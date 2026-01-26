@@ -38,6 +38,7 @@ package io.github.msobkow.v3_1.cfbam.cfbamram;
 import java.math.*;
 import java.sql.*;
 import java.text.*;
+import java.time.*;
 import java.util.*;
 import org.apache.commons.codec.binary.Base64;
 import io.github.msobkow.v3_1.cflib.*;
@@ -46,7 +47,9 @@ import io.github.msobkow.v3_1.cflib.dbutil.*;
 import io.github.msobkow.v3_1.cfsec.cfsec.*;
 import io.github.msobkow.v3_1.cfint.cfint.*;
 import io.github.msobkow.v3_1.cfbam.cfbam.*;
-import io.github.msobkow.v3_1.cfbam.cfbamobj.*;
+import io.github.msobkow.v3_1.cfsec.cfsec.buff.*;
+import io.github.msobkow.v3_1.cfint.cfint.buff.*;
+import io.github.msobkow.v3_1.cfbam.cfbam.buff.*;
 import io.github.msobkow.v3_1.cfsec.cfsecobj.*;
 import io.github.msobkow.v3_1.cfint.cfintobj.*;
 import io.github.msobkow.v3_1.cfbam.cfbamobj.*;
@@ -59,38 +62,38 @@ public class CFBamRamClearSubDep2Table
 	implements ICFBamClearSubDep2Table
 {
 	private ICFBamSchema schema;
-	private Map< CFBamScopePKey,
-				CFBamClearSubDep2Buff > dictByPKey
-		= new HashMap< CFBamScopePKey,
-				CFBamClearSubDep2Buff >();
-	private Map< CFBamClearSubDep2ByClearSubDep1IdxKey,
-				Map< CFBamScopePKey,
-					CFBamClearSubDep2Buff >> dictByClearSubDep1Idx
-		= new HashMap< CFBamClearSubDep2ByClearSubDep1IdxKey,
-				Map< CFBamScopePKey,
-					CFBamClearSubDep2Buff >>();
-	private Map< CFBamClearSubDep2ByUNameIdxKey,
-			CFBamClearSubDep2Buff > dictByUNameIdx
-		= new HashMap< CFBamClearSubDep2ByUNameIdxKey,
-			CFBamClearSubDep2Buff >();
+	private Map< CFLibDbKeyHash256,
+				CFBamBuffClearSubDep2 > dictByPKey
+		= new HashMap< CFLibDbKeyHash256,
+				CFBamBuffClearSubDep2 >();
+	private Map< CFBamBuffClearSubDep2ByClearSubDep1IdxKey,
+				Map< CFLibDbKeyHash256,
+					CFBamBuffClearSubDep2 >> dictByClearSubDep1Idx
+		= new HashMap< CFBamBuffClearSubDep2ByClearSubDep1IdxKey,
+				Map< CFLibDbKeyHash256,
+					CFBamBuffClearSubDep2 >>();
+	private Map< CFBamBuffClearSubDep2ByUNameIdxKey,
+			CFBamBuffClearSubDep2 > dictByUNameIdx
+		= new HashMap< CFBamBuffClearSubDep2ByUNameIdxKey,
+			CFBamBuffClearSubDep2 >();
 
 	public CFBamRamClearSubDep2Table( ICFBamSchema argSchema ) {
 		schema = argSchema;
 	}
 
-	public void createClearSubDep2( CFSecAuthorization Authorization,
-		CFBamClearSubDep2Buff Buff )
+	public void createClearSubDep2( ICFSecAuthorization Authorization,
+		ICFBamClearSubDep2 Buff )
 	{
 		final String S_ProcName = "createClearSubDep2";
 		schema.getTableClearDep().createClearDep( Authorization,
 			Buff );
-		CFBamScopePKey pkey = schema.getFactoryScope().newPKey();
+		CFLibDbKeyHash256 pkey = schema.getFactoryScope().newPKey();
 		pkey.setClassCode( Buff.getClassCode() );
 		pkey.setRequiredId( Buff.getRequiredId() );
-		CFBamClearSubDep2ByClearSubDep1IdxKey keyClearSubDep1Idx = schema.getFactoryClearSubDep2().newClearSubDep1IdxKey();
+		CFBamBuffClearSubDep2ByClearSubDep1IdxKey keyClearSubDep1Idx = schema.getFactoryClearSubDep2().newClearSubDep1IdxKey();
 		keyClearSubDep1Idx.setRequiredClearSubDep1Id( Buff.getRequiredClearSubDep1Id() );
 
-		CFBamClearSubDep2ByUNameIdxKey keyUNameIdx = schema.getFactoryClearSubDep2().newUNameIdxKey();
+		CFBamBuffClearSubDep2ByUNameIdxKey keyUNameIdx = schema.getFactoryClearSubDep2().newUNameIdxKey();
 		keyUNameIdx.setRequiredClearSubDep1Id( Buff.getRequiredClearSubDep1Id() );
 		keyUNameIdx.setRequiredName( Buff.getRequiredName() );
 
@@ -147,12 +150,12 @@ public class CFBamRamClearSubDep2Table
 
 		dictByPKey.put( pkey, Buff );
 
-		Map< CFBamScopePKey, CFBamClearSubDep2Buff > subdictClearSubDep1Idx;
+		Map< CFLibDbKeyHash256, CFBamBuffClearSubDep2 > subdictClearSubDep1Idx;
 		if( dictByClearSubDep1Idx.containsKey( keyClearSubDep1Idx ) ) {
 			subdictClearSubDep1Idx = dictByClearSubDep1Idx.get( keyClearSubDep1Idx );
 		}
 		else {
-			subdictClearSubDep1Idx = new HashMap< CFBamScopePKey, CFBamClearSubDep2Buff >();
+			subdictClearSubDep1Idx = new HashMap< CFLibDbKeyHash256, CFBamBuffClearSubDep2 >();
 			dictByClearSubDep1Idx.put( keyClearSubDep1Idx, subdictClearSubDep1Idx );
 		}
 		subdictClearSubDep1Idx.put( pkey, Buff );
@@ -161,13 +164,27 @@ public class CFBamRamClearSubDep2Table
 
 	}
 
-	public CFBamClearSubDep2Buff readDerived( CFSecAuthorization Authorization,
-		CFBamScopePKey PKey )
+	public ICFBamClearSubDep2 readDerived( ICFSecAuthorization Authorization,
+		CFLibDbKeyHash256 PKey )
 	{
 		final String S_ProcName = "CFBamRamClearSubDep2.readDerived";
-		CFBamScopePKey key = schema.getFactoryScope().newPKey();
+		ICFBamClearSubDep2 buff;
+		if( dictByPKey.containsKey( PKey ) ) {
+			buff = dictByPKey.get( PKey );
+		}
+		else {
+			buff = null;
+		}
+		return( buff );
+	}
+
+	public ICFBamClearSubDep2 lockDerived( ICFSecAuthorization Authorization,
+		CFLibDbKeyHash256 PKey )
+	{
+		final String S_ProcName = "CFBamRamClearSubDep2.readDerived";
+		CFLibDbKeyHash256 key = schema.getFactoryScope().newPKey();
 		key.setRequiredId( PKey.getRequiredId() );
-		CFBamClearSubDep2Buff buff;
+		ICFBamClearSubDep2 buff;
 		if( dictByPKey.containsKey( key ) ) {
 			buff = dictByPKey.get( key );
 		}
@@ -177,26 +194,10 @@ public class CFBamRamClearSubDep2Table
 		return( buff );
 	}
 
-	public CFBamClearSubDep2Buff lockDerived( CFSecAuthorization Authorization,
-		CFBamScopePKey PKey )
-	{
-		final String S_ProcName = "CFBamRamClearSubDep2.readDerived";
-		CFBamScopePKey key = schema.getFactoryScope().newPKey();
-		key.setRequiredId( PKey.getRequiredId() );
-		CFBamClearSubDep2Buff buff;
-		if( dictByPKey.containsKey( key ) ) {
-			buff = dictByPKey.get( key );
-		}
-		else {
-			buff = null;
-		}
-		return( buff );
-	}
-
-	public CFBamClearSubDep2Buff[] readAllDerived( CFSecAuthorization Authorization ) {
+	public ICFBamClearSubDep2[] readAllDerived( ICFSecAuthorization Authorization ) {
 		final String S_ProcName = "CFBamRamClearSubDep2.readAllDerived";
-		CFBamClearSubDep2Buff[] retList = new CFBamClearSubDep2Buff[ dictByPKey.values().size() ];
-		Iterator< CFBamClearSubDep2Buff > iter = dictByPKey.values().iterator();
+		ICFBamClearSubDep2[] retList = new ICFBamClearSubDep2[ dictByPKey.values().size() ];
+		Iterator< ICFBamClearSubDep2 > iter = dictByPKey.values().iterator();
 		int idx = 0;
 		while( iter.hasNext() ) {
 			retList[ idx++ ] = iter.next();
@@ -204,109 +205,109 @@ public class CFBamRamClearSubDep2Table
 		return( retList );
 	}
 
-	public CFBamClearSubDep2Buff[] readDerivedByTenantIdx( CFSecAuthorization Authorization,
+	public ICFBamClearSubDep2[] readDerivedByTenantIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 TenantId )
 	{
 		final String S_ProcName = "CFBamRamScope.readDerivedByTenantIdx";
-		CFBamScopeBuff buffList[] = schema.getTableScope().readDerivedByTenantIdx( Authorization,
+		ICFBamScope buffList[] = schema.getTableScope().readDerivedByTenantIdx( Authorization,
 			TenantId );
 		if( buffList == null ) {
 			return( null );
 		}
 		else {
-			CFBamScopeBuff buff;
-			ArrayList<CFBamClearSubDep2Buff> filteredList = new ArrayList<CFBamClearSubDep2Buff>();
+			ICFBamScope buff;
+			ArrayList<ICFBamClearSubDep2> filteredList = new ArrayList<ICFBamClearSubDep2>();
 			for( int idx = 0; idx < buffList.length; idx ++ ) {
 				buff = buffList[idx];
-				if( ( buff != null ) && ( buff instanceof CFBamClearSubDep2Buff ) ) {
-					filteredList.add( (CFBamClearSubDep2Buff)buff );
+				if( ( buff != null ) && ( buff instanceof ICFBamClearSubDep2 ) ) {
+					filteredList.add( (ICFBamClearSubDep2)buff );
 				}
 			}
-			return( filteredList.toArray( new CFBamClearSubDep2Buff[0] ) );
+			return( filteredList.toArray( new ICFBamClearSubDep2[0] ) );
 		}
 	}
 
-	public CFBamClearSubDep2Buff[] readDerivedByClearDepIdx( CFSecAuthorization Authorization,
+	public ICFBamClearSubDep2[] readDerivedByClearDepIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 RelationId )
 	{
 		final String S_ProcName = "CFBamRamClearDep.readDerivedByClearDepIdx";
-		CFBamClearDepBuff buffList[] = schema.getTableClearDep().readDerivedByClearDepIdx( Authorization,
+		ICFBamClearDep buffList[] = schema.getTableClearDep().readDerivedByClearDepIdx( Authorization,
 			RelationId );
 		if( buffList == null ) {
 			return( null );
 		}
 		else {
-			CFBamClearDepBuff buff;
-			ArrayList<CFBamClearSubDep2Buff> filteredList = new ArrayList<CFBamClearSubDep2Buff>();
+			ICFBamClearDep buff;
+			ArrayList<ICFBamClearSubDep2> filteredList = new ArrayList<ICFBamClearSubDep2>();
 			for( int idx = 0; idx < buffList.length; idx ++ ) {
 				buff = buffList[idx];
-				if( ( buff != null ) && ( buff instanceof CFBamClearSubDep2Buff ) ) {
-					filteredList.add( (CFBamClearSubDep2Buff)buff );
+				if( ( buff != null ) && ( buff instanceof ICFBamClearSubDep2 ) ) {
+					filteredList.add( (ICFBamClearSubDep2)buff );
 				}
 			}
-			return( filteredList.toArray( new CFBamClearSubDep2Buff[0] ) );
+			return( filteredList.toArray( new ICFBamClearSubDep2[0] ) );
 		}
 	}
 
-	public CFBamClearSubDep2Buff[] readDerivedByDefSchemaIdx( CFSecAuthorization Authorization,
+	public ICFBamClearSubDep2[] readDerivedByDefSchemaIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 DefSchemaId )
 	{
 		final String S_ProcName = "CFBamRamClearDep.readDerivedByDefSchemaIdx";
-		CFBamClearDepBuff buffList[] = schema.getTableClearDep().readDerivedByDefSchemaIdx( Authorization,
+		ICFBamClearDep buffList[] = schema.getTableClearDep().readDerivedByDefSchemaIdx( Authorization,
 			DefSchemaId );
 		if( buffList == null ) {
 			return( null );
 		}
 		else {
-			CFBamClearDepBuff buff;
-			ArrayList<CFBamClearSubDep2Buff> filteredList = new ArrayList<CFBamClearSubDep2Buff>();
+			ICFBamClearDep buff;
+			ArrayList<ICFBamClearSubDep2> filteredList = new ArrayList<ICFBamClearSubDep2>();
 			for( int idx = 0; idx < buffList.length; idx ++ ) {
 				buff = buffList[idx];
-				if( ( buff != null ) && ( buff instanceof CFBamClearSubDep2Buff ) ) {
-					filteredList.add( (CFBamClearSubDep2Buff)buff );
+				if( ( buff != null ) && ( buff instanceof ICFBamClearSubDep2 ) ) {
+					filteredList.add( (ICFBamClearSubDep2)buff );
 				}
 			}
-			return( filteredList.toArray( new CFBamClearSubDep2Buff[0] ) );
+			return( filteredList.toArray( new ICFBamClearSubDep2[0] ) );
 		}
 	}
 
-	public CFBamClearSubDep2Buff[] readDerivedByClearSubDep1Idx( CFSecAuthorization Authorization,
+	public ICFBamClearSubDep2[] readDerivedByClearSubDep1Idx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 ClearSubDep1Id )
 	{
 		final String S_ProcName = "CFBamRamClearSubDep2.readDerivedByClearSubDep1Idx";
-		CFBamClearSubDep2ByClearSubDep1IdxKey key = schema.getFactoryClearSubDep2().newClearSubDep1IdxKey();
+		CFBamBuffClearSubDep2ByClearSubDep1IdxKey key = schema.getFactoryClearSubDep2().newClearSubDep1IdxKey();
 		key.setRequiredClearSubDep1Id( ClearSubDep1Id );
 
-		CFBamClearSubDep2Buff[] recArray;
+		ICFBamClearSubDep2[] recArray;
 		if( dictByClearSubDep1Idx.containsKey( key ) ) {
-			Map< CFBamScopePKey, CFBamClearSubDep2Buff > subdictClearSubDep1Idx
+			Map< CFLibDbKeyHash256, CFBamBuffClearSubDep2 > subdictClearSubDep1Idx
 				= dictByClearSubDep1Idx.get( key );
-			recArray = new CFBamClearSubDep2Buff[ subdictClearSubDep1Idx.size() ];
-			Iterator< CFBamClearSubDep2Buff > iter = subdictClearSubDep1Idx.values().iterator();
+			recArray = new ICFBamClearSubDep2[ subdictClearSubDep1Idx.size() ];
+			Iterator< ICFBamClearSubDep2 > iter = subdictClearSubDep1Idx.values().iterator();
 			int idx = 0;
 			while( iter.hasNext() ) {
 				recArray[ idx++ ] = iter.next();
 			}
 		}
 		else {
-			Map< CFBamScopePKey, CFBamClearSubDep2Buff > subdictClearSubDep1Idx
-				= new HashMap< CFBamScopePKey, CFBamClearSubDep2Buff >();
+			Map< CFLibDbKeyHash256, CFBamBuffClearSubDep2 > subdictClearSubDep1Idx
+				= new HashMap< CFLibDbKeyHash256, CFBamBuffClearSubDep2 >();
 			dictByClearSubDep1Idx.put( key, subdictClearSubDep1Idx );
-			recArray = new CFBamClearSubDep2Buff[0];
+			recArray = new ICFBamClearSubDep2[0];
 		}
 		return( recArray );
 	}
 
-	public CFBamClearSubDep2Buff readDerivedByUNameIdx( CFSecAuthorization Authorization,
+	public ICFBamClearSubDep2 readDerivedByUNameIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 ClearSubDep1Id,
 		String Name )
 	{
 		final String S_ProcName = "CFBamRamClearSubDep2.readDerivedByUNameIdx";
-		CFBamClearSubDep2ByUNameIdxKey key = schema.getFactoryClearSubDep2().newUNameIdxKey();
+		CFBamBuffClearSubDep2ByUNameIdxKey key = schema.getFactoryClearSubDep2().newUNameIdxKey();
 		key.setRequiredClearSubDep1Id( ClearSubDep1Id );
 		key.setRequiredName( Name );
 
-		CFBamClearSubDep2Buff buff;
+		ICFBamClearSubDep2 buff;
 		if( dictByUNameIdx.containsKey( key ) ) {
 			buff = dictByUNameIdx.get( key );
 		}
@@ -316,14 +317,14 @@ public class CFBamRamClearSubDep2Table
 		return( buff );
 	}
 
-	public CFBamClearSubDep2Buff readDerivedByIdIdx( CFSecAuthorization Authorization,
+	public ICFBamClearSubDep2 readDerivedByIdIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 Id )
 	{
 		final String S_ProcName = "CFBamRamScope.readDerivedByIdIdx() ";
-		CFBamScopePKey key = schema.getFactoryScope().newPKey();
+		CFLibDbKeyHash256 key = schema.getFactoryScope().newPKey();
 		key.setRequiredId( Id );
 
-		CFBamClearSubDep2Buff buff;
+		ICFBamClearSubDep2 buff;
 		if( dictByPKey.containsKey( key ) ) {
 			buff = dictByPKey.get( key );
 		}
@@ -333,135 +334,135 @@ public class CFBamRamClearSubDep2Table
 		return( buff );
 	}
 
-	public CFBamClearSubDep2Buff readBuff( CFSecAuthorization Authorization,
-		CFBamScopePKey PKey )
+	public ICFBamClearSubDep2 readBuff( ICFSecAuthorization Authorization,
+		CFLibDbKeyHash256 PKey )
 	{
 		final String S_ProcName = "CFBamRamClearSubDep2.readBuff";
-		CFBamClearSubDep2Buff buff = readDerived( Authorization, PKey );
+		ICFBamClearSubDep2 buff = readDerived( Authorization, PKey );
 		if( ( buff != null ) && ( ! buff.getClassCode().equals( "a812" ) ) ) {
 			buff = null;
 		}
 		return( buff );
 	}
 
-	public CFBamClearSubDep2Buff lockBuff( CFSecAuthorization Authorization,
-		CFBamScopePKey PKey )
+	public ICFBamClearSubDep2 lockBuff( ICFSecAuthorization Authorization,
+		CFLibDbKeyHash256 PKey )
 	{
 		final String S_ProcName = "lockBuff";
-		CFBamClearSubDep2Buff buff = readDerived( Authorization, PKey );
+		ICFBamClearSubDep2 buff = readDerived( Authorization, PKey );
 		if( ( buff != null ) && ( ! buff.getClassCode().equals( "a812" ) ) ) {
 			buff = null;
 		}
 		return( buff );
 	}
 
-	public CFBamClearSubDep2Buff[] readAllBuff( CFSecAuthorization Authorization )
+	public ICFBamClearSubDep2[] readAllBuff( ICFSecAuthorization Authorization )
 	{
 		final String S_ProcName = "CFBamRamClearSubDep2.readAllBuff";
-		CFBamClearSubDep2Buff buff;
-		ArrayList<CFBamClearSubDep2Buff> filteredList = new ArrayList<CFBamClearSubDep2Buff>();
-		CFBamClearSubDep2Buff[] buffList = readAllDerived( Authorization );
+		ICFBamClearSubDep2 buff;
+		ArrayList<ICFBamClearSubDep2> filteredList = new ArrayList<ICFBamClearSubDep2>();
+		ICFBamClearSubDep2[] buffList = readAllDerived( Authorization );
 		for( int idx = 0; idx < buffList.length; idx ++ ) {
 			buff = buffList[idx];
 			if( ( buff != null ) && buff.getClassCode().equals( "a812" ) ) {
 				filteredList.add( buff );
 			}
 		}
-		return( filteredList.toArray( new CFBamClearSubDep2Buff[0] ) );
+		return( filteredList.toArray( new ICFBamClearSubDep2[0] ) );
 	}
 
-	public CFBamClearSubDep2Buff readBuffByIdIdx( CFSecAuthorization Authorization,
+	public ICFBamClearSubDep2 readBuffByIdIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 Id )
 	{
 		final String S_ProcName = "CFBamRamScope.readBuffByIdIdx() ";
-		CFBamClearSubDep2Buff buff = readDerivedByIdIdx( Authorization,
+		ICFBamClearSubDep2 buff = readDerivedByIdIdx( Authorization,
 			Id );
 		if( ( buff != null ) && buff.getClassCode().equals( "a801" ) ) {
-			return( (CFBamClearSubDep2Buff)buff );
+			return( (ICFBamClearSubDep2)buff );
 		}
 		else {
 			return( null );
 		}
 	}
 
-	public CFBamClearSubDep2Buff[] readBuffByTenantIdx( CFSecAuthorization Authorization,
+	public ICFBamClearSubDep2[] readBuffByTenantIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 TenantId )
 	{
 		final String S_ProcName = "CFBamRamScope.readBuffByTenantIdx() ";
-		CFBamClearSubDep2Buff buff;
-		ArrayList<CFBamClearSubDep2Buff> filteredList = new ArrayList<CFBamClearSubDep2Buff>();
-		CFBamClearSubDep2Buff[] buffList = readDerivedByTenantIdx( Authorization,
+		ICFBamClearSubDep2 buff;
+		ArrayList<ICFBamClearSubDep2> filteredList = new ArrayList<ICFBamClearSubDep2>();
+		ICFBamClearSubDep2[] buffList = readDerivedByTenantIdx( Authorization,
 			TenantId );
 		for( int idx = 0; idx < buffList.length; idx ++ ) {
 			buff = buffList[idx];
 			if( ( buff != null ) && buff.getClassCode().equals( "a801" ) ) {
-				filteredList.add( (CFBamClearSubDep2Buff)buff );
+				filteredList.add( (ICFBamClearSubDep2)buff );
 			}
 		}
-		return( filteredList.toArray( new CFBamClearSubDep2Buff[0] ) );
+		return( filteredList.toArray( new ICFBamClearSubDep2[0] ) );
 	}
 
-	public CFBamClearSubDep2Buff[] readBuffByClearDepIdx( CFSecAuthorization Authorization,
+	public ICFBamClearSubDep2[] readBuffByClearDepIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 RelationId )
 	{
 		final String S_ProcName = "CFBamRamClearDep.readBuffByClearDepIdx() ";
-		CFBamClearSubDep2Buff buff;
-		ArrayList<CFBamClearSubDep2Buff> filteredList = new ArrayList<CFBamClearSubDep2Buff>();
-		CFBamClearSubDep2Buff[] buffList = readDerivedByClearDepIdx( Authorization,
+		ICFBamClearSubDep2 buff;
+		ArrayList<ICFBamClearSubDep2> filteredList = new ArrayList<ICFBamClearSubDep2>();
+		ICFBamClearSubDep2[] buffList = readDerivedByClearDepIdx( Authorization,
 			RelationId );
 		for( int idx = 0; idx < buffList.length; idx ++ ) {
 			buff = buffList[idx];
 			if( ( buff != null ) && buff.getClassCode().equals( "a810" ) ) {
-				filteredList.add( (CFBamClearSubDep2Buff)buff );
+				filteredList.add( (ICFBamClearSubDep2)buff );
 			}
 		}
-		return( filteredList.toArray( new CFBamClearSubDep2Buff[0] ) );
+		return( filteredList.toArray( new ICFBamClearSubDep2[0] ) );
 	}
 
-	public CFBamClearSubDep2Buff[] readBuffByDefSchemaIdx( CFSecAuthorization Authorization,
+	public ICFBamClearSubDep2[] readBuffByDefSchemaIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 DefSchemaId )
 	{
 		final String S_ProcName = "CFBamRamClearDep.readBuffByDefSchemaIdx() ";
-		CFBamClearSubDep2Buff buff;
-		ArrayList<CFBamClearSubDep2Buff> filteredList = new ArrayList<CFBamClearSubDep2Buff>();
-		CFBamClearSubDep2Buff[] buffList = readDerivedByDefSchemaIdx( Authorization,
+		ICFBamClearSubDep2 buff;
+		ArrayList<ICFBamClearSubDep2> filteredList = new ArrayList<ICFBamClearSubDep2>();
+		ICFBamClearSubDep2[] buffList = readDerivedByDefSchemaIdx( Authorization,
 			DefSchemaId );
 		for( int idx = 0; idx < buffList.length; idx ++ ) {
 			buff = buffList[idx];
 			if( ( buff != null ) && buff.getClassCode().equals( "a810" ) ) {
-				filteredList.add( (CFBamClearSubDep2Buff)buff );
+				filteredList.add( (ICFBamClearSubDep2)buff );
 			}
 		}
-		return( filteredList.toArray( new CFBamClearSubDep2Buff[0] ) );
+		return( filteredList.toArray( new ICFBamClearSubDep2[0] ) );
 	}
 
-	public CFBamClearSubDep2Buff[] readBuffByClearSubDep1Idx( CFSecAuthorization Authorization,
+	public ICFBamClearSubDep2[] readBuffByClearSubDep1Idx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 ClearSubDep1Id )
 	{
 		final String S_ProcName = "CFBamRamClearSubDep2.readBuffByClearSubDep1Idx() ";
-		CFBamClearSubDep2Buff buff;
-		ArrayList<CFBamClearSubDep2Buff> filteredList = new ArrayList<CFBamClearSubDep2Buff>();
-		CFBamClearSubDep2Buff[] buffList = readDerivedByClearSubDep1Idx( Authorization,
+		ICFBamClearSubDep2 buff;
+		ArrayList<ICFBamClearSubDep2> filteredList = new ArrayList<ICFBamClearSubDep2>();
+		ICFBamClearSubDep2[] buffList = readDerivedByClearSubDep1Idx( Authorization,
 			ClearSubDep1Id );
 		for( int idx = 0; idx < buffList.length; idx ++ ) {
 			buff = buffList[idx];
 			if( ( buff != null ) && buff.getClassCode().equals( "a812" ) ) {
-				filteredList.add( (CFBamClearSubDep2Buff)buff );
+				filteredList.add( (ICFBamClearSubDep2)buff );
 			}
 		}
-		return( filteredList.toArray( new CFBamClearSubDep2Buff[0] ) );
+		return( filteredList.toArray( new ICFBamClearSubDep2[0] ) );
 	}
 
-	public CFBamClearSubDep2Buff readBuffByUNameIdx( CFSecAuthorization Authorization,
+	public ICFBamClearSubDep2 readBuffByUNameIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 ClearSubDep1Id,
 		String Name )
 	{
 		final String S_ProcName = "CFBamRamClearSubDep2.readBuffByUNameIdx() ";
-		CFBamClearSubDep2Buff buff = readDerivedByUNameIdx( Authorization,
+		ICFBamClearSubDep2 buff = readDerivedByUNameIdx( Authorization,
 			ClearSubDep1Id,
 			Name );
 		if( ( buff != null ) && buff.getClassCode().equals( "a812" ) ) {
-			return( (CFBamClearSubDep2Buff)buff );
+			return( (ICFBamClearSubDep2)buff );
 		}
 		else {
 			return( null );
@@ -479,7 +480,7 @@ public class CFBamRamClearSubDep2Table
 	 *
 	 *	@throws	CFLibNotSupportedException thrown by client-side implementations.
 	 */
-	public CFBamClearSubDep2Buff[] pageBuffByClearDepIdx( CFSecAuthorization Authorization,
+	public ICFBamClearSubDep2[] pageBuffByClearDepIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 RelationId,
 		CFLibDbKeyHash256 priorId )
 	{
@@ -498,7 +499,7 @@ public class CFBamRamClearSubDep2Table
 	 *
 	 *	@throws	CFLibNotSupportedException thrown by client-side implementations.
 	 */
-	public CFBamClearSubDep2Buff[] pageBuffByDefSchemaIdx( CFSecAuthorization Authorization,
+	public ICFBamClearSubDep2[] pageBuffByDefSchemaIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 DefSchemaId,
 		CFLibDbKeyHash256 priorId )
 	{
@@ -517,7 +518,7 @@ public class CFBamRamClearSubDep2Table
 	 *
 	 *	@throws	CFLibNotSupportedException thrown by client-side implementations.
 	 */
-	public CFBamClearSubDep2Buff[] pageBuffByClearSubDep1Idx( CFSecAuthorization Authorization,
+	public ICFBamClearSubDep2[] pageBuffByClearSubDep1Idx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 ClearSubDep1Id,
 		CFLibDbKeyHash256 priorId )
 	{
@@ -525,14 +526,14 @@ public class CFBamRamClearSubDep2Table
 		throw new CFLibNotImplementedYetException( getClass(), S_ProcName );
 	}
 
-	public void updateClearSubDep2( CFSecAuthorization Authorization,
-		CFBamClearSubDep2Buff Buff )
+	public void updateClearSubDep2( ICFSecAuthorization Authorization,
+		ICFBamClearSubDep2 Buff )
 	{
 		schema.getTableClearDep().updateClearDep( Authorization,
 			Buff );
-		CFBamScopePKey pkey = schema.getFactoryScope().newPKey();
+		CFLibDbKeyHash256 pkey = schema.getFactoryScope().newPKey();
 		pkey.setRequiredId( Buff.getRequiredId() );
-		CFBamClearSubDep2Buff existing = dictByPKey.get( pkey );
+		ICFBamClearSubDep2 existing = dictByPKey.get( pkey );
 		if( existing == null ) {
 			throw new CFLibStaleCacheDetectedException( getClass(),
 				"updateClearSubDep2",
@@ -540,17 +541,17 @@ public class CFBamRamClearSubDep2Table
 				"ClearSubDep2",
 				pkey );
 		}
-		CFBamClearSubDep2ByClearSubDep1IdxKey existingKeyClearSubDep1Idx = schema.getFactoryClearSubDep2().newClearSubDep1IdxKey();
+		CFBamBuffClearSubDep2ByClearSubDep1IdxKey existingKeyClearSubDep1Idx = schema.getFactoryClearSubDep2().newClearSubDep1IdxKey();
 		existingKeyClearSubDep1Idx.setRequiredClearSubDep1Id( existing.getRequiredClearSubDep1Id() );
 
-		CFBamClearSubDep2ByClearSubDep1IdxKey newKeyClearSubDep1Idx = schema.getFactoryClearSubDep2().newClearSubDep1IdxKey();
+		CFBamBuffClearSubDep2ByClearSubDep1IdxKey newKeyClearSubDep1Idx = schema.getFactoryClearSubDep2().newClearSubDep1IdxKey();
 		newKeyClearSubDep1Idx.setRequiredClearSubDep1Id( Buff.getRequiredClearSubDep1Id() );
 
-		CFBamClearSubDep2ByUNameIdxKey existingKeyUNameIdx = schema.getFactoryClearSubDep2().newUNameIdxKey();
+		CFBamBuffClearSubDep2ByUNameIdxKey existingKeyUNameIdx = schema.getFactoryClearSubDep2().newUNameIdxKey();
 		existingKeyUNameIdx.setRequiredClearSubDep1Id( existing.getRequiredClearSubDep1Id() );
 		existingKeyUNameIdx.setRequiredName( existing.getRequiredName() );
 
-		CFBamClearSubDep2ByUNameIdxKey newKeyUNameIdx = schema.getFactoryClearSubDep2().newUNameIdxKey();
+		CFBamBuffClearSubDep2ByUNameIdxKey newKeyUNameIdx = schema.getFactoryClearSubDep2().newUNameIdxKey();
 		newKeyUNameIdx.setRequiredClearSubDep1Id( Buff.getRequiredClearSubDep1Id() );
 		newKeyUNameIdx.setRequiredName( Buff.getRequiredName() );
 
@@ -603,7 +604,7 @@ public class CFBamRamClearSubDep2Table
 
 		// Update is valid
 
-		Map< CFBamScopePKey, CFBamClearSubDep2Buff > subdict;
+		Map< CFLibDbKeyHash256, CFBamBuffClearSubDep2 > subdict;
 
 		dictByPKey.remove( pkey );
 		dictByPKey.put( pkey, Buff );
@@ -616,7 +617,7 @@ public class CFBamRamClearSubDep2Table
 			subdict = dictByClearSubDep1Idx.get( newKeyClearSubDep1Idx );
 		}
 		else {
-			subdict = new HashMap< CFBamScopePKey, CFBamClearSubDep2Buff >();
+			subdict = new HashMap< CFLibDbKeyHash256, CFBamBuffClearSubDep2 >();
 			dictByClearSubDep1Idx.put( newKeyClearSubDep1Idx, subdict );
 		}
 		subdict.put( pkey, Buff );
@@ -626,14 +627,14 @@ public class CFBamRamClearSubDep2Table
 
 	}
 
-	public void deleteClearSubDep2( CFSecAuthorization Authorization,
-		CFBamClearSubDep2Buff Buff )
+	public void deleteClearSubDep2( ICFSecAuthorization Authorization,
+		ICFBamClearSubDep2 Buff )
 	{
 		final String S_ProcName = "CFBamRamClearSubDep2Table.deleteClearSubDep2() ";
 		String classCode;
-		CFBamScopePKey pkey = schema.getFactoryScope().newPKey();
+		CFLibDbKeyHash256 pkey = schema.getFactoryScope().newPKey();
 		pkey.setRequiredId( Buff.getRequiredId() );
-		CFBamClearSubDep2Buff existing = dictByPKey.get( pkey );
+		ICFBamClearSubDep2 existing = dictByPKey.get( pkey );
 		if( existing == null ) {
 			return;
 		}
@@ -650,17 +651,17 @@ public class CFBamRamClearSubDep2Table
 			schema.getTableClearSubDep3().deleteClearSubDep3ByClearSubDep2Idx( Authorization,
 						existing.getRequiredId() );
 		}
-		CFBamClearSubDep2ByClearSubDep1IdxKey keyClearSubDep1Idx = schema.getFactoryClearSubDep2().newClearSubDep1IdxKey();
+		CFBamBuffClearSubDep2ByClearSubDep1IdxKey keyClearSubDep1Idx = schema.getFactoryClearSubDep2().newClearSubDep1IdxKey();
 		keyClearSubDep1Idx.setRequiredClearSubDep1Id( existing.getRequiredClearSubDep1Id() );
 
-		CFBamClearSubDep2ByUNameIdxKey keyUNameIdx = schema.getFactoryClearSubDep2().newUNameIdxKey();
+		CFBamBuffClearSubDep2ByUNameIdxKey keyUNameIdx = schema.getFactoryClearSubDep2().newUNameIdxKey();
 		keyUNameIdx.setRequiredClearSubDep1Id( existing.getRequiredClearSubDep1Id() );
 		keyUNameIdx.setRequiredName( existing.getRequiredName() );
 
 		// Validate reverse foreign keys
 
 		// Delete is valid
-		Map< CFBamScopePKey, CFBamClearSubDep2Buff > subdict;
+		Map< CFLibDbKeyHash256, CFBamBuffClearSubDep2 > subdict;
 
 		dictByPKey.remove( pkey );
 
@@ -672,32 +673,32 @@ public class CFBamRamClearSubDep2Table
 		schema.getTableClearDep().deleteClearDep( Authorization,
 			Buff );
 	}
-	public void deleteClearSubDep2ByClearSubDep1Idx( CFSecAuthorization Authorization,
+	public void deleteClearSubDep2ByClearSubDep1Idx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argClearSubDep1Id )
 	{
-		CFBamClearSubDep2ByClearSubDep1IdxKey key = schema.getFactoryClearSubDep2().newClearSubDep1IdxKey();
+		CFBamBuffClearSubDep2ByClearSubDep1IdxKey key = schema.getFactoryClearSubDep2().newClearSubDep1IdxKey();
 		key.setRequiredClearSubDep1Id( argClearSubDep1Id );
 		deleteClearSubDep2ByClearSubDep1Idx( Authorization, key );
 	}
 
-	public void deleteClearSubDep2ByClearSubDep1Idx( CFSecAuthorization Authorization,
-		CFBamClearSubDep2ByClearSubDep1IdxKey argKey )
+	public void deleteClearSubDep2ByClearSubDep1Idx( ICFSecAuthorization Authorization,
+		ICFBamClearSubDep2ByClearSubDep1IdxKey argKey )
 	{
-		CFBamClearSubDep2Buff cur;
+		ICFBamClearSubDep2 cur;
 		boolean anyNotNull = false;
 		anyNotNull = true;
 		if( ! anyNotNull ) {
 			return;
 		}
-		LinkedList<CFBamClearSubDep2Buff> matchSet = new LinkedList<CFBamClearSubDep2Buff>();
-		Iterator<CFBamClearSubDep2Buff> values = dictByPKey.values().iterator();
+		LinkedList<ICFBamClearSubDep2> matchSet = new LinkedList<ICFBamClearSubDep2>();
+		Iterator<ICFBamClearSubDep2> values = dictByPKey.values().iterator();
 		while( values.hasNext() ) {
 			cur = values.next();
 			if( argKey.equals( cur ) ) {
 				matchSet.add( cur );
 			}
 		}
-		Iterator<CFBamClearSubDep2Buff> iterMatch = matchSet.iterator();
+		Iterator<ICFBamClearSubDep2> iterMatch = matchSet.iterator();
 		while( iterMatch.hasNext() ) {
 			cur = iterMatch.next();
 			cur = schema.getTableClearSubDep2().readDerivedByIdIdx( Authorization,
@@ -706,35 +707,35 @@ public class CFBamRamClearSubDep2Table
 		}
 	}
 
-	public void deleteClearSubDep2ByUNameIdx( CFSecAuthorization Authorization,
+	public void deleteClearSubDep2ByUNameIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argClearSubDep1Id,
 		String argName )
 	{
-		CFBamClearSubDep2ByUNameIdxKey key = schema.getFactoryClearSubDep2().newUNameIdxKey();
+		CFBamBuffClearSubDep2ByUNameIdxKey key = schema.getFactoryClearSubDep2().newUNameIdxKey();
 		key.setRequiredClearSubDep1Id( argClearSubDep1Id );
 		key.setRequiredName( argName );
 		deleteClearSubDep2ByUNameIdx( Authorization, key );
 	}
 
-	public void deleteClearSubDep2ByUNameIdx( CFSecAuthorization Authorization,
-		CFBamClearSubDep2ByUNameIdxKey argKey )
+	public void deleteClearSubDep2ByUNameIdx( ICFSecAuthorization Authorization,
+		ICFBamClearSubDep2ByUNameIdxKey argKey )
 	{
-		CFBamClearSubDep2Buff cur;
+		ICFBamClearSubDep2 cur;
 		boolean anyNotNull = false;
 		anyNotNull = true;
 		anyNotNull = true;
 		if( ! anyNotNull ) {
 			return;
 		}
-		LinkedList<CFBamClearSubDep2Buff> matchSet = new LinkedList<CFBamClearSubDep2Buff>();
-		Iterator<CFBamClearSubDep2Buff> values = dictByPKey.values().iterator();
+		LinkedList<ICFBamClearSubDep2> matchSet = new LinkedList<ICFBamClearSubDep2>();
+		Iterator<ICFBamClearSubDep2> values = dictByPKey.values().iterator();
 		while( values.hasNext() ) {
 			cur = values.next();
 			if( argKey.equals( cur ) ) {
 				matchSet.add( cur );
 			}
 		}
-		Iterator<CFBamClearSubDep2Buff> iterMatch = matchSet.iterator();
+		Iterator<ICFBamClearSubDep2> iterMatch = matchSet.iterator();
 		while( iterMatch.hasNext() ) {
 			cur = iterMatch.next();
 			cur = schema.getTableClearSubDep2().readDerivedByIdIdx( Authorization,
@@ -743,32 +744,32 @@ public class CFBamRamClearSubDep2Table
 		}
 	}
 
-	public void deleteClearSubDep2ByClearDepIdx( CFSecAuthorization Authorization,
+	public void deleteClearSubDep2ByClearDepIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argRelationId )
 	{
-		CFBamClearDepByClearDepIdxKey key = schema.getFactoryClearDep().newClearDepIdxKey();
+		CFBamBuffClearDepByClearDepIdxKey key = schema.getFactoryClearDep().newClearDepIdxKey();
 		key.setRequiredRelationId( argRelationId );
 		deleteClearSubDep2ByClearDepIdx( Authorization, key );
 	}
 
-	public void deleteClearSubDep2ByClearDepIdx( CFSecAuthorization Authorization,
-		CFBamClearDepByClearDepIdxKey argKey )
+	public void deleteClearSubDep2ByClearDepIdx( ICFSecAuthorization Authorization,
+		ICFBamClearDepByClearDepIdxKey argKey )
 	{
-		CFBamClearSubDep2Buff cur;
+		ICFBamClearSubDep2 cur;
 		boolean anyNotNull = false;
 		anyNotNull = true;
 		if( ! anyNotNull ) {
 			return;
 		}
-		LinkedList<CFBamClearSubDep2Buff> matchSet = new LinkedList<CFBamClearSubDep2Buff>();
-		Iterator<CFBamClearSubDep2Buff> values = dictByPKey.values().iterator();
+		LinkedList<ICFBamClearSubDep2> matchSet = new LinkedList<ICFBamClearSubDep2>();
+		Iterator<ICFBamClearSubDep2> values = dictByPKey.values().iterator();
 		while( values.hasNext() ) {
 			cur = values.next();
 			if( argKey.equals( cur ) ) {
 				matchSet.add( cur );
 			}
 		}
-		Iterator<CFBamClearSubDep2Buff> iterMatch = matchSet.iterator();
+		Iterator<ICFBamClearSubDep2> iterMatch = matchSet.iterator();
 		while( iterMatch.hasNext() ) {
 			cur = iterMatch.next();
 			cur = schema.getTableClearSubDep2().readDerivedByIdIdx( Authorization,
@@ -777,18 +778,18 @@ public class CFBamRamClearSubDep2Table
 		}
 	}
 
-	public void deleteClearSubDep2ByDefSchemaIdx( CFSecAuthorization Authorization,
+	public void deleteClearSubDep2ByDefSchemaIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argDefSchemaId )
 	{
-		CFBamClearDepByDefSchemaIdxKey key = schema.getFactoryClearDep().newDefSchemaIdxKey();
+		CFBamBuffClearDepByDefSchemaIdxKey key = schema.getFactoryClearDep().newDefSchemaIdxKey();
 		key.setOptionalDefSchemaId( argDefSchemaId );
 		deleteClearSubDep2ByDefSchemaIdx( Authorization, key );
 	}
 
-	public void deleteClearSubDep2ByDefSchemaIdx( CFSecAuthorization Authorization,
-		CFBamClearDepByDefSchemaIdxKey argKey )
+	public void deleteClearSubDep2ByDefSchemaIdx( ICFSecAuthorization Authorization,
+		ICFBamClearDepByDefSchemaIdxKey argKey )
 	{
-		CFBamClearSubDep2Buff cur;
+		ICFBamClearSubDep2 cur;
 		boolean anyNotNull = false;
 		if( argKey.getOptionalDefSchemaId() != null ) {
 			anyNotNull = true;
@@ -796,15 +797,15 @@ public class CFBamRamClearSubDep2Table
 		if( ! anyNotNull ) {
 			return;
 		}
-		LinkedList<CFBamClearSubDep2Buff> matchSet = new LinkedList<CFBamClearSubDep2Buff>();
-		Iterator<CFBamClearSubDep2Buff> values = dictByPKey.values().iterator();
+		LinkedList<ICFBamClearSubDep2> matchSet = new LinkedList<ICFBamClearSubDep2>();
+		Iterator<ICFBamClearSubDep2> values = dictByPKey.values().iterator();
 		while( values.hasNext() ) {
 			cur = values.next();
 			if( argKey.equals( cur ) ) {
 				matchSet.add( cur );
 			}
 		}
-		Iterator<CFBamClearSubDep2Buff> iterMatch = matchSet.iterator();
+		Iterator<ICFBamClearSubDep2> iterMatch = matchSet.iterator();
 		while( iterMatch.hasNext() ) {
 			cur = iterMatch.next();
 			cur = schema.getTableClearSubDep2().readDerivedByIdIdx( Authorization,
@@ -813,32 +814,32 @@ public class CFBamRamClearSubDep2Table
 		}
 	}
 
-	public void deleteClearSubDep2ByIdIdx( CFSecAuthorization Authorization,
+	public void deleteClearSubDep2ByIdIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argId )
 	{
-		CFBamScopePKey key = schema.getFactoryScope().newPKey();
+		CFLibDbKeyHash256 key = schema.getFactoryScope().newPKey();
 		key.setRequiredId( argId );
 		deleteClearSubDep2ByIdIdx( Authorization, key );
 	}
 
-	public void deleteClearSubDep2ByIdIdx( CFSecAuthorization Authorization,
-		CFBamScopePKey argKey )
+	public void deleteClearSubDep2ByIdIdx( ICFSecAuthorization Authorization,
+		CFLibDbKeyHash256 argKey )
 	{
 		boolean anyNotNull = false;
 		anyNotNull = true;
 		if( ! anyNotNull ) {
 			return;
 		}
-		CFBamClearSubDep2Buff cur;
-		LinkedList<CFBamClearSubDep2Buff> matchSet = new LinkedList<CFBamClearSubDep2Buff>();
-		Iterator<CFBamClearSubDep2Buff> values = dictByPKey.values().iterator();
+		ICFBamClearSubDep2 cur;
+		LinkedList<ICFBamClearSubDep2> matchSet = new LinkedList<ICFBamClearSubDep2>();
+		Iterator<ICFBamClearSubDep2> values = dictByPKey.values().iterator();
 		while( values.hasNext() ) {
 			cur = values.next();
 			if( argKey.equals( cur ) ) {
 				matchSet.add( cur );
 			}
 		}
-		Iterator<CFBamClearSubDep2Buff> iterMatch = matchSet.iterator();
+		Iterator<ICFBamClearSubDep2> iterMatch = matchSet.iterator();
 		while( iterMatch.hasNext() ) {
 			cur = iterMatch.next();
 			cur = schema.getTableClearSubDep2().readDerivedByIdIdx( Authorization,
@@ -847,32 +848,32 @@ public class CFBamRamClearSubDep2Table
 		}
 	}
 
-	public void deleteClearSubDep2ByTenantIdx( CFSecAuthorization Authorization,
+	public void deleteClearSubDep2ByTenantIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argTenantId )
 	{
-		CFBamScopeByTenantIdxKey key = schema.getFactoryScope().newTenantIdxKey();
+		CFBamBuffScopeByTenantIdxKey key = schema.getFactoryScope().newTenantIdxKey();
 		key.setRequiredTenantId( argTenantId );
 		deleteClearSubDep2ByTenantIdx( Authorization, key );
 	}
 
-	public void deleteClearSubDep2ByTenantIdx( CFSecAuthorization Authorization,
-		CFBamScopeByTenantIdxKey argKey )
+	public void deleteClearSubDep2ByTenantIdx( ICFSecAuthorization Authorization,
+		ICFBamScopeByTenantIdxKey argKey )
 	{
-		CFBamClearSubDep2Buff cur;
+		ICFBamClearSubDep2 cur;
 		boolean anyNotNull = false;
 		anyNotNull = true;
 		if( ! anyNotNull ) {
 			return;
 		}
-		LinkedList<CFBamClearSubDep2Buff> matchSet = new LinkedList<CFBamClearSubDep2Buff>();
-		Iterator<CFBamClearSubDep2Buff> values = dictByPKey.values().iterator();
+		LinkedList<ICFBamClearSubDep2> matchSet = new LinkedList<ICFBamClearSubDep2>();
+		Iterator<ICFBamClearSubDep2> values = dictByPKey.values().iterator();
 		while( values.hasNext() ) {
 			cur = values.next();
 			if( argKey.equals( cur ) ) {
 				matchSet.add( cur );
 			}
 		}
-		Iterator<CFBamClearSubDep2Buff> iterMatch = matchSet.iterator();
+		Iterator<ICFBamClearSubDep2> iterMatch = matchSet.iterator();
 		while( iterMatch.hasNext() ) {
 			cur = iterMatch.next();
 			cur = schema.getTableClearSubDep2().readDerivedByIdIdx( Authorization,

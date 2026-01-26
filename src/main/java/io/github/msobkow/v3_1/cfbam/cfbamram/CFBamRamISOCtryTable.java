@@ -38,6 +38,7 @@ package io.github.msobkow.v3_1.cfbam.cfbamram;
 import java.math.*;
 import java.sql.*;
 import java.text.*;
+import java.time.*;
 import java.util.*;
 import org.apache.commons.codec.binary.Base64;
 import io.github.msobkow.v3_1.cflib.*;
@@ -46,7 +47,9 @@ import io.github.msobkow.v3_1.cflib.dbutil.*;
 import io.github.msobkow.v3_1.cfsec.cfsec.*;
 import io.github.msobkow.v3_1.cfint.cfint.*;
 import io.github.msobkow.v3_1.cfbam.cfbam.*;
-import io.github.msobkow.v3_1.cfbam.cfbamobj.*;
+import io.github.msobkow.v3_1.cfsec.cfsec.buff.*;
+import io.github.msobkow.v3_1.cfint.cfint.buff.*;
+import io.github.msobkow.v3_1.cfbam.cfbam.buff.*;
 import io.github.msobkow.v3_1.cfsec.cfsecobj.*;
 import io.github.msobkow.v3_1.cfint.cfintobj.*;
 import io.github.msobkow.v3_1.cfbam.cfbamobj.*;
@@ -59,34 +62,34 @@ public class CFBamRamISOCtryTable
 	implements ICFBamISOCtryTable
 {
 	private ICFBamSchema schema;
-	private Map< CFSecISOCtryPKey,
-				CFSecISOCtryBuff > dictByPKey
-		= new HashMap< CFSecISOCtryPKey,
-				CFSecISOCtryBuff >();
-	private Map< CFSecISOCtryByISOCodeIdxKey,
-			CFSecISOCtryBuff > dictByISOCodeIdx
-		= new HashMap< CFSecISOCtryByISOCodeIdxKey,
-			CFSecISOCtryBuff >();
-	private Map< CFSecISOCtryByNameIdxKey,
-			CFSecISOCtryBuff > dictByNameIdx
-		= new HashMap< CFSecISOCtryByNameIdxKey,
-			CFSecISOCtryBuff >();
+	private Map< Short,
+				CFSecBuffISOCtry > dictByPKey
+		= new HashMap< Short,
+				CFSecBuffISOCtry >();
+	private Map< CFSecBuffISOCtryByISOCodeIdxKey,
+			CFSecBuffISOCtry > dictByISOCodeIdx
+		= new HashMap< CFSecBuffISOCtryByISOCodeIdxKey,
+			CFSecBuffISOCtry >();
+	private Map< CFSecBuffISOCtryByNameIdxKey,
+			CFSecBuffISOCtry > dictByNameIdx
+		= new HashMap< CFSecBuffISOCtryByNameIdxKey,
+			CFSecBuffISOCtry >();
 
 	public CFBamRamISOCtryTable( ICFBamSchema argSchema ) {
 		schema = argSchema;
 	}
 
-	public void createISOCtry( CFSecAuthorization Authorization,
-		CFSecISOCtryBuff Buff )
+	public void createISOCtry( ICFSecAuthorization Authorization,
+		ICFSecISOCtry Buff )
 	{
 		final String S_ProcName = "createISOCtry";
-		CFSecISOCtryPKey pkey = schema.getFactoryISOCtry().newPKey();
+		Short pkey = schema.getFactoryISOCtry().newPKey();
 		pkey.setRequiredISOCtryId( schema.nextISOCtryIdGen() );
 		Buff.setRequiredISOCtryId( pkey.getRequiredISOCtryId() );
-		CFSecISOCtryByISOCodeIdxKey keyISOCodeIdx = schema.getFactoryISOCtry().newISOCodeIdxKey();
+		CFSecBuffISOCtryByISOCodeIdxKey keyISOCodeIdx = schema.getFactoryISOCtry().newISOCodeIdxKey();
 		keyISOCodeIdx.setRequiredISOCode( Buff.getRequiredISOCode() );
 
-		CFSecISOCtryByNameIdxKey keyNameIdx = schema.getFactoryISOCtry().newNameIdxKey();
+		CFSecBuffISOCtryByNameIdxKey keyNameIdx = schema.getFactoryISOCtry().newNameIdxKey();
 		keyNameIdx.setRequiredName( Buff.getRequiredName() );
 
 		// Validate unique indexes
@@ -121,13 +124,27 @@ public class CFBamRamISOCtryTable
 
 	}
 
-	public CFSecISOCtryBuff readDerived( CFSecAuthorization Authorization,
-		CFSecISOCtryPKey PKey )
+	public ICFSecISOCtry readDerived( ICFSecAuthorization Authorization,
+		Short PKey )
 	{
 		final String S_ProcName = "CFBamRamISOCtry.readDerived";
-		CFSecISOCtryPKey key = schema.getFactoryISOCtry().newPKey();
+		ICFSecISOCtry buff;
+		if( dictByPKey.containsKey( PKey ) ) {
+			buff = dictByPKey.get( PKey );
+		}
+		else {
+			buff = null;
+		}
+		return( buff );
+	}
+
+	public ICFSecISOCtry lockDerived( ICFSecAuthorization Authorization,
+		Short PKey )
+	{
+		final String S_ProcName = "CFBamRamISOCtry.readDerived";
+		Short key = schema.getFactoryISOCtry().newPKey();
 		key.setRequiredISOCtryId( PKey.getRequiredISOCtryId() );
-		CFSecISOCtryBuff buff;
+		ICFSecISOCtry buff;
 		if( dictByPKey.containsKey( key ) ) {
 			buff = dictByPKey.get( key );
 		}
@@ -137,26 +154,10 @@ public class CFBamRamISOCtryTable
 		return( buff );
 	}
 
-	public CFSecISOCtryBuff lockDerived( CFSecAuthorization Authorization,
-		CFSecISOCtryPKey PKey )
-	{
-		final String S_ProcName = "CFBamRamISOCtry.readDerived";
-		CFSecISOCtryPKey key = schema.getFactoryISOCtry().newPKey();
-		key.setRequiredISOCtryId( PKey.getRequiredISOCtryId() );
-		CFSecISOCtryBuff buff;
-		if( dictByPKey.containsKey( key ) ) {
-			buff = dictByPKey.get( key );
-		}
-		else {
-			buff = null;
-		}
-		return( buff );
-	}
-
-	public CFSecISOCtryBuff[] readAllDerived( CFSecAuthorization Authorization ) {
+	public ICFSecISOCtry[] readAllDerived( ICFSecAuthorization Authorization ) {
 		final String S_ProcName = "CFBamRamISOCtry.readAllDerived";
-		CFSecISOCtryBuff[] retList = new CFSecISOCtryBuff[ dictByPKey.values().size() ];
-		Iterator< CFSecISOCtryBuff > iter = dictByPKey.values().iterator();
+		ICFSecISOCtry[] retList = new ICFSecISOCtry[ dictByPKey.values().size() ];
+		Iterator< ICFSecISOCtry > iter = dictByPKey.values().iterator();
 		int idx = 0;
 		while( iter.hasNext() ) {
 			retList[ idx++ ] = iter.next();
@@ -164,14 +165,14 @@ public class CFBamRamISOCtryTable
 		return( retList );
 	}
 
-	public CFSecISOCtryBuff readDerivedByISOCodeIdx( CFSecAuthorization Authorization,
+	public ICFSecISOCtry readDerivedByISOCodeIdx( ICFSecAuthorization Authorization,
 		String ISOCode )
 	{
 		final String S_ProcName = "CFBamRamISOCtry.readDerivedByISOCodeIdx";
-		CFSecISOCtryByISOCodeIdxKey key = schema.getFactoryISOCtry().newISOCodeIdxKey();
+		CFSecBuffISOCtryByISOCodeIdxKey key = schema.getFactoryISOCtry().newISOCodeIdxKey();
 		key.setRequiredISOCode( ISOCode );
 
-		CFSecISOCtryBuff buff;
+		ICFSecISOCtry buff;
 		if( dictByISOCodeIdx.containsKey( key ) ) {
 			buff = dictByISOCodeIdx.get( key );
 		}
@@ -181,14 +182,14 @@ public class CFBamRamISOCtryTable
 		return( buff );
 	}
 
-	public CFSecISOCtryBuff readDerivedByNameIdx( CFSecAuthorization Authorization,
+	public ICFSecISOCtry readDerivedByNameIdx( ICFSecAuthorization Authorization,
 		String Name )
 	{
 		final String S_ProcName = "CFBamRamISOCtry.readDerivedByNameIdx";
-		CFSecISOCtryByNameIdxKey key = schema.getFactoryISOCtry().newNameIdxKey();
+		CFSecBuffISOCtryByNameIdxKey key = schema.getFactoryISOCtry().newNameIdxKey();
 		key.setRequiredName( Name );
 
-		CFSecISOCtryBuff buff;
+		ICFSecISOCtry buff;
 		if( dictByNameIdx.containsKey( key ) ) {
 			buff = dictByNameIdx.get( key );
 		}
@@ -198,14 +199,14 @@ public class CFBamRamISOCtryTable
 		return( buff );
 	}
 
-	public CFSecISOCtryBuff readDerivedByIdIdx( CFSecAuthorization Authorization,
+	public ICFSecISOCtry readDerivedByIdIdx( ICFSecAuthorization Authorization,
 		short ISOCtryId )
 	{
 		final String S_ProcName = "CFBamRamISOCtry.readDerivedByIdIdx() ";
-		CFSecISOCtryPKey key = schema.getFactoryISOCtry().newPKey();
+		Short key = schema.getFactoryISOCtry().newPKey();
 		key.setRequiredISOCtryId( ISOCtryId );
 
-		CFSecISOCtryBuff buff;
+		ICFSecISOCtry buff;
 		if( dictByPKey.containsKey( key ) ) {
 			buff = dictByPKey.get( key );
 		}
@@ -215,91 +216,91 @@ public class CFBamRamISOCtryTable
 		return( buff );
 	}
 
-	public CFSecISOCtryBuff readBuff( CFSecAuthorization Authorization,
-		CFSecISOCtryPKey PKey )
+	public ICFSecISOCtry readBuff( ICFSecAuthorization Authorization,
+		Short PKey )
 	{
 		final String S_ProcName = "CFBamRamISOCtry.readBuff";
-		CFSecISOCtryBuff buff = readDerived( Authorization, PKey );
+		ICFSecISOCtry buff = readDerived( Authorization, PKey );
 		if( ( buff != null ) && ( ! buff.getClassCode().equals( "a004" ) ) ) {
 			buff = null;
 		}
 		return( buff );
 	}
 
-	public CFSecISOCtryBuff lockBuff( CFSecAuthorization Authorization,
-		CFSecISOCtryPKey PKey )
+	public ICFSecISOCtry lockBuff( ICFSecAuthorization Authorization,
+		Short PKey )
 	{
 		final String S_ProcName = "lockBuff";
-		CFSecISOCtryBuff buff = readDerived( Authorization, PKey );
+		ICFSecISOCtry buff = readDerived( Authorization, PKey );
 		if( ( buff != null ) && ( ! buff.getClassCode().equals( "a004" ) ) ) {
 			buff = null;
 		}
 		return( buff );
 	}
 
-	public CFSecISOCtryBuff[] readAllBuff( CFSecAuthorization Authorization )
+	public ICFSecISOCtry[] readAllBuff( ICFSecAuthorization Authorization )
 	{
 		final String S_ProcName = "CFBamRamISOCtry.readAllBuff";
-		CFSecISOCtryBuff buff;
-		ArrayList<CFSecISOCtryBuff> filteredList = new ArrayList<CFSecISOCtryBuff>();
-		CFSecISOCtryBuff[] buffList = readAllDerived( Authorization );
+		ICFSecISOCtry buff;
+		ArrayList<ICFSecISOCtry> filteredList = new ArrayList<ICFSecISOCtry>();
+		ICFSecISOCtry[] buffList = readAllDerived( Authorization );
 		for( int idx = 0; idx < buffList.length; idx ++ ) {
 			buff = buffList[idx];
 			if( ( buff != null ) && buff.getClassCode().equals( "a004" ) ) {
 				filteredList.add( buff );
 			}
 		}
-		return( filteredList.toArray( new CFSecISOCtryBuff[0] ) );
+		return( filteredList.toArray( new ICFSecISOCtry[0] ) );
 	}
 
-	public CFSecISOCtryBuff readBuffByIdIdx( CFSecAuthorization Authorization,
+	public ICFSecISOCtry readBuffByIdIdx( ICFSecAuthorization Authorization,
 		short ISOCtryId )
 	{
 		final String S_ProcName = "CFBamRamISOCtry.readBuffByIdIdx() ";
-		CFSecISOCtryBuff buff = readDerivedByIdIdx( Authorization,
+		ICFSecISOCtry buff = readDerivedByIdIdx( Authorization,
 			ISOCtryId );
 		if( ( buff != null ) && buff.getClassCode().equals( "a004" ) ) {
-			return( (CFSecISOCtryBuff)buff );
+			return( (ICFSecISOCtry)buff );
 		}
 		else {
 			return( null );
 		}
 	}
 
-	public CFSecISOCtryBuff readBuffByISOCodeIdx( CFSecAuthorization Authorization,
+	public ICFSecISOCtry readBuffByISOCodeIdx( ICFSecAuthorization Authorization,
 		String ISOCode )
 	{
 		final String S_ProcName = "CFBamRamISOCtry.readBuffByISOCodeIdx() ";
-		CFSecISOCtryBuff buff = readDerivedByISOCodeIdx( Authorization,
+		ICFSecISOCtry buff = readDerivedByISOCodeIdx( Authorization,
 			ISOCode );
 		if( ( buff != null ) && buff.getClassCode().equals( "a004" ) ) {
-			return( (CFSecISOCtryBuff)buff );
+			return( (ICFSecISOCtry)buff );
 		}
 		else {
 			return( null );
 		}
 	}
 
-	public CFSecISOCtryBuff readBuffByNameIdx( CFSecAuthorization Authorization,
+	public ICFSecISOCtry readBuffByNameIdx( ICFSecAuthorization Authorization,
 		String Name )
 	{
 		final String S_ProcName = "CFBamRamISOCtry.readBuffByNameIdx() ";
-		CFSecISOCtryBuff buff = readDerivedByNameIdx( Authorization,
+		ICFSecISOCtry buff = readDerivedByNameIdx( Authorization,
 			Name );
 		if( ( buff != null ) && buff.getClassCode().equals( "a004" ) ) {
-			return( (CFSecISOCtryBuff)buff );
+			return( (ICFSecISOCtry)buff );
 		}
 		else {
 			return( null );
 		}
 	}
 
-	public void updateISOCtry( CFSecAuthorization Authorization,
-		CFSecISOCtryBuff Buff )
+	public void updateISOCtry( ICFSecAuthorization Authorization,
+		ICFSecISOCtry Buff )
 	{
-		CFSecISOCtryPKey pkey = schema.getFactoryISOCtry().newPKey();
+		Short pkey = schema.getFactoryISOCtry().newPKey();
 		pkey.setRequiredISOCtryId( Buff.getRequiredISOCtryId() );
-		CFSecISOCtryBuff existing = dictByPKey.get( pkey );
+		ICFSecISOCtry existing = dictByPKey.get( pkey );
 		if( existing == null ) {
 			throw new CFLibStaleCacheDetectedException( getClass(),
 				"updateISOCtry",
@@ -313,16 +314,16 @@ public class CFBamRamISOCtryTable
 				pkey );
 		}
 		Buff.setRequiredRevision( Buff.getRequiredRevision() + 1 );
-		CFSecISOCtryByISOCodeIdxKey existingKeyISOCodeIdx = schema.getFactoryISOCtry().newISOCodeIdxKey();
+		CFSecBuffISOCtryByISOCodeIdxKey existingKeyISOCodeIdx = schema.getFactoryISOCtry().newISOCodeIdxKey();
 		existingKeyISOCodeIdx.setRequiredISOCode( existing.getRequiredISOCode() );
 
-		CFSecISOCtryByISOCodeIdxKey newKeyISOCodeIdx = schema.getFactoryISOCtry().newISOCodeIdxKey();
+		CFSecBuffISOCtryByISOCodeIdxKey newKeyISOCodeIdx = schema.getFactoryISOCtry().newISOCodeIdxKey();
 		newKeyISOCodeIdx.setRequiredISOCode( Buff.getRequiredISOCode() );
 
-		CFSecISOCtryByNameIdxKey existingKeyNameIdx = schema.getFactoryISOCtry().newNameIdxKey();
+		CFSecBuffISOCtryByNameIdxKey existingKeyNameIdx = schema.getFactoryISOCtry().newNameIdxKey();
 		existingKeyNameIdx.setRequiredName( existing.getRequiredName() );
 
-		CFSecISOCtryByNameIdxKey newKeyNameIdx = schema.getFactoryISOCtry().newNameIdxKey();
+		CFSecBuffISOCtryByNameIdxKey newKeyNameIdx = schema.getFactoryISOCtry().newNameIdxKey();
 		newKeyNameIdx.setRequiredName( Buff.getRequiredName() );
 
 		// Check unique indexes
@@ -349,7 +350,7 @@ public class CFBamRamISOCtryTable
 
 		// Update is valid
 
-		Map< CFSecISOCtryPKey, CFSecISOCtryBuff > subdict;
+		Map< Short, CFSecBuffISOCtry > subdict;
 
 		dictByPKey.remove( pkey );
 		dictByPKey.put( pkey, Buff );
@@ -362,14 +363,14 @@ public class CFBamRamISOCtryTable
 
 	}
 
-	public void deleteISOCtry( CFSecAuthorization Authorization,
-		CFSecISOCtryBuff Buff )
+	public void deleteISOCtry( ICFSecAuthorization Authorization,
+		ICFSecISOCtry Buff )
 	{
 		final String S_ProcName = "CFBamRamISOCtryTable.deleteISOCtry() ";
 		String classCode;
-		CFSecISOCtryPKey pkey = schema.getFactoryISOCtry().newPKey();
+		Short pkey = schema.getFactoryISOCtry().newPKey();
 		pkey.setRequiredISOCtryId( Buff.getRequiredISOCtryId() );
-		CFSecISOCtryBuff existing = dictByPKey.get( pkey );
+		ICFSecISOCtry existing = dictByPKey.get( pkey );
 		if( existing == null ) {
 			return;
 		}
@@ -383,16 +384,16 @@ public class CFBamRamISOCtryTable
 						existing.getRequiredISOCtryId() );
 					schema.getTableISOCtryCcy().deleteISOCtryCcyByCtryIdx( Authorization,
 						existing.getRequiredISOCtryId() );
-		CFSecISOCtryByISOCodeIdxKey keyISOCodeIdx = schema.getFactoryISOCtry().newISOCodeIdxKey();
+		CFSecBuffISOCtryByISOCodeIdxKey keyISOCodeIdx = schema.getFactoryISOCtry().newISOCodeIdxKey();
 		keyISOCodeIdx.setRequiredISOCode( existing.getRequiredISOCode() );
 
-		CFSecISOCtryByNameIdxKey keyNameIdx = schema.getFactoryISOCtry().newNameIdxKey();
+		CFSecBuffISOCtryByNameIdxKey keyNameIdx = schema.getFactoryISOCtry().newNameIdxKey();
 		keyNameIdx.setRequiredName( existing.getRequiredName() );
 
 		// Validate reverse foreign keys
 
 		// Delete is valid
-		Map< CFSecISOCtryPKey, CFSecISOCtryBuff > subdict;
+		Map< Short, CFSecBuffISOCtry > subdict;
 
 		dictByPKey.remove( pkey );
 
@@ -401,32 +402,32 @@ public class CFBamRamISOCtryTable
 		dictByNameIdx.remove( keyNameIdx );
 
 	}
-	public void deleteISOCtryByIdIdx( CFSecAuthorization Authorization,
+	public void deleteISOCtryByIdIdx( ICFSecAuthorization Authorization,
 		short argISOCtryId )
 	{
-		CFSecISOCtryPKey key = schema.getFactoryISOCtry().newPKey();
+		Short key = schema.getFactoryISOCtry().newPKey();
 		key.setRequiredISOCtryId( argISOCtryId );
 		deleteISOCtryByIdIdx( Authorization, key );
 	}
 
-	public void deleteISOCtryByIdIdx( CFSecAuthorization Authorization,
-		CFSecISOCtryPKey argKey )
+	public void deleteISOCtryByIdIdx( ICFSecAuthorization Authorization,
+		Short argKey )
 	{
 		boolean anyNotNull = false;
 		anyNotNull = true;
 		if( ! anyNotNull ) {
 			return;
 		}
-		CFSecISOCtryBuff cur;
-		LinkedList<CFSecISOCtryBuff> matchSet = new LinkedList<CFSecISOCtryBuff>();
-		Iterator<CFSecISOCtryBuff> values = dictByPKey.values().iterator();
+		ICFSecISOCtry cur;
+		LinkedList<ICFSecISOCtry> matchSet = new LinkedList<ICFSecISOCtry>();
+		Iterator<ICFSecISOCtry> values = dictByPKey.values().iterator();
 		while( values.hasNext() ) {
 			cur = values.next();
 			if( argKey.equals( cur ) ) {
 				matchSet.add( cur );
 			}
 		}
-		Iterator<CFSecISOCtryBuff> iterMatch = matchSet.iterator();
+		Iterator<ICFSecISOCtry> iterMatch = matchSet.iterator();
 		while( iterMatch.hasNext() ) {
 			cur = iterMatch.next();
 			cur = schema.getTableISOCtry().readDerivedByIdIdx( Authorization,
@@ -435,32 +436,32 @@ public class CFBamRamISOCtryTable
 		}
 	}
 
-	public void deleteISOCtryByISOCodeIdx( CFSecAuthorization Authorization,
+	public void deleteISOCtryByISOCodeIdx( ICFSecAuthorization Authorization,
 		String argISOCode )
 	{
-		CFSecISOCtryByISOCodeIdxKey key = schema.getFactoryISOCtry().newISOCodeIdxKey();
+		CFSecBuffISOCtryByISOCodeIdxKey key = schema.getFactoryISOCtry().newISOCodeIdxKey();
 		key.setRequiredISOCode( argISOCode );
 		deleteISOCtryByISOCodeIdx( Authorization, key );
 	}
 
-	public void deleteISOCtryByISOCodeIdx( CFSecAuthorization Authorization,
-		CFSecISOCtryByISOCodeIdxKey argKey )
+	public void deleteISOCtryByISOCodeIdx( ICFSecAuthorization Authorization,
+		ICFSecISOCtryByISOCodeIdxKey argKey )
 	{
-		CFSecISOCtryBuff cur;
+		ICFSecISOCtry cur;
 		boolean anyNotNull = false;
 		anyNotNull = true;
 		if( ! anyNotNull ) {
 			return;
 		}
-		LinkedList<CFSecISOCtryBuff> matchSet = new LinkedList<CFSecISOCtryBuff>();
-		Iterator<CFSecISOCtryBuff> values = dictByPKey.values().iterator();
+		LinkedList<ICFSecISOCtry> matchSet = new LinkedList<ICFSecISOCtry>();
+		Iterator<ICFSecISOCtry> values = dictByPKey.values().iterator();
 		while( values.hasNext() ) {
 			cur = values.next();
 			if( argKey.equals( cur ) ) {
 				matchSet.add( cur );
 			}
 		}
-		Iterator<CFSecISOCtryBuff> iterMatch = matchSet.iterator();
+		Iterator<ICFSecISOCtry> iterMatch = matchSet.iterator();
 		while( iterMatch.hasNext() ) {
 			cur = iterMatch.next();
 			cur = schema.getTableISOCtry().readDerivedByIdIdx( Authorization,
@@ -469,32 +470,32 @@ public class CFBamRamISOCtryTable
 		}
 	}
 
-	public void deleteISOCtryByNameIdx( CFSecAuthorization Authorization,
+	public void deleteISOCtryByNameIdx( ICFSecAuthorization Authorization,
 		String argName )
 	{
-		CFSecISOCtryByNameIdxKey key = schema.getFactoryISOCtry().newNameIdxKey();
+		CFSecBuffISOCtryByNameIdxKey key = schema.getFactoryISOCtry().newNameIdxKey();
 		key.setRequiredName( argName );
 		deleteISOCtryByNameIdx( Authorization, key );
 	}
 
-	public void deleteISOCtryByNameIdx( CFSecAuthorization Authorization,
-		CFSecISOCtryByNameIdxKey argKey )
+	public void deleteISOCtryByNameIdx( ICFSecAuthorization Authorization,
+		ICFSecISOCtryByNameIdxKey argKey )
 	{
-		CFSecISOCtryBuff cur;
+		ICFSecISOCtry cur;
 		boolean anyNotNull = false;
 		anyNotNull = true;
 		if( ! anyNotNull ) {
 			return;
 		}
-		LinkedList<CFSecISOCtryBuff> matchSet = new LinkedList<CFSecISOCtryBuff>();
-		Iterator<CFSecISOCtryBuff> values = dictByPKey.values().iterator();
+		LinkedList<ICFSecISOCtry> matchSet = new LinkedList<ICFSecISOCtry>();
+		Iterator<ICFSecISOCtry> values = dictByPKey.values().iterator();
 		while( values.hasNext() ) {
 			cur = values.next();
 			if( argKey.equals( cur ) ) {
 				matchSet.add( cur );
 			}
 		}
-		Iterator<CFSecISOCtryBuff> iterMatch = matchSet.iterator();
+		Iterator<ICFSecISOCtry> iterMatch = matchSet.iterator();
 		while( iterMatch.hasNext() ) {
 			cur = iterMatch.next();
 			cur = schema.getTableISOCtry().readDerivedByIdIdx( Authorization,

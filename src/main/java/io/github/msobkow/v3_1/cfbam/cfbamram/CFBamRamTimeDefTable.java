@@ -38,6 +38,7 @@ package io.github.msobkow.v3_1.cfbam.cfbamram;
 import java.math.*;
 import java.sql.*;
 import java.text.*;
+import java.time.*;
 import java.util.*;
 import org.apache.commons.codec.binary.Base64;
 import io.github.msobkow.v3_1.cflib.*;
@@ -46,7 +47,9 @@ import io.github.msobkow.v3_1.cflib.dbutil.*;
 import io.github.msobkow.v3_1.cfsec.cfsec.*;
 import io.github.msobkow.v3_1.cfint.cfint.*;
 import io.github.msobkow.v3_1.cfbam.cfbam.*;
-import io.github.msobkow.v3_1.cfbam.cfbamobj.*;
+import io.github.msobkow.v3_1.cfsec.cfsec.buff.*;
+import io.github.msobkow.v3_1.cfint.cfint.buff.*;
+import io.github.msobkow.v3_1.cfbam.cfbam.buff.*;
 import io.github.msobkow.v3_1.cfsec.cfsecobj.*;
 import io.github.msobkow.v3_1.cfint.cfintobj.*;
 import io.github.msobkow.v3_1.cfbam.cfbamobj.*;
@@ -59,22 +62,22 @@ public class CFBamRamTimeDefTable
 	implements ICFBamTimeDefTable
 {
 	private ICFBamSchema schema;
-	private Map< CFBamValuePKey,
-				CFBamTimeDefBuff > dictByPKey
-		= new HashMap< CFBamValuePKey,
-				CFBamTimeDefBuff >();
+	private Map< CFLibDbKeyHash256,
+				CFBamBuffTimeDef > dictByPKey
+		= new HashMap< CFLibDbKeyHash256,
+				CFBamBuffTimeDef >();
 
 	public CFBamRamTimeDefTable( ICFBamSchema argSchema ) {
 		schema = argSchema;
 	}
 
-	public void createTimeDef( CFSecAuthorization Authorization,
-		CFBamTimeDefBuff Buff )
+	public void createTimeDef( ICFSecAuthorization Authorization,
+		ICFBamTimeDef Buff )
 	{
 		final String S_ProcName = "createTimeDef";
 		schema.getTableAtom().createAtom( Authorization,
 			Buff );
-		CFBamValuePKey pkey = schema.getFactoryValue().newPKey();
+		CFLibDbKeyHash256 pkey = schema.getFactoryValue().newPKey();
 		pkey.setClassCode( Buff.getClassCode() );
 		pkey.setRequiredId( Buff.getRequiredId() );
 		// Validate unique indexes
@@ -108,13 +111,27 @@ public class CFBamRamTimeDefTable
 
 	}
 
-	public CFBamTimeDefBuff readDerived( CFSecAuthorization Authorization,
-		CFBamValuePKey PKey )
+	public ICFBamTimeDef readDerived( ICFSecAuthorization Authorization,
+		CFLibDbKeyHash256 PKey )
 	{
 		final String S_ProcName = "CFBamRamTimeDef.readDerived";
-		CFBamValuePKey key = schema.getFactoryValue().newPKey();
+		ICFBamTimeDef buff;
+		if( dictByPKey.containsKey( PKey ) ) {
+			buff = dictByPKey.get( PKey );
+		}
+		else {
+			buff = null;
+		}
+		return( buff );
+	}
+
+	public ICFBamTimeDef lockDerived( ICFSecAuthorization Authorization,
+		CFLibDbKeyHash256 PKey )
+	{
+		final String S_ProcName = "CFBamRamTimeDef.readDerived";
+		CFLibDbKeyHash256 key = schema.getFactoryValue().newPKey();
 		key.setRequiredId( PKey.getRequiredId() );
-		CFBamTimeDefBuff buff;
+		ICFBamTimeDef buff;
 		if( dictByPKey.containsKey( key ) ) {
 			buff = dictByPKey.get( key );
 		}
@@ -124,26 +141,10 @@ public class CFBamRamTimeDefTable
 		return( buff );
 	}
 
-	public CFBamTimeDefBuff lockDerived( CFSecAuthorization Authorization,
-		CFBamValuePKey PKey )
-	{
-		final String S_ProcName = "CFBamRamTimeDef.readDerived";
-		CFBamValuePKey key = schema.getFactoryValue().newPKey();
-		key.setRequiredId( PKey.getRequiredId() );
-		CFBamTimeDefBuff buff;
-		if( dictByPKey.containsKey( key ) ) {
-			buff = dictByPKey.get( key );
-		}
-		else {
-			buff = null;
-		}
-		return( buff );
-	}
-
-	public CFBamTimeDefBuff[] readAllDerived( CFSecAuthorization Authorization ) {
+	public ICFBamTimeDef[] readAllDerived( ICFSecAuthorization Authorization ) {
 		final String S_ProcName = "CFBamRamTimeDef.readAllDerived";
-		CFBamTimeDefBuff[] retList = new CFBamTimeDefBuff[ dictByPKey.values().size() ];
-		Iterator< CFBamTimeDefBuff > iter = dictByPKey.values().iterator();
+		ICFBamTimeDef[] retList = new ICFBamTimeDef[ dictByPKey.values().size() ];
+		Iterator< ICFBamTimeDef > iter = dictByPKey.values().iterator();
 		int idx = 0;
 		while( iter.hasNext() ) {
 			retList[ idx++ ] = iter.next();
@@ -151,169 +152,169 @@ public class CFBamRamTimeDefTable
 		return( retList );
 	}
 
-	public CFBamTimeDefBuff readDerivedByUNameIdx( CFSecAuthorization Authorization,
+	public ICFBamTimeDef readDerivedByUNameIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 ScopeId,
 		String Name )
 	{
 		final String S_ProcName = "CFBamRamValue.readDerivedByUNameIdx";
-		CFBamValueBuff buff = schema.getTableValue().readDerivedByUNameIdx( Authorization,
+		ICFBamValue buff = schema.getTableValue().readDerivedByUNameIdx( Authorization,
 			ScopeId,
 			Name );
 		if( buff == null ) {
 			return( null );
 		}
-		else if( buff instanceof CFBamTimeDefBuff ) {
-			return( (CFBamTimeDefBuff)buff );
+		else if( buff instanceof ICFBamTimeDef ) {
+			return( (ICFBamTimeDef)buff );
 		}
 		else {
 			return( null );
 		}
 	}
 
-	public CFBamTimeDefBuff[] readDerivedByScopeIdx( CFSecAuthorization Authorization,
+	public ICFBamTimeDef[] readDerivedByScopeIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 ScopeId )
 	{
 		final String S_ProcName = "CFBamRamValue.readDerivedByScopeIdx";
-		CFBamValueBuff buffList[] = schema.getTableValue().readDerivedByScopeIdx( Authorization,
+		ICFBamValue buffList[] = schema.getTableValue().readDerivedByScopeIdx( Authorization,
 			ScopeId );
 		if( buffList == null ) {
 			return( null );
 		}
 		else {
-			CFBamValueBuff buff;
-			ArrayList<CFBamTimeDefBuff> filteredList = new ArrayList<CFBamTimeDefBuff>();
+			ICFBamValue buff;
+			ArrayList<ICFBamTimeDef> filteredList = new ArrayList<ICFBamTimeDef>();
 			for( int idx = 0; idx < buffList.length; idx ++ ) {
 				buff = buffList[idx];
-				if( ( buff != null ) && ( buff instanceof CFBamTimeDefBuff ) ) {
-					filteredList.add( (CFBamTimeDefBuff)buff );
+				if( ( buff != null ) && ( buff instanceof ICFBamTimeDef ) ) {
+					filteredList.add( (ICFBamTimeDef)buff );
 				}
 			}
-			return( filteredList.toArray( new CFBamTimeDefBuff[0] ) );
+			return( filteredList.toArray( new ICFBamTimeDef[0] ) );
 		}
 	}
 
-	public CFBamTimeDefBuff[] readDerivedByDefSchemaIdx( CFSecAuthorization Authorization,
+	public ICFBamTimeDef[] readDerivedByDefSchemaIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 DefSchemaId )
 	{
 		final String S_ProcName = "CFBamRamValue.readDerivedByDefSchemaIdx";
-		CFBamValueBuff buffList[] = schema.getTableValue().readDerivedByDefSchemaIdx( Authorization,
+		ICFBamValue buffList[] = schema.getTableValue().readDerivedByDefSchemaIdx( Authorization,
 			DefSchemaId );
 		if( buffList == null ) {
 			return( null );
 		}
 		else {
-			CFBamValueBuff buff;
-			ArrayList<CFBamTimeDefBuff> filteredList = new ArrayList<CFBamTimeDefBuff>();
+			ICFBamValue buff;
+			ArrayList<ICFBamTimeDef> filteredList = new ArrayList<ICFBamTimeDef>();
 			for( int idx = 0; idx < buffList.length; idx ++ ) {
 				buff = buffList[idx];
-				if( ( buff != null ) && ( buff instanceof CFBamTimeDefBuff ) ) {
-					filteredList.add( (CFBamTimeDefBuff)buff );
+				if( ( buff != null ) && ( buff instanceof ICFBamTimeDef ) ) {
+					filteredList.add( (ICFBamTimeDef)buff );
 				}
 			}
-			return( filteredList.toArray( new CFBamTimeDefBuff[0] ) );
+			return( filteredList.toArray( new ICFBamTimeDef[0] ) );
 		}
 	}
 
-	public CFBamTimeDefBuff[] readDerivedByPrevIdx( CFSecAuthorization Authorization,
+	public ICFBamTimeDef[] readDerivedByPrevIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 PrevId )
 	{
 		final String S_ProcName = "CFBamRamValue.readDerivedByPrevIdx";
-		CFBamValueBuff buffList[] = schema.getTableValue().readDerivedByPrevIdx( Authorization,
+		ICFBamValue buffList[] = schema.getTableValue().readDerivedByPrevIdx( Authorization,
 			PrevId );
 		if( buffList == null ) {
 			return( null );
 		}
 		else {
-			CFBamValueBuff buff;
-			ArrayList<CFBamTimeDefBuff> filteredList = new ArrayList<CFBamTimeDefBuff>();
+			ICFBamValue buff;
+			ArrayList<ICFBamTimeDef> filteredList = new ArrayList<ICFBamTimeDef>();
 			for( int idx = 0; idx < buffList.length; idx ++ ) {
 				buff = buffList[idx];
-				if( ( buff != null ) && ( buff instanceof CFBamTimeDefBuff ) ) {
-					filteredList.add( (CFBamTimeDefBuff)buff );
+				if( ( buff != null ) && ( buff instanceof ICFBamTimeDef ) ) {
+					filteredList.add( (ICFBamTimeDef)buff );
 				}
 			}
-			return( filteredList.toArray( new CFBamTimeDefBuff[0] ) );
+			return( filteredList.toArray( new ICFBamTimeDef[0] ) );
 		}
 	}
 
-	public CFBamTimeDefBuff[] readDerivedByNextIdx( CFSecAuthorization Authorization,
+	public ICFBamTimeDef[] readDerivedByNextIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 NextId )
 	{
 		final String S_ProcName = "CFBamRamValue.readDerivedByNextIdx";
-		CFBamValueBuff buffList[] = schema.getTableValue().readDerivedByNextIdx( Authorization,
+		ICFBamValue buffList[] = schema.getTableValue().readDerivedByNextIdx( Authorization,
 			NextId );
 		if( buffList == null ) {
 			return( null );
 		}
 		else {
-			CFBamValueBuff buff;
-			ArrayList<CFBamTimeDefBuff> filteredList = new ArrayList<CFBamTimeDefBuff>();
+			ICFBamValue buff;
+			ArrayList<ICFBamTimeDef> filteredList = new ArrayList<ICFBamTimeDef>();
 			for( int idx = 0; idx < buffList.length; idx ++ ) {
 				buff = buffList[idx];
-				if( ( buff != null ) && ( buff instanceof CFBamTimeDefBuff ) ) {
-					filteredList.add( (CFBamTimeDefBuff)buff );
+				if( ( buff != null ) && ( buff instanceof ICFBamTimeDef ) ) {
+					filteredList.add( (ICFBamTimeDef)buff );
 				}
 			}
-			return( filteredList.toArray( new CFBamTimeDefBuff[0] ) );
+			return( filteredList.toArray( new ICFBamTimeDef[0] ) );
 		}
 	}
 
-	public CFBamTimeDefBuff[] readDerivedByContPrevIdx( CFSecAuthorization Authorization,
+	public ICFBamTimeDef[] readDerivedByContPrevIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 ScopeId,
 		CFLibDbKeyHash256 PrevId )
 	{
 		final String S_ProcName = "CFBamRamValue.readDerivedByContPrevIdx";
-		CFBamValueBuff buffList[] = schema.getTableValue().readDerivedByContPrevIdx( Authorization,
+		ICFBamValue buffList[] = schema.getTableValue().readDerivedByContPrevIdx( Authorization,
 			ScopeId,
 			PrevId );
 		if( buffList == null ) {
 			return( null );
 		}
 		else {
-			CFBamValueBuff buff;
-			ArrayList<CFBamTimeDefBuff> filteredList = new ArrayList<CFBamTimeDefBuff>();
+			ICFBamValue buff;
+			ArrayList<ICFBamTimeDef> filteredList = new ArrayList<ICFBamTimeDef>();
 			for( int idx = 0; idx < buffList.length; idx ++ ) {
 				buff = buffList[idx];
-				if( ( buff != null ) && ( buff instanceof CFBamTimeDefBuff ) ) {
-					filteredList.add( (CFBamTimeDefBuff)buff );
+				if( ( buff != null ) && ( buff instanceof ICFBamTimeDef ) ) {
+					filteredList.add( (ICFBamTimeDef)buff );
 				}
 			}
-			return( filteredList.toArray( new CFBamTimeDefBuff[0] ) );
+			return( filteredList.toArray( new ICFBamTimeDef[0] ) );
 		}
 	}
 
-	public CFBamTimeDefBuff[] readDerivedByContNextIdx( CFSecAuthorization Authorization,
+	public ICFBamTimeDef[] readDerivedByContNextIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 ScopeId,
 		CFLibDbKeyHash256 NextId )
 	{
 		final String S_ProcName = "CFBamRamValue.readDerivedByContNextIdx";
-		CFBamValueBuff buffList[] = schema.getTableValue().readDerivedByContNextIdx( Authorization,
+		ICFBamValue buffList[] = schema.getTableValue().readDerivedByContNextIdx( Authorization,
 			ScopeId,
 			NextId );
 		if( buffList == null ) {
 			return( null );
 		}
 		else {
-			CFBamValueBuff buff;
-			ArrayList<CFBamTimeDefBuff> filteredList = new ArrayList<CFBamTimeDefBuff>();
+			ICFBamValue buff;
+			ArrayList<ICFBamTimeDef> filteredList = new ArrayList<ICFBamTimeDef>();
 			for( int idx = 0; idx < buffList.length; idx ++ ) {
 				buff = buffList[idx];
-				if( ( buff != null ) && ( buff instanceof CFBamTimeDefBuff ) ) {
-					filteredList.add( (CFBamTimeDefBuff)buff );
+				if( ( buff != null ) && ( buff instanceof ICFBamTimeDef ) ) {
+					filteredList.add( (ICFBamTimeDef)buff );
 				}
 			}
-			return( filteredList.toArray( new CFBamTimeDefBuff[0] ) );
+			return( filteredList.toArray( new ICFBamTimeDef[0] ) );
 		}
 	}
 
-	public CFBamTimeDefBuff readDerivedByIdIdx( CFSecAuthorization Authorization,
+	public ICFBamTimeDef readDerivedByIdIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 Id )
 	{
 		final String S_ProcName = "CFBamRamValue.readDerivedByIdIdx() ";
-		CFBamValuePKey key = schema.getFactoryValue().newPKey();
+		CFLibDbKeyHash256 key = schema.getFactoryValue().newPKey();
 		key.setRequiredId( Id );
 
-		CFBamTimeDefBuff buff;
+		ICFBamTimeDef buff;
 		if( dictByPKey.containsKey( key ) ) {
 			buff = dictByPKey.get( key );
 		}
@@ -323,177 +324,177 @@ public class CFBamRamTimeDefTable
 		return( buff );
 	}
 
-	public CFBamTimeDefBuff readBuff( CFSecAuthorization Authorization,
-		CFBamValuePKey PKey )
+	public ICFBamTimeDef readBuff( ICFSecAuthorization Authorization,
+		CFLibDbKeyHash256 PKey )
 	{
 		final String S_ProcName = "CFBamRamTimeDef.readBuff";
-		CFBamTimeDefBuff buff = readDerived( Authorization, PKey );
+		ICFBamTimeDef buff = readDerived( Authorization, PKey );
 		if( ( buff != null ) && ( ! buff.getClassCode().equals( "a85b" ) ) ) {
 			buff = null;
 		}
 		return( buff );
 	}
 
-	public CFBamTimeDefBuff lockBuff( CFSecAuthorization Authorization,
-		CFBamValuePKey PKey )
+	public ICFBamTimeDef lockBuff( ICFSecAuthorization Authorization,
+		CFLibDbKeyHash256 PKey )
 	{
 		final String S_ProcName = "lockBuff";
-		CFBamTimeDefBuff buff = readDerived( Authorization, PKey );
+		ICFBamTimeDef buff = readDerived( Authorization, PKey );
 		if( ( buff != null ) && ( ! buff.getClassCode().equals( "a85b" ) ) ) {
 			buff = null;
 		}
 		return( buff );
 	}
 
-	public CFBamTimeDefBuff[] readAllBuff( CFSecAuthorization Authorization )
+	public ICFBamTimeDef[] readAllBuff( ICFSecAuthorization Authorization )
 	{
 		final String S_ProcName = "CFBamRamTimeDef.readAllBuff";
-		CFBamTimeDefBuff buff;
-		ArrayList<CFBamTimeDefBuff> filteredList = new ArrayList<CFBamTimeDefBuff>();
-		CFBamTimeDefBuff[] buffList = readAllDerived( Authorization );
+		ICFBamTimeDef buff;
+		ArrayList<ICFBamTimeDef> filteredList = new ArrayList<ICFBamTimeDef>();
+		ICFBamTimeDef[] buffList = readAllDerived( Authorization );
 		for( int idx = 0; idx < buffList.length; idx ++ ) {
 			buff = buffList[idx];
 			if( ( buff != null ) && buff.getClassCode().equals( "a85b" ) ) {
 				filteredList.add( buff );
 			}
 		}
-		return( filteredList.toArray( new CFBamTimeDefBuff[0] ) );
+		return( filteredList.toArray( new ICFBamTimeDef[0] ) );
 	}
 
-	public CFBamTimeDefBuff readBuffByIdIdx( CFSecAuthorization Authorization,
+	public ICFBamTimeDef readBuffByIdIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 Id )
 	{
 		final String S_ProcName = "CFBamRamValue.readBuffByIdIdx() ";
-		CFBamTimeDefBuff buff = readDerivedByIdIdx( Authorization,
+		ICFBamTimeDef buff = readDerivedByIdIdx( Authorization,
 			Id );
 		if( ( buff != null ) && buff.getClassCode().equals( "a809" ) ) {
-			return( (CFBamTimeDefBuff)buff );
+			return( (ICFBamTimeDef)buff );
 		}
 		else {
 			return( null );
 		}
 	}
 
-	public CFBamTimeDefBuff readBuffByUNameIdx( CFSecAuthorization Authorization,
+	public ICFBamTimeDef readBuffByUNameIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 ScopeId,
 		String Name )
 	{
 		final String S_ProcName = "CFBamRamValue.readBuffByUNameIdx() ";
-		CFBamTimeDefBuff buff = readDerivedByUNameIdx( Authorization,
+		ICFBamTimeDef buff = readDerivedByUNameIdx( Authorization,
 			ScopeId,
 			Name );
 		if( ( buff != null ) && buff.getClassCode().equals( "a809" ) ) {
-			return( (CFBamTimeDefBuff)buff );
+			return( (ICFBamTimeDef)buff );
 		}
 		else {
 			return( null );
 		}
 	}
 
-	public CFBamTimeDefBuff[] readBuffByScopeIdx( CFSecAuthorization Authorization,
+	public ICFBamTimeDef[] readBuffByScopeIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 ScopeId )
 	{
 		final String S_ProcName = "CFBamRamValue.readBuffByScopeIdx() ";
-		CFBamTimeDefBuff buff;
-		ArrayList<CFBamTimeDefBuff> filteredList = new ArrayList<CFBamTimeDefBuff>();
-		CFBamTimeDefBuff[] buffList = readDerivedByScopeIdx( Authorization,
+		ICFBamTimeDef buff;
+		ArrayList<ICFBamTimeDef> filteredList = new ArrayList<ICFBamTimeDef>();
+		ICFBamTimeDef[] buffList = readDerivedByScopeIdx( Authorization,
 			ScopeId );
 		for( int idx = 0; idx < buffList.length; idx ++ ) {
 			buff = buffList[idx];
 			if( ( buff != null ) && buff.getClassCode().equals( "a809" ) ) {
-				filteredList.add( (CFBamTimeDefBuff)buff );
+				filteredList.add( (ICFBamTimeDef)buff );
 			}
 		}
-		return( filteredList.toArray( new CFBamTimeDefBuff[0] ) );
+		return( filteredList.toArray( new ICFBamTimeDef[0] ) );
 	}
 
-	public CFBamTimeDefBuff[] readBuffByDefSchemaIdx( CFSecAuthorization Authorization,
+	public ICFBamTimeDef[] readBuffByDefSchemaIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 DefSchemaId )
 	{
 		final String S_ProcName = "CFBamRamValue.readBuffByDefSchemaIdx() ";
-		CFBamTimeDefBuff buff;
-		ArrayList<CFBamTimeDefBuff> filteredList = new ArrayList<CFBamTimeDefBuff>();
-		CFBamTimeDefBuff[] buffList = readDerivedByDefSchemaIdx( Authorization,
+		ICFBamTimeDef buff;
+		ArrayList<ICFBamTimeDef> filteredList = new ArrayList<ICFBamTimeDef>();
+		ICFBamTimeDef[] buffList = readDerivedByDefSchemaIdx( Authorization,
 			DefSchemaId );
 		for( int idx = 0; idx < buffList.length; idx ++ ) {
 			buff = buffList[idx];
 			if( ( buff != null ) && buff.getClassCode().equals( "a809" ) ) {
-				filteredList.add( (CFBamTimeDefBuff)buff );
+				filteredList.add( (ICFBamTimeDef)buff );
 			}
 		}
-		return( filteredList.toArray( new CFBamTimeDefBuff[0] ) );
+		return( filteredList.toArray( new ICFBamTimeDef[0] ) );
 	}
 
-	public CFBamTimeDefBuff[] readBuffByPrevIdx( CFSecAuthorization Authorization,
+	public ICFBamTimeDef[] readBuffByPrevIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 PrevId )
 	{
 		final String S_ProcName = "CFBamRamValue.readBuffByPrevIdx() ";
-		CFBamTimeDefBuff buff;
-		ArrayList<CFBamTimeDefBuff> filteredList = new ArrayList<CFBamTimeDefBuff>();
-		CFBamTimeDefBuff[] buffList = readDerivedByPrevIdx( Authorization,
+		ICFBamTimeDef buff;
+		ArrayList<ICFBamTimeDef> filteredList = new ArrayList<ICFBamTimeDef>();
+		ICFBamTimeDef[] buffList = readDerivedByPrevIdx( Authorization,
 			PrevId );
 		for( int idx = 0; idx < buffList.length; idx ++ ) {
 			buff = buffList[idx];
 			if( ( buff != null ) && buff.getClassCode().equals( "a809" ) ) {
-				filteredList.add( (CFBamTimeDefBuff)buff );
+				filteredList.add( (ICFBamTimeDef)buff );
 			}
 		}
-		return( filteredList.toArray( new CFBamTimeDefBuff[0] ) );
+		return( filteredList.toArray( new ICFBamTimeDef[0] ) );
 	}
 
-	public CFBamTimeDefBuff[] readBuffByNextIdx( CFSecAuthorization Authorization,
+	public ICFBamTimeDef[] readBuffByNextIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 NextId )
 	{
 		final String S_ProcName = "CFBamRamValue.readBuffByNextIdx() ";
-		CFBamTimeDefBuff buff;
-		ArrayList<CFBamTimeDefBuff> filteredList = new ArrayList<CFBamTimeDefBuff>();
-		CFBamTimeDefBuff[] buffList = readDerivedByNextIdx( Authorization,
+		ICFBamTimeDef buff;
+		ArrayList<ICFBamTimeDef> filteredList = new ArrayList<ICFBamTimeDef>();
+		ICFBamTimeDef[] buffList = readDerivedByNextIdx( Authorization,
 			NextId );
 		for( int idx = 0; idx < buffList.length; idx ++ ) {
 			buff = buffList[idx];
 			if( ( buff != null ) && buff.getClassCode().equals( "a809" ) ) {
-				filteredList.add( (CFBamTimeDefBuff)buff );
+				filteredList.add( (ICFBamTimeDef)buff );
 			}
 		}
-		return( filteredList.toArray( new CFBamTimeDefBuff[0] ) );
+		return( filteredList.toArray( new ICFBamTimeDef[0] ) );
 	}
 
-	public CFBamTimeDefBuff[] readBuffByContPrevIdx( CFSecAuthorization Authorization,
+	public ICFBamTimeDef[] readBuffByContPrevIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 ScopeId,
 		CFLibDbKeyHash256 PrevId )
 	{
 		final String S_ProcName = "CFBamRamValue.readBuffByContPrevIdx() ";
-		CFBamTimeDefBuff buff;
-		ArrayList<CFBamTimeDefBuff> filteredList = new ArrayList<CFBamTimeDefBuff>();
-		CFBamTimeDefBuff[] buffList = readDerivedByContPrevIdx( Authorization,
+		ICFBamTimeDef buff;
+		ArrayList<ICFBamTimeDef> filteredList = new ArrayList<ICFBamTimeDef>();
+		ICFBamTimeDef[] buffList = readDerivedByContPrevIdx( Authorization,
 			ScopeId,
 			PrevId );
 		for( int idx = 0; idx < buffList.length; idx ++ ) {
 			buff = buffList[idx];
 			if( ( buff != null ) && buff.getClassCode().equals( "a809" ) ) {
-				filteredList.add( (CFBamTimeDefBuff)buff );
+				filteredList.add( (ICFBamTimeDef)buff );
 			}
 		}
-		return( filteredList.toArray( new CFBamTimeDefBuff[0] ) );
+		return( filteredList.toArray( new ICFBamTimeDef[0] ) );
 	}
 
-	public CFBamTimeDefBuff[] readBuffByContNextIdx( CFSecAuthorization Authorization,
+	public ICFBamTimeDef[] readBuffByContNextIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 ScopeId,
 		CFLibDbKeyHash256 NextId )
 	{
 		final String S_ProcName = "CFBamRamValue.readBuffByContNextIdx() ";
-		CFBamTimeDefBuff buff;
-		ArrayList<CFBamTimeDefBuff> filteredList = new ArrayList<CFBamTimeDefBuff>();
-		CFBamTimeDefBuff[] buffList = readDerivedByContNextIdx( Authorization,
+		ICFBamTimeDef buff;
+		ArrayList<ICFBamTimeDef> filteredList = new ArrayList<ICFBamTimeDef>();
+		ICFBamTimeDef[] buffList = readDerivedByContNextIdx( Authorization,
 			ScopeId,
 			NextId );
 		for( int idx = 0; idx < buffList.length; idx ++ ) {
 			buff = buffList[idx];
 			if( ( buff != null ) && buff.getClassCode().equals( "a809" ) ) {
-				filteredList.add( (CFBamTimeDefBuff)buff );
+				filteredList.add( (ICFBamTimeDef)buff );
 			}
 		}
-		return( filteredList.toArray( new CFBamTimeDefBuff[0] ) );
+		return( filteredList.toArray( new ICFBamTimeDef[0] ) );
 	}
 
 	/**
@@ -501,16 +502,16 @@ public class CFBamRamTimeDefTable
 	 *
 	 *	@return	The refreshed buffer after it has been moved
 	 */
-	public CFBamTimeDefBuff moveBuffUp( CFSecAuthorization Authorization,
+	public ICFBamTimeDef moveBuffUp( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 Id,
 		int revision )
 	{
 		final String S_ProcName = "moveBuffUp";
 
-		CFBamValueBuff grandprev = null;
-		CFBamValueBuff prev = null;
-		CFBamValueBuff cur = null;
-		CFBamValueBuff next = null;
+		ICFBamValue grandprev = null;
+		ICFBamValue prev = null;
+		ICFBamValue cur = null;
+		ICFBamValue next = null;
 
 		cur = schema.getTableValue().readDerivedByIdIdx(Authorization, Id);
 		if( cur == null ) {
@@ -552,7 +553,7 @@ public class CFBamRamTimeDefTable
 		}
 
 		String classCode = prev.getClassCode();
-		CFBamValueBuff newInstance;
+		ICFBamValue newInstance;
 			if( classCode.equals( "a809" ) ) {
 				newInstance = schema.getFactoryValue().newBuff();
 			}
@@ -876,7 +877,7 @@ public class CFBamRamTimeDefTable
 					S_ProcName,
 					"Unrecognized ClassCode \"" + classCode + "\"" );
 			}
-		CFBamValueBuff editPrev = newInstance;
+		ICFBamValue editPrev = newInstance;
 		editPrev.set( prev );
 
 		classCode = cur.getClassCode();
@@ -1206,7 +1207,7 @@ public class CFBamRamTimeDefTable
 		CFBamValueBuff editCur = newInstance;
 		editCur.set( cur );
 
-		CFBamValueBuff editGrandprev = null;
+		ICFBamValue editGrandprev = null;
 		if( grandprev != null ) {
 			classCode = grandprev.getClassCode();
 			if( classCode.equals( "a809" ) ) {
@@ -1536,7 +1537,7 @@ public class CFBamRamTimeDefTable
 			editGrandprev.set( grandprev );
 		}
 
-		CFBamValueBuff editNext = null;
+		ICFBamValue editNext = null;
 		if( next != null ) {
 			classCode = next.getClassCode();
 			if( classCode.equals( "a809" ) ) {
@@ -3198,7 +3199,7 @@ public class CFBamRamTimeDefTable
 	 *
 	 *	@return	The refreshed buffer after it has been moved
 	 */
-	public CFBamTimeDefBuff moveBuffDown( CFSecAuthorization Authorization,
+	public ICFBamTimeDef moveBuffDown( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 Id,
 		int revision )
 	{
@@ -5890,14 +5891,14 @@ public class CFBamRamTimeDefTable
 		return( (CFBamTimeDefBuff)editCur );
 	}
 
-	public void updateTimeDef( CFSecAuthorization Authorization,
-		CFBamTimeDefBuff Buff )
+	public void updateTimeDef( ICFSecAuthorization Authorization,
+		ICFBamTimeDef Buff )
 	{
 		schema.getTableAtom().updateAtom( Authorization,
 			Buff );
-		CFBamValuePKey pkey = schema.getFactoryValue().newPKey();
+		CFLibDbKeyHash256 pkey = schema.getFactoryValue().newPKey();
 		pkey.setRequiredId( Buff.getRequiredId() );
-		CFBamTimeDefBuff existing = dictByPKey.get( pkey );
+		ICFBamTimeDef existing = dictByPKey.get( pkey );
 		if( existing == null ) {
 			throw new CFLibStaleCacheDetectedException( getClass(),
 				"updateTimeDef",
@@ -5928,21 +5929,21 @@ public class CFBamRamTimeDefTable
 
 		// Update is valid
 
-		Map< CFBamValuePKey, CFBamTimeDefBuff > subdict;
+		Map< CFLibDbKeyHash256, CFBamBuffTimeDef > subdict;
 
 		dictByPKey.remove( pkey );
 		dictByPKey.put( pkey, Buff );
 
 	}
 
-	public void deleteTimeDef( CFSecAuthorization Authorization,
-		CFBamTimeDefBuff Buff )
+	public void deleteTimeDef( ICFSecAuthorization Authorization,
+		ICFBamTimeDef Buff )
 	{
 		final String S_ProcName = "CFBamRamTimeDefTable.deleteTimeDef() ";
 		String classCode;
-		CFBamValuePKey pkey = schema.getFactoryValue().newPKey();
+		CFLibDbKeyHash256 pkey = schema.getFactoryValue().newPKey();
 		pkey.setRequiredId( Buff.getRequiredId() );
-		CFBamTimeDefBuff existing = dictByPKey.get( pkey );
+		ICFBamTimeDef existing = dictByPKey.get( pkey );
 		if( existing == null ) {
 			return;
 		}
@@ -7330,23 +7331,23 @@ public class CFBamRamTimeDefTable
 		}
 
 		// Delete is valid
-		Map< CFBamValuePKey, CFBamTimeDefBuff > subdict;
+		Map< CFLibDbKeyHash256, CFBamBuffTimeDef > subdict;
 
 		dictByPKey.remove( pkey );
 
 		schema.getTableAtom().deleteAtom( Authorization,
 			Buff );
 	}
-	public void deleteTimeDefByIdIdx( CFSecAuthorization Authorization,
+	public void deleteTimeDefByIdIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argId )
 	{
-		CFBamValuePKey key = schema.getFactoryValue().newPKey();
+		CFLibDbKeyHash256 key = schema.getFactoryValue().newPKey();
 		key.setRequiredId( argId );
 		deleteTimeDefByIdIdx( Authorization, key );
 	}
 
-	public void deleteTimeDefByIdIdx( CFSecAuthorization Authorization,
-		CFBamValuePKey argKey )
+	public void deleteTimeDefByIdIdx( ICFSecAuthorization Authorization,
+		CFLibDbKeyHash256 argKey )
 	{
 		final String S_ProcName = "deleteTimeDefByIdIdx";
 		boolean anyNotNull = false;
@@ -7354,16 +7355,16 @@ public class CFBamRamTimeDefTable
 		if( ! anyNotNull ) {
 			return;
 		}
-		CFBamTimeDefBuff cur;
-		LinkedList<CFBamTimeDefBuff> matchSet = new LinkedList<CFBamTimeDefBuff>();
-		Iterator<CFBamTimeDefBuff> values = dictByPKey.values().iterator();
+		ICFBamTimeDef cur;
+		LinkedList<ICFBamTimeDef> matchSet = new LinkedList<ICFBamTimeDef>();
+		Iterator<ICFBamTimeDef> values = dictByPKey.values().iterator();
 		while( values.hasNext() ) {
 			cur = values.next();
 			if( argKey.equals( cur ) ) {
 				matchSet.add( cur );
 			}
 		}
-		Iterator<CFBamTimeDefBuff> iterMatch = matchSet.iterator();
+		Iterator<ICFBamTimeDef> iterMatch = matchSet.iterator();
 		while( iterMatch.hasNext() ) {
 			cur = iterMatch.next();
 			cur = schema.getTableTimeDef().readDerivedByIdIdx( Authorization,
@@ -7373,10 +7374,10 @@ public class CFBamRamTimeDefTable
 				schema.getTableTimeDef().deleteTimeDef( Authorization, cur );
 			}
 			else if( "a85c".equals( subClassCode ) ) {
-				schema.getTableTimeType().deleteTimeType( Authorization, (CFBamTimeTypeBuff)cur );
+				schema.getTableTimeType().deleteTimeType( Authorization, (ICFBamTimeType)cur );
 			}
 			else if( "a880".equals( subClassCode ) ) {
-				schema.getTableTimeCol().deleteTimeCol( Authorization, (CFBamTimeColBuff)cur );
+				schema.getTableTimeCol().deleteTimeCol( Authorization, (ICFBamTimeCol)cur );
 			}
 			else {
 				throw new CFLibUnsupportedClassException( getClass(),
@@ -7388,36 +7389,36 @@ public class CFBamRamTimeDefTable
 		}
 	}
 
-	public void deleteTimeDefByUNameIdx( CFSecAuthorization Authorization,
+	public void deleteTimeDefByUNameIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argScopeId,
 		String argName )
 	{
-		CFBamValueByUNameIdxKey key = schema.getFactoryValue().newUNameIdxKey();
+		CFBamBuffValueByUNameIdxKey key = schema.getFactoryValue().newUNameIdxKey();
 		key.setRequiredScopeId( argScopeId );
 		key.setRequiredName( argName );
 		deleteTimeDefByUNameIdx( Authorization, key );
 	}
 
-	public void deleteTimeDefByUNameIdx( CFSecAuthorization Authorization,
-		CFBamValueByUNameIdxKey argKey )
+	public void deleteTimeDefByUNameIdx( ICFSecAuthorization Authorization,
+		ICFBamValueByUNameIdxKey argKey )
 	{
 		final String S_ProcName = "deleteTimeDefByUNameIdx";
-		CFBamTimeDefBuff cur;
+		ICFBamTimeDef cur;
 		boolean anyNotNull = false;
 		anyNotNull = true;
 		anyNotNull = true;
 		if( ! anyNotNull ) {
 			return;
 		}
-		LinkedList<CFBamTimeDefBuff> matchSet = new LinkedList<CFBamTimeDefBuff>();
-		Iterator<CFBamTimeDefBuff> values = dictByPKey.values().iterator();
+		LinkedList<ICFBamTimeDef> matchSet = new LinkedList<ICFBamTimeDef>();
+		Iterator<ICFBamTimeDef> values = dictByPKey.values().iterator();
 		while( values.hasNext() ) {
 			cur = values.next();
 			if( argKey.equals( cur ) ) {
 				matchSet.add( cur );
 			}
 		}
-		Iterator<CFBamTimeDefBuff> iterMatch = matchSet.iterator();
+		Iterator<ICFBamTimeDef> iterMatch = matchSet.iterator();
 		while( iterMatch.hasNext() ) {
 			cur = iterMatch.next();
 			cur = schema.getTableTimeDef().readDerivedByIdIdx( Authorization,
@@ -7427,10 +7428,10 @@ public class CFBamRamTimeDefTable
 				schema.getTableTimeDef().deleteTimeDef( Authorization, cur );
 			}
 			else if( "a85c".equals( subClassCode ) ) {
-				schema.getTableTimeType().deleteTimeType( Authorization, (CFBamTimeTypeBuff)cur );
+				schema.getTableTimeType().deleteTimeType( Authorization, (ICFBamTimeType)cur );
 			}
 			else if( "a880".equals( subClassCode ) ) {
-				schema.getTableTimeCol().deleteTimeCol( Authorization, (CFBamTimeColBuff)cur );
+				schema.getTableTimeCol().deleteTimeCol( Authorization, (ICFBamTimeCol)cur );
 			}
 			else {
 				throw new CFLibUnsupportedClassException( getClass(),
@@ -7442,33 +7443,33 @@ public class CFBamRamTimeDefTable
 		}
 	}
 
-	public void deleteTimeDefByScopeIdx( CFSecAuthorization Authorization,
+	public void deleteTimeDefByScopeIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argScopeId )
 	{
-		CFBamValueByScopeIdxKey key = schema.getFactoryValue().newScopeIdxKey();
+		CFBamBuffValueByScopeIdxKey key = schema.getFactoryValue().newScopeIdxKey();
 		key.setRequiredScopeId( argScopeId );
 		deleteTimeDefByScopeIdx( Authorization, key );
 	}
 
-	public void deleteTimeDefByScopeIdx( CFSecAuthorization Authorization,
-		CFBamValueByScopeIdxKey argKey )
+	public void deleteTimeDefByScopeIdx( ICFSecAuthorization Authorization,
+		ICFBamValueByScopeIdxKey argKey )
 	{
 		final String S_ProcName = "deleteTimeDefByScopeIdx";
-		CFBamTimeDefBuff cur;
+		ICFBamTimeDef cur;
 		boolean anyNotNull = false;
 		anyNotNull = true;
 		if( ! anyNotNull ) {
 			return;
 		}
-		LinkedList<CFBamTimeDefBuff> matchSet = new LinkedList<CFBamTimeDefBuff>();
-		Iterator<CFBamTimeDefBuff> values = dictByPKey.values().iterator();
+		LinkedList<ICFBamTimeDef> matchSet = new LinkedList<ICFBamTimeDef>();
+		Iterator<ICFBamTimeDef> values = dictByPKey.values().iterator();
 		while( values.hasNext() ) {
 			cur = values.next();
 			if( argKey.equals( cur ) ) {
 				matchSet.add( cur );
 			}
 		}
-		Iterator<CFBamTimeDefBuff> iterMatch = matchSet.iterator();
+		Iterator<ICFBamTimeDef> iterMatch = matchSet.iterator();
 		while( iterMatch.hasNext() ) {
 			cur = iterMatch.next();
 			cur = schema.getTableTimeDef().readDerivedByIdIdx( Authorization,
@@ -7478,10 +7479,10 @@ public class CFBamRamTimeDefTable
 				schema.getTableTimeDef().deleteTimeDef( Authorization, cur );
 			}
 			else if( "a85c".equals( subClassCode ) ) {
-				schema.getTableTimeType().deleteTimeType( Authorization, (CFBamTimeTypeBuff)cur );
+				schema.getTableTimeType().deleteTimeType( Authorization, (ICFBamTimeType)cur );
 			}
 			else if( "a880".equals( subClassCode ) ) {
-				schema.getTableTimeCol().deleteTimeCol( Authorization, (CFBamTimeColBuff)cur );
+				schema.getTableTimeCol().deleteTimeCol( Authorization, (ICFBamTimeCol)cur );
 			}
 			else {
 				throw new CFLibUnsupportedClassException( getClass(),
@@ -7493,19 +7494,19 @@ public class CFBamRamTimeDefTable
 		}
 	}
 
-	public void deleteTimeDefByDefSchemaIdx( CFSecAuthorization Authorization,
+	public void deleteTimeDefByDefSchemaIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argDefSchemaId )
 	{
-		CFBamValueByDefSchemaIdxKey key = schema.getFactoryValue().newDefSchemaIdxKey();
+		CFBamBuffValueByDefSchemaIdxKey key = schema.getFactoryValue().newDefSchemaIdxKey();
 		key.setOptionalDefSchemaId( argDefSchemaId );
 		deleteTimeDefByDefSchemaIdx( Authorization, key );
 	}
 
-	public void deleteTimeDefByDefSchemaIdx( CFSecAuthorization Authorization,
-		CFBamValueByDefSchemaIdxKey argKey )
+	public void deleteTimeDefByDefSchemaIdx( ICFSecAuthorization Authorization,
+		ICFBamValueByDefSchemaIdxKey argKey )
 	{
 		final String S_ProcName = "deleteTimeDefByDefSchemaIdx";
-		CFBamTimeDefBuff cur;
+		ICFBamTimeDef cur;
 		boolean anyNotNull = false;
 		if( argKey.getOptionalDefSchemaId() != null ) {
 			anyNotNull = true;
@@ -7513,15 +7514,15 @@ public class CFBamRamTimeDefTable
 		if( ! anyNotNull ) {
 			return;
 		}
-		LinkedList<CFBamTimeDefBuff> matchSet = new LinkedList<CFBamTimeDefBuff>();
-		Iterator<CFBamTimeDefBuff> values = dictByPKey.values().iterator();
+		LinkedList<ICFBamTimeDef> matchSet = new LinkedList<ICFBamTimeDef>();
+		Iterator<ICFBamTimeDef> values = dictByPKey.values().iterator();
 		while( values.hasNext() ) {
 			cur = values.next();
 			if( argKey.equals( cur ) ) {
 				matchSet.add( cur );
 			}
 		}
-		Iterator<CFBamTimeDefBuff> iterMatch = matchSet.iterator();
+		Iterator<ICFBamTimeDef> iterMatch = matchSet.iterator();
 		while( iterMatch.hasNext() ) {
 			cur = iterMatch.next();
 			cur = schema.getTableTimeDef().readDerivedByIdIdx( Authorization,
@@ -7531,10 +7532,10 @@ public class CFBamRamTimeDefTable
 				schema.getTableTimeDef().deleteTimeDef( Authorization, cur );
 			}
 			else if( "a85c".equals( subClassCode ) ) {
-				schema.getTableTimeType().deleteTimeType( Authorization, (CFBamTimeTypeBuff)cur );
+				schema.getTableTimeType().deleteTimeType( Authorization, (ICFBamTimeType)cur );
 			}
 			else if( "a880".equals( subClassCode ) ) {
-				schema.getTableTimeCol().deleteTimeCol( Authorization, (CFBamTimeColBuff)cur );
+				schema.getTableTimeCol().deleteTimeCol( Authorization, (ICFBamTimeCol)cur );
 			}
 			else {
 				throw new CFLibUnsupportedClassException( getClass(),
@@ -7546,19 +7547,19 @@ public class CFBamRamTimeDefTable
 		}
 	}
 
-	public void deleteTimeDefByPrevIdx( CFSecAuthorization Authorization,
+	public void deleteTimeDefByPrevIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argPrevId )
 	{
-		CFBamValueByPrevIdxKey key = schema.getFactoryValue().newPrevIdxKey();
+		CFBamBuffValueByPrevIdxKey key = schema.getFactoryValue().newPrevIdxKey();
 		key.setOptionalPrevId( argPrevId );
 		deleteTimeDefByPrevIdx( Authorization, key );
 	}
 
-	public void deleteTimeDefByPrevIdx( CFSecAuthorization Authorization,
-		CFBamValueByPrevIdxKey argKey )
+	public void deleteTimeDefByPrevIdx( ICFSecAuthorization Authorization,
+		ICFBamValueByPrevIdxKey argKey )
 	{
 		final String S_ProcName = "deleteTimeDefByPrevIdx";
-		CFBamTimeDefBuff cur;
+		ICFBamTimeDef cur;
 		boolean anyNotNull = false;
 		if( argKey.getOptionalPrevId() != null ) {
 			anyNotNull = true;
@@ -7566,15 +7567,15 @@ public class CFBamRamTimeDefTable
 		if( ! anyNotNull ) {
 			return;
 		}
-		LinkedList<CFBamTimeDefBuff> matchSet = new LinkedList<CFBamTimeDefBuff>();
-		Iterator<CFBamTimeDefBuff> values = dictByPKey.values().iterator();
+		LinkedList<ICFBamTimeDef> matchSet = new LinkedList<ICFBamTimeDef>();
+		Iterator<ICFBamTimeDef> values = dictByPKey.values().iterator();
 		while( values.hasNext() ) {
 			cur = values.next();
 			if( argKey.equals( cur ) ) {
 				matchSet.add( cur );
 			}
 		}
-		Iterator<CFBamTimeDefBuff> iterMatch = matchSet.iterator();
+		Iterator<ICFBamTimeDef> iterMatch = matchSet.iterator();
 		while( iterMatch.hasNext() ) {
 			cur = iterMatch.next();
 			cur = schema.getTableTimeDef().readDerivedByIdIdx( Authorization,
@@ -7584,10 +7585,10 @@ public class CFBamRamTimeDefTable
 				schema.getTableTimeDef().deleteTimeDef( Authorization, cur );
 			}
 			else if( "a85c".equals( subClassCode ) ) {
-				schema.getTableTimeType().deleteTimeType( Authorization, (CFBamTimeTypeBuff)cur );
+				schema.getTableTimeType().deleteTimeType( Authorization, (ICFBamTimeType)cur );
 			}
 			else if( "a880".equals( subClassCode ) ) {
-				schema.getTableTimeCol().deleteTimeCol( Authorization, (CFBamTimeColBuff)cur );
+				schema.getTableTimeCol().deleteTimeCol( Authorization, (ICFBamTimeCol)cur );
 			}
 			else {
 				throw new CFLibUnsupportedClassException( getClass(),
@@ -7599,19 +7600,19 @@ public class CFBamRamTimeDefTable
 		}
 	}
 
-	public void deleteTimeDefByNextIdx( CFSecAuthorization Authorization,
+	public void deleteTimeDefByNextIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argNextId )
 	{
-		CFBamValueByNextIdxKey key = schema.getFactoryValue().newNextIdxKey();
+		CFBamBuffValueByNextIdxKey key = schema.getFactoryValue().newNextIdxKey();
 		key.setOptionalNextId( argNextId );
 		deleteTimeDefByNextIdx( Authorization, key );
 	}
 
-	public void deleteTimeDefByNextIdx( CFSecAuthorization Authorization,
-		CFBamValueByNextIdxKey argKey )
+	public void deleteTimeDefByNextIdx( ICFSecAuthorization Authorization,
+		ICFBamValueByNextIdxKey argKey )
 	{
 		final String S_ProcName = "deleteTimeDefByNextIdx";
-		CFBamTimeDefBuff cur;
+		ICFBamTimeDef cur;
 		boolean anyNotNull = false;
 		if( argKey.getOptionalNextId() != null ) {
 			anyNotNull = true;
@@ -7619,15 +7620,15 @@ public class CFBamRamTimeDefTable
 		if( ! anyNotNull ) {
 			return;
 		}
-		LinkedList<CFBamTimeDefBuff> matchSet = new LinkedList<CFBamTimeDefBuff>();
-		Iterator<CFBamTimeDefBuff> values = dictByPKey.values().iterator();
+		LinkedList<ICFBamTimeDef> matchSet = new LinkedList<ICFBamTimeDef>();
+		Iterator<ICFBamTimeDef> values = dictByPKey.values().iterator();
 		while( values.hasNext() ) {
 			cur = values.next();
 			if( argKey.equals( cur ) ) {
 				matchSet.add( cur );
 			}
 		}
-		Iterator<CFBamTimeDefBuff> iterMatch = matchSet.iterator();
+		Iterator<ICFBamTimeDef> iterMatch = matchSet.iterator();
 		while( iterMatch.hasNext() ) {
 			cur = iterMatch.next();
 			cur = schema.getTableTimeDef().readDerivedByIdIdx( Authorization,
@@ -7637,10 +7638,10 @@ public class CFBamRamTimeDefTable
 				schema.getTableTimeDef().deleteTimeDef( Authorization, cur );
 			}
 			else if( "a85c".equals( subClassCode ) ) {
-				schema.getTableTimeType().deleteTimeType( Authorization, (CFBamTimeTypeBuff)cur );
+				schema.getTableTimeType().deleteTimeType( Authorization, (ICFBamTimeType)cur );
 			}
 			else if( "a880".equals( subClassCode ) ) {
-				schema.getTableTimeCol().deleteTimeCol( Authorization, (CFBamTimeColBuff)cur );
+				schema.getTableTimeCol().deleteTimeCol( Authorization, (ICFBamTimeCol)cur );
 			}
 			else {
 				throw new CFLibUnsupportedClassException( getClass(),
@@ -7652,21 +7653,21 @@ public class CFBamRamTimeDefTable
 		}
 	}
 
-	public void deleteTimeDefByContPrevIdx( CFSecAuthorization Authorization,
+	public void deleteTimeDefByContPrevIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argScopeId,
 		CFLibDbKeyHash256 argPrevId )
 	{
-		CFBamValueByContPrevIdxKey key = schema.getFactoryValue().newContPrevIdxKey();
+		CFBamBuffValueByContPrevIdxKey key = schema.getFactoryValue().newContPrevIdxKey();
 		key.setRequiredScopeId( argScopeId );
 		key.setOptionalPrevId( argPrevId );
 		deleteTimeDefByContPrevIdx( Authorization, key );
 	}
 
-	public void deleteTimeDefByContPrevIdx( CFSecAuthorization Authorization,
-		CFBamValueByContPrevIdxKey argKey )
+	public void deleteTimeDefByContPrevIdx( ICFSecAuthorization Authorization,
+		ICFBamValueByContPrevIdxKey argKey )
 	{
 		final String S_ProcName = "deleteTimeDefByContPrevIdx";
-		CFBamTimeDefBuff cur;
+		ICFBamTimeDef cur;
 		boolean anyNotNull = false;
 		anyNotNull = true;
 		if( argKey.getOptionalPrevId() != null ) {
@@ -7675,15 +7676,15 @@ public class CFBamRamTimeDefTable
 		if( ! anyNotNull ) {
 			return;
 		}
-		LinkedList<CFBamTimeDefBuff> matchSet = new LinkedList<CFBamTimeDefBuff>();
-		Iterator<CFBamTimeDefBuff> values = dictByPKey.values().iterator();
+		LinkedList<ICFBamTimeDef> matchSet = new LinkedList<ICFBamTimeDef>();
+		Iterator<ICFBamTimeDef> values = dictByPKey.values().iterator();
 		while( values.hasNext() ) {
 			cur = values.next();
 			if( argKey.equals( cur ) ) {
 				matchSet.add( cur );
 			}
 		}
-		Iterator<CFBamTimeDefBuff> iterMatch = matchSet.iterator();
+		Iterator<ICFBamTimeDef> iterMatch = matchSet.iterator();
 		while( iterMatch.hasNext() ) {
 			cur = iterMatch.next();
 			cur = schema.getTableTimeDef().readDerivedByIdIdx( Authorization,
@@ -7693,10 +7694,10 @@ public class CFBamRamTimeDefTable
 				schema.getTableTimeDef().deleteTimeDef( Authorization, cur );
 			}
 			else if( "a85c".equals( subClassCode ) ) {
-				schema.getTableTimeType().deleteTimeType( Authorization, (CFBamTimeTypeBuff)cur );
+				schema.getTableTimeType().deleteTimeType( Authorization, (ICFBamTimeType)cur );
 			}
 			else if( "a880".equals( subClassCode ) ) {
-				schema.getTableTimeCol().deleteTimeCol( Authorization, (CFBamTimeColBuff)cur );
+				schema.getTableTimeCol().deleteTimeCol( Authorization, (ICFBamTimeCol)cur );
 			}
 			else {
 				throw new CFLibUnsupportedClassException( getClass(),
@@ -7708,21 +7709,21 @@ public class CFBamRamTimeDefTable
 		}
 	}
 
-	public void deleteTimeDefByContNextIdx( CFSecAuthorization Authorization,
+	public void deleteTimeDefByContNextIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argScopeId,
 		CFLibDbKeyHash256 argNextId )
 	{
-		CFBamValueByContNextIdxKey key = schema.getFactoryValue().newContNextIdxKey();
+		CFBamBuffValueByContNextIdxKey key = schema.getFactoryValue().newContNextIdxKey();
 		key.setRequiredScopeId( argScopeId );
 		key.setOptionalNextId( argNextId );
 		deleteTimeDefByContNextIdx( Authorization, key );
 	}
 
-	public void deleteTimeDefByContNextIdx( CFSecAuthorization Authorization,
-		CFBamValueByContNextIdxKey argKey )
+	public void deleteTimeDefByContNextIdx( ICFSecAuthorization Authorization,
+		ICFBamValueByContNextIdxKey argKey )
 	{
 		final String S_ProcName = "deleteTimeDefByContNextIdx";
-		CFBamTimeDefBuff cur;
+		ICFBamTimeDef cur;
 		boolean anyNotNull = false;
 		anyNotNull = true;
 		if( argKey.getOptionalNextId() != null ) {
@@ -7731,15 +7732,15 @@ public class CFBamRamTimeDefTable
 		if( ! anyNotNull ) {
 			return;
 		}
-		LinkedList<CFBamTimeDefBuff> matchSet = new LinkedList<CFBamTimeDefBuff>();
-		Iterator<CFBamTimeDefBuff> values = dictByPKey.values().iterator();
+		LinkedList<ICFBamTimeDef> matchSet = new LinkedList<ICFBamTimeDef>();
+		Iterator<ICFBamTimeDef> values = dictByPKey.values().iterator();
 		while( values.hasNext() ) {
 			cur = values.next();
 			if( argKey.equals( cur ) ) {
 				matchSet.add( cur );
 			}
 		}
-		Iterator<CFBamTimeDefBuff> iterMatch = matchSet.iterator();
+		Iterator<ICFBamTimeDef> iterMatch = matchSet.iterator();
 		while( iterMatch.hasNext() ) {
 			cur = iterMatch.next();
 			cur = schema.getTableTimeDef().readDerivedByIdIdx( Authorization,
@@ -7749,10 +7750,10 @@ public class CFBamRamTimeDefTable
 				schema.getTableTimeDef().deleteTimeDef( Authorization, cur );
 			}
 			else if( "a85c".equals( subClassCode ) ) {
-				schema.getTableTimeType().deleteTimeType( Authorization, (CFBamTimeTypeBuff)cur );
+				schema.getTableTimeType().deleteTimeType( Authorization, (ICFBamTimeType)cur );
 			}
 			else if( "a880".equals( subClassCode ) ) {
-				schema.getTableTimeCol().deleteTimeCol( Authorization, (CFBamTimeColBuff)cur );
+				schema.getTableTimeCol().deleteTimeCol( Authorization, (ICFBamTimeCol)cur );
 			}
 			else {
 				throw new CFLibUnsupportedClassException( getClass(),

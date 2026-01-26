@@ -38,6 +38,7 @@ package io.github.msobkow.v3_1.cfbam.cfbamram;
 import java.math.*;
 import java.sql.*;
 import java.text.*;
+import java.time.*;
 import java.util.*;
 import org.apache.commons.codec.binary.Base64;
 import io.github.msobkow.v3_1.cflib.*;
@@ -46,7 +47,9 @@ import io.github.msobkow.v3_1.cflib.dbutil.*;
 import io.github.msobkow.v3_1.cfsec.cfsec.*;
 import io.github.msobkow.v3_1.cfint.cfint.*;
 import io.github.msobkow.v3_1.cfbam.cfbam.*;
-import io.github.msobkow.v3_1.cfbam.cfbamobj.*;
+import io.github.msobkow.v3_1.cfsec.cfsec.buff.*;
+import io.github.msobkow.v3_1.cfint.cfint.buff.*;
+import io.github.msobkow.v3_1.cfbam.cfbam.buff.*;
 import io.github.msobkow.v3_1.cfsec.cfsecobj.*;
 import io.github.msobkow.v3_1.cfint.cfintobj.*;
 import io.github.msobkow.v3_1.cfbam.cfbamobj.*;
@@ -59,22 +62,22 @@ public class CFBamRamDoubleDefTable
 	implements ICFBamDoubleDefTable
 {
 	private ICFBamSchema schema;
-	private Map< CFBamValuePKey,
-				CFBamDoubleDefBuff > dictByPKey
-		= new HashMap< CFBamValuePKey,
-				CFBamDoubleDefBuff >();
+	private Map< CFLibDbKeyHash256,
+				CFBamBuffDoubleDef > dictByPKey
+		= new HashMap< CFLibDbKeyHash256,
+				CFBamBuffDoubleDef >();
 
 	public CFBamRamDoubleDefTable( ICFBamSchema argSchema ) {
 		schema = argSchema;
 	}
 
-	public void createDoubleDef( CFSecAuthorization Authorization,
-		CFBamDoubleDefBuff Buff )
+	public void createDoubleDef( ICFSecAuthorization Authorization,
+		ICFBamDoubleDef Buff )
 	{
 		final String S_ProcName = "createDoubleDef";
 		schema.getTableAtom().createAtom( Authorization,
 			Buff );
-		CFBamValuePKey pkey = schema.getFactoryValue().newPKey();
+		CFLibDbKeyHash256 pkey = schema.getFactoryValue().newPKey();
 		pkey.setClassCode( Buff.getClassCode() );
 		pkey.setRequiredId( Buff.getRequiredId() );
 		// Validate unique indexes
@@ -108,13 +111,27 @@ public class CFBamRamDoubleDefTable
 
 	}
 
-	public CFBamDoubleDefBuff readDerived( CFSecAuthorization Authorization,
-		CFBamValuePKey PKey )
+	public ICFBamDoubleDef readDerived( ICFSecAuthorization Authorization,
+		CFLibDbKeyHash256 PKey )
 	{
 		final String S_ProcName = "CFBamRamDoubleDef.readDerived";
-		CFBamValuePKey key = schema.getFactoryValue().newPKey();
+		ICFBamDoubleDef buff;
+		if( dictByPKey.containsKey( PKey ) ) {
+			buff = dictByPKey.get( PKey );
+		}
+		else {
+			buff = null;
+		}
+		return( buff );
+	}
+
+	public ICFBamDoubleDef lockDerived( ICFSecAuthorization Authorization,
+		CFLibDbKeyHash256 PKey )
+	{
+		final String S_ProcName = "CFBamRamDoubleDef.readDerived";
+		CFLibDbKeyHash256 key = schema.getFactoryValue().newPKey();
 		key.setRequiredId( PKey.getRequiredId() );
-		CFBamDoubleDefBuff buff;
+		ICFBamDoubleDef buff;
 		if( dictByPKey.containsKey( key ) ) {
 			buff = dictByPKey.get( key );
 		}
@@ -124,26 +141,10 @@ public class CFBamRamDoubleDefTable
 		return( buff );
 	}
 
-	public CFBamDoubleDefBuff lockDerived( CFSecAuthorization Authorization,
-		CFBamValuePKey PKey )
-	{
-		final String S_ProcName = "CFBamRamDoubleDef.readDerived";
-		CFBamValuePKey key = schema.getFactoryValue().newPKey();
-		key.setRequiredId( PKey.getRequiredId() );
-		CFBamDoubleDefBuff buff;
-		if( dictByPKey.containsKey( key ) ) {
-			buff = dictByPKey.get( key );
-		}
-		else {
-			buff = null;
-		}
-		return( buff );
-	}
-
-	public CFBamDoubleDefBuff[] readAllDerived( CFSecAuthorization Authorization ) {
+	public ICFBamDoubleDef[] readAllDerived( ICFSecAuthorization Authorization ) {
 		final String S_ProcName = "CFBamRamDoubleDef.readAllDerived";
-		CFBamDoubleDefBuff[] retList = new CFBamDoubleDefBuff[ dictByPKey.values().size() ];
-		Iterator< CFBamDoubleDefBuff > iter = dictByPKey.values().iterator();
+		ICFBamDoubleDef[] retList = new ICFBamDoubleDef[ dictByPKey.values().size() ];
+		Iterator< ICFBamDoubleDef > iter = dictByPKey.values().iterator();
 		int idx = 0;
 		while( iter.hasNext() ) {
 			retList[ idx++ ] = iter.next();
@@ -151,169 +152,169 @@ public class CFBamRamDoubleDefTable
 		return( retList );
 	}
 
-	public CFBamDoubleDefBuff readDerivedByUNameIdx( CFSecAuthorization Authorization,
+	public ICFBamDoubleDef readDerivedByUNameIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 ScopeId,
 		String Name )
 	{
 		final String S_ProcName = "CFBamRamValue.readDerivedByUNameIdx";
-		CFBamValueBuff buff = schema.getTableValue().readDerivedByUNameIdx( Authorization,
+		ICFBamValue buff = schema.getTableValue().readDerivedByUNameIdx( Authorization,
 			ScopeId,
 			Name );
 		if( buff == null ) {
 			return( null );
 		}
-		else if( buff instanceof CFBamDoubleDefBuff ) {
-			return( (CFBamDoubleDefBuff)buff );
+		else if( buff instanceof ICFBamDoubleDef ) {
+			return( (ICFBamDoubleDef)buff );
 		}
 		else {
 			return( null );
 		}
 	}
 
-	public CFBamDoubleDefBuff[] readDerivedByScopeIdx( CFSecAuthorization Authorization,
+	public ICFBamDoubleDef[] readDerivedByScopeIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 ScopeId )
 	{
 		final String S_ProcName = "CFBamRamValue.readDerivedByScopeIdx";
-		CFBamValueBuff buffList[] = schema.getTableValue().readDerivedByScopeIdx( Authorization,
+		ICFBamValue buffList[] = schema.getTableValue().readDerivedByScopeIdx( Authorization,
 			ScopeId );
 		if( buffList == null ) {
 			return( null );
 		}
 		else {
-			CFBamValueBuff buff;
-			ArrayList<CFBamDoubleDefBuff> filteredList = new ArrayList<CFBamDoubleDefBuff>();
+			ICFBamValue buff;
+			ArrayList<ICFBamDoubleDef> filteredList = new ArrayList<ICFBamDoubleDef>();
 			for( int idx = 0; idx < buffList.length; idx ++ ) {
 				buff = buffList[idx];
-				if( ( buff != null ) && ( buff instanceof CFBamDoubleDefBuff ) ) {
-					filteredList.add( (CFBamDoubleDefBuff)buff );
+				if( ( buff != null ) && ( buff instanceof ICFBamDoubleDef ) ) {
+					filteredList.add( (ICFBamDoubleDef)buff );
 				}
 			}
-			return( filteredList.toArray( new CFBamDoubleDefBuff[0] ) );
+			return( filteredList.toArray( new ICFBamDoubleDef[0] ) );
 		}
 	}
 
-	public CFBamDoubleDefBuff[] readDerivedByDefSchemaIdx( CFSecAuthorization Authorization,
+	public ICFBamDoubleDef[] readDerivedByDefSchemaIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 DefSchemaId )
 	{
 		final String S_ProcName = "CFBamRamValue.readDerivedByDefSchemaIdx";
-		CFBamValueBuff buffList[] = schema.getTableValue().readDerivedByDefSchemaIdx( Authorization,
+		ICFBamValue buffList[] = schema.getTableValue().readDerivedByDefSchemaIdx( Authorization,
 			DefSchemaId );
 		if( buffList == null ) {
 			return( null );
 		}
 		else {
-			CFBamValueBuff buff;
-			ArrayList<CFBamDoubleDefBuff> filteredList = new ArrayList<CFBamDoubleDefBuff>();
+			ICFBamValue buff;
+			ArrayList<ICFBamDoubleDef> filteredList = new ArrayList<ICFBamDoubleDef>();
 			for( int idx = 0; idx < buffList.length; idx ++ ) {
 				buff = buffList[idx];
-				if( ( buff != null ) && ( buff instanceof CFBamDoubleDefBuff ) ) {
-					filteredList.add( (CFBamDoubleDefBuff)buff );
+				if( ( buff != null ) && ( buff instanceof ICFBamDoubleDef ) ) {
+					filteredList.add( (ICFBamDoubleDef)buff );
 				}
 			}
-			return( filteredList.toArray( new CFBamDoubleDefBuff[0] ) );
+			return( filteredList.toArray( new ICFBamDoubleDef[0] ) );
 		}
 	}
 
-	public CFBamDoubleDefBuff[] readDerivedByPrevIdx( CFSecAuthorization Authorization,
+	public ICFBamDoubleDef[] readDerivedByPrevIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 PrevId )
 	{
 		final String S_ProcName = "CFBamRamValue.readDerivedByPrevIdx";
-		CFBamValueBuff buffList[] = schema.getTableValue().readDerivedByPrevIdx( Authorization,
+		ICFBamValue buffList[] = schema.getTableValue().readDerivedByPrevIdx( Authorization,
 			PrevId );
 		if( buffList == null ) {
 			return( null );
 		}
 		else {
-			CFBamValueBuff buff;
-			ArrayList<CFBamDoubleDefBuff> filteredList = new ArrayList<CFBamDoubleDefBuff>();
+			ICFBamValue buff;
+			ArrayList<ICFBamDoubleDef> filteredList = new ArrayList<ICFBamDoubleDef>();
 			for( int idx = 0; idx < buffList.length; idx ++ ) {
 				buff = buffList[idx];
-				if( ( buff != null ) && ( buff instanceof CFBamDoubleDefBuff ) ) {
-					filteredList.add( (CFBamDoubleDefBuff)buff );
+				if( ( buff != null ) && ( buff instanceof ICFBamDoubleDef ) ) {
+					filteredList.add( (ICFBamDoubleDef)buff );
 				}
 			}
-			return( filteredList.toArray( new CFBamDoubleDefBuff[0] ) );
+			return( filteredList.toArray( new ICFBamDoubleDef[0] ) );
 		}
 	}
 
-	public CFBamDoubleDefBuff[] readDerivedByNextIdx( CFSecAuthorization Authorization,
+	public ICFBamDoubleDef[] readDerivedByNextIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 NextId )
 	{
 		final String S_ProcName = "CFBamRamValue.readDerivedByNextIdx";
-		CFBamValueBuff buffList[] = schema.getTableValue().readDerivedByNextIdx( Authorization,
+		ICFBamValue buffList[] = schema.getTableValue().readDerivedByNextIdx( Authorization,
 			NextId );
 		if( buffList == null ) {
 			return( null );
 		}
 		else {
-			CFBamValueBuff buff;
-			ArrayList<CFBamDoubleDefBuff> filteredList = new ArrayList<CFBamDoubleDefBuff>();
+			ICFBamValue buff;
+			ArrayList<ICFBamDoubleDef> filteredList = new ArrayList<ICFBamDoubleDef>();
 			for( int idx = 0; idx < buffList.length; idx ++ ) {
 				buff = buffList[idx];
-				if( ( buff != null ) && ( buff instanceof CFBamDoubleDefBuff ) ) {
-					filteredList.add( (CFBamDoubleDefBuff)buff );
+				if( ( buff != null ) && ( buff instanceof ICFBamDoubleDef ) ) {
+					filteredList.add( (ICFBamDoubleDef)buff );
 				}
 			}
-			return( filteredList.toArray( new CFBamDoubleDefBuff[0] ) );
+			return( filteredList.toArray( new ICFBamDoubleDef[0] ) );
 		}
 	}
 
-	public CFBamDoubleDefBuff[] readDerivedByContPrevIdx( CFSecAuthorization Authorization,
+	public ICFBamDoubleDef[] readDerivedByContPrevIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 ScopeId,
 		CFLibDbKeyHash256 PrevId )
 	{
 		final String S_ProcName = "CFBamRamValue.readDerivedByContPrevIdx";
-		CFBamValueBuff buffList[] = schema.getTableValue().readDerivedByContPrevIdx( Authorization,
+		ICFBamValue buffList[] = schema.getTableValue().readDerivedByContPrevIdx( Authorization,
 			ScopeId,
 			PrevId );
 		if( buffList == null ) {
 			return( null );
 		}
 		else {
-			CFBamValueBuff buff;
-			ArrayList<CFBamDoubleDefBuff> filteredList = new ArrayList<CFBamDoubleDefBuff>();
+			ICFBamValue buff;
+			ArrayList<ICFBamDoubleDef> filteredList = new ArrayList<ICFBamDoubleDef>();
 			for( int idx = 0; idx < buffList.length; idx ++ ) {
 				buff = buffList[idx];
-				if( ( buff != null ) && ( buff instanceof CFBamDoubleDefBuff ) ) {
-					filteredList.add( (CFBamDoubleDefBuff)buff );
+				if( ( buff != null ) && ( buff instanceof ICFBamDoubleDef ) ) {
+					filteredList.add( (ICFBamDoubleDef)buff );
 				}
 			}
-			return( filteredList.toArray( new CFBamDoubleDefBuff[0] ) );
+			return( filteredList.toArray( new ICFBamDoubleDef[0] ) );
 		}
 	}
 
-	public CFBamDoubleDefBuff[] readDerivedByContNextIdx( CFSecAuthorization Authorization,
+	public ICFBamDoubleDef[] readDerivedByContNextIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 ScopeId,
 		CFLibDbKeyHash256 NextId )
 	{
 		final String S_ProcName = "CFBamRamValue.readDerivedByContNextIdx";
-		CFBamValueBuff buffList[] = schema.getTableValue().readDerivedByContNextIdx( Authorization,
+		ICFBamValue buffList[] = schema.getTableValue().readDerivedByContNextIdx( Authorization,
 			ScopeId,
 			NextId );
 		if( buffList == null ) {
 			return( null );
 		}
 		else {
-			CFBamValueBuff buff;
-			ArrayList<CFBamDoubleDefBuff> filteredList = new ArrayList<CFBamDoubleDefBuff>();
+			ICFBamValue buff;
+			ArrayList<ICFBamDoubleDef> filteredList = new ArrayList<ICFBamDoubleDef>();
 			for( int idx = 0; idx < buffList.length; idx ++ ) {
 				buff = buffList[idx];
-				if( ( buff != null ) && ( buff instanceof CFBamDoubleDefBuff ) ) {
-					filteredList.add( (CFBamDoubleDefBuff)buff );
+				if( ( buff != null ) && ( buff instanceof ICFBamDoubleDef ) ) {
+					filteredList.add( (ICFBamDoubleDef)buff );
 				}
 			}
-			return( filteredList.toArray( new CFBamDoubleDefBuff[0] ) );
+			return( filteredList.toArray( new ICFBamDoubleDef[0] ) );
 		}
 	}
 
-	public CFBamDoubleDefBuff readDerivedByIdIdx( CFSecAuthorization Authorization,
+	public ICFBamDoubleDef readDerivedByIdIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 Id )
 	{
 		final String S_ProcName = "CFBamRamValue.readDerivedByIdIdx() ";
-		CFBamValuePKey key = schema.getFactoryValue().newPKey();
+		CFLibDbKeyHash256 key = schema.getFactoryValue().newPKey();
 		key.setRequiredId( Id );
 
-		CFBamDoubleDefBuff buff;
+		ICFBamDoubleDef buff;
 		if( dictByPKey.containsKey( key ) ) {
 			buff = dictByPKey.get( key );
 		}
@@ -323,177 +324,177 @@ public class CFBamRamDoubleDefTable
 		return( buff );
 	}
 
-	public CFBamDoubleDefBuff readBuff( CFSecAuthorization Authorization,
-		CFBamValuePKey PKey )
+	public ICFBamDoubleDef readBuff( ICFSecAuthorization Authorization,
+		CFLibDbKeyHash256 PKey )
 	{
 		final String S_ProcName = "CFBamRamDoubleDef.readBuff";
-		CFBamDoubleDefBuff buff = readDerived( Authorization, PKey );
+		ICFBamDoubleDef buff = readDerived( Authorization, PKey );
 		if( ( buff != null ) && ( ! buff.getClassCode().equals( "a81c" ) ) ) {
 			buff = null;
 		}
 		return( buff );
 	}
 
-	public CFBamDoubleDefBuff lockBuff( CFSecAuthorization Authorization,
-		CFBamValuePKey PKey )
+	public ICFBamDoubleDef lockBuff( ICFSecAuthorization Authorization,
+		CFLibDbKeyHash256 PKey )
 	{
 		final String S_ProcName = "lockBuff";
-		CFBamDoubleDefBuff buff = readDerived( Authorization, PKey );
+		ICFBamDoubleDef buff = readDerived( Authorization, PKey );
 		if( ( buff != null ) && ( ! buff.getClassCode().equals( "a81c" ) ) ) {
 			buff = null;
 		}
 		return( buff );
 	}
 
-	public CFBamDoubleDefBuff[] readAllBuff( CFSecAuthorization Authorization )
+	public ICFBamDoubleDef[] readAllBuff( ICFSecAuthorization Authorization )
 	{
 		final String S_ProcName = "CFBamRamDoubleDef.readAllBuff";
-		CFBamDoubleDefBuff buff;
-		ArrayList<CFBamDoubleDefBuff> filteredList = new ArrayList<CFBamDoubleDefBuff>();
-		CFBamDoubleDefBuff[] buffList = readAllDerived( Authorization );
+		ICFBamDoubleDef buff;
+		ArrayList<ICFBamDoubleDef> filteredList = new ArrayList<ICFBamDoubleDef>();
+		ICFBamDoubleDef[] buffList = readAllDerived( Authorization );
 		for( int idx = 0; idx < buffList.length; idx ++ ) {
 			buff = buffList[idx];
 			if( ( buff != null ) && buff.getClassCode().equals( "a81c" ) ) {
 				filteredList.add( buff );
 			}
 		}
-		return( filteredList.toArray( new CFBamDoubleDefBuff[0] ) );
+		return( filteredList.toArray( new ICFBamDoubleDef[0] ) );
 	}
 
-	public CFBamDoubleDefBuff readBuffByIdIdx( CFSecAuthorization Authorization,
+	public ICFBamDoubleDef readBuffByIdIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 Id )
 	{
 		final String S_ProcName = "CFBamRamValue.readBuffByIdIdx() ";
-		CFBamDoubleDefBuff buff = readDerivedByIdIdx( Authorization,
+		ICFBamDoubleDef buff = readDerivedByIdIdx( Authorization,
 			Id );
 		if( ( buff != null ) && buff.getClassCode().equals( "a809" ) ) {
-			return( (CFBamDoubleDefBuff)buff );
+			return( (ICFBamDoubleDef)buff );
 		}
 		else {
 			return( null );
 		}
 	}
 
-	public CFBamDoubleDefBuff readBuffByUNameIdx( CFSecAuthorization Authorization,
+	public ICFBamDoubleDef readBuffByUNameIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 ScopeId,
 		String Name )
 	{
 		final String S_ProcName = "CFBamRamValue.readBuffByUNameIdx() ";
-		CFBamDoubleDefBuff buff = readDerivedByUNameIdx( Authorization,
+		ICFBamDoubleDef buff = readDerivedByUNameIdx( Authorization,
 			ScopeId,
 			Name );
 		if( ( buff != null ) && buff.getClassCode().equals( "a809" ) ) {
-			return( (CFBamDoubleDefBuff)buff );
+			return( (ICFBamDoubleDef)buff );
 		}
 		else {
 			return( null );
 		}
 	}
 
-	public CFBamDoubleDefBuff[] readBuffByScopeIdx( CFSecAuthorization Authorization,
+	public ICFBamDoubleDef[] readBuffByScopeIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 ScopeId )
 	{
 		final String S_ProcName = "CFBamRamValue.readBuffByScopeIdx() ";
-		CFBamDoubleDefBuff buff;
-		ArrayList<CFBamDoubleDefBuff> filteredList = new ArrayList<CFBamDoubleDefBuff>();
-		CFBamDoubleDefBuff[] buffList = readDerivedByScopeIdx( Authorization,
+		ICFBamDoubleDef buff;
+		ArrayList<ICFBamDoubleDef> filteredList = new ArrayList<ICFBamDoubleDef>();
+		ICFBamDoubleDef[] buffList = readDerivedByScopeIdx( Authorization,
 			ScopeId );
 		for( int idx = 0; idx < buffList.length; idx ++ ) {
 			buff = buffList[idx];
 			if( ( buff != null ) && buff.getClassCode().equals( "a809" ) ) {
-				filteredList.add( (CFBamDoubleDefBuff)buff );
+				filteredList.add( (ICFBamDoubleDef)buff );
 			}
 		}
-		return( filteredList.toArray( new CFBamDoubleDefBuff[0] ) );
+		return( filteredList.toArray( new ICFBamDoubleDef[0] ) );
 	}
 
-	public CFBamDoubleDefBuff[] readBuffByDefSchemaIdx( CFSecAuthorization Authorization,
+	public ICFBamDoubleDef[] readBuffByDefSchemaIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 DefSchemaId )
 	{
 		final String S_ProcName = "CFBamRamValue.readBuffByDefSchemaIdx() ";
-		CFBamDoubleDefBuff buff;
-		ArrayList<CFBamDoubleDefBuff> filteredList = new ArrayList<CFBamDoubleDefBuff>();
-		CFBamDoubleDefBuff[] buffList = readDerivedByDefSchemaIdx( Authorization,
+		ICFBamDoubleDef buff;
+		ArrayList<ICFBamDoubleDef> filteredList = new ArrayList<ICFBamDoubleDef>();
+		ICFBamDoubleDef[] buffList = readDerivedByDefSchemaIdx( Authorization,
 			DefSchemaId );
 		for( int idx = 0; idx < buffList.length; idx ++ ) {
 			buff = buffList[idx];
 			if( ( buff != null ) && buff.getClassCode().equals( "a809" ) ) {
-				filteredList.add( (CFBamDoubleDefBuff)buff );
+				filteredList.add( (ICFBamDoubleDef)buff );
 			}
 		}
-		return( filteredList.toArray( new CFBamDoubleDefBuff[0] ) );
+		return( filteredList.toArray( new ICFBamDoubleDef[0] ) );
 	}
 
-	public CFBamDoubleDefBuff[] readBuffByPrevIdx( CFSecAuthorization Authorization,
+	public ICFBamDoubleDef[] readBuffByPrevIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 PrevId )
 	{
 		final String S_ProcName = "CFBamRamValue.readBuffByPrevIdx() ";
-		CFBamDoubleDefBuff buff;
-		ArrayList<CFBamDoubleDefBuff> filteredList = new ArrayList<CFBamDoubleDefBuff>();
-		CFBamDoubleDefBuff[] buffList = readDerivedByPrevIdx( Authorization,
+		ICFBamDoubleDef buff;
+		ArrayList<ICFBamDoubleDef> filteredList = new ArrayList<ICFBamDoubleDef>();
+		ICFBamDoubleDef[] buffList = readDerivedByPrevIdx( Authorization,
 			PrevId );
 		for( int idx = 0; idx < buffList.length; idx ++ ) {
 			buff = buffList[idx];
 			if( ( buff != null ) && buff.getClassCode().equals( "a809" ) ) {
-				filteredList.add( (CFBamDoubleDefBuff)buff );
+				filteredList.add( (ICFBamDoubleDef)buff );
 			}
 		}
-		return( filteredList.toArray( new CFBamDoubleDefBuff[0] ) );
+		return( filteredList.toArray( new ICFBamDoubleDef[0] ) );
 	}
 
-	public CFBamDoubleDefBuff[] readBuffByNextIdx( CFSecAuthorization Authorization,
+	public ICFBamDoubleDef[] readBuffByNextIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 NextId )
 	{
 		final String S_ProcName = "CFBamRamValue.readBuffByNextIdx() ";
-		CFBamDoubleDefBuff buff;
-		ArrayList<CFBamDoubleDefBuff> filteredList = new ArrayList<CFBamDoubleDefBuff>();
-		CFBamDoubleDefBuff[] buffList = readDerivedByNextIdx( Authorization,
+		ICFBamDoubleDef buff;
+		ArrayList<ICFBamDoubleDef> filteredList = new ArrayList<ICFBamDoubleDef>();
+		ICFBamDoubleDef[] buffList = readDerivedByNextIdx( Authorization,
 			NextId );
 		for( int idx = 0; idx < buffList.length; idx ++ ) {
 			buff = buffList[idx];
 			if( ( buff != null ) && buff.getClassCode().equals( "a809" ) ) {
-				filteredList.add( (CFBamDoubleDefBuff)buff );
+				filteredList.add( (ICFBamDoubleDef)buff );
 			}
 		}
-		return( filteredList.toArray( new CFBamDoubleDefBuff[0] ) );
+		return( filteredList.toArray( new ICFBamDoubleDef[0] ) );
 	}
 
-	public CFBamDoubleDefBuff[] readBuffByContPrevIdx( CFSecAuthorization Authorization,
+	public ICFBamDoubleDef[] readBuffByContPrevIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 ScopeId,
 		CFLibDbKeyHash256 PrevId )
 	{
 		final String S_ProcName = "CFBamRamValue.readBuffByContPrevIdx() ";
-		CFBamDoubleDefBuff buff;
-		ArrayList<CFBamDoubleDefBuff> filteredList = new ArrayList<CFBamDoubleDefBuff>();
-		CFBamDoubleDefBuff[] buffList = readDerivedByContPrevIdx( Authorization,
+		ICFBamDoubleDef buff;
+		ArrayList<ICFBamDoubleDef> filteredList = new ArrayList<ICFBamDoubleDef>();
+		ICFBamDoubleDef[] buffList = readDerivedByContPrevIdx( Authorization,
 			ScopeId,
 			PrevId );
 		for( int idx = 0; idx < buffList.length; idx ++ ) {
 			buff = buffList[idx];
 			if( ( buff != null ) && buff.getClassCode().equals( "a809" ) ) {
-				filteredList.add( (CFBamDoubleDefBuff)buff );
+				filteredList.add( (ICFBamDoubleDef)buff );
 			}
 		}
-		return( filteredList.toArray( new CFBamDoubleDefBuff[0] ) );
+		return( filteredList.toArray( new ICFBamDoubleDef[0] ) );
 	}
 
-	public CFBamDoubleDefBuff[] readBuffByContNextIdx( CFSecAuthorization Authorization,
+	public ICFBamDoubleDef[] readBuffByContNextIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 ScopeId,
 		CFLibDbKeyHash256 NextId )
 	{
 		final String S_ProcName = "CFBamRamValue.readBuffByContNextIdx() ";
-		CFBamDoubleDefBuff buff;
-		ArrayList<CFBamDoubleDefBuff> filteredList = new ArrayList<CFBamDoubleDefBuff>();
-		CFBamDoubleDefBuff[] buffList = readDerivedByContNextIdx( Authorization,
+		ICFBamDoubleDef buff;
+		ArrayList<ICFBamDoubleDef> filteredList = new ArrayList<ICFBamDoubleDef>();
+		ICFBamDoubleDef[] buffList = readDerivedByContNextIdx( Authorization,
 			ScopeId,
 			NextId );
 		for( int idx = 0; idx < buffList.length; idx ++ ) {
 			buff = buffList[idx];
 			if( ( buff != null ) && buff.getClassCode().equals( "a809" ) ) {
-				filteredList.add( (CFBamDoubleDefBuff)buff );
+				filteredList.add( (ICFBamDoubleDef)buff );
 			}
 		}
-		return( filteredList.toArray( new CFBamDoubleDefBuff[0] ) );
+		return( filteredList.toArray( new ICFBamDoubleDef[0] ) );
 	}
 
 	/**
@@ -501,16 +502,16 @@ public class CFBamRamDoubleDefTable
 	 *
 	 *	@return	The refreshed buffer after it has been moved
 	 */
-	public CFBamDoubleDefBuff moveBuffUp( CFSecAuthorization Authorization,
+	public ICFBamDoubleDef moveBuffUp( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 Id,
 		int revision )
 	{
 		final String S_ProcName = "moveBuffUp";
 
-		CFBamValueBuff grandprev = null;
-		CFBamValueBuff prev = null;
-		CFBamValueBuff cur = null;
-		CFBamValueBuff next = null;
+		ICFBamValue grandprev = null;
+		ICFBamValue prev = null;
+		ICFBamValue cur = null;
+		ICFBamValue next = null;
 
 		cur = schema.getTableValue().readDerivedByIdIdx(Authorization, Id);
 		if( cur == null ) {
@@ -552,7 +553,7 @@ public class CFBamRamDoubleDefTable
 		}
 
 		String classCode = prev.getClassCode();
-		CFBamValueBuff newInstance;
+		ICFBamValue newInstance;
 			if( classCode.equals( "a809" ) ) {
 				newInstance = schema.getFactoryValue().newBuff();
 			}
@@ -876,7 +877,7 @@ public class CFBamRamDoubleDefTable
 					S_ProcName,
 					"Unrecognized ClassCode \"" + classCode + "\"" );
 			}
-		CFBamValueBuff editPrev = newInstance;
+		ICFBamValue editPrev = newInstance;
 		editPrev.set( prev );
 
 		classCode = cur.getClassCode();
@@ -1206,7 +1207,7 @@ public class CFBamRamDoubleDefTable
 		CFBamValueBuff editCur = newInstance;
 		editCur.set( cur );
 
-		CFBamValueBuff editGrandprev = null;
+		ICFBamValue editGrandprev = null;
 		if( grandprev != null ) {
 			classCode = grandprev.getClassCode();
 			if( classCode.equals( "a809" ) ) {
@@ -1536,7 +1537,7 @@ public class CFBamRamDoubleDefTable
 			editGrandprev.set( grandprev );
 		}
 
-		CFBamValueBuff editNext = null;
+		ICFBamValue editNext = null;
 		if( next != null ) {
 			classCode = next.getClassCode();
 			if( classCode.equals( "a809" ) ) {
@@ -3198,7 +3199,7 @@ public class CFBamRamDoubleDefTable
 	 *
 	 *	@return	The refreshed buffer after it has been moved
 	 */
-	public CFBamDoubleDefBuff moveBuffDown( CFSecAuthorization Authorization,
+	public ICFBamDoubleDef moveBuffDown( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 Id,
 		int revision )
 	{
@@ -5890,14 +5891,14 @@ public class CFBamRamDoubleDefTable
 		return( (CFBamDoubleDefBuff)editCur );
 	}
 
-	public void updateDoubleDef( CFSecAuthorization Authorization,
-		CFBamDoubleDefBuff Buff )
+	public void updateDoubleDef( ICFSecAuthorization Authorization,
+		ICFBamDoubleDef Buff )
 	{
 		schema.getTableAtom().updateAtom( Authorization,
 			Buff );
-		CFBamValuePKey pkey = schema.getFactoryValue().newPKey();
+		CFLibDbKeyHash256 pkey = schema.getFactoryValue().newPKey();
 		pkey.setRequiredId( Buff.getRequiredId() );
-		CFBamDoubleDefBuff existing = dictByPKey.get( pkey );
+		ICFBamDoubleDef existing = dictByPKey.get( pkey );
 		if( existing == null ) {
 			throw new CFLibStaleCacheDetectedException( getClass(),
 				"updateDoubleDef",
@@ -5928,21 +5929,21 @@ public class CFBamRamDoubleDefTable
 
 		// Update is valid
 
-		Map< CFBamValuePKey, CFBamDoubleDefBuff > subdict;
+		Map< CFLibDbKeyHash256, CFBamBuffDoubleDef > subdict;
 
 		dictByPKey.remove( pkey );
 		dictByPKey.put( pkey, Buff );
 
 	}
 
-	public void deleteDoubleDef( CFSecAuthorization Authorization,
-		CFBamDoubleDefBuff Buff )
+	public void deleteDoubleDef( ICFSecAuthorization Authorization,
+		ICFBamDoubleDef Buff )
 	{
 		final String S_ProcName = "CFBamRamDoubleDefTable.deleteDoubleDef() ";
 		String classCode;
-		CFBamValuePKey pkey = schema.getFactoryValue().newPKey();
+		CFLibDbKeyHash256 pkey = schema.getFactoryValue().newPKey();
 		pkey.setRequiredId( Buff.getRequiredId() );
-		CFBamDoubleDefBuff existing = dictByPKey.get( pkey );
+		ICFBamDoubleDef existing = dictByPKey.get( pkey );
 		if( existing == null ) {
 			return;
 		}
@@ -7330,23 +7331,23 @@ public class CFBamRamDoubleDefTable
 		}
 
 		// Delete is valid
-		Map< CFBamValuePKey, CFBamDoubleDefBuff > subdict;
+		Map< CFLibDbKeyHash256, CFBamBuffDoubleDef > subdict;
 
 		dictByPKey.remove( pkey );
 
 		schema.getTableAtom().deleteAtom( Authorization,
 			Buff );
 	}
-	public void deleteDoubleDefByIdIdx( CFSecAuthorization Authorization,
+	public void deleteDoubleDefByIdIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argId )
 	{
-		CFBamValuePKey key = schema.getFactoryValue().newPKey();
+		CFLibDbKeyHash256 key = schema.getFactoryValue().newPKey();
 		key.setRequiredId( argId );
 		deleteDoubleDefByIdIdx( Authorization, key );
 	}
 
-	public void deleteDoubleDefByIdIdx( CFSecAuthorization Authorization,
-		CFBamValuePKey argKey )
+	public void deleteDoubleDefByIdIdx( ICFSecAuthorization Authorization,
+		CFLibDbKeyHash256 argKey )
 	{
 		final String S_ProcName = "deleteDoubleDefByIdIdx";
 		boolean anyNotNull = false;
@@ -7354,16 +7355,16 @@ public class CFBamRamDoubleDefTable
 		if( ! anyNotNull ) {
 			return;
 		}
-		CFBamDoubleDefBuff cur;
-		LinkedList<CFBamDoubleDefBuff> matchSet = new LinkedList<CFBamDoubleDefBuff>();
-		Iterator<CFBamDoubleDefBuff> values = dictByPKey.values().iterator();
+		ICFBamDoubleDef cur;
+		LinkedList<ICFBamDoubleDef> matchSet = new LinkedList<ICFBamDoubleDef>();
+		Iterator<ICFBamDoubleDef> values = dictByPKey.values().iterator();
 		while( values.hasNext() ) {
 			cur = values.next();
 			if( argKey.equals( cur ) ) {
 				matchSet.add( cur );
 			}
 		}
-		Iterator<CFBamDoubleDefBuff> iterMatch = matchSet.iterator();
+		Iterator<ICFBamDoubleDef> iterMatch = matchSet.iterator();
 		while( iterMatch.hasNext() ) {
 			cur = iterMatch.next();
 			cur = schema.getTableDoubleDef().readDerivedByIdIdx( Authorization,
@@ -7373,10 +7374,10 @@ public class CFBamRamDoubleDefTable
 				schema.getTableDoubleDef().deleteDoubleDef( Authorization, cur );
 			}
 			else if( "a81d".equals( subClassCode ) ) {
-				schema.getTableDoubleType().deleteDoubleType( Authorization, (CFBamDoubleTypeBuff)cur );
+				schema.getTableDoubleType().deleteDoubleType( Authorization, (ICFBamDoubleType)cur );
 			}
 			else if( "a86e".equals( subClassCode ) ) {
-				schema.getTableDoubleCol().deleteDoubleCol( Authorization, (CFBamDoubleColBuff)cur );
+				schema.getTableDoubleCol().deleteDoubleCol( Authorization, (ICFBamDoubleCol)cur );
 			}
 			else {
 				throw new CFLibUnsupportedClassException( getClass(),
@@ -7388,36 +7389,36 @@ public class CFBamRamDoubleDefTable
 		}
 	}
 
-	public void deleteDoubleDefByUNameIdx( CFSecAuthorization Authorization,
+	public void deleteDoubleDefByUNameIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argScopeId,
 		String argName )
 	{
-		CFBamValueByUNameIdxKey key = schema.getFactoryValue().newUNameIdxKey();
+		CFBamBuffValueByUNameIdxKey key = schema.getFactoryValue().newUNameIdxKey();
 		key.setRequiredScopeId( argScopeId );
 		key.setRequiredName( argName );
 		deleteDoubleDefByUNameIdx( Authorization, key );
 	}
 
-	public void deleteDoubleDefByUNameIdx( CFSecAuthorization Authorization,
-		CFBamValueByUNameIdxKey argKey )
+	public void deleteDoubleDefByUNameIdx( ICFSecAuthorization Authorization,
+		ICFBamValueByUNameIdxKey argKey )
 	{
 		final String S_ProcName = "deleteDoubleDefByUNameIdx";
-		CFBamDoubleDefBuff cur;
+		ICFBamDoubleDef cur;
 		boolean anyNotNull = false;
 		anyNotNull = true;
 		anyNotNull = true;
 		if( ! anyNotNull ) {
 			return;
 		}
-		LinkedList<CFBamDoubleDefBuff> matchSet = new LinkedList<CFBamDoubleDefBuff>();
-		Iterator<CFBamDoubleDefBuff> values = dictByPKey.values().iterator();
+		LinkedList<ICFBamDoubleDef> matchSet = new LinkedList<ICFBamDoubleDef>();
+		Iterator<ICFBamDoubleDef> values = dictByPKey.values().iterator();
 		while( values.hasNext() ) {
 			cur = values.next();
 			if( argKey.equals( cur ) ) {
 				matchSet.add( cur );
 			}
 		}
-		Iterator<CFBamDoubleDefBuff> iterMatch = matchSet.iterator();
+		Iterator<ICFBamDoubleDef> iterMatch = matchSet.iterator();
 		while( iterMatch.hasNext() ) {
 			cur = iterMatch.next();
 			cur = schema.getTableDoubleDef().readDerivedByIdIdx( Authorization,
@@ -7427,10 +7428,10 @@ public class CFBamRamDoubleDefTable
 				schema.getTableDoubleDef().deleteDoubleDef( Authorization, cur );
 			}
 			else if( "a81d".equals( subClassCode ) ) {
-				schema.getTableDoubleType().deleteDoubleType( Authorization, (CFBamDoubleTypeBuff)cur );
+				schema.getTableDoubleType().deleteDoubleType( Authorization, (ICFBamDoubleType)cur );
 			}
 			else if( "a86e".equals( subClassCode ) ) {
-				schema.getTableDoubleCol().deleteDoubleCol( Authorization, (CFBamDoubleColBuff)cur );
+				schema.getTableDoubleCol().deleteDoubleCol( Authorization, (ICFBamDoubleCol)cur );
 			}
 			else {
 				throw new CFLibUnsupportedClassException( getClass(),
@@ -7442,33 +7443,33 @@ public class CFBamRamDoubleDefTable
 		}
 	}
 
-	public void deleteDoubleDefByScopeIdx( CFSecAuthorization Authorization,
+	public void deleteDoubleDefByScopeIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argScopeId )
 	{
-		CFBamValueByScopeIdxKey key = schema.getFactoryValue().newScopeIdxKey();
+		CFBamBuffValueByScopeIdxKey key = schema.getFactoryValue().newScopeIdxKey();
 		key.setRequiredScopeId( argScopeId );
 		deleteDoubleDefByScopeIdx( Authorization, key );
 	}
 
-	public void deleteDoubleDefByScopeIdx( CFSecAuthorization Authorization,
-		CFBamValueByScopeIdxKey argKey )
+	public void deleteDoubleDefByScopeIdx( ICFSecAuthorization Authorization,
+		ICFBamValueByScopeIdxKey argKey )
 	{
 		final String S_ProcName = "deleteDoubleDefByScopeIdx";
-		CFBamDoubleDefBuff cur;
+		ICFBamDoubleDef cur;
 		boolean anyNotNull = false;
 		anyNotNull = true;
 		if( ! anyNotNull ) {
 			return;
 		}
-		LinkedList<CFBamDoubleDefBuff> matchSet = new LinkedList<CFBamDoubleDefBuff>();
-		Iterator<CFBamDoubleDefBuff> values = dictByPKey.values().iterator();
+		LinkedList<ICFBamDoubleDef> matchSet = new LinkedList<ICFBamDoubleDef>();
+		Iterator<ICFBamDoubleDef> values = dictByPKey.values().iterator();
 		while( values.hasNext() ) {
 			cur = values.next();
 			if( argKey.equals( cur ) ) {
 				matchSet.add( cur );
 			}
 		}
-		Iterator<CFBamDoubleDefBuff> iterMatch = matchSet.iterator();
+		Iterator<ICFBamDoubleDef> iterMatch = matchSet.iterator();
 		while( iterMatch.hasNext() ) {
 			cur = iterMatch.next();
 			cur = schema.getTableDoubleDef().readDerivedByIdIdx( Authorization,
@@ -7478,10 +7479,10 @@ public class CFBamRamDoubleDefTable
 				schema.getTableDoubleDef().deleteDoubleDef( Authorization, cur );
 			}
 			else if( "a81d".equals( subClassCode ) ) {
-				schema.getTableDoubleType().deleteDoubleType( Authorization, (CFBamDoubleTypeBuff)cur );
+				schema.getTableDoubleType().deleteDoubleType( Authorization, (ICFBamDoubleType)cur );
 			}
 			else if( "a86e".equals( subClassCode ) ) {
-				schema.getTableDoubleCol().deleteDoubleCol( Authorization, (CFBamDoubleColBuff)cur );
+				schema.getTableDoubleCol().deleteDoubleCol( Authorization, (ICFBamDoubleCol)cur );
 			}
 			else {
 				throw new CFLibUnsupportedClassException( getClass(),
@@ -7493,19 +7494,19 @@ public class CFBamRamDoubleDefTable
 		}
 	}
 
-	public void deleteDoubleDefByDefSchemaIdx( CFSecAuthorization Authorization,
+	public void deleteDoubleDefByDefSchemaIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argDefSchemaId )
 	{
-		CFBamValueByDefSchemaIdxKey key = schema.getFactoryValue().newDefSchemaIdxKey();
+		CFBamBuffValueByDefSchemaIdxKey key = schema.getFactoryValue().newDefSchemaIdxKey();
 		key.setOptionalDefSchemaId( argDefSchemaId );
 		deleteDoubleDefByDefSchemaIdx( Authorization, key );
 	}
 
-	public void deleteDoubleDefByDefSchemaIdx( CFSecAuthorization Authorization,
-		CFBamValueByDefSchemaIdxKey argKey )
+	public void deleteDoubleDefByDefSchemaIdx( ICFSecAuthorization Authorization,
+		ICFBamValueByDefSchemaIdxKey argKey )
 	{
 		final String S_ProcName = "deleteDoubleDefByDefSchemaIdx";
-		CFBamDoubleDefBuff cur;
+		ICFBamDoubleDef cur;
 		boolean anyNotNull = false;
 		if( argKey.getOptionalDefSchemaId() != null ) {
 			anyNotNull = true;
@@ -7513,15 +7514,15 @@ public class CFBamRamDoubleDefTable
 		if( ! anyNotNull ) {
 			return;
 		}
-		LinkedList<CFBamDoubleDefBuff> matchSet = new LinkedList<CFBamDoubleDefBuff>();
-		Iterator<CFBamDoubleDefBuff> values = dictByPKey.values().iterator();
+		LinkedList<ICFBamDoubleDef> matchSet = new LinkedList<ICFBamDoubleDef>();
+		Iterator<ICFBamDoubleDef> values = dictByPKey.values().iterator();
 		while( values.hasNext() ) {
 			cur = values.next();
 			if( argKey.equals( cur ) ) {
 				matchSet.add( cur );
 			}
 		}
-		Iterator<CFBamDoubleDefBuff> iterMatch = matchSet.iterator();
+		Iterator<ICFBamDoubleDef> iterMatch = matchSet.iterator();
 		while( iterMatch.hasNext() ) {
 			cur = iterMatch.next();
 			cur = schema.getTableDoubleDef().readDerivedByIdIdx( Authorization,
@@ -7531,10 +7532,10 @@ public class CFBamRamDoubleDefTable
 				schema.getTableDoubleDef().deleteDoubleDef( Authorization, cur );
 			}
 			else if( "a81d".equals( subClassCode ) ) {
-				schema.getTableDoubleType().deleteDoubleType( Authorization, (CFBamDoubleTypeBuff)cur );
+				schema.getTableDoubleType().deleteDoubleType( Authorization, (ICFBamDoubleType)cur );
 			}
 			else if( "a86e".equals( subClassCode ) ) {
-				schema.getTableDoubleCol().deleteDoubleCol( Authorization, (CFBamDoubleColBuff)cur );
+				schema.getTableDoubleCol().deleteDoubleCol( Authorization, (ICFBamDoubleCol)cur );
 			}
 			else {
 				throw new CFLibUnsupportedClassException( getClass(),
@@ -7546,19 +7547,19 @@ public class CFBamRamDoubleDefTable
 		}
 	}
 
-	public void deleteDoubleDefByPrevIdx( CFSecAuthorization Authorization,
+	public void deleteDoubleDefByPrevIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argPrevId )
 	{
-		CFBamValueByPrevIdxKey key = schema.getFactoryValue().newPrevIdxKey();
+		CFBamBuffValueByPrevIdxKey key = schema.getFactoryValue().newPrevIdxKey();
 		key.setOptionalPrevId( argPrevId );
 		deleteDoubleDefByPrevIdx( Authorization, key );
 	}
 
-	public void deleteDoubleDefByPrevIdx( CFSecAuthorization Authorization,
-		CFBamValueByPrevIdxKey argKey )
+	public void deleteDoubleDefByPrevIdx( ICFSecAuthorization Authorization,
+		ICFBamValueByPrevIdxKey argKey )
 	{
 		final String S_ProcName = "deleteDoubleDefByPrevIdx";
-		CFBamDoubleDefBuff cur;
+		ICFBamDoubleDef cur;
 		boolean anyNotNull = false;
 		if( argKey.getOptionalPrevId() != null ) {
 			anyNotNull = true;
@@ -7566,15 +7567,15 @@ public class CFBamRamDoubleDefTable
 		if( ! anyNotNull ) {
 			return;
 		}
-		LinkedList<CFBamDoubleDefBuff> matchSet = new LinkedList<CFBamDoubleDefBuff>();
-		Iterator<CFBamDoubleDefBuff> values = dictByPKey.values().iterator();
+		LinkedList<ICFBamDoubleDef> matchSet = new LinkedList<ICFBamDoubleDef>();
+		Iterator<ICFBamDoubleDef> values = dictByPKey.values().iterator();
 		while( values.hasNext() ) {
 			cur = values.next();
 			if( argKey.equals( cur ) ) {
 				matchSet.add( cur );
 			}
 		}
-		Iterator<CFBamDoubleDefBuff> iterMatch = matchSet.iterator();
+		Iterator<ICFBamDoubleDef> iterMatch = matchSet.iterator();
 		while( iterMatch.hasNext() ) {
 			cur = iterMatch.next();
 			cur = schema.getTableDoubleDef().readDerivedByIdIdx( Authorization,
@@ -7584,10 +7585,10 @@ public class CFBamRamDoubleDefTable
 				schema.getTableDoubleDef().deleteDoubleDef( Authorization, cur );
 			}
 			else if( "a81d".equals( subClassCode ) ) {
-				schema.getTableDoubleType().deleteDoubleType( Authorization, (CFBamDoubleTypeBuff)cur );
+				schema.getTableDoubleType().deleteDoubleType( Authorization, (ICFBamDoubleType)cur );
 			}
 			else if( "a86e".equals( subClassCode ) ) {
-				schema.getTableDoubleCol().deleteDoubleCol( Authorization, (CFBamDoubleColBuff)cur );
+				schema.getTableDoubleCol().deleteDoubleCol( Authorization, (ICFBamDoubleCol)cur );
 			}
 			else {
 				throw new CFLibUnsupportedClassException( getClass(),
@@ -7599,19 +7600,19 @@ public class CFBamRamDoubleDefTable
 		}
 	}
 
-	public void deleteDoubleDefByNextIdx( CFSecAuthorization Authorization,
+	public void deleteDoubleDefByNextIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argNextId )
 	{
-		CFBamValueByNextIdxKey key = schema.getFactoryValue().newNextIdxKey();
+		CFBamBuffValueByNextIdxKey key = schema.getFactoryValue().newNextIdxKey();
 		key.setOptionalNextId( argNextId );
 		deleteDoubleDefByNextIdx( Authorization, key );
 	}
 
-	public void deleteDoubleDefByNextIdx( CFSecAuthorization Authorization,
-		CFBamValueByNextIdxKey argKey )
+	public void deleteDoubleDefByNextIdx( ICFSecAuthorization Authorization,
+		ICFBamValueByNextIdxKey argKey )
 	{
 		final String S_ProcName = "deleteDoubleDefByNextIdx";
-		CFBamDoubleDefBuff cur;
+		ICFBamDoubleDef cur;
 		boolean anyNotNull = false;
 		if( argKey.getOptionalNextId() != null ) {
 			anyNotNull = true;
@@ -7619,15 +7620,15 @@ public class CFBamRamDoubleDefTable
 		if( ! anyNotNull ) {
 			return;
 		}
-		LinkedList<CFBamDoubleDefBuff> matchSet = new LinkedList<CFBamDoubleDefBuff>();
-		Iterator<CFBamDoubleDefBuff> values = dictByPKey.values().iterator();
+		LinkedList<ICFBamDoubleDef> matchSet = new LinkedList<ICFBamDoubleDef>();
+		Iterator<ICFBamDoubleDef> values = dictByPKey.values().iterator();
 		while( values.hasNext() ) {
 			cur = values.next();
 			if( argKey.equals( cur ) ) {
 				matchSet.add( cur );
 			}
 		}
-		Iterator<CFBamDoubleDefBuff> iterMatch = matchSet.iterator();
+		Iterator<ICFBamDoubleDef> iterMatch = matchSet.iterator();
 		while( iterMatch.hasNext() ) {
 			cur = iterMatch.next();
 			cur = schema.getTableDoubleDef().readDerivedByIdIdx( Authorization,
@@ -7637,10 +7638,10 @@ public class CFBamRamDoubleDefTable
 				schema.getTableDoubleDef().deleteDoubleDef( Authorization, cur );
 			}
 			else if( "a81d".equals( subClassCode ) ) {
-				schema.getTableDoubleType().deleteDoubleType( Authorization, (CFBamDoubleTypeBuff)cur );
+				schema.getTableDoubleType().deleteDoubleType( Authorization, (ICFBamDoubleType)cur );
 			}
 			else if( "a86e".equals( subClassCode ) ) {
-				schema.getTableDoubleCol().deleteDoubleCol( Authorization, (CFBamDoubleColBuff)cur );
+				schema.getTableDoubleCol().deleteDoubleCol( Authorization, (ICFBamDoubleCol)cur );
 			}
 			else {
 				throw new CFLibUnsupportedClassException( getClass(),
@@ -7652,21 +7653,21 @@ public class CFBamRamDoubleDefTable
 		}
 	}
 
-	public void deleteDoubleDefByContPrevIdx( CFSecAuthorization Authorization,
+	public void deleteDoubleDefByContPrevIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argScopeId,
 		CFLibDbKeyHash256 argPrevId )
 	{
-		CFBamValueByContPrevIdxKey key = schema.getFactoryValue().newContPrevIdxKey();
+		CFBamBuffValueByContPrevIdxKey key = schema.getFactoryValue().newContPrevIdxKey();
 		key.setRequiredScopeId( argScopeId );
 		key.setOptionalPrevId( argPrevId );
 		deleteDoubleDefByContPrevIdx( Authorization, key );
 	}
 
-	public void deleteDoubleDefByContPrevIdx( CFSecAuthorization Authorization,
-		CFBamValueByContPrevIdxKey argKey )
+	public void deleteDoubleDefByContPrevIdx( ICFSecAuthorization Authorization,
+		ICFBamValueByContPrevIdxKey argKey )
 	{
 		final String S_ProcName = "deleteDoubleDefByContPrevIdx";
-		CFBamDoubleDefBuff cur;
+		ICFBamDoubleDef cur;
 		boolean anyNotNull = false;
 		anyNotNull = true;
 		if( argKey.getOptionalPrevId() != null ) {
@@ -7675,15 +7676,15 @@ public class CFBamRamDoubleDefTable
 		if( ! anyNotNull ) {
 			return;
 		}
-		LinkedList<CFBamDoubleDefBuff> matchSet = new LinkedList<CFBamDoubleDefBuff>();
-		Iterator<CFBamDoubleDefBuff> values = dictByPKey.values().iterator();
+		LinkedList<ICFBamDoubleDef> matchSet = new LinkedList<ICFBamDoubleDef>();
+		Iterator<ICFBamDoubleDef> values = dictByPKey.values().iterator();
 		while( values.hasNext() ) {
 			cur = values.next();
 			if( argKey.equals( cur ) ) {
 				matchSet.add( cur );
 			}
 		}
-		Iterator<CFBamDoubleDefBuff> iterMatch = matchSet.iterator();
+		Iterator<ICFBamDoubleDef> iterMatch = matchSet.iterator();
 		while( iterMatch.hasNext() ) {
 			cur = iterMatch.next();
 			cur = schema.getTableDoubleDef().readDerivedByIdIdx( Authorization,
@@ -7693,10 +7694,10 @@ public class CFBamRamDoubleDefTable
 				schema.getTableDoubleDef().deleteDoubleDef( Authorization, cur );
 			}
 			else if( "a81d".equals( subClassCode ) ) {
-				schema.getTableDoubleType().deleteDoubleType( Authorization, (CFBamDoubleTypeBuff)cur );
+				schema.getTableDoubleType().deleteDoubleType( Authorization, (ICFBamDoubleType)cur );
 			}
 			else if( "a86e".equals( subClassCode ) ) {
-				schema.getTableDoubleCol().deleteDoubleCol( Authorization, (CFBamDoubleColBuff)cur );
+				schema.getTableDoubleCol().deleteDoubleCol( Authorization, (ICFBamDoubleCol)cur );
 			}
 			else {
 				throw new CFLibUnsupportedClassException( getClass(),
@@ -7708,21 +7709,21 @@ public class CFBamRamDoubleDefTable
 		}
 	}
 
-	public void deleteDoubleDefByContNextIdx( CFSecAuthorization Authorization,
+	public void deleteDoubleDefByContNextIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argScopeId,
 		CFLibDbKeyHash256 argNextId )
 	{
-		CFBamValueByContNextIdxKey key = schema.getFactoryValue().newContNextIdxKey();
+		CFBamBuffValueByContNextIdxKey key = schema.getFactoryValue().newContNextIdxKey();
 		key.setRequiredScopeId( argScopeId );
 		key.setOptionalNextId( argNextId );
 		deleteDoubleDefByContNextIdx( Authorization, key );
 	}
 
-	public void deleteDoubleDefByContNextIdx( CFSecAuthorization Authorization,
-		CFBamValueByContNextIdxKey argKey )
+	public void deleteDoubleDefByContNextIdx( ICFSecAuthorization Authorization,
+		ICFBamValueByContNextIdxKey argKey )
 	{
 		final String S_ProcName = "deleteDoubleDefByContNextIdx";
-		CFBamDoubleDefBuff cur;
+		ICFBamDoubleDef cur;
 		boolean anyNotNull = false;
 		anyNotNull = true;
 		if( argKey.getOptionalNextId() != null ) {
@@ -7731,15 +7732,15 @@ public class CFBamRamDoubleDefTable
 		if( ! anyNotNull ) {
 			return;
 		}
-		LinkedList<CFBamDoubleDefBuff> matchSet = new LinkedList<CFBamDoubleDefBuff>();
-		Iterator<CFBamDoubleDefBuff> values = dictByPKey.values().iterator();
+		LinkedList<ICFBamDoubleDef> matchSet = new LinkedList<ICFBamDoubleDef>();
+		Iterator<ICFBamDoubleDef> values = dictByPKey.values().iterator();
 		while( values.hasNext() ) {
 			cur = values.next();
 			if( argKey.equals( cur ) ) {
 				matchSet.add( cur );
 			}
 		}
-		Iterator<CFBamDoubleDefBuff> iterMatch = matchSet.iterator();
+		Iterator<ICFBamDoubleDef> iterMatch = matchSet.iterator();
 		while( iterMatch.hasNext() ) {
 			cur = iterMatch.next();
 			cur = schema.getTableDoubleDef().readDerivedByIdIdx( Authorization,
@@ -7749,10 +7750,10 @@ public class CFBamRamDoubleDefTable
 				schema.getTableDoubleDef().deleteDoubleDef( Authorization, cur );
 			}
 			else if( "a81d".equals( subClassCode ) ) {
-				schema.getTableDoubleType().deleteDoubleType( Authorization, (CFBamDoubleTypeBuff)cur );
+				schema.getTableDoubleType().deleteDoubleType( Authorization, (ICFBamDoubleType)cur );
 			}
 			else if( "a86e".equals( subClassCode ) ) {
-				schema.getTableDoubleCol().deleteDoubleCol( Authorization, (CFBamDoubleColBuff)cur );
+				schema.getTableDoubleCol().deleteDoubleCol( Authorization, (ICFBamDoubleCol)cur );
 			}
 			else {
 				throw new CFLibUnsupportedClassException( getClass(),

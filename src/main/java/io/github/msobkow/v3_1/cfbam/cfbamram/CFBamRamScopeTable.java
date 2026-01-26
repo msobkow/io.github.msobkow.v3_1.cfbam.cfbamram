@@ -38,6 +38,7 @@ package io.github.msobkow.v3_1.cfbam.cfbamram;
 import java.math.*;
 import java.sql.*;
 import java.text.*;
+import java.time.*;
 import java.util.*;
 import org.apache.commons.codec.binary.Base64;
 import io.github.msobkow.v3_1.cflib.*;
@@ -46,7 +47,9 @@ import io.github.msobkow.v3_1.cflib.dbutil.*;
 import io.github.msobkow.v3_1.cfsec.cfsec.*;
 import io.github.msobkow.v3_1.cfint.cfint.*;
 import io.github.msobkow.v3_1.cfbam.cfbam.*;
-import io.github.msobkow.v3_1.cfbam.cfbamobj.*;
+import io.github.msobkow.v3_1.cfsec.cfsec.buff.*;
+import io.github.msobkow.v3_1.cfint.cfint.buff.*;
+import io.github.msobkow.v3_1.cfbam.cfbam.buff.*;
 import io.github.msobkow.v3_1.cfsec.cfsecobj.*;
 import io.github.msobkow.v3_1.cfint.cfintobj.*;
 import io.github.msobkow.v3_1.cfbam.cfbamobj.*;
@@ -59,30 +62,30 @@ public class CFBamRamScopeTable
 	implements ICFBamScopeTable
 {
 	private ICFBamSchema schema;
-	private Map< CFBamScopePKey,
-				CFBamScopeBuff > dictByPKey
-		= new HashMap< CFBamScopePKey,
-				CFBamScopeBuff >();
-	private Map< CFBamScopeByTenantIdxKey,
-				Map< CFBamScopePKey,
-					CFBamScopeBuff >> dictByTenantIdx
-		= new HashMap< CFBamScopeByTenantIdxKey,
-				Map< CFBamScopePKey,
-					CFBamScopeBuff >>();
+	private Map< CFLibDbKeyHash256,
+				CFBamBuffScope > dictByPKey
+		= new HashMap< CFLibDbKeyHash256,
+				CFBamBuffScope >();
+	private Map< CFBamBuffScopeByTenantIdxKey,
+				Map< CFLibDbKeyHash256,
+					CFBamBuffScope >> dictByTenantIdx
+		= new HashMap< CFBamBuffScopeByTenantIdxKey,
+				Map< CFLibDbKeyHash256,
+					CFBamBuffScope >>();
 
 	public CFBamRamScopeTable( ICFBamSchema argSchema ) {
 		schema = argSchema;
 	}
 
-	public void createScope( CFSecAuthorization Authorization,
-		CFBamScopeBuff Buff )
+	public void createScope( ICFSecAuthorization Authorization,
+		ICFBamScope Buff )
 	{
 		final String S_ProcName = "createScope";
-		CFBamScopePKey pkey = schema.getFactoryScope().newPKey();
+		CFLibDbKeyHash256 pkey = schema.getFactoryScope().newPKey();
 		pkey.setClassCode( Buff.getClassCode() );
 		pkey.setRequiredId( schema.nextScopeIdGen() );
 		Buff.setRequiredId( pkey.getRequiredId() );
-		CFBamScopeByTenantIdxKey keyTenantIdx = schema.getFactoryScope().newTenantIdxKey();
+		CFBamBuffScopeByTenantIdxKey keyTenantIdx = schema.getFactoryScope().newTenantIdxKey();
 		keyTenantIdx.setRequiredTenantId( Buff.getRequiredTenantId() );
 
 		// Validate unique indexes
@@ -114,25 +117,39 @@ public class CFBamRamScopeTable
 
 		dictByPKey.put( pkey, Buff );
 
-		Map< CFBamScopePKey, CFBamScopeBuff > subdictTenantIdx;
+		Map< CFLibDbKeyHash256, CFBamBuffScope > subdictTenantIdx;
 		if( dictByTenantIdx.containsKey( keyTenantIdx ) ) {
 			subdictTenantIdx = dictByTenantIdx.get( keyTenantIdx );
 		}
 		else {
-			subdictTenantIdx = new HashMap< CFBamScopePKey, CFBamScopeBuff >();
+			subdictTenantIdx = new HashMap< CFLibDbKeyHash256, CFBamBuffScope >();
 			dictByTenantIdx.put( keyTenantIdx, subdictTenantIdx );
 		}
 		subdictTenantIdx.put( pkey, Buff );
 
 	}
 
-	public CFBamScopeBuff readDerived( CFSecAuthorization Authorization,
-		CFBamScopePKey PKey )
+	public ICFBamScope readDerived( ICFSecAuthorization Authorization,
+		CFLibDbKeyHash256 PKey )
 	{
 		final String S_ProcName = "CFBamRamScope.readDerived";
-		CFBamScopePKey key = schema.getFactoryScope().newPKey();
+		ICFBamScope buff;
+		if( dictByPKey.containsKey( PKey ) ) {
+			buff = dictByPKey.get( PKey );
+		}
+		else {
+			buff = null;
+		}
+		return( buff );
+	}
+
+	public ICFBamScope lockDerived( ICFSecAuthorization Authorization,
+		CFLibDbKeyHash256 PKey )
+	{
+		final String S_ProcName = "CFBamRamScope.readDerived";
+		CFLibDbKeyHash256 key = schema.getFactoryScope().newPKey();
 		key.setRequiredId( PKey.getRequiredId() );
-		CFBamScopeBuff buff;
+		ICFBamScope buff;
 		if( dictByPKey.containsKey( key ) ) {
 			buff = dictByPKey.get( key );
 		}
@@ -142,26 +159,10 @@ public class CFBamRamScopeTable
 		return( buff );
 	}
 
-	public CFBamScopeBuff lockDerived( CFSecAuthorization Authorization,
-		CFBamScopePKey PKey )
-	{
-		final String S_ProcName = "CFBamRamScope.readDerived";
-		CFBamScopePKey key = schema.getFactoryScope().newPKey();
-		key.setRequiredId( PKey.getRequiredId() );
-		CFBamScopeBuff buff;
-		if( dictByPKey.containsKey( key ) ) {
-			buff = dictByPKey.get( key );
-		}
-		else {
-			buff = null;
-		}
-		return( buff );
-	}
-
-	public CFBamScopeBuff[] readAllDerived( CFSecAuthorization Authorization ) {
+	public ICFBamScope[] readAllDerived( ICFSecAuthorization Authorization ) {
 		final String S_ProcName = "CFBamRamScope.readAllDerived";
-		CFBamScopeBuff[] retList = new CFBamScopeBuff[ dictByPKey.values().size() ];
-		Iterator< CFBamScopeBuff > iter = dictByPKey.values().iterator();
+		ICFBamScope[] retList = new ICFBamScope[ dictByPKey.values().size() ];
+		Iterator< ICFBamScope > iter = dictByPKey.values().iterator();
 		int idx = 0;
 		while( iter.hasNext() ) {
 			retList[ idx++ ] = iter.next();
@@ -169,41 +170,41 @@ public class CFBamRamScopeTable
 		return( retList );
 	}
 
-	public CFBamScopeBuff[] readDerivedByTenantIdx( CFSecAuthorization Authorization,
+	public ICFBamScope[] readDerivedByTenantIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 TenantId )
 	{
 		final String S_ProcName = "CFBamRamScope.readDerivedByTenantIdx";
-		CFBamScopeByTenantIdxKey key = schema.getFactoryScope().newTenantIdxKey();
+		CFBamBuffScopeByTenantIdxKey key = schema.getFactoryScope().newTenantIdxKey();
 		key.setRequiredTenantId( TenantId );
 
-		CFBamScopeBuff[] recArray;
+		ICFBamScope[] recArray;
 		if( dictByTenantIdx.containsKey( key ) ) {
-			Map< CFBamScopePKey, CFBamScopeBuff > subdictTenantIdx
+			Map< CFLibDbKeyHash256, CFBamBuffScope > subdictTenantIdx
 				= dictByTenantIdx.get( key );
-			recArray = new CFBamScopeBuff[ subdictTenantIdx.size() ];
-			Iterator< CFBamScopeBuff > iter = subdictTenantIdx.values().iterator();
+			recArray = new ICFBamScope[ subdictTenantIdx.size() ];
+			Iterator< ICFBamScope > iter = subdictTenantIdx.values().iterator();
 			int idx = 0;
 			while( iter.hasNext() ) {
 				recArray[ idx++ ] = iter.next();
 			}
 		}
 		else {
-			Map< CFBamScopePKey, CFBamScopeBuff > subdictTenantIdx
-				= new HashMap< CFBamScopePKey, CFBamScopeBuff >();
+			Map< CFLibDbKeyHash256, CFBamBuffScope > subdictTenantIdx
+				= new HashMap< CFLibDbKeyHash256, CFBamBuffScope >();
 			dictByTenantIdx.put( key, subdictTenantIdx );
-			recArray = new CFBamScopeBuff[0];
+			recArray = new ICFBamScope[0];
 		}
 		return( recArray );
 	}
 
-	public CFBamScopeBuff readDerivedByIdIdx( CFSecAuthorization Authorization,
+	public ICFBamScope readDerivedByIdIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 Id )
 	{
 		final String S_ProcName = "CFBamRamScope.readDerivedByIdIdx() ";
-		CFBamScopePKey key = schema.getFactoryScope().newPKey();
+		CFLibDbKeyHash256 key = schema.getFactoryScope().newPKey();
 		key.setRequiredId( Id );
 
-		CFBamScopeBuff buff;
+		ICFBamScope buff;
 		if( dictByPKey.containsKey( key ) ) {
 			buff = dictByPKey.get( key );
 		}
@@ -213,81 +214,81 @@ public class CFBamRamScopeTable
 		return( buff );
 	}
 
-	public CFBamScopeBuff readBuff( CFSecAuthorization Authorization,
-		CFBamScopePKey PKey )
+	public ICFBamScope readBuff( ICFSecAuthorization Authorization,
+		CFLibDbKeyHash256 PKey )
 	{
 		final String S_ProcName = "CFBamRamScope.readBuff";
-		CFBamScopeBuff buff = readDerived( Authorization, PKey );
+		ICFBamScope buff = readDerived( Authorization, PKey );
 		if( ( buff != null ) && ( ! buff.getClassCode().equals( "a801" ) ) ) {
 			buff = null;
 		}
 		return( buff );
 	}
 
-	public CFBamScopeBuff lockBuff( CFSecAuthorization Authorization,
-		CFBamScopePKey PKey )
+	public ICFBamScope lockBuff( ICFSecAuthorization Authorization,
+		CFLibDbKeyHash256 PKey )
 	{
 		final String S_ProcName = "lockBuff";
-		CFBamScopeBuff buff = readDerived( Authorization, PKey );
+		ICFBamScope buff = readDerived( Authorization, PKey );
 		if( ( buff != null ) && ( ! buff.getClassCode().equals( "a801" ) ) ) {
 			buff = null;
 		}
 		return( buff );
 	}
 
-	public CFBamScopeBuff[] readAllBuff( CFSecAuthorization Authorization )
+	public ICFBamScope[] readAllBuff( ICFSecAuthorization Authorization )
 	{
 		final String S_ProcName = "CFBamRamScope.readAllBuff";
-		CFBamScopeBuff buff;
-		ArrayList<CFBamScopeBuff> filteredList = new ArrayList<CFBamScopeBuff>();
-		CFBamScopeBuff[] buffList = readAllDerived( Authorization );
+		ICFBamScope buff;
+		ArrayList<ICFBamScope> filteredList = new ArrayList<ICFBamScope>();
+		ICFBamScope[] buffList = readAllDerived( Authorization );
 		for( int idx = 0; idx < buffList.length; idx ++ ) {
 			buff = buffList[idx];
 			if( ( buff != null ) && buff.getClassCode().equals( "a801" ) ) {
 				filteredList.add( buff );
 			}
 		}
-		return( filteredList.toArray( new CFBamScopeBuff[0] ) );
+		return( filteredList.toArray( new ICFBamScope[0] ) );
 	}
 
-	public CFBamScopeBuff readBuffByIdIdx( CFSecAuthorization Authorization,
+	public ICFBamScope readBuffByIdIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 Id )
 	{
 		final String S_ProcName = "CFBamRamScope.readBuffByIdIdx() ";
-		CFBamScopeBuff buff = readDerivedByIdIdx( Authorization,
+		ICFBamScope buff = readDerivedByIdIdx( Authorization,
 			Id );
 		if( ( buff != null ) && buff.getClassCode().equals( "a801" ) ) {
-			return( (CFBamScopeBuff)buff );
+			return( (ICFBamScope)buff );
 		}
 		else {
 			return( null );
 		}
 	}
 
-	public CFBamScopeBuff[] readBuffByTenantIdx( CFSecAuthorization Authorization,
+	public ICFBamScope[] readBuffByTenantIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 TenantId )
 	{
 		final String S_ProcName = "CFBamRamScope.readBuffByTenantIdx() ";
-		CFBamScopeBuff buff;
-		ArrayList<CFBamScopeBuff> filteredList = new ArrayList<CFBamScopeBuff>();
-		CFBamScopeBuff[] buffList = readDerivedByTenantIdx( Authorization,
+		ICFBamScope buff;
+		ArrayList<ICFBamScope> filteredList = new ArrayList<ICFBamScope>();
+		ICFBamScope[] buffList = readDerivedByTenantIdx( Authorization,
 			TenantId );
 		for( int idx = 0; idx < buffList.length; idx ++ ) {
 			buff = buffList[idx];
 			if( ( buff != null ) && buff.getClassCode().equals( "a801" ) ) {
-				filteredList.add( (CFBamScopeBuff)buff );
+				filteredList.add( (ICFBamScope)buff );
 			}
 		}
-		return( filteredList.toArray( new CFBamScopeBuff[0] ) );
+		return( filteredList.toArray( new ICFBamScope[0] ) );
 	}
 
-	public void updateScope( CFSecAuthorization Authorization,
-		CFBamScopeBuff Buff )
+	public void updateScope( ICFSecAuthorization Authorization,
+		ICFBamScope Buff )
 	{
-		CFBamScopePKey pkey = schema.getFactoryScope().newPKey();
+		CFLibDbKeyHash256 pkey = schema.getFactoryScope().newPKey();
 		pkey.setClassCode( Buff.getClassCode() );
 		pkey.setRequiredId( Buff.getRequiredId() );
-		CFBamScopeBuff existing = dictByPKey.get( pkey );
+		ICFBamScope existing = dictByPKey.get( pkey );
 		if( existing == null ) {
 			throw new CFLibStaleCacheDetectedException( getClass(),
 				"updateScope",
@@ -301,10 +302,10 @@ public class CFBamRamScopeTable
 				pkey );
 		}
 		Buff.setRequiredRevision( Buff.getRequiredRevision() + 1 );
-		CFBamScopeByTenantIdxKey existingKeyTenantIdx = schema.getFactoryScope().newTenantIdxKey();
+		CFBamBuffScopeByTenantIdxKey existingKeyTenantIdx = schema.getFactoryScope().newTenantIdxKey();
 		existingKeyTenantIdx.setRequiredTenantId( existing.getRequiredTenantId() );
 
-		CFBamScopeByTenantIdxKey newKeyTenantIdx = schema.getFactoryScope().newTenantIdxKey();
+		CFBamBuffScopeByTenantIdxKey newKeyTenantIdx = schema.getFactoryScope().newTenantIdxKey();
 		newKeyTenantIdx.setRequiredTenantId( Buff.getRequiredTenantId() );
 
 		// Check unique indexes
@@ -330,7 +331,7 @@ public class CFBamRamScopeTable
 
 		// Update is valid
 
-		Map< CFBamScopePKey, CFBamScopeBuff > subdict;
+		Map< CFLibDbKeyHash256, CFBamBuffScope > subdict;
 
 		dictByPKey.remove( pkey );
 		dictByPKey.put( pkey, Buff );
@@ -343,22 +344,22 @@ public class CFBamRamScopeTable
 			subdict = dictByTenantIdx.get( newKeyTenantIdx );
 		}
 		else {
-			subdict = new HashMap< CFBamScopePKey, CFBamScopeBuff >();
+			subdict = new HashMap< CFLibDbKeyHash256, CFBamBuffScope >();
 			dictByTenantIdx.put( newKeyTenantIdx, subdict );
 		}
 		subdict.put( pkey, Buff );
 
 	}
 
-	public void deleteScope( CFSecAuthorization Authorization,
-		CFBamScopeBuff Buff )
+	public void deleteScope( ICFSecAuthorization Authorization,
+		ICFBamScope Buff )
 	{
 		final String S_ProcName = "CFBamRamScopeTable.deleteScope() ";
 		String classCode;
-		CFBamScopePKey pkey = schema.getFactoryScope().newPKey();
+		CFLibDbKeyHash256 pkey = schema.getFactoryScope().newPKey();
 		pkey.setClassCode( Buff.getClassCode() );
 		pkey.setRequiredId( Buff.getRequiredId() );
-		CFBamScopeBuff existing = dictByPKey.get( pkey );
+		ICFBamScope existing = dictByPKey.get( pkey );
 		if( existing == null ) {
 			return;
 		}
@@ -368,7 +369,7 @@ public class CFBamRamScopeTable
 				"deleteScope",
 				pkey );
 		}
-		CFBamScopeByTenantIdxKey keyTenantIdx = schema.getFactoryScope().newTenantIdxKey();
+		CFBamBuffScopeByTenantIdxKey keyTenantIdx = schema.getFactoryScope().newTenantIdxKey();
 		keyTenantIdx.setRequiredTenantId( existing.getRequiredTenantId() );
 
 		// Validate reverse foreign keys
@@ -473,7 +474,7 @@ public class CFBamRamScopeTable
 		}
 
 		// Delete is valid
-		Map< CFBamScopePKey, CFBamScopeBuff > subdict;
+		Map< CFLibDbKeyHash256, CFBamBuffScope > subdict;
 
 		dictByPKey.remove( pkey );
 
@@ -481,16 +482,16 @@ public class CFBamRamScopeTable
 		subdict.remove( pkey );
 
 	}
-	public void deleteScopeByIdIdx( CFSecAuthorization Authorization,
+	public void deleteScopeByIdIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argId )
 	{
-		CFBamScopePKey key = schema.getFactoryScope().newPKey();
+		CFLibDbKeyHash256 key = schema.getFactoryScope().newPKey();
 		key.setRequiredId( argId );
 		deleteScopeByIdIdx( Authorization, key );
 	}
 
-	public void deleteScopeByIdIdx( CFSecAuthorization Authorization,
-		CFBamScopePKey argKey )
+	public void deleteScopeByIdIdx( ICFSecAuthorization Authorization,
+		CFLibDbKeyHash256 argKey )
 	{
 		final String S_ProcName = "deleteScopeByIdIdx";
 		boolean anyNotNull = false;
@@ -498,16 +499,16 @@ public class CFBamRamScopeTable
 		if( ! anyNotNull ) {
 			return;
 		}
-		CFBamScopeBuff cur;
-		LinkedList<CFBamScopeBuff> matchSet = new LinkedList<CFBamScopeBuff>();
-		Iterator<CFBamScopeBuff> values = dictByPKey.values().iterator();
+		ICFBamScope cur;
+		LinkedList<ICFBamScope> matchSet = new LinkedList<ICFBamScope>();
+		Iterator<ICFBamScope> values = dictByPKey.values().iterator();
 		while( values.hasNext() ) {
 			cur = values.next();
 			if( argKey.equals( cur ) ) {
 				matchSet.add( cur );
 			}
 		}
-		Iterator<CFBamScopeBuff> iterMatch = matchSet.iterator();
+		Iterator<ICFBamScope> iterMatch = matchSet.iterator();
 		while( iterMatch.hasNext() ) {
 			cur = iterMatch.next();
 			cur = schema.getTableScope().readDerivedByIdIdx( Authorization,
@@ -517,76 +518,76 @@ public class CFBamRamScopeTable
 				schema.getTableScope().deleteScope( Authorization, cur );
 			}
 			else if( "a802".equals( subClassCode ) ) {
-				schema.getTableSchemaDef().deleteSchemaDef( Authorization, (CFBamSchemaDefBuff)cur );
+				schema.getTableSchemaDef().deleteSchemaDef( Authorization, (ICFBamSchemaDef)cur );
 			}
 			else if( "a804".equals( subClassCode ) ) {
-				schema.getTableSchemaRef().deleteSchemaRef( Authorization, (CFBamSchemaRefBuff)cur );
+				schema.getTableSchemaRef().deleteSchemaRef( Authorization, (ICFBamSchemaRef)cur );
 			}
 			else if( "a805".equals( subClassCode ) ) {
-				schema.getTableServerMethod().deleteServerMethod( Authorization, (CFBamServerMethodBuff)cur );
+				schema.getTableServerMethod().deleteServerMethod( Authorization, (ICFBamServerMethod)cur );
 			}
 			else if( "a806".equals( subClassCode ) ) {
-				schema.getTableServerObjFunc().deleteServerObjFunc( Authorization, (CFBamServerObjFuncBuff)cur );
+				schema.getTableServerObjFunc().deleteServerObjFunc( Authorization, (ICFBamServerObjFunc)cur );
 			}
 			else if( "a807".equals( subClassCode ) ) {
-				schema.getTableServerProc().deleteServerProc( Authorization, (CFBamServerProcBuff)cur );
+				schema.getTableServerProc().deleteServerProc( Authorization, (ICFBamServerProc)cur );
 			}
 			else if( "a837".equals( subClassCode ) ) {
-				schema.getTableServerListFunc().deleteServerListFunc( Authorization, (CFBamServerListFuncBuff)cur );
+				schema.getTableServerListFunc().deleteServerListFunc( Authorization, (ICFBamServerListFunc)cur );
 			}
 			else if( "a808".equals( subClassCode ) ) {
-				schema.getTableTable().deleteTable( Authorization, (CFBamTableBuff)cur );
+				schema.getTableTable().deleteTable( Authorization, (ICFBamTable)cur );
 			}
 			else if( "a810".equals( subClassCode ) ) {
-				schema.getTableClearDep().deleteClearDep( Authorization, (CFBamClearDepBuff)cur );
+				schema.getTableClearDep().deleteClearDep( Authorization, (ICFBamClearDep)cur );
 			}
 			else if( "a811".equals( subClassCode ) ) {
-				schema.getTableClearSubDep1().deleteClearSubDep1( Authorization, (CFBamClearSubDep1Buff)cur );
+				schema.getTableClearSubDep1().deleteClearSubDep1( Authorization, (ICFBamClearSubDep1)cur );
 			}
 			else if( "a812".equals( subClassCode ) ) {
-				schema.getTableClearSubDep2().deleteClearSubDep2( Authorization, (CFBamClearSubDep2Buff)cur );
+				schema.getTableClearSubDep2().deleteClearSubDep2( Authorization, (ICFBamClearSubDep2)cur );
 			}
 			else if( "a813".equals( subClassCode ) ) {
-				schema.getTableClearSubDep3().deleteClearSubDep3( Authorization, (CFBamClearSubDep3Buff)cur );
+				schema.getTableClearSubDep3().deleteClearSubDep3( Authorization, (ICFBamClearSubDep3)cur );
 			}
 			else if( "a814".equals( subClassCode ) ) {
-				schema.getTableClearTopDep().deleteClearTopDep( Authorization, (CFBamClearTopDepBuff)cur );
+				schema.getTableClearTopDep().deleteClearTopDep( Authorization, (ICFBamClearTopDep)cur );
 			}
 			else if( "a817".equals( subClassCode ) ) {
-				schema.getTableDelDep().deleteDelDep( Authorization, (CFBamDelDepBuff)cur );
+				schema.getTableDelDep().deleteDelDep( Authorization, (ICFBamDelDep)cur );
 			}
 			else if( "a818".equals( subClassCode ) ) {
-				schema.getTableDelSubDep1().deleteDelSubDep1( Authorization, (CFBamDelSubDep1Buff)cur );
+				schema.getTableDelSubDep1().deleteDelSubDep1( Authorization, (ICFBamDelSubDep1)cur );
 			}
 			else if( "a819".equals( subClassCode ) ) {
-				schema.getTableDelSubDep2().deleteDelSubDep2( Authorization, (CFBamDelSubDep2Buff)cur );
+				schema.getTableDelSubDep2().deleteDelSubDep2( Authorization, (ICFBamDelSubDep2)cur );
 			}
 			else if( "a81a".equals( subClassCode ) ) {
-				schema.getTableDelSubDep3().deleteDelSubDep3( Authorization, (CFBamDelSubDep3Buff)cur );
+				schema.getTableDelSubDep3().deleteDelSubDep3( Authorization, (ICFBamDelSubDep3)cur );
 			}
 			else if( "a81b".equals( subClassCode ) ) {
-				schema.getTableDelTopDep().deleteDelTopDep( Authorization, (CFBamDelTopDepBuff)cur );
+				schema.getTableDelTopDep().deleteDelTopDep( Authorization, (ICFBamDelTopDep)cur );
 			}
 			else if( "a821".equals( subClassCode ) ) {
-				schema.getTableIndex().deleteIndex( Authorization, (CFBamIndexBuff)cur );
+				schema.getTableIndex().deleteIndex( Authorization, (ICFBamIndex)cur );
 			}
 			else if( "a830".equals( subClassCode ) ) {
-				schema.getTablePopDep().deletePopDep( Authorization, (CFBamPopDepBuff)cur );
+				schema.getTablePopDep().deletePopDep( Authorization, (ICFBamPopDep)cur );
 			}
 			else if( "a831".equals( subClassCode ) ) {
-				schema.getTablePopSubDep1().deletePopSubDep1( Authorization, (CFBamPopSubDep1Buff)cur );
+				schema.getTablePopSubDep1().deletePopSubDep1( Authorization, (ICFBamPopSubDep1)cur );
 			}
 			else if( "a832".equals( subClassCode ) ) {
-				schema.getTablePopSubDep2().deletePopSubDep2( Authorization, (CFBamPopSubDep2Buff)cur );
+				schema.getTablePopSubDep2().deletePopSubDep2( Authorization, (ICFBamPopSubDep2)cur );
 			}
 			else if( "a833".equals( subClassCode ) ) {
-				schema.getTablePopSubDep3().deletePopSubDep3( Authorization, (CFBamPopSubDep3Buff)cur );
+				schema.getTablePopSubDep3().deletePopSubDep3( Authorization, (ICFBamPopSubDep3)cur );
 			}
 			else if( "a834".equals( subClassCode ) ) {
-				schema.getTablePopTopDep().deletePopTopDep( Authorization, (CFBamPopTopDepBuff)cur );
+				schema.getTablePopTopDep().deletePopTopDep( Authorization, (ICFBamPopTopDep)cur );
 			}
 			else if( "a835".equals( subClassCode ) ) {
-				schema.getTableRelation().deleteRelation( Authorization, (CFBamRelationBuff)cur );
+				schema.getTableRelation().deleteRelation( Authorization, (ICFBamRelation)cur );
 			}
 			else {
 				throw new CFLibUnsupportedClassException( getClass(),
@@ -598,33 +599,33 @@ public class CFBamRamScopeTable
 		}
 	}
 
-	public void deleteScopeByTenantIdx( CFSecAuthorization Authorization,
+	public void deleteScopeByTenantIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argTenantId )
 	{
-		CFBamScopeByTenantIdxKey key = schema.getFactoryScope().newTenantIdxKey();
+		CFBamBuffScopeByTenantIdxKey key = schema.getFactoryScope().newTenantIdxKey();
 		key.setRequiredTenantId( argTenantId );
 		deleteScopeByTenantIdx( Authorization, key );
 	}
 
-	public void deleteScopeByTenantIdx( CFSecAuthorization Authorization,
-		CFBamScopeByTenantIdxKey argKey )
+	public void deleteScopeByTenantIdx( ICFSecAuthorization Authorization,
+		ICFBamScopeByTenantIdxKey argKey )
 	{
 		final String S_ProcName = "deleteScopeByTenantIdx";
-		CFBamScopeBuff cur;
+		ICFBamScope cur;
 		boolean anyNotNull = false;
 		anyNotNull = true;
 		if( ! anyNotNull ) {
 			return;
 		}
-		LinkedList<CFBamScopeBuff> matchSet = new LinkedList<CFBamScopeBuff>();
-		Iterator<CFBamScopeBuff> values = dictByPKey.values().iterator();
+		LinkedList<ICFBamScope> matchSet = new LinkedList<ICFBamScope>();
+		Iterator<ICFBamScope> values = dictByPKey.values().iterator();
 		while( values.hasNext() ) {
 			cur = values.next();
 			if( argKey.equals( cur ) ) {
 				matchSet.add( cur );
 			}
 		}
-		Iterator<CFBamScopeBuff> iterMatch = matchSet.iterator();
+		Iterator<ICFBamScope> iterMatch = matchSet.iterator();
 		while( iterMatch.hasNext() ) {
 			cur = iterMatch.next();
 			cur = schema.getTableScope().readDerivedByIdIdx( Authorization,
@@ -634,76 +635,76 @@ public class CFBamRamScopeTable
 				schema.getTableScope().deleteScope( Authorization, cur );
 			}
 			else if( "a802".equals( subClassCode ) ) {
-				schema.getTableSchemaDef().deleteSchemaDef( Authorization, (CFBamSchemaDefBuff)cur );
+				schema.getTableSchemaDef().deleteSchemaDef( Authorization, (ICFBamSchemaDef)cur );
 			}
 			else if( "a804".equals( subClassCode ) ) {
-				schema.getTableSchemaRef().deleteSchemaRef( Authorization, (CFBamSchemaRefBuff)cur );
+				schema.getTableSchemaRef().deleteSchemaRef( Authorization, (ICFBamSchemaRef)cur );
 			}
 			else if( "a805".equals( subClassCode ) ) {
-				schema.getTableServerMethod().deleteServerMethod( Authorization, (CFBamServerMethodBuff)cur );
+				schema.getTableServerMethod().deleteServerMethod( Authorization, (ICFBamServerMethod)cur );
 			}
 			else if( "a806".equals( subClassCode ) ) {
-				schema.getTableServerObjFunc().deleteServerObjFunc( Authorization, (CFBamServerObjFuncBuff)cur );
+				schema.getTableServerObjFunc().deleteServerObjFunc( Authorization, (ICFBamServerObjFunc)cur );
 			}
 			else if( "a807".equals( subClassCode ) ) {
-				schema.getTableServerProc().deleteServerProc( Authorization, (CFBamServerProcBuff)cur );
+				schema.getTableServerProc().deleteServerProc( Authorization, (ICFBamServerProc)cur );
 			}
 			else if( "a837".equals( subClassCode ) ) {
-				schema.getTableServerListFunc().deleteServerListFunc( Authorization, (CFBamServerListFuncBuff)cur );
+				schema.getTableServerListFunc().deleteServerListFunc( Authorization, (ICFBamServerListFunc)cur );
 			}
 			else if( "a808".equals( subClassCode ) ) {
-				schema.getTableTable().deleteTable( Authorization, (CFBamTableBuff)cur );
+				schema.getTableTable().deleteTable( Authorization, (ICFBamTable)cur );
 			}
 			else if( "a810".equals( subClassCode ) ) {
-				schema.getTableClearDep().deleteClearDep( Authorization, (CFBamClearDepBuff)cur );
+				schema.getTableClearDep().deleteClearDep( Authorization, (ICFBamClearDep)cur );
 			}
 			else if( "a811".equals( subClassCode ) ) {
-				schema.getTableClearSubDep1().deleteClearSubDep1( Authorization, (CFBamClearSubDep1Buff)cur );
+				schema.getTableClearSubDep1().deleteClearSubDep1( Authorization, (ICFBamClearSubDep1)cur );
 			}
 			else if( "a812".equals( subClassCode ) ) {
-				schema.getTableClearSubDep2().deleteClearSubDep2( Authorization, (CFBamClearSubDep2Buff)cur );
+				schema.getTableClearSubDep2().deleteClearSubDep2( Authorization, (ICFBamClearSubDep2)cur );
 			}
 			else if( "a813".equals( subClassCode ) ) {
-				schema.getTableClearSubDep3().deleteClearSubDep3( Authorization, (CFBamClearSubDep3Buff)cur );
+				schema.getTableClearSubDep3().deleteClearSubDep3( Authorization, (ICFBamClearSubDep3)cur );
 			}
 			else if( "a814".equals( subClassCode ) ) {
-				schema.getTableClearTopDep().deleteClearTopDep( Authorization, (CFBamClearTopDepBuff)cur );
+				schema.getTableClearTopDep().deleteClearTopDep( Authorization, (ICFBamClearTopDep)cur );
 			}
 			else if( "a817".equals( subClassCode ) ) {
-				schema.getTableDelDep().deleteDelDep( Authorization, (CFBamDelDepBuff)cur );
+				schema.getTableDelDep().deleteDelDep( Authorization, (ICFBamDelDep)cur );
 			}
 			else if( "a818".equals( subClassCode ) ) {
-				schema.getTableDelSubDep1().deleteDelSubDep1( Authorization, (CFBamDelSubDep1Buff)cur );
+				schema.getTableDelSubDep1().deleteDelSubDep1( Authorization, (ICFBamDelSubDep1)cur );
 			}
 			else if( "a819".equals( subClassCode ) ) {
-				schema.getTableDelSubDep2().deleteDelSubDep2( Authorization, (CFBamDelSubDep2Buff)cur );
+				schema.getTableDelSubDep2().deleteDelSubDep2( Authorization, (ICFBamDelSubDep2)cur );
 			}
 			else if( "a81a".equals( subClassCode ) ) {
-				schema.getTableDelSubDep3().deleteDelSubDep3( Authorization, (CFBamDelSubDep3Buff)cur );
+				schema.getTableDelSubDep3().deleteDelSubDep3( Authorization, (ICFBamDelSubDep3)cur );
 			}
 			else if( "a81b".equals( subClassCode ) ) {
-				schema.getTableDelTopDep().deleteDelTopDep( Authorization, (CFBamDelTopDepBuff)cur );
+				schema.getTableDelTopDep().deleteDelTopDep( Authorization, (ICFBamDelTopDep)cur );
 			}
 			else if( "a821".equals( subClassCode ) ) {
-				schema.getTableIndex().deleteIndex( Authorization, (CFBamIndexBuff)cur );
+				schema.getTableIndex().deleteIndex( Authorization, (ICFBamIndex)cur );
 			}
 			else if( "a830".equals( subClassCode ) ) {
-				schema.getTablePopDep().deletePopDep( Authorization, (CFBamPopDepBuff)cur );
+				schema.getTablePopDep().deletePopDep( Authorization, (ICFBamPopDep)cur );
 			}
 			else if( "a831".equals( subClassCode ) ) {
-				schema.getTablePopSubDep1().deletePopSubDep1( Authorization, (CFBamPopSubDep1Buff)cur );
+				schema.getTablePopSubDep1().deletePopSubDep1( Authorization, (ICFBamPopSubDep1)cur );
 			}
 			else if( "a832".equals( subClassCode ) ) {
-				schema.getTablePopSubDep2().deletePopSubDep2( Authorization, (CFBamPopSubDep2Buff)cur );
+				schema.getTablePopSubDep2().deletePopSubDep2( Authorization, (ICFBamPopSubDep2)cur );
 			}
 			else if( "a833".equals( subClassCode ) ) {
-				schema.getTablePopSubDep3().deletePopSubDep3( Authorization, (CFBamPopSubDep3Buff)cur );
+				schema.getTablePopSubDep3().deletePopSubDep3( Authorization, (ICFBamPopSubDep3)cur );
 			}
 			else if( "a834".equals( subClassCode ) ) {
-				schema.getTablePopTopDep().deletePopTopDep( Authorization, (CFBamPopTopDepBuff)cur );
+				schema.getTablePopTopDep().deletePopTopDep( Authorization, (ICFBamPopTopDep)cur );
 			}
 			else if( "a835".equals( subClassCode ) ) {
-				schema.getTableRelation().deleteRelation( Authorization, (CFBamRelationBuff)cur );
+				schema.getTableRelation().deleteRelation( Authorization, (ICFBamRelation)cur );
 			}
 			else {
 				throw new CFLibUnsupportedClassException( getClass(),
