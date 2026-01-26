@@ -99,27 +99,27 @@ public class CFBamRamChainTable
 		schema = argSchema;
 	}
 
-	public void createChain( ICFSecAuthorization Authorization,
+	public ICFBamChain createChain( ICFSecAuthorization Authorization,
 		ICFBamChain Buff )
 	{
 		final String S_ProcName = "createChain";
-		CFLibDbKeyHash256 pkey = schema.getFactoryChain().newPKey();
-		pkey.setRequiredId( schema.nextChainIdGen() );
-		Buff.setRequiredId( pkey.getRequiredId() );
-		CFBamBuffChainByChainTableIdxKey keyChainTableIdx = schema.getFactoryChain().newChainTableIdxKey();
+		CFLibDbKeyHash256 pkey;
+		pkey = schema.nextChainIdGen();
+		Buff.setRequiredId( pkey );
+		CFBamBuffChainByChainTableIdxKey keyChainTableIdx = (CFBamBuffChainByChainTableIdxKey)schema.getFactoryChain().newByChainTableIdxKey();
 		keyChainTableIdx.setRequiredTableId( Buff.getRequiredTableId() );
 
-		CFBamBuffChainByDefSchemaIdxKey keyDefSchemaIdx = schema.getFactoryChain().newDefSchemaIdxKey();
+		CFBamBuffChainByDefSchemaIdxKey keyDefSchemaIdx = (CFBamBuffChainByDefSchemaIdxKey)schema.getFactoryChain().newByDefSchemaIdxKey();
 		keyDefSchemaIdx.setOptionalDefSchemaId( Buff.getOptionalDefSchemaId() );
 
-		CFBamBuffChainByUNameIdxKey keyUNameIdx = schema.getFactoryChain().newUNameIdxKey();
+		CFBamBuffChainByUNameIdxKey keyUNameIdx = (CFBamBuffChainByUNameIdxKey)schema.getFactoryChain().newByUNameIdxKey();
 		keyUNameIdx.setRequiredTableId( Buff.getRequiredTableId() );
 		keyUNameIdx.setRequiredName( Buff.getRequiredName() );
 
-		CFBamBuffChainByPrevRelIdxKey keyPrevRelIdx = schema.getFactoryChain().newPrevRelIdxKey();
+		CFBamBuffChainByPrevRelIdxKey keyPrevRelIdx = (CFBamBuffChainByPrevRelIdxKey)schema.getFactoryChain().newByPrevRelIdxKey();
 		keyPrevRelIdx.setRequiredPrevRelationId( Buff.getRequiredPrevRelationId() );
 
-		CFBamBuffChainByNextRelIdxKey keyNextRelIdx = schema.getFactoryChain().newNextRelIdxKey();
+		CFBamBuffChainByNextRelIdxKey keyNextRelIdx = (CFBamBuffChainByNextRelIdxKey)schema.getFactoryChain().newByNextRelIdxKey();
 		keyNextRelIdx.setRequiredNextRelationId( Buff.getRequiredNextRelationId() );
 
 		// Validate unique indexes
@@ -131,6 +131,7 @@ public class CFBamRamChainTable
 		if( dictByUNameIdx.containsKey( keyUNameIdx ) ) {
 			throw new CFLibUniqueIndexViolationException( getClass(),
 				S_ProcName,
+				"ChainUNameIdx",
 				"ChainUNameIdx",
 				keyUNameIdx );
 		}
@@ -234,6 +235,7 @@ public class CFBamRamChainTable
 		}
 		subdictNextRelIdx.put( pkey, Buff );
 
+		return( Buff );
 	}
 
 	public ICFBamChain readDerived( ICFSecAuthorization Authorization,
@@ -254,11 +256,9 @@ public class CFBamRamChainTable
 		CFLibDbKeyHash256 PKey )
 	{
 		final String S_ProcName = "CFBamRamChain.readDerived";
-		CFLibDbKeyHash256 key = schema.getFactoryChain().newPKey();
-		key.setRequiredId( PKey.getRequiredId() );
 		ICFBamChain buff;
-		if( dictByPKey.containsKey( key ) ) {
-			buff = dictByPKey.get( key );
+		if( dictByPKey.containsKey( PKey ) ) {
+			buff = dictByPKey.get( PKey );
 		}
 		else {
 			buff = null;
@@ -281,7 +281,7 @@ public class CFBamRamChainTable
 		CFLibDbKeyHash256 TableId )
 	{
 		final String S_ProcName = "CFBamRamChain.readDerivedByChainTableIdx";
-		CFBamBuffChainByChainTableIdxKey key = schema.getFactoryChain().newChainTableIdxKey();
+		CFBamBuffChainByChainTableIdxKey key = (CFBamBuffChainByChainTableIdxKey)schema.getFactoryChain().newByChainTableIdxKey();
 		key.setRequiredTableId( TableId );
 
 		ICFBamChain[] recArray;
@@ -308,7 +308,7 @@ public class CFBamRamChainTable
 		CFLibDbKeyHash256 DefSchemaId )
 	{
 		final String S_ProcName = "CFBamRamChain.readDerivedByDefSchemaIdx";
-		CFBamBuffChainByDefSchemaIdxKey key = schema.getFactoryChain().newDefSchemaIdxKey();
+		CFBamBuffChainByDefSchemaIdxKey key = (CFBamBuffChainByDefSchemaIdxKey)schema.getFactoryChain().newByDefSchemaIdxKey();
 		key.setOptionalDefSchemaId( DefSchemaId );
 
 		ICFBamChain[] recArray;
@@ -336,7 +336,7 @@ public class CFBamRamChainTable
 		String Name )
 	{
 		final String S_ProcName = "CFBamRamChain.readDerivedByUNameIdx";
-		CFBamBuffChainByUNameIdxKey key = schema.getFactoryChain().newUNameIdxKey();
+		CFBamBuffChainByUNameIdxKey key = (CFBamBuffChainByUNameIdxKey)schema.getFactoryChain().newByUNameIdxKey();
 		key.setRequiredTableId( TableId );
 		key.setRequiredName( Name );
 
@@ -354,7 +354,7 @@ public class CFBamRamChainTable
 		CFLibDbKeyHash256 PrevRelationId )
 	{
 		final String S_ProcName = "CFBamRamChain.readDerivedByPrevRelIdx";
-		CFBamBuffChainByPrevRelIdxKey key = schema.getFactoryChain().newPrevRelIdxKey();
+		CFBamBuffChainByPrevRelIdxKey key = (CFBamBuffChainByPrevRelIdxKey)schema.getFactoryChain().newByPrevRelIdxKey();
 		key.setRequiredPrevRelationId( PrevRelationId );
 
 		ICFBamChain[] recArray;
@@ -381,7 +381,7 @@ public class CFBamRamChainTable
 		CFLibDbKeyHash256 NextRelationId )
 	{
 		final String S_ProcName = "CFBamRamChain.readDerivedByNextRelIdx";
-		CFBamBuffChainByNextRelIdxKey key = schema.getFactoryChain().newNextRelIdxKey();
+		CFBamBuffChainByNextRelIdxKey key = (CFBamBuffChainByNextRelIdxKey)schema.getFactoryChain().newByNextRelIdxKey();
 		key.setRequiredNextRelationId( NextRelationId );
 
 		ICFBamChain[] recArray;
@@ -408,12 +408,9 @@ public class CFBamRamChainTable
 		CFLibDbKeyHash256 Id )
 	{
 		final String S_ProcName = "CFBamRamChain.readDerivedByIdIdx() ";
-		CFLibDbKeyHash256 key = schema.getFactoryChain().newPKey();
-		key.setRequiredId( Id );
-
 		ICFBamChain buff;
-		if( dictByPKey.containsKey( key ) ) {
-			buff = dictByPKey.get( key );
+		if( dictByPKey.containsKey( Id ) ) {
+			buff = dictByPKey.get( Id );
 		}
 		else {
 			buff = null;
@@ -426,7 +423,7 @@ public class CFBamRamChainTable
 	{
 		final String S_ProcName = "CFBamRamChain.readBuff";
 		ICFBamChain buff = readDerived( Authorization, PKey );
-		if( ( buff != null ) && ( ! buff.getClassCode().equals( "a80f" ) ) ) {
+		if( ( buff != null ) && ( buff.getClassCode() != ICFBamChain.CLASS_CODE ) ) {
 			buff = null;
 		}
 		return( buff );
@@ -437,7 +434,7 @@ public class CFBamRamChainTable
 	{
 		final String S_ProcName = "lockBuff";
 		ICFBamChain buff = readDerived( Authorization, PKey );
-		if( ( buff != null ) && ( ! buff.getClassCode().equals( "a80f" ) ) ) {
+		if( ( buff != null ) && ( buff.getClassCode() != ICFBamChain.CLASS_CODE ) ) {
 			buff = null;
 		}
 		return( buff );
@@ -451,7 +448,7 @@ public class CFBamRamChainTable
 		ICFBamChain[] buffList = readAllDerived( Authorization );
 		for( int idx = 0; idx < buffList.length; idx ++ ) {
 			buff = buffList[idx];
-			if( ( buff != null ) && buff.getClassCode().equals( "a80f" ) ) {
+			if( ( buff != null ) && ( buff.getClassCode() == ICFBamChain.CLASS_CODE ) ) {
 				filteredList.add( buff );
 			}
 		}
@@ -464,7 +461,7 @@ public class CFBamRamChainTable
 		final String S_ProcName = "CFBamRamChain.readBuffByIdIdx() ";
 		ICFBamChain buff = readDerivedByIdIdx( Authorization,
 			Id );
-		if( ( buff != null ) && buff.getClassCode().equals( "a80f" ) ) {
+		if( ( buff != null ) && ( buff.getClassCode() == ICFBamChain.CLASS_CODE ) ) {
 			return( (ICFBamChain)buff );
 		}
 		else {
@@ -482,7 +479,7 @@ public class CFBamRamChainTable
 			TableId );
 		for( int idx = 0; idx < buffList.length; idx ++ ) {
 			buff = buffList[idx];
-			if( ( buff != null ) && buff.getClassCode().equals( "a80f" ) ) {
+			if( ( buff != null ) && ( buff.getClassCode() == ICFBamChain.CLASS_CODE ) ) {
 				filteredList.add( (ICFBamChain)buff );
 			}
 		}
@@ -499,7 +496,7 @@ public class CFBamRamChainTable
 			DefSchemaId );
 		for( int idx = 0; idx < buffList.length; idx ++ ) {
 			buff = buffList[idx];
-			if( ( buff != null ) && buff.getClassCode().equals( "a80f" ) ) {
+			if( ( buff != null ) && ( buff.getClassCode() == ICFBamChain.CLASS_CODE ) ) {
 				filteredList.add( (ICFBamChain)buff );
 			}
 		}
@@ -514,7 +511,7 @@ public class CFBamRamChainTable
 		ICFBamChain buff = readDerivedByUNameIdx( Authorization,
 			TableId,
 			Name );
-		if( ( buff != null ) && buff.getClassCode().equals( "a80f" ) ) {
+		if( ( buff != null ) && ( buff.getClassCode() == ICFBamChain.CLASS_CODE ) ) {
 			return( (ICFBamChain)buff );
 		}
 		else {
@@ -532,7 +529,7 @@ public class CFBamRamChainTable
 			PrevRelationId );
 		for( int idx = 0; idx < buffList.length; idx ++ ) {
 			buff = buffList[idx];
-			if( ( buff != null ) && buff.getClassCode().equals( "a80f" ) ) {
+			if( ( buff != null ) && ( buff.getClassCode() == ICFBamChain.CLASS_CODE ) ) {
 				filteredList.add( (ICFBamChain)buff );
 			}
 		}
@@ -549,18 +546,17 @@ public class CFBamRamChainTable
 			NextRelationId );
 		for( int idx = 0; idx < buffList.length; idx ++ ) {
 			buff = buffList[idx];
-			if( ( buff != null ) && buff.getClassCode().equals( "a80f" ) ) {
+			if( ( buff != null ) && ( buff.getClassCode() == ICFBamChain.CLASS_CODE ) ) {
 				filteredList.add( (ICFBamChain)buff );
 			}
 		}
 		return( filteredList.toArray( new ICFBamChain[0] ) );
 	}
 
-	public void updateChain( ICFSecAuthorization Authorization,
+	public ICFBamChain updateChain( ICFSecAuthorization Authorization,
 		ICFBamChain Buff )
 	{
-		CFLibDbKeyHash256 pkey = schema.getFactoryChain().newPKey();
-		pkey.setRequiredId( Buff.getRequiredId() );
+		CFLibDbKeyHash256 pkey = Buff.getPKey();
 		ICFBamChain existing = dictByPKey.get( pkey );
 		if( existing == null ) {
 			throw new CFLibStaleCacheDetectedException( getClass(),
@@ -575,36 +571,36 @@ public class CFBamRamChainTable
 				pkey );
 		}
 		Buff.setRequiredRevision( Buff.getRequiredRevision() + 1 );
-		CFBamBuffChainByChainTableIdxKey existingKeyChainTableIdx = schema.getFactoryChain().newChainTableIdxKey();
+		CFBamBuffChainByChainTableIdxKey existingKeyChainTableIdx = (CFBamBuffChainByChainTableIdxKey)schema.getFactoryChain().newByChainTableIdxKey();
 		existingKeyChainTableIdx.setRequiredTableId( existing.getRequiredTableId() );
 
-		CFBamBuffChainByChainTableIdxKey newKeyChainTableIdx = schema.getFactoryChain().newChainTableIdxKey();
+		CFBamBuffChainByChainTableIdxKey newKeyChainTableIdx = (CFBamBuffChainByChainTableIdxKey)schema.getFactoryChain().newByChainTableIdxKey();
 		newKeyChainTableIdx.setRequiredTableId( Buff.getRequiredTableId() );
 
-		CFBamBuffChainByDefSchemaIdxKey existingKeyDefSchemaIdx = schema.getFactoryChain().newDefSchemaIdxKey();
+		CFBamBuffChainByDefSchemaIdxKey existingKeyDefSchemaIdx = (CFBamBuffChainByDefSchemaIdxKey)schema.getFactoryChain().newByDefSchemaIdxKey();
 		existingKeyDefSchemaIdx.setOptionalDefSchemaId( existing.getOptionalDefSchemaId() );
 
-		CFBamBuffChainByDefSchemaIdxKey newKeyDefSchemaIdx = schema.getFactoryChain().newDefSchemaIdxKey();
+		CFBamBuffChainByDefSchemaIdxKey newKeyDefSchemaIdx = (CFBamBuffChainByDefSchemaIdxKey)schema.getFactoryChain().newByDefSchemaIdxKey();
 		newKeyDefSchemaIdx.setOptionalDefSchemaId( Buff.getOptionalDefSchemaId() );
 
-		CFBamBuffChainByUNameIdxKey existingKeyUNameIdx = schema.getFactoryChain().newUNameIdxKey();
+		CFBamBuffChainByUNameIdxKey existingKeyUNameIdx = (CFBamBuffChainByUNameIdxKey)schema.getFactoryChain().newByUNameIdxKey();
 		existingKeyUNameIdx.setRequiredTableId( existing.getRequiredTableId() );
 		existingKeyUNameIdx.setRequiredName( existing.getRequiredName() );
 
-		CFBamBuffChainByUNameIdxKey newKeyUNameIdx = schema.getFactoryChain().newUNameIdxKey();
+		CFBamBuffChainByUNameIdxKey newKeyUNameIdx = (CFBamBuffChainByUNameIdxKey)schema.getFactoryChain().newByUNameIdxKey();
 		newKeyUNameIdx.setRequiredTableId( Buff.getRequiredTableId() );
 		newKeyUNameIdx.setRequiredName( Buff.getRequiredName() );
 
-		CFBamBuffChainByPrevRelIdxKey existingKeyPrevRelIdx = schema.getFactoryChain().newPrevRelIdxKey();
+		CFBamBuffChainByPrevRelIdxKey existingKeyPrevRelIdx = (CFBamBuffChainByPrevRelIdxKey)schema.getFactoryChain().newByPrevRelIdxKey();
 		existingKeyPrevRelIdx.setRequiredPrevRelationId( existing.getRequiredPrevRelationId() );
 
-		CFBamBuffChainByPrevRelIdxKey newKeyPrevRelIdx = schema.getFactoryChain().newPrevRelIdxKey();
+		CFBamBuffChainByPrevRelIdxKey newKeyPrevRelIdx = (CFBamBuffChainByPrevRelIdxKey)schema.getFactoryChain().newByPrevRelIdxKey();
 		newKeyPrevRelIdx.setRequiredPrevRelationId( Buff.getRequiredPrevRelationId() );
 
-		CFBamBuffChainByNextRelIdxKey existingKeyNextRelIdx = schema.getFactoryChain().newNextRelIdxKey();
+		CFBamBuffChainByNextRelIdxKey existingKeyNextRelIdx = (CFBamBuffChainByNextRelIdxKey)schema.getFactoryChain().newByNextRelIdxKey();
 		existingKeyNextRelIdx.setRequiredNextRelationId( existing.getRequiredNextRelationId() );
 
-		CFBamBuffChainByNextRelIdxKey newKeyNextRelIdx = schema.getFactoryChain().newNextRelIdxKey();
+		CFBamBuffChainByNextRelIdxKey newKeyNextRelIdx = (CFBamBuffChainByNextRelIdxKey)schema.getFactoryChain().newByNextRelIdxKey();
 		newKeyNextRelIdx.setRequiredNextRelationId( Buff.getRequiredNextRelationId() );
 
 		// Check unique indexes
@@ -613,6 +609,7 @@ public class CFBamRamChainTable
 			if( dictByUNameIdx.containsKey( newKeyUNameIdx ) ) {
 				throw new CFLibUniqueIndexViolationException( getClass(),
 					"updateChain",
+					"ChainUNameIdx",
 					"ChainUNameIdx",
 					newKeyUNameIdx );
 			}
@@ -733,6 +730,7 @@ public class CFBamRamChainTable
 		}
 		subdict.put( pkey, Buff );
 
+		return(Buff);
 	}
 
 	public void deleteChain( ICFSecAuthorization Authorization,
@@ -752,20 +750,20 @@ public class CFBamRamChainTable
 				"deleteChain",
 				pkey );
 		}
-		CFBamBuffChainByChainTableIdxKey keyChainTableIdx = schema.getFactoryChain().newChainTableIdxKey();
+		CFBamBuffChainByChainTableIdxKey keyChainTableIdx = (CFBamBuffChainByChainTableIdxKey)schema.getFactoryChain().newByChainTableIdxKey();
 		keyChainTableIdx.setRequiredTableId( existing.getRequiredTableId() );
 
-		CFBamBuffChainByDefSchemaIdxKey keyDefSchemaIdx = schema.getFactoryChain().newDefSchemaIdxKey();
+		CFBamBuffChainByDefSchemaIdxKey keyDefSchemaIdx = (CFBamBuffChainByDefSchemaIdxKey)schema.getFactoryChain().newByDefSchemaIdxKey();
 		keyDefSchemaIdx.setOptionalDefSchemaId( existing.getOptionalDefSchemaId() );
 
-		CFBamBuffChainByUNameIdxKey keyUNameIdx = schema.getFactoryChain().newUNameIdxKey();
+		CFBamBuffChainByUNameIdxKey keyUNameIdx = (CFBamBuffChainByUNameIdxKey)schema.getFactoryChain().newByUNameIdxKey();
 		keyUNameIdx.setRequiredTableId( existing.getRequiredTableId() );
 		keyUNameIdx.setRequiredName( existing.getRequiredName() );
 
-		CFBamBuffChainByPrevRelIdxKey keyPrevRelIdx = schema.getFactoryChain().newPrevRelIdxKey();
+		CFBamBuffChainByPrevRelIdxKey keyPrevRelIdx = (CFBamBuffChainByPrevRelIdxKey)schema.getFactoryChain().newByPrevRelIdxKey();
 		keyPrevRelIdx.setRequiredPrevRelationId( existing.getRequiredPrevRelationId() );
 
-		CFBamBuffChainByNextRelIdxKey keyNextRelIdx = schema.getFactoryChain().newNextRelIdxKey();
+		CFBamBuffChainByNextRelIdxKey keyNextRelIdx = (CFBamBuffChainByNextRelIdxKey)schema.getFactoryChain().newByNextRelIdxKey();
 		keyNextRelIdx.setRequiredNextRelationId( existing.getRequiredNextRelationId() );
 
 		// Validate reverse foreign keys
@@ -790,14 +788,6 @@ public class CFBamRamChainTable
 		subdict.remove( pkey );
 
 	}
-	public void deleteChainByIdIdx( ICFSecAuthorization Authorization,
-		CFLibDbKeyHash256 argId )
-	{
-		CFLibDbKeyHash256 key = schema.getFactoryChain().newPKey();
-		key.setRequiredId( argId );
-		deleteChainByIdIdx( Authorization, key );
-	}
-
 	public void deleteChainByIdIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argKey )
 	{
@@ -827,7 +817,7 @@ public class CFBamRamChainTable
 	public void deleteChainByChainTableIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argTableId )
 	{
-		CFBamBuffChainByChainTableIdxKey key = schema.getFactoryChain().newChainTableIdxKey();
+		CFBamBuffChainByChainTableIdxKey key = (CFBamBuffChainByChainTableIdxKey)schema.getFactoryChain().newByChainTableIdxKey();
 		key.setRequiredTableId( argTableId );
 		deleteChainByChainTableIdx( Authorization, key );
 	}
@@ -861,7 +851,7 @@ public class CFBamRamChainTable
 	public void deleteChainByDefSchemaIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argDefSchemaId )
 	{
-		CFBamBuffChainByDefSchemaIdxKey key = schema.getFactoryChain().newDefSchemaIdxKey();
+		CFBamBuffChainByDefSchemaIdxKey key = (CFBamBuffChainByDefSchemaIdxKey)schema.getFactoryChain().newByDefSchemaIdxKey();
 		key.setOptionalDefSchemaId( argDefSchemaId );
 		deleteChainByDefSchemaIdx( Authorization, key );
 	}
@@ -898,7 +888,7 @@ public class CFBamRamChainTable
 		CFLibDbKeyHash256 argTableId,
 		String argName )
 	{
-		CFBamBuffChainByUNameIdxKey key = schema.getFactoryChain().newUNameIdxKey();
+		CFBamBuffChainByUNameIdxKey key = (CFBamBuffChainByUNameIdxKey)schema.getFactoryChain().newByUNameIdxKey();
 		key.setRequiredTableId( argTableId );
 		key.setRequiredName( argName );
 		deleteChainByUNameIdx( Authorization, key );
@@ -934,7 +924,7 @@ public class CFBamRamChainTable
 	public void deleteChainByPrevRelIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argPrevRelationId )
 	{
-		CFBamBuffChainByPrevRelIdxKey key = schema.getFactoryChain().newPrevRelIdxKey();
+		CFBamBuffChainByPrevRelIdxKey key = (CFBamBuffChainByPrevRelIdxKey)schema.getFactoryChain().newByPrevRelIdxKey();
 		key.setRequiredPrevRelationId( argPrevRelationId );
 		deleteChainByPrevRelIdx( Authorization, key );
 	}
@@ -968,7 +958,7 @@ public class CFBamRamChainTable
 	public void deleteChainByNextRelIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argNextRelationId )
 	{
-		CFBamBuffChainByNextRelIdxKey key = schema.getFactoryChain().newNextRelIdxKey();
+		CFBamBuffChainByNextRelIdxKey key = (CFBamBuffChainByNextRelIdxKey)schema.getFactoryChain().newByNextRelIdxKey();
 		key.setRequiredNextRelationId( argNextRelationId );
 		deleteChainByNextRelIdx( Authorization, key );
 	}

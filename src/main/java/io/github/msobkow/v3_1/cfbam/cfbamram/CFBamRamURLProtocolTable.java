@@ -81,17 +81,17 @@ public class CFBamRamURLProtocolTable
 		schema = argSchema;
 	}
 
-	public void createURLProtocol( ICFSecAuthorization Authorization,
+	public ICFIntURLProtocol createURLProtocol( ICFSecAuthorization Authorization,
 		ICFIntURLProtocol Buff )
 	{
 		final String S_ProcName = "createURLProtocol";
-		Integer pkey = schema.getFactoryURLProtocol().newPKey();
-		pkey.setRequiredURLProtocolId( schema.nextURLProtocolIdGen() );
-		Buff.setRequiredURLProtocolId( pkey.getRequiredURLProtocolId() );
-		CFIntBuffURLProtocolByUNameIdxKey keyUNameIdx = schema.getFactoryURLProtocol().newUNameIdxKey();
+		Integer pkey;
+		pkey = schema.nextURLProtocolIdGen();
+		Buff.setRequiredURLProtocolId( pkey );
+		CFIntBuffURLProtocolByUNameIdxKey keyUNameIdx = (CFIntBuffURLProtocolByUNameIdxKey)schema.getFactoryURLProtocol().newByUNameIdxKey();
 		keyUNameIdx.setRequiredName( Buff.getRequiredName() );
 
-		CFIntBuffURLProtocolByIsSecureIdxKey keyIsSecureIdx = schema.getFactoryURLProtocol().newIsSecureIdxKey();
+		CFIntBuffURLProtocolByIsSecureIdxKey keyIsSecureIdx = (CFIntBuffURLProtocolByIsSecureIdxKey)schema.getFactoryURLProtocol().newByIsSecureIdxKey();
 		keyIsSecureIdx.setRequiredIsSecure( Buff.getRequiredIsSecure() );
 
 		// Validate unique indexes
@@ -103,6 +103,7 @@ public class CFBamRamURLProtocolTable
 		if( dictByUNameIdx.containsKey( keyUNameIdx ) ) {
 			throw new CFLibUniqueIndexViolationException( getClass(),
 				S_ProcName,
+				"URLProtocolUNameIdx",
 				"URLProtocolUNameIdx",
 				keyUNameIdx );
 		}
@@ -125,6 +126,7 @@ public class CFBamRamURLProtocolTable
 		}
 		subdictIsSecureIdx.put( pkey, Buff );
 
+		return( Buff );
 	}
 
 	public ICFIntURLProtocol readDerived( ICFSecAuthorization Authorization,
@@ -145,11 +147,9 @@ public class CFBamRamURLProtocolTable
 		Integer PKey )
 	{
 		final String S_ProcName = "CFBamRamURLProtocol.readDerived";
-		Integer key = schema.getFactoryURLProtocol().newPKey();
-		key.setRequiredURLProtocolId( PKey.getRequiredURLProtocolId() );
 		ICFIntURLProtocol buff;
-		if( dictByPKey.containsKey( key ) ) {
-			buff = dictByPKey.get( key );
+		if( dictByPKey.containsKey( PKey ) ) {
+			buff = dictByPKey.get( PKey );
 		}
 		else {
 			buff = null;
@@ -172,7 +172,7 @@ public class CFBamRamURLProtocolTable
 		String Name )
 	{
 		final String S_ProcName = "CFBamRamURLProtocol.readDerivedByUNameIdx";
-		CFIntBuffURLProtocolByUNameIdxKey key = schema.getFactoryURLProtocol().newUNameIdxKey();
+		CFIntBuffURLProtocolByUNameIdxKey key = (CFIntBuffURLProtocolByUNameIdxKey)schema.getFactoryURLProtocol().newByUNameIdxKey();
 		key.setRequiredName( Name );
 
 		ICFIntURLProtocol buff;
@@ -189,7 +189,7 @@ public class CFBamRamURLProtocolTable
 		boolean IsSecure )
 	{
 		final String S_ProcName = "CFBamRamURLProtocol.readDerivedByIsSecureIdx";
-		CFIntBuffURLProtocolByIsSecureIdxKey key = schema.getFactoryURLProtocol().newIsSecureIdxKey();
+		CFIntBuffURLProtocolByIsSecureIdxKey key = (CFIntBuffURLProtocolByIsSecureIdxKey)schema.getFactoryURLProtocol().newByIsSecureIdxKey();
 		key.setRequiredIsSecure( IsSecure );
 
 		ICFIntURLProtocol[] recArray;
@@ -216,12 +216,9 @@ public class CFBamRamURLProtocolTable
 		int URLProtocolId )
 	{
 		final String S_ProcName = "CFBamRamURLProtocol.readDerivedByIdIdx() ";
-		Integer key = schema.getFactoryURLProtocol().newPKey();
-		key.setRequiredURLProtocolId( URLProtocolId );
-
 		ICFIntURLProtocol buff;
-		if( dictByPKey.containsKey( key ) ) {
-			buff = dictByPKey.get( key );
+		if( dictByPKey.containsKey( URLProtocolId ) ) {
+			buff = dictByPKey.get( URLProtocolId );
 		}
 		else {
 			buff = null;
@@ -234,7 +231,7 @@ public class CFBamRamURLProtocolTable
 	{
 		final String S_ProcName = "CFBamRamURLProtocol.readBuff";
 		ICFIntURLProtocol buff = readDerived( Authorization, PKey );
-		if( ( buff != null ) && ( ! buff.getClassCode().equals( "a109" ) ) ) {
+		if( ( buff != null ) && ( buff.getClassCode() != ICFIntURLProtocol.CLASS_CODE ) ) {
 			buff = null;
 		}
 		return( buff );
@@ -245,7 +242,7 @@ public class CFBamRamURLProtocolTable
 	{
 		final String S_ProcName = "lockBuff";
 		ICFIntURLProtocol buff = readDerived( Authorization, PKey );
-		if( ( buff != null ) && ( ! buff.getClassCode().equals( "a109" ) ) ) {
+		if( ( buff != null ) && ( buff.getClassCode() != ICFIntURLProtocol.CLASS_CODE ) ) {
 			buff = null;
 		}
 		return( buff );
@@ -259,7 +256,7 @@ public class CFBamRamURLProtocolTable
 		ICFIntURLProtocol[] buffList = readAllDerived( Authorization );
 		for( int idx = 0; idx < buffList.length; idx ++ ) {
 			buff = buffList[idx];
-			if( ( buff != null ) && buff.getClassCode().equals( "a109" ) ) {
+			if( ( buff != null ) && ( buff.getClassCode() == ICFIntURLProtocol.CLASS_CODE ) ) {
 				filteredList.add( buff );
 			}
 		}
@@ -272,7 +269,7 @@ public class CFBamRamURLProtocolTable
 		final String S_ProcName = "CFBamRamURLProtocol.readBuffByIdIdx() ";
 		ICFIntURLProtocol buff = readDerivedByIdIdx( Authorization,
 			URLProtocolId );
-		if( ( buff != null ) && buff.getClassCode().equals( "a109" ) ) {
+		if( ( buff != null ) && ( buff.getClassCode() == ICFIntURLProtocol.CLASS_CODE ) ) {
 			return( (ICFIntURLProtocol)buff );
 		}
 		else {
@@ -286,7 +283,7 @@ public class CFBamRamURLProtocolTable
 		final String S_ProcName = "CFBamRamURLProtocol.readBuffByUNameIdx() ";
 		ICFIntURLProtocol buff = readDerivedByUNameIdx( Authorization,
 			Name );
-		if( ( buff != null ) && buff.getClassCode().equals( "a109" ) ) {
+		if( ( buff != null ) && ( buff.getClassCode() == ICFIntURLProtocol.CLASS_CODE ) ) {
 			return( (ICFIntURLProtocol)buff );
 		}
 		else {
@@ -304,18 +301,17 @@ public class CFBamRamURLProtocolTable
 			IsSecure );
 		for( int idx = 0; idx < buffList.length; idx ++ ) {
 			buff = buffList[idx];
-			if( ( buff != null ) && buff.getClassCode().equals( "a109" ) ) {
+			if( ( buff != null ) && ( buff.getClassCode() == ICFIntURLProtocol.CLASS_CODE ) ) {
 				filteredList.add( (ICFIntURLProtocol)buff );
 			}
 		}
 		return( filteredList.toArray( new ICFIntURLProtocol[0] ) );
 	}
 
-	public void updateURLProtocol( ICFSecAuthorization Authorization,
+	public ICFIntURLProtocol updateURLProtocol( ICFSecAuthorization Authorization,
 		ICFIntURLProtocol Buff )
 	{
-		Integer pkey = schema.getFactoryURLProtocol().newPKey();
-		pkey.setRequiredURLProtocolId( Buff.getRequiredURLProtocolId() );
+		Integer pkey = Buff.getPKey();
 		ICFIntURLProtocol existing = dictByPKey.get( pkey );
 		if( existing == null ) {
 			throw new CFLibStaleCacheDetectedException( getClass(),
@@ -330,16 +326,16 @@ public class CFBamRamURLProtocolTable
 				pkey );
 		}
 		Buff.setRequiredRevision( Buff.getRequiredRevision() + 1 );
-		CFIntBuffURLProtocolByUNameIdxKey existingKeyUNameIdx = schema.getFactoryURLProtocol().newUNameIdxKey();
+		CFIntBuffURLProtocolByUNameIdxKey existingKeyUNameIdx = (CFIntBuffURLProtocolByUNameIdxKey)schema.getFactoryURLProtocol().newByUNameIdxKey();
 		existingKeyUNameIdx.setRequiredName( existing.getRequiredName() );
 
-		CFIntBuffURLProtocolByUNameIdxKey newKeyUNameIdx = schema.getFactoryURLProtocol().newUNameIdxKey();
+		CFIntBuffURLProtocolByUNameIdxKey newKeyUNameIdx = (CFIntBuffURLProtocolByUNameIdxKey)schema.getFactoryURLProtocol().newByUNameIdxKey();
 		newKeyUNameIdx.setRequiredName( Buff.getRequiredName() );
 
-		CFIntBuffURLProtocolByIsSecureIdxKey existingKeyIsSecureIdx = schema.getFactoryURLProtocol().newIsSecureIdxKey();
+		CFIntBuffURLProtocolByIsSecureIdxKey existingKeyIsSecureIdx = (CFIntBuffURLProtocolByIsSecureIdxKey)schema.getFactoryURLProtocol().newByIsSecureIdxKey();
 		existingKeyIsSecureIdx.setRequiredIsSecure( existing.getRequiredIsSecure() );
 
-		CFIntBuffURLProtocolByIsSecureIdxKey newKeyIsSecureIdx = schema.getFactoryURLProtocol().newIsSecureIdxKey();
+		CFIntBuffURLProtocolByIsSecureIdxKey newKeyIsSecureIdx = (CFIntBuffURLProtocolByIsSecureIdxKey)schema.getFactoryURLProtocol().newByIsSecureIdxKey();
 		newKeyIsSecureIdx.setRequiredIsSecure( Buff.getRequiredIsSecure() );
 
 		// Check unique indexes
@@ -348,6 +344,7 @@ public class CFBamRamURLProtocolTable
 			if( dictByUNameIdx.containsKey( newKeyUNameIdx ) ) {
 				throw new CFLibUniqueIndexViolationException( getClass(),
 					"updateURLProtocol",
+					"URLProtocolUNameIdx",
 					"URLProtocolUNameIdx",
 					newKeyUNameIdx );
 			}
@@ -378,6 +375,7 @@ public class CFBamRamURLProtocolTable
 		}
 		subdict.put( pkey, Buff );
 
+		return(Buff);
 	}
 
 	public void deleteURLProtocol( ICFSecAuthorization Authorization,
@@ -397,10 +395,10 @@ public class CFBamRamURLProtocolTable
 				"deleteURLProtocol",
 				pkey );
 		}
-		CFIntBuffURLProtocolByUNameIdxKey keyUNameIdx = schema.getFactoryURLProtocol().newUNameIdxKey();
+		CFIntBuffURLProtocolByUNameIdxKey keyUNameIdx = (CFIntBuffURLProtocolByUNameIdxKey)schema.getFactoryURLProtocol().newByUNameIdxKey();
 		keyUNameIdx.setRequiredName( existing.getRequiredName() );
 
-		CFIntBuffURLProtocolByIsSecureIdxKey keyIsSecureIdx = schema.getFactoryURLProtocol().newIsSecureIdxKey();
+		CFIntBuffURLProtocolByIsSecureIdxKey keyIsSecureIdx = (CFIntBuffURLProtocolByIsSecureIdxKey)schema.getFactoryURLProtocol().newByIsSecureIdxKey();
 		keyIsSecureIdx.setRequiredIsSecure( existing.getRequiredIsSecure() );
 
 		// Validate reverse foreign keys
@@ -416,14 +414,6 @@ public class CFBamRamURLProtocolTable
 		subdict.remove( pkey );
 
 	}
-	public void deleteURLProtocolByIdIdx( ICFSecAuthorization Authorization,
-		int argURLProtocolId )
-	{
-		Integer key = schema.getFactoryURLProtocol().newPKey();
-		key.setRequiredURLProtocolId( argURLProtocolId );
-		deleteURLProtocolByIdIdx( Authorization, key );
-	}
-
 	public void deleteURLProtocolByIdIdx( ICFSecAuthorization Authorization,
 		Integer argKey )
 	{
@@ -453,7 +443,7 @@ public class CFBamRamURLProtocolTable
 	public void deleteURLProtocolByUNameIdx( ICFSecAuthorization Authorization,
 		String argName )
 	{
-		CFIntBuffURLProtocolByUNameIdxKey key = schema.getFactoryURLProtocol().newUNameIdxKey();
+		CFIntBuffURLProtocolByUNameIdxKey key = (CFIntBuffURLProtocolByUNameIdxKey)schema.getFactoryURLProtocol().newByUNameIdxKey();
 		key.setRequiredName( argName );
 		deleteURLProtocolByUNameIdx( Authorization, key );
 	}
@@ -487,7 +477,7 @@ public class CFBamRamURLProtocolTable
 	public void deleteURLProtocolByIsSecureIdx( ICFSecAuthorization Authorization,
 		boolean argIsSecure )
 	{
-		CFIntBuffURLProtocolByIsSecureIdxKey key = schema.getFactoryURLProtocol().newIsSecureIdxKey();
+		CFIntBuffURLProtocolByIsSecureIdxKey key = (CFIntBuffURLProtocolByIsSecureIdxKey)schema.getFactoryURLProtocol().newByIsSecureIdxKey();
 		key.setRequiredIsSecure( argIsSecure );
 		deleteURLProtocolByIsSecureIdx( Authorization, key );
 	}

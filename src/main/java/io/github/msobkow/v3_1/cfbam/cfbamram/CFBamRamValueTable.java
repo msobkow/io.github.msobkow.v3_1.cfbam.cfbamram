@@ -111,35 +111,34 @@ public class CFBamRamValueTable
 		schema = argSchema;
 	}
 
-	public void createValue( ICFSecAuthorization Authorization,
+	public ICFBamValue createValue( ICFSecAuthorization Authorization,
 		ICFBamValue Buff )
 	{
 		final String S_ProcName = "createValue";
-		CFLibDbKeyHash256 pkey = schema.getFactoryValue().newPKey();
-		pkey.setClassCode( Buff.getClassCode() );
-		pkey.setRequiredId( schema.nextValueIdGen() );
-		Buff.setRequiredId( pkey.getRequiredId() );
-		CFBamBuffValueByUNameIdxKey keyUNameIdx = schema.getFactoryValue().newUNameIdxKey();
+		CFLibDbKeyHash256 pkey;
+		pkey = schema.nextValueIdGen();
+		Buff.setRequiredId( pkey );
+		CFBamBuffValueByUNameIdxKey keyUNameIdx = (CFBamBuffValueByUNameIdxKey)schema.getFactoryValue().newByUNameIdxKey();
 		keyUNameIdx.setRequiredScopeId( Buff.getRequiredScopeId() );
 		keyUNameIdx.setRequiredName( Buff.getRequiredName() );
 
-		CFBamBuffValueByScopeIdxKey keyScopeIdx = schema.getFactoryValue().newScopeIdxKey();
+		CFBamBuffValueByScopeIdxKey keyScopeIdx = (CFBamBuffValueByScopeIdxKey)schema.getFactoryValue().newByScopeIdxKey();
 		keyScopeIdx.setRequiredScopeId( Buff.getRequiredScopeId() );
 
-		CFBamBuffValueByDefSchemaIdxKey keyDefSchemaIdx = schema.getFactoryValue().newDefSchemaIdxKey();
+		CFBamBuffValueByDefSchemaIdxKey keyDefSchemaIdx = (CFBamBuffValueByDefSchemaIdxKey)schema.getFactoryValue().newByDefSchemaIdxKey();
 		keyDefSchemaIdx.setOptionalDefSchemaId( Buff.getOptionalDefSchemaId() );
 
-		CFBamBuffValueByPrevIdxKey keyPrevIdx = schema.getFactoryValue().newPrevIdxKey();
+		CFBamBuffValueByPrevIdxKey keyPrevIdx = (CFBamBuffValueByPrevIdxKey)schema.getFactoryValue().newByPrevIdxKey();
 		keyPrevIdx.setOptionalPrevId( Buff.getOptionalPrevId() );
 
-		CFBamBuffValueByNextIdxKey keyNextIdx = schema.getFactoryValue().newNextIdxKey();
+		CFBamBuffValueByNextIdxKey keyNextIdx = (CFBamBuffValueByNextIdxKey)schema.getFactoryValue().newByNextIdxKey();
 		keyNextIdx.setOptionalNextId( Buff.getOptionalNextId() );
 
-		CFBamBuffValueByContPrevIdxKey keyContPrevIdx = schema.getFactoryValue().newContPrevIdxKey();
+		CFBamBuffValueByContPrevIdxKey keyContPrevIdx = (CFBamBuffValueByContPrevIdxKey)schema.getFactoryValue().newByContPrevIdxKey();
 		keyContPrevIdx.setRequiredScopeId( Buff.getRequiredScopeId() );
 		keyContPrevIdx.setOptionalPrevId( Buff.getOptionalPrevId() );
 
-		CFBamBuffValueByContNextIdxKey keyContNextIdx = schema.getFactoryValue().newContNextIdxKey();
+		CFBamBuffValueByContNextIdxKey keyContNextIdx = (CFBamBuffValueByContNextIdxKey)schema.getFactoryValue().newByContNextIdxKey();
 		keyContNextIdx.setRequiredScopeId( Buff.getRequiredScopeId() );
 		keyContNextIdx.setOptionalNextId( Buff.getOptionalNextId() );
 
@@ -152,6 +151,7 @@ public class CFBamRamValueTable
 		if( dictByUNameIdx.containsKey( keyUNameIdx ) ) {
 			throw new CFLibUniqueIndexViolationException( getClass(),
 				S_ProcName,
+				"ValueUNameIdx",
 				"ValueUNameIdx",
 				keyUNameIdx );
 		}
@@ -241,6 +241,7 @@ public class CFBamRamValueTable
 		}
 		subdictContNextIdx.put( pkey, Buff );
 
+		return( Buff );
 	}
 
 	public ICFBamValue readDerived( ICFSecAuthorization Authorization,
@@ -261,11 +262,9 @@ public class CFBamRamValueTable
 		CFLibDbKeyHash256 PKey )
 	{
 		final String S_ProcName = "CFBamRamValue.readDerived";
-		CFLibDbKeyHash256 key = schema.getFactoryValue().newPKey();
-		key.setRequiredId( PKey.getRequiredId() );
 		ICFBamValue buff;
-		if( dictByPKey.containsKey( key ) ) {
-			buff = dictByPKey.get( key );
+		if( dictByPKey.containsKey( PKey ) ) {
+			buff = dictByPKey.get( PKey );
 		}
 		else {
 			buff = null;
@@ -289,7 +288,7 @@ public class CFBamRamValueTable
 		String Name )
 	{
 		final String S_ProcName = "CFBamRamValue.readDerivedByUNameIdx";
-		CFBamBuffValueByUNameIdxKey key = schema.getFactoryValue().newUNameIdxKey();
+		CFBamBuffValueByUNameIdxKey key = (CFBamBuffValueByUNameIdxKey)schema.getFactoryValue().newByUNameIdxKey();
 		key.setRequiredScopeId( ScopeId );
 		key.setRequiredName( Name );
 
@@ -307,7 +306,7 @@ public class CFBamRamValueTable
 		CFLibDbKeyHash256 ScopeId )
 	{
 		final String S_ProcName = "CFBamRamValue.readDerivedByScopeIdx";
-		CFBamBuffValueByScopeIdxKey key = schema.getFactoryValue().newScopeIdxKey();
+		CFBamBuffValueByScopeIdxKey key = (CFBamBuffValueByScopeIdxKey)schema.getFactoryValue().newByScopeIdxKey();
 		key.setRequiredScopeId( ScopeId );
 
 		ICFBamValue[] recArray;
@@ -334,7 +333,7 @@ public class CFBamRamValueTable
 		CFLibDbKeyHash256 DefSchemaId )
 	{
 		final String S_ProcName = "CFBamRamValue.readDerivedByDefSchemaIdx";
-		CFBamBuffValueByDefSchemaIdxKey key = schema.getFactoryValue().newDefSchemaIdxKey();
+		CFBamBuffValueByDefSchemaIdxKey key = (CFBamBuffValueByDefSchemaIdxKey)schema.getFactoryValue().newByDefSchemaIdxKey();
 		key.setOptionalDefSchemaId( DefSchemaId );
 
 		ICFBamValue[] recArray;
@@ -361,7 +360,7 @@ public class CFBamRamValueTable
 		CFLibDbKeyHash256 PrevId )
 	{
 		final String S_ProcName = "CFBamRamValue.readDerivedByPrevIdx";
-		CFBamBuffValueByPrevIdxKey key = schema.getFactoryValue().newPrevIdxKey();
+		CFBamBuffValueByPrevIdxKey key = (CFBamBuffValueByPrevIdxKey)schema.getFactoryValue().newByPrevIdxKey();
 		key.setOptionalPrevId( PrevId );
 
 		ICFBamValue[] recArray;
@@ -388,7 +387,7 @@ public class CFBamRamValueTable
 		CFLibDbKeyHash256 NextId )
 	{
 		final String S_ProcName = "CFBamRamValue.readDerivedByNextIdx";
-		CFBamBuffValueByNextIdxKey key = schema.getFactoryValue().newNextIdxKey();
+		CFBamBuffValueByNextIdxKey key = (CFBamBuffValueByNextIdxKey)schema.getFactoryValue().newByNextIdxKey();
 		key.setOptionalNextId( NextId );
 
 		ICFBamValue[] recArray;
@@ -416,7 +415,7 @@ public class CFBamRamValueTable
 		CFLibDbKeyHash256 PrevId )
 	{
 		final String S_ProcName = "CFBamRamValue.readDerivedByContPrevIdx";
-		CFBamBuffValueByContPrevIdxKey key = schema.getFactoryValue().newContPrevIdxKey();
+		CFBamBuffValueByContPrevIdxKey key = (CFBamBuffValueByContPrevIdxKey)schema.getFactoryValue().newByContPrevIdxKey();
 		key.setRequiredScopeId( ScopeId );
 		key.setOptionalPrevId( PrevId );
 
@@ -445,7 +444,7 @@ public class CFBamRamValueTable
 		CFLibDbKeyHash256 NextId )
 	{
 		final String S_ProcName = "CFBamRamValue.readDerivedByContNextIdx";
-		CFBamBuffValueByContNextIdxKey key = schema.getFactoryValue().newContNextIdxKey();
+		CFBamBuffValueByContNextIdxKey key = (CFBamBuffValueByContNextIdxKey)schema.getFactoryValue().newByContNextIdxKey();
 		key.setRequiredScopeId( ScopeId );
 		key.setOptionalNextId( NextId );
 
@@ -473,12 +472,9 @@ public class CFBamRamValueTable
 		CFLibDbKeyHash256 Id )
 	{
 		final String S_ProcName = "CFBamRamValue.readDerivedByIdIdx() ";
-		CFLibDbKeyHash256 key = schema.getFactoryValue().newPKey();
-		key.setRequiredId( Id );
-
 		ICFBamValue buff;
-		if( dictByPKey.containsKey( key ) ) {
-			buff = dictByPKey.get( key );
+		if( dictByPKey.containsKey( Id ) ) {
+			buff = dictByPKey.get( Id );
 		}
 		else {
 			buff = null;
@@ -491,7 +487,7 @@ public class CFBamRamValueTable
 	{
 		final String S_ProcName = "CFBamRamValue.readBuff";
 		ICFBamValue buff = readDerived( Authorization, PKey );
-		if( ( buff != null ) && ( ! buff.getClassCode().equals( "a809" ) ) ) {
+		if( ( buff != null ) && ( buff.getClassCode() != ICFBamValue.CLASS_CODE ) ) {
 			buff = null;
 		}
 		return( buff );
@@ -502,7 +498,7 @@ public class CFBamRamValueTable
 	{
 		final String S_ProcName = "lockBuff";
 		ICFBamValue buff = readDerived( Authorization, PKey );
-		if( ( buff != null ) && ( ! buff.getClassCode().equals( "a809" ) ) ) {
+		if( ( buff != null ) && ( buff.getClassCode() != ICFBamValue.CLASS_CODE ) ) {
 			buff = null;
 		}
 		return( buff );
@@ -516,7 +512,7 @@ public class CFBamRamValueTable
 		ICFBamValue[] buffList = readAllDerived( Authorization );
 		for( int idx = 0; idx < buffList.length; idx ++ ) {
 			buff = buffList[idx];
-			if( ( buff != null ) && buff.getClassCode().equals( "a809" ) ) {
+			if( ( buff != null ) && ( buff.getClassCode() == ICFBamValue.CLASS_CODE ) ) {
 				filteredList.add( buff );
 			}
 		}
@@ -529,7 +525,7 @@ public class CFBamRamValueTable
 		final String S_ProcName = "CFBamRamValue.readBuffByIdIdx() ";
 		ICFBamValue buff = readDerivedByIdIdx( Authorization,
 			Id );
-		if( ( buff != null ) && buff.getClassCode().equals( "a809" ) ) {
+		if( ( buff != null ) && ( buff.getClassCode() == ICFBamValue.CLASS_CODE ) ) {
 			return( (ICFBamValue)buff );
 		}
 		else {
@@ -545,7 +541,7 @@ public class CFBamRamValueTable
 		ICFBamValue buff = readDerivedByUNameIdx( Authorization,
 			ScopeId,
 			Name );
-		if( ( buff != null ) && buff.getClassCode().equals( "a809" ) ) {
+		if( ( buff != null ) && ( buff.getClassCode() == ICFBamValue.CLASS_CODE ) ) {
 			return( (ICFBamValue)buff );
 		}
 		else {
@@ -563,7 +559,7 @@ public class CFBamRamValueTable
 			ScopeId );
 		for( int idx = 0; idx < buffList.length; idx ++ ) {
 			buff = buffList[idx];
-			if( ( buff != null ) && buff.getClassCode().equals( "a809" ) ) {
+			if( ( buff != null ) && ( buff.getClassCode() == ICFBamValue.CLASS_CODE ) ) {
 				filteredList.add( (ICFBamValue)buff );
 			}
 		}
@@ -580,7 +576,7 @@ public class CFBamRamValueTable
 			DefSchemaId );
 		for( int idx = 0; idx < buffList.length; idx ++ ) {
 			buff = buffList[idx];
-			if( ( buff != null ) && buff.getClassCode().equals( "a809" ) ) {
+			if( ( buff != null ) && ( buff.getClassCode() == ICFBamValue.CLASS_CODE ) ) {
 				filteredList.add( (ICFBamValue)buff );
 			}
 		}
@@ -597,7 +593,7 @@ public class CFBamRamValueTable
 			PrevId );
 		for( int idx = 0; idx < buffList.length; idx ++ ) {
 			buff = buffList[idx];
-			if( ( buff != null ) && buff.getClassCode().equals( "a809" ) ) {
+			if( ( buff != null ) && ( buff.getClassCode() == ICFBamValue.CLASS_CODE ) ) {
 				filteredList.add( (ICFBamValue)buff );
 			}
 		}
@@ -614,7 +610,7 @@ public class CFBamRamValueTable
 			NextId );
 		for( int idx = 0; idx < buffList.length; idx ++ ) {
 			buff = buffList[idx];
-			if( ( buff != null ) && buff.getClassCode().equals( "a809" ) ) {
+			if( ( buff != null ) && ( buff.getClassCode() == ICFBamValue.CLASS_CODE ) ) {
 				filteredList.add( (ICFBamValue)buff );
 			}
 		}
@@ -633,7 +629,7 @@ public class CFBamRamValueTable
 			PrevId );
 		for( int idx = 0; idx < buffList.length; idx ++ ) {
 			buff = buffList[idx];
-			if( ( buff != null ) && buff.getClassCode().equals( "a809" ) ) {
+			if( ( buff != null ) && ( buff.getClassCode() == ICFBamValue.CLASS_CODE ) ) {
 				filteredList.add( (ICFBamValue)buff );
 			}
 		}
@@ -652,7 +648,7 @@ public class CFBamRamValueTable
 			NextId );
 		for( int idx = 0; idx < buffList.length; idx ++ ) {
 			buff = buffList[idx];
-			if( ( buff != null ) && buff.getClassCode().equals( "a809" ) ) {
+			if( ( buff != null ) && ( buff.getClassCode() == ICFBamValue.CLASS_CODE ) ) {
 				filteredList.add( (ICFBamValue)buff );
 			}
 		}
@@ -6053,12 +6049,10 @@ public class CFBamRamValueTable
 		return( (CFBamValueBuff)editCur );
 	}
 
-	public void updateValue( ICFSecAuthorization Authorization,
+	public ICFBamValue updateValue( ICFSecAuthorization Authorization,
 		ICFBamValue Buff )
 	{
-		CFLibDbKeyHash256 pkey = schema.getFactoryValue().newPKey();
-		pkey.setClassCode( Buff.getClassCode() );
-		pkey.setRequiredId( Buff.getRequiredId() );
+		CFLibDbKeyHash256 pkey = Buff.getPKey();
 		ICFBamValue existing = dictByPKey.get( pkey );
 		if( existing == null ) {
 			throw new CFLibStaleCacheDetectedException( getClass(),
@@ -6073,51 +6067,51 @@ public class CFBamRamValueTable
 				pkey );
 		}
 		Buff.setRequiredRevision( Buff.getRequiredRevision() + 1 );
-		CFBamBuffValueByUNameIdxKey existingKeyUNameIdx = schema.getFactoryValue().newUNameIdxKey();
+		CFBamBuffValueByUNameIdxKey existingKeyUNameIdx = (CFBamBuffValueByUNameIdxKey)schema.getFactoryValue().newByUNameIdxKey();
 		existingKeyUNameIdx.setRequiredScopeId( existing.getRequiredScopeId() );
 		existingKeyUNameIdx.setRequiredName( existing.getRequiredName() );
 
-		CFBamBuffValueByUNameIdxKey newKeyUNameIdx = schema.getFactoryValue().newUNameIdxKey();
+		CFBamBuffValueByUNameIdxKey newKeyUNameIdx = (CFBamBuffValueByUNameIdxKey)schema.getFactoryValue().newByUNameIdxKey();
 		newKeyUNameIdx.setRequiredScopeId( Buff.getRequiredScopeId() );
 		newKeyUNameIdx.setRequiredName( Buff.getRequiredName() );
 
-		CFBamBuffValueByScopeIdxKey existingKeyScopeIdx = schema.getFactoryValue().newScopeIdxKey();
+		CFBamBuffValueByScopeIdxKey existingKeyScopeIdx = (CFBamBuffValueByScopeIdxKey)schema.getFactoryValue().newByScopeIdxKey();
 		existingKeyScopeIdx.setRequiredScopeId( existing.getRequiredScopeId() );
 
-		CFBamBuffValueByScopeIdxKey newKeyScopeIdx = schema.getFactoryValue().newScopeIdxKey();
+		CFBamBuffValueByScopeIdxKey newKeyScopeIdx = (CFBamBuffValueByScopeIdxKey)schema.getFactoryValue().newByScopeIdxKey();
 		newKeyScopeIdx.setRequiredScopeId( Buff.getRequiredScopeId() );
 
-		CFBamBuffValueByDefSchemaIdxKey existingKeyDefSchemaIdx = schema.getFactoryValue().newDefSchemaIdxKey();
+		CFBamBuffValueByDefSchemaIdxKey existingKeyDefSchemaIdx = (CFBamBuffValueByDefSchemaIdxKey)schema.getFactoryValue().newByDefSchemaIdxKey();
 		existingKeyDefSchemaIdx.setOptionalDefSchemaId( existing.getOptionalDefSchemaId() );
 
-		CFBamBuffValueByDefSchemaIdxKey newKeyDefSchemaIdx = schema.getFactoryValue().newDefSchemaIdxKey();
+		CFBamBuffValueByDefSchemaIdxKey newKeyDefSchemaIdx = (CFBamBuffValueByDefSchemaIdxKey)schema.getFactoryValue().newByDefSchemaIdxKey();
 		newKeyDefSchemaIdx.setOptionalDefSchemaId( Buff.getOptionalDefSchemaId() );
 
-		CFBamBuffValueByPrevIdxKey existingKeyPrevIdx = schema.getFactoryValue().newPrevIdxKey();
+		CFBamBuffValueByPrevIdxKey existingKeyPrevIdx = (CFBamBuffValueByPrevIdxKey)schema.getFactoryValue().newByPrevIdxKey();
 		existingKeyPrevIdx.setOptionalPrevId( existing.getOptionalPrevId() );
 
-		CFBamBuffValueByPrevIdxKey newKeyPrevIdx = schema.getFactoryValue().newPrevIdxKey();
+		CFBamBuffValueByPrevIdxKey newKeyPrevIdx = (CFBamBuffValueByPrevIdxKey)schema.getFactoryValue().newByPrevIdxKey();
 		newKeyPrevIdx.setOptionalPrevId( Buff.getOptionalPrevId() );
 
-		CFBamBuffValueByNextIdxKey existingKeyNextIdx = schema.getFactoryValue().newNextIdxKey();
+		CFBamBuffValueByNextIdxKey existingKeyNextIdx = (CFBamBuffValueByNextIdxKey)schema.getFactoryValue().newByNextIdxKey();
 		existingKeyNextIdx.setOptionalNextId( existing.getOptionalNextId() );
 
-		CFBamBuffValueByNextIdxKey newKeyNextIdx = schema.getFactoryValue().newNextIdxKey();
+		CFBamBuffValueByNextIdxKey newKeyNextIdx = (CFBamBuffValueByNextIdxKey)schema.getFactoryValue().newByNextIdxKey();
 		newKeyNextIdx.setOptionalNextId( Buff.getOptionalNextId() );
 
-		CFBamBuffValueByContPrevIdxKey existingKeyContPrevIdx = schema.getFactoryValue().newContPrevIdxKey();
+		CFBamBuffValueByContPrevIdxKey existingKeyContPrevIdx = (CFBamBuffValueByContPrevIdxKey)schema.getFactoryValue().newByContPrevIdxKey();
 		existingKeyContPrevIdx.setRequiredScopeId( existing.getRequiredScopeId() );
 		existingKeyContPrevIdx.setOptionalPrevId( existing.getOptionalPrevId() );
 
-		CFBamBuffValueByContPrevIdxKey newKeyContPrevIdx = schema.getFactoryValue().newContPrevIdxKey();
+		CFBamBuffValueByContPrevIdxKey newKeyContPrevIdx = (CFBamBuffValueByContPrevIdxKey)schema.getFactoryValue().newByContPrevIdxKey();
 		newKeyContPrevIdx.setRequiredScopeId( Buff.getRequiredScopeId() );
 		newKeyContPrevIdx.setOptionalPrevId( Buff.getOptionalPrevId() );
 
-		CFBamBuffValueByContNextIdxKey existingKeyContNextIdx = schema.getFactoryValue().newContNextIdxKey();
+		CFBamBuffValueByContNextIdxKey existingKeyContNextIdx = (CFBamBuffValueByContNextIdxKey)schema.getFactoryValue().newByContNextIdxKey();
 		existingKeyContNextIdx.setRequiredScopeId( existing.getRequiredScopeId() );
 		existingKeyContNextIdx.setOptionalNextId( existing.getOptionalNextId() );
 
-		CFBamBuffValueByContNextIdxKey newKeyContNextIdx = schema.getFactoryValue().newContNextIdxKey();
+		CFBamBuffValueByContNextIdxKey newKeyContNextIdx = (CFBamBuffValueByContNextIdxKey)schema.getFactoryValue().newByContNextIdxKey();
 		newKeyContNextIdx.setRequiredScopeId( Buff.getRequiredScopeId() );
 		newKeyContNextIdx.setOptionalNextId( Buff.getOptionalNextId() );
 
@@ -6127,6 +6121,7 @@ public class CFBamRamValueTable
 			if( dictByUNameIdx.containsKey( newKeyUNameIdx ) ) {
 				throw new CFLibUniqueIndexViolationException( getClass(),
 					"updateValue",
+					"ValueUNameIdx",
 					"ValueUNameIdx",
 					newKeyUNameIdx );
 			}
@@ -6239,6 +6234,7 @@ public class CFBamRamValueTable
 		}
 		subdict.put( pkey, Buff );
 
+		return(Buff);
 	}
 
 	public void deleteValue( ICFSecAuthorization Authorization,
@@ -7612,27 +7608,27 @@ public class CFBamRamValueTable
 			schema.getTableIndexCol().deleteIndexColByColIdx( Authorization,
 						existing.getRequiredId() );
 		}
-		CFBamBuffValueByUNameIdxKey keyUNameIdx = schema.getFactoryValue().newUNameIdxKey();
+		CFBamBuffValueByUNameIdxKey keyUNameIdx = (CFBamBuffValueByUNameIdxKey)schema.getFactoryValue().newByUNameIdxKey();
 		keyUNameIdx.setRequiredScopeId( existing.getRequiredScopeId() );
 		keyUNameIdx.setRequiredName( existing.getRequiredName() );
 
-		CFBamBuffValueByScopeIdxKey keyScopeIdx = schema.getFactoryValue().newScopeIdxKey();
+		CFBamBuffValueByScopeIdxKey keyScopeIdx = (CFBamBuffValueByScopeIdxKey)schema.getFactoryValue().newByScopeIdxKey();
 		keyScopeIdx.setRequiredScopeId( existing.getRequiredScopeId() );
 
-		CFBamBuffValueByDefSchemaIdxKey keyDefSchemaIdx = schema.getFactoryValue().newDefSchemaIdxKey();
+		CFBamBuffValueByDefSchemaIdxKey keyDefSchemaIdx = (CFBamBuffValueByDefSchemaIdxKey)schema.getFactoryValue().newByDefSchemaIdxKey();
 		keyDefSchemaIdx.setOptionalDefSchemaId( existing.getOptionalDefSchemaId() );
 
-		CFBamBuffValueByPrevIdxKey keyPrevIdx = schema.getFactoryValue().newPrevIdxKey();
+		CFBamBuffValueByPrevIdxKey keyPrevIdx = (CFBamBuffValueByPrevIdxKey)schema.getFactoryValue().newByPrevIdxKey();
 		keyPrevIdx.setOptionalPrevId( existing.getOptionalPrevId() );
 
-		CFBamBuffValueByNextIdxKey keyNextIdx = schema.getFactoryValue().newNextIdxKey();
+		CFBamBuffValueByNextIdxKey keyNextIdx = (CFBamBuffValueByNextIdxKey)schema.getFactoryValue().newByNextIdxKey();
 		keyNextIdx.setOptionalNextId( existing.getOptionalNextId() );
 
-		CFBamBuffValueByContPrevIdxKey keyContPrevIdx = schema.getFactoryValue().newContPrevIdxKey();
+		CFBamBuffValueByContPrevIdxKey keyContPrevIdx = (CFBamBuffValueByContPrevIdxKey)schema.getFactoryValue().newByContPrevIdxKey();
 		keyContPrevIdx.setRequiredScopeId( existing.getRequiredScopeId() );
 		keyContPrevIdx.setOptionalPrevId( existing.getOptionalPrevId() );
 
-		CFBamBuffValueByContNextIdxKey keyContNextIdx = schema.getFactoryValue().newContNextIdxKey();
+		CFBamBuffValueByContNextIdxKey keyContNextIdx = (CFBamBuffValueByContNextIdxKey)schema.getFactoryValue().newByContNextIdxKey();
 		keyContNextIdx.setRequiredScopeId( existing.getRequiredScopeId() );
 		keyContNextIdx.setOptionalNextId( existing.getOptionalNextId() );
 
@@ -7708,14 +7704,6 @@ public class CFBamRamValueTable
 		subdict.remove( pkey );
 
 	}
-	public void deleteValueByIdIdx( ICFSecAuthorization Authorization,
-		CFLibDbKeyHash256 argId )
-	{
-		CFLibDbKeyHash256 key = schema.getFactoryValue().newPKey();
-		key.setRequiredId( argId );
-		deleteValueByIdIdx( Authorization, key );
-	}
-
 	public void deleteValueByIdIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argKey )
 	{
@@ -8072,7 +8060,7 @@ public class CFBamRamValueTable
 		CFLibDbKeyHash256 argScopeId,
 		String argName )
 	{
-		CFBamBuffValueByUNameIdxKey key = schema.getFactoryValue().newUNameIdxKey();
+		CFBamBuffValueByUNameIdxKey key = (CFBamBuffValueByUNameIdxKey)schema.getFactoryValue().newByUNameIdxKey();
 		key.setRequiredScopeId( argScopeId );
 		key.setRequiredName( argName );
 		deleteValueByUNameIdx( Authorization, key );
@@ -8434,7 +8422,7 @@ public class CFBamRamValueTable
 	public void deleteValueByScopeIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argScopeId )
 	{
-		CFBamBuffValueByScopeIdxKey key = schema.getFactoryValue().newScopeIdxKey();
+		CFBamBuffValueByScopeIdxKey key = (CFBamBuffValueByScopeIdxKey)schema.getFactoryValue().newByScopeIdxKey();
 		key.setRequiredScopeId( argScopeId );
 		deleteValueByScopeIdx( Authorization, key );
 	}
@@ -8794,7 +8782,7 @@ public class CFBamRamValueTable
 	public void deleteValueByDefSchemaIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argDefSchemaId )
 	{
-		CFBamBuffValueByDefSchemaIdxKey key = schema.getFactoryValue().newDefSchemaIdxKey();
+		CFBamBuffValueByDefSchemaIdxKey key = (CFBamBuffValueByDefSchemaIdxKey)schema.getFactoryValue().newByDefSchemaIdxKey();
 		key.setOptionalDefSchemaId( argDefSchemaId );
 		deleteValueByDefSchemaIdx( Authorization, key );
 	}
@@ -9156,7 +9144,7 @@ public class CFBamRamValueTable
 	public void deleteValueByPrevIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argPrevId )
 	{
-		CFBamBuffValueByPrevIdxKey key = schema.getFactoryValue().newPrevIdxKey();
+		CFBamBuffValueByPrevIdxKey key = (CFBamBuffValueByPrevIdxKey)schema.getFactoryValue().newByPrevIdxKey();
 		key.setOptionalPrevId( argPrevId );
 		deleteValueByPrevIdx( Authorization, key );
 	}
@@ -9518,7 +9506,7 @@ public class CFBamRamValueTable
 	public void deleteValueByNextIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argNextId )
 	{
-		CFBamBuffValueByNextIdxKey key = schema.getFactoryValue().newNextIdxKey();
+		CFBamBuffValueByNextIdxKey key = (CFBamBuffValueByNextIdxKey)schema.getFactoryValue().newByNextIdxKey();
 		key.setOptionalNextId( argNextId );
 		deleteValueByNextIdx( Authorization, key );
 	}
@@ -9881,7 +9869,7 @@ public class CFBamRamValueTable
 		CFLibDbKeyHash256 argScopeId,
 		CFLibDbKeyHash256 argPrevId )
 	{
-		CFBamBuffValueByContPrevIdxKey key = schema.getFactoryValue().newContPrevIdxKey();
+		CFBamBuffValueByContPrevIdxKey key = (CFBamBuffValueByContPrevIdxKey)schema.getFactoryValue().newByContPrevIdxKey();
 		key.setRequiredScopeId( argScopeId );
 		key.setOptionalPrevId( argPrevId );
 		deleteValueByContPrevIdx( Authorization, key );
@@ -10246,7 +10234,7 @@ public class CFBamRamValueTable
 		CFLibDbKeyHash256 argScopeId,
 		CFLibDbKeyHash256 argNextId )
 	{
-		CFBamBuffValueByContNextIdxKey key = schema.getFactoryValue().newContNextIdxKey();
+		CFBamBuffValueByContNextIdxKey key = (CFBamBuffValueByContNextIdxKey)schema.getFactoryValue().newByContNextIdxKey();
 		key.setRequiredScopeId( argScopeId );
 		key.setOptionalNextId( argNextId );
 		deleteValueByContNextIdx( Authorization, key );

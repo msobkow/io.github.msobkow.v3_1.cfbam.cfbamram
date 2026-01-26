@@ -83,19 +83,18 @@ public class CFBamRamClearDepTable
 		schema = argSchema;
 	}
 
-	public void createClearDep( ICFSecAuthorization Authorization,
+	public ICFBamClearDep createClearDep( ICFSecAuthorization Authorization,
 		ICFBamClearDep Buff )
 	{
 		final String S_ProcName = "createClearDep";
 		schema.getTableScope().createScope( Authorization,
 			Buff );
-		CFLibDbKeyHash256 pkey = schema.getFactoryScope().newPKey();
-		pkey.setClassCode( Buff.getClassCode() );
-		pkey.setRequiredId( Buff.getRequiredId() );
-		CFBamBuffClearDepByClearDepIdxKey keyClearDepIdx = schema.getFactoryClearDep().newClearDepIdxKey();
+		CFLibDbKeyHash256 pkey;
+		pkey = Buff.getRequiredId();
+		CFBamBuffClearDepByClearDepIdxKey keyClearDepIdx = (CFBamBuffClearDepByClearDepIdxKey)schema.getFactoryClearDep().newByClearDepIdxKey();
 		keyClearDepIdx.setRequiredRelationId( Buff.getRequiredRelationId() );
 
-		CFBamBuffClearDepByDefSchemaIdxKey keyDefSchemaIdx = schema.getFactoryClearDep().newDefSchemaIdxKey();
+		CFBamBuffClearDepByDefSchemaIdxKey keyDefSchemaIdx = (CFBamBuffClearDepByDefSchemaIdxKey)schema.getFactoryClearDep().newByDefSchemaIdxKey();
 		keyDefSchemaIdx.setOptionalDefSchemaId( Buff.getOptionalDefSchemaId() );
 
 		// Validate unique indexes
@@ -164,6 +163,7 @@ public class CFBamRamClearDepTable
 		}
 		subdictDefSchemaIdx.put( pkey, Buff );
 
+		return( Buff );
 	}
 
 	public ICFBamClearDep readDerived( ICFSecAuthorization Authorization,
@@ -184,11 +184,9 @@ public class CFBamRamClearDepTable
 		CFLibDbKeyHash256 PKey )
 	{
 		final String S_ProcName = "CFBamRamClearDep.readDerived";
-		CFLibDbKeyHash256 key = schema.getFactoryScope().newPKey();
-		key.setRequiredId( PKey.getRequiredId() );
 		ICFBamClearDep buff;
-		if( dictByPKey.containsKey( key ) ) {
-			buff = dictByPKey.get( key );
+		if( dictByPKey.containsKey( PKey ) ) {
+			buff = dictByPKey.get( PKey );
 		}
 		else {
 			buff = null;
@@ -233,7 +231,7 @@ public class CFBamRamClearDepTable
 		CFLibDbKeyHash256 RelationId )
 	{
 		final String S_ProcName = "CFBamRamClearDep.readDerivedByClearDepIdx";
-		CFBamBuffClearDepByClearDepIdxKey key = schema.getFactoryClearDep().newClearDepIdxKey();
+		CFBamBuffClearDepByClearDepIdxKey key = (CFBamBuffClearDepByClearDepIdxKey)schema.getFactoryClearDep().newByClearDepIdxKey();
 		key.setRequiredRelationId( RelationId );
 
 		ICFBamClearDep[] recArray;
@@ -260,7 +258,7 @@ public class CFBamRamClearDepTable
 		CFLibDbKeyHash256 DefSchemaId )
 	{
 		final String S_ProcName = "CFBamRamClearDep.readDerivedByDefSchemaIdx";
-		CFBamBuffClearDepByDefSchemaIdxKey key = schema.getFactoryClearDep().newDefSchemaIdxKey();
+		CFBamBuffClearDepByDefSchemaIdxKey key = (CFBamBuffClearDepByDefSchemaIdxKey)schema.getFactoryClearDep().newByDefSchemaIdxKey();
 		key.setOptionalDefSchemaId( DefSchemaId );
 
 		ICFBamClearDep[] recArray;
@@ -287,12 +285,9 @@ public class CFBamRamClearDepTable
 		CFLibDbKeyHash256 Id )
 	{
 		final String S_ProcName = "CFBamRamScope.readDerivedByIdIdx() ";
-		CFLibDbKeyHash256 key = schema.getFactoryScope().newPKey();
-		key.setRequiredId( Id );
-
 		ICFBamClearDep buff;
-		if( dictByPKey.containsKey( key ) ) {
-			buff = dictByPKey.get( key );
+		if( dictByPKey.containsKey( Id ) ) {
+			buff = dictByPKey.get( Id );
 		}
 		else {
 			buff = null;
@@ -305,7 +300,7 @@ public class CFBamRamClearDepTable
 	{
 		final String S_ProcName = "CFBamRamClearDep.readBuff";
 		ICFBamClearDep buff = readDerived( Authorization, PKey );
-		if( ( buff != null ) && ( ! buff.getClassCode().equals( "a810" ) ) ) {
+		if( ( buff != null ) && ( buff.getClassCode() != ICFBamClearDep.CLASS_CODE ) ) {
 			buff = null;
 		}
 		return( buff );
@@ -316,7 +311,7 @@ public class CFBamRamClearDepTable
 	{
 		final String S_ProcName = "lockBuff";
 		ICFBamClearDep buff = readDerived( Authorization, PKey );
-		if( ( buff != null ) && ( ! buff.getClassCode().equals( "a810" ) ) ) {
+		if( ( buff != null ) && ( buff.getClassCode() != ICFBamClearDep.CLASS_CODE ) ) {
 			buff = null;
 		}
 		return( buff );
@@ -330,7 +325,7 @@ public class CFBamRamClearDepTable
 		ICFBamClearDep[] buffList = readAllDerived( Authorization );
 		for( int idx = 0; idx < buffList.length; idx ++ ) {
 			buff = buffList[idx];
-			if( ( buff != null ) && buff.getClassCode().equals( "a810" ) ) {
+			if( ( buff != null ) && ( buff.getClassCode() == ICFBamClearDep.CLASS_CODE ) ) {
 				filteredList.add( buff );
 			}
 		}
@@ -343,7 +338,7 @@ public class CFBamRamClearDepTable
 		final String S_ProcName = "CFBamRamScope.readBuffByIdIdx() ";
 		ICFBamClearDep buff = readDerivedByIdIdx( Authorization,
 			Id );
-		if( ( buff != null ) && buff.getClassCode().equals( "a801" ) ) {
+		if( ( buff != null ) && ( buff.getClassCode() == ICFBamScope.CLASS_CODE ) ) {
 			return( (ICFBamClearDep)buff );
 		}
 		else {
@@ -361,7 +356,7 @@ public class CFBamRamClearDepTable
 			TenantId );
 		for( int idx = 0; idx < buffList.length; idx ++ ) {
 			buff = buffList[idx];
-			if( ( buff != null ) && buff.getClassCode().equals( "a801" ) ) {
+			if( ( buff != null ) && ( buff.getClassCode() == ICFBamScope.CLASS_CODE ) ) {
 				filteredList.add( (ICFBamClearDep)buff );
 			}
 		}
@@ -378,7 +373,7 @@ public class CFBamRamClearDepTable
 			RelationId );
 		for( int idx = 0; idx < buffList.length; idx ++ ) {
 			buff = buffList[idx];
-			if( ( buff != null ) && buff.getClassCode().equals( "a810" ) ) {
+			if( ( buff != null ) && ( buff.getClassCode() == ICFBamClearDep.CLASS_CODE ) ) {
 				filteredList.add( (ICFBamClearDep)buff );
 			}
 		}
@@ -395,7 +390,7 @@ public class CFBamRamClearDepTable
 			DefSchemaId );
 		for( int idx = 0; idx < buffList.length; idx ++ ) {
 			buff = buffList[idx];
-			if( ( buff != null ) && buff.getClassCode().equals( "a810" ) ) {
+			if( ( buff != null ) && ( buff.getClassCode() == ICFBamClearDep.CLASS_CODE ) ) {
 				filteredList.add( (ICFBamClearDep)buff );
 			}
 		}
@@ -440,13 +435,15 @@ public class CFBamRamClearDepTable
 		throw new CFLibNotImplementedYetException( getClass(), S_ProcName );
 	}
 
-	public void updateClearDep( ICFSecAuthorization Authorization,
+	public ICFBamClearDep updateClearDep( ICFSecAuthorization Authorization,
 		ICFBamClearDep Buff )
 	{
-		schema.getTableScope().updateScope( Authorization,
+		ICFBamClearDep repl = schema.getTableScope().updateScope( Authorization,
 			Buff );
-		CFLibDbKeyHash256 pkey = schema.getFactoryScope().newPKey();
-		pkey.setRequiredId( Buff.getRequiredId() );
+		if (repl != Buff) {
+			throw new CFLibInvalidStateException(getClass(), S_ProcName, "repl != Buff", "repl != Buff");
+		}
+		CFLibDbKeyHash256 pkey = Buff.getPKey();
 		ICFBamClearDep existing = dictByPKey.get( pkey );
 		if( existing == null ) {
 			throw new CFLibStaleCacheDetectedException( getClass(),
@@ -455,16 +452,16 @@ public class CFBamRamClearDepTable
 				"ClearDep",
 				pkey );
 		}
-		CFBamBuffClearDepByClearDepIdxKey existingKeyClearDepIdx = schema.getFactoryClearDep().newClearDepIdxKey();
+		CFBamBuffClearDepByClearDepIdxKey existingKeyClearDepIdx = (CFBamBuffClearDepByClearDepIdxKey)schema.getFactoryClearDep().newByClearDepIdxKey();
 		existingKeyClearDepIdx.setRequiredRelationId( existing.getRequiredRelationId() );
 
-		CFBamBuffClearDepByClearDepIdxKey newKeyClearDepIdx = schema.getFactoryClearDep().newClearDepIdxKey();
+		CFBamBuffClearDepByClearDepIdxKey newKeyClearDepIdx = (CFBamBuffClearDepByClearDepIdxKey)schema.getFactoryClearDep().newByClearDepIdxKey();
 		newKeyClearDepIdx.setRequiredRelationId( Buff.getRequiredRelationId() );
 
-		CFBamBuffClearDepByDefSchemaIdxKey existingKeyDefSchemaIdx = schema.getFactoryClearDep().newDefSchemaIdxKey();
+		CFBamBuffClearDepByDefSchemaIdxKey existingKeyDefSchemaIdx = (CFBamBuffClearDepByDefSchemaIdxKey)schema.getFactoryClearDep().newByDefSchemaIdxKey();
 		existingKeyDefSchemaIdx.setOptionalDefSchemaId( existing.getOptionalDefSchemaId() );
 
-		CFBamBuffClearDepByDefSchemaIdxKey newKeyDefSchemaIdx = schema.getFactoryClearDep().newDefSchemaIdxKey();
+		CFBamBuffClearDepByDefSchemaIdxKey newKeyDefSchemaIdx = (CFBamBuffClearDepByDefSchemaIdxKey)schema.getFactoryClearDep().newByDefSchemaIdxKey();
 		newKeyDefSchemaIdx.setOptionalDefSchemaId( Buff.getOptionalDefSchemaId() );
 
 		// Check unique indexes
@@ -538,6 +535,7 @@ public class CFBamRamClearDepTable
 		}
 		subdict.put( pkey, Buff );
 
+		return(Buff);
 	}
 
 	public void deleteClearDep( ICFSecAuthorization Authorization,
@@ -557,10 +555,10 @@ public class CFBamRamClearDepTable
 				"deleteClearDep",
 				pkey );
 		}
-		CFBamBuffClearDepByClearDepIdxKey keyClearDepIdx = schema.getFactoryClearDep().newClearDepIdxKey();
+		CFBamBuffClearDepByClearDepIdxKey keyClearDepIdx = (CFBamBuffClearDepByClearDepIdxKey)schema.getFactoryClearDep().newByClearDepIdxKey();
 		keyClearDepIdx.setRequiredRelationId( existing.getRequiredRelationId() );
 
-		CFBamBuffClearDepByDefSchemaIdxKey keyDefSchemaIdx = schema.getFactoryClearDep().newDefSchemaIdxKey();
+		CFBamBuffClearDepByDefSchemaIdxKey keyDefSchemaIdx = (CFBamBuffClearDepByDefSchemaIdxKey)schema.getFactoryClearDep().newByDefSchemaIdxKey();
 		keyDefSchemaIdx.setOptionalDefSchemaId( existing.getOptionalDefSchemaId() );
 
 		// Validate reverse foreign keys
@@ -626,7 +624,7 @@ public class CFBamRamClearDepTable
 	public void deleteClearDepByClearDepIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argRelationId )
 	{
-		CFBamBuffClearDepByClearDepIdxKey key = schema.getFactoryClearDep().newClearDepIdxKey();
+		CFBamBuffClearDepByClearDepIdxKey key = (CFBamBuffClearDepByClearDepIdxKey)schema.getFactoryClearDep().newByClearDepIdxKey();
 		key.setRequiredRelationId( argRelationId );
 		deleteClearDepByClearDepIdx( Authorization, key );
 	}
@@ -683,7 +681,7 @@ public class CFBamRamClearDepTable
 	public void deleteClearDepByDefSchemaIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argDefSchemaId )
 	{
-		CFBamBuffClearDepByDefSchemaIdxKey key = schema.getFactoryClearDep().newDefSchemaIdxKey();
+		CFBamBuffClearDepByDefSchemaIdxKey key = (CFBamBuffClearDepByDefSchemaIdxKey)schema.getFactoryClearDep().newByDefSchemaIdxKey();
 		key.setOptionalDefSchemaId( argDefSchemaId );
 		deleteClearDepByDefSchemaIdx( Authorization, key );
 	}
@@ -740,14 +738,6 @@ public class CFBamRamClearDepTable
 	}
 
 	public void deleteClearDepByIdIdx( ICFSecAuthorization Authorization,
-		CFLibDbKeyHash256 argId )
-	{
-		CFLibDbKeyHash256 key = schema.getFactoryScope().newPKey();
-		key.setRequiredId( argId );
-		deleteClearDepByIdIdx( Authorization, key );
-	}
-
-	public void deleteClearDepByIdIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argKey )
 	{
 		final String S_ProcName = "deleteClearDepByIdIdx";
@@ -799,7 +789,7 @@ public class CFBamRamClearDepTable
 	public void deleteClearDepByTenantIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argTenantId )
 	{
-		CFBamBuffScopeByTenantIdxKey key = schema.getFactoryScope().newTenantIdxKey();
+		CFBamBuffScopeByTenantIdxKey key = (CFBamBuffScopeByTenantIdxKey)schema.getFactoryScope().newByTenantIdxKey();
 		key.setRequiredTenantId( argTenantId );
 		deleteClearDepByTenantIdx( Authorization, key );
 	}

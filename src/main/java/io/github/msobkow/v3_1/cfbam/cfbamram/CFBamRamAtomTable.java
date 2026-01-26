@@ -71,15 +71,14 @@ public class CFBamRamAtomTable
 		schema = argSchema;
 	}
 
-	public void createAtom( ICFSecAuthorization Authorization,
+	public ICFBamAtom createAtom( ICFSecAuthorization Authorization,
 		ICFBamAtom Buff )
 	{
 		final String S_ProcName = "createAtom";
 		schema.getTableValue().createValue( Authorization,
 			Buff );
-		CFLibDbKeyHash256 pkey = schema.getFactoryValue().newPKey();
-		pkey.setClassCode( Buff.getClassCode() );
-		pkey.setRequiredId( Buff.getRequiredId() );
+		CFLibDbKeyHash256 pkey;
+		pkey = Buff.getRequiredId();
 		// Validate unique indexes
 
 		if( dictByPKey.containsKey( pkey ) ) {
@@ -109,6 +108,7 @@ public class CFBamRamAtomTable
 
 		dictByPKey.put( pkey, Buff );
 
+		return( Buff );
 	}
 
 	public ICFBamAtom readDerived( ICFSecAuthorization Authorization,
@@ -129,11 +129,9 @@ public class CFBamRamAtomTable
 		CFLibDbKeyHash256 PKey )
 	{
 		final String S_ProcName = "CFBamRamAtom.readDerived";
-		CFLibDbKeyHash256 key = schema.getFactoryValue().newPKey();
-		key.setRequiredId( PKey.getRequiredId() );
 		ICFBamAtom buff;
-		if( dictByPKey.containsKey( key ) ) {
-			buff = dictByPKey.get( key );
+		if( dictByPKey.containsKey( PKey ) ) {
+			buff = dictByPKey.get( PKey );
 		}
 		else {
 			buff = null;
@@ -311,12 +309,9 @@ public class CFBamRamAtomTable
 		CFLibDbKeyHash256 Id )
 	{
 		final String S_ProcName = "CFBamRamValue.readDerivedByIdIdx() ";
-		CFLibDbKeyHash256 key = schema.getFactoryValue().newPKey();
-		key.setRequiredId( Id );
-
 		ICFBamAtom buff;
-		if( dictByPKey.containsKey( key ) ) {
-			buff = dictByPKey.get( key );
+		if( dictByPKey.containsKey( Id ) ) {
+			buff = dictByPKey.get( Id );
 		}
 		else {
 			buff = null;
@@ -329,7 +324,7 @@ public class CFBamRamAtomTable
 	{
 		final String S_ProcName = "CFBamRamAtom.readBuff";
 		ICFBamAtom buff = readDerived( Authorization, PKey );
-		if( ( buff != null ) && ( ! buff.getClassCode().equals( "a80a" ) ) ) {
+		if( ( buff != null ) && ( buff.getClassCode() != ICFBamAtom.CLASS_CODE ) ) {
 			buff = null;
 		}
 		return( buff );
@@ -340,7 +335,7 @@ public class CFBamRamAtomTable
 	{
 		final String S_ProcName = "lockBuff";
 		ICFBamAtom buff = readDerived( Authorization, PKey );
-		if( ( buff != null ) && ( ! buff.getClassCode().equals( "a80a" ) ) ) {
+		if( ( buff != null ) && ( buff.getClassCode() != ICFBamAtom.CLASS_CODE ) ) {
 			buff = null;
 		}
 		return( buff );
@@ -354,7 +349,7 @@ public class CFBamRamAtomTable
 		ICFBamAtom[] buffList = readAllDerived( Authorization );
 		for( int idx = 0; idx < buffList.length; idx ++ ) {
 			buff = buffList[idx];
-			if( ( buff != null ) && buff.getClassCode().equals( "a80a" ) ) {
+			if( ( buff != null ) && ( buff.getClassCode() == ICFBamAtom.CLASS_CODE ) ) {
 				filteredList.add( buff );
 			}
 		}
@@ -367,7 +362,7 @@ public class CFBamRamAtomTable
 		final String S_ProcName = "CFBamRamValue.readBuffByIdIdx() ";
 		ICFBamAtom buff = readDerivedByIdIdx( Authorization,
 			Id );
-		if( ( buff != null ) && buff.getClassCode().equals( "a809" ) ) {
+		if( ( buff != null ) && ( buff.getClassCode() == ICFBamValue.CLASS_CODE ) ) {
 			return( (ICFBamAtom)buff );
 		}
 		else {
@@ -383,7 +378,7 @@ public class CFBamRamAtomTable
 		ICFBamAtom buff = readDerivedByUNameIdx( Authorization,
 			ScopeId,
 			Name );
-		if( ( buff != null ) && buff.getClassCode().equals( "a809" ) ) {
+		if( ( buff != null ) && ( buff.getClassCode() == ICFBamValue.CLASS_CODE ) ) {
 			return( (ICFBamAtom)buff );
 		}
 		else {
@@ -401,7 +396,7 @@ public class CFBamRamAtomTable
 			ScopeId );
 		for( int idx = 0; idx < buffList.length; idx ++ ) {
 			buff = buffList[idx];
-			if( ( buff != null ) && buff.getClassCode().equals( "a809" ) ) {
+			if( ( buff != null ) && ( buff.getClassCode() == ICFBamValue.CLASS_CODE ) ) {
 				filteredList.add( (ICFBamAtom)buff );
 			}
 		}
@@ -418,7 +413,7 @@ public class CFBamRamAtomTable
 			DefSchemaId );
 		for( int idx = 0; idx < buffList.length; idx ++ ) {
 			buff = buffList[idx];
-			if( ( buff != null ) && buff.getClassCode().equals( "a809" ) ) {
+			if( ( buff != null ) && ( buff.getClassCode() == ICFBamValue.CLASS_CODE ) ) {
 				filteredList.add( (ICFBamAtom)buff );
 			}
 		}
@@ -435,7 +430,7 @@ public class CFBamRamAtomTable
 			PrevId );
 		for( int idx = 0; idx < buffList.length; idx ++ ) {
 			buff = buffList[idx];
-			if( ( buff != null ) && buff.getClassCode().equals( "a809" ) ) {
+			if( ( buff != null ) && ( buff.getClassCode() == ICFBamValue.CLASS_CODE ) ) {
 				filteredList.add( (ICFBamAtom)buff );
 			}
 		}
@@ -452,7 +447,7 @@ public class CFBamRamAtomTable
 			NextId );
 		for( int idx = 0; idx < buffList.length; idx ++ ) {
 			buff = buffList[idx];
-			if( ( buff != null ) && buff.getClassCode().equals( "a809" ) ) {
+			if( ( buff != null ) && ( buff.getClassCode() == ICFBamValue.CLASS_CODE ) ) {
 				filteredList.add( (ICFBamAtom)buff );
 			}
 		}
@@ -471,7 +466,7 @@ public class CFBamRamAtomTable
 			PrevId );
 		for( int idx = 0; idx < buffList.length; idx ++ ) {
 			buff = buffList[idx];
-			if( ( buff != null ) && buff.getClassCode().equals( "a809" ) ) {
+			if( ( buff != null ) && ( buff.getClassCode() == ICFBamValue.CLASS_CODE ) ) {
 				filteredList.add( (ICFBamAtom)buff );
 			}
 		}
@@ -490,7 +485,7 @@ public class CFBamRamAtomTable
 			NextId );
 		for( int idx = 0; idx < buffList.length; idx ++ ) {
 			buff = buffList[idx];
-			if( ( buff != null ) && buff.getClassCode().equals( "a809" ) ) {
+			if( ( buff != null ) && ( buff.getClassCode() == ICFBamValue.CLASS_CODE ) ) {
 				filteredList.add( (ICFBamAtom)buff );
 			}
 		}
@@ -5891,13 +5886,15 @@ public class CFBamRamAtomTable
 		return( (CFBamAtomBuff)editCur );
 	}
 
-	public void updateAtom( ICFSecAuthorization Authorization,
+	public ICFBamAtom updateAtom( ICFSecAuthorization Authorization,
 		ICFBamAtom Buff )
 	{
-		schema.getTableValue().updateValue( Authorization,
+		ICFBamAtom repl = schema.getTableValue().updateValue( Authorization,
 			Buff );
-		CFLibDbKeyHash256 pkey = schema.getFactoryValue().newPKey();
-		pkey.setRequiredId( Buff.getRequiredId() );
+		if (repl != Buff) {
+			throw new CFLibInvalidStateException(getClass(), S_ProcName, "repl != Buff", "repl != Buff");
+		}
+		CFLibDbKeyHash256 pkey = Buff.getPKey();
 		ICFBamAtom existing = dictByPKey.get( pkey );
 		if( existing == null ) {
 			throw new CFLibStaleCacheDetectedException( getClass(),
@@ -5934,6 +5931,7 @@ public class CFBamRamAtomTable
 		dictByPKey.remove( pkey );
 		dictByPKey.put( pkey, Buff );
 
+		return(Buff);
 	}
 
 	public void deleteAtom( ICFSecAuthorization Authorization,
@@ -7647,14 +7645,6 @@ public class CFBamRamAtomTable
 			Buff );
 	}
 	public void deleteAtomByIdIdx( ICFSecAuthorization Authorization,
-		CFLibDbKeyHash256 argId )
-	{
-		CFLibDbKeyHash256 key = schema.getFactoryValue().newPKey();
-		key.setRequiredId( argId );
-		deleteAtomByIdIdx( Authorization, key );
-	}
-
-	public void deleteAtomByIdIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argKey )
 	{
 		final String S_ProcName = "deleteAtomByIdIdx";
@@ -8004,7 +7994,7 @@ public class CFBamRamAtomTable
 		CFLibDbKeyHash256 argScopeId,
 		String argName )
 	{
-		CFBamBuffValueByUNameIdxKey key = schema.getFactoryValue().newUNameIdxKey();
+		CFBamBuffValueByUNameIdxKey key = (CFBamBuffValueByUNameIdxKey)schema.getFactoryValue().newByUNameIdxKey();
 		key.setRequiredScopeId( argScopeId );
 		key.setRequiredName( argName );
 		deleteAtomByUNameIdx( Authorization, key );
@@ -8360,7 +8350,7 @@ public class CFBamRamAtomTable
 	public void deleteAtomByScopeIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argScopeId )
 	{
-		CFBamBuffValueByScopeIdxKey key = schema.getFactoryValue().newScopeIdxKey();
+		CFBamBuffValueByScopeIdxKey key = (CFBamBuffValueByScopeIdxKey)schema.getFactoryValue().newByScopeIdxKey();
 		key.setRequiredScopeId( argScopeId );
 		deleteAtomByScopeIdx( Authorization, key );
 	}
@@ -8714,7 +8704,7 @@ public class CFBamRamAtomTable
 	public void deleteAtomByDefSchemaIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argDefSchemaId )
 	{
-		CFBamBuffValueByDefSchemaIdxKey key = schema.getFactoryValue().newDefSchemaIdxKey();
+		CFBamBuffValueByDefSchemaIdxKey key = (CFBamBuffValueByDefSchemaIdxKey)schema.getFactoryValue().newByDefSchemaIdxKey();
 		key.setOptionalDefSchemaId( argDefSchemaId );
 		deleteAtomByDefSchemaIdx( Authorization, key );
 	}
@@ -9070,7 +9060,7 @@ public class CFBamRamAtomTable
 	public void deleteAtomByPrevIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argPrevId )
 	{
-		CFBamBuffValueByPrevIdxKey key = schema.getFactoryValue().newPrevIdxKey();
+		CFBamBuffValueByPrevIdxKey key = (CFBamBuffValueByPrevIdxKey)schema.getFactoryValue().newByPrevIdxKey();
 		key.setOptionalPrevId( argPrevId );
 		deleteAtomByPrevIdx( Authorization, key );
 	}
@@ -9426,7 +9416,7 @@ public class CFBamRamAtomTable
 	public void deleteAtomByNextIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argNextId )
 	{
-		CFBamBuffValueByNextIdxKey key = schema.getFactoryValue().newNextIdxKey();
+		CFBamBuffValueByNextIdxKey key = (CFBamBuffValueByNextIdxKey)schema.getFactoryValue().newByNextIdxKey();
 		key.setOptionalNextId( argNextId );
 		deleteAtomByNextIdx( Authorization, key );
 	}
@@ -9783,7 +9773,7 @@ public class CFBamRamAtomTable
 		CFLibDbKeyHash256 argScopeId,
 		CFLibDbKeyHash256 argPrevId )
 	{
-		CFBamBuffValueByContPrevIdxKey key = schema.getFactoryValue().newContPrevIdxKey();
+		CFBamBuffValueByContPrevIdxKey key = (CFBamBuffValueByContPrevIdxKey)schema.getFactoryValue().newByContPrevIdxKey();
 		key.setRequiredScopeId( argScopeId );
 		key.setOptionalPrevId( argPrevId );
 		deleteAtomByContPrevIdx( Authorization, key );
@@ -10142,7 +10132,7 @@ public class CFBamRamAtomTable
 		CFLibDbKeyHash256 argScopeId,
 		CFLibDbKeyHash256 argNextId )
 	{
-		CFBamBuffValueByContNextIdxKey key = schema.getFactoryValue().newContNextIdxKey();
+		CFBamBuffValueByContNextIdxKey key = (CFBamBuffValueByContNextIdxKey)schema.getFactoryValue().newByContNextIdxKey();
 		key.setRequiredScopeId( argScopeId );
 		key.setOptionalNextId( argNextId );
 		deleteAtomByContNextIdx( Authorization, key );

@@ -81,19 +81,18 @@ public class CFBamRamPopTopDepTable
 		schema = argSchema;
 	}
 
-	public void createPopTopDep( ICFSecAuthorization Authorization,
+	public ICFBamPopTopDep createPopTopDep( ICFSecAuthorization Authorization,
 		ICFBamPopTopDep Buff )
 	{
 		final String S_ProcName = "createPopTopDep";
 		schema.getTablePopDep().createPopDep( Authorization,
 			Buff );
-		CFLibDbKeyHash256 pkey = schema.getFactoryScope().newPKey();
-		pkey.setClassCode( Buff.getClassCode() );
-		pkey.setRequiredId( Buff.getRequiredId() );
-		CFBamBuffPopTopDepByContRelIdxKey keyContRelIdx = schema.getFactoryPopTopDep().newContRelIdxKey();
+		CFLibDbKeyHash256 pkey;
+		pkey = Buff.getRequiredId();
+		CFBamBuffPopTopDepByContRelIdxKey keyContRelIdx = (CFBamBuffPopTopDepByContRelIdxKey)schema.getFactoryPopTopDep().newByContRelIdxKey();
 		keyContRelIdx.setRequiredContRelationId( Buff.getRequiredContRelationId() );
 
-		CFBamBuffPopTopDepByUNameIdxKey keyUNameIdx = schema.getFactoryPopTopDep().newUNameIdxKey();
+		CFBamBuffPopTopDepByUNameIdxKey keyUNameIdx = (CFBamBuffPopTopDepByUNameIdxKey)schema.getFactoryPopTopDep().newByUNameIdxKey();
 		keyUNameIdx.setRequiredContRelationId( Buff.getRequiredContRelationId() );
 		keyUNameIdx.setRequiredName( Buff.getRequiredName() );
 
@@ -106,6 +105,7 @@ public class CFBamRamPopTopDepTable
 		if( dictByUNameIdx.containsKey( keyUNameIdx ) ) {
 			throw new CFLibUniqueIndexViolationException( getClass(),
 				S_ProcName,
+				"PopTopDepUNameIdx",
 				"PopTopDepUNameIdx",
 				keyUNameIdx );
 		}
@@ -162,6 +162,7 @@ public class CFBamRamPopTopDepTable
 
 		dictByUNameIdx.put( keyUNameIdx, Buff );
 
+		return( Buff );
 	}
 
 	public ICFBamPopTopDep readDerived( ICFSecAuthorization Authorization,
@@ -182,11 +183,9 @@ public class CFBamRamPopTopDepTable
 		CFLibDbKeyHash256 PKey )
 	{
 		final String S_ProcName = "CFBamRamPopTopDep.readDerived";
-		CFLibDbKeyHash256 key = schema.getFactoryScope().newPKey();
-		key.setRequiredId( PKey.getRequiredId() );
 		ICFBamPopTopDep buff;
-		if( dictByPKey.containsKey( key ) ) {
-			buff = dictByPKey.get( key );
+		if( dictByPKey.containsKey( PKey ) ) {
+			buff = dictByPKey.get( PKey );
 		}
 		else {
 			buff = null;
@@ -275,7 +274,7 @@ public class CFBamRamPopTopDepTable
 		CFLibDbKeyHash256 ContRelationId )
 	{
 		final String S_ProcName = "CFBamRamPopTopDep.readDerivedByContRelIdx";
-		CFBamBuffPopTopDepByContRelIdxKey key = schema.getFactoryPopTopDep().newContRelIdxKey();
+		CFBamBuffPopTopDepByContRelIdxKey key = (CFBamBuffPopTopDepByContRelIdxKey)schema.getFactoryPopTopDep().newByContRelIdxKey();
 		key.setRequiredContRelationId( ContRelationId );
 
 		ICFBamPopTopDep[] recArray;
@@ -303,7 +302,7 @@ public class CFBamRamPopTopDepTable
 		String Name )
 	{
 		final String S_ProcName = "CFBamRamPopTopDep.readDerivedByUNameIdx";
-		CFBamBuffPopTopDepByUNameIdxKey key = schema.getFactoryPopTopDep().newUNameIdxKey();
+		CFBamBuffPopTopDepByUNameIdxKey key = (CFBamBuffPopTopDepByUNameIdxKey)schema.getFactoryPopTopDep().newByUNameIdxKey();
 		key.setRequiredContRelationId( ContRelationId );
 		key.setRequiredName( Name );
 
@@ -321,12 +320,9 @@ public class CFBamRamPopTopDepTable
 		CFLibDbKeyHash256 Id )
 	{
 		final String S_ProcName = "CFBamRamScope.readDerivedByIdIdx() ";
-		CFLibDbKeyHash256 key = schema.getFactoryScope().newPKey();
-		key.setRequiredId( Id );
-
 		ICFBamPopTopDep buff;
-		if( dictByPKey.containsKey( key ) ) {
-			buff = dictByPKey.get( key );
+		if( dictByPKey.containsKey( Id ) ) {
+			buff = dictByPKey.get( Id );
 		}
 		else {
 			buff = null;
@@ -339,7 +335,7 @@ public class CFBamRamPopTopDepTable
 	{
 		final String S_ProcName = "CFBamRamPopTopDep.readBuff";
 		ICFBamPopTopDep buff = readDerived( Authorization, PKey );
-		if( ( buff != null ) && ( ! buff.getClassCode().equals( "a834" ) ) ) {
+		if( ( buff != null ) && ( buff.getClassCode() != ICFBamPopTopDep.CLASS_CODE ) ) {
 			buff = null;
 		}
 		return( buff );
@@ -350,7 +346,7 @@ public class CFBamRamPopTopDepTable
 	{
 		final String S_ProcName = "lockBuff";
 		ICFBamPopTopDep buff = readDerived( Authorization, PKey );
-		if( ( buff != null ) && ( ! buff.getClassCode().equals( "a834" ) ) ) {
+		if( ( buff != null ) && ( buff.getClassCode() != ICFBamPopTopDep.CLASS_CODE ) ) {
 			buff = null;
 		}
 		return( buff );
@@ -364,7 +360,7 @@ public class CFBamRamPopTopDepTable
 		ICFBamPopTopDep[] buffList = readAllDerived( Authorization );
 		for( int idx = 0; idx < buffList.length; idx ++ ) {
 			buff = buffList[idx];
-			if( ( buff != null ) && buff.getClassCode().equals( "a834" ) ) {
+			if( ( buff != null ) && ( buff.getClassCode() == ICFBamPopTopDep.CLASS_CODE ) ) {
 				filteredList.add( buff );
 			}
 		}
@@ -377,7 +373,7 @@ public class CFBamRamPopTopDepTable
 		final String S_ProcName = "CFBamRamScope.readBuffByIdIdx() ";
 		ICFBamPopTopDep buff = readDerivedByIdIdx( Authorization,
 			Id );
-		if( ( buff != null ) && buff.getClassCode().equals( "a801" ) ) {
+		if( ( buff != null ) && ( buff.getClassCode() == ICFBamScope.CLASS_CODE ) ) {
 			return( (ICFBamPopTopDep)buff );
 		}
 		else {
@@ -395,7 +391,7 @@ public class CFBamRamPopTopDepTable
 			TenantId );
 		for( int idx = 0; idx < buffList.length; idx ++ ) {
 			buff = buffList[idx];
-			if( ( buff != null ) && buff.getClassCode().equals( "a801" ) ) {
+			if( ( buff != null ) && ( buff.getClassCode() == ICFBamScope.CLASS_CODE ) ) {
 				filteredList.add( (ICFBamPopTopDep)buff );
 			}
 		}
@@ -412,7 +408,7 @@ public class CFBamRamPopTopDepTable
 			RelationId );
 		for( int idx = 0; idx < buffList.length; idx ++ ) {
 			buff = buffList[idx];
-			if( ( buff != null ) && buff.getClassCode().equals( "a830" ) ) {
+			if( ( buff != null ) && ( buff.getClassCode() == ICFBamPopDep.CLASS_CODE ) ) {
 				filteredList.add( (ICFBamPopTopDep)buff );
 			}
 		}
@@ -429,7 +425,7 @@ public class CFBamRamPopTopDepTable
 			DefSchemaId );
 		for( int idx = 0; idx < buffList.length; idx ++ ) {
 			buff = buffList[idx];
-			if( ( buff != null ) && buff.getClassCode().equals( "a830" ) ) {
+			if( ( buff != null ) && ( buff.getClassCode() == ICFBamPopDep.CLASS_CODE ) ) {
 				filteredList.add( (ICFBamPopTopDep)buff );
 			}
 		}
@@ -446,7 +442,7 @@ public class CFBamRamPopTopDepTable
 			ContRelationId );
 		for( int idx = 0; idx < buffList.length; idx ++ ) {
 			buff = buffList[idx];
-			if( ( buff != null ) && buff.getClassCode().equals( "a834" ) ) {
+			if( ( buff != null ) && ( buff.getClassCode() == ICFBamPopTopDep.CLASS_CODE ) ) {
 				filteredList.add( (ICFBamPopTopDep)buff );
 			}
 		}
@@ -461,7 +457,7 @@ public class CFBamRamPopTopDepTable
 		ICFBamPopTopDep buff = readDerivedByUNameIdx( Authorization,
 			ContRelationId,
 			Name );
-		if( ( buff != null ) && buff.getClassCode().equals( "a834" ) ) {
+		if( ( buff != null ) && ( buff.getClassCode() == ICFBamPopTopDep.CLASS_CODE ) ) {
 			return( (ICFBamPopTopDep)buff );
 		}
 		else {
@@ -526,13 +522,15 @@ public class CFBamRamPopTopDepTable
 		throw new CFLibNotImplementedYetException( getClass(), S_ProcName );
 	}
 
-	public void updatePopTopDep( ICFSecAuthorization Authorization,
+	public ICFBamPopTopDep updatePopTopDep( ICFSecAuthorization Authorization,
 		ICFBamPopTopDep Buff )
 	{
-		schema.getTablePopDep().updatePopDep( Authorization,
+		ICFBamPopTopDep repl = schema.getTablePopDep().updatePopDep( Authorization,
 			Buff );
-		CFLibDbKeyHash256 pkey = schema.getFactoryScope().newPKey();
-		pkey.setRequiredId( Buff.getRequiredId() );
+		if (repl != Buff) {
+			throw new CFLibInvalidStateException(getClass(), S_ProcName, "repl != Buff", "repl != Buff");
+		}
+		CFLibDbKeyHash256 pkey = Buff.getPKey();
 		ICFBamPopTopDep existing = dictByPKey.get( pkey );
 		if( existing == null ) {
 			throw new CFLibStaleCacheDetectedException( getClass(),
@@ -541,17 +539,17 @@ public class CFBamRamPopTopDepTable
 				"PopTopDep",
 				pkey );
 		}
-		CFBamBuffPopTopDepByContRelIdxKey existingKeyContRelIdx = schema.getFactoryPopTopDep().newContRelIdxKey();
+		CFBamBuffPopTopDepByContRelIdxKey existingKeyContRelIdx = (CFBamBuffPopTopDepByContRelIdxKey)schema.getFactoryPopTopDep().newByContRelIdxKey();
 		existingKeyContRelIdx.setRequiredContRelationId( existing.getRequiredContRelationId() );
 
-		CFBamBuffPopTopDepByContRelIdxKey newKeyContRelIdx = schema.getFactoryPopTopDep().newContRelIdxKey();
+		CFBamBuffPopTopDepByContRelIdxKey newKeyContRelIdx = (CFBamBuffPopTopDepByContRelIdxKey)schema.getFactoryPopTopDep().newByContRelIdxKey();
 		newKeyContRelIdx.setRequiredContRelationId( Buff.getRequiredContRelationId() );
 
-		CFBamBuffPopTopDepByUNameIdxKey existingKeyUNameIdx = schema.getFactoryPopTopDep().newUNameIdxKey();
+		CFBamBuffPopTopDepByUNameIdxKey existingKeyUNameIdx = (CFBamBuffPopTopDepByUNameIdxKey)schema.getFactoryPopTopDep().newByUNameIdxKey();
 		existingKeyUNameIdx.setRequiredContRelationId( existing.getRequiredContRelationId() );
 		existingKeyUNameIdx.setRequiredName( existing.getRequiredName() );
 
-		CFBamBuffPopTopDepByUNameIdxKey newKeyUNameIdx = schema.getFactoryPopTopDep().newUNameIdxKey();
+		CFBamBuffPopTopDepByUNameIdxKey newKeyUNameIdx = (CFBamBuffPopTopDepByUNameIdxKey)schema.getFactoryPopTopDep().newByUNameIdxKey();
 		newKeyUNameIdx.setRequiredContRelationId( Buff.getRequiredContRelationId() );
 		newKeyUNameIdx.setRequiredName( Buff.getRequiredName() );
 
@@ -561,6 +559,7 @@ public class CFBamRamPopTopDepTable
 			if( dictByUNameIdx.containsKey( newKeyUNameIdx ) ) {
 				throw new CFLibUniqueIndexViolationException( getClass(),
 					"updatePopTopDep",
+					"PopTopDepUNameIdx",
 					"PopTopDepUNameIdx",
 					newKeyUNameIdx );
 			}
@@ -625,6 +624,7 @@ public class CFBamRamPopTopDepTable
 		dictByUNameIdx.remove( existingKeyUNameIdx );
 		dictByUNameIdx.put( newKeyUNameIdx, Buff );
 
+		return(Buff);
 	}
 
 	public void deletePopTopDep( ICFSecAuthorization Authorization,
@@ -651,10 +651,10 @@ public class CFBamRamPopTopDepTable
 			schema.getTablePopSubDep1().deletePopSubDep1ByPopTopDepIdx( Authorization,
 						existing.getRequiredId() );
 		}
-		CFBamBuffPopTopDepByContRelIdxKey keyContRelIdx = schema.getFactoryPopTopDep().newContRelIdxKey();
+		CFBamBuffPopTopDepByContRelIdxKey keyContRelIdx = (CFBamBuffPopTopDepByContRelIdxKey)schema.getFactoryPopTopDep().newByContRelIdxKey();
 		keyContRelIdx.setRequiredContRelationId( existing.getRequiredContRelationId() );
 
-		CFBamBuffPopTopDepByUNameIdxKey keyUNameIdx = schema.getFactoryPopTopDep().newUNameIdxKey();
+		CFBamBuffPopTopDepByUNameIdxKey keyUNameIdx = (CFBamBuffPopTopDepByUNameIdxKey)schema.getFactoryPopTopDep().newByUNameIdxKey();
 		keyUNameIdx.setRequiredContRelationId( existing.getRequiredContRelationId() );
 		keyUNameIdx.setRequiredName( existing.getRequiredName() );
 
@@ -676,7 +676,7 @@ public class CFBamRamPopTopDepTable
 	public void deletePopTopDepByContRelIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argContRelationId )
 	{
-		CFBamBuffPopTopDepByContRelIdxKey key = schema.getFactoryPopTopDep().newContRelIdxKey();
+		CFBamBuffPopTopDepByContRelIdxKey key = (CFBamBuffPopTopDepByContRelIdxKey)schema.getFactoryPopTopDep().newByContRelIdxKey();
 		key.setRequiredContRelationId( argContRelationId );
 		deletePopTopDepByContRelIdx( Authorization, key );
 	}
@@ -711,7 +711,7 @@ public class CFBamRamPopTopDepTable
 		CFLibDbKeyHash256 argContRelationId,
 		String argName )
 	{
-		CFBamBuffPopTopDepByUNameIdxKey key = schema.getFactoryPopTopDep().newUNameIdxKey();
+		CFBamBuffPopTopDepByUNameIdxKey key = (CFBamBuffPopTopDepByUNameIdxKey)schema.getFactoryPopTopDep().newByUNameIdxKey();
 		key.setRequiredContRelationId( argContRelationId );
 		key.setRequiredName( argName );
 		deletePopTopDepByUNameIdx( Authorization, key );
@@ -747,7 +747,7 @@ public class CFBamRamPopTopDepTable
 	public void deletePopTopDepByRelationIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argRelationId )
 	{
-		CFBamBuffPopDepByRelationIdxKey key = schema.getFactoryPopDep().newRelationIdxKey();
+		CFBamBuffPopDepByRelationIdxKey key = (CFBamBuffPopDepByRelationIdxKey)schema.getFactoryPopDep().newByRelationIdxKey();
 		key.setRequiredRelationId( argRelationId );
 		deletePopTopDepByRelationIdx( Authorization, key );
 	}
@@ -781,7 +781,7 @@ public class CFBamRamPopTopDepTable
 	public void deletePopTopDepByDefSchemaIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argDefSchemaId )
 	{
-		CFBamBuffPopDepByDefSchemaIdxKey key = schema.getFactoryPopDep().newDefSchemaIdxKey();
+		CFBamBuffPopDepByDefSchemaIdxKey key = (CFBamBuffPopDepByDefSchemaIdxKey)schema.getFactoryPopDep().newByDefSchemaIdxKey();
 		key.setOptionalDefSchemaId( argDefSchemaId );
 		deletePopTopDepByDefSchemaIdx( Authorization, key );
 	}
@@ -815,14 +815,6 @@ public class CFBamRamPopTopDepTable
 	}
 
 	public void deletePopTopDepByIdIdx( ICFSecAuthorization Authorization,
-		CFLibDbKeyHash256 argId )
-	{
-		CFLibDbKeyHash256 key = schema.getFactoryScope().newPKey();
-		key.setRequiredId( argId );
-		deletePopTopDepByIdIdx( Authorization, key );
-	}
-
-	public void deletePopTopDepByIdIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argKey )
 	{
 		boolean anyNotNull = false;
@@ -851,7 +843,7 @@ public class CFBamRamPopTopDepTable
 	public void deletePopTopDepByTenantIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argTenantId )
 	{
-		CFBamBuffScopeByTenantIdxKey key = schema.getFactoryScope().newTenantIdxKey();
+		CFBamBuffScopeByTenantIdxKey key = (CFBamBuffScopeByTenantIdxKey)schema.getFactoryScope().newByTenantIdxKey();
 		key.setRequiredTenantId( argTenantId );
 		deletePopTopDepByTenantIdx( Authorization, key );
 	}

@@ -97,28 +97,28 @@ public class CFBamRamServiceTable
 		schema = argSchema;
 	}
 
-	public void createService( ICFSecAuthorization Authorization,
+	public ICFSecService createService( ICFSecAuthorization Authorization,
 		ICFSecService Buff )
 	{
 		final String S_ProcName = "createService";
-		CFLibDbKeyHash256 pkey = schema.getFactoryService().newPKey();
-		pkey.setRequiredServiceId( schema.nextServiceIdGen() );
-		Buff.setRequiredServiceId( pkey.getRequiredServiceId() );
-		CFSecBuffServiceByClusterIdxKey keyClusterIdx = schema.getFactoryService().newClusterIdxKey();
+		CFLibDbKeyHash256 pkey;
+		pkey = schema.nextServiceIdGen();
+		Buff.setRequiredServiceId( pkey );
+		CFSecBuffServiceByClusterIdxKey keyClusterIdx = (CFSecBuffServiceByClusterIdxKey)schema.getFactoryService().newByClusterIdxKey();
 		keyClusterIdx.setRequiredClusterId( Buff.getRequiredClusterId() );
 
-		CFSecBuffServiceByHostIdxKey keyHostIdx = schema.getFactoryService().newHostIdxKey();
+		CFSecBuffServiceByHostIdxKey keyHostIdx = (CFSecBuffServiceByHostIdxKey)schema.getFactoryService().newByHostIdxKey();
 		keyHostIdx.setRequiredHostNodeId( Buff.getRequiredHostNodeId() );
 
-		CFSecBuffServiceByTypeIdxKey keyTypeIdx = schema.getFactoryService().newTypeIdxKey();
+		CFSecBuffServiceByTypeIdxKey keyTypeIdx = (CFSecBuffServiceByTypeIdxKey)schema.getFactoryService().newByTypeIdxKey();
 		keyTypeIdx.setRequiredServiceTypeId( Buff.getRequiredServiceTypeId() );
 
-		CFSecBuffServiceByUTypeIdxKey keyUTypeIdx = schema.getFactoryService().newUTypeIdxKey();
+		CFSecBuffServiceByUTypeIdxKey keyUTypeIdx = (CFSecBuffServiceByUTypeIdxKey)schema.getFactoryService().newByUTypeIdxKey();
 		keyUTypeIdx.setRequiredClusterId( Buff.getRequiredClusterId() );
 		keyUTypeIdx.setRequiredHostNodeId( Buff.getRequiredHostNodeId() );
 		keyUTypeIdx.setRequiredServiceTypeId( Buff.getRequiredServiceTypeId() );
 
-		CFSecBuffServiceByUHostPortIdxKey keyUHostPortIdx = schema.getFactoryService().newUHostPortIdxKey();
+		CFSecBuffServiceByUHostPortIdxKey keyUHostPortIdx = (CFSecBuffServiceByUHostPortIdxKey)schema.getFactoryService().newByUHostPortIdxKey();
 		keyUHostPortIdx.setRequiredClusterId( Buff.getRequiredClusterId() );
 		keyUHostPortIdx.setRequiredHostNodeId( Buff.getRequiredHostNodeId() );
 		keyUHostPortIdx.setRequiredHostPort( Buff.getRequiredHostPort() );
@@ -133,12 +133,14 @@ public class CFBamRamServiceTable
 			throw new CFLibUniqueIndexViolationException( getClass(),
 				S_ProcName,
 				"ServiceUTypeIdx",
+				"ServiceUTypeIdx",
 				keyUTypeIdx );
 		}
 
 		if( dictByUHostPortIdx.containsKey( keyUHostPortIdx ) ) {
 			throw new CFLibUniqueIndexViolationException( getClass(),
 				S_ProcName,
+				"ServiceUHostPort",
 				"ServiceUHostPort",
 				keyUHostPortIdx );
 		}
@@ -200,6 +202,7 @@ public class CFBamRamServiceTable
 
 		dictByUHostPortIdx.put( keyUHostPortIdx, Buff );
 
+		return( Buff );
 	}
 
 	public ICFSecService readDerived( ICFSecAuthorization Authorization,
@@ -220,11 +223,9 @@ public class CFBamRamServiceTable
 		CFLibDbKeyHash256 PKey )
 	{
 		final String S_ProcName = "CFBamRamService.readDerived";
-		CFLibDbKeyHash256 key = schema.getFactoryService().newPKey();
-		key.setRequiredServiceId( PKey.getRequiredServiceId() );
 		ICFSecService buff;
-		if( dictByPKey.containsKey( key ) ) {
-			buff = dictByPKey.get( key );
+		if( dictByPKey.containsKey( PKey ) ) {
+			buff = dictByPKey.get( PKey );
 		}
 		else {
 			buff = null;
@@ -247,7 +248,7 @@ public class CFBamRamServiceTable
 		long ClusterId )
 	{
 		final String S_ProcName = "CFBamRamService.readDerivedByClusterIdx";
-		CFSecBuffServiceByClusterIdxKey key = schema.getFactoryService().newClusterIdxKey();
+		CFSecBuffServiceByClusterIdxKey key = (CFSecBuffServiceByClusterIdxKey)schema.getFactoryService().newByClusterIdxKey();
 		key.setRequiredClusterId( ClusterId );
 
 		ICFSecService[] recArray;
@@ -274,7 +275,7 @@ public class CFBamRamServiceTable
 		CFLibDbKeyHash256 HostNodeId )
 	{
 		final String S_ProcName = "CFBamRamService.readDerivedByHostIdx";
-		CFSecBuffServiceByHostIdxKey key = schema.getFactoryService().newHostIdxKey();
+		CFSecBuffServiceByHostIdxKey key = (CFSecBuffServiceByHostIdxKey)schema.getFactoryService().newByHostIdxKey();
 		key.setRequiredHostNodeId( HostNodeId );
 
 		ICFSecService[] recArray;
@@ -301,7 +302,7 @@ public class CFBamRamServiceTable
 		CFLibDbKeyHash256 ServiceTypeId )
 	{
 		final String S_ProcName = "CFBamRamService.readDerivedByTypeIdx";
-		CFSecBuffServiceByTypeIdxKey key = schema.getFactoryService().newTypeIdxKey();
+		CFSecBuffServiceByTypeIdxKey key = (CFSecBuffServiceByTypeIdxKey)schema.getFactoryService().newByTypeIdxKey();
 		key.setRequiredServiceTypeId( ServiceTypeId );
 
 		ICFSecService[] recArray;
@@ -330,7 +331,7 @@ public class CFBamRamServiceTable
 		CFLibDbKeyHash256 ServiceTypeId )
 	{
 		final String S_ProcName = "CFBamRamService.readDerivedByUTypeIdx";
-		CFSecBuffServiceByUTypeIdxKey key = schema.getFactoryService().newUTypeIdxKey();
+		CFSecBuffServiceByUTypeIdxKey key = (CFSecBuffServiceByUTypeIdxKey)schema.getFactoryService().newByUTypeIdxKey();
 		key.setRequiredClusterId( ClusterId );
 		key.setRequiredHostNodeId( HostNodeId );
 		key.setRequiredServiceTypeId( ServiceTypeId );
@@ -351,7 +352,7 @@ public class CFBamRamServiceTable
 		short HostPort )
 	{
 		final String S_ProcName = "CFBamRamService.readDerivedByUHostPortIdx";
-		CFSecBuffServiceByUHostPortIdxKey key = schema.getFactoryService().newUHostPortIdxKey();
+		CFSecBuffServiceByUHostPortIdxKey key = (CFSecBuffServiceByUHostPortIdxKey)schema.getFactoryService().newByUHostPortIdxKey();
 		key.setRequiredClusterId( ClusterId );
 		key.setRequiredHostNodeId( HostNodeId );
 		key.setRequiredHostPort( HostPort );
@@ -370,12 +371,9 @@ public class CFBamRamServiceTable
 		CFLibDbKeyHash256 ServiceId )
 	{
 		final String S_ProcName = "CFBamRamService.readDerivedByIdIdx() ";
-		CFLibDbKeyHash256 key = schema.getFactoryService().newPKey();
-		key.setRequiredServiceId( ServiceId );
-
 		ICFSecService buff;
-		if( dictByPKey.containsKey( key ) ) {
-			buff = dictByPKey.get( key );
+		if( dictByPKey.containsKey( ServiceId ) ) {
+			buff = dictByPKey.get( ServiceId );
 		}
 		else {
 			buff = null;
@@ -388,7 +386,7 @@ public class CFBamRamServiceTable
 	{
 		final String S_ProcName = "CFBamRamService.readBuff";
 		ICFSecService buff = readDerived( Authorization, PKey );
-		if( ( buff != null ) && ( ! buff.getClassCode().equals( "a012" ) ) ) {
+		if( ( buff != null ) && ( buff.getClassCode() != ICFSecService.CLASS_CODE ) ) {
 			buff = null;
 		}
 		return( buff );
@@ -399,7 +397,7 @@ public class CFBamRamServiceTable
 	{
 		final String S_ProcName = "lockBuff";
 		ICFSecService buff = readDerived( Authorization, PKey );
-		if( ( buff != null ) && ( ! buff.getClassCode().equals( "a012" ) ) ) {
+		if( ( buff != null ) && ( buff.getClassCode() != ICFSecService.CLASS_CODE ) ) {
 			buff = null;
 		}
 		return( buff );
@@ -413,7 +411,7 @@ public class CFBamRamServiceTable
 		ICFSecService[] buffList = readAllDerived( Authorization );
 		for( int idx = 0; idx < buffList.length; idx ++ ) {
 			buff = buffList[idx];
-			if( ( buff != null ) && buff.getClassCode().equals( "a012" ) ) {
+			if( ( buff != null ) && ( buff.getClassCode() == ICFSecService.CLASS_CODE ) ) {
 				filteredList.add( buff );
 			}
 		}
@@ -440,7 +438,7 @@ public class CFBamRamServiceTable
 		final String S_ProcName = "CFBamRamService.readBuffByIdIdx() ";
 		ICFSecService buff = readDerivedByIdIdx( Authorization,
 			ServiceId );
-		if( ( buff != null ) && buff.getClassCode().equals( "a012" ) ) {
+		if( ( buff != null ) && ( buff.getClassCode() == ICFSecService.CLASS_CODE ) ) {
 			return( (ICFSecService)buff );
 		}
 		else {
@@ -458,7 +456,7 @@ public class CFBamRamServiceTable
 			ClusterId );
 		for( int idx = 0; idx < buffList.length; idx ++ ) {
 			buff = buffList[idx];
-			if( ( buff != null ) && buff.getClassCode().equals( "a012" ) ) {
+			if( ( buff != null ) && ( buff.getClassCode() == ICFSecService.CLASS_CODE ) ) {
 				filteredList.add( (ICFSecService)buff );
 			}
 		}
@@ -475,7 +473,7 @@ public class CFBamRamServiceTable
 			HostNodeId );
 		for( int idx = 0; idx < buffList.length; idx ++ ) {
 			buff = buffList[idx];
-			if( ( buff != null ) && buff.getClassCode().equals( "a012" ) ) {
+			if( ( buff != null ) && ( buff.getClassCode() == ICFSecService.CLASS_CODE ) ) {
 				filteredList.add( (ICFSecService)buff );
 			}
 		}
@@ -492,7 +490,7 @@ public class CFBamRamServiceTable
 			ServiceTypeId );
 		for( int idx = 0; idx < buffList.length; idx ++ ) {
 			buff = buffList[idx];
-			if( ( buff != null ) && buff.getClassCode().equals( "a012" ) ) {
+			if( ( buff != null ) && ( buff.getClassCode() == ICFSecService.CLASS_CODE ) ) {
 				filteredList.add( (ICFSecService)buff );
 			}
 		}
@@ -509,7 +507,7 @@ public class CFBamRamServiceTable
 			ClusterId,
 			HostNodeId,
 			ServiceTypeId );
-		if( ( buff != null ) && buff.getClassCode().equals( "a012" ) ) {
+		if( ( buff != null ) && ( buff.getClassCode() == ICFSecService.CLASS_CODE ) ) {
 			return( (ICFSecService)buff );
 		}
 		else {
@@ -527,7 +525,7 @@ public class CFBamRamServiceTable
 			ClusterId,
 			HostNodeId,
 			HostPort );
-		if( ( buff != null ) && buff.getClassCode().equals( "a012" ) ) {
+		if( ( buff != null ) && ( buff.getClassCode() == ICFSecService.CLASS_CODE ) ) {
 			return( (ICFSecService)buff );
 		}
 		else {
@@ -592,11 +590,10 @@ public class CFBamRamServiceTable
 		throw new CFLibNotImplementedYetException( getClass(), S_ProcName );
 	}
 
-	public void updateService( ICFSecAuthorization Authorization,
+	public ICFSecService updateService( ICFSecAuthorization Authorization,
 		ICFSecService Buff )
 	{
-		CFLibDbKeyHash256 pkey = schema.getFactoryService().newPKey();
-		pkey.setRequiredServiceId( Buff.getRequiredServiceId() );
+		CFLibDbKeyHash256 pkey = Buff.getPKey();
 		ICFSecService existing = dictByPKey.get( pkey );
 		if( existing == null ) {
 			throw new CFLibStaleCacheDetectedException( getClass(),
@@ -611,40 +608,40 @@ public class CFBamRamServiceTable
 				pkey );
 		}
 		Buff.setRequiredRevision( Buff.getRequiredRevision() + 1 );
-		CFSecBuffServiceByClusterIdxKey existingKeyClusterIdx = schema.getFactoryService().newClusterIdxKey();
+		CFSecBuffServiceByClusterIdxKey existingKeyClusterIdx = (CFSecBuffServiceByClusterIdxKey)schema.getFactoryService().newByClusterIdxKey();
 		existingKeyClusterIdx.setRequiredClusterId( existing.getRequiredClusterId() );
 
-		CFSecBuffServiceByClusterIdxKey newKeyClusterIdx = schema.getFactoryService().newClusterIdxKey();
+		CFSecBuffServiceByClusterIdxKey newKeyClusterIdx = (CFSecBuffServiceByClusterIdxKey)schema.getFactoryService().newByClusterIdxKey();
 		newKeyClusterIdx.setRequiredClusterId( Buff.getRequiredClusterId() );
 
-		CFSecBuffServiceByHostIdxKey existingKeyHostIdx = schema.getFactoryService().newHostIdxKey();
+		CFSecBuffServiceByHostIdxKey existingKeyHostIdx = (CFSecBuffServiceByHostIdxKey)schema.getFactoryService().newByHostIdxKey();
 		existingKeyHostIdx.setRequiredHostNodeId( existing.getRequiredHostNodeId() );
 
-		CFSecBuffServiceByHostIdxKey newKeyHostIdx = schema.getFactoryService().newHostIdxKey();
+		CFSecBuffServiceByHostIdxKey newKeyHostIdx = (CFSecBuffServiceByHostIdxKey)schema.getFactoryService().newByHostIdxKey();
 		newKeyHostIdx.setRequiredHostNodeId( Buff.getRequiredHostNodeId() );
 
-		CFSecBuffServiceByTypeIdxKey existingKeyTypeIdx = schema.getFactoryService().newTypeIdxKey();
+		CFSecBuffServiceByTypeIdxKey existingKeyTypeIdx = (CFSecBuffServiceByTypeIdxKey)schema.getFactoryService().newByTypeIdxKey();
 		existingKeyTypeIdx.setRequiredServiceTypeId( existing.getRequiredServiceTypeId() );
 
-		CFSecBuffServiceByTypeIdxKey newKeyTypeIdx = schema.getFactoryService().newTypeIdxKey();
+		CFSecBuffServiceByTypeIdxKey newKeyTypeIdx = (CFSecBuffServiceByTypeIdxKey)schema.getFactoryService().newByTypeIdxKey();
 		newKeyTypeIdx.setRequiredServiceTypeId( Buff.getRequiredServiceTypeId() );
 
-		CFSecBuffServiceByUTypeIdxKey existingKeyUTypeIdx = schema.getFactoryService().newUTypeIdxKey();
+		CFSecBuffServiceByUTypeIdxKey existingKeyUTypeIdx = (CFSecBuffServiceByUTypeIdxKey)schema.getFactoryService().newByUTypeIdxKey();
 		existingKeyUTypeIdx.setRequiredClusterId( existing.getRequiredClusterId() );
 		existingKeyUTypeIdx.setRequiredHostNodeId( existing.getRequiredHostNodeId() );
 		existingKeyUTypeIdx.setRequiredServiceTypeId( existing.getRequiredServiceTypeId() );
 
-		CFSecBuffServiceByUTypeIdxKey newKeyUTypeIdx = schema.getFactoryService().newUTypeIdxKey();
+		CFSecBuffServiceByUTypeIdxKey newKeyUTypeIdx = (CFSecBuffServiceByUTypeIdxKey)schema.getFactoryService().newByUTypeIdxKey();
 		newKeyUTypeIdx.setRequiredClusterId( Buff.getRequiredClusterId() );
 		newKeyUTypeIdx.setRequiredHostNodeId( Buff.getRequiredHostNodeId() );
 		newKeyUTypeIdx.setRequiredServiceTypeId( Buff.getRequiredServiceTypeId() );
 
-		CFSecBuffServiceByUHostPortIdxKey existingKeyUHostPortIdx = schema.getFactoryService().newUHostPortIdxKey();
+		CFSecBuffServiceByUHostPortIdxKey existingKeyUHostPortIdx = (CFSecBuffServiceByUHostPortIdxKey)schema.getFactoryService().newByUHostPortIdxKey();
 		existingKeyUHostPortIdx.setRequiredClusterId( existing.getRequiredClusterId() );
 		existingKeyUHostPortIdx.setRequiredHostNodeId( existing.getRequiredHostNodeId() );
 		existingKeyUHostPortIdx.setRequiredHostPort( existing.getRequiredHostPort() );
 
-		CFSecBuffServiceByUHostPortIdxKey newKeyUHostPortIdx = schema.getFactoryService().newUHostPortIdxKey();
+		CFSecBuffServiceByUHostPortIdxKey newKeyUHostPortIdx = (CFSecBuffServiceByUHostPortIdxKey)schema.getFactoryService().newByUHostPortIdxKey();
 		newKeyUHostPortIdx.setRequiredClusterId( Buff.getRequiredClusterId() );
 		newKeyUHostPortIdx.setRequiredHostNodeId( Buff.getRequiredHostNodeId() );
 		newKeyUHostPortIdx.setRequiredHostPort( Buff.getRequiredHostPort() );
@@ -656,6 +653,7 @@ public class CFBamRamServiceTable
 				throw new CFLibUniqueIndexViolationException( getClass(),
 					"updateService",
 					"ServiceUTypeIdx",
+					"ServiceUTypeIdx",
 					newKeyUTypeIdx );
 			}
 		}
@@ -664,6 +662,7 @@ public class CFBamRamServiceTable
 			if( dictByUHostPortIdx.containsKey( newKeyUHostPortIdx ) ) {
 				throw new CFLibUniqueIndexViolationException( getClass(),
 					"updateService",
+					"ServiceUHostPort",
 					"ServiceUHostPort",
 					newKeyUHostPortIdx );
 			}
@@ -740,6 +739,7 @@ public class CFBamRamServiceTable
 		dictByUHostPortIdx.remove( existingKeyUHostPortIdx );
 		dictByUHostPortIdx.put( newKeyUHostPortIdx, Buff );
 
+		return(Buff);
 	}
 
 	public void deleteService( ICFSecAuthorization Authorization,
@@ -759,21 +759,21 @@ public class CFBamRamServiceTable
 				"deleteService",
 				pkey );
 		}
-		CFSecBuffServiceByClusterIdxKey keyClusterIdx = schema.getFactoryService().newClusterIdxKey();
+		CFSecBuffServiceByClusterIdxKey keyClusterIdx = (CFSecBuffServiceByClusterIdxKey)schema.getFactoryService().newByClusterIdxKey();
 		keyClusterIdx.setRequiredClusterId( existing.getRequiredClusterId() );
 
-		CFSecBuffServiceByHostIdxKey keyHostIdx = schema.getFactoryService().newHostIdxKey();
+		CFSecBuffServiceByHostIdxKey keyHostIdx = (CFSecBuffServiceByHostIdxKey)schema.getFactoryService().newByHostIdxKey();
 		keyHostIdx.setRequiredHostNodeId( existing.getRequiredHostNodeId() );
 
-		CFSecBuffServiceByTypeIdxKey keyTypeIdx = schema.getFactoryService().newTypeIdxKey();
+		CFSecBuffServiceByTypeIdxKey keyTypeIdx = (CFSecBuffServiceByTypeIdxKey)schema.getFactoryService().newByTypeIdxKey();
 		keyTypeIdx.setRequiredServiceTypeId( existing.getRequiredServiceTypeId() );
 
-		CFSecBuffServiceByUTypeIdxKey keyUTypeIdx = schema.getFactoryService().newUTypeIdxKey();
+		CFSecBuffServiceByUTypeIdxKey keyUTypeIdx = (CFSecBuffServiceByUTypeIdxKey)schema.getFactoryService().newByUTypeIdxKey();
 		keyUTypeIdx.setRequiredClusterId( existing.getRequiredClusterId() );
 		keyUTypeIdx.setRequiredHostNodeId( existing.getRequiredHostNodeId() );
 		keyUTypeIdx.setRequiredServiceTypeId( existing.getRequiredServiceTypeId() );
 
-		CFSecBuffServiceByUHostPortIdxKey keyUHostPortIdx = schema.getFactoryService().newUHostPortIdxKey();
+		CFSecBuffServiceByUHostPortIdxKey keyUHostPortIdx = (CFSecBuffServiceByUHostPortIdxKey)schema.getFactoryService().newByUHostPortIdxKey();
 		keyUHostPortIdx.setRequiredClusterId( existing.getRequiredClusterId() );
 		keyUHostPortIdx.setRequiredHostNodeId( existing.getRequiredHostNodeId() );
 		keyUHostPortIdx.setRequiredHostPort( existing.getRequiredHostPort() );
@@ -799,14 +799,6 @@ public class CFBamRamServiceTable
 		dictByUHostPortIdx.remove( keyUHostPortIdx );
 
 	}
-	public void deleteServiceByIdIdx( ICFSecAuthorization Authorization,
-		CFLibDbKeyHash256 argServiceId )
-	{
-		CFLibDbKeyHash256 key = schema.getFactoryService().newPKey();
-		key.setRequiredServiceId( argServiceId );
-		deleteServiceByIdIdx( Authorization, key );
-	}
-
 	public void deleteServiceByIdIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argKey )
 	{
@@ -836,7 +828,7 @@ public class CFBamRamServiceTable
 	public void deleteServiceByClusterIdx( ICFSecAuthorization Authorization,
 		long argClusterId )
 	{
-		CFSecBuffServiceByClusterIdxKey key = schema.getFactoryService().newClusterIdxKey();
+		CFSecBuffServiceByClusterIdxKey key = (CFSecBuffServiceByClusterIdxKey)schema.getFactoryService().newByClusterIdxKey();
 		key.setRequiredClusterId( argClusterId );
 		deleteServiceByClusterIdx( Authorization, key );
 	}
@@ -870,7 +862,7 @@ public class CFBamRamServiceTable
 	public void deleteServiceByHostIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argHostNodeId )
 	{
-		CFSecBuffServiceByHostIdxKey key = schema.getFactoryService().newHostIdxKey();
+		CFSecBuffServiceByHostIdxKey key = (CFSecBuffServiceByHostIdxKey)schema.getFactoryService().newByHostIdxKey();
 		key.setRequiredHostNodeId( argHostNodeId );
 		deleteServiceByHostIdx( Authorization, key );
 	}
@@ -904,7 +896,7 @@ public class CFBamRamServiceTable
 	public void deleteServiceByTypeIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argServiceTypeId )
 	{
-		CFSecBuffServiceByTypeIdxKey key = schema.getFactoryService().newTypeIdxKey();
+		CFSecBuffServiceByTypeIdxKey key = (CFSecBuffServiceByTypeIdxKey)schema.getFactoryService().newByTypeIdxKey();
 		key.setRequiredServiceTypeId( argServiceTypeId );
 		deleteServiceByTypeIdx( Authorization, key );
 	}
@@ -940,7 +932,7 @@ public class CFBamRamServiceTable
 		CFLibDbKeyHash256 argHostNodeId,
 		CFLibDbKeyHash256 argServiceTypeId )
 	{
-		CFSecBuffServiceByUTypeIdxKey key = schema.getFactoryService().newUTypeIdxKey();
+		CFSecBuffServiceByUTypeIdxKey key = (CFSecBuffServiceByUTypeIdxKey)schema.getFactoryService().newByUTypeIdxKey();
 		key.setRequiredClusterId( argClusterId );
 		key.setRequiredHostNodeId( argHostNodeId );
 		key.setRequiredServiceTypeId( argServiceTypeId );
@@ -980,7 +972,7 @@ public class CFBamRamServiceTable
 		CFLibDbKeyHash256 argHostNodeId,
 		short argHostPort )
 	{
-		CFSecBuffServiceByUHostPortIdxKey key = schema.getFactoryService().newUHostPortIdxKey();
+		CFSecBuffServiceByUHostPortIdxKey key = (CFSecBuffServiceByUHostPortIdxKey)schema.getFactoryService().newByUHostPortIdxKey();
 		key.setRequiredClusterId( argClusterId );
 		key.setRequiredHostNodeId( argHostNodeId );
 		key.setRequiredHostPort( argHostPort );

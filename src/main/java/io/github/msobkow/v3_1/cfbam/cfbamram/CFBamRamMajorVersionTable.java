@@ -87,20 +87,20 @@ public class CFBamRamMajorVersionTable
 		schema = argSchema;
 	}
 
-	public void createMajorVersion( ICFSecAuthorization Authorization,
+	public ICFIntMajorVersion createMajorVersion( ICFSecAuthorization Authorization,
 		ICFIntMajorVersion Buff )
 	{
 		final String S_ProcName = "createMajorVersion";
-		CFLibDbKeyHash256 pkey = schema.getFactoryMajorVersion().newPKey();
-		pkey.setRequiredId( schema.nextMajorVersionIdGen() );
-		Buff.setRequiredId( pkey.getRequiredId() );
-		CFIntBuffMajorVersionByTenantIdxKey keyTenantIdx = schema.getFactoryMajorVersion().newTenantIdxKey();
+		CFLibDbKeyHash256 pkey;
+		pkey = schema.nextMajorVersionIdGen();
+		Buff.setRequiredId( pkey );
+		CFIntBuffMajorVersionByTenantIdxKey keyTenantIdx = (CFIntBuffMajorVersionByTenantIdxKey)schema.getFactoryMajorVersion().newByTenantIdxKey();
 		keyTenantIdx.setRequiredTenantId( Buff.getRequiredTenantId() );
 
-		CFIntBuffMajorVersionBySubProjectIdxKey keySubProjectIdx = schema.getFactoryMajorVersion().newSubProjectIdxKey();
+		CFIntBuffMajorVersionBySubProjectIdxKey keySubProjectIdx = (CFIntBuffMajorVersionBySubProjectIdxKey)schema.getFactoryMajorVersion().newBySubProjectIdxKey();
 		keySubProjectIdx.setRequiredSubProjectId( Buff.getRequiredSubProjectId() );
 
-		CFIntBuffMajorVersionByNameIdxKey keyNameIdx = schema.getFactoryMajorVersion().newNameIdxKey();
+		CFIntBuffMajorVersionByNameIdxKey keyNameIdx = (CFIntBuffMajorVersionByNameIdxKey)schema.getFactoryMajorVersion().newByNameIdxKey();
 		keyNameIdx.setRequiredSubProjectId( Buff.getRequiredSubProjectId() );
 		keyNameIdx.setRequiredName( Buff.getRequiredName() );
 
@@ -113,6 +113,7 @@ public class CFBamRamMajorVersionTable
 		if( dictByNameIdx.containsKey( keyNameIdx ) ) {
 			throw new CFLibUniqueIndexViolationException( getClass(),
 				S_ProcName,
+				"MajorVersionNameIdx",
 				"MajorVersionNameIdx",
 				keyNameIdx );
 		}
@@ -179,6 +180,7 @@ public class CFBamRamMajorVersionTable
 
 		dictByNameIdx.put( keyNameIdx, Buff );
 
+		return( Buff );
 	}
 
 	public ICFIntMajorVersion readDerived( ICFSecAuthorization Authorization,
@@ -199,11 +201,9 @@ public class CFBamRamMajorVersionTable
 		CFLibDbKeyHash256 PKey )
 	{
 		final String S_ProcName = "CFBamRamMajorVersion.readDerived";
-		CFLibDbKeyHash256 key = schema.getFactoryMajorVersion().newPKey();
-		key.setRequiredId( PKey.getRequiredId() );
 		ICFIntMajorVersion buff;
-		if( dictByPKey.containsKey( key ) ) {
-			buff = dictByPKey.get( key );
+		if( dictByPKey.containsKey( PKey ) ) {
+			buff = dictByPKey.get( PKey );
 		}
 		else {
 			buff = null;
@@ -226,7 +226,7 @@ public class CFBamRamMajorVersionTable
 		CFLibDbKeyHash256 TenantId )
 	{
 		final String S_ProcName = "CFBamRamMajorVersion.readDerivedByTenantIdx";
-		CFIntBuffMajorVersionByTenantIdxKey key = schema.getFactoryMajorVersion().newTenantIdxKey();
+		CFIntBuffMajorVersionByTenantIdxKey key = (CFIntBuffMajorVersionByTenantIdxKey)schema.getFactoryMajorVersion().newByTenantIdxKey();
 		key.setRequiredTenantId( TenantId );
 
 		ICFIntMajorVersion[] recArray;
@@ -253,7 +253,7 @@ public class CFBamRamMajorVersionTable
 		CFLibDbKeyHash256 SubProjectId )
 	{
 		final String S_ProcName = "CFBamRamMajorVersion.readDerivedBySubProjectIdx";
-		CFIntBuffMajorVersionBySubProjectIdxKey key = schema.getFactoryMajorVersion().newSubProjectIdxKey();
+		CFIntBuffMajorVersionBySubProjectIdxKey key = (CFIntBuffMajorVersionBySubProjectIdxKey)schema.getFactoryMajorVersion().newBySubProjectIdxKey();
 		key.setRequiredSubProjectId( SubProjectId );
 
 		ICFIntMajorVersion[] recArray;
@@ -281,7 +281,7 @@ public class CFBamRamMajorVersionTable
 		String Name )
 	{
 		final String S_ProcName = "CFBamRamMajorVersion.readDerivedByNameIdx";
-		CFIntBuffMajorVersionByNameIdxKey key = schema.getFactoryMajorVersion().newNameIdxKey();
+		CFIntBuffMajorVersionByNameIdxKey key = (CFIntBuffMajorVersionByNameIdxKey)schema.getFactoryMajorVersion().newByNameIdxKey();
 		key.setRequiredSubProjectId( SubProjectId );
 		key.setRequiredName( Name );
 
@@ -299,12 +299,9 @@ public class CFBamRamMajorVersionTable
 		CFLibDbKeyHash256 Id )
 	{
 		final String S_ProcName = "CFBamRamMajorVersion.readDerivedByIdIdx() ";
-		CFLibDbKeyHash256 key = schema.getFactoryMajorVersion().newPKey();
-		key.setRequiredId( Id );
-
 		ICFIntMajorVersion buff;
-		if( dictByPKey.containsKey( key ) ) {
-			buff = dictByPKey.get( key );
+		if( dictByPKey.containsKey( Id ) ) {
+			buff = dictByPKey.get( Id );
 		}
 		else {
 			buff = null;
@@ -317,7 +314,7 @@ public class CFBamRamMajorVersionTable
 	{
 		final String S_ProcName = "CFBamRamMajorVersion.readBuff";
 		ICFIntMajorVersion buff = readDerived( Authorization, PKey );
-		if( ( buff != null ) && ( ! buff.getClassCode().equals( "a102" ) ) ) {
+		if( ( buff != null ) && ( buff.getClassCode() != ICFIntMajorVersion.CLASS_CODE ) ) {
 			buff = null;
 		}
 		return( buff );
@@ -328,7 +325,7 @@ public class CFBamRamMajorVersionTable
 	{
 		final String S_ProcName = "lockBuff";
 		ICFIntMajorVersion buff = readDerived( Authorization, PKey );
-		if( ( buff != null ) && ( ! buff.getClassCode().equals( "a102" ) ) ) {
+		if( ( buff != null ) && ( buff.getClassCode() != ICFIntMajorVersion.CLASS_CODE ) ) {
 			buff = null;
 		}
 		return( buff );
@@ -342,7 +339,7 @@ public class CFBamRamMajorVersionTable
 		ICFIntMajorVersion[] buffList = readAllDerived( Authorization );
 		for( int idx = 0; idx < buffList.length; idx ++ ) {
 			buff = buffList[idx];
-			if( ( buff != null ) && buff.getClassCode().equals( "a102" ) ) {
+			if( ( buff != null ) && ( buff.getClassCode() == ICFIntMajorVersion.CLASS_CODE ) ) {
 				filteredList.add( buff );
 			}
 		}
@@ -355,7 +352,7 @@ public class CFBamRamMajorVersionTable
 		final String S_ProcName = "CFBamRamMajorVersion.readBuffByIdIdx() ";
 		ICFIntMajorVersion buff = readDerivedByIdIdx( Authorization,
 			Id );
-		if( ( buff != null ) && buff.getClassCode().equals( "a102" ) ) {
+		if( ( buff != null ) && ( buff.getClassCode() == ICFIntMajorVersion.CLASS_CODE ) ) {
 			return( (ICFIntMajorVersion)buff );
 		}
 		else {
@@ -373,7 +370,7 @@ public class CFBamRamMajorVersionTable
 			TenantId );
 		for( int idx = 0; idx < buffList.length; idx ++ ) {
 			buff = buffList[idx];
-			if( ( buff != null ) && buff.getClassCode().equals( "a102" ) ) {
+			if( ( buff != null ) && ( buff.getClassCode() == ICFIntMajorVersion.CLASS_CODE ) ) {
 				filteredList.add( (ICFIntMajorVersion)buff );
 			}
 		}
@@ -390,7 +387,7 @@ public class CFBamRamMajorVersionTable
 			SubProjectId );
 		for( int idx = 0; idx < buffList.length; idx ++ ) {
 			buff = buffList[idx];
-			if( ( buff != null ) && buff.getClassCode().equals( "a102" ) ) {
+			if( ( buff != null ) && ( buff.getClassCode() == ICFIntMajorVersion.CLASS_CODE ) ) {
 				filteredList.add( (ICFIntMajorVersion)buff );
 			}
 		}
@@ -405,7 +402,7 @@ public class CFBamRamMajorVersionTable
 		ICFIntMajorVersion buff = readDerivedByNameIdx( Authorization,
 			SubProjectId,
 			Name );
-		if( ( buff != null ) && buff.getClassCode().equals( "a102" ) ) {
+		if( ( buff != null ) && ( buff.getClassCode() == ICFIntMajorVersion.CLASS_CODE ) ) {
 			return( (ICFIntMajorVersion)buff );
 		}
 		else {
@@ -413,11 +410,10 @@ public class CFBamRamMajorVersionTable
 		}
 	}
 
-	public void updateMajorVersion( ICFSecAuthorization Authorization,
+	public ICFIntMajorVersion updateMajorVersion( ICFSecAuthorization Authorization,
 		ICFIntMajorVersion Buff )
 	{
-		CFLibDbKeyHash256 pkey = schema.getFactoryMajorVersion().newPKey();
-		pkey.setRequiredId( Buff.getRequiredId() );
+		CFLibDbKeyHash256 pkey = Buff.getPKey();
 		ICFIntMajorVersion existing = dictByPKey.get( pkey );
 		if( existing == null ) {
 			throw new CFLibStaleCacheDetectedException( getClass(),
@@ -432,23 +428,23 @@ public class CFBamRamMajorVersionTable
 				pkey );
 		}
 		Buff.setRequiredRevision( Buff.getRequiredRevision() + 1 );
-		CFIntBuffMajorVersionByTenantIdxKey existingKeyTenantIdx = schema.getFactoryMajorVersion().newTenantIdxKey();
+		CFIntBuffMajorVersionByTenantIdxKey existingKeyTenantIdx = (CFIntBuffMajorVersionByTenantIdxKey)schema.getFactoryMajorVersion().newByTenantIdxKey();
 		existingKeyTenantIdx.setRequiredTenantId( existing.getRequiredTenantId() );
 
-		CFIntBuffMajorVersionByTenantIdxKey newKeyTenantIdx = schema.getFactoryMajorVersion().newTenantIdxKey();
+		CFIntBuffMajorVersionByTenantIdxKey newKeyTenantIdx = (CFIntBuffMajorVersionByTenantIdxKey)schema.getFactoryMajorVersion().newByTenantIdxKey();
 		newKeyTenantIdx.setRequiredTenantId( Buff.getRequiredTenantId() );
 
-		CFIntBuffMajorVersionBySubProjectIdxKey existingKeySubProjectIdx = schema.getFactoryMajorVersion().newSubProjectIdxKey();
+		CFIntBuffMajorVersionBySubProjectIdxKey existingKeySubProjectIdx = (CFIntBuffMajorVersionBySubProjectIdxKey)schema.getFactoryMajorVersion().newBySubProjectIdxKey();
 		existingKeySubProjectIdx.setRequiredSubProjectId( existing.getRequiredSubProjectId() );
 
-		CFIntBuffMajorVersionBySubProjectIdxKey newKeySubProjectIdx = schema.getFactoryMajorVersion().newSubProjectIdxKey();
+		CFIntBuffMajorVersionBySubProjectIdxKey newKeySubProjectIdx = (CFIntBuffMajorVersionBySubProjectIdxKey)schema.getFactoryMajorVersion().newBySubProjectIdxKey();
 		newKeySubProjectIdx.setRequiredSubProjectId( Buff.getRequiredSubProjectId() );
 
-		CFIntBuffMajorVersionByNameIdxKey existingKeyNameIdx = schema.getFactoryMajorVersion().newNameIdxKey();
+		CFIntBuffMajorVersionByNameIdxKey existingKeyNameIdx = (CFIntBuffMajorVersionByNameIdxKey)schema.getFactoryMajorVersion().newByNameIdxKey();
 		existingKeyNameIdx.setRequiredSubProjectId( existing.getRequiredSubProjectId() );
 		existingKeyNameIdx.setRequiredName( existing.getRequiredName() );
 
-		CFIntBuffMajorVersionByNameIdxKey newKeyNameIdx = schema.getFactoryMajorVersion().newNameIdxKey();
+		CFIntBuffMajorVersionByNameIdxKey newKeyNameIdx = (CFIntBuffMajorVersionByNameIdxKey)schema.getFactoryMajorVersion().newByNameIdxKey();
 		newKeyNameIdx.setRequiredSubProjectId( Buff.getRequiredSubProjectId() );
 		newKeyNameIdx.setRequiredName( Buff.getRequiredName() );
 
@@ -458,6 +454,7 @@ public class CFBamRamMajorVersionTable
 			if( dictByNameIdx.containsKey( newKeyNameIdx ) ) {
 				throw new CFLibUniqueIndexViolationException( getClass(),
 					"updateMajorVersion",
+					"MajorVersionNameIdx",
 					"MajorVersionNameIdx",
 					newKeyNameIdx );
 			}
@@ -535,6 +532,7 @@ public class CFBamRamMajorVersionTable
 		dictByNameIdx.remove( existingKeyNameIdx );
 		dictByNameIdx.put( newKeyNameIdx, Buff );
 
+		return(Buff);
 	}
 
 	public void deleteMajorVersion( ICFSecAuthorization Authorization,
@@ -556,13 +554,13 @@ public class CFBamRamMajorVersionTable
 		}
 					schema.getTableMinorVersion().deleteMinorVersionByMajorVerIdx( Authorization,
 						existing.getRequiredId() );
-		CFIntBuffMajorVersionByTenantIdxKey keyTenantIdx = schema.getFactoryMajorVersion().newTenantIdxKey();
+		CFIntBuffMajorVersionByTenantIdxKey keyTenantIdx = (CFIntBuffMajorVersionByTenantIdxKey)schema.getFactoryMajorVersion().newByTenantIdxKey();
 		keyTenantIdx.setRequiredTenantId( existing.getRequiredTenantId() );
 
-		CFIntBuffMajorVersionBySubProjectIdxKey keySubProjectIdx = schema.getFactoryMajorVersion().newSubProjectIdxKey();
+		CFIntBuffMajorVersionBySubProjectIdxKey keySubProjectIdx = (CFIntBuffMajorVersionBySubProjectIdxKey)schema.getFactoryMajorVersion().newBySubProjectIdxKey();
 		keySubProjectIdx.setRequiredSubProjectId( existing.getRequiredSubProjectId() );
 
-		CFIntBuffMajorVersionByNameIdxKey keyNameIdx = schema.getFactoryMajorVersion().newNameIdxKey();
+		CFIntBuffMajorVersionByNameIdxKey keyNameIdx = (CFIntBuffMajorVersionByNameIdxKey)schema.getFactoryMajorVersion().newByNameIdxKey();
 		keyNameIdx.setRequiredSubProjectId( existing.getRequiredSubProjectId() );
 		keyNameIdx.setRequiredName( existing.getRequiredName() );
 
@@ -582,14 +580,6 @@ public class CFBamRamMajorVersionTable
 		dictByNameIdx.remove( keyNameIdx );
 
 	}
-	public void deleteMajorVersionByIdIdx( ICFSecAuthorization Authorization,
-		CFLibDbKeyHash256 argId )
-	{
-		CFLibDbKeyHash256 key = schema.getFactoryMajorVersion().newPKey();
-		key.setRequiredId( argId );
-		deleteMajorVersionByIdIdx( Authorization, key );
-	}
-
 	public void deleteMajorVersionByIdIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argKey )
 	{
@@ -619,7 +609,7 @@ public class CFBamRamMajorVersionTable
 	public void deleteMajorVersionByTenantIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argTenantId )
 	{
-		CFIntBuffMajorVersionByTenantIdxKey key = schema.getFactoryMajorVersion().newTenantIdxKey();
+		CFIntBuffMajorVersionByTenantIdxKey key = (CFIntBuffMajorVersionByTenantIdxKey)schema.getFactoryMajorVersion().newByTenantIdxKey();
 		key.setRequiredTenantId( argTenantId );
 		deleteMajorVersionByTenantIdx( Authorization, key );
 	}
@@ -653,7 +643,7 @@ public class CFBamRamMajorVersionTable
 	public void deleteMajorVersionBySubProjectIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argSubProjectId )
 	{
-		CFIntBuffMajorVersionBySubProjectIdxKey key = schema.getFactoryMajorVersion().newSubProjectIdxKey();
+		CFIntBuffMajorVersionBySubProjectIdxKey key = (CFIntBuffMajorVersionBySubProjectIdxKey)schema.getFactoryMajorVersion().newBySubProjectIdxKey();
 		key.setRequiredSubProjectId( argSubProjectId );
 		deleteMajorVersionBySubProjectIdx( Authorization, key );
 	}
@@ -688,7 +678,7 @@ public class CFBamRamMajorVersionTable
 		CFLibDbKeyHash256 argSubProjectId,
 		String argName )
 	{
-		CFIntBuffMajorVersionByNameIdxKey key = schema.getFactoryMajorVersion().newNameIdxKey();
+		CFIntBuffMajorVersionByNameIdxKey key = (CFIntBuffMajorVersionByNameIdxKey)schema.getFactoryMajorVersion().newByNameIdxKey();
 		key.setRequiredSubProjectId( argSubProjectId );
 		key.setRequiredName( argName );
 		deleteMajorVersionByNameIdx( Authorization, key );

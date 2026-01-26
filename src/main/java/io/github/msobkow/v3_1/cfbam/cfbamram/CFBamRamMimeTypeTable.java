@@ -75,14 +75,14 @@ public class CFBamRamMimeTypeTable
 		schema = argSchema;
 	}
 
-	public void createMimeType( ICFSecAuthorization Authorization,
+	public ICFIntMimeType createMimeType( ICFSecAuthorization Authorization,
 		ICFIntMimeType Buff )
 	{
 		final String S_ProcName = "createMimeType";
-		Integer pkey = schema.getFactoryMimeType().newPKey();
-		pkey.setRequiredMimeTypeId( schema.nextMimeTypeIdGen() );
-		Buff.setRequiredMimeTypeId( pkey.getRequiredMimeTypeId() );
-		CFIntBuffMimeTypeByUNameIdxKey keyUNameIdx = schema.getFactoryMimeType().newUNameIdxKey();
+		Integer pkey;
+		pkey = schema.nextMimeTypeIdGen();
+		Buff.setRequiredMimeTypeId( pkey );
+		CFIntBuffMimeTypeByUNameIdxKey keyUNameIdx = (CFIntBuffMimeTypeByUNameIdxKey)schema.getFactoryMimeType().newByUNameIdxKey();
 		keyUNameIdx.setRequiredName( Buff.getRequiredName() );
 
 		// Validate unique indexes
@@ -95,6 +95,7 @@ public class CFBamRamMimeTypeTable
 			throw new CFLibUniqueIndexViolationException( getClass(),
 				S_ProcName,
 				"MimeTypeUNameIdx",
+				"MimeTypeUNameIdx",
 				keyUNameIdx );
 		}
 
@@ -106,6 +107,7 @@ public class CFBamRamMimeTypeTable
 
 		dictByUNameIdx.put( keyUNameIdx, Buff );
 
+		return( Buff );
 	}
 
 	public ICFIntMimeType readDerived( ICFSecAuthorization Authorization,
@@ -126,11 +128,9 @@ public class CFBamRamMimeTypeTable
 		Integer PKey )
 	{
 		final String S_ProcName = "CFBamRamMimeType.readDerived";
-		Integer key = schema.getFactoryMimeType().newPKey();
-		key.setRequiredMimeTypeId( PKey.getRequiredMimeTypeId() );
 		ICFIntMimeType buff;
-		if( dictByPKey.containsKey( key ) ) {
-			buff = dictByPKey.get( key );
+		if( dictByPKey.containsKey( PKey ) ) {
+			buff = dictByPKey.get( PKey );
 		}
 		else {
 			buff = null;
@@ -153,7 +153,7 @@ public class CFBamRamMimeTypeTable
 		String Name )
 	{
 		final String S_ProcName = "CFBamRamMimeType.readDerivedByUNameIdx";
-		CFIntBuffMimeTypeByUNameIdxKey key = schema.getFactoryMimeType().newUNameIdxKey();
+		CFIntBuffMimeTypeByUNameIdxKey key = (CFIntBuffMimeTypeByUNameIdxKey)schema.getFactoryMimeType().newByUNameIdxKey();
 		key.setRequiredName( Name );
 
 		ICFIntMimeType buff;
@@ -170,12 +170,9 @@ public class CFBamRamMimeTypeTable
 		int MimeTypeId )
 	{
 		final String S_ProcName = "CFBamRamMimeType.readDerivedByIdIdx() ";
-		Integer key = schema.getFactoryMimeType().newPKey();
-		key.setRequiredMimeTypeId( MimeTypeId );
-
 		ICFIntMimeType buff;
-		if( dictByPKey.containsKey( key ) ) {
-			buff = dictByPKey.get( key );
+		if( dictByPKey.containsKey( MimeTypeId ) ) {
+			buff = dictByPKey.get( MimeTypeId );
 		}
 		else {
 			buff = null;
@@ -188,7 +185,7 @@ public class CFBamRamMimeTypeTable
 	{
 		final String S_ProcName = "CFBamRamMimeType.readBuff";
 		ICFIntMimeType buff = readDerived( Authorization, PKey );
-		if( ( buff != null ) && ( ! buff.getClassCode().equals( "a103" ) ) ) {
+		if( ( buff != null ) && ( buff.getClassCode() != ICFIntMimeType.CLASS_CODE ) ) {
 			buff = null;
 		}
 		return( buff );
@@ -199,7 +196,7 @@ public class CFBamRamMimeTypeTable
 	{
 		final String S_ProcName = "lockBuff";
 		ICFIntMimeType buff = readDerived( Authorization, PKey );
-		if( ( buff != null ) && ( ! buff.getClassCode().equals( "a103" ) ) ) {
+		if( ( buff != null ) && ( buff.getClassCode() != ICFIntMimeType.CLASS_CODE ) ) {
 			buff = null;
 		}
 		return( buff );
@@ -213,7 +210,7 @@ public class CFBamRamMimeTypeTable
 		ICFIntMimeType[] buffList = readAllDerived( Authorization );
 		for( int idx = 0; idx < buffList.length; idx ++ ) {
 			buff = buffList[idx];
-			if( ( buff != null ) && buff.getClassCode().equals( "a103" ) ) {
+			if( ( buff != null ) && ( buff.getClassCode() == ICFIntMimeType.CLASS_CODE ) ) {
 				filteredList.add( buff );
 			}
 		}
@@ -226,7 +223,7 @@ public class CFBamRamMimeTypeTable
 		final String S_ProcName = "CFBamRamMimeType.readBuffByIdIdx() ";
 		ICFIntMimeType buff = readDerivedByIdIdx( Authorization,
 			MimeTypeId );
-		if( ( buff != null ) && buff.getClassCode().equals( "a103" ) ) {
+		if( ( buff != null ) && ( buff.getClassCode() == ICFIntMimeType.CLASS_CODE ) ) {
 			return( (ICFIntMimeType)buff );
 		}
 		else {
@@ -240,7 +237,7 @@ public class CFBamRamMimeTypeTable
 		final String S_ProcName = "CFBamRamMimeType.readBuffByUNameIdx() ";
 		ICFIntMimeType buff = readDerivedByUNameIdx( Authorization,
 			Name );
-		if( ( buff != null ) && buff.getClassCode().equals( "a103" ) ) {
+		if( ( buff != null ) && ( buff.getClassCode() == ICFIntMimeType.CLASS_CODE ) ) {
 			return( (ICFIntMimeType)buff );
 		}
 		else {
@@ -248,11 +245,10 @@ public class CFBamRamMimeTypeTable
 		}
 	}
 
-	public void updateMimeType( ICFSecAuthorization Authorization,
+	public ICFIntMimeType updateMimeType( ICFSecAuthorization Authorization,
 		ICFIntMimeType Buff )
 	{
-		Integer pkey = schema.getFactoryMimeType().newPKey();
-		pkey.setRequiredMimeTypeId( Buff.getRequiredMimeTypeId() );
+		Integer pkey = Buff.getPKey();
 		ICFIntMimeType existing = dictByPKey.get( pkey );
 		if( existing == null ) {
 			throw new CFLibStaleCacheDetectedException( getClass(),
@@ -267,10 +263,10 @@ public class CFBamRamMimeTypeTable
 				pkey );
 		}
 		Buff.setRequiredRevision( Buff.getRequiredRevision() + 1 );
-		CFIntBuffMimeTypeByUNameIdxKey existingKeyUNameIdx = schema.getFactoryMimeType().newUNameIdxKey();
+		CFIntBuffMimeTypeByUNameIdxKey existingKeyUNameIdx = (CFIntBuffMimeTypeByUNameIdxKey)schema.getFactoryMimeType().newByUNameIdxKey();
 		existingKeyUNameIdx.setRequiredName( existing.getRequiredName() );
 
-		CFIntBuffMimeTypeByUNameIdxKey newKeyUNameIdx = schema.getFactoryMimeType().newUNameIdxKey();
+		CFIntBuffMimeTypeByUNameIdxKey newKeyUNameIdx = (CFIntBuffMimeTypeByUNameIdxKey)schema.getFactoryMimeType().newByUNameIdxKey();
 		newKeyUNameIdx.setRequiredName( Buff.getRequiredName() );
 
 		// Check unique indexes
@@ -279,6 +275,7 @@ public class CFBamRamMimeTypeTable
 			if( dictByUNameIdx.containsKey( newKeyUNameIdx ) ) {
 				throw new CFLibUniqueIndexViolationException( getClass(),
 					"updateMimeType",
+					"MimeTypeUNameIdx",
 					"MimeTypeUNameIdx",
 					newKeyUNameIdx );
 			}
@@ -296,6 +293,7 @@ public class CFBamRamMimeTypeTable
 		dictByUNameIdx.remove( existingKeyUNameIdx );
 		dictByUNameIdx.put( newKeyUNameIdx, Buff );
 
+		return(Buff);
 	}
 
 	public void deleteMimeType( ICFSecAuthorization Authorization,
@@ -315,7 +313,7 @@ public class CFBamRamMimeTypeTable
 				"deleteMimeType",
 				pkey );
 		}
-		CFIntBuffMimeTypeByUNameIdxKey keyUNameIdx = schema.getFactoryMimeType().newUNameIdxKey();
+		CFIntBuffMimeTypeByUNameIdxKey keyUNameIdx = (CFIntBuffMimeTypeByUNameIdxKey)schema.getFactoryMimeType().newByUNameIdxKey();
 		keyUNameIdx.setRequiredName( existing.getRequiredName() );
 
 		// Validate reverse foreign keys
@@ -328,14 +326,6 @@ public class CFBamRamMimeTypeTable
 		dictByUNameIdx.remove( keyUNameIdx );
 
 	}
-	public void deleteMimeTypeByIdIdx( ICFSecAuthorization Authorization,
-		int argMimeTypeId )
-	{
-		Integer key = schema.getFactoryMimeType().newPKey();
-		key.setRequiredMimeTypeId( argMimeTypeId );
-		deleteMimeTypeByIdIdx( Authorization, key );
-	}
-
 	public void deleteMimeTypeByIdIdx( ICFSecAuthorization Authorization,
 		Integer argKey )
 	{
@@ -365,7 +355,7 @@ public class CFBamRamMimeTypeTable
 	public void deleteMimeTypeByUNameIdx( ICFSecAuthorization Authorization,
 		String argName )
 	{
-		CFIntBuffMimeTypeByUNameIdxKey key = schema.getFactoryMimeType().newUNameIdxKey();
+		CFIntBuffMimeTypeByUNameIdxKey key = (CFIntBuffMimeTypeByUNameIdxKey)schema.getFactoryMimeType().newByUNameIdxKey();
 		key.setRequiredName( argName );
 		deleteMimeTypeByUNameIdx( Authorization, key );
 	}

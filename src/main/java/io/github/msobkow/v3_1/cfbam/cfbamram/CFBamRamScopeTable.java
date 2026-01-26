@@ -77,15 +77,14 @@ public class CFBamRamScopeTable
 		schema = argSchema;
 	}
 
-	public void createScope( ICFSecAuthorization Authorization,
+	public ICFBamScope createScope( ICFSecAuthorization Authorization,
 		ICFBamScope Buff )
 	{
 		final String S_ProcName = "createScope";
-		CFLibDbKeyHash256 pkey = schema.getFactoryScope().newPKey();
-		pkey.setClassCode( Buff.getClassCode() );
-		pkey.setRequiredId( schema.nextScopeIdGen() );
-		Buff.setRequiredId( pkey.getRequiredId() );
-		CFBamBuffScopeByTenantIdxKey keyTenantIdx = schema.getFactoryScope().newTenantIdxKey();
+		CFLibDbKeyHash256 pkey;
+		pkey = schema.nextScopeIdGen();
+		Buff.setRequiredId( pkey );
+		CFBamBuffScopeByTenantIdxKey keyTenantIdx = (CFBamBuffScopeByTenantIdxKey)schema.getFactoryScope().newByTenantIdxKey();
 		keyTenantIdx.setRequiredTenantId( Buff.getRequiredTenantId() );
 
 		// Validate unique indexes
@@ -127,6 +126,7 @@ public class CFBamRamScopeTable
 		}
 		subdictTenantIdx.put( pkey, Buff );
 
+		return( Buff );
 	}
 
 	public ICFBamScope readDerived( ICFSecAuthorization Authorization,
@@ -147,11 +147,9 @@ public class CFBamRamScopeTable
 		CFLibDbKeyHash256 PKey )
 	{
 		final String S_ProcName = "CFBamRamScope.readDerived";
-		CFLibDbKeyHash256 key = schema.getFactoryScope().newPKey();
-		key.setRequiredId( PKey.getRequiredId() );
 		ICFBamScope buff;
-		if( dictByPKey.containsKey( key ) ) {
-			buff = dictByPKey.get( key );
+		if( dictByPKey.containsKey( PKey ) ) {
+			buff = dictByPKey.get( PKey );
 		}
 		else {
 			buff = null;
@@ -174,7 +172,7 @@ public class CFBamRamScopeTable
 		CFLibDbKeyHash256 TenantId )
 	{
 		final String S_ProcName = "CFBamRamScope.readDerivedByTenantIdx";
-		CFBamBuffScopeByTenantIdxKey key = schema.getFactoryScope().newTenantIdxKey();
+		CFBamBuffScopeByTenantIdxKey key = (CFBamBuffScopeByTenantIdxKey)schema.getFactoryScope().newByTenantIdxKey();
 		key.setRequiredTenantId( TenantId );
 
 		ICFBamScope[] recArray;
@@ -201,12 +199,9 @@ public class CFBamRamScopeTable
 		CFLibDbKeyHash256 Id )
 	{
 		final String S_ProcName = "CFBamRamScope.readDerivedByIdIdx() ";
-		CFLibDbKeyHash256 key = schema.getFactoryScope().newPKey();
-		key.setRequiredId( Id );
-
 		ICFBamScope buff;
-		if( dictByPKey.containsKey( key ) ) {
-			buff = dictByPKey.get( key );
+		if( dictByPKey.containsKey( Id ) ) {
+			buff = dictByPKey.get( Id );
 		}
 		else {
 			buff = null;
@@ -219,7 +214,7 @@ public class CFBamRamScopeTable
 	{
 		final String S_ProcName = "CFBamRamScope.readBuff";
 		ICFBamScope buff = readDerived( Authorization, PKey );
-		if( ( buff != null ) && ( ! buff.getClassCode().equals( "a801" ) ) ) {
+		if( ( buff != null ) && ( buff.getClassCode() != ICFBamScope.CLASS_CODE ) ) {
 			buff = null;
 		}
 		return( buff );
@@ -230,7 +225,7 @@ public class CFBamRamScopeTable
 	{
 		final String S_ProcName = "lockBuff";
 		ICFBamScope buff = readDerived( Authorization, PKey );
-		if( ( buff != null ) && ( ! buff.getClassCode().equals( "a801" ) ) ) {
+		if( ( buff != null ) && ( buff.getClassCode() != ICFBamScope.CLASS_CODE ) ) {
 			buff = null;
 		}
 		return( buff );
@@ -244,7 +239,7 @@ public class CFBamRamScopeTable
 		ICFBamScope[] buffList = readAllDerived( Authorization );
 		for( int idx = 0; idx < buffList.length; idx ++ ) {
 			buff = buffList[idx];
-			if( ( buff != null ) && buff.getClassCode().equals( "a801" ) ) {
+			if( ( buff != null ) && ( buff.getClassCode() == ICFBamScope.CLASS_CODE ) ) {
 				filteredList.add( buff );
 			}
 		}
@@ -257,7 +252,7 @@ public class CFBamRamScopeTable
 		final String S_ProcName = "CFBamRamScope.readBuffByIdIdx() ";
 		ICFBamScope buff = readDerivedByIdIdx( Authorization,
 			Id );
-		if( ( buff != null ) && buff.getClassCode().equals( "a801" ) ) {
+		if( ( buff != null ) && ( buff.getClassCode() == ICFBamScope.CLASS_CODE ) ) {
 			return( (ICFBamScope)buff );
 		}
 		else {
@@ -275,19 +270,17 @@ public class CFBamRamScopeTable
 			TenantId );
 		for( int idx = 0; idx < buffList.length; idx ++ ) {
 			buff = buffList[idx];
-			if( ( buff != null ) && buff.getClassCode().equals( "a801" ) ) {
+			if( ( buff != null ) && ( buff.getClassCode() == ICFBamScope.CLASS_CODE ) ) {
 				filteredList.add( (ICFBamScope)buff );
 			}
 		}
 		return( filteredList.toArray( new ICFBamScope[0] ) );
 	}
 
-	public void updateScope( ICFSecAuthorization Authorization,
+	public ICFBamScope updateScope( ICFSecAuthorization Authorization,
 		ICFBamScope Buff )
 	{
-		CFLibDbKeyHash256 pkey = schema.getFactoryScope().newPKey();
-		pkey.setClassCode( Buff.getClassCode() );
-		pkey.setRequiredId( Buff.getRequiredId() );
+		CFLibDbKeyHash256 pkey = Buff.getPKey();
 		ICFBamScope existing = dictByPKey.get( pkey );
 		if( existing == null ) {
 			throw new CFLibStaleCacheDetectedException( getClass(),
@@ -302,10 +295,10 @@ public class CFBamRamScopeTable
 				pkey );
 		}
 		Buff.setRequiredRevision( Buff.getRequiredRevision() + 1 );
-		CFBamBuffScopeByTenantIdxKey existingKeyTenantIdx = schema.getFactoryScope().newTenantIdxKey();
+		CFBamBuffScopeByTenantIdxKey existingKeyTenantIdx = (CFBamBuffScopeByTenantIdxKey)schema.getFactoryScope().newByTenantIdxKey();
 		existingKeyTenantIdx.setRequiredTenantId( existing.getRequiredTenantId() );
 
-		CFBamBuffScopeByTenantIdxKey newKeyTenantIdx = schema.getFactoryScope().newTenantIdxKey();
+		CFBamBuffScopeByTenantIdxKey newKeyTenantIdx = (CFBamBuffScopeByTenantIdxKey)schema.getFactoryScope().newByTenantIdxKey();
 		newKeyTenantIdx.setRequiredTenantId( Buff.getRequiredTenantId() );
 
 		// Check unique indexes
@@ -349,6 +342,7 @@ public class CFBamRamScopeTable
 		}
 		subdict.put( pkey, Buff );
 
+		return(Buff);
 	}
 
 	public void deleteScope( ICFSecAuthorization Authorization,
@@ -369,7 +363,7 @@ public class CFBamRamScopeTable
 				"deleteScope",
 				pkey );
 		}
-		CFBamBuffScopeByTenantIdxKey keyTenantIdx = schema.getFactoryScope().newTenantIdxKey();
+		CFBamBuffScopeByTenantIdxKey keyTenantIdx = (CFBamBuffScopeByTenantIdxKey)schema.getFactoryScope().newByTenantIdxKey();
 		keyTenantIdx.setRequiredTenantId( existing.getRequiredTenantId() );
 
 		// Validate reverse foreign keys
@@ -483,14 +477,6 @@ public class CFBamRamScopeTable
 
 	}
 	public void deleteScopeByIdIdx( ICFSecAuthorization Authorization,
-		CFLibDbKeyHash256 argId )
-	{
-		CFLibDbKeyHash256 key = schema.getFactoryScope().newPKey();
-		key.setRequiredId( argId );
-		deleteScopeByIdIdx( Authorization, key );
-	}
-
-	public void deleteScopeByIdIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argKey )
 	{
 		final String S_ProcName = "deleteScopeByIdIdx";
@@ -602,7 +588,7 @@ public class CFBamRamScopeTable
 	public void deleteScopeByTenantIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argTenantId )
 	{
-		CFBamBuffScopeByTenantIdxKey key = schema.getFactoryScope().newTenantIdxKey();
+		CFBamBuffScopeByTenantIdxKey key = (CFBamBuffScopeByTenantIdxKey)schema.getFactoryScope().newByTenantIdxKey();
 		key.setRequiredTenantId( argTenantId );
 		deleteScopeByTenantIdx( Authorization, key );
 	}

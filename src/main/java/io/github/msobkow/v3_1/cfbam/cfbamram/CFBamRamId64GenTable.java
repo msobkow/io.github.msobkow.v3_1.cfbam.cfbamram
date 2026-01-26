@@ -71,12 +71,12 @@ public class CFBamRamId64GenTable
 		schema = argSchema;
 	}
 
-	public void createId64Gen( ICFSecAuthorization Authorization,
+	public ICFBamId64Gen createId64Gen( ICFSecAuthorization Authorization,
 		ICFBamId64Gen Buff )
 	{
 		final String S_ProcName = "createId64Gen";
 		ICFBamValue tail = null;
-		if( Buff.getClassCode().equals( "a874" ) ) {
+		if( Buff.getClassCode() == ICFBamId64Gen.CLASS_CODE ) ) {
 			ICFBamValue[] siblings = schema.getTableValue().readDerivedByScopeIdx( Authorization,
 				Buff.getRequiredSchemaDefId() );
 			for( int idx = 0; ( tail == null ) && ( idx < siblings.length ); idx ++ ) {
@@ -94,9 +94,8 @@ public class CFBamRamId64GenTable
 		}
 		schema.getTableInt64Type().createInt64Type( Authorization,
 			Buff );
-		CFLibDbKeyHash256 pkey = schema.getFactoryValue().newPKey();
-		pkey.setClassCode( Buff.getClassCode() );
-		pkey.setRequiredId( Buff.getRequiredId() );
+		CFLibDbKeyHash256 pkey;
+		pkey = Buff.getRequiredId();
 		// Validate unique indexes
 
 		if( dictByPKey.containsKey( pkey ) ) {
@@ -127,638 +126,638 @@ public class CFBamRamId64GenTable
 		dictByPKey.put( pkey, Buff );
 
 		if( tail != null ) {
-			String tailClassCode = tail.getClassCode();
-			if( tailClassCode.equals( "a809" ) ) {
+			int tailClassCode = tail.getClassCode();
+			if( tailClassCode == ICFBamValue.CLASS_CODE ) {
 				ICFBamValue tailEdit = schema.getFactoryValue().newBuff();
 				tailEdit.set( (ICFBamValue)tail );
 				tailEdit.setOptionalNextId( Buff.getRequiredId() );
 				schema.getTableValue().updateValue( Authorization, tailEdit );
 			}
-			else if( tailClassCode.equals( "a80a" ) ) {
+			else if( tailClassCode == ICFBamAtom.CLASS_CODE ) {
 				ICFBamAtom tailEdit = schema.getFactoryAtom().newBuff();
 				tailEdit.set( (ICFBamAtom)tail );
 				tailEdit.setOptionalNextId( Buff.getRequiredId() );
 				schema.getTableAtom().updateAtom( Authorization, tailEdit );
 			}
-			else if( tailClassCode.equals( "a80b" ) ) {
+			else if( tailClassCode == ICFBamBlobDef.CLASS_CODE ) {
 				ICFBamBlobDef tailEdit = schema.getFactoryBlobDef().newBuff();
 				tailEdit.set( (ICFBamBlobDef)tail );
 				tailEdit.setOptionalNextId( Buff.getRequiredId() );
 				schema.getTableBlobDef().updateBlobDef( Authorization, tailEdit );
 			}
-			else if( tailClassCode.equals( "a80c" ) ) {
+			else if( tailClassCode == ICFBamBlobType.CLASS_CODE ) {
 				ICFBamBlobType tailEdit = schema.getFactoryBlobType().newBuff();
 				tailEdit.set( (ICFBamBlobType)tail );
 				tailEdit.setOptionalNextId( Buff.getRequiredId() );
 				schema.getTableBlobType().updateBlobType( Authorization, tailEdit );
 			}
-			else if( tailClassCode.equals( "a86b" ) ) {
+			else if( tailClassCode == ICFBamBlobCol.CLASS_CODE ) {
 				ICFBamBlobCol tailEdit = schema.getFactoryBlobCol().newBuff();
 				tailEdit.set( (ICFBamBlobCol)tail );
 				tailEdit.setOptionalNextId( Buff.getRequiredId() );
 				schema.getTableBlobCol().updateBlobCol( Authorization, tailEdit );
 			}
-			else if( tailClassCode.equals( "a80d" ) ) {
+			else if( tailClassCode == ICFBamBoolDef.CLASS_CODE ) {
 				ICFBamBoolDef tailEdit = schema.getFactoryBoolDef().newBuff();
 				tailEdit.set( (ICFBamBoolDef)tail );
 				tailEdit.setOptionalNextId( Buff.getRequiredId() );
 				schema.getTableBoolDef().updateBoolDef( Authorization, tailEdit );
 			}
-			else if( tailClassCode.equals( "a80e" ) ) {
+			else if( tailClassCode == ICFBamBoolType.CLASS_CODE ) {
 				ICFBamBoolType tailEdit = schema.getFactoryBoolType().newBuff();
 				tailEdit.set( (ICFBamBoolType)tail );
 				tailEdit.setOptionalNextId( Buff.getRequiredId() );
 				schema.getTableBoolType().updateBoolType( Authorization, tailEdit );
 			}
-			else if( tailClassCode.equals( "a86c" ) ) {
+			else if( tailClassCode == ICFBamBoolCol.CLASS_CODE ) {
 				ICFBamBoolCol tailEdit = schema.getFactoryBoolCol().newBuff();
 				tailEdit.set( (ICFBamBoolCol)tail );
 				tailEdit.setOptionalNextId( Buff.getRequiredId() );
 				schema.getTableBoolCol().updateBoolCol( Authorization, tailEdit );
 			}
-			else if( tailClassCode.equals( "a815" ) ) {
+			else if( tailClassCode == ICFBamDateDef.CLASS_CODE ) {
 				ICFBamDateDef tailEdit = schema.getFactoryDateDef().newBuff();
 				tailEdit.set( (ICFBamDateDef)tail );
 				tailEdit.setOptionalNextId( Buff.getRequiredId() );
 				schema.getTableDateDef().updateDateDef( Authorization, tailEdit );
 			}
-			else if( tailClassCode.equals( "a816" ) ) {
+			else if( tailClassCode == ICFBamDateType.CLASS_CODE ) {
 				ICFBamDateType tailEdit = schema.getFactoryDateType().newBuff();
 				tailEdit.set( (ICFBamDateType)tail );
 				tailEdit.setOptionalNextId( Buff.getRequiredId() );
 				schema.getTableDateType().updateDateType( Authorization, tailEdit );
 			}
-			else if( tailClassCode.equals( "a86d" ) ) {
+			else if( tailClassCode == ICFBamDateCol.CLASS_CODE ) {
 				ICFBamDateCol tailEdit = schema.getFactoryDateCol().newBuff();
 				tailEdit.set( (ICFBamDateCol)tail );
 				tailEdit.setOptionalNextId( Buff.getRequiredId() );
 				schema.getTableDateCol().updateDateCol( Authorization, tailEdit );
 			}
-			else if( tailClassCode.equals( "a81c" ) ) {
+			else if( tailClassCode == ICFBamDoubleDef.CLASS_CODE ) {
 				ICFBamDoubleDef tailEdit = schema.getFactoryDoubleDef().newBuff();
 				tailEdit.set( (ICFBamDoubleDef)tail );
 				tailEdit.setOptionalNextId( Buff.getRequiredId() );
 				schema.getTableDoubleDef().updateDoubleDef( Authorization, tailEdit );
 			}
-			else if( tailClassCode.equals( "a81d" ) ) {
+			else if( tailClassCode == ICFBamDoubleType.CLASS_CODE ) {
 				ICFBamDoubleType tailEdit = schema.getFactoryDoubleType().newBuff();
 				tailEdit.set( (ICFBamDoubleType)tail );
 				tailEdit.setOptionalNextId( Buff.getRequiredId() );
 				schema.getTableDoubleType().updateDoubleType( Authorization, tailEdit );
 			}
-			else if( tailClassCode.equals( "a86e" ) ) {
+			else if( tailClassCode == ICFBamDoubleCol.CLASS_CODE ) {
 				ICFBamDoubleCol tailEdit = schema.getFactoryDoubleCol().newBuff();
 				tailEdit.set( (ICFBamDoubleCol)tail );
 				tailEdit.setOptionalNextId( Buff.getRequiredId() );
 				schema.getTableDoubleCol().updateDoubleCol( Authorization, tailEdit );
 			}
-			else if( tailClassCode.equals( "a81f" ) ) {
+			else if( tailClassCode == ICFBamFloatDef.CLASS_CODE ) {
 				ICFBamFloatDef tailEdit = schema.getFactoryFloatDef().newBuff();
 				tailEdit.set( (ICFBamFloatDef)tail );
 				tailEdit.setOptionalNextId( Buff.getRequiredId() );
 				schema.getTableFloatDef().updateFloatDef( Authorization, tailEdit );
 			}
-			else if( tailClassCode.equals( "a820" ) ) {
+			else if( tailClassCode == ICFBamFloatType.CLASS_CODE ) {
 				ICFBamFloatType tailEdit = schema.getFactoryFloatType().newBuff();
 				tailEdit.set( (ICFBamFloatType)tail );
 				tailEdit.setOptionalNextId( Buff.getRequiredId() );
 				schema.getTableFloatType().updateFloatType( Authorization, tailEdit );
 			}
-			else if( tailClassCode.equals( "a871" ) ) {
+			else if( tailClassCode == ICFBamFloatCol.CLASS_CODE ) {
 				ICFBamFloatCol tailEdit = schema.getFactoryFloatCol().newBuff();
 				tailEdit.set( (ICFBamFloatCol)tail );
 				tailEdit.setOptionalNextId( Buff.getRequiredId() );
 				schema.getTableFloatCol().updateFloatCol( Authorization, tailEdit );
 			}
-			else if( tailClassCode.equals( "a823" ) ) {
+			else if( tailClassCode == ICFBamInt16Def.CLASS_CODE ) {
 				ICFBamInt16Def tailEdit = schema.getFactoryInt16Def().newBuff();
 				tailEdit.set( (ICFBamInt16Def)tail );
 				tailEdit.setOptionalNextId( Buff.getRequiredId() );
 				schema.getTableInt16Def().updateInt16Def( Authorization, tailEdit );
 			}
-			else if( tailClassCode.equals( "a824" ) ) {
+			else if( tailClassCode == ICFBamInt16Type.CLASS_CODE ) {
 				ICFBamInt16Type tailEdit = schema.getFactoryInt16Type().newBuff();
 				tailEdit.set( (ICFBamInt16Type)tail );
 				tailEdit.setOptionalNextId( Buff.getRequiredId() );
 				schema.getTableInt16Type().updateInt16Type( Authorization, tailEdit );
 			}
-			else if( tailClassCode.equals( "a872" ) ) {
+			else if( tailClassCode == ICFBamId16Gen.CLASS_CODE ) {
 				ICFBamId16Gen tailEdit = schema.getFactoryId16Gen().newBuff();
 				tailEdit.set( (ICFBamId16Gen)tail );
 				tailEdit.setOptionalNextId( Buff.getRequiredId() );
 				schema.getTableId16Gen().updateId16Gen( Authorization, tailEdit );
 			}
-			else if( tailClassCode.equals( "a86f" ) ) {
+			else if( tailClassCode == ICFBamEnumDef.CLASS_CODE ) {
 				ICFBamEnumDef tailEdit = schema.getFactoryEnumDef().newBuff();
 				tailEdit.set( (ICFBamEnumDef)tail );
 				tailEdit.setOptionalNextId( Buff.getRequiredId() );
 				schema.getTableEnumDef().updateEnumDef( Authorization, tailEdit );
 			}
-			else if( tailClassCode.equals( "a870" ) ) {
+			else if( tailClassCode == ICFBamEnumType.CLASS_CODE ) {
 				ICFBamEnumType tailEdit = schema.getFactoryEnumType().newBuff();
 				tailEdit.set( (ICFBamEnumType)tail );
 				tailEdit.setOptionalNextId( Buff.getRequiredId() );
 				schema.getTableEnumType().updateEnumType( Authorization, tailEdit );
 			}
-			else if( tailClassCode.equals( "a875" ) ) {
+			else if( tailClassCode == ICFBamInt16Col.CLASS_CODE ) {
 				ICFBamInt16Col tailEdit = schema.getFactoryInt16Col().newBuff();
 				tailEdit.set( (ICFBamInt16Col)tail );
 				tailEdit.setOptionalNextId( Buff.getRequiredId() );
 				schema.getTableInt16Col().updateInt16Col( Authorization, tailEdit );
 			}
-			else if( tailClassCode.equals( "a825" ) ) {
+			else if( tailClassCode == ICFBamInt32Def.CLASS_CODE ) {
 				ICFBamInt32Def tailEdit = schema.getFactoryInt32Def().newBuff();
 				tailEdit.set( (ICFBamInt32Def)tail );
 				tailEdit.setOptionalNextId( Buff.getRequiredId() );
 				schema.getTableInt32Def().updateInt32Def( Authorization, tailEdit );
 			}
-			else if( tailClassCode.equals( "a826" ) ) {
+			else if( tailClassCode == ICFBamInt32Type.CLASS_CODE ) {
 				ICFBamInt32Type tailEdit = schema.getFactoryInt32Type().newBuff();
 				tailEdit.set( (ICFBamInt32Type)tail );
 				tailEdit.setOptionalNextId( Buff.getRequiredId() );
 				schema.getTableInt32Type().updateInt32Type( Authorization, tailEdit );
 			}
-			else if( tailClassCode.equals( "a873" ) ) {
+			else if( tailClassCode == ICFBamId32Gen.CLASS_CODE ) {
 				ICFBamId32Gen tailEdit = schema.getFactoryId32Gen().newBuff();
 				tailEdit.set( (ICFBamId32Gen)tail );
 				tailEdit.setOptionalNextId( Buff.getRequiredId() );
 				schema.getTableId32Gen().updateId32Gen( Authorization, tailEdit );
 			}
-			else if( tailClassCode.equals( "a876" ) ) {
+			else if( tailClassCode == ICFBamInt32Col.CLASS_CODE ) {
 				ICFBamInt32Col tailEdit = schema.getFactoryInt32Col().newBuff();
 				tailEdit.set( (ICFBamInt32Col)tail );
 				tailEdit.setOptionalNextId( Buff.getRequiredId() );
 				schema.getTableInt32Col().updateInt32Col( Authorization, tailEdit );
 			}
-			else if( tailClassCode.equals( "a827" ) ) {
+			else if( tailClassCode == ICFBamInt64Def.CLASS_CODE ) {
 				ICFBamInt64Def tailEdit = schema.getFactoryInt64Def().newBuff();
 				tailEdit.set( (ICFBamInt64Def)tail );
 				tailEdit.setOptionalNextId( Buff.getRequiredId() );
 				schema.getTableInt64Def().updateInt64Def( Authorization, tailEdit );
 			}
-			else if( tailClassCode.equals( "a828" ) ) {
+			else if( tailClassCode == ICFBamInt64Type.CLASS_CODE ) {
 				ICFBamInt64Type tailEdit = schema.getFactoryInt64Type().newBuff();
 				tailEdit.set( (ICFBamInt64Type)tail );
 				tailEdit.setOptionalNextId( Buff.getRequiredId() );
 				schema.getTableInt64Type().updateInt64Type( Authorization, tailEdit );
 			}
-			else if( tailClassCode.equals( "a874" ) ) {
+			else if( tailClassCode == ICFBamId64Gen.CLASS_CODE ) {
 				ICFBamId64Gen tailEdit = schema.getFactoryId64Gen().newBuff();
 				tailEdit.set( (ICFBamId64Gen)tail );
 				tailEdit.setOptionalNextId( Buff.getRequiredId() );
 				schema.getTableId64Gen().updateId64Gen( Authorization, tailEdit );
 			}
-			else if( tailClassCode.equals( "a877" ) ) {
+			else if( tailClassCode == ICFBamInt64Col.CLASS_CODE ) {
 				ICFBamInt64Col tailEdit = schema.getFactoryInt64Col().newBuff();
 				tailEdit.set( (ICFBamInt64Col)tail );
 				tailEdit.setOptionalNextId( Buff.getRequiredId() );
 				schema.getTableInt64Col().updateInt64Col( Authorization, tailEdit );
 			}
-			else if( tailClassCode.equals( "a829" ) ) {
+			else if( tailClassCode == ICFBamNmTokenDef.CLASS_CODE ) {
 				ICFBamNmTokenDef tailEdit = schema.getFactoryNmTokenDef().newBuff();
 				tailEdit.set( (ICFBamNmTokenDef)tail );
 				tailEdit.setOptionalNextId( Buff.getRequiredId() );
 				schema.getTableNmTokenDef().updateNmTokenDef( Authorization, tailEdit );
 			}
-			else if( tailClassCode.equals( "a82a" ) ) {
+			else if( tailClassCode == ICFBamNmTokenType.CLASS_CODE ) {
 				ICFBamNmTokenType tailEdit = schema.getFactoryNmTokenType().newBuff();
 				tailEdit.set( (ICFBamNmTokenType)tail );
 				tailEdit.setOptionalNextId( Buff.getRequiredId() );
 				schema.getTableNmTokenType().updateNmTokenType( Authorization, tailEdit );
 			}
-			else if( tailClassCode.equals( "a878" ) ) {
+			else if( tailClassCode == ICFBamNmTokenCol.CLASS_CODE ) {
 				ICFBamNmTokenCol tailEdit = schema.getFactoryNmTokenCol().newBuff();
 				tailEdit.set( (ICFBamNmTokenCol)tail );
 				tailEdit.setOptionalNextId( Buff.getRequiredId() );
 				schema.getTableNmTokenCol().updateNmTokenCol( Authorization, tailEdit );
 			}
-			else if( tailClassCode.equals( "a82b" ) ) {
+			else if( tailClassCode == ICFBamNmTokensDef.CLASS_CODE ) {
 				ICFBamNmTokensDef tailEdit = schema.getFactoryNmTokensDef().newBuff();
 				tailEdit.set( (ICFBamNmTokensDef)tail );
 				tailEdit.setOptionalNextId( Buff.getRequiredId() );
 				schema.getTableNmTokensDef().updateNmTokensDef( Authorization, tailEdit );
 			}
-			else if( tailClassCode.equals( "a82c" ) ) {
+			else if( tailClassCode == ICFBamNmTokensType.CLASS_CODE ) {
 				ICFBamNmTokensType tailEdit = schema.getFactoryNmTokensType().newBuff();
 				tailEdit.set( (ICFBamNmTokensType)tail );
 				tailEdit.setOptionalNextId( Buff.getRequiredId() );
 				schema.getTableNmTokensType().updateNmTokensType( Authorization, tailEdit );
 			}
-			else if( tailClassCode.equals( "a879" ) ) {
+			else if( tailClassCode == ICFBamNmTokensCol.CLASS_CODE ) {
 				ICFBamNmTokensCol tailEdit = schema.getFactoryNmTokensCol().newBuff();
 				tailEdit.set( (ICFBamNmTokensCol)tail );
 				tailEdit.setOptionalNextId( Buff.getRequiredId() );
 				schema.getTableNmTokensCol().updateNmTokensCol( Authorization, tailEdit );
 			}
-			else if( tailClassCode.equals( "a82d" ) ) {
+			else if( tailClassCode == ICFBamNumberDef.CLASS_CODE ) {
 				ICFBamNumberDef tailEdit = schema.getFactoryNumberDef().newBuff();
 				tailEdit.set( (ICFBamNumberDef)tail );
 				tailEdit.setOptionalNextId( Buff.getRequiredId() );
 				schema.getTableNumberDef().updateNumberDef( Authorization, tailEdit );
 			}
-			else if( tailClassCode.equals( "a82e" ) ) {
+			else if( tailClassCode == ICFBamNumberType.CLASS_CODE ) {
 				ICFBamNumberType tailEdit = schema.getFactoryNumberType().newBuff();
 				tailEdit.set( (ICFBamNumberType)tail );
 				tailEdit.setOptionalNextId( Buff.getRequiredId() );
 				schema.getTableNumberType().updateNumberType( Authorization, tailEdit );
 			}
-			else if( tailClassCode.equals( "a87a" ) ) {
+			else if( tailClassCode == ICFBamNumberCol.CLASS_CODE ) {
 				ICFBamNumberCol tailEdit = schema.getFactoryNumberCol().newBuff();
 				tailEdit.set( (ICFBamNumberCol)tail );
 				tailEdit.setOptionalNextId( Buff.getRequiredId() );
 				schema.getTableNumberCol().updateNumberCol( Authorization, tailEdit );
 			}
-			else if( tailClassCode.equals( "a839" ) ) {
+			else if( tailClassCode == ICFBamDbKeyHash128Def.CLASS_CODE ) {
 				ICFBamDbKeyHash128Def tailEdit = schema.getFactoryDbKeyHash128Def().newBuff();
 				tailEdit.set( (ICFBamDbKeyHash128Def)tail );
 				tailEdit.setOptionalNextId( Buff.getRequiredId() );
 				schema.getTableDbKeyHash128Def().updateDbKeyHash128Def( Authorization, tailEdit );
 			}
-			else if( tailClassCode.equals( "a838" ) ) {
+			else if( tailClassCode == ICFBamDbKeyHash128Col.CLASS_CODE ) {
 				ICFBamDbKeyHash128Col tailEdit = schema.getFactoryDbKeyHash128Col().newBuff();
 				tailEdit.set( (ICFBamDbKeyHash128Col)tail );
 				tailEdit.setOptionalNextId( Buff.getRequiredId() );
 				schema.getTableDbKeyHash128Col().updateDbKeyHash128Col( Authorization, tailEdit );
 			}
-			else if( tailClassCode.equals( "a83a" ) ) {
+			else if( tailClassCode == ICFBamDbKeyHash128Type.CLASS_CODE ) {
 				ICFBamDbKeyHash128Type tailEdit = schema.getFactoryDbKeyHash128Type().newBuff();
 				tailEdit.set( (ICFBamDbKeyHash128Type)tail );
 				tailEdit.setOptionalNextId( Buff.getRequiredId() );
 				schema.getTableDbKeyHash128Type().updateDbKeyHash128Type( Authorization, tailEdit );
 			}
-			else if( tailClassCode.equals( "a83b" ) ) {
+			else if( tailClassCode == ICFBamDbKeyHash128Gen.CLASS_CODE ) {
 				ICFBamDbKeyHash128Gen tailEdit = schema.getFactoryDbKeyHash128Gen().newBuff();
 				tailEdit.set( (ICFBamDbKeyHash128Gen)tail );
 				tailEdit.setOptionalNextId( Buff.getRequiredId() );
 				schema.getTableDbKeyHash128Gen().updateDbKeyHash128Gen( Authorization, tailEdit );
 			}
-			else if( tailClassCode.equals( "a83d" ) ) {
+			else if( tailClassCode == ICFBamDbKeyHash160Def.CLASS_CODE ) {
 				ICFBamDbKeyHash160Def tailEdit = schema.getFactoryDbKeyHash160Def().newBuff();
 				tailEdit.set( (ICFBamDbKeyHash160Def)tail );
 				tailEdit.setOptionalNextId( Buff.getRequiredId() );
 				schema.getTableDbKeyHash160Def().updateDbKeyHash160Def( Authorization, tailEdit );
 			}
-			else if( tailClassCode.equals( "a83c" ) ) {
+			else if( tailClassCode == ICFBamDbKeyHash160Col.CLASS_CODE ) {
 				ICFBamDbKeyHash160Col tailEdit = schema.getFactoryDbKeyHash160Col().newBuff();
 				tailEdit.set( (ICFBamDbKeyHash160Col)tail );
 				tailEdit.setOptionalNextId( Buff.getRequiredId() );
 				schema.getTableDbKeyHash160Col().updateDbKeyHash160Col( Authorization, tailEdit );
 			}
-			else if( tailClassCode.equals( "a83e" ) ) {
+			else if( tailClassCode == ICFBamDbKeyHash160Type.CLASS_CODE ) {
 				ICFBamDbKeyHash160Type tailEdit = schema.getFactoryDbKeyHash160Type().newBuff();
 				tailEdit.set( (ICFBamDbKeyHash160Type)tail );
 				tailEdit.setOptionalNextId( Buff.getRequiredId() );
 				schema.getTableDbKeyHash160Type().updateDbKeyHash160Type( Authorization, tailEdit );
 			}
-			else if( tailClassCode.equals( "a83f" ) ) {
+			else if( tailClassCode == ICFBamDbKeyHash160Gen.CLASS_CODE ) {
 				ICFBamDbKeyHash160Gen tailEdit = schema.getFactoryDbKeyHash160Gen().newBuff();
 				tailEdit.set( (ICFBamDbKeyHash160Gen)tail );
 				tailEdit.setOptionalNextId( Buff.getRequiredId() );
 				schema.getTableDbKeyHash160Gen().updateDbKeyHash160Gen( Authorization, tailEdit );
 			}
-			else if( tailClassCode.equals( "a841" ) ) {
+			else if( tailClassCode == ICFBamDbKeyHash224Def.CLASS_CODE ) {
 				ICFBamDbKeyHash224Def tailEdit = schema.getFactoryDbKeyHash224Def().newBuff();
 				tailEdit.set( (ICFBamDbKeyHash224Def)tail );
 				tailEdit.setOptionalNextId( Buff.getRequiredId() );
 				schema.getTableDbKeyHash224Def().updateDbKeyHash224Def( Authorization, tailEdit );
 			}
-			else if( tailClassCode.equals( "a840" ) ) {
+			else if( tailClassCode == ICFBamDbKeyHash224Col.CLASS_CODE ) {
 				ICFBamDbKeyHash224Col tailEdit = schema.getFactoryDbKeyHash224Col().newBuff();
 				tailEdit.set( (ICFBamDbKeyHash224Col)tail );
 				tailEdit.setOptionalNextId( Buff.getRequiredId() );
 				schema.getTableDbKeyHash224Col().updateDbKeyHash224Col( Authorization, tailEdit );
 			}
-			else if( tailClassCode.equals( "a842" ) ) {
+			else if( tailClassCode == ICFBamDbKeyHash224Type.CLASS_CODE ) {
 				ICFBamDbKeyHash224Type tailEdit = schema.getFactoryDbKeyHash224Type().newBuff();
 				tailEdit.set( (ICFBamDbKeyHash224Type)tail );
 				tailEdit.setOptionalNextId( Buff.getRequiredId() );
 				schema.getTableDbKeyHash224Type().updateDbKeyHash224Type( Authorization, tailEdit );
 			}
-			else if( tailClassCode.equals( "a843" ) ) {
+			else if( tailClassCode == ICFBamDbKeyHash224Gen.CLASS_CODE ) {
 				ICFBamDbKeyHash224Gen tailEdit = schema.getFactoryDbKeyHash224Gen().newBuff();
 				tailEdit.set( (ICFBamDbKeyHash224Gen)tail );
 				tailEdit.setOptionalNextId( Buff.getRequiredId() );
 				schema.getTableDbKeyHash224Gen().updateDbKeyHash224Gen( Authorization, tailEdit );
 			}
-			else if( tailClassCode.equals( "a845" ) ) {
+			else if( tailClassCode == ICFBamDbKeyHash256Def.CLASS_CODE ) {
 				ICFBamDbKeyHash256Def tailEdit = schema.getFactoryDbKeyHash256Def().newBuff();
 				tailEdit.set( (ICFBamDbKeyHash256Def)tail );
 				tailEdit.setOptionalNextId( Buff.getRequiredId() );
 				schema.getTableDbKeyHash256Def().updateDbKeyHash256Def( Authorization, tailEdit );
 			}
-			else if( tailClassCode.equals( "a844" ) ) {
+			else if( tailClassCode == ICFBamDbKeyHash256Col.CLASS_CODE ) {
 				ICFBamDbKeyHash256Col tailEdit = schema.getFactoryDbKeyHash256Col().newBuff();
 				tailEdit.set( (ICFBamDbKeyHash256Col)tail );
 				tailEdit.setOptionalNextId( Buff.getRequiredId() );
 				schema.getTableDbKeyHash256Col().updateDbKeyHash256Col( Authorization, tailEdit );
 			}
-			else if( tailClassCode.equals( "a846" ) ) {
+			else if( tailClassCode == ICFBamDbKeyHash256Type.CLASS_CODE ) {
 				ICFBamDbKeyHash256Type tailEdit = schema.getFactoryDbKeyHash256Type().newBuff();
 				tailEdit.set( (ICFBamDbKeyHash256Type)tail );
 				tailEdit.setOptionalNextId( Buff.getRequiredId() );
 				schema.getTableDbKeyHash256Type().updateDbKeyHash256Type( Authorization, tailEdit );
 			}
-			else if( tailClassCode.equals( "a847" ) ) {
+			else if( tailClassCode == ICFBamDbKeyHash256Gen.CLASS_CODE ) {
 				ICFBamDbKeyHash256Gen tailEdit = schema.getFactoryDbKeyHash256Gen().newBuff();
 				tailEdit.set( (ICFBamDbKeyHash256Gen)tail );
 				tailEdit.setOptionalNextId( Buff.getRequiredId() );
 				schema.getTableDbKeyHash256Gen().updateDbKeyHash256Gen( Authorization, tailEdit );
 			}
-			else if( tailClassCode.equals( "a849" ) ) {
+			else if( tailClassCode == ICFBamDbKeyHash384Def.CLASS_CODE ) {
 				ICFBamDbKeyHash384Def tailEdit = schema.getFactoryDbKeyHash384Def().newBuff();
 				tailEdit.set( (ICFBamDbKeyHash384Def)tail );
 				tailEdit.setOptionalNextId( Buff.getRequiredId() );
 				schema.getTableDbKeyHash384Def().updateDbKeyHash384Def( Authorization, tailEdit );
 			}
-			else if( tailClassCode.equals( "a848" ) ) {
+			else if( tailClassCode == ICFBamDbKeyHash384Col.CLASS_CODE ) {
 				ICFBamDbKeyHash384Col tailEdit = schema.getFactoryDbKeyHash384Col().newBuff();
 				tailEdit.set( (ICFBamDbKeyHash384Col)tail );
 				tailEdit.setOptionalNextId( Buff.getRequiredId() );
 				schema.getTableDbKeyHash384Col().updateDbKeyHash384Col( Authorization, tailEdit );
 			}
-			else if( tailClassCode.equals( "a84a" ) ) {
+			else if( tailClassCode == ICFBamDbKeyHash384Type.CLASS_CODE ) {
 				ICFBamDbKeyHash384Type tailEdit = schema.getFactoryDbKeyHash384Type().newBuff();
 				tailEdit.set( (ICFBamDbKeyHash384Type)tail );
 				tailEdit.setOptionalNextId( Buff.getRequiredId() );
 				schema.getTableDbKeyHash384Type().updateDbKeyHash384Type( Authorization, tailEdit );
 			}
-			else if( tailClassCode.equals( "a84b" ) ) {
+			else if( tailClassCode == ICFBamDbKeyHash384Gen.CLASS_CODE ) {
 				ICFBamDbKeyHash384Gen tailEdit = schema.getFactoryDbKeyHash384Gen().newBuff();
 				tailEdit.set( (ICFBamDbKeyHash384Gen)tail );
 				tailEdit.setOptionalNextId( Buff.getRequiredId() );
 				schema.getTableDbKeyHash384Gen().updateDbKeyHash384Gen( Authorization, tailEdit );
 			}
-			else if( tailClassCode.equals( "a84d" ) ) {
+			else if( tailClassCode == ICFBamDbKeyHash512Def.CLASS_CODE ) {
 				ICFBamDbKeyHash512Def tailEdit = schema.getFactoryDbKeyHash512Def().newBuff();
 				tailEdit.set( (ICFBamDbKeyHash512Def)tail );
 				tailEdit.setOptionalNextId( Buff.getRequiredId() );
 				schema.getTableDbKeyHash512Def().updateDbKeyHash512Def( Authorization, tailEdit );
 			}
-			else if( tailClassCode.equals( "a84c" ) ) {
+			else if( tailClassCode == ICFBamDbKeyHash512Col.CLASS_CODE ) {
 				ICFBamDbKeyHash512Col tailEdit = schema.getFactoryDbKeyHash512Col().newBuff();
 				tailEdit.set( (ICFBamDbKeyHash512Col)tail );
 				tailEdit.setOptionalNextId( Buff.getRequiredId() );
 				schema.getTableDbKeyHash512Col().updateDbKeyHash512Col( Authorization, tailEdit );
 			}
-			else if( tailClassCode.equals( "a84e" ) ) {
+			else if( tailClassCode == ICFBamDbKeyHash512Type.CLASS_CODE ) {
 				ICFBamDbKeyHash512Type tailEdit = schema.getFactoryDbKeyHash512Type().newBuff();
 				tailEdit.set( (ICFBamDbKeyHash512Type)tail );
 				tailEdit.setOptionalNextId( Buff.getRequiredId() );
 				schema.getTableDbKeyHash512Type().updateDbKeyHash512Type( Authorization, tailEdit );
 			}
-			else if( tailClassCode.equals( "a84f" ) ) {
+			else if( tailClassCode == ICFBamDbKeyHash512Gen.CLASS_CODE ) {
 				ICFBamDbKeyHash512Gen tailEdit = schema.getFactoryDbKeyHash512Gen().newBuff();
 				tailEdit.set( (ICFBamDbKeyHash512Gen)tail );
 				tailEdit.setOptionalNextId( Buff.getRequiredId() );
 				schema.getTableDbKeyHash512Gen().updateDbKeyHash512Gen( Authorization, tailEdit );
 			}
-			else if( tailClassCode.equals( "a850" ) ) {
+			else if( tailClassCode == ICFBamStringDef.CLASS_CODE ) {
 				ICFBamStringDef tailEdit = schema.getFactoryStringDef().newBuff();
 				tailEdit.set( (ICFBamStringDef)tail );
 				tailEdit.setOptionalNextId( Buff.getRequiredId() );
 				schema.getTableStringDef().updateStringDef( Authorization, tailEdit );
 			}
-			else if( tailClassCode.equals( "a851" ) ) {
+			else if( tailClassCode == ICFBamStringType.CLASS_CODE ) {
 				ICFBamStringType tailEdit = schema.getFactoryStringType().newBuff();
 				tailEdit.set( (ICFBamStringType)tail );
 				tailEdit.setOptionalNextId( Buff.getRequiredId() );
 				schema.getTableStringType().updateStringType( Authorization, tailEdit );
 			}
-			else if( tailClassCode.equals( "a87b" ) ) {
+			else if( tailClassCode == ICFBamStringCol.CLASS_CODE ) {
 				ICFBamStringCol tailEdit = schema.getFactoryStringCol().newBuff();
 				tailEdit.set( (ICFBamStringCol)tail );
 				tailEdit.setOptionalNextId( Buff.getRequiredId() );
 				schema.getTableStringCol().updateStringCol( Authorization, tailEdit );
 			}
-			else if( tailClassCode.equals( "a852" ) ) {
+			else if( tailClassCode == ICFBamTZDateDef.CLASS_CODE ) {
 				ICFBamTZDateDef tailEdit = schema.getFactoryTZDateDef().newBuff();
 				tailEdit.set( (ICFBamTZDateDef)tail );
 				tailEdit.setOptionalNextId( Buff.getRequiredId() );
 				schema.getTableTZDateDef().updateTZDateDef( Authorization, tailEdit );
 			}
-			else if( tailClassCode.equals( "a853" ) ) {
+			else if( tailClassCode == ICFBamTZDateType.CLASS_CODE ) {
 				ICFBamTZDateType tailEdit = schema.getFactoryTZDateType().newBuff();
 				tailEdit.set( (ICFBamTZDateType)tail );
 				tailEdit.setOptionalNextId( Buff.getRequiredId() );
 				schema.getTableTZDateType().updateTZDateType( Authorization, tailEdit );
 			}
-			else if( tailClassCode.equals( "a87c" ) ) {
+			else if( tailClassCode == ICFBamTZDateCol.CLASS_CODE ) {
 				ICFBamTZDateCol tailEdit = schema.getFactoryTZDateCol().newBuff();
 				tailEdit.set( (ICFBamTZDateCol)tail );
 				tailEdit.setOptionalNextId( Buff.getRequiredId() );
 				schema.getTableTZDateCol().updateTZDateCol( Authorization, tailEdit );
 			}
-			else if( tailClassCode.equals( "a854" ) ) {
+			else if( tailClassCode == ICFBamTZTimeDef.CLASS_CODE ) {
 				ICFBamTZTimeDef tailEdit = schema.getFactoryTZTimeDef().newBuff();
 				tailEdit.set( (ICFBamTZTimeDef)tail );
 				tailEdit.setOptionalNextId( Buff.getRequiredId() );
 				schema.getTableTZTimeDef().updateTZTimeDef( Authorization, tailEdit );
 			}
-			else if( tailClassCode.equals( "a855" ) ) {
+			else if( tailClassCode == ICFBamTZTimeType.CLASS_CODE ) {
 				ICFBamTZTimeType tailEdit = schema.getFactoryTZTimeType().newBuff();
 				tailEdit.set( (ICFBamTZTimeType)tail );
 				tailEdit.setOptionalNextId( Buff.getRequiredId() );
 				schema.getTableTZTimeType().updateTZTimeType( Authorization, tailEdit );
 			}
-			else if( tailClassCode.equals( "a87d" ) ) {
+			else if( tailClassCode == ICFBamTZTimeCol.CLASS_CODE ) {
 				ICFBamTZTimeCol tailEdit = schema.getFactoryTZTimeCol().newBuff();
 				tailEdit.set( (ICFBamTZTimeCol)tail );
 				tailEdit.setOptionalNextId( Buff.getRequiredId() );
 				schema.getTableTZTimeCol().updateTZTimeCol( Authorization, tailEdit );
 			}
-			else if( tailClassCode.equals( "a856" ) ) {
+			else if( tailClassCode == ICFBamTZTimestampDef.CLASS_CODE ) {
 				ICFBamTZTimestampDef tailEdit = schema.getFactoryTZTimestampDef().newBuff();
 				tailEdit.set( (ICFBamTZTimestampDef)tail );
 				tailEdit.setOptionalNextId( Buff.getRequiredId() );
 				schema.getTableTZTimestampDef().updateTZTimestampDef( Authorization, tailEdit );
 			}
-			else if( tailClassCode.equals( "a857" ) ) {
+			else if( tailClassCode == ICFBamTZTimestampType.CLASS_CODE ) {
 				ICFBamTZTimestampType tailEdit = schema.getFactoryTZTimestampType().newBuff();
 				tailEdit.set( (ICFBamTZTimestampType)tail );
 				tailEdit.setOptionalNextId( Buff.getRequiredId() );
 				schema.getTableTZTimestampType().updateTZTimestampType( Authorization, tailEdit );
 			}
-			else if( tailClassCode.equals( "a87e" ) ) {
+			else if( tailClassCode == ICFBamTZTimestampCol.CLASS_CODE ) {
 				ICFBamTZTimestampCol tailEdit = schema.getFactoryTZTimestampCol().newBuff();
 				tailEdit.set( (ICFBamTZTimestampCol)tail );
 				tailEdit.setOptionalNextId( Buff.getRequiredId() );
 				schema.getTableTZTimestampCol().updateTZTimestampCol( Authorization, tailEdit );
 			}
-			else if( tailClassCode.equals( "a859" ) ) {
+			else if( tailClassCode == ICFBamTextDef.CLASS_CODE ) {
 				ICFBamTextDef tailEdit = schema.getFactoryTextDef().newBuff();
 				tailEdit.set( (ICFBamTextDef)tail );
 				tailEdit.setOptionalNextId( Buff.getRequiredId() );
 				schema.getTableTextDef().updateTextDef( Authorization, tailEdit );
 			}
-			else if( tailClassCode.equals( "a85a" ) ) {
+			else if( tailClassCode == ICFBamTextType.CLASS_CODE ) {
 				ICFBamTextType tailEdit = schema.getFactoryTextType().newBuff();
 				tailEdit.set( (ICFBamTextType)tail );
 				tailEdit.setOptionalNextId( Buff.getRequiredId() );
 				schema.getTableTextType().updateTextType( Authorization, tailEdit );
 			}
-			else if( tailClassCode.equals( "a87f" ) ) {
+			else if( tailClassCode == ICFBamTextCol.CLASS_CODE ) {
 				ICFBamTextCol tailEdit = schema.getFactoryTextCol().newBuff();
 				tailEdit.set( (ICFBamTextCol)tail );
 				tailEdit.setOptionalNextId( Buff.getRequiredId() );
 				schema.getTableTextCol().updateTextCol( Authorization, tailEdit );
 			}
-			else if( tailClassCode.equals( "a85b" ) ) {
+			else if( tailClassCode == ICFBamTimeDef.CLASS_CODE ) {
 				ICFBamTimeDef tailEdit = schema.getFactoryTimeDef().newBuff();
 				tailEdit.set( (ICFBamTimeDef)tail );
 				tailEdit.setOptionalNextId( Buff.getRequiredId() );
 				schema.getTableTimeDef().updateTimeDef( Authorization, tailEdit );
 			}
-			else if( tailClassCode.equals( "a85c" ) ) {
+			else if( tailClassCode == ICFBamTimeType.CLASS_CODE ) {
 				ICFBamTimeType tailEdit = schema.getFactoryTimeType().newBuff();
 				tailEdit.set( (ICFBamTimeType)tail );
 				tailEdit.setOptionalNextId( Buff.getRequiredId() );
 				schema.getTableTimeType().updateTimeType( Authorization, tailEdit );
 			}
-			else if( tailClassCode.equals( "a880" ) ) {
+			else if( tailClassCode == ICFBamTimeCol.CLASS_CODE ) {
 				ICFBamTimeCol tailEdit = schema.getFactoryTimeCol().newBuff();
 				tailEdit.set( (ICFBamTimeCol)tail );
 				tailEdit.setOptionalNextId( Buff.getRequiredId() );
 				schema.getTableTimeCol().updateTimeCol( Authorization, tailEdit );
 			}
-			else if( tailClassCode.equals( "a85d" ) ) {
+			else if( tailClassCode == ICFBamTimestampDef.CLASS_CODE ) {
 				ICFBamTimestampDef tailEdit = schema.getFactoryTimestampDef().newBuff();
 				tailEdit.set( (ICFBamTimestampDef)tail );
 				tailEdit.setOptionalNextId( Buff.getRequiredId() );
 				schema.getTableTimestampDef().updateTimestampDef( Authorization, tailEdit );
 			}
-			else if( tailClassCode.equals( "a85e" ) ) {
+			else if( tailClassCode == ICFBamTimestampType.CLASS_CODE ) {
 				ICFBamTimestampType tailEdit = schema.getFactoryTimestampType().newBuff();
 				tailEdit.set( (ICFBamTimestampType)tail );
 				tailEdit.setOptionalNextId( Buff.getRequiredId() );
 				schema.getTableTimestampType().updateTimestampType( Authorization, tailEdit );
 			}
-			else if( tailClassCode.equals( "a881" ) ) {
+			else if( tailClassCode == ICFBamTimestampCol.CLASS_CODE ) {
 				ICFBamTimestampCol tailEdit = schema.getFactoryTimestampCol().newBuff();
 				tailEdit.set( (ICFBamTimestampCol)tail );
 				tailEdit.setOptionalNextId( Buff.getRequiredId() );
 				schema.getTableTimestampCol().updateTimestampCol( Authorization, tailEdit );
 			}
-			else if( tailClassCode.equals( "a85f" ) ) {
+			else if( tailClassCode == ICFBamTokenDef.CLASS_CODE ) {
 				ICFBamTokenDef tailEdit = schema.getFactoryTokenDef().newBuff();
 				tailEdit.set( (ICFBamTokenDef)tail );
 				tailEdit.setOptionalNextId( Buff.getRequiredId() );
 				schema.getTableTokenDef().updateTokenDef( Authorization, tailEdit );
 			}
-			else if( tailClassCode.equals( "a860" ) ) {
+			else if( tailClassCode == ICFBamTokenType.CLASS_CODE ) {
 				ICFBamTokenType tailEdit = schema.getFactoryTokenType().newBuff();
 				tailEdit.set( (ICFBamTokenType)tail );
 				tailEdit.setOptionalNextId( Buff.getRequiredId() );
 				schema.getTableTokenType().updateTokenType( Authorization, tailEdit );
 			}
-			else if( tailClassCode.equals( "a882" ) ) {
+			else if( tailClassCode == ICFBamTokenCol.CLASS_CODE ) {
 				ICFBamTokenCol tailEdit = schema.getFactoryTokenCol().newBuff();
 				tailEdit.set( (ICFBamTokenCol)tail );
 				tailEdit.setOptionalNextId( Buff.getRequiredId() );
 				schema.getTableTokenCol().updateTokenCol( Authorization, tailEdit );
 			}
-			else if( tailClassCode.equals( "a861" ) ) {
+			else if( tailClassCode == ICFBamUInt16Def.CLASS_CODE ) {
 				ICFBamUInt16Def tailEdit = schema.getFactoryUInt16Def().newBuff();
 				tailEdit.set( (ICFBamUInt16Def)tail );
 				tailEdit.setOptionalNextId( Buff.getRequiredId() );
 				schema.getTableUInt16Def().updateUInt16Def( Authorization, tailEdit );
 			}
-			else if( tailClassCode.equals( "a862" ) ) {
+			else if( tailClassCode == ICFBamUInt16Type.CLASS_CODE ) {
 				ICFBamUInt16Type tailEdit = schema.getFactoryUInt16Type().newBuff();
 				tailEdit.set( (ICFBamUInt16Type)tail );
 				tailEdit.setOptionalNextId( Buff.getRequiredId() );
 				schema.getTableUInt16Type().updateUInt16Type( Authorization, tailEdit );
 			}
-			else if( tailClassCode.equals( "a883" ) ) {
+			else if( tailClassCode == ICFBamUInt16Col.CLASS_CODE ) {
 				ICFBamUInt16Col tailEdit = schema.getFactoryUInt16Col().newBuff();
 				tailEdit.set( (ICFBamUInt16Col)tail );
 				tailEdit.setOptionalNextId( Buff.getRequiredId() );
 				schema.getTableUInt16Col().updateUInt16Col( Authorization, tailEdit );
 			}
-			else if( tailClassCode.equals( "a863" ) ) {
+			else if( tailClassCode == ICFBamUInt32Def.CLASS_CODE ) {
 				ICFBamUInt32Def tailEdit = schema.getFactoryUInt32Def().newBuff();
 				tailEdit.set( (ICFBamUInt32Def)tail );
 				tailEdit.setOptionalNextId( Buff.getRequiredId() );
 				schema.getTableUInt32Def().updateUInt32Def( Authorization, tailEdit );
 			}
-			else if( tailClassCode.equals( "a864" ) ) {
+			else if( tailClassCode == ICFBamUInt32Type.CLASS_CODE ) {
 				ICFBamUInt32Type tailEdit = schema.getFactoryUInt32Type().newBuff();
 				tailEdit.set( (ICFBamUInt32Type)tail );
 				tailEdit.setOptionalNextId( Buff.getRequiredId() );
 				schema.getTableUInt32Type().updateUInt32Type( Authorization, tailEdit );
 			}
-			else if( tailClassCode.equals( "a884" ) ) {
+			else if( tailClassCode == ICFBamUInt32Col.CLASS_CODE ) {
 				ICFBamUInt32Col tailEdit = schema.getFactoryUInt32Col().newBuff();
 				tailEdit.set( (ICFBamUInt32Col)tail );
 				tailEdit.setOptionalNextId( Buff.getRequiredId() );
 				schema.getTableUInt32Col().updateUInt32Col( Authorization, tailEdit );
 			}
-			else if( tailClassCode.equals( "a865" ) ) {
+			else if( tailClassCode == ICFBamUInt64Def.CLASS_CODE ) {
 				ICFBamUInt64Def tailEdit = schema.getFactoryUInt64Def().newBuff();
 				tailEdit.set( (ICFBamUInt64Def)tail );
 				tailEdit.setOptionalNextId( Buff.getRequiredId() );
 				schema.getTableUInt64Def().updateUInt64Def( Authorization, tailEdit );
 			}
-			else if( tailClassCode.equals( "a866" ) ) {
+			else if( tailClassCode == ICFBamUInt64Type.CLASS_CODE ) {
 				ICFBamUInt64Type tailEdit = schema.getFactoryUInt64Type().newBuff();
 				tailEdit.set( (ICFBamUInt64Type)tail );
 				tailEdit.setOptionalNextId( Buff.getRequiredId() );
 				schema.getTableUInt64Type().updateUInt64Type( Authorization, tailEdit );
 			}
-			else if( tailClassCode.equals( "a885" ) ) {
+			else if( tailClassCode == ICFBamUInt64Col.CLASS_CODE ) {
 				ICFBamUInt64Col tailEdit = schema.getFactoryUInt64Col().newBuff();
 				tailEdit.set( (ICFBamUInt64Col)tail );
 				tailEdit.setOptionalNextId( Buff.getRequiredId() );
 				schema.getTableUInt64Col().updateUInt64Col( Authorization, tailEdit );
 			}
-			else if( tailClassCode.equals( "a867" ) ) {
+			else if( tailClassCode == ICFBamUuidDef.CLASS_CODE ) {
 				ICFBamUuidDef tailEdit = schema.getFactoryUuidDef().newBuff();
 				tailEdit.set( (ICFBamUuidDef)tail );
 				tailEdit.setOptionalNextId( Buff.getRequiredId() );
 				schema.getTableUuidDef().updateUuidDef( Authorization, tailEdit );
 			}
-			else if( tailClassCode.equals( "a869" ) ) {
+			else if( tailClassCode == ICFBamUuidType.CLASS_CODE ) {
 				ICFBamUuidType tailEdit = schema.getFactoryUuidType().newBuff();
 				tailEdit.set( (ICFBamUuidType)tail );
 				tailEdit.setOptionalNextId( Buff.getRequiredId() );
 				schema.getTableUuidType().updateUuidType( Authorization, tailEdit );
 			}
-			else if( tailClassCode.equals( "a888" ) ) {
+			else if( tailClassCode == ICFBamUuidGen.CLASS_CODE ) {
 				ICFBamUuidGen tailEdit = schema.getFactoryUuidGen().newBuff();
 				tailEdit.set( (ICFBamUuidGen)tail );
 				tailEdit.setOptionalNextId( Buff.getRequiredId() );
 				schema.getTableUuidGen().updateUuidGen( Authorization, tailEdit );
 			}
-			else if( tailClassCode.equals( "a886" ) ) {
+			else if( tailClassCode == ICFBamUuidCol.CLASS_CODE ) {
 				ICFBamUuidCol tailEdit = schema.getFactoryUuidCol().newBuff();
 				tailEdit.set( (ICFBamUuidCol)tail );
 				tailEdit.setOptionalNextId( Buff.getRequiredId() );
 				schema.getTableUuidCol().updateUuidCol( Authorization, tailEdit );
 			}
-			else if( tailClassCode.equals( "a868" ) ) {
+			else if( tailClassCode == ICFBamUuid6Def.CLASS_CODE ) {
 				ICFBamUuid6Def tailEdit = schema.getFactoryUuid6Def().newBuff();
 				tailEdit.set( (ICFBamUuid6Def)tail );
 				tailEdit.setOptionalNextId( Buff.getRequiredId() );
 				schema.getTableUuid6Def().updateUuid6Def( Authorization, tailEdit );
 			}
-			else if( tailClassCode.equals( "a86a" ) ) {
+			else if( tailClassCode == ICFBamUuid6Type.CLASS_CODE ) {
 				ICFBamUuid6Type tailEdit = schema.getFactoryUuid6Type().newBuff();
 				tailEdit.set( (ICFBamUuid6Type)tail );
 				tailEdit.setOptionalNextId( Buff.getRequiredId() );
 				schema.getTableUuid6Type().updateUuid6Type( Authorization, tailEdit );
 			}
-			else if( tailClassCode.equals( "a889" ) ) {
+			else if( tailClassCode == ICFBamUuid6Gen.CLASS_CODE ) {
 				ICFBamUuid6Gen tailEdit = schema.getFactoryUuid6Gen().newBuff();
 				tailEdit.set( (ICFBamUuid6Gen)tail );
 				tailEdit.setOptionalNextId( Buff.getRequiredId() );
 				schema.getTableUuid6Gen().updateUuid6Gen( Authorization, tailEdit );
 			}
-			else if( tailClassCode.equals( "a887" ) ) {
+			else if( tailClassCode == ICFBamUuid6Col.CLASS_CODE ) {
 				ICFBamUuid6Col tailEdit = schema.getFactoryUuid6Col().newBuff();
 				tailEdit.set( (ICFBamUuid6Col)tail );
 				tailEdit.setOptionalNextId( Buff.getRequiredId() );
 				schema.getTableUuid6Col().updateUuid6Col( Authorization, tailEdit );
 			}
-			else if( tailClassCode.equals( "a858" ) ) {
+			else if( tailClassCode == ICFBamTableCol.CLASS_CODE ) {
 				ICFBamTableCol tailEdit = schema.getFactoryTableCol().newBuff();
 				tailEdit.set( (ICFBamTableCol)tail );
 				tailEdit.setOptionalNextId( Buff.getRequiredId() );
@@ -770,6 +769,7 @@ public class CFBamRamId64GenTable
 					"Unrecognized ClassCode " + tailClassCode );
 			}
 		}
+		return( Buff );
 	}
 
 	public ICFBamId64Gen readDerived( ICFSecAuthorization Authorization,
@@ -790,11 +790,9 @@ public class CFBamRamId64GenTable
 		CFLibDbKeyHash256 PKey )
 	{
 		final String S_ProcName = "CFBamRamId64Gen.readDerived";
-		CFLibDbKeyHash256 key = schema.getFactoryValue().newPKey();
-		key.setRequiredId( PKey.getRequiredId() );
 		ICFBamId64Gen buff;
-		if( dictByPKey.containsKey( key ) ) {
-			buff = dictByPKey.get( key );
+		if( dictByPKey.containsKey( PKey ) ) {
+			buff = dictByPKey.get( PKey );
 		}
 		else {
 			buff = null;
@@ -994,12 +992,9 @@ public class CFBamRamId64GenTable
 		CFLibDbKeyHash256 Id )
 	{
 		final String S_ProcName = "CFBamRamValue.readDerivedByIdIdx() ";
-		CFLibDbKeyHash256 key = schema.getFactoryValue().newPKey();
-		key.setRequiredId( Id );
-
 		ICFBamId64Gen buff;
-		if( dictByPKey.containsKey( key ) ) {
-			buff = dictByPKey.get( key );
+		if( dictByPKey.containsKey( Id ) ) {
+			buff = dictByPKey.get( Id );
 		}
 		else {
 			buff = null;
@@ -1012,7 +1007,7 @@ public class CFBamRamId64GenTable
 	{
 		final String S_ProcName = "CFBamRamId64Gen.readBuff";
 		ICFBamId64Gen buff = readDerived( Authorization, PKey );
-		if( ( buff != null ) && ( ! buff.getClassCode().equals( "a874" ) ) ) {
+		if( ( buff != null ) && ( buff.getClassCode() != ICFBamId64Gen.CLASS_CODE ) ) {
 			buff = null;
 		}
 		return( buff );
@@ -1023,7 +1018,7 @@ public class CFBamRamId64GenTable
 	{
 		final String S_ProcName = "lockBuff";
 		ICFBamId64Gen buff = readDerived( Authorization, PKey );
-		if( ( buff != null ) && ( ! buff.getClassCode().equals( "a874" ) ) ) {
+		if( ( buff != null ) && ( buff.getClassCode() != ICFBamId64Gen.CLASS_CODE ) ) {
 			buff = null;
 		}
 		return( buff );
@@ -1037,7 +1032,7 @@ public class CFBamRamId64GenTable
 		ICFBamId64Gen[] buffList = readAllDerived( Authorization );
 		for( int idx = 0; idx < buffList.length; idx ++ ) {
 			buff = buffList[idx];
-			if( ( buff != null ) && buff.getClassCode().equals( "a874" ) ) {
+			if( ( buff != null ) && ( buff.getClassCode() == ICFBamId64Gen.CLASS_CODE ) ) {
 				filteredList.add( buff );
 			}
 		}
@@ -1050,7 +1045,7 @@ public class CFBamRamId64GenTable
 		final String S_ProcName = "CFBamRamValue.readBuffByIdIdx() ";
 		ICFBamId64Gen buff = readDerivedByIdIdx( Authorization,
 			Id );
-		if( ( buff != null ) && buff.getClassCode().equals( "a809" ) ) {
+		if( ( buff != null ) && ( buff.getClassCode() == ICFBamValue.CLASS_CODE ) ) {
 			return( (ICFBamId64Gen)buff );
 		}
 		else {
@@ -1066,7 +1061,7 @@ public class CFBamRamId64GenTable
 		ICFBamId64Gen buff = readDerivedByUNameIdx( Authorization,
 			ScopeId,
 			Name );
-		if( ( buff != null ) && buff.getClassCode().equals( "a809" ) ) {
+		if( ( buff != null ) && ( buff.getClassCode() == ICFBamValue.CLASS_CODE ) ) {
 			return( (ICFBamId64Gen)buff );
 		}
 		else {
@@ -1084,7 +1079,7 @@ public class CFBamRamId64GenTable
 			ScopeId );
 		for( int idx = 0; idx < buffList.length; idx ++ ) {
 			buff = buffList[idx];
-			if( ( buff != null ) && buff.getClassCode().equals( "a809" ) ) {
+			if( ( buff != null ) && ( buff.getClassCode() == ICFBamValue.CLASS_CODE ) ) {
 				filteredList.add( (ICFBamId64Gen)buff );
 			}
 		}
@@ -1101,7 +1096,7 @@ public class CFBamRamId64GenTable
 			DefSchemaId );
 		for( int idx = 0; idx < buffList.length; idx ++ ) {
 			buff = buffList[idx];
-			if( ( buff != null ) && buff.getClassCode().equals( "a809" ) ) {
+			if( ( buff != null ) && ( buff.getClassCode() == ICFBamValue.CLASS_CODE ) ) {
 				filteredList.add( (ICFBamId64Gen)buff );
 			}
 		}
@@ -1118,7 +1113,7 @@ public class CFBamRamId64GenTable
 			PrevId );
 		for( int idx = 0; idx < buffList.length; idx ++ ) {
 			buff = buffList[idx];
-			if( ( buff != null ) && buff.getClassCode().equals( "a809" ) ) {
+			if( ( buff != null ) && ( buff.getClassCode() == ICFBamValue.CLASS_CODE ) ) {
 				filteredList.add( (ICFBamId64Gen)buff );
 			}
 		}
@@ -1135,7 +1130,7 @@ public class CFBamRamId64GenTable
 			NextId );
 		for( int idx = 0; idx < buffList.length; idx ++ ) {
 			buff = buffList[idx];
-			if( ( buff != null ) && buff.getClassCode().equals( "a809" ) ) {
+			if( ( buff != null ) && ( buff.getClassCode() == ICFBamValue.CLASS_CODE ) ) {
 				filteredList.add( (ICFBamId64Gen)buff );
 			}
 		}
@@ -1154,7 +1149,7 @@ public class CFBamRamId64GenTable
 			PrevId );
 		for( int idx = 0; idx < buffList.length; idx ++ ) {
 			buff = buffList[idx];
-			if( ( buff != null ) && buff.getClassCode().equals( "a809" ) ) {
+			if( ( buff != null ) && ( buff.getClassCode() == ICFBamValue.CLASS_CODE ) ) {
 				filteredList.add( (ICFBamId64Gen)buff );
 			}
 		}
@@ -1173,7 +1168,7 @@ public class CFBamRamId64GenTable
 			NextId );
 		for( int idx = 0; idx < buffList.length; idx ++ ) {
 			buff = buffList[idx];
-			if( ( buff != null ) && buff.getClassCode().equals( "a809" ) ) {
+			if( ( buff != null ) && ( buff.getClassCode() == ICFBamValue.CLASS_CODE ) ) {
 				filteredList.add( (ICFBamId64Gen)buff );
 			}
 		}
@@ -1190,7 +1185,7 @@ public class CFBamRamId64GenTable
 			SchemaDefId );
 		for( int idx = 0; idx < buffList.length; idx ++ ) {
 			buff = buffList[idx];
-			if( ( buff != null ) && buff.getClassCode().equals( "a828" ) ) {
+			if( ( buff != null ) && ( buff.getClassCode() == ICFBamInt64Type.CLASS_CODE ) ) {
 				filteredList.add( (ICFBamId64Gen)buff );
 			}
 		}
@@ -6610,13 +6605,15 @@ public class CFBamRamId64GenTable
 		return( (CFBamId64GenBuff)editCur );
 	}
 
-	public void updateId64Gen( ICFSecAuthorization Authorization,
+	public ICFBamId64Gen updateId64Gen( ICFSecAuthorization Authorization,
 		ICFBamId64Gen Buff )
 	{
-		schema.getTableInt64Type().updateInt64Type( Authorization,
+		ICFBamId64Gen repl = schema.getTableInt64Type().updateInt64Type( Authorization,
 			Buff );
-		CFLibDbKeyHash256 pkey = schema.getFactoryValue().newPKey();
-		pkey.setRequiredId( Buff.getRequiredId() );
+		if (repl != Buff) {
+			throw new CFLibInvalidStateException(getClass(), S_ProcName, "repl != Buff", "repl != Buff");
+		}
+		CFLibDbKeyHash256 pkey = Buff.getPKey();
 		ICFBamId64Gen existing = dictByPKey.get( pkey );
 		if( existing == null ) {
 			throw new CFLibStaleCacheDetectedException( getClass(),
@@ -6653,6 +6650,7 @@ public class CFBamRamId64GenTable
 		dictByPKey.remove( pkey );
 		dictByPKey.put( pkey, Buff );
 
+		return(Buff);
 	}
 
 	public void deleteId64Gen( ICFSecAuthorization Authorization,
@@ -8038,7 +8036,7 @@ public class CFBamRamId64GenTable
 	public void deleteId64GenBySchemaIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argSchemaDefId )
 	{
-		CFBamBuffInt64TypeBySchemaIdxKey key = schema.getFactoryInt64Type().newSchemaIdxKey();
+		CFBamBuffInt64TypeBySchemaIdxKey key = (CFBamBuffInt64TypeBySchemaIdxKey)schema.getFactoryInt64Type().newBySchemaIdxKey();
 		key.setRequiredSchemaDefId( argSchemaDefId );
 		deleteId64GenBySchemaIdx( Authorization, key );
 	}
@@ -8067,14 +8065,6 @@ public class CFBamRamId64GenTable
 				cur.getRequiredId() );
 			deleteId64Gen( Authorization, cur );
 		}
-	}
-
-	public void deleteId64GenByIdIdx( ICFSecAuthorization Authorization,
-		CFLibDbKeyHash256 argId )
-	{
-		CFLibDbKeyHash256 key = schema.getFactoryValue().newPKey();
-		key.setRequiredId( argId );
-		deleteId64GenByIdIdx( Authorization, key );
 	}
 
 	public void deleteId64GenByIdIdx( ICFSecAuthorization Authorization,
@@ -8107,7 +8097,7 @@ public class CFBamRamId64GenTable
 		CFLibDbKeyHash256 argScopeId,
 		String argName )
 	{
-		CFBamBuffValueByUNameIdxKey key = schema.getFactoryValue().newUNameIdxKey();
+		CFBamBuffValueByUNameIdxKey key = (CFBamBuffValueByUNameIdxKey)schema.getFactoryValue().newByUNameIdxKey();
 		key.setRequiredScopeId( argScopeId );
 		key.setRequiredName( argName );
 		deleteId64GenByUNameIdx( Authorization, key );
@@ -8143,7 +8133,7 @@ public class CFBamRamId64GenTable
 	public void deleteId64GenByScopeIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argScopeId )
 	{
-		CFBamBuffValueByScopeIdxKey key = schema.getFactoryValue().newScopeIdxKey();
+		CFBamBuffValueByScopeIdxKey key = (CFBamBuffValueByScopeIdxKey)schema.getFactoryValue().newByScopeIdxKey();
 		key.setRequiredScopeId( argScopeId );
 		deleteId64GenByScopeIdx( Authorization, key );
 	}
@@ -8177,7 +8167,7 @@ public class CFBamRamId64GenTable
 	public void deleteId64GenByDefSchemaIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argDefSchemaId )
 	{
-		CFBamBuffValueByDefSchemaIdxKey key = schema.getFactoryValue().newDefSchemaIdxKey();
+		CFBamBuffValueByDefSchemaIdxKey key = (CFBamBuffValueByDefSchemaIdxKey)schema.getFactoryValue().newByDefSchemaIdxKey();
 		key.setOptionalDefSchemaId( argDefSchemaId );
 		deleteId64GenByDefSchemaIdx( Authorization, key );
 	}
@@ -8213,7 +8203,7 @@ public class CFBamRamId64GenTable
 	public void deleteId64GenByPrevIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argPrevId )
 	{
-		CFBamBuffValueByPrevIdxKey key = schema.getFactoryValue().newPrevIdxKey();
+		CFBamBuffValueByPrevIdxKey key = (CFBamBuffValueByPrevIdxKey)schema.getFactoryValue().newByPrevIdxKey();
 		key.setOptionalPrevId( argPrevId );
 		deleteId64GenByPrevIdx( Authorization, key );
 	}
@@ -8249,7 +8239,7 @@ public class CFBamRamId64GenTable
 	public void deleteId64GenByNextIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argNextId )
 	{
-		CFBamBuffValueByNextIdxKey key = schema.getFactoryValue().newNextIdxKey();
+		CFBamBuffValueByNextIdxKey key = (CFBamBuffValueByNextIdxKey)schema.getFactoryValue().newByNextIdxKey();
 		key.setOptionalNextId( argNextId );
 		deleteId64GenByNextIdx( Authorization, key );
 	}
@@ -8286,7 +8276,7 @@ public class CFBamRamId64GenTable
 		CFLibDbKeyHash256 argScopeId,
 		CFLibDbKeyHash256 argPrevId )
 	{
-		CFBamBuffValueByContPrevIdxKey key = schema.getFactoryValue().newContPrevIdxKey();
+		CFBamBuffValueByContPrevIdxKey key = (CFBamBuffValueByContPrevIdxKey)schema.getFactoryValue().newByContPrevIdxKey();
 		key.setRequiredScopeId( argScopeId );
 		key.setOptionalPrevId( argPrevId );
 		deleteId64GenByContPrevIdx( Authorization, key );
@@ -8325,7 +8315,7 @@ public class CFBamRamId64GenTable
 		CFLibDbKeyHash256 argScopeId,
 		CFLibDbKeyHash256 argNextId )
 	{
-		CFBamBuffValueByContNextIdxKey key = schema.getFactoryValue().newContNextIdxKey();
+		CFBamBuffValueByContNextIdxKey key = (CFBamBuffValueByContNextIdxKey)schema.getFactoryValue().newByContNextIdxKey();
 		key.setRequiredScopeId( argScopeId );
 		key.setOptionalNextId( argNextId );
 		deleteId64GenByContNextIdx( Authorization, key );

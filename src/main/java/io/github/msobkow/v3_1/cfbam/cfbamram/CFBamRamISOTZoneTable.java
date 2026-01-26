@@ -87,21 +87,21 @@ public class CFBamRamISOTZoneTable
 		schema = argSchema;
 	}
 
-	public void createISOTZone( ICFSecAuthorization Authorization,
+	public ICFSecISOTZone createISOTZone( ICFSecAuthorization Authorization,
 		ICFSecISOTZone Buff )
 	{
 		final String S_ProcName = "createISOTZone";
-		Short pkey = schema.getFactoryISOTZone().newPKey();
-		pkey.setRequiredISOTZoneId( schema.nextISOTZoneIdGen() );
-		Buff.setRequiredISOTZoneId( pkey.getRequiredISOTZoneId() );
-		CFSecBuffISOTZoneByOffsetIdxKey keyOffsetIdx = schema.getFactoryISOTZone().newOffsetIdxKey();
+		Short pkey;
+		pkey = schema.nextISOTZoneIdGen();
+		Buff.setRequiredISOTZoneId( pkey );
+		CFSecBuffISOTZoneByOffsetIdxKey keyOffsetIdx = (CFSecBuffISOTZoneByOffsetIdxKey)schema.getFactoryISOTZone().newByOffsetIdxKey();
 		keyOffsetIdx.setRequiredTZHourOffset( Buff.getRequiredTZHourOffset() );
 		keyOffsetIdx.setRequiredTZMinOffset( Buff.getRequiredTZMinOffset() );
 
-		CFSecBuffISOTZoneByUTZNameIdxKey keyUTZNameIdx = schema.getFactoryISOTZone().newUTZNameIdxKey();
+		CFSecBuffISOTZoneByUTZNameIdxKey keyUTZNameIdx = (CFSecBuffISOTZoneByUTZNameIdxKey)schema.getFactoryISOTZone().newByUTZNameIdxKey();
 		keyUTZNameIdx.setRequiredTZName( Buff.getRequiredTZName() );
 
-		CFSecBuffISOTZoneByIso8601IdxKey keyIso8601Idx = schema.getFactoryISOTZone().newIso8601IdxKey();
+		CFSecBuffISOTZoneByIso8601IdxKey keyIso8601Idx = (CFSecBuffISOTZoneByIso8601IdxKey)schema.getFactoryISOTZone().newByIso8601IdxKey();
 		keyIso8601Idx.setRequiredIso8601( Buff.getRequiredIso8601() );
 
 		// Validate unique indexes
@@ -113,6 +113,7 @@ public class CFBamRamISOTZoneTable
 		if( dictByUTZNameIdx.containsKey( keyUTZNameIdx ) ) {
 			throw new CFLibUniqueIndexViolationException( getClass(),
 				S_ProcName,
+				"ISOTZoneUTZNameIdx",
 				"ISOTZoneUTZNameIdx",
 				keyUTZNameIdx );
 		}
@@ -145,6 +146,7 @@ public class CFBamRamISOTZoneTable
 		}
 		subdictIso8601Idx.put( pkey, Buff );
 
+		return( Buff );
 	}
 
 	public ICFSecISOTZone readDerived( ICFSecAuthorization Authorization,
@@ -165,11 +167,9 @@ public class CFBamRamISOTZoneTable
 		Short PKey )
 	{
 		final String S_ProcName = "CFBamRamISOTZone.readDerived";
-		Short key = schema.getFactoryISOTZone().newPKey();
-		key.setRequiredISOTZoneId( PKey.getRequiredISOTZoneId() );
 		ICFSecISOTZone buff;
-		if( dictByPKey.containsKey( key ) ) {
-			buff = dictByPKey.get( key );
+		if( dictByPKey.containsKey( PKey ) ) {
+			buff = dictByPKey.get( PKey );
 		}
 		else {
 			buff = null;
@@ -193,7 +193,7 @@ public class CFBamRamISOTZoneTable
 		short TZMinOffset )
 	{
 		final String S_ProcName = "CFBamRamISOTZone.readDerivedByOffsetIdx";
-		CFSecBuffISOTZoneByOffsetIdxKey key = schema.getFactoryISOTZone().newOffsetIdxKey();
+		CFSecBuffISOTZoneByOffsetIdxKey key = (CFSecBuffISOTZoneByOffsetIdxKey)schema.getFactoryISOTZone().newByOffsetIdxKey();
 		key.setRequiredTZHourOffset( TZHourOffset );
 		key.setRequiredTZMinOffset( TZMinOffset );
 
@@ -221,7 +221,7 @@ public class CFBamRamISOTZoneTable
 		String TZName )
 	{
 		final String S_ProcName = "CFBamRamISOTZone.readDerivedByUTZNameIdx";
-		CFSecBuffISOTZoneByUTZNameIdxKey key = schema.getFactoryISOTZone().newUTZNameIdxKey();
+		CFSecBuffISOTZoneByUTZNameIdxKey key = (CFSecBuffISOTZoneByUTZNameIdxKey)schema.getFactoryISOTZone().newByUTZNameIdxKey();
 		key.setRequiredTZName( TZName );
 
 		ICFSecISOTZone buff;
@@ -238,7 +238,7 @@ public class CFBamRamISOTZoneTable
 		String Iso8601 )
 	{
 		final String S_ProcName = "CFBamRamISOTZone.readDerivedByIso8601Idx";
-		CFSecBuffISOTZoneByIso8601IdxKey key = schema.getFactoryISOTZone().newIso8601IdxKey();
+		CFSecBuffISOTZoneByIso8601IdxKey key = (CFSecBuffISOTZoneByIso8601IdxKey)schema.getFactoryISOTZone().newByIso8601IdxKey();
 		key.setRequiredIso8601( Iso8601 );
 
 		ICFSecISOTZone[] recArray;
@@ -265,12 +265,9 @@ public class CFBamRamISOTZoneTable
 		short ISOTZoneId )
 	{
 		final String S_ProcName = "CFBamRamISOTZone.readDerivedByIdIdx() ";
-		Short key = schema.getFactoryISOTZone().newPKey();
-		key.setRequiredISOTZoneId( ISOTZoneId );
-
 		ICFSecISOTZone buff;
-		if( dictByPKey.containsKey( key ) ) {
-			buff = dictByPKey.get( key );
+		if( dictByPKey.containsKey( ISOTZoneId ) ) {
+			buff = dictByPKey.get( ISOTZoneId );
 		}
 		else {
 			buff = null;
@@ -283,7 +280,7 @@ public class CFBamRamISOTZoneTable
 	{
 		final String S_ProcName = "CFBamRamISOTZone.readBuff";
 		ICFSecISOTZone buff = readDerived( Authorization, PKey );
-		if( ( buff != null ) && ( ! buff.getClassCode().equals( "a008" ) ) ) {
+		if( ( buff != null ) && ( buff.getClassCode() != ICFSecISOTZone.CLASS_CODE ) ) {
 			buff = null;
 		}
 		return( buff );
@@ -294,7 +291,7 @@ public class CFBamRamISOTZoneTable
 	{
 		final String S_ProcName = "lockBuff";
 		ICFSecISOTZone buff = readDerived( Authorization, PKey );
-		if( ( buff != null ) && ( ! buff.getClassCode().equals( "a008" ) ) ) {
+		if( ( buff != null ) && ( buff.getClassCode() != ICFSecISOTZone.CLASS_CODE ) ) {
 			buff = null;
 		}
 		return( buff );
@@ -308,7 +305,7 @@ public class CFBamRamISOTZoneTable
 		ICFSecISOTZone[] buffList = readAllDerived( Authorization );
 		for( int idx = 0; idx < buffList.length; idx ++ ) {
 			buff = buffList[idx];
-			if( ( buff != null ) && buff.getClassCode().equals( "a008" ) ) {
+			if( ( buff != null ) && ( buff.getClassCode() == ICFSecISOTZone.CLASS_CODE ) ) {
 				filteredList.add( buff );
 			}
 		}
@@ -321,7 +318,7 @@ public class CFBamRamISOTZoneTable
 		final String S_ProcName = "CFBamRamISOTZone.readBuffByIdIdx() ";
 		ICFSecISOTZone buff = readDerivedByIdIdx( Authorization,
 			ISOTZoneId );
-		if( ( buff != null ) && buff.getClassCode().equals( "a008" ) ) {
+		if( ( buff != null ) && ( buff.getClassCode() == ICFSecISOTZone.CLASS_CODE ) ) {
 			return( (ICFSecISOTZone)buff );
 		}
 		else {
@@ -341,7 +338,7 @@ public class CFBamRamISOTZoneTable
 			TZMinOffset );
 		for( int idx = 0; idx < buffList.length; idx ++ ) {
 			buff = buffList[idx];
-			if( ( buff != null ) && buff.getClassCode().equals( "a008" ) ) {
+			if( ( buff != null ) && ( buff.getClassCode() == ICFSecISOTZone.CLASS_CODE ) ) {
 				filteredList.add( (ICFSecISOTZone)buff );
 			}
 		}
@@ -354,7 +351,7 @@ public class CFBamRamISOTZoneTable
 		final String S_ProcName = "CFBamRamISOTZone.readBuffByUTZNameIdx() ";
 		ICFSecISOTZone buff = readDerivedByUTZNameIdx( Authorization,
 			TZName );
-		if( ( buff != null ) && buff.getClassCode().equals( "a008" ) ) {
+		if( ( buff != null ) && ( buff.getClassCode() == ICFSecISOTZone.CLASS_CODE ) ) {
 			return( (ICFSecISOTZone)buff );
 		}
 		else {
@@ -372,18 +369,17 @@ public class CFBamRamISOTZoneTable
 			Iso8601 );
 		for( int idx = 0; idx < buffList.length; idx ++ ) {
 			buff = buffList[idx];
-			if( ( buff != null ) && buff.getClassCode().equals( "a008" ) ) {
+			if( ( buff != null ) && ( buff.getClassCode() == ICFSecISOTZone.CLASS_CODE ) ) {
 				filteredList.add( (ICFSecISOTZone)buff );
 			}
 		}
 		return( filteredList.toArray( new ICFSecISOTZone[0] ) );
 	}
 
-	public void updateISOTZone( ICFSecAuthorization Authorization,
+	public ICFSecISOTZone updateISOTZone( ICFSecAuthorization Authorization,
 		ICFSecISOTZone Buff )
 	{
-		Short pkey = schema.getFactoryISOTZone().newPKey();
-		pkey.setRequiredISOTZoneId( Buff.getRequiredISOTZoneId() );
+		Short pkey = Buff.getPKey();
 		ICFSecISOTZone existing = dictByPKey.get( pkey );
 		if( existing == null ) {
 			throw new CFLibStaleCacheDetectedException( getClass(),
@@ -398,24 +394,24 @@ public class CFBamRamISOTZoneTable
 				pkey );
 		}
 		Buff.setRequiredRevision( Buff.getRequiredRevision() + 1 );
-		CFSecBuffISOTZoneByOffsetIdxKey existingKeyOffsetIdx = schema.getFactoryISOTZone().newOffsetIdxKey();
+		CFSecBuffISOTZoneByOffsetIdxKey existingKeyOffsetIdx = (CFSecBuffISOTZoneByOffsetIdxKey)schema.getFactoryISOTZone().newByOffsetIdxKey();
 		existingKeyOffsetIdx.setRequiredTZHourOffset( existing.getRequiredTZHourOffset() );
 		existingKeyOffsetIdx.setRequiredTZMinOffset( existing.getRequiredTZMinOffset() );
 
-		CFSecBuffISOTZoneByOffsetIdxKey newKeyOffsetIdx = schema.getFactoryISOTZone().newOffsetIdxKey();
+		CFSecBuffISOTZoneByOffsetIdxKey newKeyOffsetIdx = (CFSecBuffISOTZoneByOffsetIdxKey)schema.getFactoryISOTZone().newByOffsetIdxKey();
 		newKeyOffsetIdx.setRequiredTZHourOffset( Buff.getRequiredTZHourOffset() );
 		newKeyOffsetIdx.setRequiredTZMinOffset( Buff.getRequiredTZMinOffset() );
 
-		CFSecBuffISOTZoneByUTZNameIdxKey existingKeyUTZNameIdx = schema.getFactoryISOTZone().newUTZNameIdxKey();
+		CFSecBuffISOTZoneByUTZNameIdxKey existingKeyUTZNameIdx = (CFSecBuffISOTZoneByUTZNameIdxKey)schema.getFactoryISOTZone().newByUTZNameIdxKey();
 		existingKeyUTZNameIdx.setRequiredTZName( existing.getRequiredTZName() );
 
-		CFSecBuffISOTZoneByUTZNameIdxKey newKeyUTZNameIdx = schema.getFactoryISOTZone().newUTZNameIdxKey();
+		CFSecBuffISOTZoneByUTZNameIdxKey newKeyUTZNameIdx = (CFSecBuffISOTZoneByUTZNameIdxKey)schema.getFactoryISOTZone().newByUTZNameIdxKey();
 		newKeyUTZNameIdx.setRequiredTZName( Buff.getRequiredTZName() );
 
-		CFSecBuffISOTZoneByIso8601IdxKey existingKeyIso8601Idx = schema.getFactoryISOTZone().newIso8601IdxKey();
+		CFSecBuffISOTZoneByIso8601IdxKey existingKeyIso8601Idx = (CFSecBuffISOTZoneByIso8601IdxKey)schema.getFactoryISOTZone().newByIso8601IdxKey();
 		existingKeyIso8601Idx.setRequiredIso8601( existing.getRequiredIso8601() );
 
-		CFSecBuffISOTZoneByIso8601IdxKey newKeyIso8601Idx = schema.getFactoryISOTZone().newIso8601IdxKey();
+		CFSecBuffISOTZoneByIso8601IdxKey newKeyIso8601Idx = (CFSecBuffISOTZoneByIso8601IdxKey)schema.getFactoryISOTZone().newByIso8601IdxKey();
 		newKeyIso8601Idx.setRequiredIso8601( Buff.getRequiredIso8601() );
 
 		// Check unique indexes
@@ -424,6 +420,7 @@ public class CFBamRamISOTZoneTable
 			if( dictByUTZNameIdx.containsKey( newKeyUTZNameIdx ) ) {
 				throw new CFLibUniqueIndexViolationException( getClass(),
 					"updateISOTZone",
+					"ISOTZoneUTZNameIdx",
 					"ISOTZoneUTZNameIdx",
 					newKeyUTZNameIdx );
 			}
@@ -467,6 +464,7 @@ public class CFBamRamISOTZoneTable
 		}
 		subdict.put( pkey, Buff );
 
+		return(Buff);
 	}
 
 	public void deleteISOTZone( ICFSecAuthorization Authorization,
@@ -486,14 +484,14 @@ public class CFBamRamISOTZoneTable
 				"deleteISOTZone",
 				pkey );
 		}
-		CFSecBuffISOTZoneByOffsetIdxKey keyOffsetIdx = schema.getFactoryISOTZone().newOffsetIdxKey();
+		CFSecBuffISOTZoneByOffsetIdxKey keyOffsetIdx = (CFSecBuffISOTZoneByOffsetIdxKey)schema.getFactoryISOTZone().newByOffsetIdxKey();
 		keyOffsetIdx.setRequiredTZHourOffset( existing.getRequiredTZHourOffset() );
 		keyOffsetIdx.setRequiredTZMinOffset( existing.getRequiredTZMinOffset() );
 
-		CFSecBuffISOTZoneByUTZNameIdxKey keyUTZNameIdx = schema.getFactoryISOTZone().newUTZNameIdxKey();
+		CFSecBuffISOTZoneByUTZNameIdxKey keyUTZNameIdx = (CFSecBuffISOTZoneByUTZNameIdxKey)schema.getFactoryISOTZone().newByUTZNameIdxKey();
 		keyUTZNameIdx.setRequiredTZName( existing.getRequiredTZName() );
 
-		CFSecBuffISOTZoneByIso8601IdxKey keyIso8601Idx = schema.getFactoryISOTZone().newIso8601IdxKey();
+		CFSecBuffISOTZoneByIso8601IdxKey keyIso8601Idx = (CFSecBuffISOTZoneByIso8601IdxKey)schema.getFactoryISOTZone().newByIso8601IdxKey();
 		keyIso8601Idx.setRequiredIso8601( existing.getRequiredIso8601() );
 
 		// Validate reverse foreign keys
@@ -512,14 +510,6 @@ public class CFBamRamISOTZoneTable
 		subdict.remove( pkey );
 
 	}
-	public void deleteISOTZoneByIdIdx( ICFSecAuthorization Authorization,
-		short argISOTZoneId )
-	{
-		Short key = schema.getFactoryISOTZone().newPKey();
-		key.setRequiredISOTZoneId( argISOTZoneId );
-		deleteISOTZoneByIdIdx( Authorization, key );
-	}
-
 	public void deleteISOTZoneByIdIdx( ICFSecAuthorization Authorization,
 		Short argKey )
 	{
@@ -550,7 +540,7 @@ public class CFBamRamISOTZoneTable
 		short argTZHourOffset,
 		short argTZMinOffset )
 	{
-		CFSecBuffISOTZoneByOffsetIdxKey key = schema.getFactoryISOTZone().newOffsetIdxKey();
+		CFSecBuffISOTZoneByOffsetIdxKey key = (CFSecBuffISOTZoneByOffsetIdxKey)schema.getFactoryISOTZone().newByOffsetIdxKey();
 		key.setRequiredTZHourOffset( argTZHourOffset );
 		key.setRequiredTZMinOffset( argTZMinOffset );
 		deleteISOTZoneByOffsetIdx( Authorization, key );
@@ -586,7 +576,7 @@ public class CFBamRamISOTZoneTable
 	public void deleteISOTZoneByUTZNameIdx( ICFSecAuthorization Authorization,
 		String argTZName )
 	{
-		CFSecBuffISOTZoneByUTZNameIdxKey key = schema.getFactoryISOTZone().newUTZNameIdxKey();
+		CFSecBuffISOTZoneByUTZNameIdxKey key = (CFSecBuffISOTZoneByUTZNameIdxKey)schema.getFactoryISOTZone().newByUTZNameIdxKey();
 		key.setRequiredTZName( argTZName );
 		deleteISOTZoneByUTZNameIdx( Authorization, key );
 	}
@@ -620,7 +610,7 @@ public class CFBamRamISOTZoneTable
 	public void deleteISOTZoneByIso8601Idx( ICFSecAuthorization Authorization,
 		String argIso8601 )
 	{
-		CFSecBuffISOTZoneByIso8601IdxKey key = schema.getFactoryISOTZone().newIso8601IdxKey();
+		CFSecBuffISOTZoneByIso8601IdxKey key = (CFSecBuffISOTZoneByIso8601IdxKey)schema.getFactoryISOTZone().newByIso8601IdxKey();
 		key.setRequiredIso8601( argIso8601 );
 		deleteISOTZoneByIso8601Idx( Authorization, key );
 	}

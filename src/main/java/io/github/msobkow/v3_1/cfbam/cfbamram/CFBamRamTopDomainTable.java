@@ -87,20 +87,20 @@ public class CFBamRamTopDomainTable
 		schema = argSchema;
 	}
 
-	public void createTopDomain( ICFSecAuthorization Authorization,
+	public ICFIntTopDomain createTopDomain( ICFSecAuthorization Authorization,
 		ICFIntTopDomain Buff )
 	{
 		final String S_ProcName = "createTopDomain";
-		CFLibDbKeyHash256 pkey = schema.getFactoryTopDomain().newPKey();
-		pkey.setRequiredId( schema.nextTopDomainIdGen() );
-		Buff.setRequiredId( pkey.getRequiredId() );
-		CFIntBuffTopDomainByTenantIdxKey keyTenantIdx = schema.getFactoryTopDomain().newTenantIdxKey();
+		CFLibDbKeyHash256 pkey;
+		pkey = schema.nextTopDomainIdGen();
+		Buff.setRequiredId( pkey );
+		CFIntBuffTopDomainByTenantIdxKey keyTenantIdx = (CFIntBuffTopDomainByTenantIdxKey)schema.getFactoryTopDomain().newByTenantIdxKey();
 		keyTenantIdx.setRequiredTenantId( Buff.getRequiredTenantId() );
 
-		CFIntBuffTopDomainByTldIdxKey keyTldIdx = schema.getFactoryTopDomain().newTldIdxKey();
+		CFIntBuffTopDomainByTldIdxKey keyTldIdx = (CFIntBuffTopDomainByTldIdxKey)schema.getFactoryTopDomain().newByTldIdxKey();
 		keyTldIdx.setRequiredTldId( Buff.getRequiredTldId() );
 
-		CFIntBuffTopDomainByNameIdxKey keyNameIdx = schema.getFactoryTopDomain().newNameIdxKey();
+		CFIntBuffTopDomainByNameIdxKey keyNameIdx = (CFIntBuffTopDomainByNameIdxKey)schema.getFactoryTopDomain().newByNameIdxKey();
 		keyNameIdx.setRequiredTldId( Buff.getRequiredTldId() );
 		keyNameIdx.setRequiredName( Buff.getRequiredName() );
 
@@ -113,6 +113,7 @@ public class CFBamRamTopDomainTable
 		if( dictByNameIdx.containsKey( keyNameIdx ) ) {
 			throw new CFLibUniqueIndexViolationException( getClass(),
 				S_ProcName,
+				"TopDomNameIdx",
 				"TopDomNameIdx",
 				keyNameIdx );
 		}
@@ -179,6 +180,7 @@ public class CFBamRamTopDomainTable
 
 		dictByNameIdx.put( keyNameIdx, Buff );
 
+		return( Buff );
 	}
 
 	public ICFIntTopDomain readDerived( ICFSecAuthorization Authorization,
@@ -199,11 +201,9 @@ public class CFBamRamTopDomainTable
 		CFLibDbKeyHash256 PKey )
 	{
 		final String S_ProcName = "CFBamRamTopDomain.readDerived";
-		CFLibDbKeyHash256 key = schema.getFactoryTopDomain().newPKey();
-		key.setRequiredId( PKey.getRequiredId() );
 		ICFIntTopDomain buff;
-		if( dictByPKey.containsKey( key ) ) {
-			buff = dictByPKey.get( key );
+		if( dictByPKey.containsKey( PKey ) ) {
+			buff = dictByPKey.get( PKey );
 		}
 		else {
 			buff = null;
@@ -226,7 +226,7 @@ public class CFBamRamTopDomainTable
 		CFLibDbKeyHash256 TenantId )
 	{
 		final String S_ProcName = "CFBamRamTopDomain.readDerivedByTenantIdx";
-		CFIntBuffTopDomainByTenantIdxKey key = schema.getFactoryTopDomain().newTenantIdxKey();
+		CFIntBuffTopDomainByTenantIdxKey key = (CFIntBuffTopDomainByTenantIdxKey)schema.getFactoryTopDomain().newByTenantIdxKey();
 		key.setRequiredTenantId( TenantId );
 
 		ICFIntTopDomain[] recArray;
@@ -253,7 +253,7 @@ public class CFBamRamTopDomainTable
 		CFLibDbKeyHash256 TldId )
 	{
 		final String S_ProcName = "CFBamRamTopDomain.readDerivedByTldIdx";
-		CFIntBuffTopDomainByTldIdxKey key = schema.getFactoryTopDomain().newTldIdxKey();
+		CFIntBuffTopDomainByTldIdxKey key = (CFIntBuffTopDomainByTldIdxKey)schema.getFactoryTopDomain().newByTldIdxKey();
 		key.setRequiredTldId( TldId );
 
 		ICFIntTopDomain[] recArray;
@@ -281,7 +281,7 @@ public class CFBamRamTopDomainTable
 		String Name )
 	{
 		final String S_ProcName = "CFBamRamTopDomain.readDerivedByNameIdx";
-		CFIntBuffTopDomainByNameIdxKey key = schema.getFactoryTopDomain().newNameIdxKey();
+		CFIntBuffTopDomainByNameIdxKey key = (CFIntBuffTopDomainByNameIdxKey)schema.getFactoryTopDomain().newByNameIdxKey();
 		key.setRequiredTldId( TldId );
 		key.setRequiredName( Name );
 
@@ -299,12 +299,9 @@ public class CFBamRamTopDomainTable
 		CFLibDbKeyHash256 Id )
 	{
 		final String S_ProcName = "CFBamRamTopDomain.readDerivedByIdIdx() ";
-		CFLibDbKeyHash256 key = schema.getFactoryTopDomain().newPKey();
-		key.setRequiredId( Id );
-
 		ICFIntTopDomain buff;
-		if( dictByPKey.containsKey( key ) ) {
-			buff = dictByPKey.get( key );
+		if( dictByPKey.containsKey( Id ) ) {
+			buff = dictByPKey.get( Id );
 		}
 		else {
 			buff = null;
@@ -317,7 +314,7 @@ public class CFBamRamTopDomainTable
 	{
 		final String S_ProcName = "CFBamRamTopDomain.readBuff";
 		ICFIntTopDomain buff = readDerived( Authorization, PKey );
-		if( ( buff != null ) && ( ! buff.getClassCode().equals( "a107" ) ) ) {
+		if( ( buff != null ) && ( buff.getClassCode() != ICFIntTopDomain.CLASS_CODE ) ) {
 			buff = null;
 		}
 		return( buff );
@@ -328,7 +325,7 @@ public class CFBamRamTopDomainTable
 	{
 		final String S_ProcName = "lockBuff";
 		ICFIntTopDomain buff = readDerived( Authorization, PKey );
-		if( ( buff != null ) && ( ! buff.getClassCode().equals( "a107" ) ) ) {
+		if( ( buff != null ) && ( buff.getClassCode() != ICFIntTopDomain.CLASS_CODE ) ) {
 			buff = null;
 		}
 		return( buff );
@@ -342,7 +339,7 @@ public class CFBamRamTopDomainTable
 		ICFIntTopDomain[] buffList = readAllDerived( Authorization );
 		for( int idx = 0; idx < buffList.length; idx ++ ) {
 			buff = buffList[idx];
-			if( ( buff != null ) && buff.getClassCode().equals( "a107" ) ) {
+			if( ( buff != null ) && ( buff.getClassCode() == ICFIntTopDomain.CLASS_CODE ) ) {
 				filteredList.add( buff );
 			}
 		}
@@ -355,7 +352,7 @@ public class CFBamRamTopDomainTable
 		final String S_ProcName = "CFBamRamTopDomain.readBuffByIdIdx() ";
 		ICFIntTopDomain buff = readDerivedByIdIdx( Authorization,
 			Id );
-		if( ( buff != null ) && buff.getClassCode().equals( "a107" ) ) {
+		if( ( buff != null ) && ( buff.getClassCode() == ICFIntTopDomain.CLASS_CODE ) ) {
 			return( (ICFIntTopDomain)buff );
 		}
 		else {
@@ -373,7 +370,7 @@ public class CFBamRamTopDomainTable
 			TenantId );
 		for( int idx = 0; idx < buffList.length; idx ++ ) {
 			buff = buffList[idx];
-			if( ( buff != null ) && buff.getClassCode().equals( "a107" ) ) {
+			if( ( buff != null ) && ( buff.getClassCode() == ICFIntTopDomain.CLASS_CODE ) ) {
 				filteredList.add( (ICFIntTopDomain)buff );
 			}
 		}
@@ -390,7 +387,7 @@ public class CFBamRamTopDomainTable
 			TldId );
 		for( int idx = 0; idx < buffList.length; idx ++ ) {
 			buff = buffList[idx];
-			if( ( buff != null ) && buff.getClassCode().equals( "a107" ) ) {
+			if( ( buff != null ) && ( buff.getClassCode() == ICFIntTopDomain.CLASS_CODE ) ) {
 				filteredList.add( (ICFIntTopDomain)buff );
 			}
 		}
@@ -405,7 +402,7 @@ public class CFBamRamTopDomainTable
 		ICFIntTopDomain buff = readDerivedByNameIdx( Authorization,
 			TldId,
 			Name );
-		if( ( buff != null ) && buff.getClassCode().equals( "a107" ) ) {
+		if( ( buff != null ) && ( buff.getClassCode() == ICFIntTopDomain.CLASS_CODE ) ) {
 			return( (ICFIntTopDomain)buff );
 		}
 		else {
@@ -413,11 +410,10 @@ public class CFBamRamTopDomainTable
 		}
 	}
 
-	public void updateTopDomain( ICFSecAuthorization Authorization,
+	public ICFIntTopDomain updateTopDomain( ICFSecAuthorization Authorization,
 		ICFIntTopDomain Buff )
 	{
-		CFLibDbKeyHash256 pkey = schema.getFactoryTopDomain().newPKey();
-		pkey.setRequiredId( Buff.getRequiredId() );
+		CFLibDbKeyHash256 pkey = Buff.getPKey();
 		ICFIntTopDomain existing = dictByPKey.get( pkey );
 		if( existing == null ) {
 			throw new CFLibStaleCacheDetectedException( getClass(),
@@ -432,23 +428,23 @@ public class CFBamRamTopDomainTable
 				pkey );
 		}
 		Buff.setRequiredRevision( Buff.getRequiredRevision() + 1 );
-		CFIntBuffTopDomainByTenantIdxKey existingKeyTenantIdx = schema.getFactoryTopDomain().newTenantIdxKey();
+		CFIntBuffTopDomainByTenantIdxKey existingKeyTenantIdx = (CFIntBuffTopDomainByTenantIdxKey)schema.getFactoryTopDomain().newByTenantIdxKey();
 		existingKeyTenantIdx.setRequiredTenantId( existing.getRequiredTenantId() );
 
-		CFIntBuffTopDomainByTenantIdxKey newKeyTenantIdx = schema.getFactoryTopDomain().newTenantIdxKey();
+		CFIntBuffTopDomainByTenantIdxKey newKeyTenantIdx = (CFIntBuffTopDomainByTenantIdxKey)schema.getFactoryTopDomain().newByTenantIdxKey();
 		newKeyTenantIdx.setRequiredTenantId( Buff.getRequiredTenantId() );
 
-		CFIntBuffTopDomainByTldIdxKey existingKeyTldIdx = schema.getFactoryTopDomain().newTldIdxKey();
+		CFIntBuffTopDomainByTldIdxKey existingKeyTldIdx = (CFIntBuffTopDomainByTldIdxKey)schema.getFactoryTopDomain().newByTldIdxKey();
 		existingKeyTldIdx.setRequiredTldId( existing.getRequiredTldId() );
 
-		CFIntBuffTopDomainByTldIdxKey newKeyTldIdx = schema.getFactoryTopDomain().newTldIdxKey();
+		CFIntBuffTopDomainByTldIdxKey newKeyTldIdx = (CFIntBuffTopDomainByTldIdxKey)schema.getFactoryTopDomain().newByTldIdxKey();
 		newKeyTldIdx.setRequiredTldId( Buff.getRequiredTldId() );
 
-		CFIntBuffTopDomainByNameIdxKey existingKeyNameIdx = schema.getFactoryTopDomain().newNameIdxKey();
+		CFIntBuffTopDomainByNameIdxKey existingKeyNameIdx = (CFIntBuffTopDomainByNameIdxKey)schema.getFactoryTopDomain().newByNameIdxKey();
 		existingKeyNameIdx.setRequiredTldId( existing.getRequiredTldId() );
 		existingKeyNameIdx.setRequiredName( existing.getRequiredName() );
 
-		CFIntBuffTopDomainByNameIdxKey newKeyNameIdx = schema.getFactoryTopDomain().newNameIdxKey();
+		CFIntBuffTopDomainByNameIdxKey newKeyNameIdx = (CFIntBuffTopDomainByNameIdxKey)schema.getFactoryTopDomain().newByNameIdxKey();
 		newKeyNameIdx.setRequiredTldId( Buff.getRequiredTldId() );
 		newKeyNameIdx.setRequiredName( Buff.getRequiredName() );
 
@@ -458,6 +454,7 @@ public class CFBamRamTopDomainTable
 			if( dictByNameIdx.containsKey( newKeyNameIdx ) ) {
 				throw new CFLibUniqueIndexViolationException( getClass(),
 					"updateTopDomain",
+					"TopDomNameIdx",
 					"TopDomNameIdx",
 					newKeyNameIdx );
 			}
@@ -535,6 +532,7 @@ public class CFBamRamTopDomainTable
 		dictByNameIdx.remove( existingKeyNameIdx );
 		dictByNameIdx.put( newKeyNameIdx, Buff );
 
+		return(Buff);
 	}
 
 	public void deleteTopDomain( ICFSecAuthorization Authorization,
@@ -556,13 +554,13 @@ public class CFBamRamTopDomainTable
 		}
 					schema.getTableTopProject().deleteTopProjectByTopDomainIdx( Authorization,
 						existing.getRequiredId() );
-		CFIntBuffTopDomainByTenantIdxKey keyTenantIdx = schema.getFactoryTopDomain().newTenantIdxKey();
+		CFIntBuffTopDomainByTenantIdxKey keyTenantIdx = (CFIntBuffTopDomainByTenantIdxKey)schema.getFactoryTopDomain().newByTenantIdxKey();
 		keyTenantIdx.setRequiredTenantId( existing.getRequiredTenantId() );
 
-		CFIntBuffTopDomainByTldIdxKey keyTldIdx = schema.getFactoryTopDomain().newTldIdxKey();
+		CFIntBuffTopDomainByTldIdxKey keyTldIdx = (CFIntBuffTopDomainByTldIdxKey)schema.getFactoryTopDomain().newByTldIdxKey();
 		keyTldIdx.setRequiredTldId( existing.getRequiredTldId() );
 
-		CFIntBuffTopDomainByNameIdxKey keyNameIdx = schema.getFactoryTopDomain().newNameIdxKey();
+		CFIntBuffTopDomainByNameIdxKey keyNameIdx = (CFIntBuffTopDomainByNameIdxKey)schema.getFactoryTopDomain().newByNameIdxKey();
 		keyNameIdx.setRequiredTldId( existing.getRequiredTldId() );
 		keyNameIdx.setRequiredName( existing.getRequiredName() );
 
@@ -582,14 +580,6 @@ public class CFBamRamTopDomainTable
 		dictByNameIdx.remove( keyNameIdx );
 
 	}
-	public void deleteTopDomainByIdIdx( ICFSecAuthorization Authorization,
-		CFLibDbKeyHash256 argId )
-	{
-		CFLibDbKeyHash256 key = schema.getFactoryTopDomain().newPKey();
-		key.setRequiredId( argId );
-		deleteTopDomainByIdIdx( Authorization, key );
-	}
-
 	public void deleteTopDomainByIdIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argKey )
 	{
@@ -619,7 +609,7 @@ public class CFBamRamTopDomainTable
 	public void deleteTopDomainByTenantIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argTenantId )
 	{
-		CFIntBuffTopDomainByTenantIdxKey key = schema.getFactoryTopDomain().newTenantIdxKey();
+		CFIntBuffTopDomainByTenantIdxKey key = (CFIntBuffTopDomainByTenantIdxKey)schema.getFactoryTopDomain().newByTenantIdxKey();
 		key.setRequiredTenantId( argTenantId );
 		deleteTopDomainByTenantIdx( Authorization, key );
 	}
@@ -653,7 +643,7 @@ public class CFBamRamTopDomainTable
 	public void deleteTopDomainByTldIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argTldId )
 	{
-		CFIntBuffTopDomainByTldIdxKey key = schema.getFactoryTopDomain().newTldIdxKey();
+		CFIntBuffTopDomainByTldIdxKey key = (CFIntBuffTopDomainByTldIdxKey)schema.getFactoryTopDomain().newByTldIdxKey();
 		key.setRequiredTldId( argTldId );
 		deleteTopDomainByTldIdx( Authorization, key );
 	}
@@ -688,7 +678,7 @@ public class CFBamRamTopDomainTable
 		CFLibDbKeyHash256 argTldId,
 		String argName )
 	{
-		CFIntBuffTopDomainByNameIdxKey key = schema.getFactoryTopDomain().newNameIdxKey();
+		CFIntBuffTopDomainByNameIdxKey key = (CFIntBuffTopDomainByNameIdxKey)schema.getFactoryTopDomain().newByNameIdxKey();
 		key.setRequiredTldId( argTldId );
 		key.setRequiredName( argName );
 		deleteTopDomainByNameIdx( Authorization, key );

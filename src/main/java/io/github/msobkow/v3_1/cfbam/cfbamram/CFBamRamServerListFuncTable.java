@@ -77,16 +77,15 @@ public class CFBamRamServerListFuncTable
 		schema = argSchema;
 	}
 
-	public void createServerListFunc( ICFSecAuthorization Authorization,
+	public ICFBamServerListFunc createServerListFunc( ICFSecAuthorization Authorization,
 		ICFBamServerListFunc Buff )
 	{
 		final String S_ProcName = "createServerListFunc";
 		schema.getTableServerMethod().createServerMethod( Authorization,
 			Buff );
-		CFLibDbKeyHash256 pkey = schema.getFactoryScope().newPKey();
-		pkey.setClassCode( Buff.getClassCode() );
-		pkey.setRequiredId( Buff.getRequiredId() );
-		CFBamBuffServerListFuncByRetTblIdxKey keyRetTblIdx = schema.getFactoryServerListFunc().newRetTblIdxKey();
+		CFLibDbKeyHash256 pkey;
+		pkey = Buff.getRequiredId();
+		CFBamBuffServerListFuncByRetTblIdxKey keyRetTblIdx = (CFBamBuffServerListFuncByRetTblIdxKey)schema.getFactoryServerListFunc().newByRetTblIdxKey();
 		keyRetTblIdx.setOptionalRetTableId( Buff.getOptionalRetTableId() );
 
 		// Validate unique indexes
@@ -128,6 +127,7 @@ public class CFBamRamServerListFuncTable
 		}
 		subdictRetTblIdx.put( pkey, Buff );
 
+		return( Buff );
 	}
 
 	public ICFBamServerListFunc readDerived( ICFSecAuthorization Authorization,
@@ -148,11 +148,9 @@ public class CFBamRamServerListFuncTable
 		CFLibDbKeyHash256 PKey )
 	{
 		final String S_ProcName = "CFBamRamServerListFunc.readDerived";
-		CFLibDbKeyHash256 key = schema.getFactoryScope().newPKey();
-		key.setRequiredId( PKey.getRequiredId() );
 		ICFBamServerListFunc buff;
-		if( dictByPKey.containsKey( key ) ) {
-			buff = dictByPKey.get( key );
+		if( dictByPKey.containsKey( PKey ) ) {
+			buff = dictByPKey.get( PKey );
 		}
 		else {
 			buff = null;
@@ -260,7 +258,7 @@ public class CFBamRamServerListFuncTable
 		CFLibDbKeyHash256 RetTableId )
 	{
 		final String S_ProcName = "CFBamRamServerListFunc.readDerivedByRetTblIdx";
-		CFBamBuffServerListFuncByRetTblIdxKey key = schema.getFactoryServerListFunc().newRetTblIdxKey();
+		CFBamBuffServerListFuncByRetTblIdxKey key = (CFBamBuffServerListFuncByRetTblIdxKey)schema.getFactoryServerListFunc().newByRetTblIdxKey();
 		key.setOptionalRetTableId( RetTableId );
 
 		ICFBamServerListFunc[] recArray;
@@ -287,12 +285,9 @@ public class CFBamRamServerListFuncTable
 		CFLibDbKeyHash256 Id )
 	{
 		final String S_ProcName = "CFBamRamScope.readDerivedByIdIdx() ";
-		CFLibDbKeyHash256 key = schema.getFactoryScope().newPKey();
-		key.setRequiredId( Id );
-
 		ICFBamServerListFunc buff;
-		if( dictByPKey.containsKey( key ) ) {
-			buff = dictByPKey.get( key );
+		if( dictByPKey.containsKey( Id ) ) {
+			buff = dictByPKey.get( Id );
 		}
 		else {
 			buff = null;
@@ -305,7 +300,7 @@ public class CFBamRamServerListFuncTable
 	{
 		final String S_ProcName = "CFBamRamServerListFunc.readBuff";
 		ICFBamServerListFunc buff = readDerived( Authorization, PKey );
-		if( ( buff != null ) && ( ! buff.getClassCode().equals( "a837" ) ) ) {
+		if( ( buff != null ) && ( buff.getClassCode() != ICFBamServerListFunc.CLASS_CODE ) ) {
 			buff = null;
 		}
 		return( buff );
@@ -316,7 +311,7 @@ public class CFBamRamServerListFuncTable
 	{
 		final String S_ProcName = "lockBuff";
 		ICFBamServerListFunc buff = readDerived( Authorization, PKey );
-		if( ( buff != null ) && ( ! buff.getClassCode().equals( "a837" ) ) ) {
+		if( ( buff != null ) && ( buff.getClassCode() != ICFBamServerListFunc.CLASS_CODE ) ) {
 			buff = null;
 		}
 		return( buff );
@@ -330,7 +325,7 @@ public class CFBamRamServerListFuncTable
 		ICFBamServerListFunc[] buffList = readAllDerived( Authorization );
 		for( int idx = 0; idx < buffList.length; idx ++ ) {
 			buff = buffList[idx];
-			if( ( buff != null ) && buff.getClassCode().equals( "a837" ) ) {
+			if( ( buff != null ) && ( buff.getClassCode() == ICFBamServerListFunc.CLASS_CODE ) ) {
 				filteredList.add( buff );
 			}
 		}
@@ -343,7 +338,7 @@ public class CFBamRamServerListFuncTable
 		final String S_ProcName = "CFBamRamScope.readBuffByIdIdx() ";
 		ICFBamServerListFunc buff = readDerivedByIdIdx( Authorization,
 			Id );
-		if( ( buff != null ) && buff.getClassCode().equals( "a801" ) ) {
+		if( ( buff != null ) && ( buff.getClassCode() == ICFBamScope.CLASS_CODE ) ) {
 			return( (ICFBamServerListFunc)buff );
 		}
 		else {
@@ -361,7 +356,7 @@ public class CFBamRamServerListFuncTable
 			TenantId );
 		for( int idx = 0; idx < buffList.length; idx ++ ) {
 			buff = buffList[idx];
-			if( ( buff != null ) && buff.getClassCode().equals( "a801" ) ) {
+			if( ( buff != null ) && ( buff.getClassCode() == ICFBamScope.CLASS_CODE ) ) {
 				filteredList.add( (ICFBamServerListFunc)buff );
 			}
 		}
@@ -376,7 +371,7 @@ public class CFBamRamServerListFuncTable
 		ICFBamServerListFunc buff = readDerivedByUNameIdx( Authorization,
 			TableId,
 			Name );
-		if( ( buff != null ) && buff.getClassCode().equals( "a805" ) ) {
+		if( ( buff != null ) && ( buff.getClassCode() == ICFBamServerMethod.CLASS_CODE ) ) {
 			return( (ICFBamServerListFunc)buff );
 		}
 		else {
@@ -394,7 +389,7 @@ public class CFBamRamServerListFuncTable
 			TableId );
 		for( int idx = 0; idx < buffList.length; idx ++ ) {
 			buff = buffList[idx];
-			if( ( buff != null ) && buff.getClassCode().equals( "a805" ) ) {
+			if( ( buff != null ) && ( buff.getClassCode() == ICFBamServerMethod.CLASS_CODE ) ) {
 				filteredList.add( (ICFBamServerListFunc)buff );
 			}
 		}
@@ -411,7 +406,7 @@ public class CFBamRamServerListFuncTable
 			DefSchemaId );
 		for( int idx = 0; idx < buffList.length; idx ++ ) {
 			buff = buffList[idx];
-			if( ( buff != null ) && buff.getClassCode().equals( "a805" ) ) {
+			if( ( buff != null ) && ( buff.getClassCode() == ICFBamServerMethod.CLASS_CODE ) ) {
 				filteredList.add( (ICFBamServerListFunc)buff );
 			}
 		}
@@ -428,7 +423,7 @@ public class CFBamRamServerListFuncTable
 			RetTableId );
 		for( int idx = 0; idx < buffList.length; idx ++ ) {
 			buff = buffList[idx];
-			if( ( buff != null ) && buff.getClassCode().equals( "a837" ) ) {
+			if( ( buff != null ) && ( buff.getClassCode() == ICFBamServerListFunc.CLASS_CODE ) ) {
 				filteredList.add( (ICFBamServerListFunc)buff );
 			}
 		}
@@ -492,13 +487,15 @@ public class CFBamRamServerListFuncTable
 		throw new CFLibNotImplementedYetException( getClass(), S_ProcName );
 	}
 
-	public void updateServerListFunc( ICFSecAuthorization Authorization,
+	public ICFBamServerListFunc updateServerListFunc( ICFSecAuthorization Authorization,
 		ICFBamServerListFunc Buff )
 	{
-		schema.getTableServerMethod().updateServerMethod( Authorization,
+		ICFBamServerListFunc repl = schema.getTableServerMethod().updateServerMethod( Authorization,
 			Buff );
-		CFLibDbKeyHash256 pkey = schema.getFactoryScope().newPKey();
-		pkey.setRequiredId( Buff.getRequiredId() );
+		if (repl != Buff) {
+			throw new CFLibInvalidStateException(getClass(), S_ProcName, "repl != Buff", "repl != Buff");
+		}
+		CFLibDbKeyHash256 pkey = Buff.getPKey();
 		ICFBamServerListFunc existing = dictByPKey.get( pkey );
 		if( existing == null ) {
 			throw new CFLibStaleCacheDetectedException( getClass(),
@@ -507,10 +504,10 @@ public class CFBamRamServerListFuncTable
 				"ServerListFunc",
 				pkey );
 		}
-		CFBamBuffServerListFuncByRetTblIdxKey existingKeyRetTblIdx = schema.getFactoryServerListFunc().newRetTblIdxKey();
+		CFBamBuffServerListFuncByRetTblIdxKey existingKeyRetTblIdx = (CFBamBuffServerListFuncByRetTblIdxKey)schema.getFactoryServerListFunc().newByRetTblIdxKey();
 		existingKeyRetTblIdx.setOptionalRetTableId( existing.getOptionalRetTableId() );
 
-		CFBamBuffServerListFuncByRetTblIdxKey newKeyRetTblIdx = schema.getFactoryServerListFunc().newRetTblIdxKey();
+		CFBamBuffServerListFuncByRetTblIdxKey newKeyRetTblIdx = (CFBamBuffServerListFuncByRetTblIdxKey)schema.getFactoryServerListFunc().newByRetTblIdxKey();
 		newKeyRetTblIdx.setOptionalRetTableId( Buff.getOptionalRetTableId() );
 
 		// Check unique indexes
@@ -554,6 +551,7 @@ public class CFBamRamServerListFuncTable
 		}
 		subdict.put( pkey, Buff );
 
+		return(Buff);
 	}
 
 	public void deleteServerListFunc( ICFSecAuthorization Authorization,
@@ -580,7 +578,7 @@ public class CFBamRamServerListFuncTable
 			schema.getTableParam().deleteParamByServerMethodIdx( Authorization,
 						existing.getRequiredId() );
 		}
-		CFBamBuffServerListFuncByRetTblIdxKey keyRetTblIdx = schema.getFactoryServerListFunc().newRetTblIdxKey();
+		CFBamBuffServerListFuncByRetTblIdxKey keyRetTblIdx = (CFBamBuffServerListFuncByRetTblIdxKey)schema.getFactoryServerListFunc().newByRetTblIdxKey();
 		keyRetTblIdx.setOptionalRetTableId( existing.getOptionalRetTableId() );
 
 		// Validate reverse foreign keys
@@ -599,7 +597,7 @@ public class CFBamRamServerListFuncTable
 	public void deleteServerListFuncByRetTblIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argRetTableId )
 	{
-		CFBamBuffServerListFuncByRetTblIdxKey key = schema.getFactoryServerListFunc().newRetTblIdxKey();
+		CFBamBuffServerListFuncByRetTblIdxKey key = (CFBamBuffServerListFuncByRetTblIdxKey)schema.getFactoryServerListFunc().newByRetTblIdxKey();
 		key.setOptionalRetTableId( argRetTableId );
 		deleteServerListFuncByRetTblIdx( Authorization, key );
 	}
@@ -636,7 +634,7 @@ public class CFBamRamServerListFuncTable
 		CFLibDbKeyHash256 argTableId,
 		String argName )
 	{
-		CFBamBuffServerMethodByUNameIdxKey key = schema.getFactoryServerMethod().newUNameIdxKey();
+		CFBamBuffServerMethodByUNameIdxKey key = (CFBamBuffServerMethodByUNameIdxKey)schema.getFactoryServerMethod().newByUNameIdxKey();
 		key.setRequiredTableId( argTableId );
 		key.setRequiredName( argName );
 		deleteServerListFuncByUNameIdx( Authorization, key );
@@ -672,7 +670,7 @@ public class CFBamRamServerListFuncTable
 	public void deleteServerListFuncByMethTableIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argTableId )
 	{
-		CFBamBuffServerMethodByMethTableIdxKey key = schema.getFactoryServerMethod().newMethTableIdxKey();
+		CFBamBuffServerMethodByMethTableIdxKey key = (CFBamBuffServerMethodByMethTableIdxKey)schema.getFactoryServerMethod().newByMethTableIdxKey();
 		key.setRequiredTableId( argTableId );
 		deleteServerListFuncByMethTableIdx( Authorization, key );
 	}
@@ -706,7 +704,7 @@ public class CFBamRamServerListFuncTable
 	public void deleteServerListFuncByDefSchemaIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argDefSchemaId )
 	{
-		CFBamBuffServerMethodByDefSchemaIdxKey key = schema.getFactoryServerMethod().newDefSchemaIdxKey();
+		CFBamBuffServerMethodByDefSchemaIdxKey key = (CFBamBuffServerMethodByDefSchemaIdxKey)schema.getFactoryServerMethod().newByDefSchemaIdxKey();
 		key.setOptionalDefSchemaId( argDefSchemaId );
 		deleteServerListFuncByDefSchemaIdx( Authorization, key );
 	}
@@ -740,14 +738,6 @@ public class CFBamRamServerListFuncTable
 	}
 
 	public void deleteServerListFuncByIdIdx( ICFSecAuthorization Authorization,
-		CFLibDbKeyHash256 argId )
-	{
-		CFLibDbKeyHash256 key = schema.getFactoryScope().newPKey();
-		key.setRequiredId( argId );
-		deleteServerListFuncByIdIdx( Authorization, key );
-	}
-
-	public void deleteServerListFuncByIdIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argKey )
 	{
 		boolean anyNotNull = false;
@@ -776,7 +766,7 @@ public class CFBamRamServerListFuncTable
 	public void deleteServerListFuncByTenantIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argTenantId )
 	{
-		CFBamBuffScopeByTenantIdxKey key = schema.getFactoryScope().newTenantIdxKey();
+		CFBamBuffScopeByTenantIdxKey key = (CFBamBuffScopeByTenantIdxKey)schema.getFactoryScope().newByTenantIdxKey();
 		key.setRequiredTenantId( argTenantId );
 		deleteServerListFuncByTenantIdx( Authorization, key );
 	}

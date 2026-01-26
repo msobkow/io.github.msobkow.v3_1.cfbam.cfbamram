@@ -123,7 +123,7 @@ public class CFBamRamRelationColTable
 		schema = argSchema;
 	}
 
-	public void createRelationCol( ICFSecAuthorization Authorization,
+	public ICFBamRelationCol createRelationCol( ICFSecAuthorization Authorization,
 		ICFBamRelationCol Buff )
 	{
 		final String S_ProcName = "createRelationCol";
@@ -144,36 +144,36 @@ public class CFBamRamRelationColTable
 				Buff.setOptionalPrevId( null );
 			}
 		
-		CFLibDbKeyHash256 pkey = schema.getFactoryRelationCol().newPKey();
-		pkey.setRequiredId( schema.nextRelationColIdGen() );
-		Buff.setRequiredId( pkey.getRequiredId() );
-		CFBamBuffRelationColByUNameIdxKey keyUNameIdx = schema.getFactoryRelationCol().newUNameIdxKey();
+		CFLibDbKeyHash256 pkey;
+		pkey = schema.nextRelationColIdGen();
+		Buff.setRequiredId( pkey );
+		CFBamBuffRelationColByUNameIdxKey keyUNameIdx = (CFBamBuffRelationColByUNameIdxKey)schema.getFactoryRelationCol().newByUNameIdxKey();
 		keyUNameIdx.setRequiredRelationId( Buff.getRequiredRelationId() );
 		keyUNameIdx.setRequiredName( Buff.getRequiredName() );
 
-		CFBamBuffRelationColByRelationIdxKey keyRelationIdx = schema.getFactoryRelationCol().newRelationIdxKey();
+		CFBamBuffRelationColByRelationIdxKey keyRelationIdx = (CFBamBuffRelationColByRelationIdxKey)schema.getFactoryRelationCol().newByRelationIdxKey();
 		keyRelationIdx.setRequiredRelationId( Buff.getRequiredRelationId() );
 
-		CFBamBuffRelationColByDefSchemaIdxKey keyDefSchemaIdx = schema.getFactoryRelationCol().newDefSchemaIdxKey();
+		CFBamBuffRelationColByDefSchemaIdxKey keyDefSchemaIdx = (CFBamBuffRelationColByDefSchemaIdxKey)schema.getFactoryRelationCol().newByDefSchemaIdxKey();
 		keyDefSchemaIdx.setOptionalDefSchemaId( Buff.getOptionalDefSchemaId() );
 
-		CFBamBuffRelationColByFromColIdxKey keyFromColIdx = schema.getFactoryRelationCol().newFromColIdxKey();
+		CFBamBuffRelationColByFromColIdxKey keyFromColIdx = (CFBamBuffRelationColByFromColIdxKey)schema.getFactoryRelationCol().newByFromColIdxKey();
 		keyFromColIdx.setRequiredFromColId( Buff.getRequiredFromColId() );
 
-		CFBamBuffRelationColByToColIdxKey keyToColIdx = schema.getFactoryRelationCol().newToColIdxKey();
+		CFBamBuffRelationColByToColIdxKey keyToColIdx = (CFBamBuffRelationColByToColIdxKey)schema.getFactoryRelationCol().newByToColIdxKey();
 		keyToColIdx.setRequiredToColId( Buff.getRequiredToColId() );
 
-		CFBamBuffRelationColByPrevIdxKey keyPrevIdx = schema.getFactoryRelationCol().newPrevIdxKey();
+		CFBamBuffRelationColByPrevIdxKey keyPrevIdx = (CFBamBuffRelationColByPrevIdxKey)schema.getFactoryRelationCol().newByPrevIdxKey();
 		keyPrevIdx.setOptionalPrevId( Buff.getOptionalPrevId() );
 
-		CFBamBuffRelationColByNextIdxKey keyNextIdx = schema.getFactoryRelationCol().newNextIdxKey();
+		CFBamBuffRelationColByNextIdxKey keyNextIdx = (CFBamBuffRelationColByNextIdxKey)schema.getFactoryRelationCol().newByNextIdxKey();
 		keyNextIdx.setOptionalNextId( Buff.getOptionalNextId() );
 
-		CFBamBuffRelationColByRelPrevIdxKey keyRelPrevIdx = schema.getFactoryRelationCol().newRelPrevIdxKey();
+		CFBamBuffRelationColByRelPrevIdxKey keyRelPrevIdx = (CFBamBuffRelationColByRelPrevIdxKey)schema.getFactoryRelationCol().newByRelPrevIdxKey();
 		keyRelPrevIdx.setRequiredRelationId( Buff.getRequiredRelationId() );
 		keyRelPrevIdx.setOptionalPrevId( Buff.getOptionalPrevId() );
 
-		CFBamBuffRelationColByRelNextIdxKey keyRelNextIdx = schema.getFactoryRelationCol().newRelNextIdxKey();
+		CFBamBuffRelationColByRelNextIdxKey keyRelNextIdx = (CFBamBuffRelationColByRelNextIdxKey)schema.getFactoryRelationCol().newByRelNextIdxKey();
 		keyRelNextIdx.setRequiredRelationId( Buff.getRequiredRelationId() );
 		keyRelNextIdx.setOptionalNextId( Buff.getOptionalNextId() );
 
@@ -186,6 +186,7 @@ public class CFBamRamRelationColTable
 		if( dictByUNameIdx.containsKey( keyUNameIdx ) ) {
 			throw new CFLibUniqueIndexViolationException( getClass(),
 				S_ProcName,
+				"RelationColUNameIdx",
 				"RelationColUNameIdx",
 				keyUNameIdx );
 		}
@@ -335,6 +336,7 @@ public class CFBamRamRelationColTable
 				tailEdit.setOptionalNextId( Buff.getRequiredId() );
 			schema.getTableRelationCol().updateRelationCol( Authorization, tailEdit );
 		}
+		return( Buff );
 	}
 
 	public ICFBamRelationCol readDerived( ICFSecAuthorization Authorization,
@@ -355,11 +357,9 @@ public class CFBamRamRelationColTable
 		CFLibDbKeyHash256 PKey )
 	{
 		final String S_ProcName = "CFBamRamRelationCol.readDerived";
-		CFLibDbKeyHash256 key = schema.getFactoryRelationCol().newPKey();
-		key.setRequiredId( PKey.getRequiredId() );
 		ICFBamRelationCol buff;
-		if( dictByPKey.containsKey( key ) ) {
-			buff = dictByPKey.get( key );
+		if( dictByPKey.containsKey( PKey ) ) {
+			buff = dictByPKey.get( PKey );
 		}
 		else {
 			buff = null;
@@ -383,7 +383,7 @@ public class CFBamRamRelationColTable
 		String Name )
 	{
 		final String S_ProcName = "CFBamRamRelationCol.readDerivedByUNameIdx";
-		CFBamBuffRelationColByUNameIdxKey key = schema.getFactoryRelationCol().newUNameIdxKey();
+		CFBamBuffRelationColByUNameIdxKey key = (CFBamBuffRelationColByUNameIdxKey)schema.getFactoryRelationCol().newByUNameIdxKey();
 		key.setRequiredRelationId( RelationId );
 		key.setRequiredName( Name );
 
@@ -401,7 +401,7 @@ public class CFBamRamRelationColTable
 		CFLibDbKeyHash256 RelationId )
 	{
 		final String S_ProcName = "CFBamRamRelationCol.readDerivedByRelationIdx";
-		CFBamBuffRelationColByRelationIdxKey key = schema.getFactoryRelationCol().newRelationIdxKey();
+		CFBamBuffRelationColByRelationIdxKey key = (CFBamBuffRelationColByRelationIdxKey)schema.getFactoryRelationCol().newByRelationIdxKey();
 		key.setRequiredRelationId( RelationId );
 
 		ICFBamRelationCol[] recArray;
@@ -428,7 +428,7 @@ public class CFBamRamRelationColTable
 		CFLibDbKeyHash256 DefSchemaId )
 	{
 		final String S_ProcName = "CFBamRamRelationCol.readDerivedByDefSchemaIdx";
-		CFBamBuffRelationColByDefSchemaIdxKey key = schema.getFactoryRelationCol().newDefSchemaIdxKey();
+		CFBamBuffRelationColByDefSchemaIdxKey key = (CFBamBuffRelationColByDefSchemaIdxKey)schema.getFactoryRelationCol().newByDefSchemaIdxKey();
 		key.setOptionalDefSchemaId( DefSchemaId );
 
 		ICFBamRelationCol[] recArray;
@@ -455,7 +455,7 @@ public class CFBamRamRelationColTable
 		CFLibDbKeyHash256 FromColId )
 	{
 		final String S_ProcName = "CFBamRamRelationCol.readDerivedByFromColIdx";
-		CFBamBuffRelationColByFromColIdxKey key = schema.getFactoryRelationCol().newFromColIdxKey();
+		CFBamBuffRelationColByFromColIdxKey key = (CFBamBuffRelationColByFromColIdxKey)schema.getFactoryRelationCol().newByFromColIdxKey();
 		key.setRequiredFromColId( FromColId );
 
 		ICFBamRelationCol[] recArray;
@@ -482,7 +482,7 @@ public class CFBamRamRelationColTable
 		CFLibDbKeyHash256 ToColId )
 	{
 		final String S_ProcName = "CFBamRamRelationCol.readDerivedByToColIdx";
-		CFBamBuffRelationColByToColIdxKey key = schema.getFactoryRelationCol().newToColIdxKey();
+		CFBamBuffRelationColByToColIdxKey key = (CFBamBuffRelationColByToColIdxKey)schema.getFactoryRelationCol().newByToColIdxKey();
 		key.setRequiredToColId( ToColId );
 
 		ICFBamRelationCol[] recArray;
@@ -509,7 +509,7 @@ public class CFBamRamRelationColTable
 		CFLibDbKeyHash256 PrevId )
 	{
 		final String S_ProcName = "CFBamRamRelationCol.readDerivedByPrevIdx";
-		CFBamBuffRelationColByPrevIdxKey key = schema.getFactoryRelationCol().newPrevIdxKey();
+		CFBamBuffRelationColByPrevIdxKey key = (CFBamBuffRelationColByPrevIdxKey)schema.getFactoryRelationCol().newByPrevIdxKey();
 		key.setOptionalPrevId( PrevId );
 
 		ICFBamRelationCol[] recArray;
@@ -536,7 +536,7 @@ public class CFBamRamRelationColTable
 		CFLibDbKeyHash256 NextId )
 	{
 		final String S_ProcName = "CFBamRamRelationCol.readDerivedByNextIdx";
-		CFBamBuffRelationColByNextIdxKey key = schema.getFactoryRelationCol().newNextIdxKey();
+		CFBamBuffRelationColByNextIdxKey key = (CFBamBuffRelationColByNextIdxKey)schema.getFactoryRelationCol().newByNextIdxKey();
 		key.setOptionalNextId( NextId );
 
 		ICFBamRelationCol[] recArray;
@@ -564,7 +564,7 @@ public class CFBamRamRelationColTable
 		CFLibDbKeyHash256 PrevId )
 	{
 		final String S_ProcName = "CFBamRamRelationCol.readDerivedByRelPrevIdx";
-		CFBamBuffRelationColByRelPrevIdxKey key = schema.getFactoryRelationCol().newRelPrevIdxKey();
+		CFBamBuffRelationColByRelPrevIdxKey key = (CFBamBuffRelationColByRelPrevIdxKey)schema.getFactoryRelationCol().newByRelPrevIdxKey();
 		key.setRequiredRelationId( RelationId );
 		key.setOptionalPrevId( PrevId );
 
@@ -593,7 +593,7 @@ public class CFBamRamRelationColTable
 		CFLibDbKeyHash256 NextId )
 	{
 		final String S_ProcName = "CFBamRamRelationCol.readDerivedByRelNextIdx";
-		CFBamBuffRelationColByRelNextIdxKey key = schema.getFactoryRelationCol().newRelNextIdxKey();
+		CFBamBuffRelationColByRelNextIdxKey key = (CFBamBuffRelationColByRelNextIdxKey)schema.getFactoryRelationCol().newByRelNextIdxKey();
 		key.setRequiredRelationId( RelationId );
 		key.setOptionalNextId( NextId );
 
@@ -621,12 +621,9 @@ public class CFBamRamRelationColTable
 		CFLibDbKeyHash256 Id )
 	{
 		final String S_ProcName = "CFBamRamRelationCol.readDerivedByIdIdx() ";
-		CFLibDbKeyHash256 key = schema.getFactoryRelationCol().newPKey();
-		key.setRequiredId( Id );
-
 		ICFBamRelationCol buff;
-		if( dictByPKey.containsKey( key ) ) {
-			buff = dictByPKey.get( key );
+		if( dictByPKey.containsKey( Id ) ) {
+			buff = dictByPKey.get( Id );
 		}
 		else {
 			buff = null;
@@ -639,7 +636,7 @@ public class CFBamRamRelationColTable
 	{
 		final String S_ProcName = "CFBamRamRelationCol.readBuff";
 		ICFBamRelationCol buff = readDerived( Authorization, PKey );
-		if( ( buff != null ) && ( ! buff.getClassCode().equals( "a836" ) ) ) {
+		if( ( buff != null ) && ( buff.getClassCode() != ICFBamRelationCol.CLASS_CODE ) ) {
 			buff = null;
 		}
 		return( buff );
@@ -650,7 +647,7 @@ public class CFBamRamRelationColTable
 	{
 		final String S_ProcName = "lockBuff";
 		ICFBamRelationCol buff = readDerived( Authorization, PKey );
-		if( ( buff != null ) && ( ! buff.getClassCode().equals( "a836" ) ) ) {
+		if( ( buff != null ) && ( buff.getClassCode() != ICFBamRelationCol.CLASS_CODE ) ) {
 			buff = null;
 		}
 		return( buff );
@@ -664,7 +661,7 @@ public class CFBamRamRelationColTable
 		ICFBamRelationCol[] buffList = readAllDerived( Authorization );
 		for( int idx = 0; idx < buffList.length; idx ++ ) {
 			buff = buffList[idx];
-			if( ( buff != null ) && buff.getClassCode().equals( "a836" ) ) {
+			if( ( buff != null ) && ( buff.getClassCode() == ICFBamRelationCol.CLASS_CODE ) ) {
 				filteredList.add( buff );
 			}
 		}
@@ -677,7 +674,7 @@ public class CFBamRamRelationColTable
 		final String S_ProcName = "CFBamRamRelationCol.readBuffByIdIdx() ";
 		ICFBamRelationCol buff = readDerivedByIdIdx( Authorization,
 			Id );
-		if( ( buff != null ) && buff.getClassCode().equals( "a836" ) ) {
+		if( ( buff != null ) && ( buff.getClassCode() == ICFBamRelationCol.CLASS_CODE ) ) {
 			return( (ICFBamRelationCol)buff );
 		}
 		else {
@@ -693,7 +690,7 @@ public class CFBamRamRelationColTable
 		ICFBamRelationCol buff = readDerivedByUNameIdx( Authorization,
 			RelationId,
 			Name );
-		if( ( buff != null ) && buff.getClassCode().equals( "a836" ) ) {
+		if( ( buff != null ) && ( buff.getClassCode() == ICFBamRelationCol.CLASS_CODE ) ) {
 			return( (ICFBamRelationCol)buff );
 		}
 		else {
@@ -711,7 +708,7 @@ public class CFBamRamRelationColTable
 			RelationId );
 		for( int idx = 0; idx < buffList.length; idx ++ ) {
 			buff = buffList[idx];
-			if( ( buff != null ) && buff.getClassCode().equals( "a836" ) ) {
+			if( ( buff != null ) && ( buff.getClassCode() == ICFBamRelationCol.CLASS_CODE ) ) {
 				filteredList.add( (ICFBamRelationCol)buff );
 			}
 		}
@@ -728,7 +725,7 @@ public class CFBamRamRelationColTable
 			DefSchemaId );
 		for( int idx = 0; idx < buffList.length; idx ++ ) {
 			buff = buffList[idx];
-			if( ( buff != null ) && buff.getClassCode().equals( "a836" ) ) {
+			if( ( buff != null ) && ( buff.getClassCode() == ICFBamRelationCol.CLASS_CODE ) ) {
 				filteredList.add( (ICFBamRelationCol)buff );
 			}
 		}
@@ -745,7 +742,7 @@ public class CFBamRamRelationColTable
 			FromColId );
 		for( int idx = 0; idx < buffList.length; idx ++ ) {
 			buff = buffList[idx];
-			if( ( buff != null ) && buff.getClassCode().equals( "a836" ) ) {
+			if( ( buff != null ) && ( buff.getClassCode() == ICFBamRelationCol.CLASS_CODE ) ) {
 				filteredList.add( (ICFBamRelationCol)buff );
 			}
 		}
@@ -762,7 +759,7 @@ public class CFBamRamRelationColTable
 			ToColId );
 		for( int idx = 0; idx < buffList.length; idx ++ ) {
 			buff = buffList[idx];
-			if( ( buff != null ) && buff.getClassCode().equals( "a836" ) ) {
+			if( ( buff != null ) && ( buff.getClassCode() == ICFBamRelationCol.CLASS_CODE ) ) {
 				filteredList.add( (ICFBamRelationCol)buff );
 			}
 		}
@@ -779,7 +776,7 @@ public class CFBamRamRelationColTable
 			PrevId );
 		for( int idx = 0; idx < buffList.length; idx ++ ) {
 			buff = buffList[idx];
-			if( ( buff != null ) && buff.getClassCode().equals( "a836" ) ) {
+			if( ( buff != null ) && ( buff.getClassCode() == ICFBamRelationCol.CLASS_CODE ) ) {
 				filteredList.add( (ICFBamRelationCol)buff );
 			}
 		}
@@ -796,7 +793,7 @@ public class CFBamRamRelationColTable
 			NextId );
 		for( int idx = 0; idx < buffList.length; idx ++ ) {
 			buff = buffList[idx];
-			if( ( buff != null ) && buff.getClassCode().equals( "a836" ) ) {
+			if( ( buff != null ) && ( buff.getClassCode() == ICFBamRelationCol.CLASS_CODE ) ) {
 				filteredList.add( (ICFBamRelationCol)buff );
 			}
 		}
@@ -815,7 +812,7 @@ public class CFBamRamRelationColTable
 			PrevId );
 		for( int idx = 0; idx < buffList.length; idx ++ ) {
 			buff = buffList[idx];
-			if( ( buff != null ) && buff.getClassCode().equals( "a836" ) ) {
+			if( ( buff != null ) && ( buff.getClassCode() == ICFBamRelationCol.CLASS_CODE ) ) {
 				filteredList.add( (ICFBamRelationCol)buff );
 			}
 		}
@@ -834,7 +831,7 @@ public class CFBamRamRelationColTable
 			NextId );
 		for( int idx = 0; idx < buffList.length; idx ++ ) {
 			buff = buffList[idx];
-			if( ( buff != null ) && buff.getClassCode().equals( "a836" ) ) {
+			if( ( buff != null ) && ( buff.getClassCode() == ICFBamRelationCol.CLASS_CODE ) ) {
 				filteredList.add( (ICFBamRelationCol)buff );
 			}
 		}
@@ -1195,11 +1192,10 @@ public class CFBamRamRelationColTable
 		return( (CFBamRelationColBuff)editCur );
 	}
 
-	public void updateRelationCol( ICFSecAuthorization Authorization,
+	public ICFBamRelationCol updateRelationCol( ICFSecAuthorization Authorization,
 		ICFBamRelationCol Buff )
 	{
-		CFLibDbKeyHash256 pkey = schema.getFactoryRelationCol().newPKey();
-		pkey.setRequiredId( Buff.getRequiredId() );
+		CFLibDbKeyHash256 pkey = Buff.getPKey();
 		ICFBamRelationCol existing = dictByPKey.get( pkey );
 		if( existing == null ) {
 			throw new CFLibStaleCacheDetectedException( getClass(),
@@ -1214,63 +1210,63 @@ public class CFBamRamRelationColTable
 				pkey );
 		}
 		Buff.setRequiredRevision( Buff.getRequiredRevision() + 1 );
-		CFBamBuffRelationColByUNameIdxKey existingKeyUNameIdx = schema.getFactoryRelationCol().newUNameIdxKey();
+		CFBamBuffRelationColByUNameIdxKey existingKeyUNameIdx = (CFBamBuffRelationColByUNameIdxKey)schema.getFactoryRelationCol().newByUNameIdxKey();
 		existingKeyUNameIdx.setRequiredRelationId( existing.getRequiredRelationId() );
 		existingKeyUNameIdx.setRequiredName( existing.getRequiredName() );
 
-		CFBamBuffRelationColByUNameIdxKey newKeyUNameIdx = schema.getFactoryRelationCol().newUNameIdxKey();
+		CFBamBuffRelationColByUNameIdxKey newKeyUNameIdx = (CFBamBuffRelationColByUNameIdxKey)schema.getFactoryRelationCol().newByUNameIdxKey();
 		newKeyUNameIdx.setRequiredRelationId( Buff.getRequiredRelationId() );
 		newKeyUNameIdx.setRequiredName( Buff.getRequiredName() );
 
-		CFBamBuffRelationColByRelationIdxKey existingKeyRelationIdx = schema.getFactoryRelationCol().newRelationIdxKey();
+		CFBamBuffRelationColByRelationIdxKey existingKeyRelationIdx = (CFBamBuffRelationColByRelationIdxKey)schema.getFactoryRelationCol().newByRelationIdxKey();
 		existingKeyRelationIdx.setRequiredRelationId( existing.getRequiredRelationId() );
 
-		CFBamBuffRelationColByRelationIdxKey newKeyRelationIdx = schema.getFactoryRelationCol().newRelationIdxKey();
+		CFBamBuffRelationColByRelationIdxKey newKeyRelationIdx = (CFBamBuffRelationColByRelationIdxKey)schema.getFactoryRelationCol().newByRelationIdxKey();
 		newKeyRelationIdx.setRequiredRelationId( Buff.getRequiredRelationId() );
 
-		CFBamBuffRelationColByDefSchemaIdxKey existingKeyDefSchemaIdx = schema.getFactoryRelationCol().newDefSchemaIdxKey();
+		CFBamBuffRelationColByDefSchemaIdxKey existingKeyDefSchemaIdx = (CFBamBuffRelationColByDefSchemaIdxKey)schema.getFactoryRelationCol().newByDefSchemaIdxKey();
 		existingKeyDefSchemaIdx.setOptionalDefSchemaId( existing.getOptionalDefSchemaId() );
 
-		CFBamBuffRelationColByDefSchemaIdxKey newKeyDefSchemaIdx = schema.getFactoryRelationCol().newDefSchemaIdxKey();
+		CFBamBuffRelationColByDefSchemaIdxKey newKeyDefSchemaIdx = (CFBamBuffRelationColByDefSchemaIdxKey)schema.getFactoryRelationCol().newByDefSchemaIdxKey();
 		newKeyDefSchemaIdx.setOptionalDefSchemaId( Buff.getOptionalDefSchemaId() );
 
-		CFBamBuffRelationColByFromColIdxKey existingKeyFromColIdx = schema.getFactoryRelationCol().newFromColIdxKey();
+		CFBamBuffRelationColByFromColIdxKey existingKeyFromColIdx = (CFBamBuffRelationColByFromColIdxKey)schema.getFactoryRelationCol().newByFromColIdxKey();
 		existingKeyFromColIdx.setRequiredFromColId( existing.getRequiredFromColId() );
 
-		CFBamBuffRelationColByFromColIdxKey newKeyFromColIdx = schema.getFactoryRelationCol().newFromColIdxKey();
+		CFBamBuffRelationColByFromColIdxKey newKeyFromColIdx = (CFBamBuffRelationColByFromColIdxKey)schema.getFactoryRelationCol().newByFromColIdxKey();
 		newKeyFromColIdx.setRequiredFromColId( Buff.getRequiredFromColId() );
 
-		CFBamBuffRelationColByToColIdxKey existingKeyToColIdx = schema.getFactoryRelationCol().newToColIdxKey();
+		CFBamBuffRelationColByToColIdxKey existingKeyToColIdx = (CFBamBuffRelationColByToColIdxKey)schema.getFactoryRelationCol().newByToColIdxKey();
 		existingKeyToColIdx.setRequiredToColId( existing.getRequiredToColId() );
 
-		CFBamBuffRelationColByToColIdxKey newKeyToColIdx = schema.getFactoryRelationCol().newToColIdxKey();
+		CFBamBuffRelationColByToColIdxKey newKeyToColIdx = (CFBamBuffRelationColByToColIdxKey)schema.getFactoryRelationCol().newByToColIdxKey();
 		newKeyToColIdx.setRequiredToColId( Buff.getRequiredToColId() );
 
-		CFBamBuffRelationColByPrevIdxKey existingKeyPrevIdx = schema.getFactoryRelationCol().newPrevIdxKey();
+		CFBamBuffRelationColByPrevIdxKey existingKeyPrevIdx = (CFBamBuffRelationColByPrevIdxKey)schema.getFactoryRelationCol().newByPrevIdxKey();
 		existingKeyPrevIdx.setOptionalPrevId( existing.getOptionalPrevId() );
 
-		CFBamBuffRelationColByPrevIdxKey newKeyPrevIdx = schema.getFactoryRelationCol().newPrevIdxKey();
+		CFBamBuffRelationColByPrevIdxKey newKeyPrevIdx = (CFBamBuffRelationColByPrevIdxKey)schema.getFactoryRelationCol().newByPrevIdxKey();
 		newKeyPrevIdx.setOptionalPrevId( Buff.getOptionalPrevId() );
 
-		CFBamBuffRelationColByNextIdxKey existingKeyNextIdx = schema.getFactoryRelationCol().newNextIdxKey();
+		CFBamBuffRelationColByNextIdxKey existingKeyNextIdx = (CFBamBuffRelationColByNextIdxKey)schema.getFactoryRelationCol().newByNextIdxKey();
 		existingKeyNextIdx.setOptionalNextId( existing.getOptionalNextId() );
 
-		CFBamBuffRelationColByNextIdxKey newKeyNextIdx = schema.getFactoryRelationCol().newNextIdxKey();
+		CFBamBuffRelationColByNextIdxKey newKeyNextIdx = (CFBamBuffRelationColByNextIdxKey)schema.getFactoryRelationCol().newByNextIdxKey();
 		newKeyNextIdx.setOptionalNextId( Buff.getOptionalNextId() );
 
-		CFBamBuffRelationColByRelPrevIdxKey existingKeyRelPrevIdx = schema.getFactoryRelationCol().newRelPrevIdxKey();
+		CFBamBuffRelationColByRelPrevIdxKey existingKeyRelPrevIdx = (CFBamBuffRelationColByRelPrevIdxKey)schema.getFactoryRelationCol().newByRelPrevIdxKey();
 		existingKeyRelPrevIdx.setRequiredRelationId( existing.getRequiredRelationId() );
 		existingKeyRelPrevIdx.setOptionalPrevId( existing.getOptionalPrevId() );
 
-		CFBamBuffRelationColByRelPrevIdxKey newKeyRelPrevIdx = schema.getFactoryRelationCol().newRelPrevIdxKey();
+		CFBamBuffRelationColByRelPrevIdxKey newKeyRelPrevIdx = (CFBamBuffRelationColByRelPrevIdxKey)schema.getFactoryRelationCol().newByRelPrevIdxKey();
 		newKeyRelPrevIdx.setRequiredRelationId( Buff.getRequiredRelationId() );
 		newKeyRelPrevIdx.setOptionalPrevId( Buff.getOptionalPrevId() );
 
-		CFBamBuffRelationColByRelNextIdxKey existingKeyRelNextIdx = schema.getFactoryRelationCol().newRelNextIdxKey();
+		CFBamBuffRelationColByRelNextIdxKey existingKeyRelNextIdx = (CFBamBuffRelationColByRelNextIdxKey)schema.getFactoryRelationCol().newByRelNextIdxKey();
 		existingKeyRelNextIdx.setRequiredRelationId( existing.getRequiredRelationId() );
 		existingKeyRelNextIdx.setOptionalNextId( existing.getOptionalNextId() );
 
-		CFBamBuffRelationColByRelNextIdxKey newKeyRelNextIdx = schema.getFactoryRelationCol().newRelNextIdxKey();
+		CFBamBuffRelationColByRelNextIdxKey newKeyRelNextIdx = (CFBamBuffRelationColByRelNextIdxKey)schema.getFactoryRelationCol().newByRelNextIdxKey();
 		newKeyRelNextIdx.setRequiredRelationId( Buff.getRequiredRelationId() );
 		newKeyRelNextIdx.setOptionalNextId( Buff.getOptionalNextId() );
 
@@ -1280,6 +1276,7 @@ public class CFBamRamRelationColTable
 			if( dictByUNameIdx.containsKey( newKeyUNameIdx ) ) {
 				throw new CFLibUniqueIndexViolationException( getClass(),
 					"updateRelationCol",
+					"RelationColUNameIdx",
 					"RelationColUNameIdx",
 					newKeyUNameIdx );
 			}
@@ -1452,6 +1449,7 @@ public class CFBamRamRelationColTable
 		}
 		subdict.put( pkey, Buff );
 
+		return(Buff);
 	}
 
 	public void deleteRelationCol( ICFSecAuthorization Authorization,
@@ -1550,33 +1548,33 @@ public class CFBamRamRelationColTable
 			}
 		}
 
-		CFBamBuffRelationColByUNameIdxKey keyUNameIdx = schema.getFactoryRelationCol().newUNameIdxKey();
+		CFBamBuffRelationColByUNameIdxKey keyUNameIdx = (CFBamBuffRelationColByUNameIdxKey)schema.getFactoryRelationCol().newByUNameIdxKey();
 		keyUNameIdx.setRequiredRelationId( existing.getRequiredRelationId() );
 		keyUNameIdx.setRequiredName( existing.getRequiredName() );
 
-		CFBamBuffRelationColByRelationIdxKey keyRelationIdx = schema.getFactoryRelationCol().newRelationIdxKey();
+		CFBamBuffRelationColByRelationIdxKey keyRelationIdx = (CFBamBuffRelationColByRelationIdxKey)schema.getFactoryRelationCol().newByRelationIdxKey();
 		keyRelationIdx.setRequiredRelationId( existing.getRequiredRelationId() );
 
-		CFBamBuffRelationColByDefSchemaIdxKey keyDefSchemaIdx = schema.getFactoryRelationCol().newDefSchemaIdxKey();
+		CFBamBuffRelationColByDefSchemaIdxKey keyDefSchemaIdx = (CFBamBuffRelationColByDefSchemaIdxKey)schema.getFactoryRelationCol().newByDefSchemaIdxKey();
 		keyDefSchemaIdx.setOptionalDefSchemaId( existing.getOptionalDefSchemaId() );
 
-		CFBamBuffRelationColByFromColIdxKey keyFromColIdx = schema.getFactoryRelationCol().newFromColIdxKey();
+		CFBamBuffRelationColByFromColIdxKey keyFromColIdx = (CFBamBuffRelationColByFromColIdxKey)schema.getFactoryRelationCol().newByFromColIdxKey();
 		keyFromColIdx.setRequiredFromColId( existing.getRequiredFromColId() );
 
-		CFBamBuffRelationColByToColIdxKey keyToColIdx = schema.getFactoryRelationCol().newToColIdxKey();
+		CFBamBuffRelationColByToColIdxKey keyToColIdx = (CFBamBuffRelationColByToColIdxKey)schema.getFactoryRelationCol().newByToColIdxKey();
 		keyToColIdx.setRequiredToColId( existing.getRequiredToColId() );
 
-		CFBamBuffRelationColByPrevIdxKey keyPrevIdx = schema.getFactoryRelationCol().newPrevIdxKey();
+		CFBamBuffRelationColByPrevIdxKey keyPrevIdx = (CFBamBuffRelationColByPrevIdxKey)schema.getFactoryRelationCol().newByPrevIdxKey();
 		keyPrevIdx.setOptionalPrevId( existing.getOptionalPrevId() );
 
-		CFBamBuffRelationColByNextIdxKey keyNextIdx = schema.getFactoryRelationCol().newNextIdxKey();
+		CFBamBuffRelationColByNextIdxKey keyNextIdx = (CFBamBuffRelationColByNextIdxKey)schema.getFactoryRelationCol().newByNextIdxKey();
 		keyNextIdx.setOptionalNextId( existing.getOptionalNextId() );
 
-		CFBamBuffRelationColByRelPrevIdxKey keyRelPrevIdx = schema.getFactoryRelationCol().newRelPrevIdxKey();
+		CFBamBuffRelationColByRelPrevIdxKey keyRelPrevIdx = (CFBamBuffRelationColByRelPrevIdxKey)schema.getFactoryRelationCol().newByRelPrevIdxKey();
 		keyRelPrevIdx.setRequiredRelationId( existing.getRequiredRelationId() );
 		keyRelPrevIdx.setOptionalPrevId( existing.getOptionalPrevId() );
 
-		CFBamBuffRelationColByRelNextIdxKey keyRelNextIdx = schema.getFactoryRelationCol().newRelNextIdxKey();
+		CFBamBuffRelationColByRelNextIdxKey keyRelNextIdx = (CFBamBuffRelationColByRelNextIdxKey)schema.getFactoryRelationCol().newByRelNextIdxKey();
 		keyRelNextIdx.setRequiredRelationId( existing.getRequiredRelationId() );
 		keyRelNextIdx.setOptionalNextId( existing.getOptionalNextId() );
 
@@ -1615,14 +1613,6 @@ public class CFBamRamRelationColTable
 
 	}
 	public void deleteRelationColByIdIdx( ICFSecAuthorization Authorization,
-		CFLibDbKeyHash256 argId )
-	{
-		CFLibDbKeyHash256 key = schema.getFactoryRelationCol().newPKey();
-		key.setRequiredId( argId );
-		deleteRelationColByIdIdx( Authorization, key );
-	}
-
-	public void deleteRelationColByIdIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argKey )
 	{
 		boolean anyNotNull = false;
@@ -1652,7 +1642,7 @@ public class CFBamRamRelationColTable
 		CFLibDbKeyHash256 argRelationId,
 		String argName )
 	{
-		CFBamBuffRelationColByUNameIdxKey key = schema.getFactoryRelationCol().newUNameIdxKey();
+		CFBamBuffRelationColByUNameIdxKey key = (CFBamBuffRelationColByUNameIdxKey)schema.getFactoryRelationCol().newByUNameIdxKey();
 		key.setRequiredRelationId( argRelationId );
 		key.setRequiredName( argName );
 		deleteRelationColByUNameIdx( Authorization, key );
@@ -1688,7 +1678,7 @@ public class CFBamRamRelationColTable
 	public void deleteRelationColByRelationIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argRelationId )
 	{
-		CFBamBuffRelationColByRelationIdxKey key = schema.getFactoryRelationCol().newRelationIdxKey();
+		CFBamBuffRelationColByRelationIdxKey key = (CFBamBuffRelationColByRelationIdxKey)schema.getFactoryRelationCol().newByRelationIdxKey();
 		key.setRequiredRelationId( argRelationId );
 		deleteRelationColByRelationIdx( Authorization, key );
 	}
@@ -1722,7 +1712,7 @@ public class CFBamRamRelationColTable
 	public void deleteRelationColByDefSchemaIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argDefSchemaId )
 	{
-		CFBamBuffRelationColByDefSchemaIdxKey key = schema.getFactoryRelationCol().newDefSchemaIdxKey();
+		CFBamBuffRelationColByDefSchemaIdxKey key = (CFBamBuffRelationColByDefSchemaIdxKey)schema.getFactoryRelationCol().newByDefSchemaIdxKey();
 		key.setOptionalDefSchemaId( argDefSchemaId );
 		deleteRelationColByDefSchemaIdx( Authorization, key );
 	}
@@ -1758,7 +1748,7 @@ public class CFBamRamRelationColTable
 	public void deleteRelationColByFromColIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argFromColId )
 	{
-		CFBamBuffRelationColByFromColIdxKey key = schema.getFactoryRelationCol().newFromColIdxKey();
+		CFBamBuffRelationColByFromColIdxKey key = (CFBamBuffRelationColByFromColIdxKey)schema.getFactoryRelationCol().newByFromColIdxKey();
 		key.setRequiredFromColId( argFromColId );
 		deleteRelationColByFromColIdx( Authorization, key );
 	}
@@ -1792,7 +1782,7 @@ public class CFBamRamRelationColTable
 	public void deleteRelationColByToColIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argToColId )
 	{
-		CFBamBuffRelationColByToColIdxKey key = schema.getFactoryRelationCol().newToColIdxKey();
+		CFBamBuffRelationColByToColIdxKey key = (CFBamBuffRelationColByToColIdxKey)schema.getFactoryRelationCol().newByToColIdxKey();
 		key.setRequiredToColId( argToColId );
 		deleteRelationColByToColIdx( Authorization, key );
 	}
@@ -1826,7 +1816,7 @@ public class CFBamRamRelationColTable
 	public void deleteRelationColByPrevIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argPrevId )
 	{
-		CFBamBuffRelationColByPrevIdxKey key = schema.getFactoryRelationCol().newPrevIdxKey();
+		CFBamBuffRelationColByPrevIdxKey key = (CFBamBuffRelationColByPrevIdxKey)schema.getFactoryRelationCol().newByPrevIdxKey();
 		key.setOptionalPrevId( argPrevId );
 		deleteRelationColByPrevIdx( Authorization, key );
 	}
@@ -1862,7 +1852,7 @@ public class CFBamRamRelationColTable
 	public void deleteRelationColByNextIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argNextId )
 	{
-		CFBamBuffRelationColByNextIdxKey key = schema.getFactoryRelationCol().newNextIdxKey();
+		CFBamBuffRelationColByNextIdxKey key = (CFBamBuffRelationColByNextIdxKey)schema.getFactoryRelationCol().newByNextIdxKey();
 		key.setOptionalNextId( argNextId );
 		deleteRelationColByNextIdx( Authorization, key );
 	}
@@ -1899,7 +1889,7 @@ public class CFBamRamRelationColTable
 		CFLibDbKeyHash256 argRelationId,
 		CFLibDbKeyHash256 argPrevId )
 	{
-		CFBamBuffRelationColByRelPrevIdxKey key = schema.getFactoryRelationCol().newRelPrevIdxKey();
+		CFBamBuffRelationColByRelPrevIdxKey key = (CFBamBuffRelationColByRelPrevIdxKey)schema.getFactoryRelationCol().newByRelPrevIdxKey();
 		key.setRequiredRelationId( argRelationId );
 		key.setOptionalPrevId( argPrevId );
 		deleteRelationColByRelPrevIdx( Authorization, key );
@@ -1938,7 +1928,7 @@ public class CFBamRamRelationColTable
 		CFLibDbKeyHash256 argRelationId,
 		CFLibDbKeyHash256 argNextId )
 	{
-		CFBamBuffRelationColByRelNextIdxKey key = schema.getFactoryRelationCol().newRelNextIdxKey();
+		CFBamBuffRelationColByRelNextIdxKey key = (CFBamBuffRelationColByRelNextIdxKey)schema.getFactoryRelationCol().newByRelNextIdxKey();
 		key.setRequiredRelationId( argRelationId );
 		key.setOptionalNextId( argNextId );
 		deleteRelationColByRelNextIdx( Authorization, key );

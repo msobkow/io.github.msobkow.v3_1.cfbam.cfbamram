@@ -87,23 +87,22 @@ public class CFBamRamServerMethodTable
 		schema = argSchema;
 	}
 
-	public void createServerMethod( ICFSecAuthorization Authorization,
+	public ICFBamServerMethod createServerMethod( ICFSecAuthorization Authorization,
 		ICFBamServerMethod Buff )
 	{
 		final String S_ProcName = "createServerMethod";
 		schema.getTableScope().createScope( Authorization,
 			Buff );
-		CFLibDbKeyHash256 pkey = schema.getFactoryScope().newPKey();
-		pkey.setClassCode( Buff.getClassCode() );
-		pkey.setRequiredId( Buff.getRequiredId() );
-		CFBamBuffServerMethodByUNameIdxKey keyUNameIdx = schema.getFactoryServerMethod().newUNameIdxKey();
+		CFLibDbKeyHash256 pkey;
+		pkey = Buff.getRequiredId();
+		CFBamBuffServerMethodByUNameIdxKey keyUNameIdx = (CFBamBuffServerMethodByUNameIdxKey)schema.getFactoryServerMethod().newByUNameIdxKey();
 		keyUNameIdx.setRequiredTableId( Buff.getRequiredTableId() );
 		keyUNameIdx.setRequiredName( Buff.getRequiredName() );
 
-		CFBamBuffServerMethodByMethTableIdxKey keyMethTableIdx = schema.getFactoryServerMethod().newMethTableIdxKey();
+		CFBamBuffServerMethodByMethTableIdxKey keyMethTableIdx = (CFBamBuffServerMethodByMethTableIdxKey)schema.getFactoryServerMethod().newByMethTableIdxKey();
 		keyMethTableIdx.setRequiredTableId( Buff.getRequiredTableId() );
 
-		CFBamBuffServerMethodByDefSchemaIdxKey keyDefSchemaIdx = schema.getFactoryServerMethod().newDefSchemaIdxKey();
+		CFBamBuffServerMethodByDefSchemaIdxKey keyDefSchemaIdx = (CFBamBuffServerMethodByDefSchemaIdxKey)schema.getFactoryServerMethod().newByDefSchemaIdxKey();
 		keyDefSchemaIdx.setOptionalDefSchemaId( Buff.getOptionalDefSchemaId() );
 
 		// Validate unique indexes
@@ -115,6 +114,7 @@ public class CFBamRamServerMethodTable
 		if( dictByUNameIdx.containsKey( keyUNameIdx ) ) {
 			throw new CFLibUniqueIndexViolationException( getClass(),
 				S_ProcName,
+				"ServerMethodUNameIdx",
 				"ServerMethodUNameIdx",
 				keyUNameIdx );
 		}
@@ -181,6 +181,7 @@ public class CFBamRamServerMethodTable
 		}
 		subdictDefSchemaIdx.put( pkey, Buff );
 
+		return( Buff );
 	}
 
 	public ICFBamServerMethod readDerived( ICFSecAuthorization Authorization,
@@ -201,11 +202,9 @@ public class CFBamRamServerMethodTable
 		CFLibDbKeyHash256 PKey )
 	{
 		final String S_ProcName = "CFBamRamServerMethod.readDerived";
-		CFLibDbKeyHash256 key = schema.getFactoryScope().newPKey();
-		key.setRequiredId( PKey.getRequiredId() );
 		ICFBamServerMethod buff;
-		if( dictByPKey.containsKey( key ) ) {
-			buff = dictByPKey.get( key );
+		if( dictByPKey.containsKey( PKey ) ) {
+			buff = dictByPKey.get( PKey );
 		}
 		else {
 			buff = null;
@@ -251,7 +250,7 @@ public class CFBamRamServerMethodTable
 		String Name )
 	{
 		final String S_ProcName = "CFBamRamServerMethod.readDerivedByUNameIdx";
-		CFBamBuffServerMethodByUNameIdxKey key = schema.getFactoryServerMethod().newUNameIdxKey();
+		CFBamBuffServerMethodByUNameIdxKey key = (CFBamBuffServerMethodByUNameIdxKey)schema.getFactoryServerMethod().newByUNameIdxKey();
 		key.setRequiredTableId( TableId );
 		key.setRequiredName( Name );
 
@@ -269,7 +268,7 @@ public class CFBamRamServerMethodTable
 		CFLibDbKeyHash256 TableId )
 	{
 		final String S_ProcName = "CFBamRamServerMethod.readDerivedByMethTableIdx";
-		CFBamBuffServerMethodByMethTableIdxKey key = schema.getFactoryServerMethod().newMethTableIdxKey();
+		CFBamBuffServerMethodByMethTableIdxKey key = (CFBamBuffServerMethodByMethTableIdxKey)schema.getFactoryServerMethod().newByMethTableIdxKey();
 		key.setRequiredTableId( TableId );
 
 		ICFBamServerMethod[] recArray;
@@ -296,7 +295,7 @@ public class CFBamRamServerMethodTable
 		CFLibDbKeyHash256 DefSchemaId )
 	{
 		final String S_ProcName = "CFBamRamServerMethod.readDerivedByDefSchemaIdx";
-		CFBamBuffServerMethodByDefSchemaIdxKey key = schema.getFactoryServerMethod().newDefSchemaIdxKey();
+		CFBamBuffServerMethodByDefSchemaIdxKey key = (CFBamBuffServerMethodByDefSchemaIdxKey)schema.getFactoryServerMethod().newByDefSchemaIdxKey();
 		key.setOptionalDefSchemaId( DefSchemaId );
 
 		ICFBamServerMethod[] recArray;
@@ -323,12 +322,9 @@ public class CFBamRamServerMethodTable
 		CFLibDbKeyHash256 Id )
 	{
 		final String S_ProcName = "CFBamRamScope.readDerivedByIdIdx() ";
-		CFLibDbKeyHash256 key = schema.getFactoryScope().newPKey();
-		key.setRequiredId( Id );
-
 		ICFBamServerMethod buff;
-		if( dictByPKey.containsKey( key ) ) {
-			buff = dictByPKey.get( key );
+		if( dictByPKey.containsKey( Id ) ) {
+			buff = dictByPKey.get( Id );
 		}
 		else {
 			buff = null;
@@ -341,7 +337,7 @@ public class CFBamRamServerMethodTable
 	{
 		final String S_ProcName = "CFBamRamServerMethod.readBuff";
 		ICFBamServerMethod buff = readDerived( Authorization, PKey );
-		if( ( buff != null ) && ( ! buff.getClassCode().equals( "a805" ) ) ) {
+		if( ( buff != null ) && ( buff.getClassCode() != ICFBamServerMethod.CLASS_CODE ) ) {
 			buff = null;
 		}
 		return( buff );
@@ -352,7 +348,7 @@ public class CFBamRamServerMethodTable
 	{
 		final String S_ProcName = "lockBuff";
 		ICFBamServerMethod buff = readDerived( Authorization, PKey );
-		if( ( buff != null ) && ( ! buff.getClassCode().equals( "a805" ) ) ) {
+		if( ( buff != null ) && ( buff.getClassCode() != ICFBamServerMethod.CLASS_CODE ) ) {
 			buff = null;
 		}
 		return( buff );
@@ -366,7 +362,7 @@ public class CFBamRamServerMethodTable
 		ICFBamServerMethod[] buffList = readAllDerived( Authorization );
 		for( int idx = 0; idx < buffList.length; idx ++ ) {
 			buff = buffList[idx];
-			if( ( buff != null ) && buff.getClassCode().equals( "a805" ) ) {
+			if( ( buff != null ) && ( buff.getClassCode() == ICFBamServerMethod.CLASS_CODE ) ) {
 				filteredList.add( buff );
 			}
 		}
@@ -379,7 +375,7 @@ public class CFBamRamServerMethodTable
 		final String S_ProcName = "CFBamRamScope.readBuffByIdIdx() ";
 		ICFBamServerMethod buff = readDerivedByIdIdx( Authorization,
 			Id );
-		if( ( buff != null ) && buff.getClassCode().equals( "a801" ) ) {
+		if( ( buff != null ) && ( buff.getClassCode() == ICFBamScope.CLASS_CODE ) ) {
 			return( (ICFBamServerMethod)buff );
 		}
 		else {
@@ -397,7 +393,7 @@ public class CFBamRamServerMethodTable
 			TenantId );
 		for( int idx = 0; idx < buffList.length; idx ++ ) {
 			buff = buffList[idx];
-			if( ( buff != null ) && buff.getClassCode().equals( "a801" ) ) {
+			if( ( buff != null ) && ( buff.getClassCode() == ICFBamScope.CLASS_CODE ) ) {
 				filteredList.add( (ICFBamServerMethod)buff );
 			}
 		}
@@ -412,7 +408,7 @@ public class CFBamRamServerMethodTable
 		ICFBamServerMethod buff = readDerivedByUNameIdx( Authorization,
 			TableId,
 			Name );
-		if( ( buff != null ) && buff.getClassCode().equals( "a805" ) ) {
+		if( ( buff != null ) && ( buff.getClassCode() == ICFBamServerMethod.CLASS_CODE ) ) {
 			return( (ICFBamServerMethod)buff );
 		}
 		else {
@@ -430,7 +426,7 @@ public class CFBamRamServerMethodTable
 			TableId );
 		for( int idx = 0; idx < buffList.length; idx ++ ) {
 			buff = buffList[idx];
-			if( ( buff != null ) && buff.getClassCode().equals( "a805" ) ) {
+			if( ( buff != null ) && ( buff.getClassCode() == ICFBamServerMethod.CLASS_CODE ) ) {
 				filteredList.add( (ICFBamServerMethod)buff );
 			}
 		}
@@ -447,7 +443,7 @@ public class CFBamRamServerMethodTable
 			DefSchemaId );
 		for( int idx = 0; idx < buffList.length; idx ++ ) {
 			buff = buffList[idx];
-			if( ( buff != null ) && buff.getClassCode().equals( "a805" ) ) {
+			if( ( buff != null ) && ( buff.getClassCode() == ICFBamServerMethod.CLASS_CODE ) ) {
 				filteredList.add( (ICFBamServerMethod)buff );
 			}
 		}
@@ -492,13 +488,15 @@ public class CFBamRamServerMethodTable
 		throw new CFLibNotImplementedYetException( getClass(), S_ProcName );
 	}
 
-	public void updateServerMethod( ICFSecAuthorization Authorization,
+	public ICFBamServerMethod updateServerMethod( ICFSecAuthorization Authorization,
 		ICFBamServerMethod Buff )
 	{
-		schema.getTableScope().updateScope( Authorization,
+		ICFBamServerMethod repl = schema.getTableScope().updateScope( Authorization,
 			Buff );
-		CFLibDbKeyHash256 pkey = schema.getFactoryScope().newPKey();
-		pkey.setRequiredId( Buff.getRequiredId() );
+		if (repl != Buff) {
+			throw new CFLibInvalidStateException(getClass(), S_ProcName, "repl != Buff", "repl != Buff");
+		}
+		CFLibDbKeyHash256 pkey = Buff.getPKey();
 		ICFBamServerMethod existing = dictByPKey.get( pkey );
 		if( existing == null ) {
 			throw new CFLibStaleCacheDetectedException( getClass(),
@@ -507,24 +505,24 @@ public class CFBamRamServerMethodTable
 				"ServerMethod",
 				pkey );
 		}
-		CFBamBuffServerMethodByUNameIdxKey existingKeyUNameIdx = schema.getFactoryServerMethod().newUNameIdxKey();
+		CFBamBuffServerMethodByUNameIdxKey existingKeyUNameIdx = (CFBamBuffServerMethodByUNameIdxKey)schema.getFactoryServerMethod().newByUNameIdxKey();
 		existingKeyUNameIdx.setRequiredTableId( existing.getRequiredTableId() );
 		existingKeyUNameIdx.setRequiredName( existing.getRequiredName() );
 
-		CFBamBuffServerMethodByUNameIdxKey newKeyUNameIdx = schema.getFactoryServerMethod().newUNameIdxKey();
+		CFBamBuffServerMethodByUNameIdxKey newKeyUNameIdx = (CFBamBuffServerMethodByUNameIdxKey)schema.getFactoryServerMethod().newByUNameIdxKey();
 		newKeyUNameIdx.setRequiredTableId( Buff.getRequiredTableId() );
 		newKeyUNameIdx.setRequiredName( Buff.getRequiredName() );
 
-		CFBamBuffServerMethodByMethTableIdxKey existingKeyMethTableIdx = schema.getFactoryServerMethod().newMethTableIdxKey();
+		CFBamBuffServerMethodByMethTableIdxKey existingKeyMethTableIdx = (CFBamBuffServerMethodByMethTableIdxKey)schema.getFactoryServerMethod().newByMethTableIdxKey();
 		existingKeyMethTableIdx.setRequiredTableId( existing.getRequiredTableId() );
 
-		CFBamBuffServerMethodByMethTableIdxKey newKeyMethTableIdx = schema.getFactoryServerMethod().newMethTableIdxKey();
+		CFBamBuffServerMethodByMethTableIdxKey newKeyMethTableIdx = (CFBamBuffServerMethodByMethTableIdxKey)schema.getFactoryServerMethod().newByMethTableIdxKey();
 		newKeyMethTableIdx.setRequiredTableId( Buff.getRequiredTableId() );
 
-		CFBamBuffServerMethodByDefSchemaIdxKey existingKeyDefSchemaIdx = schema.getFactoryServerMethod().newDefSchemaIdxKey();
+		CFBamBuffServerMethodByDefSchemaIdxKey existingKeyDefSchemaIdx = (CFBamBuffServerMethodByDefSchemaIdxKey)schema.getFactoryServerMethod().newByDefSchemaIdxKey();
 		existingKeyDefSchemaIdx.setOptionalDefSchemaId( existing.getOptionalDefSchemaId() );
 
-		CFBamBuffServerMethodByDefSchemaIdxKey newKeyDefSchemaIdx = schema.getFactoryServerMethod().newDefSchemaIdxKey();
+		CFBamBuffServerMethodByDefSchemaIdxKey newKeyDefSchemaIdx = (CFBamBuffServerMethodByDefSchemaIdxKey)schema.getFactoryServerMethod().newByDefSchemaIdxKey();
 		newKeyDefSchemaIdx.setOptionalDefSchemaId( Buff.getOptionalDefSchemaId() );
 
 		// Check unique indexes
@@ -533,6 +531,7 @@ public class CFBamRamServerMethodTable
 			if( dictByUNameIdx.containsKey( newKeyUNameIdx ) ) {
 				throw new CFLibUniqueIndexViolationException( getClass(),
 					"updateServerMethod",
+					"ServerMethodUNameIdx",
 					"ServerMethodUNameIdx",
 					newKeyUNameIdx );
 			}
@@ -610,6 +609,7 @@ public class CFBamRamServerMethodTable
 		}
 		subdict.put( pkey, Buff );
 
+		return(Buff);
 	}
 
 	public void deleteServerMethod( ICFSecAuthorization Authorization,
@@ -636,14 +636,14 @@ public class CFBamRamServerMethodTable
 			schema.getTableParam().deleteParamByServerMethodIdx( Authorization,
 						existing.getRequiredId() );
 		}
-		CFBamBuffServerMethodByUNameIdxKey keyUNameIdx = schema.getFactoryServerMethod().newUNameIdxKey();
+		CFBamBuffServerMethodByUNameIdxKey keyUNameIdx = (CFBamBuffServerMethodByUNameIdxKey)schema.getFactoryServerMethod().newByUNameIdxKey();
 		keyUNameIdx.setRequiredTableId( existing.getRequiredTableId() );
 		keyUNameIdx.setRequiredName( existing.getRequiredName() );
 
-		CFBamBuffServerMethodByMethTableIdxKey keyMethTableIdx = schema.getFactoryServerMethod().newMethTableIdxKey();
+		CFBamBuffServerMethodByMethTableIdxKey keyMethTableIdx = (CFBamBuffServerMethodByMethTableIdxKey)schema.getFactoryServerMethod().newByMethTableIdxKey();
 		keyMethTableIdx.setRequiredTableId( existing.getRequiredTableId() );
 
-		CFBamBuffServerMethodByDefSchemaIdxKey keyDefSchemaIdx = schema.getFactoryServerMethod().newDefSchemaIdxKey();
+		CFBamBuffServerMethodByDefSchemaIdxKey keyDefSchemaIdx = (CFBamBuffServerMethodByDefSchemaIdxKey)schema.getFactoryServerMethod().newByDefSchemaIdxKey();
 		keyDefSchemaIdx.setOptionalDefSchemaId( existing.getOptionalDefSchemaId() );
 
 		// Validate reverse foreign keys
@@ -701,7 +701,7 @@ public class CFBamRamServerMethodTable
 		CFLibDbKeyHash256 argTableId,
 		String argName )
 	{
-		CFBamBuffServerMethodByUNameIdxKey key = schema.getFactoryServerMethod().newUNameIdxKey();
+		CFBamBuffServerMethodByUNameIdxKey key = (CFBamBuffServerMethodByUNameIdxKey)schema.getFactoryServerMethod().newByUNameIdxKey();
 		key.setRequiredTableId( argTableId );
 		key.setRequiredName( argName );
 		deleteServerMethodByUNameIdx( Authorization, key );
@@ -757,7 +757,7 @@ public class CFBamRamServerMethodTable
 	public void deleteServerMethodByMethTableIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argTableId )
 	{
-		CFBamBuffServerMethodByMethTableIdxKey key = schema.getFactoryServerMethod().newMethTableIdxKey();
+		CFBamBuffServerMethodByMethTableIdxKey key = (CFBamBuffServerMethodByMethTableIdxKey)schema.getFactoryServerMethod().newByMethTableIdxKey();
 		key.setRequiredTableId( argTableId );
 		deleteServerMethodByMethTableIdx( Authorization, key );
 	}
@@ -811,7 +811,7 @@ public class CFBamRamServerMethodTable
 	public void deleteServerMethodByDefSchemaIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argDefSchemaId )
 	{
-		CFBamBuffServerMethodByDefSchemaIdxKey key = schema.getFactoryServerMethod().newDefSchemaIdxKey();
+		CFBamBuffServerMethodByDefSchemaIdxKey key = (CFBamBuffServerMethodByDefSchemaIdxKey)schema.getFactoryServerMethod().newByDefSchemaIdxKey();
 		key.setOptionalDefSchemaId( argDefSchemaId );
 		deleteServerMethodByDefSchemaIdx( Authorization, key );
 	}
@@ -865,14 +865,6 @@ public class CFBamRamServerMethodTable
 	}
 
 	public void deleteServerMethodByIdIdx( ICFSecAuthorization Authorization,
-		CFLibDbKeyHash256 argId )
-	{
-		CFLibDbKeyHash256 key = schema.getFactoryScope().newPKey();
-		key.setRequiredId( argId );
-		deleteServerMethodByIdIdx( Authorization, key );
-	}
-
-	public void deleteServerMethodByIdIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argKey )
 	{
 		final String S_ProcName = "deleteServerMethodByIdIdx";
@@ -921,7 +913,7 @@ public class CFBamRamServerMethodTable
 	public void deleteServerMethodByTenantIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argTenantId )
 	{
-		CFBamBuffScopeByTenantIdxKey key = schema.getFactoryScope().newTenantIdxKey();
+		CFBamBuffScopeByTenantIdxKey key = (CFBamBuffScopeByTenantIdxKey)schema.getFactoryScope().newByTenantIdxKey();
 		key.setRequiredTenantId( argTenantId );
 		deleteServerMethodByTenantIdx( Authorization, key );
 	}

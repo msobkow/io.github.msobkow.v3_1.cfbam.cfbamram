@@ -83,7 +83,7 @@ public class CFBamRamISOCtryLangTable
 		schema = argSchema;
 	}
 
-	public void createISOCtryLang( ICFSecAuthorization Authorization,
+	public ICFSecISOCtryLang createISOCtryLang( ICFSecAuthorization Authorization,
 		ICFSecISOCtryLang Buff )
 	{
 		final String S_ProcName = "createISOCtryLang";
@@ -92,10 +92,10 @@ public class CFBamRamISOCtryLangTable
 		pkey.setRequiredISOLangId( Buff.getRequiredISOLangId() );
 		Buff.setRequiredISOCtryId( pkey.getRequiredISOCtryId() );
 		Buff.setRequiredISOLangId( pkey.getRequiredISOLangId() );
-		CFSecBuffISOCtryLangByCtryIdxKey keyCtryIdx = schema.getFactoryISOCtryLang().newCtryIdxKey();
+		CFSecBuffISOCtryLangByCtryIdxKey keyCtryIdx = (CFSecBuffISOCtryLangByCtryIdxKey)schema.getFactoryISOCtryLang().newByCtryIdxKey();
 		keyCtryIdx.setRequiredISOCtryId( Buff.getRequiredISOCtryId() );
 
-		CFSecBuffISOCtryLangByLangIdxKey keyLangIdx = schema.getFactoryISOCtryLang().newLangIdxKey();
+		CFSecBuffISOCtryLangByLangIdxKey keyLangIdx = (CFSecBuffISOCtryLangByLangIdxKey)schema.getFactoryISOCtryLang().newByLangIdxKey();
 		keyLangIdx.setRequiredISOLangId( Buff.getRequiredISOLangId() );
 
 		// Validate unique indexes
@@ -147,6 +147,7 @@ public class CFBamRamISOCtryLangTable
 		}
 		subdictLangIdx.put( pkey, Buff );
 
+		return( Buff );
 	}
 
 	public ICFSecISOCtryLang readDerived( ICFSecAuthorization Authorization,
@@ -198,7 +199,7 @@ public class CFBamRamISOCtryLangTable
 		short ISOCtryId )
 	{
 		final String S_ProcName = "CFBamRamISOCtryLang.readDerivedByCtryIdx";
-		CFSecBuffISOCtryLangByCtryIdxKey key = schema.getFactoryISOCtryLang().newCtryIdxKey();
+		CFSecBuffISOCtryLangByCtryIdxKey key = (CFSecBuffISOCtryLangByCtryIdxKey)schema.getFactoryISOCtryLang().newByCtryIdxKey();
 		key.setRequiredISOCtryId( ISOCtryId );
 
 		ICFSecISOCtryLang[] recArray;
@@ -225,7 +226,7 @@ public class CFBamRamISOCtryLangTable
 		short ISOLangId )
 	{
 		final String S_ProcName = "CFBamRamISOCtryLang.readDerivedByLangIdx";
-		CFSecBuffISOCtryLangByLangIdxKey key = schema.getFactoryISOCtryLang().newLangIdxKey();
+		CFSecBuffISOCtryLangByLangIdxKey key = (CFSecBuffISOCtryLangByLangIdxKey)schema.getFactoryISOCtryLang().newByLangIdxKey();
 		key.setRequiredISOLangId( ISOLangId );
 
 		ICFSecISOCtryLang[] recArray;
@@ -272,7 +273,7 @@ public class CFBamRamISOCtryLangTable
 	{
 		final String S_ProcName = "CFBamRamISOCtryLang.readBuff";
 		ICFSecISOCtryLang buff = readDerived( Authorization, PKey );
-		if( ( buff != null ) && ( ! buff.getClassCode().equals( "a006" ) ) ) {
+		if( ( buff != null ) && ( buff.getClassCode() != ICFSecISOCtryLang.CLASS_CODE ) ) {
 			buff = null;
 		}
 		return( buff );
@@ -283,7 +284,7 @@ public class CFBamRamISOCtryLangTable
 	{
 		final String S_ProcName = "lockBuff";
 		ICFSecISOCtryLang buff = readDerived( Authorization, PKey );
-		if( ( buff != null ) && ( ! buff.getClassCode().equals( "a006" ) ) ) {
+		if( ( buff != null ) && ( buff.getClassCode() != ICFSecISOCtryLang.CLASS_CODE ) ) {
 			buff = null;
 		}
 		return( buff );
@@ -297,7 +298,7 @@ public class CFBamRamISOCtryLangTable
 		ICFSecISOCtryLang[] buffList = readAllDerived( Authorization );
 		for( int idx = 0; idx < buffList.length; idx ++ ) {
 			buff = buffList[idx];
-			if( ( buff != null ) && buff.getClassCode().equals( "a006" ) ) {
+			if( ( buff != null ) && ( buff.getClassCode() == ICFSecISOCtryLang.CLASS_CODE ) ) {
 				filteredList.add( buff );
 			}
 		}
@@ -312,7 +313,7 @@ public class CFBamRamISOCtryLangTable
 		ICFSecISOCtryLang buff = readDerivedByIdIdx( Authorization,
 			ISOCtryId,
 			ISOLangId );
-		if( ( buff != null ) && buff.getClassCode().equals( "a006" ) ) {
+		if( ( buff != null ) && ( buff.getClassCode() == ICFSecISOCtryLang.CLASS_CODE ) ) {
 			return( (ICFSecISOCtryLang)buff );
 		}
 		else {
@@ -330,7 +331,7 @@ public class CFBamRamISOCtryLangTable
 			ISOCtryId );
 		for( int idx = 0; idx < buffList.length; idx ++ ) {
 			buff = buffList[idx];
-			if( ( buff != null ) && buff.getClassCode().equals( "a006" ) ) {
+			if( ( buff != null ) && ( buff.getClassCode() == ICFSecISOCtryLang.CLASS_CODE ) ) {
 				filteredList.add( (ICFSecISOCtryLang)buff );
 			}
 		}
@@ -347,14 +348,14 @@ public class CFBamRamISOCtryLangTable
 			ISOLangId );
 		for( int idx = 0; idx < buffList.length; idx ++ ) {
 			buff = buffList[idx];
-			if( ( buff != null ) && buff.getClassCode().equals( "a006" ) ) {
+			if( ( buff != null ) && ( buff.getClassCode() == ICFSecISOCtryLang.CLASS_CODE ) ) {
 				filteredList.add( (ICFSecISOCtryLang)buff );
 			}
 		}
 		return( filteredList.toArray( new ICFSecISOCtryLang[0] ) );
 	}
 
-	public void updateISOCtryLang( ICFSecAuthorization Authorization,
+	public ICFSecISOCtryLang updateISOCtryLang( ICFSecAuthorization Authorization,
 		ICFSecISOCtryLang Buff )
 	{
 		ICFSecISOCtryLangPKey pkey = schema.getFactoryISOCtryLang().newPKey();
@@ -374,16 +375,16 @@ public class CFBamRamISOCtryLangTable
 				pkey );
 		}
 		Buff.setRequiredRevision( Buff.getRequiredRevision() + 1 );
-		CFSecBuffISOCtryLangByCtryIdxKey existingKeyCtryIdx = schema.getFactoryISOCtryLang().newCtryIdxKey();
+		CFSecBuffISOCtryLangByCtryIdxKey existingKeyCtryIdx = (CFSecBuffISOCtryLangByCtryIdxKey)schema.getFactoryISOCtryLang().newByCtryIdxKey();
 		existingKeyCtryIdx.setRequiredISOCtryId( existing.getRequiredISOCtryId() );
 
-		CFSecBuffISOCtryLangByCtryIdxKey newKeyCtryIdx = schema.getFactoryISOCtryLang().newCtryIdxKey();
+		CFSecBuffISOCtryLangByCtryIdxKey newKeyCtryIdx = (CFSecBuffISOCtryLangByCtryIdxKey)schema.getFactoryISOCtryLang().newByCtryIdxKey();
 		newKeyCtryIdx.setRequiredISOCtryId( Buff.getRequiredISOCtryId() );
 
-		CFSecBuffISOCtryLangByLangIdxKey existingKeyLangIdx = schema.getFactoryISOCtryLang().newLangIdxKey();
+		CFSecBuffISOCtryLangByLangIdxKey existingKeyLangIdx = (CFSecBuffISOCtryLangByLangIdxKey)schema.getFactoryISOCtryLang().newByLangIdxKey();
 		existingKeyLangIdx.setRequiredISOLangId( existing.getRequiredISOLangId() );
 
-		CFSecBuffISOCtryLangByLangIdxKey newKeyLangIdx = schema.getFactoryISOCtryLang().newLangIdxKey();
+		CFSecBuffISOCtryLangByLangIdxKey newKeyLangIdx = (CFSecBuffISOCtryLangByLangIdxKey)schema.getFactoryISOCtryLang().newByLangIdxKey();
 		newKeyLangIdx.setRequiredISOLangId( Buff.getRequiredISOLangId() );
 
 		// Check unique indexes
@@ -440,6 +441,7 @@ public class CFBamRamISOCtryLangTable
 		}
 		subdict.put( pkey, Buff );
 
+		return(Buff);
 	}
 
 	public void deleteISOCtryLang( ICFSecAuthorization Authorization,
@@ -460,10 +462,10 @@ public class CFBamRamISOCtryLangTable
 				"deleteISOCtryLang",
 				pkey );
 		}
-		CFSecBuffISOCtryLangByCtryIdxKey keyCtryIdx = schema.getFactoryISOCtryLang().newCtryIdxKey();
+		CFSecBuffISOCtryLangByCtryIdxKey keyCtryIdx = (CFSecBuffISOCtryLangByCtryIdxKey)schema.getFactoryISOCtryLang().newByCtryIdxKey();
 		keyCtryIdx.setRequiredISOCtryId( existing.getRequiredISOCtryId() );
 
-		CFSecBuffISOCtryLangByLangIdxKey keyLangIdx = schema.getFactoryISOCtryLang().newLangIdxKey();
+		CFSecBuffISOCtryLangByLangIdxKey keyLangIdx = (CFSecBuffISOCtryLangByLangIdxKey)schema.getFactoryISOCtryLang().newByLangIdxKey();
 		keyLangIdx.setRequiredISOLangId( existing.getRequiredISOLangId() );
 
 		// Validate reverse foreign keys
@@ -521,7 +523,7 @@ public class CFBamRamISOCtryLangTable
 	public void deleteISOCtryLangByCtryIdx( ICFSecAuthorization Authorization,
 		short argISOCtryId )
 	{
-		CFSecBuffISOCtryLangByCtryIdxKey key = schema.getFactoryISOCtryLang().newCtryIdxKey();
+		CFSecBuffISOCtryLangByCtryIdxKey key = (CFSecBuffISOCtryLangByCtryIdxKey)schema.getFactoryISOCtryLang().newByCtryIdxKey();
 		key.setRequiredISOCtryId( argISOCtryId );
 		deleteISOCtryLangByCtryIdx( Authorization, key );
 	}
@@ -556,7 +558,7 @@ public class CFBamRamISOCtryLangTable
 	public void deleteISOCtryLangByLangIdx( ICFSecAuthorization Authorization,
 		short argISOLangId )
 	{
-		CFSecBuffISOCtryLangByLangIdxKey key = schema.getFactoryISOCtryLang().newLangIdxKey();
+		CFSecBuffISOCtryLangByLangIdxKey key = (CFSecBuffISOCtryLangByLangIdxKey)schema.getFactoryISOCtryLang().newByLangIdxKey();
 		key.setRequiredISOLangId( argISOLangId );
 		deleteISOCtryLangByLangIdx( Authorization, key );
 	}
