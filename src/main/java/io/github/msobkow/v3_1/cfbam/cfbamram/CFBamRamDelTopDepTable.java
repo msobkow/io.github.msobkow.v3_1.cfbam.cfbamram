@@ -94,9 +94,12 @@ public class CFBamRamDelTopDepTable
 	}
 
 	public ICFBamDelTopDep createDelTopDep( ICFSecAuthorization Authorization,
-		ICFBamDelTopDep Buff )
+		ICFBamDelTopDep iBuff )
 	{
 		final String S_ProcName = "createDelTopDep";
+		
+		CFBamBuffDelTopDep Buff = (CFBamBuffDelTopDep)(schema.getTableDelDep().createDelDep( Authorization,
+			iBuff ));
 		ICFBamDelTopDep tail = null;
 		if( Buff.getClassCode() == ICFBamDelTopDep.CLASS_CODE ) ) {
 			ICFBamDelTopDep[] siblings = schema.getTableDelTopDep().readDerivedByDelTopDepTblIdx( Authorization,
@@ -114,8 +117,6 @@ public class CFBamRamDelTopDepTable
 				Buff.setOptionalPrevId( null );
 			}
 		}
-		schema.getTableDelDep().createDelDep( Authorization,
-			Buff );
 		CFLibDbKeyHash256 pkey;
 		pkey = Buff.getRequiredId();
 		CFBamBuffDelTopDepByDelTopDepTblIdxKey keyDelTopDepTblIdx = (CFBamBuffDelTopDepByDelTopDepTblIdxKey)schema.getFactoryDelTopDep().newByDelTopDepTblIdxKey();
@@ -231,7 +232,20 @@ public class CFBamRamDelTopDepTable
 					"Unrecognized ClassCode " + tailClassCode );
 			}
 		}
-		return( Buff );
+		if (Buff == null) {
+			return( null );
+		}
+		else {
+			int classCode = Buff.getClassCode();
+			if (classCode == ICFBamDelTopDep.CLASS_CODE) {
+				CFBamBuffDelTopDep retbuff = ((CFBamBuffDelTopDep)(schema.getFactoryDelTopDep().newRec()));
+				retbuff.set(Buff);
+				return( retbuff );
+			}
+			else {
+				throw new CFLibUnsupportedClassException(getClass(), S_ProcName, 0, "-create-buff-cloning-", "Not " + Integer.toString(classCode));
+			}
+		}
 	}
 
 	public ICFBamDelTopDep readDerived( ICFSecAuthorization Authorization,
@@ -737,6 +751,8 @@ public class CFBamRamDelTopDepTable
 		if( cur == null ) {
 			throw new CFLibCollisionDetectedException( getClass(),
 				S_ProcName,
+				"CFBamDelTopDepByIdIdxKey",
+				"CFBamDelTopDepByIdIdxKey",
 				"Could not locate object" );
 		}
 
@@ -749,6 +765,8 @@ public class CFBamRamDelTopDepTable
 		if( prev == null ) {
 			throw new CFLibCollisionDetectedException( getClass(),
 				S_ProcName,
+				"CFBamDelTopDepByIdIdxKey",
+				"CFBamDelTopDepByIdIdxKey",
 				"Could not locate object.prev" );
 		}
 
@@ -758,6 +776,8 @@ public class CFBamRamDelTopDepTable
 			if( grandprev == null ) {
 				throw new CFLibCollisionDetectedException( getClass(),
 					S_ProcName,
+					"CFBamDelTopDepByIdIdxKey",
+					"CFBamDelTopDepByIdIdxKey",
 					"Could not locate object.prev.prev" );
 			}
 		}
@@ -768,31 +788,29 @@ public class CFBamRamDelTopDepTable
 			if( next == null ) {
 				throw new CFLibCollisionDetectedException( getClass(),
 					S_ProcName,
+					"CFBamDelTopDepByIdIdxKey",
+					"CFBamDelTopDepByIdIdxKey",
 					"Could not locate object.next" );
 			}
 		}
 
 		String classCode = prev.getClassCode();
 		ICFBamDelTopDep newInstance;
-			if( classCode.equals( "a81b" ) ) {
+			if( classCode == ICFBamDelTopDep.CLASS_CODE ) {
 				newInstance = schema.getFactoryDelTopDep().newBuff();
 			}
 			else {
-				throw new CFLibUnsupportedClassException( getClass(),
-					S_ProcName,
-					"Unrecognized ClassCode \"" + classCode + "\"" );
+				throw new CFLibUnsupportedClassException(getClass(), S_ProcName, 0, "-instantiate-buff-", "Not " + Integer.toString(classCode));
 			}
 		ICFBamDelTopDep editPrev = newInstance;
 		editPrev.set( prev );
 
 		classCode = cur.getClassCode();
-			if( classCode.equals( "a81b" ) ) {
+			if( classCode == ICFBamDelTopDep.CLASS_CODE ) {
 				newInstance = schema.getFactoryDelTopDep().newBuff();
 			}
 			else {
-				throw new CFLibUnsupportedClassException( getClass(),
-					S_ProcName,
-					"Unrecognized ClassCode \"" + classCode + "\"" );
+				throw new CFLibUnsupportedClassException(getClass(), S_ProcName, 0, "-instantiate-buff-", "Not " + Integer.toString(classCode));
 			}
 		CFBamDelTopDepBuff editCur = newInstance;
 		editCur.set( cur );
@@ -800,13 +818,11 @@ public class CFBamRamDelTopDepTable
 		ICFBamDelTopDep editGrandprev = null;
 		if( grandprev != null ) {
 			classCode = grandprev.getClassCode();
-			if( classCode.equals( "a81b" ) ) {
+			if( classCode == ICFBamDelTopDep.CLASS_CODE ) {
 				newInstance = schema.getFactoryDelTopDep().newBuff();
 			}
 			else {
-				throw new CFLibUnsupportedClassException( getClass(),
-					S_ProcName,
-					"Unrecognized ClassCode \"" + classCode + "\"" );
+				throw new CFLibUnsupportedClassException(getClass(), S_ProcName, 0, "-instantiate-buff-", "Not " + Integer.toString(classCode));
 			}
 			editGrandprev = newInstance;
 			editGrandprev.set( grandprev );
@@ -815,13 +831,11 @@ public class CFBamRamDelTopDepTable
 		ICFBamDelTopDep editNext = null;
 		if( next != null ) {
 			classCode = next.getClassCode();
-			if( classCode.equals( "a81b" ) ) {
+			if( classCode == ICFBamDelTopDep.CLASS_CODE ) {
 				newInstance = schema.getFactoryDelTopDep().newBuff();
 			}
 			else {
-				throw new CFLibUnsupportedClassException( getClass(),
-					S_ProcName,
-					"Unrecognized ClassCode \"" + classCode + "\"" );
+				throw new CFLibUnsupportedClassException(getClass(), S_ProcName, 0, "-instantiate-buff-", "Not " + Integer.toString(classCode));
 			}
 			editNext = newInstance;
 			editNext.set( next );
@@ -849,45 +863,37 @@ public class CFBamRamDelTopDepTable
 
 		if( editGrandprev != null ) {
 			classCode = editGrandprev.getClassCode();
-			if( classCode.equals( "a81b" ) ) {
+			if( classCode == ICFBamDelTopDep.CLASS_CODE ) {
 				schema.getTableDelTopDep().updateDelTopDep( Authorization, editGrandprev );
 			}
 			else {
-				throw new CFLibUnsupportedClassException( getClass(),
-					S_ProcName,
-					"Unrecognized ClassCode \"" + classCode + "\"" );
+				throw new CFLibUnsupportedClassException(getClass(), S_ProcName, 0, "-update-grand-prev-", "Not " + Integer.toString(classCode));
 			}
 		}
 
 		classCode = editPrev.getClassCode();
-			if( classCode.equals( "a81b" ) ) {
+			if( classCode == ICFBamDelTopDep.CLASS_CODE ) {
 				schema.getTableDelTopDep().updateDelTopDep( Authorization, editPrev );
 			}
 			else {
-				throw new CFLibUnsupportedClassException( getClass(),
-					S_ProcName,
-					"Unrecognized ClassCode \"" + classCode + "\"" );
+				throw new CFLibUnsupportedClassException(getClass(), S_ProcName, 0, "-update-prev-", "Not " + Integer.toString(classCode));
 			}
 
 		classCode = editCur.getClassCode();
-			if( classCode.equals( "a81b" ) ) {
+			if( classCode == ICFBamDelTopDep.CLASS_CODE ) {
 				schema.getTableDelTopDep().updateDelTopDep( Authorization, editCur );
 			}
 			else {
-				throw new CFLibUnsupportedClassException( getClass(),
-					S_ProcName,
-					"Unrecognized ClassCode \"" + classCode + "\"" );
+				throw new CFLibUnsupportedClassException(getClass(), S_ProcName, 0, "-update-cur-", "Not " + Integer.toString(classCode));
 			}
 
 		if( editNext != null ) {
 			classCode = editNext.getClassCode();
-			if( classCode.equals( "a81b" ) ) {
+			if( classCode == ICFBamDelTopDep.CLASS_CODE ) {
 				schema.getTableDelTopDep().updateDelTopDep( Authorization, editNext );
 			}
 			else {
-				throw new CFLibUnsupportedClassException( getClass(),
-					S_ProcName,
-					"Unrecognized ClassCode \"" + classCode + "\"" );
+				throw new CFLibUnsupportedClassException(getClass(), S_ProcName, 0, "-update-next-", "Not " + Integer.toString(classCode));
 			}
 		}
 
@@ -914,6 +920,8 @@ public class CFBamRamDelTopDepTable
 		if( cur == null ) {
 			throw new CFLibCollisionDetectedException( getClass(),
 				S_ProcName,
+				"CFBamDelTopDepByIdIdxKey",
+				"CFBamDelTopDepByIdIdxKey",
 				"Could not locate object" );
 		}
 
@@ -926,6 +934,8 @@ public class CFBamRamDelTopDepTable
 		if( next == null ) {
 			throw new CFLibCollisionDetectedException( getClass(),
 				S_ProcName,
+				"CFBamDelTopDepByIdIdxKey",
+				"CFBamDelTopDepByIdIdxKey",
 				"Could not locate object.next" );
 		}
 
@@ -935,6 +945,8 @@ public class CFBamRamDelTopDepTable
 			if( grandnext == null ) {
 				throw new CFLibCollisionDetectedException( getClass(),
 					S_ProcName,
+					"CFBamDelTopDepByIdIdxKey",
+					"CFBamDelTopDepByIdIdxKey",
 					"Could not locate object.next.next" );
 			}
 		}
@@ -945,31 +957,29 @@ public class CFBamRamDelTopDepTable
 			if( prev == null ) {
 				throw new CFLibCollisionDetectedException( getClass(),
 					S_ProcName,
+					"CFBamDelTopDepByIdIdxKey",
+					"CFBamDelTopDepByIdIdxKey",
 					"Could not locate object.prev" );
 			}
 		}
 
-		String classCode = cur.getClassCode();
+		integer classCode = cur.getClassCode();
 		CFBamDelTopDepBuff newInstance;
-			if( classCode.equals( "a81b" ) ) {
+			if( classCode == ICFBamDelTopDep.CLASS_CODE ) {
 				newInstance = schema.getFactoryDelTopDep().newBuff();
 			}
 			else {
-				throw new CFLibUnsupportedClassException( getClass(),
-					S_ProcName,
-					"Unrecognized ClassCode \"" + classCode + "\"" );
+				throw new CFLibUnsupportedClassException(getClass(), S_ProcName, 0, "-instantiate-buff-", "Not " + Integer.toString(classCode));
 			}
 		CFBamDelTopDepBuff editCur = newInstance;
 		editCur.set( cur );
 
 		classCode = next.getClassCode();
-			if( classCode.equals( "a81b" ) ) {
+			if( classCode == ICFBamDelTopDep.CLASS_CODE ) {
 				newInstance = schema.getFactoryDelTopDep().newBuff();
 			}
 			else {
-				throw new CFLibUnsupportedClassException( getClass(),
-					S_ProcName,
-					"Unrecognized ClassCode \"" + classCode + "\"" );
+				throw new CFLibUnsupportedClassException(getClass(), S_ProcName, 0, "-instantiate-buff-", "Not " + Integer.toString(classCode));
 			}
 		CFBamDelTopDepBuff editNext = newInstance;
 		editNext.set( next );
@@ -977,13 +987,11 @@ public class CFBamRamDelTopDepTable
 		CFBamDelTopDepBuff editGrandnext = null;
 		if( grandnext != null ) {
 			classCode = grandnext.getClassCode();
-			if( classCode.equals( "a81b" ) ) {
+			if( classCode == ICFBamDelTopDep.CLASS_CODE ) {
 				newInstance = schema.getFactoryDelTopDep().newBuff();
 			}
 			else {
-				throw new CFLibUnsupportedClassException( getClass(),
-					S_ProcName,
-					"Unrecognized ClassCode \"" + classCode + "\"" );
+				throw new CFLibUnsupportedClassException(getClass(), S_ProcName, 0, "-instantiate-buff-", "Not " + Integer.toString(classCode));
 			}
 			editGrandnext = newInstance;
 			editGrandnext.set( grandnext );
@@ -992,13 +1000,11 @@ public class CFBamRamDelTopDepTable
 		CFBamDelTopDepBuff editPrev = null;
 		if( prev != null ) {
 			classCode = prev.getClassCode();
-			if( classCode.equals( "a81b" ) ) {
+			if( classCode == ICFBamDelTopDep.CLASS_CODE ) {
 				newInstance = schema.getFactoryDelTopDep().newBuff();
 			}
 			else {
-				throw new CFLibUnsupportedClassException( getClass(),
-					S_ProcName,
-					"Unrecognized ClassCode \"" + classCode + "\"" );
+				throw new CFLibUnsupportedClassException(getClass(), S_ProcName, 0, "-instantiate-buff-", "Not " + Integer.toString(classCode));
 			}
 			editPrev = newInstance;
 			editPrev.set( prev );
@@ -1026,45 +1032,37 @@ public class CFBamRamDelTopDepTable
 
 		if( editPrev != null ) {
 			classCode = editPrev.getClassCode();
-			if( classCode.equals( "a81b" ) ) {
+			if( classCode == ICFBamDelTopDep.CLASS_CODE ) {
 				schema.getTableDelTopDep().updateDelTopDep( Authorization, editPrev );
 			}
 			else {
-				throw new CFLibUnsupportedClassException( getClass(),
-					S_ProcName,
-					"Unrecognized ClassCode \"" + classCode + "\"" );
+				throw new CFLibUnsupportedClassException(getClass(), S_ProcName, 0, "-update-prev-", "Not " + Integer.toString(classCode));
 			}
 		}
 
 		classCode = editCur.getClassCode();
-			if( classCode.equals( "a81b" ) ) {
+			if( classCode == ICFBamDelTopDep.CLASS_CODE ) {
 				schema.getTableDelTopDep().updateDelTopDep( Authorization, editCur );
 			}
 			else {
-				throw new CFLibUnsupportedClassException( getClass(),
-					S_ProcName,
-					"Unrecognized ClassCode \"" + classCode + "\"" );
+				throw new CFLibUnsupportedClassException(getClass(), S_ProcName, 0, "-update-cur-", "Not " + Integer.toString(classCode));
 			}
 
 		classCode = editNext.getClassCode();
-			if( classCode.equals( "a81b" ) ) {
+			if( classCode == ICFBamDelTopDep.CLASS_CODE ) {
 				schema.getTableDelTopDep().updateDelTopDep( Authorization, editNext );
 			}
 			else {
-				throw new CFLibUnsupportedClassException( getClass(),
-					S_ProcName,
-					"Unrecognized ClassCode \"" + classCode + "\"" );
+				throw new CFLibUnsupportedClassException(getClass(), S_ProcName, 0, "-update-next-", "Not " + Integer.toString(classCode));
 			}
 
 		if( editGrandnext != null ) {
 			classCode = editGrandnext.getClassCode();
-			if( classCode.equals( "a81b" ) ) {
+			if( classCode == ICFBamDelTopDep.CLASS_CODE ) {
 				schema.getTableDelTopDep().updateDelTopDep( Authorization, editGrandnext );
 			}
 			else {
-				throw new CFLibUnsupportedClassException( getClass(),
-					S_ProcName,
-					"Unrecognized ClassCode \"" + classCode + "\"" );
+				throw new CFLibUnsupportedClassException(getClass(), S_ProcName, 0, "-update-grand-next-", "Not " + Integer.toString(classCode));
 			}
 		}
 
@@ -1261,9 +1259,7 @@ public class CFBamRamDelTopDepTable
 				editPrev = schema.getFactoryDelTopDep().newBuff();
 			}
 			else {
-				throw new CFLibUnsupportedClassException( getClass(),
-					S_ProcName,
-					"Unrecognized ClassCode \"" + classCode + "\"" );
+				throw new CFLibUnsupportedClassException(getClass(), S_ProcName, 0, "-delete-update-prev-", "Not " + Integer.toString(classCode));
 			}
 			editPrev.set( prev );
 			editPrev.setOptionalNextId( nextId );
@@ -1271,9 +1267,7 @@ public class CFBamRamDelTopDepTable
 				schema.getTableDelTopDep().updateDelTopDep( Authorization, editPrev );
 			}
 			else {
-				throw new CFLibUnsupportedClassException( getClass(),
-					S_ProcName,
-					"Unrecognized ClassCode \"" + classCode + "\"" );
+				throw new CFLibUnsupportedClassException(getClass(), S_ProcName, 0, "-delete-edit-prev-", "Not " + Integer.toString(classCode));
 			}
 		}
 
@@ -1294,9 +1288,7 @@ public class CFBamRamDelTopDepTable
 				editNext = schema.getFactoryDelTopDep().newBuff();
 			}
 			else {
-				throw new CFLibUnsupportedClassException( getClass(),
-					S_ProcName,
-					"Unrecognized ClassCode \"" + classCode + "\"" );
+				throw new CFLibUnsupportedClassException(getClass(), S_ProcName, 0, "-delete-update-next-", "Not " + Integer.toString(classCode));
 			}
 			editNext.set( next );
 			editNext.setOptionalPrevId( prevId );
@@ -1304,9 +1296,7 @@ public class CFBamRamDelTopDepTable
 				schema.getTableDelTopDep().updateDelTopDep( Authorization, editNext );
 			}
 			else {
-				throw new CFLibUnsupportedClassException( getClass(),
-					S_ProcName,
-					"Unrecognized ClassCode \"" + classCode + "\"" );
+				throw new CFLibUnsupportedClassException(getClass(), S_ProcName, 0, "-delete-edit-next-", "Not " + Integer.toString(classCode));
 			}
 		}
 

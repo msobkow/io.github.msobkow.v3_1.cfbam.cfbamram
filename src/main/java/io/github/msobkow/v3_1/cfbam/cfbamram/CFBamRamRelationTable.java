@@ -112,11 +112,12 @@ public class CFBamRamRelationTable
 	}
 
 	public ICFBamRelation createRelation( ICFSecAuthorization Authorization,
-		ICFBamRelation Buff )
+		ICFBamRelation iBuff )
 	{
 		final String S_ProcName = "createRelation";
-		schema.getTableScope().createScope( Authorization,
-			Buff );
+		
+		CFBamBuffRelation Buff = (CFBamBuffRelation)(schema.getTableScope().createScope( Authorization,
+			iBuff ));
 		CFLibDbKeyHash256 pkey;
 		pkey = Buff.getRequiredId();
 		CFBamBuffRelationByUNameIdxKey keyUNameIdx = (CFBamBuffRelationByUNameIdxKey)schema.getFactoryRelation().newByUNameIdxKey();
@@ -308,7 +309,20 @@ public class CFBamRamRelationTable
 		}
 		subdictNarrowedIdx.put( pkey, Buff );
 
-		return( Buff );
+		if (Buff == null) {
+			return( null );
+		}
+		else {
+			int classCode = Buff.getClassCode();
+			if (classCode == ICFBamRelation.CLASS_CODE) {
+				CFBamBuffRelation retbuff = ((CFBamBuffRelation)(schema.getFactoryRelation().newRec()));
+				retbuff.set(Buff);
+				return( retbuff );
+			}
+			else {
+				throw new CFLibUnsupportedClassException(getClass(), S_ProcName, 0, "-create-buff-cloning-", "Not " + Integer.toString(classCode));
+			}
+		}
 	}
 
 	public ICFBamRelation readDerived( ICFSecAuthorization Authorization,

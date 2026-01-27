@@ -78,11 +78,12 @@ public class CFBamRamServerObjFuncTable
 	}
 
 	public ICFBamServerObjFunc createServerObjFunc( ICFSecAuthorization Authorization,
-		ICFBamServerObjFunc Buff )
+		ICFBamServerObjFunc iBuff )
 	{
 		final String S_ProcName = "createServerObjFunc";
-		schema.getTableServerMethod().createServerMethod( Authorization,
-			Buff );
+		
+		CFBamBuffServerObjFunc Buff = (CFBamBuffServerObjFunc)(schema.getTableServerMethod().createServerMethod( Authorization,
+			iBuff ));
 		CFLibDbKeyHash256 pkey;
 		pkey = Buff.getRequiredId();
 		CFBamBuffServerObjFuncByRetTblIdxKey keyRetTblIdx = (CFBamBuffServerObjFuncByRetTblIdxKey)schema.getFactoryServerObjFunc().newByRetTblIdxKey();
@@ -127,7 +128,20 @@ public class CFBamRamServerObjFuncTable
 		}
 		subdictRetTblIdx.put( pkey, Buff );
 
-		return( Buff );
+		if (Buff == null) {
+			return( null );
+		}
+		else {
+			int classCode = Buff.getClassCode();
+			if (classCode == ICFBamServerObjFunc.CLASS_CODE) {
+				CFBamBuffServerObjFunc retbuff = ((CFBamBuffServerObjFunc)(schema.getFactoryServerObjFunc().newRec()));
+				retbuff.set(Buff);
+				return( retbuff );
+			}
+			else {
+				throw new CFLibUnsupportedClassException(getClass(), S_ProcName, 0, "-create-buff-cloning-", "Not " + Integer.toString(classCode));
+			}
+		}
 	}
 
 	public ICFBamServerObjFunc readDerived( ICFSecAuthorization Authorization,

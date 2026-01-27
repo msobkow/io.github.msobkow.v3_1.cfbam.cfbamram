@@ -88,11 +88,12 @@ public class CFBamRamServerMethodTable
 	}
 
 	public ICFBamServerMethod createServerMethod( ICFSecAuthorization Authorization,
-		ICFBamServerMethod Buff )
+		ICFBamServerMethod iBuff )
 	{
 		final String S_ProcName = "createServerMethod";
-		schema.getTableScope().createScope( Authorization,
-			Buff );
+		
+		CFBamBuffServerMethod Buff = (CFBamBuffServerMethod)(schema.getTableScope().createScope( Authorization,
+			iBuff ));
 		CFLibDbKeyHash256 pkey;
 		pkey = Buff.getRequiredId();
 		CFBamBuffServerMethodByUNameIdxKey keyUNameIdx = (CFBamBuffServerMethodByUNameIdxKey)schema.getFactoryServerMethod().newByUNameIdxKey();
@@ -181,7 +182,35 @@ public class CFBamRamServerMethodTable
 		}
 		subdictDefSchemaIdx.put( pkey, Buff );
 
-		return( Buff );
+		if (Buff == null) {
+			return( null );
+		}
+		else {
+			int classCode = Buff.getClassCode();
+			if (classCode == ICFBamServerMethod.CLASS_CODE) {
+				CFBamBuffServerMethod retbuff = ((CFBamBuffServerMethod)(schema.getFactoryServerMethod().newRec()));
+				retbuff.set(Buff);
+				return( retbuff );
+			}
+			else if (classCode == ICFBamServerObjFunc.CLASS_CODE) {
+				CFBamBuffServerObjFunc retbuff = ((CFBamBuffServerObjFunc)(schema.getFactoryServerObjFunc().newRec()));
+				retbuff.set((ICFBamServerObjFunc)Buff);
+				return( retbuff );
+			}
+			else if (classCode == ICFBamServerProc.CLASS_CODE) {
+				CFBamBuffServerProc retbuff = ((CFBamBuffServerProc)(schema.getFactoryServerProc().newRec()));
+				retbuff.set((ICFBamServerProc)Buff);
+				return( retbuff );
+			}
+			else if (classCode == ICFBamServerListFunc.CLASS_CODE) {
+				CFBamBuffServerListFunc retbuff = ((CFBamBuffServerListFunc)(schema.getFactoryServerListFunc().newRec()));
+				retbuff.set((ICFBamServerListFunc)Buff);
+				return( retbuff );
+			}
+			else {
+				throw new CFLibUnsupportedClassException(getClass(), S_ProcName, 0, "-create-buff-cloning-", "Not " + Integer.toString(classCode));
+			}
+		}
 	}
 
 	public ICFBamServerMethod readDerived( ICFSecAuthorization Authorization,
@@ -745,11 +774,7 @@ public class CFBamRamServerMethodTable
 				schema.getTableServerListFunc().deleteServerListFunc( Authorization, (ICFBamServerListFunc)cur );
 			}
 			else {
-				throw new CFLibUnsupportedClassException( getClass(),
-					S_ProcName,
-					"subClassCode",
-					cur,
-					"Instance of or subclass of ServerMethod must not be \"" + subClassCode + "\"" );
+				throw new CFLibUnsupportedClassException(getClass(), S_ProcName, 0, "-delete-by-suffix-class-walker-", "Not " + Integer.toString(classCode));
 			}
 		}
 	}
@@ -799,11 +824,7 @@ public class CFBamRamServerMethodTable
 				schema.getTableServerListFunc().deleteServerListFunc( Authorization, (ICFBamServerListFunc)cur );
 			}
 			else {
-				throw new CFLibUnsupportedClassException( getClass(),
-					S_ProcName,
-					"subClassCode",
-					cur,
-					"Instance of or subclass of ServerMethod must not be \"" + subClassCode + "\"" );
+				throw new CFLibUnsupportedClassException(getClass(), S_ProcName, 0, "-delete-by-suffix-class-walker-", "Not " + Integer.toString(classCode));
 			}
 		}
 	}
@@ -855,11 +876,7 @@ public class CFBamRamServerMethodTable
 				schema.getTableServerListFunc().deleteServerListFunc( Authorization, (ICFBamServerListFunc)cur );
 			}
 			else {
-				throw new CFLibUnsupportedClassException( getClass(),
-					S_ProcName,
-					"subClassCode",
-					cur,
-					"Instance of or subclass of ServerMethod must not be \"" + subClassCode + "\"" );
+				throw new CFLibUnsupportedClassException(getClass(), S_ProcName, 0, "-delete-by-suffix-class-walker-", "Not " + Integer.toString(classCode));
 			}
 		}
 	}
@@ -901,11 +918,7 @@ public class CFBamRamServerMethodTable
 				schema.getTableServerListFunc().deleteServerListFunc( Authorization, (ICFBamServerListFunc)cur );
 			}
 			else {
-				throw new CFLibUnsupportedClassException( getClass(),
-					S_ProcName,
-					"subClassCode",
-					cur,
-					"Instance of or subclass of ServerMethod must not be \"" + subClassCode + "\"" );
+				throw new CFLibUnsupportedClassException(getClass(), S_ProcName, 0, "-delete-by-suffix-class-walker-", "Not " + Integer.toString(classCode));
 			}
 		}
 	}
@@ -955,11 +968,7 @@ public class CFBamRamServerMethodTable
 				schema.getTableServerListFunc().deleteServerListFunc( Authorization, (ICFBamServerListFunc)cur );
 			}
 			else {
-				throw new CFLibUnsupportedClassException( getClass(),
-					S_ProcName,
-					"subClassCode",
-					cur,
-					"Instance of or subclass of ServerMethod must not be \"" + subClassCode + "\"" );
+				throw new CFLibUnsupportedClassException(getClass(), S_ProcName, 0, "-delete-by-suffix-class-walker-", "Not " + Integer.toString(classCode));
 			}
 		}
 	}

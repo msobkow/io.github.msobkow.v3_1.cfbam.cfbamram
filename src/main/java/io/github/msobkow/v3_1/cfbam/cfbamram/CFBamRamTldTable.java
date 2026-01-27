@@ -81,10 +81,27 @@ public class CFBamRamTldTable
 		schema = argSchema;
 	}
 
+	public CFIntBuffTld ensureRec(ICFIntTld rec) {
+		if (rec == null) {
+			return( null );
+		}
+		else {
+			int classCode = rec.getClassCode();
+			if (classCode == ICFIntTld.CLASS_CODE) {
+				return( ((CFIntBuffTldDefaultFactory)(schema.getFactoryTld())).ensureRec(rec) );
+			}
+			else {
+				throw new CFLibUnsupportedClassException(getClass(), "ensureRec", 1, "rec", "Not " + Integer.toString(classCode));
+			}
+		}
+	}
+
 	public ICFIntTld createTld( ICFSecAuthorization Authorization,
-		ICFIntTld Buff )
+		ICFIntTld iBuff )
 	{
 		final String S_ProcName = "createTld";
+		
+		CFIntBuffTld Buff = ensureRec(iBuff);
 		CFLibDbKeyHash256 pkey;
 		pkey = schema.nextTldIdGen();
 		Buff.setRequiredId( pkey );
@@ -143,7 +160,20 @@ public class CFBamRamTldTable
 
 		dictByNameIdx.put( keyNameIdx, Buff );
 
-		return( Buff );
+		if (Buff == null) {
+			return( null );
+		}
+		else {
+			int classCode = Buff.getClassCode();
+			if (classCode == ICFIntTld.CLASS_CODE) {
+				CFIntBuffTld retbuff = ((CFIntBuffTld)(schema.getFactoryTld().newRec()));
+				retbuff.set(Buff);
+				return( retbuff );
+			}
+			else {
+				throw new CFLibUnsupportedClassException(getClass(), S_ProcName, 0, "-create-buff-cloning-", "Not " + Integer.toString(classCode));
+			}
+		}
 	}
 
 	public ICFIntTld readDerived( ICFSecAuthorization Authorization,

@@ -99,10 +99,27 @@ public class CFBamRamEnumTagTable
 		schema = argSchema;
 	}
 
+	public CFBamBuffEnumTag ensureRec(ICFBamEnumTag rec) {
+		if (rec == null) {
+			return( null );
+		}
+		else {
+			int classCode = rec.getClassCode();
+			if (classCode == ICFBamEnumTag.CLASS_CODE) {
+				return( ((CFBamBuffEnumTagDefaultFactory)(schema.getFactoryEnumTag())).ensureRec(rec) );
+			}
+			else {
+				throw new CFLibUnsupportedClassException(getClass(), "ensureRec", 1, "rec", "Not " + Integer.toString(classCode));
+			}
+		}
+	}
+
 	public ICFBamEnumTag createEnumTag( ICFSecAuthorization Authorization,
-		ICFBamEnumTag Buff )
+		ICFBamEnumTag iBuff )
 	{
 		final String S_ProcName = "createEnumTag";
+		
+		CFBamBuffEnumTag Buff = ensureRec(iBuff);
 			ICFBamEnumTag tail = null;
 
 			ICFBamEnumTag[] siblings = schema.getTableEnumTag().readDerivedByEnumIdx( Authorization,
@@ -224,7 +241,20 @@ public class CFBamRamEnumTagTable
 				tailEdit.setOptionalNextId( Buff.getRequiredId() );
 			schema.getTableEnumTag().updateEnumTag( Authorization, tailEdit );
 		}
-		return( Buff );
+		if (Buff == null) {
+			return( null );
+		}
+		else {
+			int classCode = Buff.getClassCode();
+			if (classCode == ICFBamEnumTag.CLASS_CODE) {
+				CFBamBuffEnumTag retbuff = ((CFBamBuffEnumTag)(schema.getFactoryEnumTag().newRec()));
+				retbuff.set(Buff);
+				return( retbuff );
+			}
+			else {
+				throw new CFLibUnsupportedClassException(getClass(), S_ProcName, 0, "-create-buff-cloning-", "Not " + Integer.toString(classCode));
+			}
+		}
 	}
 
 	public ICFBamEnumTag readDerived( ICFSecAuthorization Authorization,
@@ -562,6 +592,8 @@ public class CFBamRamEnumTagTable
 		if( cur == null ) {
 			throw new CFLibCollisionDetectedException( getClass(),
 				S_ProcName,
+				"CFBamEnumTagByIdIdxKey",
+				"CFBamEnumTagByIdIdxKey",
 				"Could not locate object" );
 		}
 
@@ -574,6 +606,8 @@ public class CFBamRamEnumTagTable
 		if( prev == null ) {
 			throw new CFLibCollisionDetectedException( getClass(),
 				S_ProcName,
+				"CFBamEnumTagByIdIdxKey",
+				"CFBamEnumTagByIdIdxKey",
 				"Could not locate object.prev" );
 		}
 
@@ -583,6 +617,8 @@ public class CFBamRamEnumTagTable
 			if( grandprev == null ) {
 				throw new CFLibCollisionDetectedException( getClass(),
 					S_ProcName,
+					"CFBamEnumTagByIdIdxKey",
+					"CFBamEnumTagByIdIdxKey",
 					"Could not locate object.prev.prev" );
 			}
 		}
@@ -593,31 +629,29 @@ public class CFBamRamEnumTagTable
 			if( next == null ) {
 				throw new CFLibCollisionDetectedException( getClass(),
 					S_ProcName,
+					"CFBamEnumTagByIdIdxKey",
+					"CFBamEnumTagByIdIdxKey",
 					"Could not locate object.next" );
 			}
 		}
 
 		String classCode = prev.getClassCode();
 		ICFBamEnumTag newInstance;
-			if( classCode.equals( "a81e" ) ) {
+			if( classCode == ICFBamEnumTag.CLASS_CODE ) {
 				newInstance = schema.getFactoryEnumTag().newBuff();
 			}
 			else {
-				throw new CFLibUnsupportedClassException( getClass(),
-					S_ProcName,
-					"Unrecognized ClassCode \"" + classCode + "\"" );
+				throw new CFLibUnsupportedClassException(getClass(), S_ProcName, 0, "-instantiate-buff-", "Not " + Integer.toString(classCode));
 			}
 		ICFBamEnumTag editPrev = newInstance;
 		editPrev.set( prev );
 
 		classCode = cur.getClassCode();
-			if( classCode.equals( "a81e" ) ) {
+			if( classCode == ICFBamEnumTag.CLASS_CODE ) {
 				newInstance = schema.getFactoryEnumTag().newBuff();
 			}
 			else {
-				throw new CFLibUnsupportedClassException( getClass(),
-					S_ProcName,
-					"Unrecognized ClassCode \"" + classCode + "\"" );
+				throw new CFLibUnsupportedClassException(getClass(), S_ProcName, 0, "-instantiate-buff-", "Not " + Integer.toString(classCode));
 			}
 		CFBamEnumTagBuff editCur = newInstance;
 		editCur.set( cur );
@@ -625,13 +659,11 @@ public class CFBamRamEnumTagTable
 		ICFBamEnumTag editGrandprev = null;
 		if( grandprev != null ) {
 			classCode = grandprev.getClassCode();
-			if( classCode.equals( "a81e" ) ) {
+			if( classCode == ICFBamEnumTag.CLASS_CODE ) {
 				newInstance = schema.getFactoryEnumTag().newBuff();
 			}
 			else {
-				throw new CFLibUnsupportedClassException( getClass(),
-					S_ProcName,
-					"Unrecognized ClassCode \"" + classCode + "\"" );
+				throw new CFLibUnsupportedClassException(getClass(), S_ProcName, 0, "-instantiate-buff-", "Not " + Integer.toString(classCode));
 			}
 			editGrandprev = newInstance;
 			editGrandprev.set( grandprev );
@@ -640,13 +672,11 @@ public class CFBamRamEnumTagTable
 		ICFBamEnumTag editNext = null;
 		if( next != null ) {
 			classCode = next.getClassCode();
-			if( classCode.equals( "a81e" ) ) {
+			if( classCode == ICFBamEnumTag.CLASS_CODE ) {
 				newInstance = schema.getFactoryEnumTag().newBuff();
 			}
 			else {
-				throw new CFLibUnsupportedClassException( getClass(),
-					S_ProcName,
-					"Unrecognized ClassCode \"" + classCode + "\"" );
+				throw new CFLibUnsupportedClassException(getClass(), S_ProcName, 0, "-instantiate-buff-", "Not " + Integer.toString(classCode));
 			}
 			editNext = newInstance;
 			editNext.set( next );
@@ -674,45 +704,37 @@ public class CFBamRamEnumTagTable
 
 		if( editGrandprev != null ) {
 			classCode = editGrandprev.getClassCode();
-			if( classCode.equals( "a81e" ) ) {
+			if( classCode == ICFBamEnumTag.CLASS_CODE ) {
 				schema.getTableEnumTag().updateEnumTag( Authorization, editGrandprev );
 			}
 			else {
-				throw new CFLibUnsupportedClassException( getClass(),
-					S_ProcName,
-					"Unrecognized ClassCode \"" + classCode + "\"" );
+				throw new CFLibUnsupportedClassException(getClass(), S_ProcName, 0, "-update-grand-prev-", "Not " + Integer.toString(classCode));
 			}
 		}
 
 		classCode = editPrev.getClassCode();
-			if( classCode.equals( "a81e" ) ) {
+			if( classCode == ICFBamEnumTag.CLASS_CODE ) {
 				schema.getTableEnumTag().updateEnumTag( Authorization, editPrev );
 			}
 			else {
-				throw new CFLibUnsupportedClassException( getClass(),
-					S_ProcName,
-					"Unrecognized ClassCode \"" + classCode + "\"" );
+				throw new CFLibUnsupportedClassException(getClass(), S_ProcName, 0, "-update-prev-", "Not " + Integer.toString(classCode));
 			}
 
 		classCode = editCur.getClassCode();
-			if( classCode.equals( "a81e" ) ) {
+			if( classCode == ICFBamEnumTag.CLASS_CODE ) {
 				schema.getTableEnumTag().updateEnumTag( Authorization, editCur );
 			}
 			else {
-				throw new CFLibUnsupportedClassException( getClass(),
-					S_ProcName,
-					"Unrecognized ClassCode \"" + classCode + "\"" );
+				throw new CFLibUnsupportedClassException(getClass(), S_ProcName, 0, "-update-cur-", "Not " + Integer.toString(classCode));
 			}
 
 		if( editNext != null ) {
 			classCode = editNext.getClassCode();
-			if( classCode.equals( "a81e" ) ) {
+			if( classCode == ICFBamEnumTag.CLASS_CODE ) {
 				schema.getTableEnumTag().updateEnumTag( Authorization, editNext );
 			}
 			else {
-				throw new CFLibUnsupportedClassException( getClass(),
-					S_ProcName,
-					"Unrecognized ClassCode \"" + classCode + "\"" );
+				throw new CFLibUnsupportedClassException(getClass(), S_ProcName, 0, "-update-next-", "Not " + Integer.toString(classCode));
 			}
 		}
 
@@ -739,6 +761,8 @@ public class CFBamRamEnumTagTable
 		if( cur == null ) {
 			throw new CFLibCollisionDetectedException( getClass(),
 				S_ProcName,
+				"CFBamEnumTagByIdIdxKey",
+				"CFBamEnumTagByIdIdxKey",
 				"Could not locate object" );
 		}
 
@@ -751,6 +775,8 @@ public class CFBamRamEnumTagTable
 		if( next == null ) {
 			throw new CFLibCollisionDetectedException( getClass(),
 				S_ProcName,
+				"CFBamEnumTagByIdIdxKey",
+				"CFBamEnumTagByIdIdxKey",
 				"Could not locate object.next" );
 		}
 
@@ -760,6 +786,8 @@ public class CFBamRamEnumTagTable
 			if( grandnext == null ) {
 				throw new CFLibCollisionDetectedException( getClass(),
 					S_ProcName,
+					"CFBamEnumTagByIdIdxKey",
+					"CFBamEnumTagByIdIdxKey",
 					"Could not locate object.next.next" );
 			}
 		}
@@ -770,31 +798,29 @@ public class CFBamRamEnumTagTable
 			if( prev == null ) {
 				throw new CFLibCollisionDetectedException( getClass(),
 					S_ProcName,
+					"CFBamEnumTagByIdIdxKey",
+					"CFBamEnumTagByIdIdxKey",
 					"Could not locate object.prev" );
 			}
 		}
 
-		String classCode = cur.getClassCode();
+		integer classCode = cur.getClassCode();
 		CFBamEnumTagBuff newInstance;
-			if( classCode.equals( "a81e" ) ) {
+			if( classCode == ICFBamEnumTag.CLASS_CODE ) {
 				newInstance = schema.getFactoryEnumTag().newBuff();
 			}
 			else {
-				throw new CFLibUnsupportedClassException( getClass(),
-					S_ProcName,
-					"Unrecognized ClassCode \"" + classCode + "\"" );
+				throw new CFLibUnsupportedClassException(getClass(), S_ProcName, 0, "-instantiate-buff-", "Not " + Integer.toString(classCode));
 			}
 		CFBamEnumTagBuff editCur = newInstance;
 		editCur.set( cur );
 
 		classCode = next.getClassCode();
-			if( classCode.equals( "a81e" ) ) {
+			if( classCode == ICFBamEnumTag.CLASS_CODE ) {
 				newInstance = schema.getFactoryEnumTag().newBuff();
 			}
 			else {
-				throw new CFLibUnsupportedClassException( getClass(),
-					S_ProcName,
-					"Unrecognized ClassCode \"" + classCode + "\"" );
+				throw new CFLibUnsupportedClassException(getClass(), S_ProcName, 0, "-instantiate-buff-", "Not " + Integer.toString(classCode));
 			}
 		CFBamEnumTagBuff editNext = newInstance;
 		editNext.set( next );
@@ -802,13 +828,11 @@ public class CFBamRamEnumTagTable
 		CFBamEnumTagBuff editGrandnext = null;
 		if( grandnext != null ) {
 			classCode = grandnext.getClassCode();
-			if( classCode.equals( "a81e" ) ) {
+			if( classCode == ICFBamEnumTag.CLASS_CODE ) {
 				newInstance = schema.getFactoryEnumTag().newBuff();
 			}
 			else {
-				throw new CFLibUnsupportedClassException( getClass(),
-					S_ProcName,
-					"Unrecognized ClassCode \"" + classCode + "\"" );
+				throw new CFLibUnsupportedClassException(getClass(), S_ProcName, 0, "-instantiate-buff-", "Not " + Integer.toString(classCode));
 			}
 			editGrandnext = newInstance;
 			editGrandnext.set( grandnext );
@@ -817,13 +841,11 @@ public class CFBamRamEnumTagTable
 		CFBamEnumTagBuff editPrev = null;
 		if( prev != null ) {
 			classCode = prev.getClassCode();
-			if( classCode.equals( "a81e" ) ) {
+			if( classCode == ICFBamEnumTag.CLASS_CODE ) {
 				newInstance = schema.getFactoryEnumTag().newBuff();
 			}
 			else {
-				throw new CFLibUnsupportedClassException( getClass(),
-					S_ProcName,
-					"Unrecognized ClassCode \"" + classCode + "\"" );
+				throw new CFLibUnsupportedClassException(getClass(), S_ProcName, 0, "-instantiate-buff-", "Not " + Integer.toString(classCode));
 			}
 			editPrev = newInstance;
 			editPrev.set( prev );
@@ -851,45 +873,37 @@ public class CFBamRamEnumTagTable
 
 		if( editPrev != null ) {
 			classCode = editPrev.getClassCode();
-			if( classCode.equals( "a81e" ) ) {
+			if( classCode == ICFBamEnumTag.CLASS_CODE ) {
 				schema.getTableEnumTag().updateEnumTag( Authorization, editPrev );
 			}
 			else {
-				throw new CFLibUnsupportedClassException( getClass(),
-					S_ProcName,
-					"Unrecognized ClassCode \"" + classCode + "\"" );
+				throw new CFLibUnsupportedClassException(getClass(), S_ProcName, 0, "-update-prev-", "Not " + Integer.toString(classCode));
 			}
 		}
 
 		classCode = editCur.getClassCode();
-			if( classCode.equals( "a81e" ) ) {
+			if( classCode == ICFBamEnumTag.CLASS_CODE ) {
 				schema.getTableEnumTag().updateEnumTag( Authorization, editCur );
 			}
 			else {
-				throw new CFLibUnsupportedClassException( getClass(),
-					S_ProcName,
-					"Unrecognized ClassCode \"" + classCode + "\"" );
+				throw new CFLibUnsupportedClassException(getClass(), S_ProcName, 0, "-update-cur-", "Not " + Integer.toString(classCode));
 			}
 
 		classCode = editNext.getClassCode();
-			if( classCode.equals( "a81e" ) ) {
+			if( classCode == ICFBamEnumTag.CLASS_CODE ) {
 				schema.getTableEnumTag().updateEnumTag( Authorization, editNext );
 			}
 			else {
-				throw new CFLibUnsupportedClassException( getClass(),
-					S_ProcName,
-					"Unrecognized ClassCode \"" + classCode + "\"" );
+				throw new CFLibUnsupportedClassException(getClass(), S_ProcName, 0, "-update-next-", "Not " + Integer.toString(classCode));
 			}
 
 		if( editGrandnext != null ) {
 			classCode = editGrandnext.getClassCode();
-			if( classCode.equals( "a81e" ) ) {
+			if( classCode == ICFBamEnumTag.CLASS_CODE ) {
 				schema.getTableEnumTag().updateEnumTag( Authorization, editGrandnext );
 			}
 			else {
-				throw new CFLibUnsupportedClassException( getClass(),
-					S_ProcName,
-					"Unrecognized ClassCode \"" + classCode + "\"" );
+				throw new CFLibUnsupportedClassException(getClass(), S_ProcName, 0, "-update-grand-next-", "Not " + Integer.toString(classCode));
 			}
 		}
 
@@ -1089,9 +1103,7 @@ public class CFBamRamEnumTagTable
 				editPrev = schema.getFactoryEnumTag().newBuff();
 			}
 			else {
-				throw new CFLibUnsupportedClassException( getClass(),
-					S_ProcName,
-					"Unrecognized ClassCode \"" + classCode + "\"" );
+				throw new CFLibUnsupportedClassException(getClass(), S_ProcName, 0, "-delete-update-prev-", "Not " + Integer.toString(classCode));
 			}
 			editPrev.set( prev );
 			editPrev.setOptionalNextId( nextId );
@@ -1099,9 +1111,7 @@ public class CFBamRamEnumTagTable
 				schema.getTableEnumTag().updateEnumTag( Authorization, editPrev );
 			}
 			else {
-				throw new CFLibUnsupportedClassException( getClass(),
-					S_ProcName,
-					"Unrecognized ClassCode \"" + classCode + "\"" );
+				throw new CFLibUnsupportedClassException(getClass(), S_ProcName, 0, "-delete-edit-prev-", "Not " + Integer.toString(classCode));
 			}
 		}
 
@@ -1122,9 +1132,7 @@ public class CFBamRamEnumTagTable
 				editNext = schema.getFactoryEnumTag().newBuff();
 			}
 			else {
-				throw new CFLibUnsupportedClassException( getClass(),
-					S_ProcName,
-					"Unrecognized ClassCode \"" + classCode + "\"" );
+				throw new CFLibUnsupportedClassException(getClass(), S_ProcName, 0, "-delete-update-next-", "Not " + Integer.toString(classCode));
 			}
 			editNext.set( next );
 			editNext.setOptionalPrevId( prevId );
@@ -1132,9 +1140,7 @@ public class CFBamRamEnumTagTable
 				schema.getTableEnumTag().updateEnumTag( Authorization, editNext );
 			}
 			else {
-				throw new CFLibUnsupportedClassException( getClass(),
-					S_ProcName,
-					"Unrecognized ClassCode \"" + classCode + "\"" );
+				throw new CFLibUnsupportedClassException(getClass(), S_ProcName, 0, "-delete-edit-next-", "Not " + Integer.toString(classCode));
 			}
 		}
 

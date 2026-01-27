@@ -82,11 +82,12 @@ public class CFBamRamDelSubDep1Table
 	}
 
 	public ICFBamDelSubDep1 createDelSubDep1( ICFSecAuthorization Authorization,
-		ICFBamDelSubDep1 Buff )
+		ICFBamDelSubDep1 iBuff )
 	{
 		final String S_ProcName = "createDelSubDep1";
-		schema.getTableDelDep().createDelDep( Authorization,
-			Buff );
+		
+		CFBamBuffDelSubDep1 Buff = (CFBamBuffDelSubDep1)(schema.getTableDelDep().createDelDep( Authorization,
+			iBuff ));
 		CFLibDbKeyHash256 pkey;
 		pkey = Buff.getRequiredId();
 		CFBamBuffDelSubDep1ByDelTopDepIdxKey keyDelTopDepIdx = (CFBamBuffDelSubDep1ByDelTopDepIdxKey)schema.getFactoryDelSubDep1().newByDelTopDepIdxKey();
@@ -162,7 +163,20 @@ public class CFBamRamDelSubDep1Table
 
 		dictByUNameIdx.put( keyUNameIdx, Buff );
 
-		return( Buff );
+		if (Buff == null) {
+			return( null );
+		}
+		else {
+			int classCode = Buff.getClassCode();
+			if (classCode == ICFBamDelSubDep1.CLASS_CODE) {
+				CFBamBuffDelSubDep1 retbuff = ((CFBamBuffDelSubDep1)(schema.getFactoryDelSubDep1().newRec()));
+				retbuff.set(Buff);
+				return( retbuff );
+			}
+			else {
+				throw new CFLibUnsupportedClassException(getClass(), S_ProcName, 0, "-create-buff-cloning-", "Not " + Integer.toString(classCode));
+			}
+		}
 	}
 
 	public ICFBamDelSubDep1 readDerived( ICFSecAuthorization Authorization,

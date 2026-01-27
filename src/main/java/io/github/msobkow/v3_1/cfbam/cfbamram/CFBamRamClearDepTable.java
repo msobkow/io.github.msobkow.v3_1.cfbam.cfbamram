@@ -84,11 +84,12 @@ public class CFBamRamClearDepTable
 	}
 
 	public ICFBamClearDep createClearDep( ICFSecAuthorization Authorization,
-		ICFBamClearDep Buff )
+		ICFBamClearDep iBuff )
 	{
 		final String S_ProcName = "createClearDep";
-		schema.getTableScope().createScope( Authorization,
-			Buff );
+		
+		CFBamBuffClearDep Buff = (CFBamBuffClearDep)(schema.getTableScope().createScope( Authorization,
+			iBuff ));
 		CFLibDbKeyHash256 pkey;
 		pkey = Buff.getRequiredId();
 		CFBamBuffClearDepByClearDepIdxKey keyClearDepIdx = (CFBamBuffClearDepByClearDepIdxKey)schema.getFactoryClearDep().newByClearDepIdxKey();
@@ -163,7 +164,40 @@ public class CFBamRamClearDepTable
 		}
 		subdictDefSchemaIdx.put( pkey, Buff );
 
-		return( Buff );
+		if (Buff == null) {
+			return( null );
+		}
+		else {
+			int classCode = Buff.getClassCode();
+			if (classCode == ICFBamClearDep.CLASS_CODE) {
+				CFBamBuffClearDep retbuff = ((CFBamBuffClearDep)(schema.getFactoryClearDep().newRec()));
+				retbuff.set(Buff);
+				return( retbuff );
+			}
+			else if (classCode == ICFBamClearSubDep1.CLASS_CODE) {
+				CFBamBuffClearSubDep1 retbuff = ((CFBamBuffClearSubDep1)(schema.getFactoryClearSubDep1().newRec()));
+				retbuff.set((ICFBamClearSubDep1)Buff);
+				return( retbuff );
+			}
+			else if (classCode == ICFBamClearSubDep2.CLASS_CODE) {
+				CFBamBuffClearSubDep2 retbuff = ((CFBamBuffClearSubDep2)(schema.getFactoryClearSubDep2().newRec()));
+				retbuff.set((ICFBamClearSubDep2)Buff);
+				return( retbuff );
+			}
+			else if (classCode == ICFBamClearSubDep3.CLASS_CODE) {
+				CFBamBuffClearSubDep3 retbuff = ((CFBamBuffClearSubDep3)(schema.getFactoryClearSubDep3().newRec()));
+				retbuff.set((ICFBamClearSubDep3)Buff);
+				return( retbuff );
+			}
+			else if (classCode == ICFBamClearTopDep.CLASS_CODE) {
+				CFBamBuffClearTopDep retbuff = ((CFBamBuffClearTopDep)(schema.getFactoryClearTopDep().newRec()));
+				retbuff.set((ICFBamClearTopDep)Buff);
+				return( retbuff );
+			}
+			else {
+				throw new CFLibUnsupportedClassException(getClass(), S_ProcName, 0, "-create-buff-cloning-", "Not " + Integer.toString(classCode));
+			}
+		}
 	}
 
 	public ICFBamClearDep readDerived( ICFSecAuthorization Authorization,
@@ -669,11 +703,7 @@ public class CFBamRamClearDepTable
 				schema.getTableClearTopDep().deleteClearTopDep( Authorization, (ICFBamClearTopDep)cur );
 			}
 			else {
-				throw new CFLibUnsupportedClassException( getClass(),
-					S_ProcName,
-					"subClassCode",
-					cur,
-					"Instance of or subclass of ClearDep must not be \"" + subClassCode + "\"" );
+				throw new CFLibUnsupportedClassException(getClass(), S_ProcName, 0, "-delete-by-suffix-class-walker-", "Not " + Integer.toString(classCode));
 			}
 		}
 	}
@@ -728,11 +758,7 @@ public class CFBamRamClearDepTable
 				schema.getTableClearTopDep().deleteClearTopDep( Authorization, (ICFBamClearTopDep)cur );
 			}
 			else {
-				throw new CFLibUnsupportedClassException( getClass(),
-					S_ProcName,
-					"subClassCode",
-					cur,
-					"Instance of or subclass of ClearDep must not be \"" + subClassCode + "\"" );
+				throw new CFLibUnsupportedClassException(getClass(), S_ProcName, 0, "-delete-by-suffix-class-walker-", "Not " + Integer.toString(classCode));
 			}
 		}
 	}
@@ -777,11 +803,7 @@ public class CFBamRamClearDepTable
 				schema.getTableClearTopDep().deleteClearTopDep( Authorization, (ICFBamClearTopDep)cur );
 			}
 			else {
-				throw new CFLibUnsupportedClassException( getClass(),
-					S_ProcName,
-					"subClassCode",
-					cur,
-					"Instance of or subclass of ClearDep must not be \"" + subClassCode + "\"" );
+				throw new CFLibUnsupportedClassException(getClass(), S_ProcName, 0, "-delete-by-suffix-class-walker-", "Not " + Integer.toString(classCode));
 			}
 		}
 	}
@@ -834,11 +856,7 @@ public class CFBamRamClearDepTable
 				schema.getTableClearTopDep().deleteClearTopDep( Authorization, (ICFBamClearTopDep)cur );
 			}
 			else {
-				throw new CFLibUnsupportedClassException( getClass(),
-					S_ProcName,
-					"subClassCode",
-					cur,
-					"Instance of or subclass of ClearDep must not be \"" + subClassCode + "\"" );
+				throw new CFLibUnsupportedClassException(getClass(), S_ProcName, 0, "-delete-by-suffix-class-walker-", "Not " + Integer.toString(classCode));
 			}
 		}
 	}

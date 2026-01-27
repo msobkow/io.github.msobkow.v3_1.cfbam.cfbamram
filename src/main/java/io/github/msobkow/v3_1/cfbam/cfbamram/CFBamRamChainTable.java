@@ -99,10 +99,27 @@ public class CFBamRamChainTable
 		schema = argSchema;
 	}
 
+	public CFBamBuffChain ensureRec(ICFBamChain rec) {
+		if (rec == null) {
+			return( null );
+		}
+		else {
+			int classCode = rec.getClassCode();
+			if (classCode == ICFBamChain.CLASS_CODE) {
+				return( ((CFBamBuffChainDefaultFactory)(schema.getFactoryChain())).ensureRec(rec) );
+			}
+			else {
+				throw new CFLibUnsupportedClassException(getClass(), "ensureRec", 1, "rec", "Not " + Integer.toString(classCode));
+			}
+		}
+	}
+
 	public ICFBamChain createChain( ICFSecAuthorization Authorization,
-		ICFBamChain Buff )
+		ICFBamChain iBuff )
 	{
 		final String S_ProcName = "createChain";
+		
+		CFBamBuffChain Buff = ensureRec(iBuff);
 		CFLibDbKeyHash256 pkey;
 		pkey = schema.nextChainIdGen();
 		Buff.setRequiredId( pkey );
@@ -235,7 +252,20 @@ public class CFBamRamChainTable
 		}
 		subdictNextRelIdx.put( pkey, Buff );
 
-		return( Buff );
+		if (Buff == null) {
+			return( null );
+		}
+		else {
+			int classCode = Buff.getClassCode();
+			if (classCode == ICFBamChain.CLASS_CODE) {
+				CFBamBuffChain retbuff = ((CFBamBuffChain)(schema.getFactoryChain().newRec()));
+				retbuff.set(Buff);
+				return( retbuff );
+			}
+			else {
+				throw new CFLibUnsupportedClassException(getClass(), S_ProcName, 0, "-create-buff-cloning-", "Not " + Integer.toString(classCode));
+			}
+		}
 	}
 
 	public ICFBamChain readDerived( ICFSecAuthorization Authorization,

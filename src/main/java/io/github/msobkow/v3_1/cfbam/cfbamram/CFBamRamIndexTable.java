@@ -88,11 +88,12 @@ public class CFBamRamIndexTable
 	}
 
 	public ICFBamIndex createIndex( ICFSecAuthorization Authorization,
-		ICFBamIndex Buff )
+		ICFBamIndex iBuff )
 	{
 		final String S_ProcName = "createIndex";
-		schema.getTableScope().createScope( Authorization,
-			Buff );
+		
+		CFBamBuffIndex Buff = (CFBamBuffIndex)(schema.getTableScope().createScope( Authorization,
+			iBuff ));
 		CFLibDbKeyHash256 pkey;
 		pkey = Buff.getRequiredId();
 		CFBamBuffIndexByUNameIdxKey keyUNameIdx = (CFBamBuffIndexByUNameIdxKey)schema.getFactoryIndex().newByUNameIdxKey();
@@ -181,7 +182,20 @@ public class CFBamRamIndexTable
 		}
 		subdictDefSchemaIdx.put( pkey, Buff );
 
-		return( Buff );
+		if (Buff == null) {
+			return( null );
+		}
+		else {
+			int classCode = Buff.getClassCode();
+			if (classCode == ICFBamIndex.CLASS_CODE) {
+				CFBamBuffIndex retbuff = ((CFBamBuffIndex)(schema.getFactoryIndex().newRec()));
+				retbuff.set(Buff);
+				return( retbuff );
+			}
+			else {
+				throw new CFLibUnsupportedClassException(getClass(), S_ProcName, 0, "-create-buff-cloning-", "Not " + Integer.toString(classCode));
+			}
+		}
 	}
 
 	public ICFBamIndex readDerived( ICFSecAuthorization Authorization,

@@ -82,11 +82,12 @@ public class CFBamRamPopSubDep2Table
 	}
 
 	public ICFBamPopSubDep2 createPopSubDep2( ICFSecAuthorization Authorization,
-		ICFBamPopSubDep2 Buff )
+		ICFBamPopSubDep2 iBuff )
 	{
 		final String S_ProcName = "createPopSubDep2";
-		schema.getTablePopDep().createPopDep( Authorization,
-			Buff );
+		
+		CFBamBuffPopSubDep2 Buff = (CFBamBuffPopSubDep2)(schema.getTablePopDep().createPopDep( Authorization,
+			iBuff ));
 		CFLibDbKeyHash256 pkey;
 		pkey = Buff.getRequiredId();
 		CFBamBuffPopSubDep2ByPopSubDep1IdxKey keyPopSubDep1Idx = (CFBamBuffPopSubDep2ByPopSubDep1IdxKey)schema.getFactoryPopSubDep2().newByPopSubDep1IdxKey();
@@ -162,7 +163,20 @@ public class CFBamRamPopSubDep2Table
 
 		dictByUNameIdx.put( keyUNameIdx, Buff );
 
-		return( Buff );
+		if (Buff == null) {
+			return( null );
+		}
+		else {
+			int classCode = Buff.getClassCode();
+			if (classCode == ICFBamPopSubDep2.CLASS_CODE) {
+				CFBamBuffPopSubDep2 retbuff = ((CFBamBuffPopSubDep2)(schema.getFactoryPopSubDep2().newRec()));
+				retbuff.set(Buff);
+				return( retbuff );
+			}
+			else {
+				throw new CFLibUnsupportedClassException(getClass(), S_ProcName, 0, "-create-buff-cloning-", "Not " + Integer.toString(classCode));
+			}
+		}
 	}
 
 	public ICFBamPopSubDep2 readDerived( ICFSecAuthorization Authorization,

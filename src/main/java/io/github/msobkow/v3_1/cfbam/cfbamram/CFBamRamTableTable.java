@@ -116,11 +116,12 @@ public class CFBamRamTableTable
 	}
 
 	public ICFBamTable createTable( ICFSecAuthorization Authorization,
-		ICFBamTable Buff )
+		ICFBamTable iBuff )
 	{
 		final String S_ProcName = "createTable";
-		schema.getTableScope().createScope( Authorization,
-			Buff );
+		
+		CFBamBuffTable Buff = (CFBamBuffTable)(schema.getTableScope().createScope( Authorization,
+			iBuff ));
 		CFLibDbKeyHash256 pkey;
 		pkey = Buff.getRequiredId();
 		CFBamBuffTableBySchemaDefIdxKey keySchemaDefIdx = (CFBamBuffTableBySchemaDefIdxKey)schema.getFactoryTable().newBySchemaDefIdxKey();
@@ -275,7 +276,20 @@ public class CFBamRamTableTable
 		}
 		subdictQualTableIdx.put( pkey, Buff );
 
-		return( Buff );
+		if (Buff == null) {
+			return( null );
+		}
+		else {
+			int classCode = Buff.getClassCode();
+			if (classCode == ICFBamTable.CLASS_CODE) {
+				CFBamBuffTable retbuff = ((CFBamBuffTable)(schema.getFactoryTable().newRec()));
+				retbuff.set(Buff);
+				return( retbuff );
+			}
+			else {
+				throw new CFLibUnsupportedClassException(getClass(), S_ProcName, 0, "-create-buff-cloning-", "Not " + Integer.toString(classCode));
+			}
+		}
 	}
 
 	public ICFBamTable readDerived( ICFSecAuthorization Authorization,
@@ -1116,9 +1130,7 @@ public class CFBamRamTableTable
 							schema.getTableTable().updateTable( Authorization, editBuff );
 						}
 						else {
-							new CFLibUnsupportedClassException( getClass(),
-								S_ProcName,
-								"Unrecognized ClassCode \"" + classCode + "\"" );
+							throw new CFLibUnsupportedClassException(getClass(), S_ProcName, 0, "-delete-clear-top-dep-", "Not " + Integer.toString(classCode));
 						}
 					}
 		CFBamTableBuff editSubobj = schema.getTableTable().readDerivedByIdIdx( Authorization,
@@ -1127,13 +1139,11 @@ public class CFBamRamTableTable
 			editSubobj.setOptionalAltIndexId( null );
 			editSubobj.setOptionalPrimaryIndexId( null );
 		classCode = editSubobj.getClassCode();
-		if( classCode.equals( "a808" ) ) {
+		if( classCode == ICFBamTable.CLASS_CODE ) {
 			schema.getTableTable().updateTable( Authorization, editSubobj );
 		}
 		else {
-			new CFLibUnsupportedClassException( getClass(),
-				S_ProcName,
-				"Unrecognized ClassCode \"" + classCode + "\"" );
+			throw new CFLibUnsupportedClassException(getClass(), S_ProcName, 0, "-clear-root-subobject-refs-", "Not " + Integer.toString(classCode));
 		}
 		existing = editSubobj;
 					schema.getTableServerMethod().deleteServerMethodByMethTableIdx( Authorization,

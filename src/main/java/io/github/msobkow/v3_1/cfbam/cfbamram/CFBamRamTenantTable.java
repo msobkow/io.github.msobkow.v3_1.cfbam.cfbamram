@@ -81,10 +81,27 @@ public class CFBamRamTenantTable
 		schema = argSchema;
 	}
 
+	public CFSecBuffTenant ensureRec(ICFSecTenant rec) {
+		if (rec == null) {
+			return( null );
+		}
+		else {
+			int classCode = rec.getClassCode();
+			if (classCode == ICFSecTenant.CLASS_CODE) {
+				return( ((CFSecBuffTenantDefaultFactory)(schema.getFactoryTenant())).ensureRec(rec) );
+			}
+			else {
+				throw new CFLibUnsupportedClassException(getClass(), "ensureRec", 1, "rec", "Not " + Integer.toString(classCode));
+			}
+		}
+	}
+
 	public ICFSecTenant createTenant( ICFSecAuthorization Authorization,
-		ICFSecTenant Buff )
+		ICFSecTenant iBuff )
 	{
 		final String S_ProcName = "createTenant";
+		
+		CFSecBuffTenant Buff = ensureRec(iBuff);
 		CFLibDbKeyHash256 pkey;
 		pkey = schema.nextTenantIdGen();
 		Buff.setRequiredId( pkey );
@@ -144,7 +161,20 @@ public class CFBamRamTenantTable
 
 		dictByUNameIdx.put( keyUNameIdx, Buff );
 
-		return( Buff );
+		if (Buff == null) {
+			return( null );
+		}
+		else {
+			int classCode = Buff.getClassCode();
+			if (classCode == ICFSecTenant.CLASS_CODE) {
+				CFSecBuffTenant retbuff = ((CFSecBuffTenant)(schema.getFactoryTenant().newRec()));
+				retbuff.set(Buff);
+				return( retbuff );
+			}
+			else {
+				throw new CFLibUnsupportedClassException(getClass(), S_ProcName, 0, "-create-buff-cloning-", "Not " + Integer.toString(classCode));
+			}
+		}
 	}
 
 	public ICFSecTenant readDerived( ICFSecAuthorization Authorization,
@@ -493,9 +523,7 @@ public class CFBamRamTenantTable
 							schema.getTableRelation().updateRelation( Authorization, editBuff );
 						}
 						else {
-							new CFLibUnsupportedClassException( getClass(),
-								S_ProcName,
-								"Unrecognized ClassCode \"" + classCode + "\"" );
+							throw new CFLibUnsupportedClassException(getClass(), S_ProcName, 0, "-delete-clear-sub-dep-3-", "Not " + Integer.toString(classCode));
 						}
 					}
 				

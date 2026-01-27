@@ -81,10 +81,27 @@ public class CFBamRamURLProtocolTable
 		schema = argSchema;
 	}
 
+	public CFIntBuffURLProtocol ensureRec(ICFIntURLProtocol rec) {
+		if (rec == null) {
+			return( null );
+		}
+		else {
+			int classCode = rec.getClassCode();
+			if (classCode == ICFIntURLProtocol.CLASS_CODE) {
+				return( ((CFIntBuffURLProtocolDefaultFactory)(schema.getFactoryURLProtocol())).ensureRec(rec) );
+			}
+			else {
+				throw new CFLibUnsupportedClassException(getClass(), "ensureRec", 1, "rec", "Not " + Integer.toString(classCode));
+			}
+		}
+	}
+
 	public ICFIntURLProtocol createURLProtocol( ICFSecAuthorization Authorization,
-		ICFIntURLProtocol Buff )
+		ICFIntURLProtocol iBuff )
 	{
 		final String S_ProcName = "createURLProtocol";
+		
+		CFIntBuffURLProtocol Buff = ensureRec(iBuff);
 		Integer pkey;
 		pkey = schema.nextURLProtocolIdGen();
 		Buff.setRequiredURLProtocolId( pkey );
@@ -126,7 +143,20 @@ public class CFBamRamURLProtocolTable
 		}
 		subdictIsSecureIdx.put( pkey, Buff );
 
-		return( Buff );
+		if (Buff == null) {
+			return( null );
+		}
+		else {
+			int classCode = Buff.getClassCode();
+			if (classCode == ICFIntURLProtocol.CLASS_CODE) {
+				CFIntBuffURLProtocol retbuff = ((CFIntBuffURLProtocol)(schema.getFactoryURLProtocol().newRec()));
+				retbuff.set(Buff);
+				return( retbuff );
+			}
+			else {
+				throw new CFLibUnsupportedClassException(getClass(), S_ProcName, 0, "-create-buff-cloning-", "Not " + Integer.toString(classCode));
+			}
+		}
 	}
 
 	public ICFIntURLProtocol readDerived( ICFSecAuthorization Authorization,

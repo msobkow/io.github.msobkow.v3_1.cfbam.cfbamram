@@ -72,11 +72,12 @@ public class CFBamRamServerProcTable
 	}
 
 	public ICFBamServerProc createServerProc( ICFSecAuthorization Authorization,
-		ICFBamServerProc Buff )
+		ICFBamServerProc iBuff )
 	{
 		final String S_ProcName = "createServerProc";
-		schema.getTableServerMethod().createServerMethod( Authorization,
-			Buff );
+		
+		CFBamBuffServerProc Buff = (CFBamBuffServerProc)(schema.getTableServerMethod().createServerMethod( Authorization,
+			iBuff ));
 		CFLibDbKeyHash256 pkey;
 		pkey = Buff.getRequiredId();
 		// Validate unique indexes
@@ -108,7 +109,20 @@ public class CFBamRamServerProcTable
 
 		dictByPKey.put( pkey, Buff );
 
-		return( Buff );
+		if (Buff == null) {
+			return( null );
+		}
+		else {
+			int classCode = Buff.getClassCode();
+			if (classCode == ICFBamServerProc.CLASS_CODE) {
+				CFBamBuffServerProc retbuff = ((CFBamBuffServerProc)(schema.getFactoryServerProc().newRec()));
+				retbuff.set(Buff);
+				return( retbuff );
+			}
+			else {
+				throw new CFLibUnsupportedClassException(getClass(), S_ProcName, 0, "-create-buff-cloning-", "Not " + Integer.toString(classCode));
+			}
+		}
 	}
 
 	public ICFBamServerProc readDerived( ICFSecAuthorization Authorization,

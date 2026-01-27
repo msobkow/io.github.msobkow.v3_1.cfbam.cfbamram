@@ -87,10 +87,27 @@ public class CFBamRamMinorVersionTable
 		schema = argSchema;
 	}
 
+	public CFIntBuffMinorVersion ensureRec(ICFIntMinorVersion rec) {
+		if (rec == null) {
+			return( null );
+		}
+		else {
+			int classCode = rec.getClassCode();
+			if (classCode == ICFIntMinorVersion.CLASS_CODE) {
+				return( ((CFIntBuffMinorVersionDefaultFactory)(schema.getFactoryMinorVersion())).ensureRec(rec) );
+			}
+			else {
+				throw new CFLibUnsupportedClassException(getClass(), "ensureRec", 1, "rec", "Not " + Integer.toString(classCode));
+			}
+		}
+	}
+
 	public ICFIntMinorVersion createMinorVersion( ICFSecAuthorization Authorization,
-		ICFIntMinorVersion Buff )
+		ICFIntMinorVersion iBuff )
 	{
 		final String S_ProcName = "createMinorVersion";
+		
+		CFIntBuffMinorVersion Buff = ensureRec(iBuff);
 		CFLibDbKeyHash256 pkey;
 		pkey = schema.nextMinorVersionIdGen();
 		Buff.setRequiredId( pkey );
@@ -180,7 +197,20 @@ public class CFBamRamMinorVersionTable
 
 		dictByNameIdx.put( keyNameIdx, Buff );
 
-		return( Buff );
+		if (Buff == null) {
+			return( null );
+		}
+		else {
+			int classCode = Buff.getClassCode();
+			if (classCode == ICFIntMinorVersion.CLASS_CODE) {
+				CFIntBuffMinorVersion retbuff = ((CFIntBuffMinorVersion)(schema.getFactoryMinorVersion().newRec()));
+				retbuff.set(Buff);
+				return( retbuff );
+			}
+			else {
+				throw new CFLibUnsupportedClassException(getClass(), S_ProcName, 0, "-create-buff-cloning-", "Not " + Integer.toString(classCode));
+			}
+		}
 	}
 
 	public ICFIntMinorVersion readDerived( ICFSecAuthorization Authorization,

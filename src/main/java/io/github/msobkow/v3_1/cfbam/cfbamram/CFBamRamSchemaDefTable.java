@@ -104,11 +104,12 @@ public class CFBamRamSchemaDefTable
 	}
 
 	public ICFBamSchemaDef createSchemaDef( ICFSecAuthorization Authorization,
-		ICFBamSchemaDef Buff )
+		ICFBamSchemaDef iBuff )
 	{
 		final String S_ProcName = "createSchemaDef";
-		schema.getTableScope().createScope( Authorization,
-			Buff );
+		
+		CFBamBuffSchemaDef Buff = (CFBamBuffSchemaDef)(schema.getTableScope().createScope( Authorization,
+			iBuff ));
 		CFLibDbKeyHash256 pkey;
 		pkey = Buff.getRequiredId();
 		CFBamBuffSchemaDefByCTenantIdxKey keyCTenantIdx = (CFBamBuffSchemaDefByCTenantIdxKey)schema.getFactorySchemaDef().newByCTenantIdxKey();
@@ -256,7 +257,20 @@ public class CFBamRamSchemaDefTable
 
 		dictByPubURIIdx.put( keyPubURIIdx, Buff );
 
-		return( Buff );
+		if (Buff == null) {
+			return( null );
+		}
+		else {
+			int classCode = Buff.getClassCode();
+			if (classCode == ICFBamSchemaDef.CLASS_CODE) {
+				CFBamBuffSchemaDef retbuff = ((CFBamBuffSchemaDef)(schema.getFactorySchemaDef().newRec()));
+				retbuff.set(Buff);
+				return( retbuff );
+			}
+			else {
+				throw new CFLibUnsupportedClassException(getClass(), S_ProcName, 0, "-create-buff-cloning-", "Not " + Integer.toString(classCode));
+			}
+		}
 	}
 
 	public ICFBamSchemaDef readDerived( ICFSecAuthorization Authorization,
@@ -978,9 +992,7 @@ public class CFBamRamSchemaDefTable
 							schema.getTableTableCol().updateTableCol( Authorization, editBuff );
 						}
 						else {
-							new CFLibUnsupportedClassException( getClass(),
-								S_ProcName,
-								"Unrecognized ClassCode \"" + classCode + "\"" );
+							throw new CFLibUnsupportedClassException(getClass(), S_ProcName, 0, "-delete-clear-sub-dep-2-", "Not " + Integer.toString(classCode));
 						}
 					}
 				}
@@ -1004,9 +1016,7 @@ public class CFBamRamSchemaDefTable
 							schema.getTableRelation().updateRelation( Authorization, editBuff );
 						}
 						else {
-							new CFLibUnsupportedClassException( getClass(),
-								S_ProcName,
-								"Unrecognized ClassCode \"" + classCode + "\"" );
+							throw new CFLibUnsupportedClassException(getClass(), S_ProcName, 0, "-delete-clear-sub-dep-2-", "Not " + Integer.toString(classCode));
 						}
 					}
 				}

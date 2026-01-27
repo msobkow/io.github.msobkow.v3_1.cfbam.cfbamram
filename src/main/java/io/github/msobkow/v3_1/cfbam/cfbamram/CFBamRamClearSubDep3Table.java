@@ -82,11 +82,12 @@ public class CFBamRamClearSubDep3Table
 	}
 
 	public ICFBamClearSubDep3 createClearSubDep3( ICFSecAuthorization Authorization,
-		ICFBamClearSubDep3 Buff )
+		ICFBamClearSubDep3 iBuff )
 	{
 		final String S_ProcName = "createClearSubDep3";
-		schema.getTableClearDep().createClearDep( Authorization,
-			Buff );
+		
+		CFBamBuffClearSubDep3 Buff = (CFBamBuffClearSubDep3)(schema.getTableClearDep().createClearDep( Authorization,
+			iBuff ));
 		CFLibDbKeyHash256 pkey;
 		pkey = Buff.getRequiredId();
 		CFBamBuffClearSubDep3ByClearSubDep2IdxKey keyClearSubDep2Idx = (CFBamBuffClearSubDep3ByClearSubDep2IdxKey)schema.getFactoryClearSubDep3().newByClearSubDep2IdxKey();
@@ -162,7 +163,20 @@ public class CFBamRamClearSubDep3Table
 
 		dictByUNameIdx.put( keyUNameIdx, Buff );
 
-		return( Buff );
+		if (Buff == null) {
+			return( null );
+		}
+		else {
+			int classCode = Buff.getClassCode();
+			if (classCode == ICFBamClearSubDep3.CLASS_CODE) {
+				CFBamBuffClearSubDep3 retbuff = ((CFBamBuffClearSubDep3)(schema.getFactoryClearSubDep3().newRec()));
+				retbuff.set(Buff);
+				return( retbuff );
+			}
+			else {
+				throw new CFLibUnsupportedClassException(getClass(), S_ProcName, 0, "-create-buff-cloning-", "Not " + Integer.toString(classCode));
+			}
+		}
 	}
 
 	public ICFBamClearSubDep3 readDerived( ICFSecAuthorization Authorization,

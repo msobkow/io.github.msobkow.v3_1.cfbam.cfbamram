@@ -93,10 +93,27 @@ public class CFBamRamSecUserTable
 		schema = argSchema;
 	}
 
+	public CFSecBuffSecUser ensureRec(ICFSecSecUser rec) {
+		if (rec == null) {
+			return( null );
+		}
+		else {
+			int classCode = rec.getClassCode();
+			if (classCode == ICFSecSecUser.CLASS_CODE) {
+				return( ((CFSecBuffSecUserDefaultFactory)(schema.getFactorySecUser())).ensureRec(rec) );
+			}
+			else {
+				throw new CFLibUnsupportedClassException(getClass(), "ensureRec", 1, "rec", "Not " + Integer.toString(classCode));
+			}
+		}
+	}
+
 	public ICFSecSecUser createSecUser( ICFSecAuthorization Authorization,
-		ICFSecSecUser Buff )
+		ICFSecSecUser iBuff )
 	{
 		final String S_ProcName = "createSecUser";
+		
+		CFSecBuffSecUser Buff = ensureRec(iBuff);
 		CFLibDbKeyHash256 pkey;
 		pkey = schema.nextSecUserIdGen();
 		Buff.setRequiredSecUserId( pkey );
@@ -165,7 +182,20 @@ public class CFBamRamSecUserTable
 		}
 		subdictDefDevIdx.put( pkey, Buff );
 
-		return( Buff );
+		if (Buff == null) {
+			return( null );
+		}
+		else {
+			int classCode = Buff.getClassCode();
+			if (classCode == ICFSecSecUser.CLASS_CODE) {
+				CFSecBuffSecUser retbuff = ((CFSecBuffSecUser)(schema.getFactorySecUser().newRec()));
+				retbuff.set(Buff);
+				return( retbuff );
+			}
+			else {
+				throw new CFLibUnsupportedClassException(getClass(), S_ProcName, 0, "-create-buff-cloning-", "Not " + Integer.toString(classCode));
+			}
+		}
 	}
 
 	public ICFSecSecUser readDerived( ICFSecAuthorization Authorization,
@@ -650,9 +680,7 @@ public class CFBamRamSecUserTable
 							schema.getTableSecUser().updateSecUser( Authorization, editBuff );
 						}
 						else {
-							new CFLibUnsupportedClassException( getClass(),
-								S_ProcName,
-								"Unrecognized ClassCode \"" + classCode + "\"" );
+							throw new CFLibUnsupportedClassException(getClass(), S_ProcName, 0, "-delete-clear-top-dep-", "Not " + Integer.toString(classCode));
 						}
 					}
 		CFSecSecUserBuff editSubobj = schema.getTableSecUser().readDerivedByIdIdx( Authorization,
@@ -660,13 +688,11 @@ public class CFBamRamSecUserTable
 			editSubobj.setOptionalDfltDevUserId( null );
 			editSubobj.setOptionalDfltDevName( null );
 		classCode = editSubobj.getClassCode();
-		if( classCode.equals( "a011" ) ) {
+		if( classCode == ICFSecSecUser.CLASS_CODE ) {
 			schema.getTableSecUser().updateSecUser( Authorization, editSubobj );
 		}
 		else {
-			new CFLibUnsupportedClassException( getClass(),
-				S_ProcName,
-				"Unrecognized ClassCode \"" + classCode + "\"" );
+			throw new CFLibUnsupportedClassException(getClass(), S_ProcName, 0, "-clear-root-subobject-refs-", "Not " + Integer.toString(classCode));
 		}
 		existing = editSubobj;
 					schema.getTableTSecGrpMemb().deleteTSecGrpMembByUserIdx( Authorization,

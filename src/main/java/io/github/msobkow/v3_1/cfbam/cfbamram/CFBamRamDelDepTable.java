@@ -84,11 +84,12 @@ public class CFBamRamDelDepTable
 	}
 
 	public ICFBamDelDep createDelDep( ICFSecAuthorization Authorization,
-		ICFBamDelDep Buff )
+		ICFBamDelDep iBuff )
 	{
 		final String S_ProcName = "createDelDep";
-		schema.getTableScope().createScope( Authorization,
-			Buff );
+		
+		CFBamBuffDelDep Buff = (CFBamBuffDelDep)(schema.getTableScope().createScope( Authorization,
+			iBuff ));
 		CFLibDbKeyHash256 pkey;
 		pkey = Buff.getRequiredId();
 		CFBamBuffDelDepByDefSchemaIdxKey keyDefSchemaIdx = (CFBamBuffDelDepByDefSchemaIdxKey)schema.getFactoryDelDep().newByDefSchemaIdxKey();
@@ -163,7 +164,40 @@ public class CFBamRamDelDepTable
 		}
 		subdictDelDepIdx.put( pkey, Buff );
 
-		return( Buff );
+		if (Buff == null) {
+			return( null );
+		}
+		else {
+			int classCode = Buff.getClassCode();
+			if (classCode == ICFBamDelDep.CLASS_CODE) {
+				CFBamBuffDelDep retbuff = ((CFBamBuffDelDep)(schema.getFactoryDelDep().newRec()));
+				retbuff.set(Buff);
+				return( retbuff );
+			}
+			else if (classCode == ICFBamDelSubDep1.CLASS_CODE) {
+				CFBamBuffDelSubDep1 retbuff = ((CFBamBuffDelSubDep1)(schema.getFactoryDelSubDep1().newRec()));
+				retbuff.set((ICFBamDelSubDep1)Buff);
+				return( retbuff );
+			}
+			else if (classCode == ICFBamDelSubDep2.CLASS_CODE) {
+				CFBamBuffDelSubDep2 retbuff = ((CFBamBuffDelSubDep2)(schema.getFactoryDelSubDep2().newRec()));
+				retbuff.set((ICFBamDelSubDep2)Buff);
+				return( retbuff );
+			}
+			else if (classCode == ICFBamDelSubDep3.CLASS_CODE) {
+				CFBamBuffDelSubDep3 retbuff = ((CFBamBuffDelSubDep3)(schema.getFactoryDelSubDep3().newRec()));
+				retbuff.set((ICFBamDelSubDep3)Buff);
+				return( retbuff );
+			}
+			else if (classCode == ICFBamDelTopDep.CLASS_CODE) {
+				CFBamBuffDelTopDep retbuff = ((CFBamBuffDelTopDep)(schema.getFactoryDelTopDep().newRec()));
+				retbuff.set((ICFBamDelTopDep)Buff);
+				return( retbuff );
+			}
+			else {
+				throw new CFLibUnsupportedClassException(getClass(), S_ProcName, 0, "-create-buff-cloning-", "Not " + Integer.toString(classCode));
+			}
+		}
 	}
 
 	public ICFBamDelDep readDerived( ICFSecAuthorization Authorization,
@@ -671,11 +705,7 @@ public class CFBamRamDelDepTable
 				schema.getTableDelTopDep().deleteDelTopDep( Authorization, (ICFBamDelTopDep)cur );
 			}
 			else {
-				throw new CFLibUnsupportedClassException( getClass(),
-					S_ProcName,
-					"subClassCode",
-					cur,
-					"Instance of or subclass of DelDep must not be \"" + subClassCode + "\"" );
+				throw new CFLibUnsupportedClassException(getClass(), S_ProcName, 0, "-delete-by-suffix-class-walker-", "Not " + Integer.toString(classCode));
 			}
 		}
 	}
@@ -728,11 +758,7 @@ public class CFBamRamDelDepTable
 				schema.getTableDelTopDep().deleteDelTopDep( Authorization, (ICFBamDelTopDep)cur );
 			}
 			else {
-				throw new CFLibUnsupportedClassException( getClass(),
-					S_ProcName,
-					"subClassCode",
-					cur,
-					"Instance of or subclass of DelDep must not be \"" + subClassCode + "\"" );
+				throw new CFLibUnsupportedClassException(getClass(), S_ProcName, 0, "-delete-by-suffix-class-walker-", "Not " + Integer.toString(classCode));
 			}
 		}
 	}
@@ -777,11 +803,7 @@ public class CFBamRamDelDepTable
 				schema.getTableDelTopDep().deleteDelTopDep( Authorization, (ICFBamDelTopDep)cur );
 			}
 			else {
-				throw new CFLibUnsupportedClassException( getClass(),
-					S_ProcName,
-					"subClassCode",
-					cur,
-					"Instance of or subclass of DelDep must not be \"" + subClassCode + "\"" );
+				throw new CFLibUnsupportedClassException(getClass(), S_ProcName, 0, "-delete-by-suffix-class-walker-", "Not " + Integer.toString(classCode));
 			}
 		}
 	}
@@ -834,11 +856,7 @@ public class CFBamRamDelDepTable
 				schema.getTableDelTopDep().deleteDelTopDep( Authorization, (ICFBamDelTopDep)cur );
 			}
 			else {
-				throw new CFLibUnsupportedClassException( getClass(),
-					S_ProcName,
-					"subClassCode",
-					cur,
-					"Instance of or subclass of DelDep must not be \"" + subClassCode + "\"" );
+				throw new CFLibUnsupportedClassException(getClass(), S_ProcName, 0, "-delete-by-suffix-class-walker-", "Not " + Integer.toString(classCode));
 			}
 		}
 	}
