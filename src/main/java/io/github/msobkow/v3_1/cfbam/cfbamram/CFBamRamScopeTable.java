@@ -159,7 +159,7 @@ public class CFBamRamScopeTable
 				return( ((CFBamBuffRelationDefaultFactory)(schema.getFactoryRelation())).ensureRec(rec) );
 			}
 			else {
-				throw new CFLibUnsupportedClassException(getClass(), "ensureRec", 1, "rec", "Not " + Integer.toString(classCode));
+				throw new CFLibUnsupportedClassException(getClass(), "ensureRec", "rec", (Integer)classCode, "Classcode not recognized: " + Integer.toString(classCode));
 			}
 		}
 	}
@@ -346,7 +346,7 @@ public class CFBamRamScopeTable
 				return( retbuff );
 			}
 			else {
-				throw new CFLibUnsupportedClassException(getClass(), S_ProcName, 0, "-create-buff-cloning-", "Not " + Integer.toString(classCode));
+				throw new CFLibUnsupportedClassException(getClass(), S_ProcName, "-create-buff-cloning-", (Integer)classCode, "Classcode not recognized: " + Integer.toString(classCode));
 			}
 		}
 	}
@@ -382,7 +382,7 @@ public class CFBamRamScopeTable
 	public ICFBamScope[] readAllDerived( ICFSecAuthorization Authorization ) {
 		final String S_ProcName = "CFBamRamScope.readAllDerived";
 		ICFBamScope[] retList = new ICFBamScope[ dictByPKey.values().size() ];
-		Iterator< ICFBamScope > iter = dictByPKey.values().iterator();
+		Iterator< CFBamBuffScope > iter = dictByPKey.values().iterator();
 		int idx = 0;
 		while( iter.hasNext() ) {
 			retList[ idx++ ] = iter.next();
@@ -402,7 +402,7 @@ public class CFBamRamScopeTable
 			Map< CFLibDbKeyHash256, CFBamBuffScope > subdictTenantIdx
 				= dictByTenantIdx.get( key );
 			recArray = new ICFBamScope[ subdictTenantIdx.size() ];
-			Iterator< ICFBamScope > iter = subdictTenantIdx.values().iterator();
+			Iterator< CFBamBuffScope > iter = subdictTenantIdx.values().iterator();
 			int idx = 0;
 			while( iter.hasNext() ) {
 				recArray[ idx++ ] = iter.next();
@@ -500,14 +500,17 @@ public class CFBamRamScopeTable
 	}
 
 	public ICFBamScope updateScope( ICFSecAuthorization Authorization,
-		ICFBamScope Buff )
+		ICFBamScope iBuff )
 	{
+		CFBamBuffScope Buff = ensureRec(iBuff);
 		CFLibDbKeyHash256 pkey = Buff.getPKey();
-		ICFBamScope existing = dictByPKey.get( pkey );
+		CFBamBuffScope existing = dictByPKey.get( pkey );
 		if( existing == null ) {
 			throw new CFLibStaleCacheDetectedException( getClass(),
 				"updateScope",
 				"Existing record not found",
+				"Existing record not found",
+				"Scope",
 				"Scope",
 				pkey );
 		}
@@ -568,14 +571,13 @@ public class CFBamRamScopeTable
 	}
 
 	public void deleteScope( ICFSecAuthorization Authorization,
-		ICFBamScope Buff )
+		ICFBamScope iBuff )
 	{
 		final String S_ProcName = "CFBamRamScopeTable.deleteScope() ";
-		String classCode;
-		CFLibDbKeyHash256 pkey = schema.getFactoryScope().newPKey();
-		pkey.setClassCode( Buff.getClassCode() );
-		pkey.setRequiredId( Buff.getRequiredId() );
-		ICFBamScope existing = dictByPKey.get( pkey );
+		CFBamBuffScope Buff = ensureRec(iBuff);
+		int classCode;
+		CFLibDbKeyHash256 pkey = (CFLibDbKeyHash256)(Buff.getPKey());
+		CFBamBuffScope existing = dictByPKey.get( pkey );
 		if( existing == null ) {
 			return;
 		}
@@ -798,7 +800,7 @@ public class CFBamRamScopeTable
 				schema.getTableRelation().deleteRelation( Authorization, (ICFBamRelation)cur );
 			}
 			else {
-				throw new CFLibUnsupportedClassException(getClass(), S_ProcName, 0, "-delete-by-suffix-class-walker-", "Not " + Integer.toString(classCode));
+				throw new CFLibUnsupportedClassException(getClass(), S_ProcName, "-delete-by-suffix-class-walker-", (Integer)classCode, "Classcode not recognized: " + Integer.toString(classCode));
 			}
 		}
 	}
@@ -911,7 +913,7 @@ public class CFBamRamScopeTable
 				schema.getTableRelation().deleteRelation( Authorization, (ICFBamRelation)cur );
 			}
 			else {
-				throw new CFLibUnsupportedClassException(getClass(), S_ProcName, 0, "-delete-by-suffix-class-walker-", "Not " + Integer.toString(classCode));
+				throw new CFLibUnsupportedClassException(getClass(), S_ProcName, "-delete-by-suffix-class-walker-", (Integer)classCode, "Classcode not recognized: " + Integer.toString(classCode));
 			}
 		}
 	}

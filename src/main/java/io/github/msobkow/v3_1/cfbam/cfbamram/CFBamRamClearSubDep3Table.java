@@ -174,7 +174,7 @@ public class CFBamRamClearSubDep3Table
 				return( retbuff );
 			}
 			else {
-				throw new CFLibUnsupportedClassException(getClass(), S_ProcName, 0, "-create-buff-cloning-", "Not " + Integer.toString(classCode));
+				throw new CFLibUnsupportedClassException(getClass(), S_ProcName, "-create-buff-cloning-", (Integer)classCode, "Classcode not recognized: " + Integer.toString(classCode));
 			}
 		}
 	}
@@ -210,7 +210,7 @@ public class CFBamRamClearSubDep3Table
 	public ICFBamClearSubDep3[] readAllDerived( ICFSecAuthorization Authorization ) {
 		final String S_ProcName = "CFBamRamClearSubDep3.readAllDerived";
 		ICFBamClearSubDep3[] retList = new ICFBamClearSubDep3[ dictByPKey.values().size() ];
-		Iterator< ICFBamClearSubDep3 > iter = dictByPKey.values().iterator();
+		Iterator< CFBamBuffClearSubDep3 > iter = dictByPKey.values().iterator();
 		int idx = 0;
 		while( iter.hasNext() ) {
 			retList[ idx++ ] = iter.next();
@@ -296,7 +296,7 @@ public class CFBamRamClearSubDep3Table
 			Map< CFLibDbKeyHash256, CFBamBuffClearSubDep3 > subdictClearSubDep2Idx
 				= dictByClearSubDep2Idx.get( key );
 			recArray = new ICFBamClearSubDep3[ subdictClearSubDep2Idx.size() ];
-			Iterator< ICFBamClearSubDep3 > iter = subdictClearSubDep2Idx.values().iterator();
+			Iterator< CFBamBuffClearSubDep3 > iter = subdictClearSubDep2Idx.values().iterator();
 			int idx = 0;
 			while( iter.hasNext() ) {
 				recArray[ idx++ ] = iter.next();
@@ -537,19 +537,17 @@ public class CFBamRamClearSubDep3Table
 	}
 
 	public ICFBamClearSubDep3 updateClearSubDep3( ICFSecAuthorization Authorization,
-		ICFBamClearSubDep3 Buff )
+		ICFBamClearSubDep3 iBuff )
 	{
-		ICFBamClearSubDep3 repl = schema.getTableClearDep().updateClearDep( Authorization,
-			Buff );
-		if (repl != Buff) {
-			throw new CFLibInvalidStateException(getClass(), S_ProcName, "repl != Buff", "repl != Buff");
-		}
+		CFBamBuffClearSubDep3 Buff = (CFBamBuffClearSubDep3)schema.getTableClearDep().updateClearDep( Authorization,	Buff );
 		CFLibDbKeyHash256 pkey = Buff.getPKey();
-		ICFBamClearSubDep3 existing = dictByPKey.get( pkey );
+		CFBamBuffClearSubDep3 existing = dictByPKey.get( pkey );
 		if( existing == null ) {
 			throw new CFLibStaleCacheDetectedException( getClass(),
 				"updateClearSubDep3",
 				"Existing record not found",
+				"Existing record not found",
+				"ClearSubDep3",
 				"ClearSubDep3",
 				pkey );
 		}
@@ -642,13 +640,13 @@ public class CFBamRamClearSubDep3Table
 	}
 
 	public void deleteClearSubDep3( ICFSecAuthorization Authorization,
-		ICFBamClearSubDep3 Buff )
+		ICFBamClearSubDep3 iBuff )
 	{
 		final String S_ProcName = "CFBamRamClearSubDep3Table.deleteClearSubDep3() ";
-		String classCode;
-		CFLibDbKeyHash256 pkey = schema.getFactoryScope().newPKey();
-		pkey.setRequiredId( Buff.getRequiredId() );
-		ICFBamClearSubDep3 existing = dictByPKey.get( pkey );
+		CFBamBuffClearSubDep3 Buff = ensureRec(iBuff);
+		int classCode;
+		CFLibDbKeyHash256 pkey = (CFLibDbKeyHash256)(Buff.getPKey());
+		CFBamBuffClearSubDep3 existing = dictByPKey.get( pkey );
 		if( existing == null ) {
 			return;
 		}

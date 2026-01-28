@@ -89,7 +89,7 @@ public class CFBamRamISOCtryTable
 				return( ((CFSecBuffISOCtryDefaultFactory)(schema.getFactoryISOCtry())).ensureRec(rec) );
 			}
 			else {
-				throw new CFLibUnsupportedClassException(getClass(), "ensureRec", 1, "rec", "Not " + Integer.toString(classCode));
+				throw new CFLibUnsupportedClassException(getClass(), "ensureRec", "rec", (Integer)classCode, "Classcode not recognized: " + Integer.toString(classCode));
 			}
 		}
 	}
@@ -152,7 +152,7 @@ public class CFBamRamISOCtryTable
 				return( retbuff );
 			}
 			else {
-				throw new CFLibUnsupportedClassException(getClass(), S_ProcName, 0, "-create-buff-cloning-", "Not " + Integer.toString(classCode));
+				throw new CFLibUnsupportedClassException(getClass(), S_ProcName, "-create-buff-cloning-", (Integer)classCode, "Classcode not recognized: " + Integer.toString(classCode));
 			}
 		}
 	}
@@ -188,7 +188,7 @@ public class CFBamRamISOCtryTable
 	public ICFSecISOCtry[] readAllDerived( ICFSecAuthorization Authorization ) {
 		final String S_ProcName = "CFBamRamISOCtry.readAllDerived";
 		ICFSecISOCtry[] retList = new ICFSecISOCtry[ dictByPKey.values().size() ];
-		Iterator< ICFSecISOCtry > iter = dictByPKey.values().iterator();
+		Iterator< CFSecBuffISOCtry > iter = dictByPKey.values().iterator();
 		int idx = 0;
 		while( iter.hasNext() ) {
 			retList[ idx++ ] = iter.next();
@@ -324,14 +324,17 @@ public class CFBamRamISOCtryTable
 	}
 
 	public ICFSecISOCtry updateISOCtry( ICFSecAuthorization Authorization,
-		ICFSecISOCtry Buff )
+		ICFSecISOCtry iBuff )
 	{
+		CFSecBuffISOCtry Buff = ensureRec(iBuff);
 		Short pkey = Buff.getPKey();
-		ICFSecISOCtry existing = dictByPKey.get( pkey );
+		CFSecBuffISOCtry existing = dictByPKey.get( pkey );
 		if( existing == null ) {
 			throw new CFLibStaleCacheDetectedException( getClass(),
 				"updateISOCtry",
 				"Existing record not found",
+				"Existing record not found",
+				"ISOCtry",
 				"ISOCtry",
 				pkey );
 		}
@@ -394,13 +397,13 @@ public class CFBamRamISOCtryTable
 	}
 
 	public void deleteISOCtry( ICFSecAuthorization Authorization,
-		ICFSecISOCtry Buff )
+		ICFSecISOCtry iBuff )
 	{
 		final String S_ProcName = "CFBamRamISOCtryTable.deleteISOCtry() ";
-		String classCode;
-		Short pkey = schema.getFactoryISOCtry().newPKey();
-		pkey.setRequiredISOCtryId( Buff.getRequiredISOCtryId() );
-		ICFSecISOCtry existing = dictByPKey.get( pkey );
+		CFSecBuffISOCtry Buff = ensureRec(iBuff);
+		int classCode;
+		Short pkey = (Short)(Buff.getPKey());
+		CFSecBuffISOCtry existing = dictByPKey.get( pkey );
 		if( existing == null ) {
 			return;
 		}

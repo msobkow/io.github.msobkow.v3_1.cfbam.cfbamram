@@ -174,7 +174,7 @@ public class CFBamRamDelSubDep2Table
 				return( retbuff );
 			}
 			else {
-				throw new CFLibUnsupportedClassException(getClass(), S_ProcName, 0, "-create-buff-cloning-", "Not " + Integer.toString(classCode));
+				throw new CFLibUnsupportedClassException(getClass(), S_ProcName, "-create-buff-cloning-", (Integer)classCode, "Classcode not recognized: " + Integer.toString(classCode));
 			}
 		}
 	}
@@ -210,7 +210,7 @@ public class CFBamRamDelSubDep2Table
 	public ICFBamDelSubDep2[] readAllDerived( ICFSecAuthorization Authorization ) {
 		final String S_ProcName = "CFBamRamDelSubDep2.readAllDerived";
 		ICFBamDelSubDep2[] retList = new ICFBamDelSubDep2[ dictByPKey.values().size() ];
-		Iterator< ICFBamDelSubDep2 > iter = dictByPKey.values().iterator();
+		Iterator< CFBamBuffDelSubDep2 > iter = dictByPKey.values().iterator();
 		int idx = 0;
 		while( iter.hasNext() ) {
 			retList[ idx++ ] = iter.next();
@@ -296,7 +296,7 @@ public class CFBamRamDelSubDep2Table
 			Map< CFLibDbKeyHash256, CFBamBuffDelSubDep2 > subdictContDelDep1Idx
 				= dictByContDelDep1Idx.get( key );
 			recArray = new ICFBamDelSubDep2[ subdictContDelDep1Idx.size() ];
-			Iterator< ICFBamDelSubDep2 > iter = subdictContDelDep1Idx.values().iterator();
+			Iterator< CFBamBuffDelSubDep2 > iter = subdictContDelDep1Idx.values().iterator();
 			int idx = 0;
 			while( iter.hasNext() ) {
 				recArray[ idx++ ] = iter.next();
@@ -537,19 +537,17 @@ public class CFBamRamDelSubDep2Table
 	}
 
 	public ICFBamDelSubDep2 updateDelSubDep2( ICFSecAuthorization Authorization,
-		ICFBamDelSubDep2 Buff )
+		ICFBamDelSubDep2 iBuff )
 	{
-		ICFBamDelSubDep2 repl = schema.getTableDelDep().updateDelDep( Authorization,
-			Buff );
-		if (repl != Buff) {
-			throw new CFLibInvalidStateException(getClass(), S_ProcName, "repl != Buff", "repl != Buff");
-		}
+		CFBamBuffDelSubDep2 Buff = (CFBamBuffDelSubDep2)schema.getTableDelDep().updateDelDep( Authorization,	Buff );
 		CFLibDbKeyHash256 pkey = Buff.getPKey();
-		ICFBamDelSubDep2 existing = dictByPKey.get( pkey );
+		CFBamBuffDelSubDep2 existing = dictByPKey.get( pkey );
 		if( existing == null ) {
 			throw new CFLibStaleCacheDetectedException( getClass(),
 				"updateDelSubDep2",
 				"Existing record not found",
+				"Existing record not found",
+				"DelSubDep2",
 				"DelSubDep2",
 				pkey );
 		}
@@ -642,13 +640,13 @@ public class CFBamRamDelSubDep2Table
 	}
 
 	public void deleteDelSubDep2( ICFSecAuthorization Authorization,
-		ICFBamDelSubDep2 Buff )
+		ICFBamDelSubDep2 iBuff )
 	{
 		final String S_ProcName = "CFBamRamDelSubDep2Table.deleteDelSubDep2() ";
-		String classCode;
-		CFLibDbKeyHash256 pkey = schema.getFactoryScope().newPKey();
-		pkey.setRequiredId( Buff.getRequiredId() );
-		ICFBamDelSubDep2 existing = dictByPKey.get( pkey );
+		CFBamBuffDelSubDep2 Buff = ensureRec(iBuff);
+		int classCode;
+		CFLibDbKeyHash256 pkey = (CFLibDbKeyHash256)(Buff.getPKey());
+		CFBamBuffDelSubDep2 existing = dictByPKey.get( pkey );
 		if( existing == null ) {
 			return;
 		}

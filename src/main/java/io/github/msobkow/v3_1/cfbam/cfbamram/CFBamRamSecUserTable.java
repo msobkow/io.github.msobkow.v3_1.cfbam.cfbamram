@@ -103,7 +103,7 @@ public class CFBamRamSecUserTable
 				return( ((CFSecBuffSecUserDefaultFactory)(schema.getFactorySecUser())).ensureRec(rec) );
 			}
 			else {
-				throw new CFLibUnsupportedClassException(getClass(), "ensureRec", 1, "rec", "Not " + Integer.toString(classCode));
+				throw new CFLibUnsupportedClassException(getClass(), "ensureRec", "rec", (Integer)classCode, "Classcode not recognized: " + Integer.toString(classCode));
 			}
 		}
 	}
@@ -193,7 +193,7 @@ public class CFBamRamSecUserTable
 				return( retbuff );
 			}
 			else {
-				throw new CFLibUnsupportedClassException(getClass(), S_ProcName, 0, "-create-buff-cloning-", "Not " + Integer.toString(classCode));
+				throw new CFLibUnsupportedClassException(getClass(), S_ProcName, "-create-buff-cloning-", (Integer)classCode, "Classcode not recognized: " + Integer.toString(classCode));
 			}
 		}
 	}
@@ -229,7 +229,7 @@ public class CFBamRamSecUserTable
 	public ICFSecSecUser[] readAllDerived( ICFSecAuthorization Authorization ) {
 		final String S_ProcName = "CFBamRamSecUser.readAllDerived";
 		ICFSecSecUser[] retList = new ICFSecSecUser[ dictByPKey.values().size() ];
-		Iterator< ICFSecSecUser > iter = dictByPKey.values().iterator();
+		Iterator< CFSecBuffSecUser > iter = dictByPKey.values().iterator();
 		int idx = 0;
 		while( iter.hasNext() ) {
 			retList[ idx++ ] = iter.next();
@@ -266,7 +266,7 @@ public class CFBamRamSecUserTable
 			Map< CFLibDbKeyHash256, CFSecBuffSecUser > subdictEMConfIdx
 				= dictByEMConfIdx.get( key );
 			recArray = new ICFSecSecUser[ subdictEMConfIdx.size() ];
-			Iterator< ICFSecSecUser > iter = subdictEMConfIdx.values().iterator();
+			Iterator< CFSecBuffSecUser > iter = subdictEMConfIdx.values().iterator();
 			int idx = 0;
 			while( iter.hasNext() ) {
 				recArray[ idx++ ] = iter.next();
@@ -293,7 +293,7 @@ public class CFBamRamSecUserTable
 			Map< CFLibDbKeyHash256, CFSecBuffSecUser > subdictPwdResetIdx
 				= dictByPwdResetIdx.get( key );
 			recArray = new ICFSecSecUser[ subdictPwdResetIdx.size() ];
-			Iterator< ICFSecSecUser > iter = subdictPwdResetIdx.values().iterator();
+			Iterator< CFSecBuffSecUser > iter = subdictPwdResetIdx.values().iterator();
 			int idx = 0;
 			while( iter.hasNext() ) {
 				recArray[ idx++ ] = iter.next();
@@ -322,7 +322,7 @@ public class CFBamRamSecUserTable
 			Map< CFLibDbKeyHash256, CFSecBuffSecUser > subdictDefDevIdx
 				= dictByDefDevIdx.get( key );
 			recArray = new ICFSecSecUser[ subdictDefDevIdx.size() ];
-			Iterator< ICFSecSecUser > iter = subdictDefDevIdx.values().iterator();
+			Iterator< CFSecBuffSecUser > iter = subdictDefDevIdx.values().iterator();
 			int idx = 0;
 			while( iter.hasNext() ) {
 				recArray[ idx++ ] = iter.next();
@@ -544,14 +544,17 @@ public class CFBamRamSecUserTable
 	}
 
 	public ICFSecSecUser updateSecUser( ICFSecAuthorization Authorization,
-		ICFSecSecUser Buff )
+		ICFSecSecUser iBuff )
 	{
+		CFSecBuffSecUser Buff = ensureRec(iBuff);
 		CFLibDbKeyHash256 pkey = Buff.getPKey();
-		ICFSecSecUser existing = dictByPKey.get( pkey );
+		CFSecBuffSecUser existing = dictByPKey.get( pkey );
 		if( existing == null ) {
 			throw new CFLibStaleCacheDetectedException( getClass(),
 				"updateSecUser",
 				"Existing record not found",
+				"Existing record not found",
+				"SecUser",
 				"SecUser",
 				pkey );
 		}
@@ -654,13 +657,13 @@ public class CFBamRamSecUserTable
 	}
 
 	public void deleteSecUser( ICFSecAuthorization Authorization,
-		ICFSecSecUser Buff )
+		ICFSecSecUser iBuff )
 	{
 		final String S_ProcName = "CFBamRamSecUserTable.deleteSecUser() ";
-		String classCode;
-		CFLibDbKeyHash256 pkey = schema.getFactorySecUser().newPKey();
-		pkey.setRequiredSecUserId( Buff.getRequiredSecUserId() );
-		ICFSecSecUser existing = dictByPKey.get( pkey );
+		CFSecBuffSecUser Buff = ensureRec(iBuff);
+		int classCode;
+		CFLibDbKeyHash256 pkey = (CFLibDbKeyHash256)(Buff.getPKey());
+		CFSecBuffSecUser existing = dictByPKey.get( pkey );
 		if( existing == null ) {
 			return;
 		}
@@ -680,10 +683,10 @@ public class CFBamRamSecUserTable
 							schema.getTableSecUser().updateSecUser( Authorization, editBuff );
 						}
 						else {
-							throw new CFLibUnsupportedClassException(getClass(), S_ProcName, 0, "-delete-clear-top-dep-", "Not " + Integer.toString(classCode));
+							throw new CFLibUnsupportedClassException(getClass(), S_ProcName, "-delete-clear-top-dep-", (Integer)classCode, "Classcode not recognized: " + Integer.toString(classCode));
 						}
 					}
-		CFSecSecUserBuff editSubobj = schema.getTableSecUser().readDerivedByIdIdx( Authorization,
+		CFSecBuffSecUser editSubobj = schema.getTableSecUser().readDerivedByIdIdx( Authorization,
 			existing.getRequiredSecUserId() );
 			editSubobj.setOptionalDfltDevUserId( null );
 			editSubobj.setOptionalDfltDevName( null );
@@ -692,7 +695,7 @@ public class CFBamRamSecUserTable
 			schema.getTableSecUser().updateSecUser( Authorization, editSubobj );
 		}
 		else {
-			throw new CFLibUnsupportedClassException(getClass(), S_ProcName, 0, "-clear-root-subobject-refs-", "Not " + Integer.toString(classCode));
+			throw new CFLibUnsupportedClassException(getClass(), S_ProcName, "-delete-clear-root-subobject-refs-", (Integer)classCode, "Classcode not recognized: " + Integer.toString(classCode));
 		}
 		existing = editSubobj;
 					schema.getTableTSecGrpMemb().deleteTSecGrpMembByUserIdx( Authorization,

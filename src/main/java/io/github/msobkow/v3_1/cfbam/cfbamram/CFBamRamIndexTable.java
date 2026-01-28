@@ -193,7 +193,7 @@ public class CFBamRamIndexTable
 				return( retbuff );
 			}
 			else {
-				throw new CFLibUnsupportedClassException(getClass(), S_ProcName, 0, "-create-buff-cloning-", "Not " + Integer.toString(classCode));
+				throw new CFLibUnsupportedClassException(getClass(), S_ProcName, "-create-buff-cloning-", (Integer)classCode, "Classcode not recognized: " + Integer.toString(classCode));
 			}
 		}
 	}
@@ -229,7 +229,7 @@ public class CFBamRamIndexTable
 	public ICFBamIndex[] readAllDerived( ICFSecAuthorization Authorization ) {
 		final String S_ProcName = "CFBamRamIndex.readAllDerived";
 		ICFBamIndex[] retList = new ICFBamIndex[ dictByPKey.values().size() ];
-		Iterator< ICFBamIndex > iter = dictByPKey.values().iterator();
+		Iterator< CFBamBuffIndex > iter = dictByPKey.values().iterator();
 		int idx = 0;
 		while( iter.hasNext() ) {
 			retList[ idx++ ] = iter.next();
@@ -290,7 +290,7 @@ public class CFBamRamIndexTable
 			Map< CFLibDbKeyHash256, CFBamBuffIndex > subdictIdxTableIdx
 				= dictByIdxTableIdx.get( key );
 			recArray = new ICFBamIndex[ subdictIdxTableIdx.size() ];
-			Iterator< ICFBamIndex > iter = subdictIdxTableIdx.values().iterator();
+			Iterator< CFBamBuffIndex > iter = subdictIdxTableIdx.values().iterator();
 			int idx = 0;
 			while( iter.hasNext() ) {
 				recArray[ idx++ ] = iter.next();
@@ -317,7 +317,7 @@ public class CFBamRamIndexTable
 			Map< CFLibDbKeyHash256, CFBamBuffIndex > subdictDefSchemaIdx
 				= dictByDefSchemaIdx.get( key );
 			recArray = new ICFBamIndex[ subdictDefSchemaIdx.size() ];
-			Iterator< ICFBamIndex > iter = subdictDefSchemaIdx.values().iterator();
+			Iterator< CFBamBuffIndex > iter = subdictDefSchemaIdx.values().iterator();
 			int idx = 0;
 			while( iter.hasNext() ) {
 				recArray[ idx++ ] = iter.next();
@@ -503,19 +503,17 @@ public class CFBamRamIndexTable
 	}
 
 	public ICFBamIndex updateIndex( ICFSecAuthorization Authorization,
-		ICFBamIndex Buff )
+		ICFBamIndex iBuff )
 	{
-		ICFBamIndex repl = schema.getTableScope().updateScope( Authorization,
-			Buff );
-		if (repl != Buff) {
-			throw new CFLibInvalidStateException(getClass(), S_ProcName, "repl != Buff", "repl != Buff");
-		}
+		CFBamBuffIndex Buff = (CFBamBuffIndex)schema.getTableScope().updateScope( Authorization,	Buff );
 		CFLibDbKeyHash256 pkey = Buff.getPKey();
-		ICFBamIndex existing = dictByPKey.get( pkey );
+		CFBamBuffIndex existing = dictByPKey.get( pkey );
 		if( existing == null ) {
 			throw new CFLibStaleCacheDetectedException( getClass(),
 				"updateIndex",
 				"Existing record not found",
+				"Existing record not found",
+				"Index",
 				"Index",
 				pkey );
 		}
@@ -627,13 +625,13 @@ public class CFBamRamIndexTable
 	}
 
 	public void deleteIndex( ICFSecAuthorization Authorization,
-		ICFBamIndex Buff )
+		ICFBamIndex iBuff )
 	{
 		final String S_ProcName = "CFBamRamIndexTable.deleteIndex() ";
-		String classCode;
-		CFLibDbKeyHash256 pkey = schema.getFactoryScope().newPKey();
-		pkey.setRequiredId( Buff.getRequiredId() );
-		ICFBamIndex existing = dictByPKey.get( pkey );
+		CFBamBuffIndex Buff = ensureRec(iBuff);
+		int classCode;
+		CFLibDbKeyHash256 pkey = (CFLibDbKeyHash256)(Buff.getPKey());
+		CFBamBuffIndex existing = dictByPKey.get( pkey );
 		if( existing == null ) {
 			return;
 		}
@@ -643,16 +641,16 @@ public class CFBamRamIndexTable
 				"deleteIndex",
 				pkey );
 		}
-		CFBamIndexColBuff buffDelIndexRefRelFromCols;
-		CFBamIndexColBuff arrDelIndexRefRelFromCols[] = schema.getTableIndexCol().readDerivedByIndexIdx( Authorization,
+		CFBamBuffIndexCol buffDelIndexRefRelFromCols;
+		CFBamBuffIndexCol arrDelIndexRefRelFromCols[] = schema.getTableIndexCol().readDerivedByIndexIdx( Authorization,
 			existing.getRequiredId() );
 		for( int idxDelIndexRefRelFromCols = 0; idxDelIndexRefRelFromCols < arrDelIndexRefRelFromCols.length; idxDelIndexRefRelFromCols++ ) {
 			buffDelIndexRefRelFromCols = arrDelIndexRefRelFromCols[idxDelIndexRefRelFromCols];
 					schema.getTableRelationCol().deleteRelationColByFromColIdx( Authorization,
 						buffDelIndexRefRelFromCols.getRequiredId() );
 		}
-		CFBamIndexColBuff buffDelIndexRefRelToCols;
-		CFBamIndexColBuff arrDelIndexRefRelToCols[] = schema.getTableIndexCol().readDerivedByIndexIdx( Authorization,
+		CFBamBuffIndexCol buffDelIndexRefRelToCols;
+		CFBamBuffIndexCol arrDelIndexRefRelToCols[] = schema.getTableIndexCol().readDerivedByIndexIdx( Authorization,
 			existing.getRequiredId() );
 		for( int idxDelIndexRefRelToCols = 0; idxDelIndexRefRelToCols < arrDelIndexRefRelToCols.length; idxDelIndexRefRelToCols++ ) {
 			buffDelIndexRefRelToCols = arrDelIndexRefRelToCols[idxDelIndexRefRelToCols];

@@ -103,7 +103,7 @@ public class CFBamRamSecGrpMembTable
 				return( ((CFSecBuffSecGrpMembDefaultFactory)(schema.getFactorySecGrpMemb())).ensureRec(rec) );
 			}
 			else {
-				throw new CFLibUnsupportedClassException(getClass(), "ensureRec", 1, "rec", "Not " + Integer.toString(classCode));
+				throw new CFLibUnsupportedClassException(getClass(), "ensureRec", "rec", (Integer)classCode, "Classcode not recognized: " + Integer.toString(classCode));
 			}
 		}
 	}
@@ -228,7 +228,7 @@ public class CFBamRamSecGrpMembTable
 				return( retbuff );
 			}
 			else {
-				throw new CFLibUnsupportedClassException(getClass(), S_ProcName, 0, "-create-buff-cloning-", "Not " + Integer.toString(classCode));
+				throw new CFLibUnsupportedClassException(getClass(), S_ProcName, "-create-buff-cloning-", (Integer)classCode, "Classcode not recognized: " + Integer.toString(classCode));
 			}
 		}
 	}
@@ -264,7 +264,7 @@ public class CFBamRamSecGrpMembTable
 	public ICFSecSecGrpMemb[] readAllDerived( ICFSecAuthorization Authorization ) {
 		final String S_ProcName = "CFBamRamSecGrpMemb.readAllDerived";
 		ICFSecSecGrpMemb[] retList = new ICFSecSecGrpMemb[ dictByPKey.values().size() ];
-		Iterator< ICFSecSecGrpMemb > iter = dictByPKey.values().iterator();
+		Iterator< CFSecBuffSecGrpMemb > iter = dictByPKey.values().iterator();
 		int idx = 0;
 		while( iter.hasNext() ) {
 			retList[ idx++ ] = iter.next();
@@ -284,7 +284,7 @@ public class CFBamRamSecGrpMembTable
 			Map< CFLibDbKeyHash256, CFSecBuffSecGrpMemb > subdictClusterIdx
 				= dictByClusterIdx.get( key );
 			recArray = new ICFSecSecGrpMemb[ subdictClusterIdx.size() ];
-			Iterator< ICFSecSecGrpMemb > iter = subdictClusterIdx.values().iterator();
+			Iterator< CFSecBuffSecGrpMemb > iter = subdictClusterIdx.values().iterator();
 			int idx = 0;
 			while( iter.hasNext() ) {
 				recArray[ idx++ ] = iter.next();
@@ -311,7 +311,7 @@ public class CFBamRamSecGrpMembTable
 			Map< CFLibDbKeyHash256, CFSecBuffSecGrpMemb > subdictGroupIdx
 				= dictByGroupIdx.get( key );
 			recArray = new ICFSecSecGrpMemb[ subdictGroupIdx.size() ];
-			Iterator< ICFSecSecGrpMemb > iter = subdictGroupIdx.values().iterator();
+			Iterator< CFSecBuffSecGrpMemb > iter = subdictGroupIdx.values().iterator();
 			int idx = 0;
 			while( iter.hasNext() ) {
 				recArray[ idx++ ] = iter.next();
@@ -338,7 +338,7 @@ public class CFBamRamSecGrpMembTable
 			Map< CFLibDbKeyHash256, CFSecBuffSecGrpMemb > subdictUserIdx
 				= dictByUserIdx.get( key );
 			recArray = new ICFSecSecGrpMemb[ subdictUserIdx.size() ];
-			Iterator< ICFSecSecGrpMemb > iter = subdictUserIdx.values().iterator();
+			Iterator< CFSecBuffSecGrpMemb > iter = subdictUserIdx.values().iterator();
 			int idx = 0;
 			while( iter.hasNext() ) {
 				recArray[ idx++ ] = iter.next();
@@ -580,14 +580,17 @@ public class CFBamRamSecGrpMembTable
 	}
 
 	public ICFSecSecGrpMemb updateSecGrpMemb( ICFSecAuthorization Authorization,
-		ICFSecSecGrpMemb Buff )
+		ICFSecSecGrpMemb iBuff )
 	{
+		CFSecBuffSecGrpMemb Buff = ensureRec(iBuff);
 		CFLibDbKeyHash256 pkey = Buff.getPKey();
-		ICFSecSecGrpMemb existing = dictByPKey.get( pkey );
+		CFSecBuffSecGrpMemb existing = dictByPKey.get( pkey );
 		if( existing == null ) {
 			throw new CFLibStaleCacheDetectedException( getClass(),
 				"updateSecGrpMemb",
 				"Existing record not found",
+				"Existing record not found",
+				"SecGrpMemb",
 				"SecGrpMemb",
 				pkey );
 		}
@@ -726,13 +729,13 @@ public class CFBamRamSecGrpMembTable
 	}
 
 	public void deleteSecGrpMemb( ICFSecAuthorization Authorization,
-		ICFSecSecGrpMemb Buff )
+		ICFSecSecGrpMemb iBuff )
 	{
 		final String S_ProcName = "CFBamRamSecGrpMembTable.deleteSecGrpMemb() ";
-		String classCode;
-		CFLibDbKeyHash256 pkey = schema.getFactorySecGrpMemb().newPKey();
-		pkey.setRequiredSecGrpMembId( Buff.getRequiredSecGrpMembId() );
-		ICFSecSecGrpMemb existing = dictByPKey.get( pkey );
+		CFSecBuffSecGrpMemb Buff = ensureRec(iBuff);
+		int classCode;
+		CFLibDbKeyHash256 pkey = (CFLibDbKeyHash256)(Buff.getPKey());
+		CFSecBuffSecGrpMemb existing = dictByPKey.get( pkey );
 		if( existing == null ) {
 			return;
 		}

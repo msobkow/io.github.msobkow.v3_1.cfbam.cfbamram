@@ -91,7 +91,7 @@ public class CFBamRamISOLangTable
 				return( ((CFSecBuffISOLangDefaultFactory)(schema.getFactoryISOLang())).ensureRec(rec) );
 			}
 			else {
-				throw new CFLibUnsupportedClassException(getClass(), "ensureRec", 1, "rec", "Not " + Integer.toString(classCode));
+				throw new CFLibUnsupportedClassException(getClass(), "ensureRec", "rec", (Integer)classCode, "Classcode not recognized: " + Integer.toString(classCode));
 			}
 		}
 	}
@@ -154,7 +154,7 @@ public class CFBamRamISOLangTable
 				return( retbuff );
 			}
 			else {
-				throw new CFLibUnsupportedClassException(getClass(), S_ProcName, 0, "-create-buff-cloning-", "Not " + Integer.toString(classCode));
+				throw new CFLibUnsupportedClassException(getClass(), S_ProcName, "-create-buff-cloning-", (Integer)classCode, "Classcode not recognized: " + Integer.toString(classCode));
 			}
 		}
 	}
@@ -190,7 +190,7 @@ public class CFBamRamISOLangTable
 	public ICFSecISOLang[] readAllDerived( ICFSecAuthorization Authorization ) {
 		final String S_ProcName = "CFBamRamISOLang.readAllDerived";
 		ICFSecISOLang[] retList = new ICFSecISOLang[ dictByPKey.values().size() ];
-		Iterator< ICFSecISOLang > iter = dictByPKey.values().iterator();
+		Iterator< CFSecBuffISOLang > iter = dictByPKey.values().iterator();
 		int idx = 0;
 		while( iter.hasNext() ) {
 			retList[ idx++ ] = iter.next();
@@ -227,7 +227,7 @@ public class CFBamRamISOLangTable
 			Map< Short, CFSecBuffISOLang > subdictCode2Idx
 				= dictByCode2Idx.get( key );
 			recArray = new ICFSecISOLang[ subdictCode2Idx.size() ];
-			Iterator< ICFSecISOLang > iter = subdictCode2Idx.values().iterator();
+			Iterator< CFSecBuffISOLang > iter = subdictCode2Idx.values().iterator();
 			int idx = 0;
 			while( iter.hasNext() ) {
 				recArray[ idx++ ] = iter.next();
@@ -339,14 +339,17 @@ public class CFBamRamISOLangTable
 	}
 
 	public ICFSecISOLang updateISOLang( ICFSecAuthorization Authorization,
-		ICFSecISOLang Buff )
+		ICFSecISOLang iBuff )
 	{
+		CFSecBuffISOLang Buff = ensureRec(iBuff);
 		Short pkey = Buff.getPKey();
-		ICFSecISOLang existing = dictByPKey.get( pkey );
+		CFSecBuffISOLang existing = dictByPKey.get( pkey );
 		if( existing == null ) {
 			throw new CFLibStaleCacheDetectedException( getClass(),
 				"updateISOLang",
 				"Existing record not found",
+				"Existing record not found",
+				"ISOLang",
 				"ISOLang",
 				pkey );
 		}
@@ -409,13 +412,13 @@ public class CFBamRamISOLangTable
 	}
 
 	public void deleteISOLang( ICFSecAuthorization Authorization,
-		ICFSecISOLang Buff )
+		ICFSecISOLang iBuff )
 	{
 		final String S_ProcName = "CFBamRamISOLangTable.deleteISOLang() ";
-		String classCode;
-		Short pkey = schema.getFactoryISOLang().newPKey();
-		pkey.setRequiredISOLangId( Buff.getRequiredISOLangId() );
-		ICFSecISOLang existing = dictByPKey.get( pkey );
+		CFSecBuffISOLang Buff = ensureRec(iBuff);
+		int classCode;
+		Short pkey = (Short)(Buff.getPKey());
+		CFSecBuffISOLang existing = dictByPKey.get( pkey );
 		if( existing == null ) {
 			return;
 		}

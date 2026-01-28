@@ -127,7 +127,7 @@ public class CFBamRamParamTable
 				return( ((CFBamBuffParamDefaultFactory)(schema.getFactoryParam())).ensureRec(rec) );
 			}
 			else {
-				throw new CFLibUnsupportedClassException(getClass(), "ensureRec", 1, "rec", "Not " + Integer.toString(classCode));
+				throw new CFLibUnsupportedClassException(getClass(), "ensureRec", "rec", (Integer)classCode, "Classcode not recognized: " + Integer.toString(classCode));
 			}
 		}
 	}
@@ -330,7 +330,7 @@ public class CFBamRamParamTable
 				return( retbuff );
 			}
 			else {
-				throw new CFLibUnsupportedClassException(getClass(), S_ProcName, 0, "-create-buff-cloning-", "Not " + Integer.toString(classCode));
+				throw new CFLibUnsupportedClassException(getClass(), S_ProcName, "-create-buff-cloning-", (Integer)classCode, "Classcode not recognized: " + Integer.toString(classCode));
 			}
 		}
 	}
@@ -366,7 +366,7 @@ public class CFBamRamParamTable
 	public ICFBamParam[] readAllDerived( ICFSecAuthorization Authorization ) {
 		final String S_ProcName = "CFBamRamParam.readAllDerived";
 		ICFBamParam[] retList = new ICFBamParam[ dictByPKey.values().size() ];
-		Iterator< ICFBamParam > iter = dictByPKey.values().iterator();
+		Iterator< CFBamBuffParam > iter = dictByPKey.values().iterator();
 		int idx = 0;
 		while( iter.hasNext() ) {
 			retList[ idx++ ] = iter.next();
@@ -405,7 +405,7 @@ public class CFBamRamParamTable
 			Map< CFLibDbKeyHash256, CFBamBuffParam > subdictServerMethodIdx
 				= dictByServerMethodIdx.get( key );
 			recArray = new ICFBamParam[ subdictServerMethodIdx.size() ];
-			Iterator< ICFBamParam > iter = subdictServerMethodIdx.values().iterator();
+			Iterator< CFBamBuffParam > iter = subdictServerMethodIdx.values().iterator();
 			int idx = 0;
 			while( iter.hasNext() ) {
 				recArray[ idx++ ] = iter.next();
@@ -432,7 +432,7 @@ public class CFBamRamParamTable
 			Map< CFLibDbKeyHash256, CFBamBuffParam > subdictDefSchemaIdx
 				= dictByDefSchemaIdx.get( key );
 			recArray = new ICFBamParam[ subdictDefSchemaIdx.size() ];
-			Iterator< ICFBamParam > iter = subdictDefSchemaIdx.values().iterator();
+			Iterator< CFBamBuffParam > iter = subdictDefSchemaIdx.values().iterator();
 			int idx = 0;
 			while( iter.hasNext() ) {
 				recArray[ idx++ ] = iter.next();
@@ -459,7 +459,7 @@ public class CFBamRamParamTable
 			Map< CFLibDbKeyHash256, CFBamBuffParam > subdictServerTypeIdx
 				= dictByServerTypeIdx.get( key );
 			recArray = new ICFBamParam[ subdictServerTypeIdx.size() ];
-			Iterator< ICFBamParam > iter = subdictServerTypeIdx.values().iterator();
+			Iterator< CFBamBuffParam > iter = subdictServerTypeIdx.values().iterator();
 			int idx = 0;
 			while( iter.hasNext() ) {
 				recArray[ idx++ ] = iter.next();
@@ -486,7 +486,7 @@ public class CFBamRamParamTable
 			Map< CFLibDbKeyHash256, CFBamBuffParam > subdictPrevIdx
 				= dictByPrevIdx.get( key );
 			recArray = new ICFBamParam[ subdictPrevIdx.size() ];
-			Iterator< ICFBamParam > iter = subdictPrevIdx.values().iterator();
+			Iterator< CFBamBuffParam > iter = subdictPrevIdx.values().iterator();
 			int idx = 0;
 			while( iter.hasNext() ) {
 				recArray[ idx++ ] = iter.next();
@@ -513,7 +513,7 @@ public class CFBamRamParamTable
 			Map< CFLibDbKeyHash256, CFBamBuffParam > subdictNextIdx
 				= dictByNextIdx.get( key );
 			recArray = new ICFBamParam[ subdictNextIdx.size() ];
-			Iterator< ICFBamParam > iter = subdictNextIdx.values().iterator();
+			Iterator< CFBamBuffParam > iter = subdictNextIdx.values().iterator();
 			int idx = 0;
 			while( iter.hasNext() ) {
 				recArray[ idx++ ] = iter.next();
@@ -542,7 +542,7 @@ public class CFBamRamParamTable
 			Map< CFLibDbKeyHash256, CFBamBuffParam > subdictContPrevIdx
 				= dictByContPrevIdx.get( key );
 			recArray = new ICFBamParam[ subdictContPrevIdx.size() ];
-			Iterator< ICFBamParam > iter = subdictContPrevIdx.values().iterator();
+			Iterator< CFBamBuffParam > iter = subdictContPrevIdx.values().iterator();
 			int idx = 0;
 			while( iter.hasNext() ) {
 				recArray[ idx++ ] = iter.next();
@@ -571,7 +571,7 @@ public class CFBamRamParamTable
 			Map< CFLibDbKeyHash256, CFBamBuffParam > subdictContNextIdx
 				= dictByContNextIdx.get( key );
 			recArray = new ICFBamParam[ subdictContNextIdx.size() ];
-			Iterator< ICFBamParam > iter = subdictContNextIdx.values().iterator();
+			Iterator< CFBamBuffParam > iter = subdictContNextIdx.values().iterator();
 			int idx = 0;
 			while( iter.hasNext() ) {
 				recArray[ idx++ ] = iter.next();
@@ -817,7 +817,7 @@ public class CFBamRamParamTable
 
 		if( ( cur.getOptionalPrevId() == null ) )
 		{
-			return( (CFBamParamBuff)cur );
+			return( (CFBamBuffParam)cur );
 		}
 
 		prev = schema.getTableParam().readDerivedByIdIdx(Authorization, cur.getOptionalPrevId() );
@@ -859,7 +859,7 @@ public class CFBamRamParamTable
 				newInstance = schema.getFactoryParam().newBuff();
 			}
 			else {
-				throw new CFLibUnsupportedClassException(getClass(), S_ProcName, 0, "-instantiate-buff-", "Not " + Integer.toString(classCode));
+				throw new CFLibUnsupportedClassException(getClass(), S_ProcName, "-instantiate-buff-", (Integer)classCode, "Classcode not recognized: " + Integer.toString(classCode));
 			}
 		ICFBamParam editPrev = newInstance;
 		editPrev.set( prev );
@@ -869,32 +869,32 @@ public class CFBamRamParamTable
 				newInstance = schema.getFactoryParam().newBuff();
 			}
 			else {
-				throw new CFLibUnsupportedClassException(getClass(), S_ProcName, 0, "-instantiate-buff-", "Not " + Integer.toString(classCode));
+				throw new CFLibUnsupportedClassException(getClass(), S_ProcName, "-instantiate-buff-", (Integer)classCode, "Classcode not recognized: " + Integer.toString(classCode));
 			}
-		CFBamParamBuff editCur = newInstance;
+		CFBamBuffParam editCur = newInstance;
 		editCur.set( cur );
 
-		ICFBamParam editGrandprev = null;
+		CFBamBuffParam editGrandprev = null;
 		if( grandprev != null ) {
 			classCode = grandprev.getClassCode();
 			if( classCode == ICFBamParam.CLASS_CODE ) {
 				newInstance = schema.getFactoryParam().newBuff();
 			}
 			else {
-				throw new CFLibUnsupportedClassException(getClass(), S_ProcName, 0, "-instantiate-buff-", "Not " + Integer.toString(classCode));
+				throw new CFLibUnsupportedClassException(getClass(), S_ProcName, "-instantiate-buff-", (Integer)classCode, "Classcode not recognized: " + Integer.toString(classCode));
 			}
 			editGrandprev = newInstance;
 			editGrandprev.set( grandprev );
 		}
 
-		ICFBamParam editNext = null;
+		CFBamBuffParam editNext = null;
 		if( next != null ) {
 			classCode = next.getClassCode();
 			if( classCode == ICFBamParam.CLASS_CODE ) {
 				newInstance = schema.getFactoryParam().newBuff();
 			}
 			else {
-				throw new CFLibUnsupportedClassException(getClass(), S_ProcName, 0, "-instantiate-buff-", "Not " + Integer.toString(classCode));
+				throw new CFLibUnsupportedClassException(getClass(), S_ProcName, "-instantiate-buff-", (Integer)classCode, "Classcode not recognized: " + Integer.toString(classCode));
 			}
 			editNext = newInstance;
 			editNext.set( next );
@@ -926,7 +926,7 @@ public class CFBamRamParamTable
 				schema.getTableParam().updateParam( Authorization, editGrandprev );
 			}
 			else {
-				throw new CFLibUnsupportedClassException(getClass(), S_ProcName, 0, "-update-grand-prev-", "Not " + Integer.toString(classCode));
+				throw new CFLibUnsupportedClassException(getClass(), S_ProcName, "-update-grand-prev-", (Integer)classCode, "Classcode not recognized: " + Integer.toString(classCode));
 			}
 		}
 
@@ -935,7 +935,7 @@ public class CFBamRamParamTable
 				schema.getTableParam().updateParam( Authorization, editPrev );
 			}
 			else {
-				throw new CFLibUnsupportedClassException(getClass(), S_ProcName, 0, "-update-prev-", "Not " + Integer.toString(classCode));
+				throw new CFLibUnsupportedClassException(getClass(), S_ProcName, "-update-prev-", (Integer)classCode, "Classcode not recognized: " + Integer.toString(classCode));
 			}
 
 		classCode = editCur.getClassCode();
@@ -943,7 +943,7 @@ public class CFBamRamParamTable
 				schema.getTableParam().updateParam( Authorization, editCur );
 			}
 			else {
-				throw new CFLibUnsupportedClassException(getClass(), S_ProcName, 0, "-update-cur-", "Not " + Integer.toString(classCode));
+				throw new CFLibUnsupportedClassException(getClass(), S_ProcName, "-update-cur-", (Integer)classCode, "Classcode not recognized: " + Integer.toString(classCode));
 			}
 
 		if( editNext != null ) {
@@ -952,11 +952,11 @@ public class CFBamRamParamTable
 				schema.getTableParam().updateParam( Authorization, editNext );
 			}
 			else {
-				throw new CFLibUnsupportedClassException(getClass(), S_ProcName, 0, "-update-next-", "Not " + Integer.toString(classCode));
+				throw new CFLibUnsupportedClassException(getClass(), S_ProcName, "-update-next-", (Integer)classCode, "Classcode not recognized: " + Integer.toString(classCode));
 			}
 		}
 
-		return( (CFBamParamBuff)editCur );
+		return( (CFBamBuffParam)editCur );
 	}
 
 	/**
@@ -970,10 +970,10 @@ public class CFBamRamParamTable
 	{
 		final String S_ProcName = "moveBuffDown";
 
-		CFBamParamBuff prev = null;
-		CFBamParamBuff cur = null;
-		CFBamParamBuff next = null;
-		CFBamParamBuff grandnext = null;
+		CFBamBuffParam prev = null;
+		CFBamBuffParam cur = null;
+		CFBamBuffParam next = null;
+		CFBamBuffParam grandnext = null;
 
 		cur = schema.getTableParam().readDerivedByIdIdx(Authorization, Id);
 		if( cur == null ) {
@@ -986,7 +986,7 @@ public class CFBamRamParamTable
 
 		if( ( cur.getOptionalNextId() == null ) )
 		{
-			return( (CFBamParamBuff)cur );
+			return( (CFBamBuffParam)cur );
 		}
 
 		next = schema.getTableParam().readDerivedByIdIdx(Authorization, cur.getOptionalNextId() );
@@ -1023,14 +1023,14 @@ public class CFBamRamParamTable
 		}
 
 		integer classCode = cur.getClassCode();
-		CFBamParamBuff newInstance;
+		CFBamBuffParam newInstance;
 			if( classCode == ICFBamParam.CLASS_CODE ) {
 				newInstance = schema.getFactoryParam().newBuff();
 			}
 			else {
-				throw new CFLibUnsupportedClassException(getClass(), S_ProcName, 0, "-instantiate-buff-", "Not " + Integer.toString(classCode));
+				throw new CFLibUnsupportedClassException(getClass(), S_ProcName, "-instantiate-buff-", (Integer)classCode, "Classcode not recognized: " + Integer.toString(classCode));
 			}
-		CFBamParamBuff editCur = newInstance;
+		CFBamBuffParam editCur = newInstance;
 		editCur.set( cur );
 
 		classCode = next.getClassCode();
@@ -1038,32 +1038,32 @@ public class CFBamRamParamTable
 				newInstance = schema.getFactoryParam().newBuff();
 			}
 			else {
-				throw new CFLibUnsupportedClassException(getClass(), S_ProcName, 0, "-instantiate-buff-", "Not " + Integer.toString(classCode));
+				throw new CFLibUnsupportedClassException(getClass(), S_ProcName, "-instantiate-buff-", (Integer)classCode, "Classcode not recognized: " + Integer.toString(classCode));
 			}
-		CFBamParamBuff editNext = newInstance;
+		CFBamBuffParam editNext = newInstance;
 		editNext.set( next );
 
-		CFBamParamBuff editGrandnext = null;
+		CFBamBuffParam editGrandnext = null;
 		if( grandnext != null ) {
 			classCode = grandnext.getClassCode();
 			if( classCode == ICFBamParam.CLASS_CODE ) {
 				newInstance = schema.getFactoryParam().newBuff();
 			}
 			else {
-				throw new CFLibUnsupportedClassException(getClass(), S_ProcName, 0, "-instantiate-buff-", "Not " + Integer.toString(classCode));
+				throw new CFLibUnsupportedClassException(getClass(), S_ProcName, "-instantiate-buff-", (Integer)classCode, "Classcode not recognized: " + Integer.toString(classCode));
 			}
 			editGrandnext = newInstance;
 			editGrandnext.set( grandnext );
 		}
 
-		CFBamParamBuff editPrev = null;
+		CFBamBuffParam editPrev = null;
 		if( prev != null ) {
 			classCode = prev.getClassCode();
 			if( classCode == ICFBamParam.CLASS_CODE ) {
 				newInstance = schema.getFactoryParam().newBuff();
 			}
 			else {
-				throw new CFLibUnsupportedClassException(getClass(), S_ProcName, 0, "-instantiate-buff-", "Not " + Integer.toString(classCode));
+				throw new CFLibUnsupportedClassException(getClass(), S_ProcName, "-instantiate-buff-", (Integer)classCode, "Classcode not recognized: " + Integer.toString(classCode));
 			}
 			editPrev = newInstance;
 			editPrev.set( prev );
@@ -1095,7 +1095,7 @@ public class CFBamRamParamTable
 				schema.getTableParam().updateParam( Authorization, editPrev );
 			}
 			else {
-				throw new CFLibUnsupportedClassException(getClass(), S_ProcName, 0, "-update-prev-", "Not " + Integer.toString(classCode));
+				throw new CFLibUnsupportedClassException(getClass(), S_ProcName, "-update-prev-", (Integer)classCode, "Classcode not recognized: " + Integer.toString(classCode));
 			}
 		}
 
@@ -1104,7 +1104,7 @@ public class CFBamRamParamTable
 				schema.getTableParam().updateParam( Authorization, editCur );
 			}
 			else {
-				throw new CFLibUnsupportedClassException(getClass(), S_ProcName, 0, "-update-cur-", "Not " + Integer.toString(classCode));
+				throw new CFLibUnsupportedClassException(getClass(), S_ProcName, "-update-cur-", (Integer)classCode, "Classcode not recognized: " + Integer.toString(classCode));
 			}
 
 		classCode = editNext.getClassCode();
@@ -1112,7 +1112,7 @@ public class CFBamRamParamTable
 				schema.getTableParam().updateParam( Authorization, editNext );
 			}
 			else {
-				throw new CFLibUnsupportedClassException(getClass(), S_ProcName, 0, "-update-next-", "Not " + Integer.toString(classCode));
+				throw new CFLibUnsupportedClassException(getClass(), S_ProcName, "-update-next-", (Integer)classCode, "Classcode not recognized: " + Integer.toString(classCode));
 			}
 
 		if( editGrandnext != null ) {
@@ -1121,22 +1121,25 @@ public class CFBamRamParamTable
 				schema.getTableParam().updateParam( Authorization, editGrandnext );
 			}
 			else {
-				throw new CFLibUnsupportedClassException(getClass(), S_ProcName, 0, "-update-grand-next-", "Not " + Integer.toString(classCode));
+				throw new CFLibUnsupportedClassException(getClass(), S_ProcName, "-update-grand-next-", (Integer)classCode, "Classcode not recognized: " + Integer.toString(classCode));
 			}
 		}
 
-		return( (CFBamParamBuff)editCur );
+		return( (CFBamBuffParam)editCur );
 	}
 
 	public ICFBamParam updateParam( ICFSecAuthorization Authorization,
-		ICFBamParam Buff )
+		ICFBamParam iBuff )
 	{
+		CFBamBuffParam Buff = ensureRec(iBuff);
 		CFLibDbKeyHash256 pkey = Buff.getPKey();
-		ICFBamParam existing = dictByPKey.get( pkey );
+		CFBamBuffParam existing = dictByPKey.get( pkey );
 		if( existing == null ) {
 			throw new CFLibStaleCacheDetectedException( getClass(),
 				"updateParam",
 				"Existing record not found",
+				"Existing record not found",
+				"Param",
 				"Param",
 				pkey );
 		}
@@ -1355,13 +1358,13 @@ public class CFBamRamParamTable
 	}
 
 	public void deleteParam( ICFSecAuthorization Authorization,
-		ICFBamParam Buff )
+		ICFBamParam iBuff )
 	{
 		final String S_ProcName = "CFBamRamParamTable.deleteParam() ";
-		String classCode;
-		CFLibDbKeyHash256 pkey = schema.getFactoryParam().newPKey();
-		pkey.setRequiredId( Buff.getRequiredId() );
-		ICFBamParam existing = dictByPKey.get( pkey );
+		CFBamBuffParam Buff = ensureRec(iBuff);
+		int classCode;
+		CFLibDbKeyHash256 pkey = (CFLibDbKeyHash256)(Buff.getPKey());
+		CFBamBuffParam existing = dictByPKey.get( pkey );
 		if( existing == null ) {
 			return;
 		}
@@ -1372,7 +1375,7 @@ public class CFBamRamParamTable
 				pkey );
 		}
 		CFLibDbKeyHash256 varServerMethodId = existing.getRequiredServerMethodId();
-		CFBamServerMethodBuff container = schema.getTableServerMethod().readDerivedByIdIdx( Authorization,
+		CFBamBuffServerMethod container = schema.getTableServerMethod().readDerivedByIdIdx( Authorization,
 			varServerMethodId );
 		if( container == null ) {
 			throw new CFLibNullArgumentException( getClass(),
@@ -1384,7 +1387,7 @@ public class CFBamRamParamTable
 		CFLibDbKeyHash256 prevId = existing.getOptionalPrevId();
 		CFLibDbKeyHash256 nextId = existing.getOptionalNextId();
 
-		CFBamParamBuff prev = null;
+		CFBamBuffParam prev = null;
 		if( ( prevId != null ) )
 		{
 			prev = schema.getTableParam().readDerivedByIdIdx( Authorization,
@@ -1395,13 +1398,13 @@ public class CFBamRamParamTable
 					0,
 					"prev" );
 			}
-			CFBamParamBuff editPrev;
+			CFBamBuffParam editPrev;
 			classCode = prev.getClassCode();
 			if( classCode.equals( "a82f" ) ) {
 				editPrev = schema.getFactoryParam().newBuff();
 			}
 			else {
-				throw new CFLibUnsupportedClassException(getClass(), S_ProcName, 0, "-delete-update-prev-", "Not " + Integer.toString(classCode));
+				throw new CFLibUnsupportedClassException(getClass(), S_ProcName, "-delete-update-prev-", (Integer)classCode, "Classcode not recognized: " + Integer.toString(classCode));
 			}
 			editPrev.set( prev );
 			editPrev.setOptionalNextId( nextId );
@@ -1409,11 +1412,11 @@ public class CFBamRamParamTable
 				schema.getTableParam().updateParam( Authorization, editPrev );
 			}
 			else {
-				throw new CFLibUnsupportedClassException(getClass(), S_ProcName, 0, "-delete-edit-prev-", "Not " + Integer.toString(classCode));
+				throw new CFLibUnsupportedClassException(getClass(), S_ProcName, "-delete-edit-prev-", (Integer)classCode, "Classcode not recognized: " + Integer.toString(classCode));
 			}
 		}
 
-		CFBamParamBuff next = null;
+		CFBamBuffParam next = null;
 		if( ( nextId != null ) )
 		{
 			next = schema.getTableParam().readDerivedByIdIdx( Authorization,
@@ -1424,13 +1427,13 @@ public class CFBamRamParamTable
 					0,
 					"next" );
 			}
-			CFBamParamBuff editNext;
+			CFBamBuffParam editNext;
 			classCode = next.getClassCode();
 			if( classCode.equals( "a82f" ) ) {
 				editNext = schema.getFactoryParam().newBuff();
 			}
 			else {
-				throw new CFLibUnsupportedClassException(getClass(), S_ProcName, 0, "-delete-update-next-", "Not " + Integer.toString(classCode));
+				throw new CFLibUnsupportedClassException(getClass(), S_ProcName, "-delete-update-next-", (Integer)classCode, "Classcode not recognized: " + Integer.toString(classCode));
 			}
 			editNext.set( next );
 			editNext.setOptionalPrevId( prevId );
@@ -1438,7 +1441,7 @@ public class CFBamRamParamTable
 				schema.getTableParam().updateParam( Authorization, editNext );
 			}
 			else {
-				throw new CFLibUnsupportedClassException(getClass(), S_ProcName, 0, "-delete-edit-next-", "Not " + Integer.toString(classCode));
+				throw new CFLibUnsupportedClassException(getClass(), S_ProcName, "-delete-edit-next-", (Integer)classCode, "Classcode not recognized: " + Integer.toString(classCode));
 			}
 		}
 

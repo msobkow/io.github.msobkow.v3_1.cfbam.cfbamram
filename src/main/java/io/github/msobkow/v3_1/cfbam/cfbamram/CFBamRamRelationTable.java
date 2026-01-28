@@ -320,7 +320,7 @@ public class CFBamRamRelationTable
 				return( retbuff );
 			}
 			else {
-				throw new CFLibUnsupportedClassException(getClass(), S_ProcName, 0, "-create-buff-cloning-", "Not " + Integer.toString(classCode));
+				throw new CFLibUnsupportedClassException(getClass(), S_ProcName, "-create-buff-cloning-", (Integer)classCode, "Classcode not recognized: " + Integer.toString(classCode));
 			}
 		}
 	}
@@ -356,7 +356,7 @@ public class CFBamRamRelationTable
 	public ICFBamRelation[] readAllDerived( ICFSecAuthorization Authorization ) {
 		final String S_ProcName = "CFBamRamRelation.readAllDerived";
 		ICFBamRelation[] retList = new ICFBamRelation[ dictByPKey.values().size() ];
-		Iterator< ICFBamRelation > iter = dictByPKey.values().iterator();
+		Iterator< CFBamBuffRelation > iter = dictByPKey.values().iterator();
 		int idx = 0;
 		while( iter.hasNext() ) {
 			retList[ idx++ ] = iter.next();
@@ -417,7 +417,7 @@ public class CFBamRamRelationTable
 			Map< CFLibDbKeyHash256, CFBamBuffRelation > subdictRelTableIdx
 				= dictByRelTableIdx.get( key );
 			recArray = new ICFBamRelation[ subdictRelTableIdx.size() ];
-			Iterator< ICFBamRelation > iter = subdictRelTableIdx.values().iterator();
+			Iterator< CFBamBuffRelation > iter = subdictRelTableIdx.values().iterator();
 			int idx = 0;
 			while( iter.hasNext() ) {
 				recArray[ idx++ ] = iter.next();
@@ -444,7 +444,7 @@ public class CFBamRamRelationTable
 			Map< CFLibDbKeyHash256, CFBamBuffRelation > subdictDefSchemaIdx
 				= dictByDefSchemaIdx.get( key );
 			recArray = new ICFBamRelation[ subdictDefSchemaIdx.size() ];
-			Iterator< ICFBamRelation > iter = subdictDefSchemaIdx.values().iterator();
+			Iterator< CFBamBuffRelation > iter = subdictDefSchemaIdx.values().iterator();
 			int idx = 0;
 			while( iter.hasNext() ) {
 				recArray[ idx++ ] = iter.next();
@@ -471,7 +471,7 @@ public class CFBamRamRelationTable
 			Map< CFLibDbKeyHash256, CFBamBuffRelation > subdictFromKeyIdx
 				= dictByFromKeyIdx.get( key );
 			recArray = new ICFBamRelation[ subdictFromKeyIdx.size() ];
-			Iterator< ICFBamRelation > iter = subdictFromKeyIdx.values().iterator();
+			Iterator< CFBamBuffRelation > iter = subdictFromKeyIdx.values().iterator();
 			int idx = 0;
 			while( iter.hasNext() ) {
 				recArray[ idx++ ] = iter.next();
@@ -498,7 +498,7 @@ public class CFBamRamRelationTable
 			Map< CFLibDbKeyHash256, CFBamBuffRelation > subdictToTblIdx
 				= dictByToTblIdx.get( key );
 			recArray = new ICFBamRelation[ subdictToTblIdx.size() ];
-			Iterator< ICFBamRelation > iter = subdictToTblIdx.values().iterator();
+			Iterator< CFBamBuffRelation > iter = subdictToTblIdx.values().iterator();
 			int idx = 0;
 			while( iter.hasNext() ) {
 				recArray[ idx++ ] = iter.next();
@@ -525,7 +525,7 @@ public class CFBamRamRelationTable
 			Map< CFLibDbKeyHash256, CFBamBuffRelation > subdictToKeyIdx
 				= dictByToKeyIdx.get( key );
 			recArray = new ICFBamRelation[ subdictToKeyIdx.size() ];
-			Iterator< ICFBamRelation > iter = subdictToKeyIdx.values().iterator();
+			Iterator< CFBamBuffRelation > iter = subdictToKeyIdx.values().iterator();
 			int idx = 0;
 			while( iter.hasNext() ) {
 				recArray[ idx++ ] = iter.next();
@@ -552,7 +552,7 @@ public class CFBamRamRelationTable
 			Map< CFLibDbKeyHash256, CFBamBuffRelation > subdictNarrowedIdx
 				= dictByNarrowedIdx.get( key );
 			recArray = new ICFBamRelation[ subdictNarrowedIdx.size() ];
-			Iterator< ICFBamRelation > iter = subdictNarrowedIdx.values().iterator();
+			Iterator< CFBamBuffRelation > iter = subdictNarrowedIdx.values().iterator();
 			int idx = 0;
 			while( iter.hasNext() ) {
 				recArray[ idx++ ] = iter.next();
@@ -882,19 +882,17 @@ public class CFBamRamRelationTable
 	}
 
 	public ICFBamRelation updateRelation( ICFSecAuthorization Authorization,
-		ICFBamRelation Buff )
+		ICFBamRelation iBuff )
 	{
-		ICFBamRelation repl = schema.getTableScope().updateScope( Authorization,
-			Buff );
-		if (repl != Buff) {
-			throw new CFLibInvalidStateException(getClass(), S_ProcName, "repl != Buff", "repl != Buff");
-		}
+		CFBamBuffRelation Buff = (CFBamBuffRelation)schema.getTableScope().updateScope( Authorization,	Buff );
 		CFLibDbKeyHash256 pkey = Buff.getPKey();
-		ICFBamRelation existing = dictByPKey.get( pkey );
+		CFBamBuffRelation existing = dictByPKey.get( pkey );
 		if( existing == null ) {
 			throw new CFLibStaleCacheDetectedException( getClass(),
 				"updateRelation",
 				"Existing record not found",
+				"Existing record not found",
+				"Relation",
 				"Relation",
 				pkey );
 		}
@@ -1133,13 +1131,13 @@ public class CFBamRamRelationTable
 	}
 
 	public void deleteRelation( ICFSecAuthorization Authorization,
-		ICFBamRelation Buff )
+		ICFBamRelation iBuff )
 	{
 		final String S_ProcName = "CFBamRamRelationTable.deleteRelation() ";
-		String classCode;
-		CFLibDbKeyHash256 pkey = schema.getFactoryScope().newPKey();
-		pkey.setRequiredId( Buff.getRequiredId() );
-		ICFBamRelation existing = dictByPKey.get( pkey );
+		CFBamBuffRelation Buff = ensureRec(iBuff);
+		int classCode;
+		CFLibDbKeyHash256 pkey = (CFLibDbKeyHash256)(Buff.getPKey());
+		CFBamBuffRelation existing = dictByPKey.get( pkey );
 		if( existing == null ) {
 			return;
 		}

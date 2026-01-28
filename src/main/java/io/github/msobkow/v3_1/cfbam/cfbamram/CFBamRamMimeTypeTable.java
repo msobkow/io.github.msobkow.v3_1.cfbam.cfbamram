@@ -85,7 +85,7 @@ public class CFBamRamMimeTypeTable
 				return( ((CFIntBuffMimeTypeDefaultFactory)(schema.getFactoryMimeType())).ensureRec(rec) );
 			}
 			else {
-				throw new CFLibUnsupportedClassException(getClass(), "ensureRec", 1, "rec", "Not " + Integer.toString(classCode));
+				throw new CFLibUnsupportedClassException(getClass(), "ensureRec", "rec", (Integer)classCode, "Classcode not recognized: " + Integer.toString(classCode));
 			}
 		}
 	}
@@ -135,7 +135,7 @@ public class CFBamRamMimeTypeTable
 				return( retbuff );
 			}
 			else {
-				throw new CFLibUnsupportedClassException(getClass(), S_ProcName, 0, "-create-buff-cloning-", "Not " + Integer.toString(classCode));
+				throw new CFLibUnsupportedClassException(getClass(), S_ProcName, "-create-buff-cloning-", (Integer)classCode, "Classcode not recognized: " + Integer.toString(classCode));
 			}
 		}
 	}
@@ -171,7 +171,7 @@ public class CFBamRamMimeTypeTable
 	public ICFIntMimeType[] readAllDerived( ICFSecAuthorization Authorization ) {
 		final String S_ProcName = "CFBamRamMimeType.readAllDerived";
 		ICFIntMimeType[] retList = new ICFIntMimeType[ dictByPKey.values().size() ];
-		Iterator< ICFIntMimeType > iter = dictByPKey.values().iterator();
+		Iterator< CFIntBuffMimeType > iter = dictByPKey.values().iterator();
 		int idx = 0;
 		while( iter.hasNext() ) {
 			retList[ idx++ ] = iter.next();
@@ -276,14 +276,17 @@ public class CFBamRamMimeTypeTable
 	}
 
 	public ICFIntMimeType updateMimeType( ICFSecAuthorization Authorization,
-		ICFIntMimeType Buff )
+		ICFIntMimeType iBuff )
 	{
+		CFIntBuffMimeType Buff = ensureRec(iBuff);
 		Integer pkey = Buff.getPKey();
-		ICFIntMimeType existing = dictByPKey.get( pkey );
+		CFIntBuffMimeType existing = dictByPKey.get( pkey );
 		if( existing == null ) {
 			throw new CFLibStaleCacheDetectedException( getClass(),
 				"updateMimeType",
 				"Existing record not found",
+				"Existing record not found",
+				"MimeType",
 				"MimeType",
 				pkey );
 		}
@@ -327,13 +330,13 @@ public class CFBamRamMimeTypeTable
 	}
 
 	public void deleteMimeType( ICFSecAuthorization Authorization,
-		ICFIntMimeType Buff )
+		ICFIntMimeType iBuff )
 	{
 		final String S_ProcName = "CFBamRamMimeTypeTable.deleteMimeType() ";
-		String classCode;
-		Integer pkey = schema.getFactoryMimeType().newPKey();
-		pkey.setRequiredMimeTypeId( Buff.getRequiredMimeTypeId() );
-		ICFIntMimeType existing = dictByPKey.get( pkey );
+		CFIntBuffMimeType Buff = ensureRec(iBuff);
+		int classCode;
+		Integer pkey = (Integer)(Buff.getPKey());
+		CFIntBuffMimeType existing = dictByPKey.get( pkey );
 		if( existing == null ) {
 			return;
 		}

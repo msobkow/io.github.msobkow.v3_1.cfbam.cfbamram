@@ -195,7 +195,7 @@ public class CFBamRamClearDepTable
 				return( retbuff );
 			}
 			else {
-				throw new CFLibUnsupportedClassException(getClass(), S_ProcName, 0, "-create-buff-cloning-", "Not " + Integer.toString(classCode));
+				throw new CFLibUnsupportedClassException(getClass(), S_ProcName, "-create-buff-cloning-", (Integer)classCode, "Classcode not recognized: " + Integer.toString(classCode));
 			}
 		}
 	}
@@ -231,7 +231,7 @@ public class CFBamRamClearDepTable
 	public ICFBamClearDep[] readAllDerived( ICFSecAuthorization Authorization ) {
 		final String S_ProcName = "CFBamRamClearDep.readAllDerived";
 		ICFBamClearDep[] retList = new ICFBamClearDep[ dictByPKey.values().size() ];
-		Iterator< ICFBamClearDep > iter = dictByPKey.values().iterator();
+		Iterator< CFBamBuffClearDep > iter = dictByPKey.values().iterator();
 		int idx = 0;
 		while( iter.hasNext() ) {
 			retList[ idx++ ] = iter.next();
@@ -273,7 +273,7 @@ public class CFBamRamClearDepTable
 			Map< CFLibDbKeyHash256, CFBamBuffClearDep > subdictClearDepIdx
 				= dictByClearDepIdx.get( key );
 			recArray = new ICFBamClearDep[ subdictClearDepIdx.size() ];
-			Iterator< ICFBamClearDep > iter = subdictClearDepIdx.values().iterator();
+			Iterator< CFBamBuffClearDep > iter = subdictClearDepIdx.values().iterator();
 			int idx = 0;
 			while( iter.hasNext() ) {
 				recArray[ idx++ ] = iter.next();
@@ -300,7 +300,7 @@ public class CFBamRamClearDepTable
 			Map< CFLibDbKeyHash256, CFBamBuffClearDep > subdictDefSchemaIdx
 				= dictByDefSchemaIdx.get( key );
 			recArray = new ICFBamClearDep[ subdictDefSchemaIdx.size() ];
-			Iterator< ICFBamClearDep > iter = subdictDefSchemaIdx.values().iterator();
+			Iterator< CFBamBuffClearDep > iter = subdictDefSchemaIdx.values().iterator();
 			int idx = 0;
 			while( iter.hasNext() ) {
 				recArray[ idx++ ] = iter.next();
@@ -470,19 +470,17 @@ public class CFBamRamClearDepTable
 	}
 
 	public ICFBamClearDep updateClearDep( ICFSecAuthorization Authorization,
-		ICFBamClearDep Buff )
+		ICFBamClearDep iBuff )
 	{
-		ICFBamClearDep repl = schema.getTableScope().updateScope( Authorization,
-			Buff );
-		if (repl != Buff) {
-			throw new CFLibInvalidStateException(getClass(), S_ProcName, "repl != Buff", "repl != Buff");
-		}
+		CFBamBuffClearDep Buff = (CFBamBuffClearDep)schema.getTableScope().updateScope( Authorization,	Buff );
 		CFLibDbKeyHash256 pkey = Buff.getPKey();
-		ICFBamClearDep existing = dictByPKey.get( pkey );
+		CFBamBuffClearDep existing = dictByPKey.get( pkey );
 		if( existing == null ) {
 			throw new CFLibStaleCacheDetectedException( getClass(),
 				"updateClearDep",
 				"Existing record not found",
+				"Existing record not found",
+				"ClearDep",
 				"ClearDep",
 				pkey );
 		}
@@ -573,13 +571,13 @@ public class CFBamRamClearDepTable
 	}
 
 	public void deleteClearDep( ICFSecAuthorization Authorization,
-		ICFBamClearDep Buff )
+		ICFBamClearDep iBuff )
 	{
 		final String S_ProcName = "CFBamRamClearDepTable.deleteClearDep() ";
-		String classCode;
-		CFLibDbKeyHash256 pkey = schema.getFactoryScope().newPKey();
-		pkey.setRequiredId( Buff.getRequiredId() );
-		ICFBamClearDep existing = dictByPKey.get( pkey );
+		CFBamBuffClearDep Buff = ensureRec(iBuff);
+		int classCode;
+		CFLibDbKeyHash256 pkey = (CFLibDbKeyHash256)(Buff.getPKey());
+		CFBamBuffClearDep existing = dictByPKey.get( pkey );
 		if( existing == null ) {
 			return;
 		}
@@ -703,7 +701,7 @@ public class CFBamRamClearDepTable
 				schema.getTableClearTopDep().deleteClearTopDep( Authorization, (ICFBamClearTopDep)cur );
 			}
 			else {
-				throw new CFLibUnsupportedClassException(getClass(), S_ProcName, 0, "-delete-by-suffix-class-walker-", "Not " + Integer.toString(classCode));
+				throw new CFLibUnsupportedClassException(getClass(), S_ProcName, "-delete-by-suffix-class-walker-", (Integer)classCode, "Classcode not recognized: " + Integer.toString(classCode));
 			}
 		}
 	}
@@ -758,7 +756,7 @@ public class CFBamRamClearDepTable
 				schema.getTableClearTopDep().deleteClearTopDep( Authorization, (ICFBamClearTopDep)cur );
 			}
 			else {
-				throw new CFLibUnsupportedClassException(getClass(), S_ProcName, 0, "-delete-by-suffix-class-walker-", "Not " + Integer.toString(classCode));
+				throw new CFLibUnsupportedClassException(getClass(), S_ProcName, "-delete-by-suffix-class-walker-", (Integer)classCode, "Classcode not recognized: " + Integer.toString(classCode));
 			}
 		}
 	}
@@ -803,7 +801,7 @@ public class CFBamRamClearDepTable
 				schema.getTableClearTopDep().deleteClearTopDep( Authorization, (ICFBamClearTopDep)cur );
 			}
 			else {
-				throw new CFLibUnsupportedClassException(getClass(), S_ProcName, 0, "-delete-by-suffix-class-walker-", "Not " + Integer.toString(classCode));
+				throw new CFLibUnsupportedClassException(getClass(), S_ProcName, "-delete-by-suffix-class-walker-", (Integer)classCode, "Classcode not recognized: " + Integer.toString(classCode));
 			}
 		}
 	}
@@ -856,7 +854,7 @@ public class CFBamRamClearDepTable
 				schema.getTableClearTopDep().deleteClearTopDep( Authorization, (ICFBamClearTopDep)cur );
 			}
 			else {
-				throw new CFLibUnsupportedClassException(getClass(), S_ProcName, 0, "-delete-by-suffix-class-walker-", "Not " + Integer.toString(classCode));
+				throw new CFLibUnsupportedClassException(getClass(), S_ProcName, "-delete-by-suffix-class-walker-", (Integer)classCode, "Classcode not recognized: " + Integer.toString(classCode));
 			}
 		}
 	}

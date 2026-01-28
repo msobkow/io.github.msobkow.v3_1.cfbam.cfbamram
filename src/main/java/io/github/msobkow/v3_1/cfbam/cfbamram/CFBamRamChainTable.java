@@ -109,7 +109,7 @@ public class CFBamRamChainTable
 				return( ((CFBamBuffChainDefaultFactory)(schema.getFactoryChain())).ensureRec(rec) );
 			}
 			else {
-				throw new CFLibUnsupportedClassException(getClass(), "ensureRec", 1, "rec", "Not " + Integer.toString(classCode));
+				throw new CFLibUnsupportedClassException(getClass(), "ensureRec", "rec", (Integer)classCode, "Classcode not recognized: " + Integer.toString(classCode));
 			}
 		}
 	}
@@ -263,7 +263,7 @@ public class CFBamRamChainTable
 				return( retbuff );
 			}
 			else {
-				throw new CFLibUnsupportedClassException(getClass(), S_ProcName, 0, "-create-buff-cloning-", "Not " + Integer.toString(classCode));
+				throw new CFLibUnsupportedClassException(getClass(), S_ProcName, "-create-buff-cloning-", (Integer)classCode, "Classcode not recognized: " + Integer.toString(classCode));
 			}
 		}
 	}
@@ -299,7 +299,7 @@ public class CFBamRamChainTable
 	public ICFBamChain[] readAllDerived( ICFSecAuthorization Authorization ) {
 		final String S_ProcName = "CFBamRamChain.readAllDerived";
 		ICFBamChain[] retList = new ICFBamChain[ dictByPKey.values().size() ];
-		Iterator< ICFBamChain > iter = dictByPKey.values().iterator();
+		Iterator< CFBamBuffChain > iter = dictByPKey.values().iterator();
 		int idx = 0;
 		while( iter.hasNext() ) {
 			retList[ idx++ ] = iter.next();
@@ -319,7 +319,7 @@ public class CFBamRamChainTable
 			Map< CFLibDbKeyHash256, CFBamBuffChain > subdictChainTableIdx
 				= dictByChainTableIdx.get( key );
 			recArray = new ICFBamChain[ subdictChainTableIdx.size() ];
-			Iterator< ICFBamChain > iter = subdictChainTableIdx.values().iterator();
+			Iterator< CFBamBuffChain > iter = subdictChainTableIdx.values().iterator();
 			int idx = 0;
 			while( iter.hasNext() ) {
 				recArray[ idx++ ] = iter.next();
@@ -346,7 +346,7 @@ public class CFBamRamChainTable
 			Map< CFLibDbKeyHash256, CFBamBuffChain > subdictDefSchemaIdx
 				= dictByDefSchemaIdx.get( key );
 			recArray = new ICFBamChain[ subdictDefSchemaIdx.size() ];
-			Iterator< ICFBamChain > iter = subdictDefSchemaIdx.values().iterator();
+			Iterator< CFBamBuffChain > iter = subdictDefSchemaIdx.values().iterator();
 			int idx = 0;
 			while( iter.hasNext() ) {
 				recArray[ idx++ ] = iter.next();
@@ -392,7 +392,7 @@ public class CFBamRamChainTable
 			Map< CFLibDbKeyHash256, CFBamBuffChain > subdictPrevRelIdx
 				= dictByPrevRelIdx.get( key );
 			recArray = new ICFBamChain[ subdictPrevRelIdx.size() ];
-			Iterator< ICFBamChain > iter = subdictPrevRelIdx.values().iterator();
+			Iterator< CFBamBuffChain > iter = subdictPrevRelIdx.values().iterator();
 			int idx = 0;
 			while( iter.hasNext() ) {
 				recArray[ idx++ ] = iter.next();
@@ -419,7 +419,7 @@ public class CFBamRamChainTable
 			Map< CFLibDbKeyHash256, CFBamBuffChain > subdictNextRelIdx
 				= dictByNextRelIdx.get( key );
 			recArray = new ICFBamChain[ subdictNextRelIdx.size() ];
-			Iterator< ICFBamChain > iter = subdictNextRelIdx.values().iterator();
+			Iterator< CFBamBuffChain > iter = subdictNextRelIdx.values().iterator();
 			int idx = 0;
 			while( iter.hasNext() ) {
 				recArray[ idx++ ] = iter.next();
@@ -584,14 +584,17 @@ public class CFBamRamChainTable
 	}
 
 	public ICFBamChain updateChain( ICFSecAuthorization Authorization,
-		ICFBamChain Buff )
+		ICFBamChain iBuff )
 	{
+		CFBamBuffChain Buff = ensureRec(iBuff);
 		CFLibDbKeyHash256 pkey = Buff.getPKey();
-		ICFBamChain existing = dictByPKey.get( pkey );
+		CFBamBuffChain existing = dictByPKey.get( pkey );
 		if( existing == null ) {
 			throw new CFLibStaleCacheDetectedException( getClass(),
 				"updateChain",
 				"Existing record not found",
+				"Existing record not found",
+				"Chain",
 				"Chain",
 				pkey );
 		}
@@ -764,13 +767,13 @@ public class CFBamRamChainTable
 	}
 
 	public void deleteChain( ICFSecAuthorization Authorization,
-		ICFBamChain Buff )
+		ICFBamChain iBuff )
 	{
 		final String S_ProcName = "CFBamRamChainTable.deleteChain() ";
-		String classCode;
-		CFLibDbKeyHash256 pkey = schema.getFactoryChain().newPKey();
-		pkey.setRequiredId( Buff.getRequiredId() );
-		ICFBamChain existing = dictByPKey.get( pkey );
+		CFBamBuffChain Buff = ensureRec(iBuff);
+		int classCode;
+		CFLibDbKeyHash256 pkey = (CFLibDbKeyHash256)(Buff.getPKey());
+		CFBamBuffChain existing = dictByPKey.get( pkey );
 		if( existing == null ) {
 			return;
 		}

@@ -97,7 +97,7 @@ public class CFBamRamMajorVersionTable
 				return( ((CFIntBuffMajorVersionDefaultFactory)(schema.getFactoryMajorVersion())).ensureRec(rec) );
 			}
 			else {
-				throw new CFLibUnsupportedClassException(getClass(), "ensureRec", 1, "rec", "Not " + Integer.toString(classCode));
+				throw new CFLibUnsupportedClassException(getClass(), "ensureRec", "rec", (Integer)classCode, "Classcode not recognized: " + Integer.toString(classCode));
 			}
 		}
 	}
@@ -208,7 +208,7 @@ public class CFBamRamMajorVersionTable
 				return( retbuff );
 			}
 			else {
-				throw new CFLibUnsupportedClassException(getClass(), S_ProcName, 0, "-create-buff-cloning-", "Not " + Integer.toString(classCode));
+				throw new CFLibUnsupportedClassException(getClass(), S_ProcName, "-create-buff-cloning-", (Integer)classCode, "Classcode not recognized: " + Integer.toString(classCode));
 			}
 		}
 	}
@@ -244,7 +244,7 @@ public class CFBamRamMajorVersionTable
 	public ICFIntMajorVersion[] readAllDerived( ICFSecAuthorization Authorization ) {
 		final String S_ProcName = "CFBamRamMajorVersion.readAllDerived";
 		ICFIntMajorVersion[] retList = new ICFIntMajorVersion[ dictByPKey.values().size() ];
-		Iterator< ICFIntMajorVersion > iter = dictByPKey.values().iterator();
+		Iterator< CFIntBuffMajorVersion > iter = dictByPKey.values().iterator();
 		int idx = 0;
 		while( iter.hasNext() ) {
 			retList[ idx++ ] = iter.next();
@@ -264,7 +264,7 @@ public class CFBamRamMajorVersionTable
 			Map< CFLibDbKeyHash256, CFIntBuffMajorVersion > subdictTenantIdx
 				= dictByTenantIdx.get( key );
 			recArray = new ICFIntMajorVersion[ subdictTenantIdx.size() ];
-			Iterator< ICFIntMajorVersion > iter = subdictTenantIdx.values().iterator();
+			Iterator< CFIntBuffMajorVersion > iter = subdictTenantIdx.values().iterator();
 			int idx = 0;
 			while( iter.hasNext() ) {
 				recArray[ idx++ ] = iter.next();
@@ -291,7 +291,7 @@ public class CFBamRamMajorVersionTable
 			Map< CFLibDbKeyHash256, CFIntBuffMajorVersion > subdictSubProjectIdx
 				= dictBySubProjectIdx.get( key );
 			recArray = new ICFIntMajorVersion[ subdictSubProjectIdx.size() ];
-			Iterator< ICFIntMajorVersion > iter = subdictSubProjectIdx.values().iterator();
+			Iterator< CFIntBuffMajorVersion > iter = subdictSubProjectIdx.values().iterator();
 			int idx = 0;
 			while( iter.hasNext() ) {
 				recArray[ idx++ ] = iter.next();
@@ -441,14 +441,17 @@ public class CFBamRamMajorVersionTable
 	}
 
 	public ICFIntMajorVersion updateMajorVersion( ICFSecAuthorization Authorization,
-		ICFIntMajorVersion Buff )
+		ICFIntMajorVersion iBuff )
 	{
+		CFIntBuffMajorVersion Buff = ensureRec(iBuff);
 		CFLibDbKeyHash256 pkey = Buff.getPKey();
-		ICFIntMajorVersion existing = dictByPKey.get( pkey );
+		CFIntBuffMajorVersion existing = dictByPKey.get( pkey );
 		if( existing == null ) {
 			throw new CFLibStaleCacheDetectedException( getClass(),
 				"updateMajorVersion",
 				"Existing record not found",
+				"Existing record not found",
+				"MajorVersion",
 				"MajorVersion",
 				pkey );
 		}
@@ -566,13 +569,13 @@ public class CFBamRamMajorVersionTable
 	}
 
 	public void deleteMajorVersion( ICFSecAuthorization Authorization,
-		ICFIntMajorVersion Buff )
+		ICFIntMajorVersion iBuff )
 	{
 		final String S_ProcName = "CFBamRamMajorVersionTable.deleteMajorVersion() ";
-		String classCode;
-		CFLibDbKeyHash256 pkey = schema.getFactoryMajorVersion().newPKey();
-		pkey.setRequiredId( Buff.getRequiredId() );
-		ICFIntMajorVersion existing = dictByPKey.get( pkey );
+		CFIntBuffMajorVersion Buff = ensureRec(iBuff);
+		int classCode;
+		CFLibDbKeyHash256 pkey = (CFLibDbKeyHash256)(Buff.getPKey());
+		CFIntBuffMajorVersion existing = dictByPKey.get( pkey );
 		if( existing == null ) {
 			return;
 		}

@@ -87,7 +87,7 @@ public class CFBamRamSysClusterTable
 				return( ((CFSecBuffSysClusterDefaultFactory)(schema.getFactorySysCluster())).ensureRec(rec) );
 			}
 			else {
-				throw new CFLibUnsupportedClassException(getClass(), "ensureRec", 1, "rec", "Not " + Integer.toString(classCode));
+				throw new CFLibUnsupportedClassException(getClass(), "ensureRec", "rec", (Integer)classCode, "Classcode not recognized: " + Integer.toString(classCode));
 			}
 		}
 	}
@@ -154,7 +154,7 @@ public class CFBamRamSysClusterTable
 				return( retbuff );
 			}
 			else {
-				throw new CFLibUnsupportedClassException(getClass(), S_ProcName, 0, "-create-buff-cloning-", "Not " + Integer.toString(classCode));
+				throw new CFLibUnsupportedClassException(getClass(), S_ProcName, "-create-buff-cloning-", (Integer)classCode, "Classcode not recognized: " + Integer.toString(classCode));
 			}
 		}
 	}
@@ -190,7 +190,7 @@ public class CFBamRamSysClusterTable
 	public ICFSecSysCluster[] readAllDerived( ICFSecAuthorization Authorization ) {
 		final String S_ProcName = "CFBamRamSysCluster.readAllDerived";
 		ICFSecSysCluster[] retList = new ICFSecSysCluster[ dictByPKey.values().size() ];
-		Iterator< ICFSecSysCluster > iter = dictByPKey.values().iterator();
+		Iterator< CFSecBuffSysCluster > iter = dictByPKey.values().iterator();
 		int idx = 0;
 		while( iter.hasNext() ) {
 			retList[ idx++ ] = iter.next();
@@ -210,7 +210,7 @@ public class CFBamRamSysClusterTable
 			Map< Integer, CFSecBuffSysCluster > subdictClusterIdx
 				= dictByClusterIdx.get( key );
 			recArray = new ICFSecSysCluster[ subdictClusterIdx.size() ];
-			Iterator< ICFSecSysCluster > iter = subdictClusterIdx.values().iterator();
+			Iterator< CFSecBuffSysCluster > iter = subdictClusterIdx.values().iterator();
 			int idx = 0;
 			while( iter.hasNext() ) {
 				recArray[ idx++ ] = iter.next();
@@ -308,14 +308,17 @@ public class CFBamRamSysClusterTable
 	}
 
 	public ICFSecSysCluster updateSysCluster( ICFSecAuthorization Authorization,
-		ICFSecSysCluster Buff )
+		ICFSecSysCluster iBuff )
 	{
+		CFSecBuffSysCluster Buff = ensureRec(iBuff);
 		Integer pkey = Buff.getPKey();
-		ICFSecSysCluster existing = dictByPKey.get( pkey );
+		CFSecBuffSysCluster existing = dictByPKey.get( pkey );
 		if( existing == null ) {
 			throw new CFLibStaleCacheDetectedException( getClass(),
 				"updateSysCluster",
 				"Existing record not found",
+				"Existing record not found",
+				"SysCluster",
 				"SysCluster",
 				pkey );
 		}
@@ -376,13 +379,13 @@ public class CFBamRamSysClusterTable
 	}
 
 	public void deleteSysCluster( ICFSecAuthorization Authorization,
-		ICFSecSysCluster Buff )
+		ICFSecSysCluster iBuff )
 	{
 		final String S_ProcName = "CFBamRamSysClusterTable.deleteSysCluster() ";
-		String classCode;
-		Integer pkey = schema.getFactorySysCluster().newPKey();
-		pkey.setRequiredSingletonId( Buff.getRequiredSingletonId() );
-		ICFSecSysCluster existing = dictByPKey.get( pkey );
+		CFSecBuffSysCluster Buff = ensureRec(iBuff);
+		int classCode;
+		Integer pkey = (Integer)(Buff.getPKey());
+		CFSecBuffSysCluster existing = dictByPKey.get( pkey );
 		if( existing == null ) {
 			return;
 		}

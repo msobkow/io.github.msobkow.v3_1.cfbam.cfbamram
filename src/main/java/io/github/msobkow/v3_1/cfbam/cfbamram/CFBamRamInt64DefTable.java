@@ -135,7 +135,7 @@ public class CFBamRamInt64DefTable
 				return( retbuff );
 			}
 			else {
-				throw new CFLibUnsupportedClassException(getClass(), S_ProcName, 0, "-create-buff-cloning-", "Not " + Integer.toString(classCode));
+				throw new CFLibUnsupportedClassException(getClass(), S_ProcName, "-create-buff-cloning-", (Integer)classCode, "Classcode not recognized: " + Integer.toString(classCode));
 			}
 		}
 	}
@@ -171,7 +171,7 @@ public class CFBamRamInt64DefTable
 	public ICFBamInt64Def[] readAllDerived( ICFSecAuthorization Authorization ) {
 		final String S_ProcName = "CFBamRamInt64Def.readAllDerived";
 		ICFBamInt64Def[] retList = new ICFBamInt64Def[ dictByPKey.values().size() ];
-		Iterator< ICFBamInt64Def > iter = dictByPKey.values().iterator();
+		Iterator< CFBamBuffInt64Def > iter = dictByPKey.values().iterator();
 		int idx = 0;
 		while( iter.hasNext() ) {
 			retList[ idx++ ] = iter.next();
@@ -548,7 +548,7 @@ public class CFBamRamInt64DefTable
 
 		if( ( cur.getOptionalPrevId() == null ) )
 		{
-			return( (CFBamInt64DefBuff)cur );
+			return( (CFBamBuffInt64Def)cur );
 		}
 
 		prev = schema.getTableValue().readDerivedByIdIdx(Authorization, cur.getOptionalPrevId() );
@@ -905,7 +905,7 @@ public class CFBamRamInt64DefTable
 				newInstance = schema.getFactoryTableCol().newBuff();
 			}
 			else {
-				throw new CFLibUnsupportedClassException(getClass(), S_ProcName, 0, "-instantiate-buff-", "Not " + Integer.toString(classCode));
+				throw new CFLibUnsupportedClassException(getClass(), S_ProcName, "-instantiate-buff-", (Integer)classCode, "Classcode not recognized: " + Integer.toString(classCode));
 			}
 		ICFBamValue editPrev = newInstance;
 		editPrev.set( prev );
@@ -1230,12 +1230,12 @@ public class CFBamRamInt64DefTable
 				newInstance = schema.getFactoryTableCol().newBuff();
 			}
 			else {
-				throw new CFLibUnsupportedClassException(getClass(), S_ProcName, 0, "-instantiate-buff-", "Not " + Integer.toString(classCode));
+				throw new CFLibUnsupportedClassException(getClass(), S_ProcName, "-instantiate-buff-", (Integer)classCode, "Classcode not recognized: " + Integer.toString(classCode));
 			}
-		CFBamValueBuff editCur = newInstance;
+		CFBamBuffValue editCur = newInstance;
 		editCur.set( cur );
 
-		ICFBamValue editGrandprev = null;
+		CFBamBuffValue editGrandprev = null;
 		if( grandprev != null ) {
 			classCode = grandprev.getClassCode();
 			if( classCode == ICFBamValue.CLASS_CODE ) {
@@ -1557,13 +1557,13 @@ public class CFBamRamInt64DefTable
 				newInstance = schema.getFactoryTableCol().newBuff();
 			}
 			else {
-				throw new CFLibUnsupportedClassException(getClass(), S_ProcName, 0, "-instantiate-buff-", "Not " + Integer.toString(classCode));
+				throw new CFLibUnsupportedClassException(getClass(), S_ProcName, "-instantiate-buff-", (Integer)classCode, "Classcode not recognized: " + Integer.toString(classCode));
 			}
 			editGrandprev = newInstance;
 			editGrandprev.set( grandprev );
 		}
 
-		ICFBamValue editNext = null;
+		CFBamBuffValue editNext = null;
 		if( next != null ) {
 			classCode = next.getClassCode();
 			if( classCode == ICFBamValue.CLASS_CODE ) {
@@ -1885,7 +1885,7 @@ public class CFBamRamInt64DefTable
 				newInstance = schema.getFactoryTableCol().newBuff();
 			}
 			else {
-				throw new CFLibUnsupportedClassException(getClass(), S_ProcName, 0, "-instantiate-buff-", "Not " + Integer.toString(classCode));
+				throw new CFLibUnsupportedClassException(getClass(), S_ProcName, "-instantiate-buff-", (Integer)classCode, "Classcode not recognized: " + Integer.toString(classCode));
 			}
 			editNext = newInstance;
 			editNext.set( next );
@@ -1917,322 +1917,322 @@ public class CFBamRamInt64DefTable
 				schema.getTableValue().updateValue( Authorization, editGrandprev );
 			}
 			else if( classCode == ICFBamAtom.CLASS_CODE ) {
-				schema.getTableAtom().updateAtom( Authorization, (CFBamAtomBuff)editGrandprev );
+				schema.getTableAtom().updateAtom( Authorization, (CFBamBuffAtom)editGrandprev );
 			}
 			else if( classCode == ICFBamBlobDef.CLASS_CODE ) {
-				schema.getTableBlobDef().updateBlobDef( Authorization, (CFBamBlobDefBuff)editGrandprev );
+				schema.getTableBlobDef().updateBlobDef( Authorization, (CFBamBuffBlobDef)editGrandprev );
 			}
 			else if( classCode == ICFBamBlobType.CLASS_CODE ) {
-				schema.getTableBlobType().updateBlobType( Authorization, (CFBamBlobTypeBuff)editGrandprev );
+				schema.getTableBlobType().updateBlobType( Authorization, (CFBamBuffBlobType)editGrandprev );
 			}
 			else if( classCode == ICFBamBlobCol.CLASS_CODE ) {
-				schema.getTableBlobCol().updateBlobCol( Authorization, (CFBamBlobColBuff)editGrandprev );
+				schema.getTableBlobCol().updateBlobCol( Authorization, (CFBamBuffBlobCol)editGrandprev );
 			}
 			else if( classCode == ICFBamBoolDef.CLASS_CODE ) {
-				schema.getTableBoolDef().updateBoolDef( Authorization, (CFBamBoolDefBuff)editGrandprev );
+				schema.getTableBoolDef().updateBoolDef( Authorization, (CFBamBuffBoolDef)editGrandprev );
 			}
 			else if( classCode == ICFBamBoolType.CLASS_CODE ) {
-				schema.getTableBoolType().updateBoolType( Authorization, (CFBamBoolTypeBuff)editGrandprev );
+				schema.getTableBoolType().updateBoolType( Authorization, (CFBamBuffBoolType)editGrandprev );
 			}
 			else if( classCode == ICFBamBoolCol.CLASS_CODE ) {
-				schema.getTableBoolCol().updateBoolCol( Authorization, (CFBamBoolColBuff)editGrandprev );
+				schema.getTableBoolCol().updateBoolCol( Authorization, (CFBamBuffBoolCol)editGrandprev );
 			}
 			else if( classCode == ICFBamDateDef.CLASS_CODE ) {
-				schema.getTableDateDef().updateDateDef( Authorization, (CFBamDateDefBuff)editGrandprev );
+				schema.getTableDateDef().updateDateDef( Authorization, (CFBamBuffDateDef)editGrandprev );
 			}
 			else if( classCode == ICFBamDateType.CLASS_CODE ) {
-				schema.getTableDateType().updateDateType( Authorization, (CFBamDateTypeBuff)editGrandprev );
+				schema.getTableDateType().updateDateType( Authorization, (CFBamBuffDateType)editGrandprev );
 			}
 			else if( classCode == ICFBamDateCol.CLASS_CODE ) {
-				schema.getTableDateCol().updateDateCol( Authorization, (CFBamDateColBuff)editGrandprev );
+				schema.getTableDateCol().updateDateCol( Authorization, (CFBamBuffDateCol)editGrandprev );
 			}
 			else if( classCode == ICFBamDoubleDef.CLASS_CODE ) {
-				schema.getTableDoubleDef().updateDoubleDef( Authorization, (CFBamDoubleDefBuff)editGrandprev );
+				schema.getTableDoubleDef().updateDoubleDef( Authorization, (CFBamBuffDoubleDef)editGrandprev );
 			}
 			else if( classCode == ICFBamDoubleType.CLASS_CODE ) {
-				schema.getTableDoubleType().updateDoubleType( Authorization, (CFBamDoubleTypeBuff)editGrandprev );
+				schema.getTableDoubleType().updateDoubleType( Authorization, (CFBamBuffDoubleType)editGrandprev );
 			}
 			else if( classCode == ICFBamDoubleCol.CLASS_CODE ) {
-				schema.getTableDoubleCol().updateDoubleCol( Authorization, (CFBamDoubleColBuff)editGrandprev );
+				schema.getTableDoubleCol().updateDoubleCol( Authorization, (CFBamBuffDoubleCol)editGrandprev );
 			}
 			else if( classCode == ICFBamFloatDef.CLASS_CODE ) {
-				schema.getTableFloatDef().updateFloatDef( Authorization, (CFBamFloatDefBuff)editGrandprev );
+				schema.getTableFloatDef().updateFloatDef( Authorization, (CFBamBuffFloatDef)editGrandprev );
 			}
 			else if( classCode == ICFBamFloatType.CLASS_CODE ) {
-				schema.getTableFloatType().updateFloatType( Authorization, (CFBamFloatTypeBuff)editGrandprev );
+				schema.getTableFloatType().updateFloatType( Authorization, (CFBamBuffFloatType)editGrandprev );
 			}
 			else if( classCode == ICFBamFloatCol.CLASS_CODE ) {
-				schema.getTableFloatCol().updateFloatCol( Authorization, (CFBamFloatColBuff)editGrandprev );
+				schema.getTableFloatCol().updateFloatCol( Authorization, (CFBamBuffFloatCol)editGrandprev );
 			}
 			else if( classCode == ICFBamInt16Def.CLASS_CODE ) {
-				schema.getTableInt16Def().updateInt16Def( Authorization, (CFBamInt16DefBuff)editGrandprev );
+				schema.getTableInt16Def().updateInt16Def( Authorization, (CFBamBuffInt16Def)editGrandprev );
 			}
 			else if( classCode == ICFBamInt16Type.CLASS_CODE ) {
-				schema.getTableInt16Type().updateInt16Type( Authorization, (CFBamInt16TypeBuff)editGrandprev );
+				schema.getTableInt16Type().updateInt16Type( Authorization, (CFBamBuffInt16Type)editGrandprev );
 			}
 			else if( classCode == ICFBamId16Gen.CLASS_CODE ) {
-				schema.getTableId16Gen().updateId16Gen( Authorization, (CFBamId16GenBuff)editGrandprev );
+				schema.getTableId16Gen().updateId16Gen( Authorization, (CFBamBuffId16Gen)editGrandprev );
 			}
 			else if( classCode == ICFBamEnumDef.CLASS_CODE ) {
-				schema.getTableEnumDef().updateEnumDef( Authorization, (CFBamEnumDefBuff)editGrandprev );
+				schema.getTableEnumDef().updateEnumDef( Authorization, (CFBamBuffEnumDef)editGrandprev );
 			}
 			else if( classCode == ICFBamEnumType.CLASS_CODE ) {
-				schema.getTableEnumType().updateEnumType( Authorization, (CFBamEnumTypeBuff)editGrandprev );
+				schema.getTableEnumType().updateEnumType( Authorization, (CFBamBuffEnumType)editGrandprev );
 			}
 			else if( classCode == ICFBamInt16Col.CLASS_CODE ) {
-				schema.getTableInt16Col().updateInt16Col( Authorization, (CFBamInt16ColBuff)editGrandprev );
+				schema.getTableInt16Col().updateInt16Col( Authorization, (CFBamBuffInt16Col)editGrandprev );
 			}
 			else if( classCode == ICFBamInt32Def.CLASS_CODE ) {
-				schema.getTableInt32Def().updateInt32Def( Authorization, (CFBamInt32DefBuff)editGrandprev );
+				schema.getTableInt32Def().updateInt32Def( Authorization, (CFBamBuffInt32Def)editGrandprev );
 			}
 			else if( classCode == ICFBamInt32Type.CLASS_CODE ) {
-				schema.getTableInt32Type().updateInt32Type( Authorization, (CFBamInt32TypeBuff)editGrandprev );
+				schema.getTableInt32Type().updateInt32Type( Authorization, (CFBamBuffInt32Type)editGrandprev );
 			}
 			else if( classCode == ICFBamId32Gen.CLASS_CODE ) {
-				schema.getTableId32Gen().updateId32Gen( Authorization, (CFBamId32GenBuff)editGrandprev );
+				schema.getTableId32Gen().updateId32Gen( Authorization, (CFBamBuffId32Gen)editGrandprev );
 			}
 			else if( classCode == ICFBamInt32Col.CLASS_CODE ) {
-				schema.getTableInt32Col().updateInt32Col( Authorization, (CFBamInt32ColBuff)editGrandprev );
+				schema.getTableInt32Col().updateInt32Col( Authorization, (CFBamBuffInt32Col)editGrandprev );
 			}
 			else if( classCode == ICFBamInt64Def.CLASS_CODE ) {
-				schema.getTableInt64Def().updateInt64Def( Authorization, (CFBamInt64DefBuff)editGrandprev );
+				schema.getTableInt64Def().updateInt64Def( Authorization, (CFBamBuffInt64Def)editGrandprev );
 			}
 			else if( classCode == ICFBamInt64Type.CLASS_CODE ) {
-				schema.getTableInt64Type().updateInt64Type( Authorization, (CFBamInt64TypeBuff)editGrandprev );
+				schema.getTableInt64Type().updateInt64Type( Authorization, (CFBamBuffInt64Type)editGrandprev );
 			}
 			else if( classCode == ICFBamId64Gen.CLASS_CODE ) {
-				schema.getTableId64Gen().updateId64Gen( Authorization, (CFBamId64GenBuff)editGrandprev );
+				schema.getTableId64Gen().updateId64Gen( Authorization, (CFBamBuffId64Gen)editGrandprev );
 			}
 			else if( classCode == ICFBamInt64Col.CLASS_CODE ) {
-				schema.getTableInt64Col().updateInt64Col( Authorization, (CFBamInt64ColBuff)editGrandprev );
+				schema.getTableInt64Col().updateInt64Col( Authorization, (CFBamBuffInt64Col)editGrandprev );
 			}
 			else if( classCode == ICFBamNmTokenDef.CLASS_CODE ) {
-				schema.getTableNmTokenDef().updateNmTokenDef( Authorization, (CFBamNmTokenDefBuff)editGrandprev );
+				schema.getTableNmTokenDef().updateNmTokenDef( Authorization, (CFBamBuffNmTokenDef)editGrandprev );
 			}
 			else if( classCode == ICFBamNmTokenType.CLASS_CODE ) {
-				schema.getTableNmTokenType().updateNmTokenType( Authorization, (CFBamNmTokenTypeBuff)editGrandprev );
+				schema.getTableNmTokenType().updateNmTokenType( Authorization, (CFBamBuffNmTokenType)editGrandprev );
 			}
 			else if( classCode == ICFBamNmTokenCol.CLASS_CODE ) {
-				schema.getTableNmTokenCol().updateNmTokenCol( Authorization, (CFBamNmTokenColBuff)editGrandprev );
+				schema.getTableNmTokenCol().updateNmTokenCol( Authorization, (CFBamBuffNmTokenCol)editGrandprev );
 			}
 			else if( classCode == ICFBamNmTokensDef.CLASS_CODE ) {
-				schema.getTableNmTokensDef().updateNmTokensDef( Authorization, (CFBamNmTokensDefBuff)editGrandprev );
+				schema.getTableNmTokensDef().updateNmTokensDef( Authorization, (CFBamBuffNmTokensDef)editGrandprev );
 			}
 			else if( classCode == ICFBamNmTokensType.CLASS_CODE ) {
-				schema.getTableNmTokensType().updateNmTokensType( Authorization, (CFBamNmTokensTypeBuff)editGrandprev );
+				schema.getTableNmTokensType().updateNmTokensType( Authorization, (CFBamBuffNmTokensType)editGrandprev );
 			}
 			else if( classCode == ICFBamNmTokensCol.CLASS_CODE ) {
-				schema.getTableNmTokensCol().updateNmTokensCol( Authorization, (CFBamNmTokensColBuff)editGrandprev );
+				schema.getTableNmTokensCol().updateNmTokensCol( Authorization, (CFBamBuffNmTokensCol)editGrandprev );
 			}
 			else if( classCode == ICFBamNumberDef.CLASS_CODE ) {
-				schema.getTableNumberDef().updateNumberDef( Authorization, (CFBamNumberDefBuff)editGrandprev );
+				schema.getTableNumberDef().updateNumberDef( Authorization, (CFBamBuffNumberDef)editGrandprev );
 			}
 			else if( classCode == ICFBamNumberType.CLASS_CODE ) {
-				schema.getTableNumberType().updateNumberType( Authorization, (CFBamNumberTypeBuff)editGrandprev );
+				schema.getTableNumberType().updateNumberType( Authorization, (CFBamBuffNumberType)editGrandprev );
 			}
 			else if( classCode == ICFBamNumberCol.CLASS_CODE ) {
-				schema.getTableNumberCol().updateNumberCol( Authorization, (CFBamNumberColBuff)editGrandprev );
+				schema.getTableNumberCol().updateNumberCol( Authorization, (CFBamBuffNumberCol)editGrandprev );
 			}
 			else if( classCode == ICFBamDbKeyHash128Def.CLASS_CODE ) {
-				schema.getTableDbKeyHash128Def().updateDbKeyHash128Def( Authorization, (CFBamDbKeyHash128DefBuff)editGrandprev );
+				schema.getTableDbKeyHash128Def().updateDbKeyHash128Def( Authorization, (CFBamBuffDbKeyHash128Def)editGrandprev );
 			}
 			else if( classCode == ICFBamDbKeyHash128Col.CLASS_CODE ) {
-				schema.getTableDbKeyHash128Col().updateDbKeyHash128Col( Authorization, (CFBamDbKeyHash128ColBuff)editGrandprev );
+				schema.getTableDbKeyHash128Col().updateDbKeyHash128Col( Authorization, (CFBamBuffDbKeyHash128Col)editGrandprev );
 			}
 			else if( classCode == ICFBamDbKeyHash128Type.CLASS_CODE ) {
-				schema.getTableDbKeyHash128Type().updateDbKeyHash128Type( Authorization, (CFBamDbKeyHash128TypeBuff)editGrandprev );
+				schema.getTableDbKeyHash128Type().updateDbKeyHash128Type( Authorization, (CFBamBuffDbKeyHash128Type)editGrandprev );
 			}
 			else if( classCode == ICFBamDbKeyHash128Gen.CLASS_CODE ) {
-				schema.getTableDbKeyHash128Gen().updateDbKeyHash128Gen( Authorization, (CFBamDbKeyHash128GenBuff)editGrandprev );
+				schema.getTableDbKeyHash128Gen().updateDbKeyHash128Gen( Authorization, (CFBamBuffDbKeyHash128Gen)editGrandprev );
 			}
 			else if( classCode == ICFBamDbKeyHash160Def.CLASS_CODE ) {
-				schema.getTableDbKeyHash160Def().updateDbKeyHash160Def( Authorization, (CFBamDbKeyHash160DefBuff)editGrandprev );
+				schema.getTableDbKeyHash160Def().updateDbKeyHash160Def( Authorization, (CFBamBuffDbKeyHash160Def)editGrandprev );
 			}
 			else if( classCode == ICFBamDbKeyHash160Col.CLASS_CODE ) {
-				schema.getTableDbKeyHash160Col().updateDbKeyHash160Col( Authorization, (CFBamDbKeyHash160ColBuff)editGrandprev );
+				schema.getTableDbKeyHash160Col().updateDbKeyHash160Col( Authorization, (CFBamBuffDbKeyHash160Col)editGrandprev );
 			}
 			else if( classCode == ICFBamDbKeyHash160Type.CLASS_CODE ) {
-				schema.getTableDbKeyHash160Type().updateDbKeyHash160Type( Authorization, (CFBamDbKeyHash160TypeBuff)editGrandprev );
+				schema.getTableDbKeyHash160Type().updateDbKeyHash160Type( Authorization, (CFBamBuffDbKeyHash160Type)editGrandprev );
 			}
 			else if( classCode == ICFBamDbKeyHash160Gen.CLASS_CODE ) {
-				schema.getTableDbKeyHash160Gen().updateDbKeyHash160Gen( Authorization, (CFBamDbKeyHash160GenBuff)editGrandprev );
+				schema.getTableDbKeyHash160Gen().updateDbKeyHash160Gen( Authorization, (CFBamBuffDbKeyHash160Gen)editGrandprev );
 			}
 			else if( classCode == ICFBamDbKeyHash224Def.CLASS_CODE ) {
-				schema.getTableDbKeyHash224Def().updateDbKeyHash224Def( Authorization, (CFBamDbKeyHash224DefBuff)editGrandprev );
+				schema.getTableDbKeyHash224Def().updateDbKeyHash224Def( Authorization, (CFBamBuffDbKeyHash224Def)editGrandprev );
 			}
 			else if( classCode == ICFBamDbKeyHash224Col.CLASS_CODE ) {
-				schema.getTableDbKeyHash224Col().updateDbKeyHash224Col( Authorization, (CFBamDbKeyHash224ColBuff)editGrandprev );
+				schema.getTableDbKeyHash224Col().updateDbKeyHash224Col( Authorization, (CFBamBuffDbKeyHash224Col)editGrandprev );
 			}
 			else if( classCode == ICFBamDbKeyHash224Type.CLASS_CODE ) {
-				schema.getTableDbKeyHash224Type().updateDbKeyHash224Type( Authorization, (CFBamDbKeyHash224TypeBuff)editGrandprev );
+				schema.getTableDbKeyHash224Type().updateDbKeyHash224Type( Authorization, (CFBamBuffDbKeyHash224Type)editGrandprev );
 			}
 			else if( classCode == ICFBamDbKeyHash224Gen.CLASS_CODE ) {
-				schema.getTableDbKeyHash224Gen().updateDbKeyHash224Gen( Authorization, (CFBamDbKeyHash224GenBuff)editGrandprev );
+				schema.getTableDbKeyHash224Gen().updateDbKeyHash224Gen( Authorization, (CFBamBuffDbKeyHash224Gen)editGrandprev );
 			}
 			else if( classCode == ICFBamDbKeyHash256Def.CLASS_CODE ) {
-				schema.getTableDbKeyHash256Def().updateDbKeyHash256Def( Authorization, (CFBamDbKeyHash256DefBuff)editGrandprev );
+				schema.getTableDbKeyHash256Def().updateDbKeyHash256Def( Authorization, (CFBamBuffDbKeyHash256Def)editGrandprev );
 			}
 			else if( classCode == ICFBamDbKeyHash256Col.CLASS_CODE ) {
-				schema.getTableDbKeyHash256Col().updateDbKeyHash256Col( Authorization, (CFBamDbKeyHash256ColBuff)editGrandprev );
+				schema.getTableDbKeyHash256Col().updateDbKeyHash256Col( Authorization, (CFBamBuffDbKeyHash256Col)editGrandprev );
 			}
 			else if( classCode == ICFBamDbKeyHash256Type.CLASS_CODE ) {
-				schema.getTableDbKeyHash256Type().updateDbKeyHash256Type( Authorization, (CFBamDbKeyHash256TypeBuff)editGrandprev );
+				schema.getTableDbKeyHash256Type().updateDbKeyHash256Type( Authorization, (CFBamBuffDbKeyHash256Type)editGrandprev );
 			}
 			else if( classCode == ICFBamDbKeyHash256Gen.CLASS_CODE ) {
-				schema.getTableDbKeyHash256Gen().updateDbKeyHash256Gen( Authorization, (CFBamDbKeyHash256GenBuff)editGrandprev );
+				schema.getTableDbKeyHash256Gen().updateDbKeyHash256Gen( Authorization, (CFBamBuffDbKeyHash256Gen)editGrandprev );
 			}
 			else if( classCode == ICFBamDbKeyHash384Def.CLASS_CODE ) {
-				schema.getTableDbKeyHash384Def().updateDbKeyHash384Def( Authorization, (CFBamDbKeyHash384DefBuff)editGrandprev );
+				schema.getTableDbKeyHash384Def().updateDbKeyHash384Def( Authorization, (CFBamBuffDbKeyHash384Def)editGrandprev );
 			}
 			else if( classCode == ICFBamDbKeyHash384Col.CLASS_CODE ) {
-				schema.getTableDbKeyHash384Col().updateDbKeyHash384Col( Authorization, (CFBamDbKeyHash384ColBuff)editGrandprev );
+				schema.getTableDbKeyHash384Col().updateDbKeyHash384Col( Authorization, (CFBamBuffDbKeyHash384Col)editGrandprev );
 			}
 			else if( classCode == ICFBamDbKeyHash384Type.CLASS_CODE ) {
-				schema.getTableDbKeyHash384Type().updateDbKeyHash384Type( Authorization, (CFBamDbKeyHash384TypeBuff)editGrandprev );
+				schema.getTableDbKeyHash384Type().updateDbKeyHash384Type( Authorization, (CFBamBuffDbKeyHash384Type)editGrandprev );
 			}
 			else if( classCode == ICFBamDbKeyHash384Gen.CLASS_CODE ) {
-				schema.getTableDbKeyHash384Gen().updateDbKeyHash384Gen( Authorization, (CFBamDbKeyHash384GenBuff)editGrandprev );
+				schema.getTableDbKeyHash384Gen().updateDbKeyHash384Gen( Authorization, (CFBamBuffDbKeyHash384Gen)editGrandprev );
 			}
 			else if( classCode == ICFBamDbKeyHash512Def.CLASS_CODE ) {
-				schema.getTableDbKeyHash512Def().updateDbKeyHash512Def( Authorization, (CFBamDbKeyHash512DefBuff)editGrandprev );
+				schema.getTableDbKeyHash512Def().updateDbKeyHash512Def( Authorization, (CFBamBuffDbKeyHash512Def)editGrandprev );
 			}
 			else if( classCode == ICFBamDbKeyHash512Col.CLASS_CODE ) {
-				schema.getTableDbKeyHash512Col().updateDbKeyHash512Col( Authorization, (CFBamDbKeyHash512ColBuff)editGrandprev );
+				schema.getTableDbKeyHash512Col().updateDbKeyHash512Col( Authorization, (CFBamBuffDbKeyHash512Col)editGrandprev );
 			}
 			else if( classCode == ICFBamDbKeyHash512Type.CLASS_CODE ) {
-				schema.getTableDbKeyHash512Type().updateDbKeyHash512Type( Authorization, (CFBamDbKeyHash512TypeBuff)editGrandprev );
+				schema.getTableDbKeyHash512Type().updateDbKeyHash512Type( Authorization, (CFBamBuffDbKeyHash512Type)editGrandprev );
 			}
 			else if( classCode == ICFBamDbKeyHash512Gen.CLASS_CODE ) {
-				schema.getTableDbKeyHash512Gen().updateDbKeyHash512Gen( Authorization, (CFBamDbKeyHash512GenBuff)editGrandprev );
+				schema.getTableDbKeyHash512Gen().updateDbKeyHash512Gen( Authorization, (CFBamBuffDbKeyHash512Gen)editGrandprev );
 			}
 			else if( classCode == ICFBamStringDef.CLASS_CODE ) {
-				schema.getTableStringDef().updateStringDef( Authorization, (CFBamStringDefBuff)editGrandprev );
+				schema.getTableStringDef().updateStringDef( Authorization, (CFBamBuffStringDef)editGrandprev );
 			}
 			else if( classCode == ICFBamStringType.CLASS_CODE ) {
-				schema.getTableStringType().updateStringType( Authorization, (CFBamStringTypeBuff)editGrandprev );
+				schema.getTableStringType().updateStringType( Authorization, (CFBamBuffStringType)editGrandprev );
 			}
 			else if( classCode == ICFBamStringCol.CLASS_CODE ) {
-				schema.getTableStringCol().updateStringCol( Authorization, (CFBamStringColBuff)editGrandprev );
+				schema.getTableStringCol().updateStringCol( Authorization, (CFBamBuffStringCol)editGrandprev );
 			}
 			else if( classCode == ICFBamTZDateDef.CLASS_CODE ) {
-				schema.getTableTZDateDef().updateTZDateDef( Authorization, (CFBamTZDateDefBuff)editGrandprev );
+				schema.getTableTZDateDef().updateTZDateDef( Authorization, (CFBamBuffTZDateDef)editGrandprev );
 			}
 			else if( classCode == ICFBamTZDateType.CLASS_CODE ) {
-				schema.getTableTZDateType().updateTZDateType( Authorization, (CFBamTZDateTypeBuff)editGrandprev );
+				schema.getTableTZDateType().updateTZDateType( Authorization, (CFBamBuffTZDateType)editGrandprev );
 			}
 			else if( classCode == ICFBamTZDateCol.CLASS_CODE ) {
-				schema.getTableTZDateCol().updateTZDateCol( Authorization, (CFBamTZDateColBuff)editGrandprev );
+				schema.getTableTZDateCol().updateTZDateCol( Authorization, (CFBamBuffTZDateCol)editGrandprev );
 			}
 			else if( classCode == ICFBamTZTimeDef.CLASS_CODE ) {
-				schema.getTableTZTimeDef().updateTZTimeDef( Authorization, (CFBamTZTimeDefBuff)editGrandprev );
+				schema.getTableTZTimeDef().updateTZTimeDef( Authorization, (CFBamBuffTZTimeDef)editGrandprev );
 			}
 			else if( classCode == ICFBamTZTimeType.CLASS_CODE ) {
-				schema.getTableTZTimeType().updateTZTimeType( Authorization, (CFBamTZTimeTypeBuff)editGrandprev );
+				schema.getTableTZTimeType().updateTZTimeType( Authorization, (CFBamBuffTZTimeType)editGrandprev );
 			}
 			else if( classCode == ICFBamTZTimeCol.CLASS_CODE ) {
-				schema.getTableTZTimeCol().updateTZTimeCol( Authorization, (CFBamTZTimeColBuff)editGrandprev );
+				schema.getTableTZTimeCol().updateTZTimeCol( Authorization, (CFBamBuffTZTimeCol)editGrandprev );
 			}
 			else if( classCode == ICFBamTZTimestampDef.CLASS_CODE ) {
-				schema.getTableTZTimestampDef().updateTZTimestampDef( Authorization, (CFBamTZTimestampDefBuff)editGrandprev );
+				schema.getTableTZTimestampDef().updateTZTimestampDef( Authorization, (CFBamBuffTZTimestampDef)editGrandprev );
 			}
 			else if( classCode == ICFBamTZTimestampType.CLASS_CODE ) {
-				schema.getTableTZTimestampType().updateTZTimestampType( Authorization, (CFBamTZTimestampTypeBuff)editGrandprev );
+				schema.getTableTZTimestampType().updateTZTimestampType( Authorization, (CFBamBuffTZTimestampType)editGrandprev );
 			}
 			else if( classCode == ICFBamTZTimestampCol.CLASS_CODE ) {
-				schema.getTableTZTimestampCol().updateTZTimestampCol( Authorization, (CFBamTZTimestampColBuff)editGrandprev );
+				schema.getTableTZTimestampCol().updateTZTimestampCol( Authorization, (CFBamBuffTZTimestampCol)editGrandprev );
 			}
 			else if( classCode == ICFBamTextDef.CLASS_CODE ) {
-				schema.getTableTextDef().updateTextDef( Authorization, (CFBamTextDefBuff)editGrandprev );
+				schema.getTableTextDef().updateTextDef( Authorization, (CFBamBuffTextDef)editGrandprev );
 			}
 			else if( classCode == ICFBamTextType.CLASS_CODE ) {
-				schema.getTableTextType().updateTextType( Authorization, (CFBamTextTypeBuff)editGrandprev );
+				schema.getTableTextType().updateTextType( Authorization, (CFBamBuffTextType)editGrandprev );
 			}
 			else if( classCode == ICFBamTextCol.CLASS_CODE ) {
-				schema.getTableTextCol().updateTextCol( Authorization, (CFBamTextColBuff)editGrandprev );
+				schema.getTableTextCol().updateTextCol( Authorization, (CFBamBuffTextCol)editGrandprev );
 			}
 			else if( classCode == ICFBamTimeDef.CLASS_CODE ) {
-				schema.getTableTimeDef().updateTimeDef( Authorization, (CFBamTimeDefBuff)editGrandprev );
+				schema.getTableTimeDef().updateTimeDef( Authorization, (CFBamBuffTimeDef)editGrandprev );
 			}
 			else if( classCode == ICFBamTimeType.CLASS_CODE ) {
-				schema.getTableTimeType().updateTimeType( Authorization, (CFBamTimeTypeBuff)editGrandprev );
+				schema.getTableTimeType().updateTimeType( Authorization, (CFBamBuffTimeType)editGrandprev );
 			}
 			else if( classCode == ICFBamTimeCol.CLASS_CODE ) {
-				schema.getTableTimeCol().updateTimeCol( Authorization, (CFBamTimeColBuff)editGrandprev );
+				schema.getTableTimeCol().updateTimeCol( Authorization, (CFBamBuffTimeCol)editGrandprev );
 			}
 			else if( classCode == ICFBamTimestampDef.CLASS_CODE ) {
-				schema.getTableTimestampDef().updateTimestampDef( Authorization, (CFBamTimestampDefBuff)editGrandprev );
+				schema.getTableTimestampDef().updateTimestampDef( Authorization, (CFBamBuffTimestampDef)editGrandprev );
 			}
 			else if( classCode == ICFBamTimestampType.CLASS_CODE ) {
-				schema.getTableTimestampType().updateTimestampType( Authorization, (CFBamTimestampTypeBuff)editGrandprev );
+				schema.getTableTimestampType().updateTimestampType( Authorization, (CFBamBuffTimestampType)editGrandprev );
 			}
 			else if( classCode == ICFBamTimestampCol.CLASS_CODE ) {
-				schema.getTableTimestampCol().updateTimestampCol( Authorization, (CFBamTimestampColBuff)editGrandprev );
+				schema.getTableTimestampCol().updateTimestampCol( Authorization, (CFBamBuffTimestampCol)editGrandprev );
 			}
 			else if( classCode == ICFBamTokenDef.CLASS_CODE ) {
-				schema.getTableTokenDef().updateTokenDef( Authorization, (CFBamTokenDefBuff)editGrandprev );
+				schema.getTableTokenDef().updateTokenDef( Authorization, (CFBamBuffTokenDef)editGrandprev );
 			}
 			else if( classCode == ICFBamTokenType.CLASS_CODE ) {
-				schema.getTableTokenType().updateTokenType( Authorization, (CFBamTokenTypeBuff)editGrandprev );
+				schema.getTableTokenType().updateTokenType( Authorization, (CFBamBuffTokenType)editGrandprev );
 			}
 			else if( classCode == ICFBamTokenCol.CLASS_CODE ) {
-				schema.getTableTokenCol().updateTokenCol( Authorization, (CFBamTokenColBuff)editGrandprev );
+				schema.getTableTokenCol().updateTokenCol( Authorization, (CFBamBuffTokenCol)editGrandprev );
 			}
 			else if( classCode == ICFBamUInt16Def.CLASS_CODE ) {
-				schema.getTableUInt16Def().updateUInt16Def( Authorization, (CFBamUInt16DefBuff)editGrandprev );
+				schema.getTableUInt16Def().updateUInt16Def( Authorization, (CFBamBuffUInt16Def)editGrandprev );
 			}
 			else if( classCode == ICFBamUInt16Type.CLASS_CODE ) {
-				schema.getTableUInt16Type().updateUInt16Type( Authorization, (CFBamUInt16TypeBuff)editGrandprev );
+				schema.getTableUInt16Type().updateUInt16Type( Authorization, (CFBamBuffUInt16Type)editGrandprev );
 			}
 			else if( classCode == ICFBamUInt16Col.CLASS_CODE ) {
-				schema.getTableUInt16Col().updateUInt16Col( Authorization, (CFBamUInt16ColBuff)editGrandprev );
+				schema.getTableUInt16Col().updateUInt16Col( Authorization, (CFBamBuffUInt16Col)editGrandprev );
 			}
 			else if( classCode == ICFBamUInt32Def.CLASS_CODE ) {
-				schema.getTableUInt32Def().updateUInt32Def( Authorization, (CFBamUInt32DefBuff)editGrandprev );
+				schema.getTableUInt32Def().updateUInt32Def( Authorization, (CFBamBuffUInt32Def)editGrandprev );
 			}
 			else if( classCode == ICFBamUInt32Type.CLASS_CODE ) {
-				schema.getTableUInt32Type().updateUInt32Type( Authorization, (CFBamUInt32TypeBuff)editGrandprev );
+				schema.getTableUInt32Type().updateUInt32Type( Authorization, (CFBamBuffUInt32Type)editGrandprev );
 			}
 			else if( classCode == ICFBamUInt32Col.CLASS_CODE ) {
-				schema.getTableUInt32Col().updateUInt32Col( Authorization, (CFBamUInt32ColBuff)editGrandprev );
+				schema.getTableUInt32Col().updateUInt32Col( Authorization, (CFBamBuffUInt32Col)editGrandprev );
 			}
 			else if( classCode == ICFBamUInt64Def.CLASS_CODE ) {
-				schema.getTableUInt64Def().updateUInt64Def( Authorization, (CFBamUInt64DefBuff)editGrandprev );
+				schema.getTableUInt64Def().updateUInt64Def( Authorization, (CFBamBuffUInt64Def)editGrandprev );
 			}
 			else if( classCode == ICFBamUInt64Type.CLASS_CODE ) {
-				schema.getTableUInt64Type().updateUInt64Type( Authorization, (CFBamUInt64TypeBuff)editGrandprev );
+				schema.getTableUInt64Type().updateUInt64Type( Authorization, (CFBamBuffUInt64Type)editGrandprev );
 			}
 			else if( classCode == ICFBamUInt64Col.CLASS_CODE ) {
-				schema.getTableUInt64Col().updateUInt64Col( Authorization, (CFBamUInt64ColBuff)editGrandprev );
+				schema.getTableUInt64Col().updateUInt64Col( Authorization, (CFBamBuffUInt64Col)editGrandprev );
 			}
 			else if( classCode == ICFBamUuidDef.CLASS_CODE ) {
-				schema.getTableUuidDef().updateUuidDef( Authorization, (CFBamUuidDefBuff)editGrandprev );
+				schema.getTableUuidDef().updateUuidDef( Authorization, (CFBamBuffUuidDef)editGrandprev );
 			}
 			else if( classCode == ICFBamUuidType.CLASS_CODE ) {
-				schema.getTableUuidType().updateUuidType( Authorization, (CFBamUuidTypeBuff)editGrandprev );
+				schema.getTableUuidType().updateUuidType( Authorization, (CFBamBuffUuidType)editGrandprev );
 			}
 			else if( classCode == ICFBamUuidGen.CLASS_CODE ) {
-				schema.getTableUuidGen().updateUuidGen( Authorization, (CFBamUuidGenBuff)editGrandprev );
+				schema.getTableUuidGen().updateUuidGen( Authorization, (CFBamBuffUuidGen)editGrandprev );
 			}
 			else if( classCode == ICFBamUuidCol.CLASS_CODE ) {
-				schema.getTableUuidCol().updateUuidCol( Authorization, (CFBamUuidColBuff)editGrandprev );
+				schema.getTableUuidCol().updateUuidCol( Authorization, (CFBamBuffUuidCol)editGrandprev );
 			}
 			else if( classCode == ICFBamUuid6Def.CLASS_CODE ) {
-				schema.getTableUuid6Def().updateUuid6Def( Authorization, (CFBamUuid6DefBuff)editGrandprev );
+				schema.getTableUuid6Def().updateUuid6Def( Authorization, (CFBamBuffUuid6Def)editGrandprev );
 			}
 			else if( classCode == ICFBamUuid6Type.CLASS_CODE ) {
-				schema.getTableUuid6Type().updateUuid6Type( Authorization, (CFBamUuid6TypeBuff)editGrandprev );
+				schema.getTableUuid6Type().updateUuid6Type( Authorization, (CFBamBuffUuid6Type)editGrandprev );
 			}
 			else if( classCode == ICFBamUuid6Gen.CLASS_CODE ) {
-				schema.getTableUuid6Gen().updateUuid6Gen( Authorization, (CFBamUuid6GenBuff)editGrandprev );
+				schema.getTableUuid6Gen().updateUuid6Gen( Authorization, (CFBamBuffUuid6Gen)editGrandprev );
 			}
 			else if( classCode == ICFBamUuid6Col.CLASS_CODE ) {
-				schema.getTableUuid6Col().updateUuid6Col( Authorization, (CFBamUuid6ColBuff)editGrandprev );
+				schema.getTableUuid6Col().updateUuid6Col( Authorization, (CFBamBuffUuid6Col)editGrandprev );
 			}
 			else if( classCode == ICFBamTableCol.CLASS_CODE ) {
-				schema.getTableTableCol().updateTableCol( Authorization, (CFBamTableColBuff)editGrandprev );
+				schema.getTableTableCol().updateTableCol( Authorization, (CFBamBuffTableCol)editGrandprev );
 			}
 			else {
-				throw new CFLibUnsupportedClassException(getClass(), S_ProcName, 0, "-update-grand-prev-", "Not " + Integer.toString(classCode));
+				throw new CFLibUnsupportedClassException(getClass(), S_ProcName, "-update-grand-prev-", (Integer)classCode, "Classcode not recognized: " + Integer.toString(classCode));
 			}
 		}
 
@@ -2241,322 +2241,322 @@ public class CFBamRamInt64DefTable
 				schema.getTableValue().updateValue( Authorization, editPrev );
 			}
 			else if( classCode == ICFBamAtom.CLASS_CODE ) {
-				schema.getTableAtom().updateAtom( Authorization, (CFBamAtomBuff)editPrev );
+				schema.getTableAtom().updateAtom( Authorization, (CFBamBuffAtom)editPrev );
 			}
 			else if( classCode == ICFBamBlobDef.CLASS_CODE ) {
-				schema.getTableBlobDef().updateBlobDef( Authorization, (CFBamBlobDefBuff)editPrev );
+				schema.getTableBlobDef().updateBlobDef( Authorization, (CFBamBuffBlobDef)editPrev );
 			}
 			else if( classCode == ICFBamBlobType.CLASS_CODE ) {
-				schema.getTableBlobType().updateBlobType( Authorization, (CFBamBlobTypeBuff)editPrev );
+				schema.getTableBlobType().updateBlobType( Authorization, (CFBamBuffBlobType)editPrev );
 			}
 			else if( classCode == ICFBamBlobCol.CLASS_CODE ) {
-				schema.getTableBlobCol().updateBlobCol( Authorization, (CFBamBlobColBuff)editPrev );
+				schema.getTableBlobCol().updateBlobCol( Authorization, (CFBamBuffBlobCol)editPrev );
 			}
 			else if( classCode == ICFBamBoolDef.CLASS_CODE ) {
-				schema.getTableBoolDef().updateBoolDef( Authorization, (CFBamBoolDefBuff)editPrev );
+				schema.getTableBoolDef().updateBoolDef( Authorization, (CFBamBuffBoolDef)editPrev );
 			}
 			else if( classCode == ICFBamBoolType.CLASS_CODE ) {
-				schema.getTableBoolType().updateBoolType( Authorization, (CFBamBoolTypeBuff)editPrev );
+				schema.getTableBoolType().updateBoolType( Authorization, (CFBamBuffBoolType)editPrev );
 			}
 			else if( classCode == ICFBamBoolCol.CLASS_CODE ) {
-				schema.getTableBoolCol().updateBoolCol( Authorization, (CFBamBoolColBuff)editPrev );
+				schema.getTableBoolCol().updateBoolCol( Authorization, (CFBamBuffBoolCol)editPrev );
 			}
 			else if( classCode == ICFBamDateDef.CLASS_CODE ) {
-				schema.getTableDateDef().updateDateDef( Authorization, (CFBamDateDefBuff)editPrev );
+				schema.getTableDateDef().updateDateDef( Authorization, (CFBamBuffDateDef)editPrev );
 			}
 			else if( classCode == ICFBamDateType.CLASS_CODE ) {
-				schema.getTableDateType().updateDateType( Authorization, (CFBamDateTypeBuff)editPrev );
+				schema.getTableDateType().updateDateType( Authorization, (CFBamBuffDateType)editPrev );
 			}
 			else if( classCode == ICFBamDateCol.CLASS_CODE ) {
-				schema.getTableDateCol().updateDateCol( Authorization, (CFBamDateColBuff)editPrev );
+				schema.getTableDateCol().updateDateCol( Authorization, (CFBamBuffDateCol)editPrev );
 			}
 			else if( classCode == ICFBamDoubleDef.CLASS_CODE ) {
-				schema.getTableDoubleDef().updateDoubleDef( Authorization, (CFBamDoubleDefBuff)editPrev );
+				schema.getTableDoubleDef().updateDoubleDef( Authorization, (CFBamBuffDoubleDef)editPrev );
 			}
 			else if( classCode == ICFBamDoubleType.CLASS_CODE ) {
-				schema.getTableDoubleType().updateDoubleType( Authorization, (CFBamDoubleTypeBuff)editPrev );
+				schema.getTableDoubleType().updateDoubleType( Authorization, (CFBamBuffDoubleType)editPrev );
 			}
 			else if( classCode == ICFBamDoubleCol.CLASS_CODE ) {
-				schema.getTableDoubleCol().updateDoubleCol( Authorization, (CFBamDoubleColBuff)editPrev );
+				schema.getTableDoubleCol().updateDoubleCol( Authorization, (CFBamBuffDoubleCol)editPrev );
 			}
 			else if( classCode == ICFBamFloatDef.CLASS_CODE ) {
-				schema.getTableFloatDef().updateFloatDef( Authorization, (CFBamFloatDefBuff)editPrev );
+				schema.getTableFloatDef().updateFloatDef( Authorization, (CFBamBuffFloatDef)editPrev );
 			}
 			else if( classCode == ICFBamFloatType.CLASS_CODE ) {
-				schema.getTableFloatType().updateFloatType( Authorization, (CFBamFloatTypeBuff)editPrev );
+				schema.getTableFloatType().updateFloatType( Authorization, (CFBamBuffFloatType)editPrev );
 			}
 			else if( classCode == ICFBamFloatCol.CLASS_CODE ) {
-				schema.getTableFloatCol().updateFloatCol( Authorization, (CFBamFloatColBuff)editPrev );
+				schema.getTableFloatCol().updateFloatCol( Authorization, (CFBamBuffFloatCol)editPrev );
 			}
 			else if( classCode == ICFBamInt16Def.CLASS_CODE ) {
-				schema.getTableInt16Def().updateInt16Def( Authorization, (CFBamInt16DefBuff)editPrev );
+				schema.getTableInt16Def().updateInt16Def( Authorization, (CFBamBuffInt16Def)editPrev );
 			}
 			else if( classCode == ICFBamInt16Type.CLASS_CODE ) {
-				schema.getTableInt16Type().updateInt16Type( Authorization, (CFBamInt16TypeBuff)editPrev );
+				schema.getTableInt16Type().updateInt16Type( Authorization, (CFBamBuffInt16Type)editPrev );
 			}
 			else if( classCode == ICFBamId16Gen.CLASS_CODE ) {
-				schema.getTableId16Gen().updateId16Gen( Authorization, (CFBamId16GenBuff)editPrev );
+				schema.getTableId16Gen().updateId16Gen( Authorization, (CFBamBuffId16Gen)editPrev );
 			}
 			else if( classCode == ICFBamEnumDef.CLASS_CODE ) {
-				schema.getTableEnumDef().updateEnumDef( Authorization, (CFBamEnumDefBuff)editPrev );
+				schema.getTableEnumDef().updateEnumDef( Authorization, (CFBamBuffEnumDef)editPrev );
 			}
 			else if( classCode == ICFBamEnumType.CLASS_CODE ) {
-				schema.getTableEnumType().updateEnumType( Authorization, (CFBamEnumTypeBuff)editPrev );
+				schema.getTableEnumType().updateEnumType( Authorization, (CFBamBuffEnumType)editPrev );
 			}
 			else if( classCode == ICFBamInt16Col.CLASS_CODE ) {
-				schema.getTableInt16Col().updateInt16Col( Authorization, (CFBamInt16ColBuff)editPrev );
+				schema.getTableInt16Col().updateInt16Col( Authorization, (CFBamBuffInt16Col)editPrev );
 			}
 			else if( classCode == ICFBamInt32Def.CLASS_CODE ) {
-				schema.getTableInt32Def().updateInt32Def( Authorization, (CFBamInt32DefBuff)editPrev );
+				schema.getTableInt32Def().updateInt32Def( Authorization, (CFBamBuffInt32Def)editPrev );
 			}
 			else if( classCode == ICFBamInt32Type.CLASS_CODE ) {
-				schema.getTableInt32Type().updateInt32Type( Authorization, (CFBamInt32TypeBuff)editPrev );
+				schema.getTableInt32Type().updateInt32Type( Authorization, (CFBamBuffInt32Type)editPrev );
 			}
 			else if( classCode == ICFBamId32Gen.CLASS_CODE ) {
-				schema.getTableId32Gen().updateId32Gen( Authorization, (CFBamId32GenBuff)editPrev );
+				schema.getTableId32Gen().updateId32Gen( Authorization, (CFBamBuffId32Gen)editPrev );
 			}
 			else if( classCode == ICFBamInt32Col.CLASS_CODE ) {
-				schema.getTableInt32Col().updateInt32Col( Authorization, (CFBamInt32ColBuff)editPrev );
+				schema.getTableInt32Col().updateInt32Col( Authorization, (CFBamBuffInt32Col)editPrev );
 			}
 			else if( classCode == ICFBamInt64Def.CLASS_CODE ) {
-				schema.getTableInt64Def().updateInt64Def( Authorization, (CFBamInt64DefBuff)editPrev );
+				schema.getTableInt64Def().updateInt64Def( Authorization, (CFBamBuffInt64Def)editPrev );
 			}
 			else if( classCode == ICFBamInt64Type.CLASS_CODE ) {
-				schema.getTableInt64Type().updateInt64Type( Authorization, (CFBamInt64TypeBuff)editPrev );
+				schema.getTableInt64Type().updateInt64Type( Authorization, (CFBamBuffInt64Type)editPrev );
 			}
 			else if( classCode == ICFBamId64Gen.CLASS_CODE ) {
-				schema.getTableId64Gen().updateId64Gen( Authorization, (CFBamId64GenBuff)editPrev );
+				schema.getTableId64Gen().updateId64Gen( Authorization, (CFBamBuffId64Gen)editPrev );
 			}
 			else if( classCode == ICFBamInt64Col.CLASS_CODE ) {
-				schema.getTableInt64Col().updateInt64Col( Authorization, (CFBamInt64ColBuff)editPrev );
+				schema.getTableInt64Col().updateInt64Col( Authorization, (CFBamBuffInt64Col)editPrev );
 			}
 			else if( classCode == ICFBamNmTokenDef.CLASS_CODE ) {
-				schema.getTableNmTokenDef().updateNmTokenDef( Authorization, (CFBamNmTokenDefBuff)editPrev );
+				schema.getTableNmTokenDef().updateNmTokenDef( Authorization, (CFBamBuffNmTokenDef)editPrev );
 			}
 			else if( classCode == ICFBamNmTokenType.CLASS_CODE ) {
-				schema.getTableNmTokenType().updateNmTokenType( Authorization, (CFBamNmTokenTypeBuff)editPrev );
+				schema.getTableNmTokenType().updateNmTokenType( Authorization, (CFBamBuffNmTokenType)editPrev );
 			}
 			else if( classCode == ICFBamNmTokenCol.CLASS_CODE ) {
-				schema.getTableNmTokenCol().updateNmTokenCol( Authorization, (CFBamNmTokenColBuff)editPrev );
+				schema.getTableNmTokenCol().updateNmTokenCol( Authorization, (CFBamBuffNmTokenCol)editPrev );
 			}
 			else if( classCode == ICFBamNmTokensDef.CLASS_CODE ) {
-				schema.getTableNmTokensDef().updateNmTokensDef( Authorization, (CFBamNmTokensDefBuff)editPrev );
+				schema.getTableNmTokensDef().updateNmTokensDef( Authorization, (CFBamBuffNmTokensDef)editPrev );
 			}
 			else if( classCode == ICFBamNmTokensType.CLASS_CODE ) {
-				schema.getTableNmTokensType().updateNmTokensType( Authorization, (CFBamNmTokensTypeBuff)editPrev );
+				schema.getTableNmTokensType().updateNmTokensType( Authorization, (CFBamBuffNmTokensType)editPrev );
 			}
 			else if( classCode == ICFBamNmTokensCol.CLASS_CODE ) {
-				schema.getTableNmTokensCol().updateNmTokensCol( Authorization, (CFBamNmTokensColBuff)editPrev );
+				schema.getTableNmTokensCol().updateNmTokensCol( Authorization, (CFBamBuffNmTokensCol)editPrev );
 			}
 			else if( classCode == ICFBamNumberDef.CLASS_CODE ) {
-				schema.getTableNumberDef().updateNumberDef( Authorization, (CFBamNumberDefBuff)editPrev );
+				schema.getTableNumberDef().updateNumberDef( Authorization, (CFBamBuffNumberDef)editPrev );
 			}
 			else if( classCode == ICFBamNumberType.CLASS_CODE ) {
-				schema.getTableNumberType().updateNumberType( Authorization, (CFBamNumberTypeBuff)editPrev );
+				schema.getTableNumberType().updateNumberType( Authorization, (CFBamBuffNumberType)editPrev );
 			}
 			else if( classCode == ICFBamNumberCol.CLASS_CODE ) {
-				schema.getTableNumberCol().updateNumberCol( Authorization, (CFBamNumberColBuff)editPrev );
+				schema.getTableNumberCol().updateNumberCol( Authorization, (CFBamBuffNumberCol)editPrev );
 			}
 			else if( classCode == ICFBamDbKeyHash128Def.CLASS_CODE ) {
-				schema.getTableDbKeyHash128Def().updateDbKeyHash128Def( Authorization, (CFBamDbKeyHash128DefBuff)editPrev );
+				schema.getTableDbKeyHash128Def().updateDbKeyHash128Def( Authorization, (CFBamBuffDbKeyHash128Def)editPrev );
 			}
 			else if( classCode == ICFBamDbKeyHash128Col.CLASS_CODE ) {
-				schema.getTableDbKeyHash128Col().updateDbKeyHash128Col( Authorization, (CFBamDbKeyHash128ColBuff)editPrev );
+				schema.getTableDbKeyHash128Col().updateDbKeyHash128Col( Authorization, (CFBamBuffDbKeyHash128Col)editPrev );
 			}
 			else if( classCode == ICFBamDbKeyHash128Type.CLASS_CODE ) {
-				schema.getTableDbKeyHash128Type().updateDbKeyHash128Type( Authorization, (CFBamDbKeyHash128TypeBuff)editPrev );
+				schema.getTableDbKeyHash128Type().updateDbKeyHash128Type( Authorization, (CFBamBuffDbKeyHash128Type)editPrev );
 			}
 			else if( classCode == ICFBamDbKeyHash128Gen.CLASS_CODE ) {
-				schema.getTableDbKeyHash128Gen().updateDbKeyHash128Gen( Authorization, (CFBamDbKeyHash128GenBuff)editPrev );
+				schema.getTableDbKeyHash128Gen().updateDbKeyHash128Gen( Authorization, (CFBamBuffDbKeyHash128Gen)editPrev );
 			}
 			else if( classCode == ICFBamDbKeyHash160Def.CLASS_CODE ) {
-				schema.getTableDbKeyHash160Def().updateDbKeyHash160Def( Authorization, (CFBamDbKeyHash160DefBuff)editPrev );
+				schema.getTableDbKeyHash160Def().updateDbKeyHash160Def( Authorization, (CFBamBuffDbKeyHash160Def)editPrev );
 			}
 			else if( classCode == ICFBamDbKeyHash160Col.CLASS_CODE ) {
-				schema.getTableDbKeyHash160Col().updateDbKeyHash160Col( Authorization, (CFBamDbKeyHash160ColBuff)editPrev );
+				schema.getTableDbKeyHash160Col().updateDbKeyHash160Col( Authorization, (CFBamBuffDbKeyHash160Col)editPrev );
 			}
 			else if( classCode == ICFBamDbKeyHash160Type.CLASS_CODE ) {
-				schema.getTableDbKeyHash160Type().updateDbKeyHash160Type( Authorization, (CFBamDbKeyHash160TypeBuff)editPrev );
+				schema.getTableDbKeyHash160Type().updateDbKeyHash160Type( Authorization, (CFBamBuffDbKeyHash160Type)editPrev );
 			}
 			else if( classCode == ICFBamDbKeyHash160Gen.CLASS_CODE ) {
-				schema.getTableDbKeyHash160Gen().updateDbKeyHash160Gen( Authorization, (CFBamDbKeyHash160GenBuff)editPrev );
+				schema.getTableDbKeyHash160Gen().updateDbKeyHash160Gen( Authorization, (CFBamBuffDbKeyHash160Gen)editPrev );
 			}
 			else if( classCode == ICFBamDbKeyHash224Def.CLASS_CODE ) {
-				schema.getTableDbKeyHash224Def().updateDbKeyHash224Def( Authorization, (CFBamDbKeyHash224DefBuff)editPrev );
+				schema.getTableDbKeyHash224Def().updateDbKeyHash224Def( Authorization, (CFBamBuffDbKeyHash224Def)editPrev );
 			}
 			else if( classCode == ICFBamDbKeyHash224Col.CLASS_CODE ) {
-				schema.getTableDbKeyHash224Col().updateDbKeyHash224Col( Authorization, (CFBamDbKeyHash224ColBuff)editPrev );
+				schema.getTableDbKeyHash224Col().updateDbKeyHash224Col( Authorization, (CFBamBuffDbKeyHash224Col)editPrev );
 			}
 			else if( classCode == ICFBamDbKeyHash224Type.CLASS_CODE ) {
-				schema.getTableDbKeyHash224Type().updateDbKeyHash224Type( Authorization, (CFBamDbKeyHash224TypeBuff)editPrev );
+				schema.getTableDbKeyHash224Type().updateDbKeyHash224Type( Authorization, (CFBamBuffDbKeyHash224Type)editPrev );
 			}
 			else if( classCode == ICFBamDbKeyHash224Gen.CLASS_CODE ) {
-				schema.getTableDbKeyHash224Gen().updateDbKeyHash224Gen( Authorization, (CFBamDbKeyHash224GenBuff)editPrev );
+				schema.getTableDbKeyHash224Gen().updateDbKeyHash224Gen( Authorization, (CFBamBuffDbKeyHash224Gen)editPrev );
 			}
 			else if( classCode == ICFBamDbKeyHash256Def.CLASS_CODE ) {
-				schema.getTableDbKeyHash256Def().updateDbKeyHash256Def( Authorization, (CFBamDbKeyHash256DefBuff)editPrev );
+				schema.getTableDbKeyHash256Def().updateDbKeyHash256Def( Authorization, (CFBamBuffDbKeyHash256Def)editPrev );
 			}
 			else if( classCode == ICFBamDbKeyHash256Col.CLASS_CODE ) {
-				schema.getTableDbKeyHash256Col().updateDbKeyHash256Col( Authorization, (CFBamDbKeyHash256ColBuff)editPrev );
+				schema.getTableDbKeyHash256Col().updateDbKeyHash256Col( Authorization, (CFBamBuffDbKeyHash256Col)editPrev );
 			}
 			else if( classCode == ICFBamDbKeyHash256Type.CLASS_CODE ) {
-				schema.getTableDbKeyHash256Type().updateDbKeyHash256Type( Authorization, (CFBamDbKeyHash256TypeBuff)editPrev );
+				schema.getTableDbKeyHash256Type().updateDbKeyHash256Type( Authorization, (CFBamBuffDbKeyHash256Type)editPrev );
 			}
 			else if( classCode == ICFBamDbKeyHash256Gen.CLASS_CODE ) {
-				schema.getTableDbKeyHash256Gen().updateDbKeyHash256Gen( Authorization, (CFBamDbKeyHash256GenBuff)editPrev );
+				schema.getTableDbKeyHash256Gen().updateDbKeyHash256Gen( Authorization, (CFBamBuffDbKeyHash256Gen)editPrev );
 			}
 			else if( classCode == ICFBamDbKeyHash384Def.CLASS_CODE ) {
-				schema.getTableDbKeyHash384Def().updateDbKeyHash384Def( Authorization, (CFBamDbKeyHash384DefBuff)editPrev );
+				schema.getTableDbKeyHash384Def().updateDbKeyHash384Def( Authorization, (CFBamBuffDbKeyHash384Def)editPrev );
 			}
 			else if( classCode == ICFBamDbKeyHash384Col.CLASS_CODE ) {
-				schema.getTableDbKeyHash384Col().updateDbKeyHash384Col( Authorization, (CFBamDbKeyHash384ColBuff)editPrev );
+				schema.getTableDbKeyHash384Col().updateDbKeyHash384Col( Authorization, (CFBamBuffDbKeyHash384Col)editPrev );
 			}
 			else if( classCode == ICFBamDbKeyHash384Type.CLASS_CODE ) {
-				schema.getTableDbKeyHash384Type().updateDbKeyHash384Type( Authorization, (CFBamDbKeyHash384TypeBuff)editPrev );
+				schema.getTableDbKeyHash384Type().updateDbKeyHash384Type( Authorization, (CFBamBuffDbKeyHash384Type)editPrev );
 			}
 			else if( classCode == ICFBamDbKeyHash384Gen.CLASS_CODE ) {
-				schema.getTableDbKeyHash384Gen().updateDbKeyHash384Gen( Authorization, (CFBamDbKeyHash384GenBuff)editPrev );
+				schema.getTableDbKeyHash384Gen().updateDbKeyHash384Gen( Authorization, (CFBamBuffDbKeyHash384Gen)editPrev );
 			}
 			else if( classCode == ICFBamDbKeyHash512Def.CLASS_CODE ) {
-				schema.getTableDbKeyHash512Def().updateDbKeyHash512Def( Authorization, (CFBamDbKeyHash512DefBuff)editPrev );
+				schema.getTableDbKeyHash512Def().updateDbKeyHash512Def( Authorization, (CFBamBuffDbKeyHash512Def)editPrev );
 			}
 			else if( classCode == ICFBamDbKeyHash512Col.CLASS_CODE ) {
-				schema.getTableDbKeyHash512Col().updateDbKeyHash512Col( Authorization, (CFBamDbKeyHash512ColBuff)editPrev );
+				schema.getTableDbKeyHash512Col().updateDbKeyHash512Col( Authorization, (CFBamBuffDbKeyHash512Col)editPrev );
 			}
 			else if( classCode == ICFBamDbKeyHash512Type.CLASS_CODE ) {
-				schema.getTableDbKeyHash512Type().updateDbKeyHash512Type( Authorization, (CFBamDbKeyHash512TypeBuff)editPrev );
+				schema.getTableDbKeyHash512Type().updateDbKeyHash512Type( Authorization, (CFBamBuffDbKeyHash512Type)editPrev );
 			}
 			else if( classCode == ICFBamDbKeyHash512Gen.CLASS_CODE ) {
-				schema.getTableDbKeyHash512Gen().updateDbKeyHash512Gen( Authorization, (CFBamDbKeyHash512GenBuff)editPrev );
+				schema.getTableDbKeyHash512Gen().updateDbKeyHash512Gen( Authorization, (CFBamBuffDbKeyHash512Gen)editPrev );
 			}
 			else if( classCode == ICFBamStringDef.CLASS_CODE ) {
-				schema.getTableStringDef().updateStringDef( Authorization, (CFBamStringDefBuff)editPrev );
+				schema.getTableStringDef().updateStringDef( Authorization, (CFBamBuffStringDef)editPrev );
 			}
 			else if( classCode == ICFBamStringType.CLASS_CODE ) {
-				schema.getTableStringType().updateStringType( Authorization, (CFBamStringTypeBuff)editPrev );
+				schema.getTableStringType().updateStringType( Authorization, (CFBamBuffStringType)editPrev );
 			}
 			else if( classCode == ICFBamStringCol.CLASS_CODE ) {
-				schema.getTableStringCol().updateStringCol( Authorization, (CFBamStringColBuff)editPrev );
+				schema.getTableStringCol().updateStringCol( Authorization, (CFBamBuffStringCol)editPrev );
 			}
 			else if( classCode == ICFBamTZDateDef.CLASS_CODE ) {
-				schema.getTableTZDateDef().updateTZDateDef( Authorization, (CFBamTZDateDefBuff)editPrev );
+				schema.getTableTZDateDef().updateTZDateDef( Authorization, (CFBamBuffTZDateDef)editPrev );
 			}
 			else if( classCode == ICFBamTZDateType.CLASS_CODE ) {
-				schema.getTableTZDateType().updateTZDateType( Authorization, (CFBamTZDateTypeBuff)editPrev );
+				schema.getTableTZDateType().updateTZDateType( Authorization, (CFBamBuffTZDateType)editPrev );
 			}
 			else if( classCode == ICFBamTZDateCol.CLASS_CODE ) {
-				schema.getTableTZDateCol().updateTZDateCol( Authorization, (CFBamTZDateColBuff)editPrev );
+				schema.getTableTZDateCol().updateTZDateCol( Authorization, (CFBamBuffTZDateCol)editPrev );
 			}
 			else if( classCode == ICFBamTZTimeDef.CLASS_CODE ) {
-				schema.getTableTZTimeDef().updateTZTimeDef( Authorization, (CFBamTZTimeDefBuff)editPrev );
+				schema.getTableTZTimeDef().updateTZTimeDef( Authorization, (CFBamBuffTZTimeDef)editPrev );
 			}
 			else if( classCode == ICFBamTZTimeType.CLASS_CODE ) {
-				schema.getTableTZTimeType().updateTZTimeType( Authorization, (CFBamTZTimeTypeBuff)editPrev );
+				schema.getTableTZTimeType().updateTZTimeType( Authorization, (CFBamBuffTZTimeType)editPrev );
 			}
 			else if( classCode == ICFBamTZTimeCol.CLASS_CODE ) {
-				schema.getTableTZTimeCol().updateTZTimeCol( Authorization, (CFBamTZTimeColBuff)editPrev );
+				schema.getTableTZTimeCol().updateTZTimeCol( Authorization, (CFBamBuffTZTimeCol)editPrev );
 			}
 			else if( classCode == ICFBamTZTimestampDef.CLASS_CODE ) {
-				schema.getTableTZTimestampDef().updateTZTimestampDef( Authorization, (CFBamTZTimestampDefBuff)editPrev );
+				schema.getTableTZTimestampDef().updateTZTimestampDef( Authorization, (CFBamBuffTZTimestampDef)editPrev );
 			}
 			else if( classCode == ICFBamTZTimestampType.CLASS_CODE ) {
-				schema.getTableTZTimestampType().updateTZTimestampType( Authorization, (CFBamTZTimestampTypeBuff)editPrev );
+				schema.getTableTZTimestampType().updateTZTimestampType( Authorization, (CFBamBuffTZTimestampType)editPrev );
 			}
 			else if( classCode == ICFBamTZTimestampCol.CLASS_CODE ) {
-				schema.getTableTZTimestampCol().updateTZTimestampCol( Authorization, (CFBamTZTimestampColBuff)editPrev );
+				schema.getTableTZTimestampCol().updateTZTimestampCol( Authorization, (CFBamBuffTZTimestampCol)editPrev );
 			}
 			else if( classCode == ICFBamTextDef.CLASS_CODE ) {
-				schema.getTableTextDef().updateTextDef( Authorization, (CFBamTextDefBuff)editPrev );
+				schema.getTableTextDef().updateTextDef( Authorization, (CFBamBuffTextDef)editPrev );
 			}
 			else if( classCode == ICFBamTextType.CLASS_CODE ) {
-				schema.getTableTextType().updateTextType( Authorization, (CFBamTextTypeBuff)editPrev );
+				schema.getTableTextType().updateTextType( Authorization, (CFBamBuffTextType)editPrev );
 			}
 			else if( classCode == ICFBamTextCol.CLASS_CODE ) {
-				schema.getTableTextCol().updateTextCol( Authorization, (CFBamTextColBuff)editPrev );
+				schema.getTableTextCol().updateTextCol( Authorization, (CFBamBuffTextCol)editPrev );
 			}
 			else if( classCode == ICFBamTimeDef.CLASS_CODE ) {
-				schema.getTableTimeDef().updateTimeDef( Authorization, (CFBamTimeDefBuff)editPrev );
+				schema.getTableTimeDef().updateTimeDef( Authorization, (CFBamBuffTimeDef)editPrev );
 			}
 			else if( classCode == ICFBamTimeType.CLASS_CODE ) {
-				schema.getTableTimeType().updateTimeType( Authorization, (CFBamTimeTypeBuff)editPrev );
+				schema.getTableTimeType().updateTimeType( Authorization, (CFBamBuffTimeType)editPrev );
 			}
 			else if( classCode == ICFBamTimeCol.CLASS_CODE ) {
-				schema.getTableTimeCol().updateTimeCol( Authorization, (CFBamTimeColBuff)editPrev );
+				schema.getTableTimeCol().updateTimeCol( Authorization, (CFBamBuffTimeCol)editPrev );
 			}
 			else if( classCode == ICFBamTimestampDef.CLASS_CODE ) {
-				schema.getTableTimestampDef().updateTimestampDef( Authorization, (CFBamTimestampDefBuff)editPrev );
+				schema.getTableTimestampDef().updateTimestampDef( Authorization, (CFBamBuffTimestampDef)editPrev );
 			}
 			else if( classCode == ICFBamTimestampType.CLASS_CODE ) {
-				schema.getTableTimestampType().updateTimestampType( Authorization, (CFBamTimestampTypeBuff)editPrev );
+				schema.getTableTimestampType().updateTimestampType( Authorization, (CFBamBuffTimestampType)editPrev );
 			}
 			else if( classCode == ICFBamTimestampCol.CLASS_CODE ) {
-				schema.getTableTimestampCol().updateTimestampCol( Authorization, (CFBamTimestampColBuff)editPrev );
+				schema.getTableTimestampCol().updateTimestampCol( Authorization, (CFBamBuffTimestampCol)editPrev );
 			}
 			else if( classCode == ICFBamTokenDef.CLASS_CODE ) {
-				schema.getTableTokenDef().updateTokenDef( Authorization, (CFBamTokenDefBuff)editPrev );
+				schema.getTableTokenDef().updateTokenDef( Authorization, (CFBamBuffTokenDef)editPrev );
 			}
 			else if( classCode == ICFBamTokenType.CLASS_CODE ) {
-				schema.getTableTokenType().updateTokenType( Authorization, (CFBamTokenTypeBuff)editPrev );
+				schema.getTableTokenType().updateTokenType( Authorization, (CFBamBuffTokenType)editPrev );
 			}
 			else if( classCode == ICFBamTokenCol.CLASS_CODE ) {
-				schema.getTableTokenCol().updateTokenCol( Authorization, (CFBamTokenColBuff)editPrev );
+				schema.getTableTokenCol().updateTokenCol( Authorization, (CFBamBuffTokenCol)editPrev );
 			}
 			else if( classCode == ICFBamUInt16Def.CLASS_CODE ) {
-				schema.getTableUInt16Def().updateUInt16Def( Authorization, (CFBamUInt16DefBuff)editPrev );
+				schema.getTableUInt16Def().updateUInt16Def( Authorization, (CFBamBuffUInt16Def)editPrev );
 			}
 			else if( classCode == ICFBamUInt16Type.CLASS_CODE ) {
-				schema.getTableUInt16Type().updateUInt16Type( Authorization, (CFBamUInt16TypeBuff)editPrev );
+				schema.getTableUInt16Type().updateUInt16Type( Authorization, (CFBamBuffUInt16Type)editPrev );
 			}
 			else if( classCode == ICFBamUInt16Col.CLASS_CODE ) {
-				schema.getTableUInt16Col().updateUInt16Col( Authorization, (CFBamUInt16ColBuff)editPrev );
+				schema.getTableUInt16Col().updateUInt16Col( Authorization, (CFBamBuffUInt16Col)editPrev );
 			}
 			else if( classCode == ICFBamUInt32Def.CLASS_CODE ) {
-				schema.getTableUInt32Def().updateUInt32Def( Authorization, (CFBamUInt32DefBuff)editPrev );
+				schema.getTableUInt32Def().updateUInt32Def( Authorization, (CFBamBuffUInt32Def)editPrev );
 			}
 			else if( classCode == ICFBamUInt32Type.CLASS_CODE ) {
-				schema.getTableUInt32Type().updateUInt32Type( Authorization, (CFBamUInt32TypeBuff)editPrev );
+				schema.getTableUInt32Type().updateUInt32Type( Authorization, (CFBamBuffUInt32Type)editPrev );
 			}
 			else if( classCode == ICFBamUInt32Col.CLASS_CODE ) {
-				schema.getTableUInt32Col().updateUInt32Col( Authorization, (CFBamUInt32ColBuff)editPrev );
+				schema.getTableUInt32Col().updateUInt32Col( Authorization, (CFBamBuffUInt32Col)editPrev );
 			}
 			else if( classCode == ICFBamUInt64Def.CLASS_CODE ) {
-				schema.getTableUInt64Def().updateUInt64Def( Authorization, (CFBamUInt64DefBuff)editPrev );
+				schema.getTableUInt64Def().updateUInt64Def( Authorization, (CFBamBuffUInt64Def)editPrev );
 			}
 			else if( classCode == ICFBamUInt64Type.CLASS_CODE ) {
-				schema.getTableUInt64Type().updateUInt64Type( Authorization, (CFBamUInt64TypeBuff)editPrev );
+				schema.getTableUInt64Type().updateUInt64Type( Authorization, (CFBamBuffUInt64Type)editPrev );
 			}
 			else if( classCode == ICFBamUInt64Col.CLASS_CODE ) {
-				schema.getTableUInt64Col().updateUInt64Col( Authorization, (CFBamUInt64ColBuff)editPrev );
+				schema.getTableUInt64Col().updateUInt64Col( Authorization, (CFBamBuffUInt64Col)editPrev );
 			}
 			else if( classCode == ICFBamUuidDef.CLASS_CODE ) {
-				schema.getTableUuidDef().updateUuidDef( Authorization, (CFBamUuidDefBuff)editPrev );
+				schema.getTableUuidDef().updateUuidDef( Authorization, (CFBamBuffUuidDef)editPrev );
 			}
 			else if( classCode == ICFBamUuidType.CLASS_CODE ) {
-				schema.getTableUuidType().updateUuidType( Authorization, (CFBamUuidTypeBuff)editPrev );
+				schema.getTableUuidType().updateUuidType( Authorization, (CFBamBuffUuidType)editPrev );
 			}
 			else if( classCode == ICFBamUuidGen.CLASS_CODE ) {
-				schema.getTableUuidGen().updateUuidGen( Authorization, (CFBamUuidGenBuff)editPrev );
+				schema.getTableUuidGen().updateUuidGen( Authorization, (CFBamBuffUuidGen)editPrev );
 			}
 			else if( classCode == ICFBamUuidCol.CLASS_CODE ) {
-				schema.getTableUuidCol().updateUuidCol( Authorization, (CFBamUuidColBuff)editPrev );
+				schema.getTableUuidCol().updateUuidCol( Authorization, (CFBamBuffUuidCol)editPrev );
 			}
 			else if( classCode == ICFBamUuid6Def.CLASS_CODE ) {
-				schema.getTableUuid6Def().updateUuid6Def( Authorization, (CFBamUuid6DefBuff)editPrev );
+				schema.getTableUuid6Def().updateUuid6Def( Authorization, (CFBamBuffUuid6Def)editPrev );
 			}
 			else if( classCode == ICFBamUuid6Type.CLASS_CODE ) {
-				schema.getTableUuid6Type().updateUuid6Type( Authorization, (CFBamUuid6TypeBuff)editPrev );
+				schema.getTableUuid6Type().updateUuid6Type( Authorization, (CFBamBuffUuid6Type)editPrev );
 			}
 			else if( classCode == ICFBamUuid6Gen.CLASS_CODE ) {
-				schema.getTableUuid6Gen().updateUuid6Gen( Authorization, (CFBamUuid6GenBuff)editPrev );
+				schema.getTableUuid6Gen().updateUuid6Gen( Authorization, (CFBamBuffUuid6Gen)editPrev );
 			}
 			else if( classCode == ICFBamUuid6Col.CLASS_CODE ) {
-				schema.getTableUuid6Col().updateUuid6Col( Authorization, (CFBamUuid6ColBuff)editPrev );
+				schema.getTableUuid6Col().updateUuid6Col( Authorization, (CFBamBuffUuid6Col)editPrev );
 			}
 			else if( classCode == ICFBamTableCol.CLASS_CODE ) {
-				schema.getTableTableCol().updateTableCol( Authorization, (CFBamTableColBuff)editPrev );
+				schema.getTableTableCol().updateTableCol( Authorization, (CFBamBuffTableCol)editPrev );
 			}
 			else {
-				throw new CFLibUnsupportedClassException(getClass(), S_ProcName, 0, "-update-prev-", "Not " + Integer.toString(classCode));
+				throw new CFLibUnsupportedClassException(getClass(), S_ProcName, "-update-prev-", (Integer)classCode, "Classcode not recognized: " + Integer.toString(classCode));
 			}
 
 		classCode = editCur.getClassCode();
@@ -2564,322 +2564,322 @@ public class CFBamRamInt64DefTable
 				schema.getTableValue().updateValue( Authorization, editCur );
 			}
 			else if( classCode == ICFBamAtom.CLASS_CODE ) {
-				schema.getTableAtom().updateAtom( Authorization, (CFBamAtomBuff)editCur );
+				schema.getTableAtom().updateAtom( Authorization, (CFBamBuffAtom)editCur );
 			}
 			else if( classCode == ICFBamBlobDef.CLASS_CODE ) {
-				schema.getTableBlobDef().updateBlobDef( Authorization, (CFBamBlobDefBuff)editCur );
+				schema.getTableBlobDef().updateBlobDef( Authorization, (CFBamBuffBlobDef)editCur );
 			}
 			else if( classCode == ICFBamBlobType.CLASS_CODE ) {
-				schema.getTableBlobType().updateBlobType( Authorization, (CFBamBlobTypeBuff)editCur );
+				schema.getTableBlobType().updateBlobType( Authorization, (CFBamBuffBlobType)editCur );
 			}
 			else if( classCode == ICFBamBlobCol.CLASS_CODE ) {
-				schema.getTableBlobCol().updateBlobCol( Authorization, (CFBamBlobColBuff)editCur );
+				schema.getTableBlobCol().updateBlobCol( Authorization, (CFBamBuffBlobCol)editCur );
 			}
 			else if( classCode == ICFBamBoolDef.CLASS_CODE ) {
-				schema.getTableBoolDef().updateBoolDef( Authorization, (CFBamBoolDefBuff)editCur );
+				schema.getTableBoolDef().updateBoolDef( Authorization, (CFBamBuffBoolDef)editCur );
 			}
 			else if( classCode == ICFBamBoolType.CLASS_CODE ) {
-				schema.getTableBoolType().updateBoolType( Authorization, (CFBamBoolTypeBuff)editCur );
+				schema.getTableBoolType().updateBoolType( Authorization, (CFBamBuffBoolType)editCur );
 			}
 			else if( classCode == ICFBamBoolCol.CLASS_CODE ) {
-				schema.getTableBoolCol().updateBoolCol( Authorization, (CFBamBoolColBuff)editCur );
+				schema.getTableBoolCol().updateBoolCol( Authorization, (CFBamBuffBoolCol)editCur );
 			}
 			else if( classCode == ICFBamDateDef.CLASS_CODE ) {
-				schema.getTableDateDef().updateDateDef( Authorization, (CFBamDateDefBuff)editCur );
+				schema.getTableDateDef().updateDateDef( Authorization, (CFBamBuffDateDef)editCur );
 			}
 			else if( classCode == ICFBamDateType.CLASS_CODE ) {
-				schema.getTableDateType().updateDateType( Authorization, (CFBamDateTypeBuff)editCur );
+				schema.getTableDateType().updateDateType( Authorization, (CFBamBuffDateType)editCur );
 			}
 			else if( classCode == ICFBamDateCol.CLASS_CODE ) {
-				schema.getTableDateCol().updateDateCol( Authorization, (CFBamDateColBuff)editCur );
+				schema.getTableDateCol().updateDateCol( Authorization, (CFBamBuffDateCol)editCur );
 			}
 			else if( classCode == ICFBamDoubleDef.CLASS_CODE ) {
-				schema.getTableDoubleDef().updateDoubleDef( Authorization, (CFBamDoubleDefBuff)editCur );
+				schema.getTableDoubleDef().updateDoubleDef( Authorization, (CFBamBuffDoubleDef)editCur );
 			}
 			else if( classCode == ICFBamDoubleType.CLASS_CODE ) {
-				schema.getTableDoubleType().updateDoubleType( Authorization, (CFBamDoubleTypeBuff)editCur );
+				schema.getTableDoubleType().updateDoubleType( Authorization, (CFBamBuffDoubleType)editCur );
 			}
 			else if( classCode == ICFBamDoubleCol.CLASS_CODE ) {
-				schema.getTableDoubleCol().updateDoubleCol( Authorization, (CFBamDoubleColBuff)editCur );
+				schema.getTableDoubleCol().updateDoubleCol( Authorization, (CFBamBuffDoubleCol)editCur );
 			}
 			else if( classCode == ICFBamFloatDef.CLASS_CODE ) {
-				schema.getTableFloatDef().updateFloatDef( Authorization, (CFBamFloatDefBuff)editCur );
+				schema.getTableFloatDef().updateFloatDef( Authorization, (CFBamBuffFloatDef)editCur );
 			}
 			else if( classCode == ICFBamFloatType.CLASS_CODE ) {
-				schema.getTableFloatType().updateFloatType( Authorization, (CFBamFloatTypeBuff)editCur );
+				schema.getTableFloatType().updateFloatType( Authorization, (CFBamBuffFloatType)editCur );
 			}
 			else if( classCode == ICFBamFloatCol.CLASS_CODE ) {
-				schema.getTableFloatCol().updateFloatCol( Authorization, (CFBamFloatColBuff)editCur );
+				schema.getTableFloatCol().updateFloatCol( Authorization, (CFBamBuffFloatCol)editCur );
 			}
 			else if( classCode == ICFBamInt16Def.CLASS_CODE ) {
-				schema.getTableInt16Def().updateInt16Def( Authorization, (CFBamInt16DefBuff)editCur );
+				schema.getTableInt16Def().updateInt16Def( Authorization, (CFBamBuffInt16Def)editCur );
 			}
 			else if( classCode == ICFBamInt16Type.CLASS_CODE ) {
-				schema.getTableInt16Type().updateInt16Type( Authorization, (CFBamInt16TypeBuff)editCur );
+				schema.getTableInt16Type().updateInt16Type( Authorization, (CFBamBuffInt16Type)editCur );
 			}
 			else if( classCode == ICFBamId16Gen.CLASS_CODE ) {
-				schema.getTableId16Gen().updateId16Gen( Authorization, (CFBamId16GenBuff)editCur );
+				schema.getTableId16Gen().updateId16Gen( Authorization, (CFBamBuffId16Gen)editCur );
 			}
 			else if( classCode == ICFBamEnumDef.CLASS_CODE ) {
-				schema.getTableEnumDef().updateEnumDef( Authorization, (CFBamEnumDefBuff)editCur );
+				schema.getTableEnumDef().updateEnumDef( Authorization, (CFBamBuffEnumDef)editCur );
 			}
 			else if( classCode == ICFBamEnumType.CLASS_CODE ) {
-				schema.getTableEnumType().updateEnumType( Authorization, (CFBamEnumTypeBuff)editCur );
+				schema.getTableEnumType().updateEnumType( Authorization, (CFBamBuffEnumType)editCur );
 			}
 			else if( classCode == ICFBamInt16Col.CLASS_CODE ) {
-				schema.getTableInt16Col().updateInt16Col( Authorization, (CFBamInt16ColBuff)editCur );
+				schema.getTableInt16Col().updateInt16Col( Authorization, (CFBamBuffInt16Col)editCur );
 			}
 			else if( classCode == ICFBamInt32Def.CLASS_CODE ) {
-				schema.getTableInt32Def().updateInt32Def( Authorization, (CFBamInt32DefBuff)editCur );
+				schema.getTableInt32Def().updateInt32Def( Authorization, (CFBamBuffInt32Def)editCur );
 			}
 			else if( classCode == ICFBamInt32Type.CLASS_CODE ) {
-				schema.getTableInt32Type().updateInt32Type( Authorization, (CFBamInt32TypeBuff)editCur );
+				schema.getTableInt32Type().updateInt32Type( Authorization, (CFBamBuffInt32Type)editCur );
 			}
 			else if( classCode == ICFBamId32Gen.CLASS_CODE ) {
-				schema.getTableId32Gen().updateId32Gen( Authorization, (CFBamId32GenBuff)editCur );
+				schema.getTableId32Gen().updateId32Gen( Authorization, (CFBamBuffId32Gen)editCur );
 			}
 			else if( classCode == ICFBamInt32Col.CLASS_CODE ) {
-				schema.getTableInt32Col().updateInt32Col( Authorization, (CFBamInt32ColBuff)editCur );
+				schema.getTableInt32Col().updateInt32Col( Authorization, (CFBamBuffInt32Col)editCur );
 			}
 			else if( classCode == ICFBamInt64Def.CLASS_CODE ) {
-				schema.getTableInt64Def().updateInt64Def( Authorization, (CFBamInt64DefBuff)editCur );
+				schema.getTableInt64Def().updateInt64Def( Authorization, (CFBamBuffInt64Def)editCur );
 			}
 			else if( classCode == ICFBamInt64Type.CLASS_CODE ) {
-				schema.getTableInt64Type().updateInt64Type( Authorization, (CFBamInt64TypeBuff)editCur );
+				schema.getTableInt64Type().updateInt64Type( Authorization, (CFBamBuffInt64Type)editCur );
 			}
 			else if( classCode == ICFBamId64Gen.CLASS_CODE ) {
-				schema.getTableId64Gen().updateId64Gen( Authorization, (CFBamId64GenBuff)editCur );
+				schema.getTableId64Gen().updateId64Gen( Authorization, (CFBamBuffId64Gen)editCur );
 			}
 			else if( classCode == ICFBamInt64Col.CLASS_CODE ) {
-				schema.getTableInt64Col().updateInt64Col( Authorization, (CFBamInt64ColBuff)editCur );
+				schema.getTableInt64Col().updateInt64Col( Authorization, (CFBamBuffInt64Col)editCur );
 			}
 			else if( classCode == ICFBamNmTokenDef.CLASS_CODE ) {
-				schema.getTableNmTokenDef().updateNmTokenDef( Authorization, (CFBamNmTokenDefBuff)editCur );
+				schema.getTableNmTokenDef().updateNmTokenDef( Authorization, (CFBamBuffNmTokenDef)editCur );
 			}
 			else if( classCode == ICFBamNmTokenType.CLASS_CODE ) {
-				schema.getTableNmTokenType().updateNmTokenType( Authorization, (CFBamNmTokenTypeBuff)editCur );
+				schema.getTableNmTokenType().updateNmTokenType( Authorization, (CFBamBuffNmTokenType)editCur );
 			}
 			else if( classCode == ICFBamNmTokenCol.CLASS_CODE ) {
-				schema.getTableNmTokenCol().updateNmTokenCol( Authorization, (CFBamNmTokenColBuff)editCur );
+				schema.getTableNmTokenCol().updateNmTokenCol( Authorization, (CFBamBuffNmTokenCol)editCur );
 			}
 			else if( classCode == ICFBamNmTokensDef.CLASS_CODE ) {
-				schema.getTableNmTokensDef().updateNmTokensDef( Authorization, (CFBamNmTokensDefBuff)editCur );
+				schema.getTableNmTokensDef().updateNmTokensDef( Authorization, (CFBamBuffNmTokensDef)editCur );
 			}
 			else if( classCode == ICFBamNmTokensType.CLASS_CODE ) {
-				schema.getTableNmTokensType().updateNmTokensType( Authorization, (CFBamNmTokensTypeBuff)editCur );
+				schema.getTableNmTokensType().updateNmTokensType( Authorization, (CFBamBuffNmTokensType)editCur );
 			}
 			else if( classCode == ICFBamNmTokensCol.CLASS_CODE ) {
-				schema.getTableNmTokensCol().updateNmTokensCol( Authorization, (CFBamNmTokensColBuff)editCur );
+				schema.getTableNmTokensCol().updateNmTokensCol( Authorization, (CFBamBuffNmTokensCol)editCur );
 			}
 			else if( classCode == ICFBamNumberDef.CLASS_CODE ) {
-				schema.getTableNumberDef().updateNumberDef( Authorization, (CFBamNumberDefBuff)editCur );
+				schema.getTableNumberDef().updateNumberDef( Authorization, (CFBamBuffNumberDef)editCur );
 			}
 			else if( classCode == ICFBamNumberType.CLASS_CODE ) {
-				schema.getTableNumberType().updateNumberType( Authorization, (CFBamNumberTypeBuff)editCur );
+				schema.getTableNumberType().updateNumberType( Authorization, (CFBamBuffNumberType)editCur );
 			}
 			else if( classCode == ICFBamNumberCol.CLASS_CODE ) {
-				schema.getTableNumberCol().updateNumberCol( Authorization, (CFBamNumberColBuff)editCur );
+				schema.getTableNumberCol().updateNumberCol( Authorization, (CFBamBuffNumberCol)editCur );
 			}
 			else if( classCode == ICFBamDbKeyHash128Def.CLASS_CODE ) {
-				schema.getTableDbKeyHash128Def().updateDbKeyHash128Def( Authorization, (CFBamDbKeyHash128DefBuff)editCur );
+				schema.getTableDbKeyHash128Def().updateDbKeyHash128Def( Authorization, (CFBamBuffDbKeyHash128Def)editCur );
 			}
 			else if( classCode == ICFBamDbKeyHash128Col.CLASS_CODE ) {
-				schema.getTableDbKeyHash128Col().updateDbKeyHash128Col( Authorization, (CFBamDbKeyHash128ColBuff)editCur );
+				schema.getTableDbKeyHash128Col().updateDbKeyHash128Col( Authorization, (CFBamBuffDbKeyHash128Col)editCur );
 			}
 			else if( classCode == ICFBamDbKeyHash128Type.CLASS_CODE ) {
-				schema.getTableDbKeyHash128Type().updateDbKeyHash128Type( Authorization, (CFBamDbKeyHash128TypeBuff)editCur );
+				schema.getTableDbKeyHash128Type().updateDbKeyHash128Type( Authorization, (CFBamBuffDbKeyHash128Type)editCur );
 			}
 			else if( classCode == ICFBamDbKeyHash128Gen.CLASS_CODE ) {
-				schema.getTableDbKeyHash128Gen().updateDbKeyHash128Gen( Authorization, (CFBamDbKeyHash128GenBuff)editCur );
+				schema.getTableDbKeyHash128Gen().updateDbKeyHash128Gen( Authorization, (CFBamBuffDbKeyHash128Gen)editCur );
 			}
 			else if( classCode == ICFBamDbKeyHash160Def.CLASS_CODE ) {
-				schema.getTableDbKeyHash160Def().updateDbKeyHash160Def( Authorization, (CFBamDbKeyHash160DefBuff)editCur );
+				schema.getTableDbKeyHash160Def().updateDbKeyHash160Def( Authorization, (CFBamBuffDbKeyHash160Def)editCur );
 			}
 			else if( classCode == ICFBamDbKeyHash160Col.CLASS_CODE ) {
-				schema.getTableDbKeyHash160Col().updateDbKeyHash160Col( Authorization, (CFBamDbKeyHash160ColBuff)editCur );
+				schema.getTableDbKeyHash160Col().updateDbKeyHash160Col( Authorization, (CFBamBuffDbKeyHash160Col)editCur );
 			}
 			else if( classCode == ICFBamDbKeyHash160Type.CLASS_CODE ) {
-				schema.getTableDbKeyHash160Type().updateDbKeyHash160Type( Authorization, (CFBamDbKeyHash160TypeBuff)editCur );
+				schema.getTableDbKeyHash160Type().updateDbKeyHash160Type( Authorization, (CFBamBuffDbKeyHash160Type)editCur );
 			}
 			else if( classCode == ICFBamDbKeyHash160Gen.CLASS_CODE ) {
-				schema.getTableDbKeyHash160Gen().updateDbKeyHash160Gen( Authorization, (CFBamDbKeyHash160GenBuff)editCur );
+				schema.getTableDbKeyHash160Gen().updateDbKeyHash160Gen( Authorization, (CFBamBuffDbKeyHash160Gen)editCur );
 			}
 			else if( classCode == ICFBamDbKeyHash224Def.CLASS_CODE ) {
-				schema.getTableDbKeyHash224Def().updateDbKeyHash224Def( Authorization, (CFBamDbKeyHash224DefBuff)editCur );
+				schema.getTableDbKeyHash224Def().updateDbKeyHash224Def( Authorization, (CFBamBuffDbKeyHash224Def)editCur );
 			}
 			else if( classCode == ICFBamDbKeyHash224Col.CLASS_CODE ) {
-				schema.getTableDbKeyHash224Col().updateDbKeyHash224Col( Authorization, (CFBamDbKeyHash224ColBuff)editCur );
+				schema.getTableDbKeyHash224Col().updateDbKeyHash224Col( Authorization, (CFBamBuffDbKeyHash224Col)editCur );
 			}
 			else if( classCode == ICFBamDbKeyHash224Type.CLASS_CODE ) {
-				schema.getTableDbKeyHash224Type().updateDbKeyHash224Type( Authorization, (CFBamDbKeyHash224TypeBuff)editCur );
+				schema.getTableDbKeyHash224Type().updateDbKeyHash224Type( Authorization, (CFBamBuffDbKeyHash224Type)editCur );
 			}
 			else if( classCode == ICFBamDbKeyHash224Gen.CLASS_CODE ) {
-				schema.getTableDbKeyHash224Gen().updateDbKeyHash224Gen( Authorization, (CFBamDbKeyHash224GenBuff)editCur );
+				schema.getTableDbKeyHash224Gen().updateDbKeyHash224Gen( Authorization, (CFBamBuffDbKeyHash224Gen)editCur );
 			}
 			else if( classCode == ICFBamDbKeyHash256Def.CLASS_CODE ) {
-				schema.getTableDbKeyHash256Def().updateDbKeyHash256Def( Authorization, (CFBamDbKeyHash256DefBuff)editCur );
+				schema.getTableDbKeyHash256Def().updateDbKeyHash256Def( Authorization, (CFBamBuffDbKeyHash256Def)editCur );
 			}
 			else if( classCode == ICFBamDbKeyHash256Col.CLASS_CODE ) {
-				schema.getTableDbKeyHash256Col().updateDbKeyHash256Col( Authorization, (CFBamDbKeyHash256ColBuff)editCur );
+				schema.getTableDbKeyHash256Col().updateDbKeyHash256Col( Authorization, (CFBamBuffDbKeyHash256Col)editCur );
 			}
 			else if( classCode == ICFBamDbKeyHash256Type.CLASS_CODE ) {
-				schema.getTableDbKeyHash256Type().updateDbKeyHash256Type( Authorization, (CFBamDbKeyHash256TypeBuff)editCur );
+				schema.getTableDbKeyHash256Type().updateDbKeyHash256Type( Authorization, (CFBamBuffDbKeyHash256Type)editCur );
 			}
 			else if( classCode == ICFBamDbKeyHash256Gen.CLASS_CODE ) {
-				schema.getTableDbKeyHash256Gen().updateDbKeyHash256Gen( Authorization, (CFBamDbKeyHash256GenBuff)editCur );
+				schema.getTableDbKeyHash256Gen().updateDbKeyHash256Gen( Authorization, (CFBamBuffDbKeyHash256Gen)editCur );
 			}
 			else if( classCode == ICFBamDbKeyHash384Def.CLASS_CODE ) {
-				schema.getTableDbKeyHash384Def().updateDbKeyHash384Def( Authorization, (CFBamDbKeyHash384DefBuff)editCur );
+				schema.getTableDbKeyHash384Def().updateDbKeyHash384Def( Authorization, (CFBamBuffDbKeyHash384Def)editCur );
 			}
 			else if( classCode == ICFBamDbKeyHash384Col.CLASS_CODE ) {
-				schema.getTableDbKeyHash384Col().updateDbKeyHash384Col( Authorization, (CFBamDbKeyHash384ColBuff)editCur );
+				schema.getTableDbKeyHash384Col().updateDbKeyHash384Col( Authorization, (CFBamBuffDbKeyHash384Col)editCur );
 			}
 			else if( classCode == ICFBamDbKeyHash384Type.CLASS_CODE ) {
-				schema.getTableDbKeyHash384Type().updateDbKeyHash384Type( Authorization, (CFBamDbKeyHash384TypeBuff)editCur );
+				schema.getTableDbKeyHash384Type().updateDbKeyHash384Type( Authorization, (CFBamBuffDbKeyHash384Type)editCur );
 			}
 			else if( classCode == ICFBamDbKeyHash384Gen.CLASS_CODE ) {
-				schema.getTableDbKeyHash384Gen().updateDbKeyHash384Gen( Authorization, (CFBamDbKeyHash384GenBuff)editCur );
+				schema.getTableDbKeyHash384Gen().updateDbKeyHash384Gen( Authorization, (CFBamBuffDbKeyHash384Gen)editCur );
 			}
 			else if( classCode == ICFBamDbKeyHash512Def.CLASS_CODE ) {
-				schema.getTableDbKeyHash512Def().updateDbKeyHash512Def( Authorization, (CFBamDbKeyHash512DefBuff)editCur );
+				schema.getTableDbKeyHash512Def().updateDbKeyHash512Def( Authorization, (CFBamBuffDbKeyHash512Def)editCur );
 			}
 			else if( classCode == ICFBamDbKeyHash512Col.CLASS_CODE ) {
-				schema.getTableDbKeyHash512Col().updateDbKeyHash512Col( Authorization, (CFBamDbKeyHash512ColBuff)editCur );
+				schema.getTableDbKeyHash512Col().updateDbKeyHash512Col( Authorization, (CFBamBuffDbKeyHash512Col)editCur );
 			}
 			else if( classCode == ICFBamDbKeyHash512Type.CLASS_CODE ) {
-				schema.getTableDbKeyHash512Type().updateDbKeyHash512Type( Authorization, (CFBamDbKeyHash512TypeBuff)editCur );
+				schema.getTableDbKeyHash512Type().updateDbKeyHash512Type( Authorization, (CFBamBuffDbKeyHash512Type)editCur );
 			}
 			else if( classCode == ICFBamDbKeyHash512Gen.CLASS_CODE ) {
-				schema.getTableDbKeyHash512Gen().updateDbKeyHash512Gen( Authorization, (CFBamDbKeyHash512GenBuff)editCur );
+				schema.getTableDbKeyHash512Gen().updateDbKeyHash512Gen( Authorization, (CFBamBuffDbKeyHash512Gen)editCur );
 			}
 			else if( classCode == ICFBamStringDef.CLASS_CODE ) {
-				schema.getTableStringDef().updateStringDef( Authorization, (CFBamStringDefBuff)editCur );
+				schema.getTableStringDef().updateStringDef( Authorization, (CFBamBuffStringDef)editCur );
 			}
 			else if( classCode == ICFBamStringType.CLASS_CODE ) {
-				schema.getTableStringType().updateStringType( Authorization, (CFBamStringTypeBuff)editCur );
+				schema.getTableStringType().updateStringType( Authorization, (CFBamBuffStringType)editCur );
 			}
 			else if( classCode == ICFBamStringCol.CLASS_CODE ) {
-				schema.getTableStringCol().updateStringCol( Authorization, (CFBamStringColBuff)editCur );
+				schema.getTableStringCol().updateStringCol( Authorization, (CFBamBuffStringCol)editCur );
 			}
 			else if( classCode == ICFBamTZDateDef.CLASS_CODE ) {
-				schema.getTableTZDateDef().updateTZDateDef( Authorization, (CFBamTZDateDefBuff)editCur );
+				schema.getTableTZDateDef().updateTZDateDef( Authorization, (CFBamBuffTZDateDef)editCur );
 			}
 			else if( classCode == ICFBamTZDateType.CLASS_CODE ) {
-				schema.getTableTZDateType().updateTZDateType( Authorization, (CFBamTZDateTypeBuff)editCur );
+				schema.getTableTZDateType().updateTZDateType( Authorization, (CFBamBuffTZDateType)editCur );
 			}
 			else if( classCode == ICFBamTZDateCol.CLASS_CODE ) {
-				schema.getTableTZDateCol().updateTZDateCol( Authorization, (CFBamTZDateColBuff)editCur );
+				schema.getTableTZDateCol().updateTZDateCol( Authorization, (CFBamBuffTZDateCol)editCur );
 			}
 			else if( classCode == ICFBamTZTimeDef.CLASS_CODE ) {
-				schema.getTableTZTimeDef().updateTZTimeDef( Authorization, (CFBamTZTimeDefBuff)editCur );
+				schema.getTableTZTimeDef().updateTZTimeDef( Authorization, (CFBamBuffTZTimeDef)editCur );
 			}
 			else if( classCode == ICFBamTZTimeType.CLASS_CODE ) {
-				schema.getTableTZTimeType().updateTZTimeType( Authorization, (CFBamTZTimeTypeBuff)editCur );
+				schema.getTableTZTimeType().updateTZTimeType( Authorization, (CFBamBuffTZTimeType)editCur );
 			}
 			else if( classCode == ICFBamTZTimeCol.CLASS_CODE ) {
-				schema.getTableTZTimeCol().updateTZTimeCol( Authorization, (CFBamTZTimeColBuff)editCur );
+				schema.getTableTZTimeCol().updateTZTimeCol( Authorization, (CFBamBuffTZTimeCol)editCur );
 			}
 			else if( classCode == ICFBamTZTimestampDef.CLASS_CODE ) {
-				schema.getTableTZTimestampDef().updateTZTimestampDef( Authorization, (CFBamTZTimestampDefBuff)editCur );
+				schema.getTableTZTimestampDef().updateTZTimestampDef( Authorization, (CFBamBuffTZTimestampDef)editCur );
 			}
 			else if( classCode == ICFBamTZTimestampType.CLASS_CODE ) {
-				schema.getTableTZTimestampType().updateTZTimestampType( Authorization, (CFBamTZTimestampTypeBuff)editCur );
+				schema.getTableTZTimestampType().updateTZTimestampType( Authorization, (CFBamBuffTZTimestampType)editCur );
 			}
 			else if( classCode == ICFBamTZTimestampCol.CLASS_CODE ) {
-				schema.getTableTZTimestampCol().updateTZTimestampCol( Authorization, (CFBamTZTimestampColBuff)editCur );
+				schema.getTableTZTimestampCol().updateTZTimestampCol( Authorization, (CFBamBuffTZTimestampCol)editCur );
 			}
 			else if( classCode == ICFBamTextDef.CLASS_CODE ) {
-				schema.getTableTextDef().updateTextDef( Authorization, (CFBamTextDefBuff)editCur );
+				schema.getTableTextDef().updateTextDef( Authorization, (CFBamBuffTextDef)editCur );
 			}
 			else if( classCode == ICFBamTextType.CLASS_CODE ) {
-				schema.getTableTextType().updateTextType( Authorization, (CFBamTextTypeBuff)editCur );
+				schema.getTableTextType().updateTextType( Authorization, (CFBamBuffTextType)editCur );
 			}
 			else if( classCode == ICFBamTextCol.CLASS_CODE ) {
-				schema.getTableTextCol().updateTextCol( Authorization, (CFBamTextColBuff)editCur );
+				schema.getTableTextCol().updateTextCol( Authorization, (CFBamBuffTextCol)editCur );
 			}
 			else if( classCode == ICFBamTimeDef.CLASS_CODE ) {
-				schema.getTableTimeDef().updateTimeDef( Authorization, (CFBamTimeDefBuff)editCur );
+				schema.getTableTimeDef().updateTimeDef( Authorization, (CFBamBuffTimeDef)editCur );
 			}
 			else if( classCode == ICFBamTimeType.CLASS_CODE ) {
-				schema.getTableTimeType().updateTimeType( Authorization, (CFBamTimeTypeBuff)editCur );
+				schema.getTableTimeType().updateTimeType( Authorization, (CFBamBuffTimeType)editCur );
 			}
 			else if( classCode == ICFBamTimeCol.CLASS_CODE ) {
-				schema.getTableTimeCol().updateTimeCol( Authorization, (CFBamTimeColBuff)editCur );
+				schema.getTableTimeCol().updateTimeCol( Authorization, (CFBamBuffTimeCol)editCur );
 			}
 			else if( classCode == ICFBamTimestampDef.CLASS_CODE ) {
-				schema.getTableTimestampDef().updateTimestampDef( Authorization, (CFBamTimestampDefBuff)editCur );
+				schema.getTableTimestampDef().updateTimestampDef( Authorization, (CFBamBuffTimestampDef)editCur );
 			}
 			else if( classCode == ICFBamTimestampType.CLASS_CODE ) {
-				schema.getTableTimestampType().updateTimestampType( Authorization, (CFBamTimestampTypeBuff)editCur );
+				schema.getTableTimestampType().updateTimestampType( Authorization, (CFBamBuffTimestampType)editCur );
 			}
 			else if( classCode == ICFBamTimestampCol.CLASS_CODE ) {
-				schema.getTableTimestampCol().updateTimestampCol( Authorization, (CFBamTimestampColBuff)editCur );
+				schema.getTableTimestampCol().updateTimestampCol( Authorization, (CFBamBuffTimestampCol)editCur );
 			}
 			else if( classCode == ICFBamTokenDef.CLASS_CODE ) {
-				schema.getTableTokenDef().updateTokenDef( Authorization, (CFBamTokenDefBuff)editCur );
+				schema.getTableTokenDef().updateTokenDef( Authorization, (CFBamBuffTokenDef)editCur );
 			}
 			else if( classCode == ICFBamTokenType.CLASS_CODE ) {
-				schema.getTableTokenType().updateTokenType( Authorization, (CFBamTokenTypeBuff)editCur );
+				schema.getTableTokenType().updateTokenType( Authorization, (CFBamBuffTokenType)editCur );
 			}
 			else if( classCode == ICFBamTokenCol.CLASS_CODE ) {
-				schema.getTableTokenCol().updateTokenCol( Authorization, (CFBamTokenColBuff)editCur );
+				schema.getTableTokenCol().updateTokenCol( Authorization, (CFBamBuffTokenCol)editCur );
 			}
 			else if( classCode == ICFBamUInt16Def.CLASS_CODE ) {
-				schema.getTableUInt16Def().updateUInt16Def( Authorization, (CFBamUInt16DefBuff)editCur );
+				schema.getTableUInt16Def().updateUInt16Def( Authorization, (CFBamBuffUInt16Def)editCur );
 			}
 			else if( classCode == ICFBamUInt16Type.CLASS_CODE ) {
-				schema.getTableUInt16Type().updateUInt16Type( Authorization, (CFBamUInt16TypeBuff)editCur );
+				schema.getTableUInt16Type().updateUInt16Type( Authorization, (CFBamBuffUInt16Type)editCur );
 			}
 			else if( classCode == ICFBamUInt16Col.CLASS_CODE ) {
-				schema.getTableUInt16Col().updateUInt16Col( Authorization, (CFBamUInt16ColBuff)editCur );
+				schema.getTableUInt16Col().updateUInt16Col( Authorization, (CFBamBuffUInt16Col)editCur );
 			}
 			else if( classCode == ICFBamUInt32Def.CLASS_CODE ) {
-				schema.getTableUInt32Def().updateUInt32Def( Authorization, (CFBamUInt32DefBuff)editCur );
+				schema.getTableUInt32Def().updateUInt32Def( Authorization, (CFBamBuffUInt32Def)editCur );
 			}
 			else if( classCode == ICFBamUInt32Type.CLASS_CODE ) {
-				schema.getTableUInt32Type().updateUInt32Type( Authorization, (CFBamUInt32TypeBuff)editCur );
+				schema.getTableUInt32Type().updateUInt32Type( Authorization, (CFBamBuffUInt32Type)editCur );
 			}
 			else if( classCode == ICFBamUInt32Col.CLASS_CODE ) {
-				schema.getTableUInt32Col().updateUInt32Col( Authorization, (CFBamUInt32ColBuff)editCur );
+				schema.getTableUInt32Col().updateUInt32Col( Authorization, (CFBamBuffUInt32Col)editCur );
 			}
 			else if( classCode == ICFBamUInt64Def.CLASS_CODE ) {
-				schema.getTableUInt64Def().updateUInt64Def( Authorization, (CFBamUInt64DefBuff)editCur );
+				schema.getTableUInt64Def().updateUInt64Def( Authorization, (CFBamBuffUInt64Def)editCur );
 			}
 			else if( classCode == ICFBamUInt64Type.CLASS_CODE ) {
-				schema.getTableUInt64Type().updateUInt64Type( Authorization, (CFBamUInt64TypeBuff)editCur );
+				schema.getTableUInt64Type().updateUInt64Type( Authorization, (CFBamBuffUInt64Type)editCur );
 			}
 			else if( classCode == ICFBamUInt64Col.CLASS_CODE ) {
-				schema.getTableUInt64Col().updateUInt64Col( Authorization, (CFBamUInt64ColBuff)editCur );
+				schema.getTableUInt64Col().updateUInt64Col( Authorization, (CFBamBuffUInt64Col)editCur );
 			}
 			else if( classCode == ICFBamUuidDef.CLASS_CODE ) {
-				schema.getTableUuidDef().updateUuidDef( Authorization, (CFBamUuidDefBuff)editCur );
+				schema.getTableUuidDef().updateUuidDef( Authorization, (CFBamBuffUuidDef)editCur );
 			}
 			else if( classCode == ICFBamUuidType.CLASS_CODE ) {
-				schema.getTableUuidType().updateUuidType( Authorization, (CFBamUuidTypeBuff)editCur );
+				schema.getTableUuidType().updateUuidType( Authorization, (CFBamBuffUuidType)editCur );
 			}
 			else if( classCode == ICFBamUuidGen.CLASS_CODE ) {
-				schema.getTableUuidGen().updateUuidGen( Authorization, (CFBamUuidGenBuff)editCur );
+				schema.getTableUuidGen().updateUuidGen( Authorization, (CFBamBuffUuidGen)editCur );
 			}
 			else if( classCode == ICFBamUuidCol.CLASS_CODE ) {
-				schema.getTableUuidCol().updateUuidCol( Authorization, (CFBamUuidColBuff)editCur );
+				schema.getTableUuidCol().updateUuidCol( Authorization, (CFBamBuffUuidCol)editCur );
 			}
 			else if( classCode == ICFBamUuid6Def.CLASS_CODE ) {
-				schema.getTableUuid6Def().updateUuid6Def( Authorization, (CFBamUuid6DefBuff)editCur );
+				schema.getTableUuid6Def().updateUuid6Def( Authorization, (CFBamBuffUuid6Def)editCur );
 			}
 			else if( classCode == ICFBamUuid6Type.CLASS_CODE ) {
-				schema.getTableUuid6Type().updateUuid6Type( Authorization, (CFBamUuid6TypeBuff)editCur );
+				schema.getTableUuid6Type().updateUuid6Type( Authorization, (CFBamBuffUuid6Type)editCur );
 			}
 			else if( classCode == ICFBamUuid6Gen.CLASS_CODE ) {
-				schema.getTableUuid6Gen().updateUuid6Gen( Authorization, (CFBamUuid6GenBuff)editCur );
+				schema.getTableUuid6Gen().updateUuid6Gen( Authorization, (CFBamBuffUuid6Gen)editCur );
 			}
 			else if( classCode == ICFBamUuid6Col.CLASS_CODE ) {
-				schema.getTableUuid6Col().updateUuid6Col( Authorization, (CFBamUuid6ColBuff)editCur );
+				schema.getTableUuid6Col().updateUuid6Col( Authorization, (CFBamBuffUuid6Col)editCur );
 			}
 			else if( classCode == ICFBamTableCol.CLASS_CODE ) {
-				schema.getTableTableCol().updateTableCol( Authorization, (CFBamTableColBuff)editCur );
+				schema.getTableTableCol().updateTableCol( Authorization, (CFBamBuffTableCol)editCur );
 			}
 			else {
-				throw new CFLibUnsupportedClassException(getClass(), S_ProcName, 0, "-update-cur-", "Not " + Integer.toString(classCode));
+				throw new CFLibUnsupportedClassException(getClass(), S_ProcName, "-update-cur-", (Integer)classCode, "Classcode not recognized: " + Integer.toString(classCode));
 			}
 
 		if( editNext != null ) {
@@ -2888,326 +2888,326 @@ public class CFBamRamInt64DefTable
 				schema.getTableValue().updateValue( Authorization, editNext );
 			}
 			else if( classCode == ICFBamAtom.CLASS_CODE ) {
-				schema.getTableAtom().updateAtom( Authorization, (CFBamAtomBuff)editNext );
+				schema.getTableAtom().updateAtom( Authorization, (CFBamBuffAtom)editNext );
 			}
 			else if( classCode == ICFBamBlobDef.CLASS_CODE ) {
-				schema.getTableBlobDef().updateBlobDef( Authorization, (CFBamBlobDefBuff)editNext );
+				schema.getTableBlobDef().updateBlobDef( Authorization, (CFBamBuffBlobDef)editNext );
 			}
 			else if( classCode == ICFBamBlobType.CLASS_CODE ) {
-				schema.getTableBlobType().updateBlobType( Authorization, (CFBamBlobTypeBuff)editNext );
+				schema.getTableBlobType().updateBlobType( Authorization, (CFBamBuffBlobType)editNext );
 			}
 			else if( classCode == ICFBamBlobCol.CLASS_CODE ) {
-				schema.getTableBlobCol().updateBlobCol( Authorization, (CFBamBlobColBuff)editNext );
+				schema.getTableBlobCol().updateBlobCol( Authorization, (CFBamBuffBlobCol)editNext );
 			}
 			else if( classCode == ICFBamBoolDef.CLASS_CODE ) {
-				schema.getTableBoolDef().updateBoolDef( Authorization, (CFBamBoolDefBuff)editNext );
+				schema.getTableBoolDef().updateBoolDef( Authorization, (CFBamBuffBoolDef)editNext );
 			}
 			else if( classCode == ICFBamBoolType.CLASS_CODE ) {
-				schema.getTableBoolType().updateBoolType( Authorization, (CFBamBoolTypeBuff)editNext );
+				schema.getTableBoolType().updateBoolType( Authorization, (CFBamBuffBoolType)editNext );
 			}
 			else if( classCode == ICFBamBoolCol.CLASS_CODE ) {
-				schema.getTableBoolCol().updateBoolCol( Authorization, (CFBamBoolColBuff)editNext );
+				schema.getTableBoolCol().updateBoolCol( Authorization, (CFBamBuffBoolCol)editNext );
 			}
 			else if( classCode == ICFBamDateDef.CLASS_CODE ) {
-				schema.getTableDateDef().updateDateDef( Authorization, (CFBamDateDefBuff)editNext );
+				schema.getTableDateDef().updateDateDef( Authorization, (CFBamBuffDateDef)editNext );
 			}
 			else if( classCode == ICFBamDateType.CLASS_CODE ) {
-				schema.getTableDateType().updateDateType( Authorization, (CFBamDateTypeBuff)editNext );
+				schema.getTableDateType().updateDateType( Authorization, (CFBamBuffDateType)editNext );
 			}
 			else if( classCode == ICFBamDateCol.CLASS_CODE ) {
-				schema.getTableDateCol().updateDateCol( Authorization, (CFBamDateColBuff)editNext );
+				schema.getTableDateCol().updateDateCol( Authorization, (CFBamBuffDateCol)editNext );
 			}
 			else if( classCode == ICFBamDoubleDef.CLASS_CODE ) {
-				schema.getTableDoubleDef().updateDoubleDef( Authorization, (CFBamDoubleDefBuff)editNext );
+				schema.getTableDoubleDef().updateDoubleDef( Authorization, (CFBamBuffDoubleDef)editNext );
 			}
 			else if( classCode == ICFBamDoubleType.CLASS_CODE ) {
-				schema.getTableDoubleType().updateDoubleType( Authorization, (CFBamDoubleTypeBuff)editNext );
+				schema.getTableDoubleType().updateDoubleType( Authorization, (CFBamBuffDoubleType)editNext );
 			}
 			else if( classCode == ICFBamDoubleCol.CLASS_CODE ) {
-				schema.getTableDoubleCol().updateDoubleCol( Authorization, (CFBamDoubleColBuff)editNext );
+				schema.getTableDoubleCol().updateDoubleCol( Authorization, (CFBamBuffDoubleCol)editNext );
 			}
 			else if( classCode == ICFBamFloatDef.CLASS_CODE ) {
-				schema.getTableFloatDef().updateFloatDef( Authorization, (CFBamFloatDefBuff)editNext );
+				schema.getTableFloatDef().updateFloatDef( Authorization, (CFBamBuffFloatDef)editNext );
 			}
 			else if( classCode == ICFBamFloatType.CLASS_CODE ) {
-				schema.getTableFloatType().updateFloatType( Authorization, (CFBamFloatTypeBuff)editNext );
+				schema.getTableFloatType().updateFloatType( Authorization, (CFBamBuffFloatType)editNext );
 			}
 			else if( classCode == ICFBamFloatCol.CLASS_CODE ) {
-				schema.getTableFloatCol().updateFloatCol( Authorization, (CFBamFloatColBuff)editNext );
+				schema.getTableFloatCol().updateFloatCol( Authorization, (CFBamBuffFloatCol)editNext );
 			}
 			else if( classCode == ICFBamInt16Def.CLASS_CODE ) {
-				schema.getTableInt16Def().updateInt16Def( Authorization, (CFBamInt16DefBuff)editNext );
+				schema.getTableInt16Def().updateInt16Def( Authorization, (CFBamBuffInt16Def)editNext );
 			}
 			else if( classCode == ICFBamInt16Type.CLASS_CODE ) {
-				schema.getTableInt16Type().updateInt16Type( Authorization, (CFBamInt16TypeBuff)editNext );
+				schema.getTableInt16Type().updateInt16Type( Authorization, (CFBamBuffInt16Type)editNext );
 			}
 			else if( classCode == ICFBamId16Gen.CLASS_CODE ) {
-				schema.getTableId16Gen().updateId16Gen( Authorization, (CFBamId16GenBuff)editNext );
+				schema.getTableId16Gen().updateId16Gen( Authorization, (CFBamBuffId16Gen)editNext );
 			}
 			else if( classCode == ICFBamEnumDef.CLASS_CODE ) {
-				schema.getTableEnumDef().updateEnumDef( Authorization, (CFBamEnumDefBuff)editNext );
+				schema.getTableEnumDef().updateEnumDef( Authorization, (CFBamBuffEnumDef)editNext );
 			}
 			else if( classCode == ICFBamEnumType.CLASS_CODE ) {
-				schema.getTableEnumType().updateEnumType( Authorization, (CFBamEnumTypeBuff)editNext );
+				schema.getTableEnumType().updateEnumType( Authorization, (CFBamBuffEnumType)editNext );
 			}
 			else if( classCode == ICFBamInt16Col.CLASS_CODE ) {
-				schema.getTableInt16Col().updateInt16Col( Authorization, (CFBamInt16ColBuff)editNext );
+				schema.getTableInt16Col().updateInt16Col( Authorization, (CFBamBuffInt16Col)editNext );
 			}
 			else if( classCode == ICFBamInt32Def.CLASS_CODE ) {
-				schema.getTableInt32Def().updateInt32Def( Authorization, (CFBamInt32DefBuff)editNext );
+				schema.getTableInt32Def().updateInt32Def( Authorization, (CFBamBuffInt32Def)editNext );
 			}
 			else if( classCode == ICFBamInt32Type.CLASS_CODE ) {
-				schema.getTableInt32Type().updateInt32Type( Authorization, (CFBamInt32TypeBuff)editNext );
+				schema.getTableInt32Type().updateInt32Type( Authorization, (CFBamBuffInt32Type)editNext );
 			}
 			else if( classCode == ICFBamId32Gen.CLASS_CODE ) {
-				schema.getTableId32Gen().updateId32Gen( Authorization, (CFBamId32GenBuff)editNext );
+				schema.getTableId32Gen().updateId32Gen( Authorization, (CFBamBuffId32Gen)editNext );
 			}
 			else if( classCode == ICFBamInt32Col.CLASS_CODE ) {
-				schema.getTableInt32Col().updateInt32Col( Authorization, (CFBamInt32ColBuff)editNext );
+				schema.getTableInt32Col().updateInt32Col( Authorization, (CFBamBuffInt32Col)editNext );
 			}
 			else if( classCode == ICFBamInt64Def.CLASS_CODE ) {
-				schema.getTableInt64Def().updateInt64Def( Authorization, (CFBamInt64DefBuff)editNext );
+				schema.getTableInt64Def().updateInt64Def( Authorization, (CFBamBuffInt64Def)editNext );
 			}
 			else if( classCode == ICFBamInt64Type.CLASS_CODE ) {
-				schema.getTableInt64Type().updateInt64Type( Authorization, (CFBamInt64TypeBuff)editNext );
+				schema.getTableInt64Type().updateInt64Type( Authorization, (CFBamBuffInt64Type)editNext );
 			}
 			else if( classCode == ICFBamId64Gen.CLASS_CODE ) {
-				schema.getTableId64Gen().updateId64Gen( Authorization, (CFBamId64GenBuff)editNext );
+				schema.getTableId64Gen().updateId64Gen( Authorization, (CFBamBuffId64Gen)editNext );
 			}
 			else if( classCode == ICFBamInt64Col.CLASS_CODE ) {
-				schema.getTableInt64Col().updateInt64Col( Authorization, (CFBamInt64ColBuff)editNext );
+				schema.getTableInt64Col().updateInt64Col( Authorization, (CFBamBuffInt64Col)editNext );
 			}
 			else if( classCode == ICFBamNmTokenDef.CLASS_CODE ) {
-				schema.getTableNmTokenDef().updateNmTokenDef( Authorization, (CFBamNmTokenDefBuff)editNext );
+				schema.getTableNmTokenDef().updateNmTokenDef( Authorization, (CFBamBuffNmTokenDef)editNext );
 			}
 			else if( classCode == ICFBamNmTokenType.CLASS_CODE ) {
-				schema.getTableNmTokenType().updateNmTokenType( Authorization, (CFBamNmTokenTypeBuff)editNext );
+				schema.getTableNmTokenType().updateNmTokenType( Authorization, (CFBamBuffNmTokenType)editNext );
 			}
 			else if( classCode == ICFBamNmTokenCol.CLASS_CODE ) {
-				schema.getTableNmTokenCol().updateNmTokenCol( Authorization, (CFBamNmTokenColBuff)editNext );
+				schema.getTableNmTokenCol().updateNmTokenCol( Authorization, (CFBamBuffNmTokenCol)editNext );
 			}
 			else if( classCode == ICFBamNmTokensDef.CLASS_CODE ) {
-				schema.getTableNmTokensDef().updateNmTokensDef( Authorization, (CFBamNmTokensDefBuff)editNext );
+				schema.getTableNmTokensDef().updateNmTokensDef( Authorization, (CFBamBuffNmTokensDef)editNext );
 			}
 			else if( classCode == ICFBamNmTokensType.CLASS_CODE ) {
-				schema.getTableNmTokensType().updateNmTokensType( Authorization, (CFBamNmTokensTypeBuff)editNext );
+				schema.getTableNmTokensType().updateNmTokensType( Authorization, (CFBamBuffNmTokensType)editNext );
 			}
 			else if( classCode == ICFBamNmTokensCol.CLASS_CODE ) {
-				schema.getTableNmTokensCol().updateNmTokensCol( Authorization, (CFBamNmTokensColBuff)editNext );
+				schema.getTableNmTokensCol().updateNmTokensCol( Authorization, (CFBamBuffNmTokensCol)editNext );
 			}
 			else if( classCode == ICFBamNumberDef.CLASS_CODE ) {
-				schema.getTableNumberDef().updateNumberDef( Authorization, (CFBamNumberDefBuff)editNext );
+				schema.getTableNumberDef().updateNumberDef( Authorization, (CFBamBuffNumberDef)editNext );
 			}
 			else if( classCode == ICFBamNumberType.CLASS_CODE ) {
-				schema.getTableNumberType().updateNumberType( Authorization, (CFBamNumberTypeBuff)editNext );
+				schema.getTableNumberType().updateNumberType( Authorization, (CFBamBuffNumberType)editNext );
 			}
 			else if( classCode == ICFBamNumberCol.CLASS_CODE ) {
-				schema.getTableNumberCol().updateNumberCol( Authorization, (CFBamNumberColBuff)editNext );
+				schema.getTableNumberCol().updateNumberCol( Authorization, (CFBamBuffNumberCol)editNext );
 			}
 			else if( classCode == ICFBamDbKeyHash128Def.CLASS_CODE ) {
-				schema.getTableDbKeyHash128Def().updateDbKeyHash128Def( Authorization, (CFBamDbKeyHash128DefBuff)editNext );
+				schema.getTableDbKeyHash128Def().updateDbKeyHash128Def( Authorization, (CFBamBuffDbKeyHash128Def)editNext );
 			}
 			else if( classCode == ICFBamDbKeyHash128Col.CLASS_CODE ) {
-				schema.getTableDbKeyHash128Col().updateDbKeyHash128Col( Authorization, (CFBamDbKeyHash128ColBuff)editNext );
+				schema.getTableDbKeyHash128Col().updateDbKeyHash128Col( Authorization, (CFBamBuffDbKeyHash128Col)editNext );
 			}
 			else if( classCode == ICFBamDbKeyHash128Type.CLASS_CODE ) {
-				schema.getTableDbKeyHash128Type().updateDbKeyHash128Type( Authorization, (CFBamDbKeyHash128TypeBuff)editNext );
+				schema.getTableDbKeyHash128Type().updateDbKeyHash128Type( Authorization, (CFBamBuffDbKeyHash128Type)editNext );
 			}
 			else if( classCode == ICFBamDbKeyHash128Gen.CLASS_CODE ) {
-				schema.getTableDbKeyHash128Gen().updateDbKeyHash128Gen( Authorization, (CFBamDbKeyHash128GenBuff)editNext );
+				schema.getTableDbKeyHash128Gen().updateDbKeyHash128Gen( Authorization, (CFBamBuffDbKeyHash128Gen)editNext );
 			}
 			else if( classCode == ICFBamDbKeyHash160Def.CLASS_CODE ) {
-				schema.getTableDbKeyHash160Def().updateDbKeyHash160Def( Authorization, (CFBamDbKeyHash160DefBuff)editNext );
+				schema.getTableDbKeyHash160Def().updateDbKeyHash160Def( Authorization, (CFBamBuffDbKeyHash160Def)editNext );
 			}
 			else if( classCode == ICFBamDbKeyHash160Col.CLASS_CODE ) {
-				schema.getTableDbKeyHash160Col().updateDbKeyHash160Col( Authorization, (CFBamDbKeyHash160ColBuff)editNext );
+				schema.getTableDbKeyHash160Col().updateDbKeyHash160Col( Authorization, (CFBamBuffDbKeyHash160Col)editNext );
 			}
 			else if( classCode == ICFBamDbKeyHash160Type.CLASS_CODE ) {
-				schema.getTableDbKeyHash160Type().updateDbKeyHash160Type( Authorization, (CFBamDbKeyHash160TypeBuff)editNext );
+				schema.getTableDbKeyHash160Type().updateDbKeyHash160Type( Authorization, (CFBamBuffDbKeyHash160Type)editNext );
 			}
 			else if( classCode == ICFBamDbKeyHash160Gen.CLASS_CODE ) {
-				schema.getTableDbKeyHash160Gen().updateDbKeyHash160Gen( Authorization, (CFBamDbKeyHash160GenBuff)editNext );
+				schema.getTableDbKeyHash160Gen().updateDbKeyHash160Gen( Authorization, (CFBamBuffDbKeyHash160Gen)editNext );
 			}
 			else if( classCode == ICFBamDbKeyHash224Def.CLASS_CODE ) {
-				schema.getTableDbKeyHash224Def().updateDbKeyHash224Def( Authorization, (CFBamDbKeyHash224DefBuff)editNext );
+				schema.getTableDbKeyHash224Def().updateDbKeyHash224Def( Authorization, (CFBamBuffDbKeyHash224Def)editNext );
 			}
 			else if( classCode == ICFBamDbKeyHash224Col.CLASS_CODE ) {
-				schema.getTableDbKeyHash224Col().updateDbKeyHash224Col( Authorization, (CFBamDbKeyHash224ColBuff)editNext );
+				schema.getTableDbKeyHash224Col().updateDbKeyHash224Col( Authorization, (CFBamBuffDbKeyHash224Col)editNext );
 			}
 			else if( classCode == ICFBamDbKeyHash224Type.CLASS_CODE ) {
-				schema.getTableDbKeyHash224Type().updateDbKeyHash224Type( Authorization, (CFBamDbKeyHash224TypeBuff)editNext );
+				schema.getTableDbKeyHash224Type().updateDbKeyHash224Type( Authorization, (CFBamBuffDbKeyHash224Type)editNext );
 			}
 			else if( classCode == ICFBamDbKeyHash224Gen.CLASS_CODE ) {
-				schema.getTableDbKeyHash224Gen().updateDbKeyHash224Gen( Authorization, (CFBamDbKeyHash224GenBuff)editNext );
+				schema.getTableDbKeyHash224Gen().updateDbKeyHash224Gen( Authorization, (CFBamBuffDbKeyHash224Gen)editNext );
 			}
 			else if( classCode == ICFBamDbKeyHash256Def.CLASS_CODE ) {
-				schema.getTableDbKeyHash256Def().updateDbKeyHash256Def( Authorization, (CFBamDbKeyHash256DefBuff)editNext );
+				schema.getTableDbKeyHash256Def().updateDbKeyHash256Def( Authorization, (CFBamBuffDbKeyHash256Def)editNext );
 			}
 			else if( classCode == ICFBamDbKeyHash256Col.CLASS_CODE ) {
-				schema.getTableDbKeyHash256Col().updateDbKeyHash256Col( Authorization, (CFBamDbKeyHash256ColBuff)editNext );
+				schema.getTableDbKeyHash256Col().updateDbKeyHash256Col( Authorization, (CFBamBuffDbKeyHash256Col)editNext );
 			}
 			else if( classCode == ICFBamDbKeyHash256Type.CLASS_CODE ) {
-				schema.getTableDbKeyHash256Type().updateDbKeyHash256Type( Authorization, (CFBamDbKeyHash256TypeBuff)editNext );
+				schema.getTableDbKeyHash256Type().updateDbKeyHash256Type( Authorization, (CFBamBuffDbKeyHash256Type)editNext );
 			}
 			else if( classCode == ICFBamDbKeyHash256Gen.CLASS_CODE ) {
-				schema.getTableDbKeyHash256Gen().updateDbKeyHash256Gen( Authorization, (CFBamDbKeyHash256GenBuff)editNext );
+				schema.getTableDbKeyHash256Gen().updateDbKeyHash256Gen( Authorization, (CFBamBuffDbKeyHash256Gen)editNext );
 			}
 			else if( classCode == ICFBamDbKeyHash384Def.CLASS_CODE ) {
-				schema.getTableDbKeyHash384Def().updateDbKeyHash384Def( Authorization, (CFBamDbKeyHash384DefBuff)editNext );
+				schema.getTableDbKeyHash384Def().updateDbKeyHash384Def( Authorization, (CFBamBuffDbKeyHash384Def)editNext );
 			}
 			else if( classCode == ICFBamDbKeyHash384Col.CLASS_CODE ) {
-				schema.getTableDbKeyHash384Col().updateDbKeyHash384Col( Authorization, (CFBamDbKeyHash384ColBuff)editNext );
+				schema.getTableDbKeyHash384Col().updateDbKeyHash384Col( Authorization, (CFBamBuffDbKeyHash384Col)editNext );
 			}
 			else if( classCode == ICFBamDbKeyHash384Type.CLASS_CODE ) {
-				schema.getTableDbKeyHash384Type().updateDbKeyHash384Type( Authorization, (CFBamDbKeyHash384TypeBuff)editNext );
+				schema.getTableDbKeyHash384Type().updateDbKeyHash384Type( Authorization, (CFBamBuffDbKeyHash384Type)editNext );
 			}
 			else if( classCode == ICFBamDbKeyHash384Gen.CLASS_CODE ) {
-				schema.getTableDbKeyHash384Gen().updateDbKeyHash384Gen( Authorization, (CFBamDbKeyHash384GenBuff)editNext );
+				schema.getTableDbKeyHash384Gen().updateDbKeyHash384Gen( Authorization, (CFBamBuffDbKeyHash384Gen)editNext );
 			}
 			else if( classCode == ICFBamDbKeyHash512Def.CLASS_CODE ) {
-				schema.getTableDbKeyHash512Def().updateDbKeyHash512Def( Authorization, (CFBamDbKeyHash512DefBuff)editNext );
+				schema.getTableDbKeyHash512Def().updateDbKeyHash512Def( Authorization, (CFBamBuffDbKeyHash512Def)editNext );
 			}
 			else if( classCode == ICFBamDbKeyHash512Col.CLASS_CODE ) {
-				schema.getTableDbKeyHash512Col().updateDbKeyHash512Col( Authorization, (CFBamDbKeyHash512ColBuff)editNext );
+				schema.getTableDbKeyHash512Col().updateDbKeyHash512Col( Authorization, (CFBamBuffDbKeyHash512Col)editNext );
 			}
 			else if( classCode == ICFBamDbKeyHash512Type.CLASS_CODE ) {
-				schema.getTableDbKeyHash512Type().updateDbKeyHash512Type( Authorization, (CFBamDbKeyHash512TypeBuff)editNext );
+				schema.getTableDbKeyHash512Type().updateDbKeyHash512Type( Authorization, (CFBamBuffDbKeyHash512Type)editNext );
 			}
 			else if( classCode == ICFBamDbKeyHash512Gen.CLASS_CODE ) {
-				schema.getTableDbKeyHash512Gen().updateDbKeyHash512Gen( Authorization, (CFBamDbKeyHash512GenBuff)editNext );
+				schema.getTableDbKeyHash512Gen().updateDbKeyHash512Gen( Authorization, (CFBamBuffDbKeyHash512Gen)editNext );
 			}
 			else if( classCode == ICFBamStringDef.CLASS_CODE ) {
-				schema.getTableStringDef().updateStringDef( Authorization, (CFBamStringDefBuff)editNext );
+				schema.getTableStringDef().updateStringDef( Authorization, (CFBamBuffStringDef)editNext );
 			}
 			else if( classCode == ICFBamStringType.CLASS_CODE ) {
-				schema.getTableStringType().updateStringType( Authorization, (CFBamStringTypeBuff)editNext );
+				schema.getTableStringType().updateStringType( Authorization, (CFBamBuffStringType)editNext );
 			}
 			else if( classCode == ICFBamStringCol.CLASS_CODE ) {
-				schema.getTableStringCol().updateStringCol( Authorization, (CFBamStringColBuff)editNext );
+				schema.getTableStringCol().updateStringCol( Authorization, (CFBamBuffStringCol)editNext );
 			}
 			else if( classCode == ICFBamTZDateDef.CLASS_CODE ) {
-				schema.getTableTZDateDef().updateTZDateDef( Authorization, (CFBamTZDateDefBuff)editNext );
+				schema.getTableTZDateDef().updateTZDateDef( Authorization, (CFBamBuffTZDateDef)editNext );
 			}
 			else if( classCode == ICFBamTZDateType.CLASS_CODE ) {
-				schema.getTableTZDateType().updateTZDateType( Authorization, (CFBamTZDateTypeBuff)editNext );
+				schema.getTableTZDateType().updateTZDateType( Authorization, (CFBamBuffTZDateType)editNext );
 			}
 			else if( classCode == ICFBamTZDateCol.CLASS_CODE ) {
-				schema.getTableTZDateCol().updateTZDateCol( Authorization, (CFBamTZDateColBuff)editNext );
+				schema.getTableTZDateCol().updateTZDateCol( Authorization, (CFBamBuffTZDateCol)editNext );
 			}
 			else if( classCode == ICFBamTZTimeDef.CLASS_CODE ) {
-				schema.getTableTZTimeDef().updateTZTimeDef( Authorization, (CFBamTZTimeDefBuff)editNext );
+				schema.getTableTZTimeDef().updateTZTimeDef( Authorization, (CFBamBuffTZTimeDef)editNext );
 			}
 			else if( classCode == ICFBamTZTimeType.CLASS_CODE ) {
-				schema.getTableTZTimeType().updateTZTimeType( Authorization, (CFBamTZTimeTypeBuff)editNext );
+				schema.getTableTZTimeType().updateTZTimeType( Authorization, (CFBamBuffTZTimeType)editNext );
 			}
 			else if( classCode == ICFBamTZTimeCol.CLASS_CODE ) {
-				schema.getTableTZTimeCol().updateTZTimeCol( Authorization, (CFBamTZTimeColBuff)editNext );
+				schema.getTableTZTimeCol().updateTZTimeCol( Authorization, (CFBamBuffTZTimeCol)editNext );
 			}
 			else if( classCode == ICFBamTZTimestampDef.CLASS_CODE ) {
-				schema.getTableTZTimestampDef().updateTZTimestampDef( Authorization, (CFBamTZTimestampDefBuff)editNext );
+				schema.getTableTZTimestampDef().updateTZTimestampDef( Authorization, (CFBamBuffTZTimestampDef)editNext );
 			}
 			else if( classCode == ICFBamTZTimestampType.CLASS_CODE ) {
-				schema.getTableTZTimestampType().updateTZTimestampType( Authorization, (CFBamTZTimestampTypeBuff)editNext );
+				schema.getTableTZTimestampType().updateTZTimestampType( Authorization, (CFBamBuffTZTimestampType)editNext );
 			}
 			else if( classCode == ICFBamTZTimestampCol.CLASS_CODE ) {
-				schema.getTableTZTimestampCol().updateTZTimestampCol( Authorization, (CFBamTZTimestampColBuff)editNext );
+				schema.getTableTZTimestampCol().updateTZTimestampCol( Authorization, (CFBamBuffTZTimestampCol)editNext );
 			}
 			else if( classCode == ICFBamTextDef.CLASS_CODE ) {
-				schema.getTableTextDef().updateTextDef( Authorization, (CFBamTextDefBuff)editNext );
+				schema.getTableTextDef().updateTextDef( Authorization, (CFBamBuffTextDef)editNext );
 			}
 			else if( classCode == ICFBamTextType.CLASS_CODE ) {
-				schema.getTableTextType().updateTextType( Authorization, (CFBamTextTypeBuff)editNext );
+				schema.getTableTextType().updateTextType( Authorization, (CFBamBuffTextType)editNext );
 			}
 			else if( classCode == ICFBamTextCol.CLASS_CODE ) {
-				schema.getTableTextCol().updateTextCol( Authorization, (CFBamTextColBuff)editNext );
+				schema.getTableTextCol().updateTextCol( Authorization, (CFBamBuffTextCol)editNext );
 			}
 			else if( classCode == ICFBamTimeDef.CLASS_CODE ) {
-				schema.getTableTimeDef().updateTimeDef( Authorization, (CFBamTimeDefBuff)editNext );
+				schema.getTableTimeDef().updateTimeDef( Authorization, (CFBamBuffTimeDef)editNext );
 			}
 			else if( classCode == ICFBamTimeType.CLASS_CODE ) {
-				schema.getTableTimeType().updateTimeType( Authorization, (CFBamTimeTypeBuff)editNext );
+				schema.getTableTimeType().updateTimeType( Authorization, (CFBamBuffTimeType)editNext );
 			}
 			else if( classCode == ICFBamTimeCol.CLASS_CODE ) {
-				schema.getTableTimeCol().updateTimeCol( Authorization, (CFBamTimeColBuff)editNext );
+				schema.getTableTimeCol().updateTimeCol( Authorization, (CFBamBuffTimeCol)editNext );
 			}
 			else if( classCode == ICFBamTimestampDef.CLASS_CODE ) {
-				schema.getTableTimestampDef().updateTimestampDef( Authorization, (CFBamTimestampDefBuff)editNext );
+				schema.getTableTimestampDef().updateTimestampDef( Authorization, (CFBamBuffTimestampDef)editNext );
 			}
 			else if( classCode == ICFBamTimestampType.CLASS_CODE ) {
-				schema.getTableTimestampType().updateTimestampType( Authorization, (CFBamTimestampTypeBuff)editNext );
+				schema.getTableTimestampType().updateTimestampType( Authorization, (CFBamBuffTimestampType)editNext );
 			}
 			else if( classCode == ICFBamTimestampCol.CLASS_CODE ) {
-				schema.getTableTimestampCol().updateTimestampCol( Authorization, (CFBamTimestampColBuff)editNext );
+				schema.getTableTimestampCol().updateTimestampCol( Authorization, (CFBamBuffTimestampCol)editNext );
 			}
 			else if( classCode == ICFBamTokenDef.CLASS_CODE ) {
-				schema.getTableTokenDef().updateTokenDef( Authorization, (CFBamTokenDefBuff)editNext );
+				schema.getTableTokenDef().updateTokenDef( Authorization, (CFBamBuffTokenDef)editNext );
 			}
 			else if( classCode == ICFBamTokenType.CLASS_CODE ) {
-				schema.getTableTokenType().updateTokenType( Authorization, (CFBamTokenTypeBuff)editNext );
+				schema.getTableTokenType().updateTokenType( Authorization, (CFBamBuffTokenType)editNext );
 			}
 			else if( classCode == ICFBamTokenCol.CLASS_CODE ) {
-				schema.getTableTokenCol().updateTokenCol( Authorization, (CFBamTokenColBuff)editNext );
+				schema.getTableTokenCol().updateTokenCol( Authorization, (CFBamBuffTokenCol)editNext );
 			}
 			else if( classCode == ICFBamUInt16Def.CLASS_CODE ) {
-				schema.getTableUInt16Def().updateUInt16Def( Authorization, (CFBamUInt16DefBuff)editNext );
+				schema.getTableUInt16Def().updateUInt16Def( Authorization, (CFBamBuffUInt16Def)editNext );
 			}
 			else if( classCode == ICFBamUInt16Type.CLASS_CODE ) {
-				schema.getTableUInt16Type().updateUInt16Type( Authorization, (CFBamUInt16TypeBuff)editNext );
+				schema.getTableUInt16Type().updateUInt16Type( Authorization, (CFBamBuffUInt16Type)editNext );
 			}
 			else if( classCode == ICFBamUInt16Col.CLASS_CODE ) {
-				schema.getTableUInt16Col().updateUInt16Col( Authorization, (CFBamUInt16ColBuff)editNext );
+				schema.getTableUInt16Col().updateUInt16Col( Authorization, (CFBamBuffUInt16Col)editNext );
 			}
 			else if( classCode == ICFBamUInt32Def.CLASS_CODE ) {
-				schema.getTableUInt32Def().updateUInt32Def( Authorization, (CFBamUInt32DefBuff)editNext );
+				schema.getTableUInt32Def().updateUInt32Def( Authorization, (CFBamBuffUInt32Def)editNext );
 			}
 			else if( classCode == ICFBamUInt32Type.CLASS_CODE ) {
-				schema.getTableUInt32Type().updateUInt32Type( Authorization, (CFBamUInt32TypeBuff)editNext );
+				schema.getTableUInt32Type().updateUInt32Type( Authorization, (CFBamBuffUInt32Type)editNext );
 			}
 			else if( classCode == ICFBamUInt32Col.CLASS_CODE ) {
-				schema.getTableUInt32Col().updateUInt32Col( Authorization, (CFBamUInt32ColBuff)editNext );
+				schema.getTableUInt32Col().updateUInt32Col( Authorization, (CFBamBuffUInt32Col)editNext );
 			}
 			else if( classCode == ICFBamUInt64Def.CLASS_CODE ) {
-				schema.getTableUInt64Def().updateUInt64Def( Authorization, (CFBamUInt64DefBuff)editNext );
+				schema.getTableUInt64Def().updateUInt64Def( Authorization, (CFBamBuffUInt64Def)editNext );
 			}
 			else if( classCode == ICFBamUInt64Type.CLASS_CODE ) {
-				schema.getTableUInt64Type().updateUInt64Type( Authorization, (CFBamUInt64TypeBuff)editNext );
+				schema.getTableUInt64Type().updateUInt64Type( Authorization, (CFBamBuffUInt64Type)editNext );
 			}
 			else if( classCode == ICFBamUInt64Col.CLASS_CODE ) {
-				schema.getTableUInt64Col().updateUInt64Col( Authorization, (CFBamUInt64ColBuff)editNext );
+				schema.getTableUInt64Col().updateUInt64Col( Authorization, (CFBamBuffUInt64Col)editNext );
 			}
 			else if( classCode == ICFBamUuidDef.CLASS_CODE ) {
-				schema.getTableUuidDef().updateUuidDef( Authorization, (CFBamUuidDefBuff)editNext );
+				schema.getTableUuidDef().updateUuidDef( Authorization, (CFBamBuffUuidDef)editNext );
 			}
 			else if( classCode == ICFBamUuidType.CLASS_CODE ) {
-				schema.getTableUuidType().updateUuidType( Authorization, (CFBamUuidTypeBuff)editNext );
+				schema.getTableUuidType().updateUuidType( Authorization, (CFBamBuffUuidType)editNext );
 			}
 			else if( classCode == ICFBamUuidGen.CLASS_CODE ) {
-				schema.getTableUuidGen().updateUuidGen( Authorization, (CFBamUuidGenBuff)editNext );
+				schema.getTableUuidGen().updateUuidGen( Authorization, (CFBamBuffUuidGen)editNext );
 			}
 			else if( classCode == ICFBamUuidCol.CLASS_CODE ) {
-				schema.getTableUuidCol().updateUuidCol( Authorization, (CFBamUuidColBuff)editNext );
+				schema.getTableUuidCol().updateUuidCol( Authorization, (CFBamBuffUuidCol)editNext );
 			}
 			else if( classCode == ICFBamUuid6Def.CLASS_CODE ) {
-				schema.getTableUuid6Def().updateUuid6Def( Authorization, (CFBamUuid6DefBuff)editNext );
+				schema.getTableUuid6Def().updateUuid6Def( Authorization, (CFBamBuffUuid6Def)editNext );
 			}
 			else if( classCode == ICFBamUuid6Type.CLASS_CODE ) {
-				schema.getTableUuid6Type().updateUuid6Type( Authorization, (CFBamUuid6TypeBuff)editNext );
+				schema.getTableUuid6Type().updateUuid6Type( Authorization, (CFBamBuffUuid6Type)editNext );
 			}
 			else if( classCode == ICFBamUuid6Gen.CLASS_CODE ) {
-				schema.getTableUuid6Gen().updateUuid6Gen( Authorization, (CFBamUuid6GenBuff)editNext );
+				schema.getTableUuid6Gen().updateUuid6Gen( Authorization, (CFBamBuffUuid6Gen)editNext );
 			}
 			else if( classCode == ICFBamUuid6Col.CLASS_CODE ) {
-				schema.getTableUuid6Col().updateUuid6Col( Authorization, (CFBamUuid6ColBuff)editNext );
+				schema.getTableUuid6Col().updateUuid6Col( Authorization, (CFBamBuffUuid6Col)editNext );
 			}
 			else if( classCode == ICFBamTableCol.CLASS_CODE ) {
-				schema.getTableTableCol().updateTableCol( Authorization, (CFBamTableColBuff)editNext );
+				schema.getTableTableCol().updateTableCol( Authorization, (CFBamBuffTableCol)editNext );
 			}
 			else {
-				throw new CFLibUnsupportedClassException(getClass(), S_ProcName, 0, "-update-next-", "Not " + Integer.toString(classCode));
+				throw new CFLibUnsupportedClassException(getClass(), S_ProcName, "-update-next-", (Integer)classCode, "Classcode not recognized: " + Integer.toString(classCode));
 			}
 		}
 
-		return( (CFBamInt64DefBuff)editCur );
+		return( (CFBamBuffInt64Def)editCur );
 	}
 
 	/**
@@ -3221,10 +3221,10 @@ public class CFBamRamInt64DefTable
 	{
 		final String S_ProcName = "moveBuffDown";
 
-		CFBamValueBuff prev = null;
-		CFBamValueBuff cur = null;
-		CFBamValueBuff next = null;
-		CFBamValueBuff grandnext = null;
+		CFBamBuffValue prev = null;
+		CFBamBuffValue cur = null;
+		CFBamBuffValue next = null;
+		CFBamBuffValue grandnext = null;
 
 		cur = schema.getTableValue().readDerivedByIdIdx(Authorization, Id);
 		if( cur == null ) {
@@ -3237,7 +3237,7 @@ public class CFBamRamInt64DefTable
 
 		if( ( cur.getOptionalNextId() == null ) )
 		{
-			return( (CFBamInt64DefBuff)cur );
+			return( (CFBamBuffInt64Def)cur );
 		}
 
 		next = schema.getTableValue().readDerivedByIdIdx(Authorization, cur.getOptionalNextId() );
@@ -3274,7 +3274,7 @@ public class CFBamRamInt64DefTable
 		}
 
 		integer classCode = cur.getClassCode();
-		CFBamValueBuff newInstance;
+		CFBamBuffValue newInstance;
 			if( classCode == ICFBamValue.CLASS_CODE ) {
 				newInstance = schema.getFactoryValue().newBuff();
 			}
@@ -3594,9 +3594,9 @@ public class CFBamRamInt64DefTable
 				newInstance = schema.getFactoryTableCol().newBuff();
 			}
 			else {
-				throw new CFLibUnsupportedClassException(getClass(), S_ProcName, 0, "-instantiate-buff-", "Not " + Integer.toString(classCode));
+				throw new CFLibUnsupportedClassException(getClass(), S_ProcName, "-instantiate-buff-", (Integer)classCode, "Classcode not recognized: " + Integer.toString(classCode));
 			}
-		CFBamValueBuff editCur = newInstance;
+		CFBamBuffValue editCur = newInstance;
 		editCur.set( cur );
 
 		classCode = next.getClassCode();
@@ -3919,12 +3919,12 @@ public class CFBamRamInt64DefTable
 				newInstance = schema.getFactoryTableCol().newBuff();
 			}
 			else {
-				throw new CFLibUnsupportedClassException(getClass(), S_ProcName, 0, "-instantiate-buff-", "Not " + Integer.toString(classCode));
+				throw new CFLibUnsupportedClassException(getClass(), S_ProcName, "-instantiate-buff-", (Integer)classCode, "Classcode not recognized: " + Integer.toString(classCode));
 			}
-		CFBamValueBuff editNext = newInstance;
+		CFBamBuffValue editNext = newInstance;
 		editNext.set( next );
 
-		CFBamValueBuff editGrandnext = null;
+		CFBamBuffValue editGrandnext = null;
 		if( grandnext != null ) {
 			classCode = grandnext.getClassCode();
 			if( classCode == ICFBamValue.CLASS_CODE ) {
@@ -4246,13 +4246,13 @@ public class CFBamRamInt64DefTable
 				newInstance = schema.getFactoryTableCol().newBuff();
 			}
 			else {
-				throw new CFLibUnsupportedClassException(getClass(), S_ProcName, 0, "-instantiate-buff-", "Not " + Integer.toString(classCode));
+				throw new CFLibUnsupportedClassException(getClass(), S_ProcName, "-instantiate-buff-", (Integer)classCode, "Classcode not recognized: " + Integer.toString(classCode));
 			}
 			editGrandnext = newInstance;
 			editGrandnext.set( grandnext );
 		}
 
-		CFBamValueBuff editPrev = null;
+		CFBamBuffValue editPrev = null;
 		if( prev != null ) {
 			classCode = prev.getClassCode();
 			if( classCode == ICFBamValue.CLASS_CODE ) {
@@ -4574,7 +4574,7 @@ public class CFBamRamInt64DefTable
 				newInstance = schema.getFactoryTableCol().newBuff();
 			}
 			else {
-				throw new CFLibUnsupportedClassException(getClass(), S_ProcName, 0, "-instantiate-buff-", "Not " + Integer.toString(classCode));
+				throw new CFLibUnsupportedClassException(getClass(), S_ProcName, "-instantiate-buff-", (Integer)classCode, "Classcode not recognized: " + Integer.toString(classCode));
 			}
 			editPrev = newInstance;
 			editPrev.set( prev );
@@ -4606,322 +4606,322 @@ public class CFBamRamInt64DefTable
 				schema.getTableValue().updateValue( Authorization, editPrev );
 			}
 			else if( classCode == ICFBamAtom.CLASS_CODE ) {
-				schema.getTableAtom().updateAtom( Authorization, (CFBamAtomBuff)editPrev );
+				schema.getTableAtom().updateAtom( Authorization, (CFBamBuffAtom)editPrev );
 			}
 			else if( classCode == ICFBamBlobDef.CLASS_CODE ) {
-				schema.getTableBlobDef().updateBlobDef( Authorization, (CFBamBlobDefBuff)editPrev );
+				schema.getTableBlobDef().updateBlobDef( Authorization, (CFBamBuffBlobDef)editPrev );
 			}
 			else if( classCode == ICFBamBlobType.CLASS_CODE ) {
-				schema.getTableBlobType().updateBlobType( Authorization, (CFBamBlobTypeBuff)editPrev );
+				schema.getTableBlobType().updateBlobType( Authorization, (CFBamBuffBlobType)editPrev );
 			}
 			else if( classCode == ICFBamBlobCol.CLASS_CODE ) {
-				schema.getTableBlobCol().updateBlobCol( Authorization, (CFBamBlobColBuff)editPrev );
+				schema.getTableBlobCol().updateBlobCol( Authorization, (CFBamBuffBlobCol)editPrev );
 			}
 			else if( classCode == ICFBamBoolDef.CLASS_CODE ) {
-				schema.getTableBoolDef().updateBoolDef( Authorization, (CFBamBoolDefBuff)editPrev );
+				schema.getTableBoolDef().updateBoolDef( Authorization, (CFBamBuffBoolDef)editPrev );
 			}
 			else if( classCode == ICFBamBoolType.CLASS_CODE ) {
-				schema.getTableBoolType().updateBoolType( Authorization, (CFBamBoolTypeBuff)editPrev );
+				schema.getTableBoolType().updateBoolType( Authorization, (CFBamBuffBoolType)editPrev );
 			}
 			else if( classCode == ICFBamBoolCol.CLASS_CODE ) {
-				schema.getTableBoolCol().updateBoolCol( Authorization, (CFBamBoolColBuff)editPrev );
+				schema.getTableBoolCol().updateBoolCol( Authorization, (CFBamBuffBoolCol)editPrev );
 			}
 			else if( classCode == ICFBamDateDef.CLASS_CODE ) {
-				schema.getTableDateDef().updateDateDef( Authorization, (CFBamDateDefBuff)editPrev );
+				schema.getTableDateDef().updateDateDef( Authorization, (CFBamBuffDateDef)editPrev );
 			}
 			else if( classCode == ICFBamDateType.CLASS_CODE ) {
-				schema.getTableDateType().updateDateType( Authorization, (CFBamDateTypeBuff)editPrev );
+				schema.getTableDateType().updateDateType( Authorization, (CFBamBuffDateType)editPrev );
 			}
 			else if( classCode == ICFBamDateCol.CLASS_CODE ) {
-				schema.getTableDateCol().updateDateCol( Authorization, (CFBamDateColBuff)editPrev );
+				schema.getTableDateCol().updateDateCol( Authorization, (CFBamBuffDateCol)editPrev );
 			}
 			else if( classCode == ICFBamDoubleDef.CLASS_CODE ) {
-				schema.getTableDoubleDef().updateDoubleDef( Authorization, (CFBamDoubleDefBuff)editPrev );
+				schema.getTableDoubleDef().updateDoubleDef( Authorization, (CFBamBuffDoubleDef)editPrev );
 			}
 			else if( classCode == ICFBamDoubleType.CLASS_CODE ) {
-				schema.getTableDoubleType().updateDoubleType( Authorization, (CFBamDoubleTypeBuff)editPrev );
+				schema.getTableDoubleType().updateDoubleType( Authorization, (CFBamBuffDoubleType)editPrev );
 			}
 			else if( classCode == ICFBamDoubleCol.CLASS_CODE ) {
-				schema.getTableDoubleCol().updateDoubleCol( Authorization, (CFBamDoubleColBuff)editPrev );
+				schema.getTableDoubleCol().updateDoubleCol( Authorization, (CFBamBuffDoubleCol)editPrev );
 			}
 			else if( classCode == ICFBamFloatDef.CLASS_CODE ) {
-				schema.getTableFloatDef().updateFloatDef( Authorization, (CFBamFloatDefBuff)editPrev );
+				schema.getTableFloatDef().updateFloatDef( Authorization, (CFBamBuffFloatDef)editPrev );
 			}
 			else if( classCode == ICFBamFloatType.CLASS_CODE ) {
-				schema.getTableFloatType().updateFloatType( Authorization, (CFBamFloatTypeBuff)editPrev );
+				schema.getTableFloatType().updateFloatType( Authorization, (CFBamBuffFloatType)editPrev );
 			}
 			else if( classCode == ICFBamFloatCol.CLASS_CODE ) {
-				schema.getTableFloatCol().updateFloatCol( Authorization, (CFBamFloatColBuff)editPrev );
+				schema.getTableFloatCol().updateFloatCol( Authorization, (CFBamBuffFloatCol)editPrev );
 			}
 			else if( classCode == ICFBamInt16Def.CLASS_CODE ) {
-				schema.getTableInt16Def().updateInt16Def( Authorization, (CFBamInt16DefBuff)editPrev );
+				schema.getTableInt16Def().updateInt16Def( Authorization, (CFBamBuffInt16Def)editPrev );
 			}
 			else if( classCode == ICFBamInt16Type.CLASS_CODE ) {
-				schema.getTableInt16Type().updateInt16Type( Authorization, (CFBamInt16TypeBuff)editPrev );
+				schema.getTableInt16Type().updateInt16Type( Authorization, (CFBamBuffInt16Type)editPrev );
 			}
 			else if( classCode == ICFBamId16Gen.CLASS_CODE ) {
-				schema.getTableId16Gen().updateId16Gen( Authorization, (CFBamId16GenBuff)editPrev );
+				schema.getTableId16Gen().updateId16Gen( Authorization, (CFBamBuffId16Gen)editPrev );
 			}
 			else if( classCode == ICFBamEnumDef.CLASS_CODE ) {
-				schema.getTableEnumDef().updateEnumDef( Authorization, (CFBamEnumDefBuff)editPrev );
+				schema.getTableEnumDef().updateEnumDef( Authorization, (CFBamBuffEnumDef)editPrev );
 			}
 			else if( classCode == ICFBamEnumType.CLASS_CODE ) {
-				schema.getTableEnumType().updateEnumType( Authorization, (CFBamEnumTypeBuff)editPrev );
+				schema.getTableEnumType().updateEnumType( Authorization, (CFBamBuffEnumType)editPrev );
 			}
 			else if( classCode == ICFBamInt16Col.CLASS_CODE ) {
-				schema.getTableInt16Col().updateInt16Col( Authorization, (CFBamInt16ColBuff)editPrev );
+				schema.getTableInt16Col().updateInt16Col( Authorization, (CFBamBuffInt16Col)editPrev );
 			}
 			else if( classCode == ICFBamInt32Def.CLASS_CODE ) {
-				schema.getTableInt32Def().updateInt32Def( Authorization, (CFBamInt32DefBuff)editPrev );
+				schema.getTableInt32Def().updateInt32Def( Authorization, (CFBamBuffInt32Def)editPrev );
 			}
 			else if( classCode == ICFBamInt32Type.CLASS_CODE ) {
-				schema.getTableInt32Type().updateInt32Type( Authorization, (CFBamInt32TypeBuff)editPrev );
+				schema.getTableInt32Type().updateInt32Type( Authorization, (CFBamBuffInt32Type)editPrev );
 			}
 			else if( classCode == ICFBamId32Gen.CLASS_CODE ) {
-				schema.getTableId32Gen().updateId32Gen( Authorization, (CFBamId32GenBuff)editPrev );
+				schema.getTableId32Gen().updateId32Gen( Authorization, (CFBamBuffId32Gen)editPrev );
 			}
 			else if( classCode == ICFBamInt32Col.CLASS_CODE ) {
-				schema.getTableInt32Col().updateInt32Col( Authorization, (CFBamInt32ColBuff)editPrev );
+				schema.getTableInt32Col().updateInt32Col( Authorization, (CFBamBuffInt32Col)editPrev );
 			}
 			else if( classCode == ICFBamInt64Def.CLASS_CODE ) {
-				schema.getTableInt64Def().updateInt64Def( Authorization, (CFBamInt64DefBuff)editPrev );
+				schema.getTableInt64Def().updateInt64Def( Authorization, (CFBamBuffInt64Def)editPrev );
 			}
 			else if( classCode == ICFBamInt64Type.CLASS_CODE ) {
-				schema.getTableInt64Type().updateInt64Type( Authorization, (CFBamInt64TypeBuff)editPrev );
+				schema.getTableInt64Type().updateInt64Type( Authorization, (CFBamBuffInt64Type)editPrev );
 			}
 			else if( classCode == ICFBamId64Gen.CLASS_CODE ) {
-				schema.getTableId64Gen().updateId64Gen( Authorization, (CFBamId64GenBuff)editPrev );
+				schema.getTableId64Gen().updateId64Gen( Authorization, (CFBamBuffId64Gen)editPrev );
 			}
 			else if( classCode == ICFBamInt64Col.CLASS_CODE ) {
-				schema.getTableInt64Col().updateInt64Col( Authorization, (CFBamInt64ColBuff)editPrev );
+				schema.getTableInt64Col().updateInt64Col( Authorization, (CFBamBuffInt64Col)editPrev );
 			}
 			else if( classCode == ICFBamNmTokenDef.CLASS_CODE ) {
-				schema.getTableNmTokenDef().updateNmTokenDef( Authorization, (CFBamNmTokenDefBuff)editPrev );
+				schema.getTableNmTokenDef().updateNmTokenDef( Authorization, (CFBamBuffNmTokenDef)editPrev );
 			}
 			else if( classCode == ICFBamNmTokenType.CLASS_CODE ) {
-				schema.getTableNmTokenType().updateNmTokenType( Authorization, (CFBamNmTokenTypeBuff)editPrev );
+				schema.getTableNmTokenType().updateNmTokenType( Authorization, (CFBamBuffNmTokenType)editPrev );
 			}
 			else if( classCode == ICFBamNmTokenCol.CLASS_CODE ) {
-				schema.getTableNmTokenCol().updateNmTokenCol( Authorization, (CFBamNmTokenColBuff)editPrev );
+				schema.getTableNmTokenCol().updateNmTokenCol( Authorization, (CFBamBuffNmTokenCol)editPrev );
 			}
 			else if( classCode == ICFBamNmTokensDef.CLASS_CODE ) {
-				schema.getTableNmTokensDef().updateNmTokensDef( Authorization, (CFBamNmTokensDefBuff)editPrev );
+				schema.getTableNmTokensDef().updateNmTokensDef( Authorization, (CFBamBuffNmTokensDef)editPrev );
 			}
 			else if( classCode == ICFBamNmTokensType.CLASS_CODE ) {
-				schema.getTableNmTokensType().updateNmTokensType( Authorization, (CFBamNmTokensTypeBuff)editPrev );
+				schema.getTableNmTokensType().updateNmTokensType( Authorization, (CFBamBuffNmTokensType)editPrev );
 			}
 			else if( classCode == ICFBamNmTokensCol.CLASS_CODE ) {
-				schema.getTableNmTokensCol().updateNmTokensCol( Authorization, (CFBamNmTokensColBuff)editPrev );
+				schema.getTableNmTokensCol().updateNmTokensCol( Authorization, (CFBamBuffNmTokensCol)editPrev );
 			}
 			else if( classCode == ICFBamNumberDef.CLASS_CODE ) {
-				schema.getTableNumberDef().updateNumberDef( Authorization, (CFBamNumberDefBuff)editPrev );
+				schema.getTableNumberDef().updateNumberDef( Authorization, (CFBamBuffNumberDef)editPrev );
 			}
 			else if( classCode == ICFBamNumberType.CLASS_CODE ) {
-				schema.getTableNumberType().updateNumberType( Authorization, (CFBamNumberTypeBuff)editPrev );
+				schema.getTableNumberType().updateNumberType( Authorization, (CFBamBuffNumberType)editPrev );
 			}
 			else if( classCode == ICFBamNumberCol.CLASS_CODE ) {
-				schema.getTableNumberCol().updateNumberCol( Authorization, (CFBamNumberColBuff)editPrev );
+				schema.getTableNumberCol().updateNumberCol( Authorization, (CFBamBuffNumberCol)editPrev );
 			}
 			else if( classCode == ICFBamDbKeyHash128Def.CLASS_CODE ) {
-				schema.getTableDbKeyHash128Def().updateDbKeyHash128Def( Authorization, (CFBamDbKeyHash128DefBuff)editPrev );
+				schema.getTableDbKeyHash128Def().updateDbKeyHash128Def( Authorization, (CFBamBuffDbKeyHash128Def)editPrev );
 			}
 			else if( classCode == ICFBamDbKeyHash128Col.CLASS_CODE ) {
-				schema.getTableDbKeyHash128Col().updateDbKeyHash128Col( Authorization, (CFBamDbKeyHash128ColBuff)editPrev );
+				schema.getTableDbKeyHash128Col().updateDbKeyHash128Col( Authorization, (CFBamBuffDbKeyHash128Col)editPrev );
 			}
 			else if( classCode == ICFBamDbKeyHash128Type.CLASS_CODE ) {
-				schema.getTableDbKeyHash128Type().updateDbKeyHash128Type( Authorization, (CFBamDbKeyHash128TypeBuff)editPrev );
+				schema.getTableDbKeyHash128Type().updateDbKeyHash128Type( Authorization, (CFBamBuffDbKeyHash128Type)editPrev );
 			}
 			else if( classCode == ICFBamDbKeyHash128Gen.CLASS_CODE ) {
-				schema.getTableDbKeyHash128Gen().updateDbKeyHash128Gen( Authorization, (CFBamDbKeyHash128GenBuff)editPrev );
+				schema.getTableDbKeyHash128Gen().updateDbKeyHash128Gen( Authorization, (CFBamBuffDbKeyHash128Gen)editPrev );
 			}
 			else if( classCode == ICFBamDbKeyHash160Def.CLASS_CODE ) {
-				schema.getTableDbKeyHash160Def().updateDbKeyHash160Def( Authorization, (CFBamDbKeyHash160DefBuff)editPrev );
+				schema.getTableDbKeyHash160Def().updateDbKeyHash160Def( Authorization, (CFBamBuffDbKeyHash160Def)editPrev );
 			}
 			else if( classCode == ICFBamDbKeyHash160Col.CLASS_CODE ) {
-				schema.getTableDbKeyHash160Col().updateDbKeyHash160Col( Authorization, (CFBamDbKeyHash160ColBuff)editPrev );
+				schema.getTableDbKeyHash160Col().updateDbKeyHash160Col( Authorization, (CFBamBuffDbKeyHash160Col)editPrev );
 			}
 			else if( classCode == ICFBamDbKeyHash160Type.CLASS_CODE ) {
-				schema.getTableDbKeyHash160Type().updateDbKeyHash160Type( Authorization, (CFBamDbKeyHash160TypeBuff)editPrev );
+				schema.getTableDbKeyHash160Type().updateDbKeyHash160Type( Authorization, (CFBamBuffDbKeyHash160Type)editPrev );
 			}
 			else if( classCode == ICFBamDbKeyHash160Gen.CLASS_CODE ) {
-				schema.getTableDbKeyHash160Gen().updateDbKeyHash160Gen( Authorization, (CFBamDbKeyHash160GenBuff)editPrev );
+				schema.getTableDbKeyHash160Gen().updateDbKeyHash160Gen( Authorization, (CFBamBuffDbKeyHash160Gen)editPrev );
 			}
 			else if( classCode == ICFBamDbKeyHash224Def.CLASS_CODE ) {
-				schema.getTableDbKeyHash224Def().updateDbKeyHash224Def( Authorization, (CFBamDbKeyHash224DefBuff)editPrev );
+				schema.getTableDbKeyHash224Def().updateDbKeyHash224Def( Authorization, (CFBamBuffDbKeyHash224Def)editPrev );
 			}
 			else if( classCode == ICFBamDbKeyHash224Col.CLASS_CODE ) {
-				schema.getTableDbKeyHash224Col().updateDbKeyHash224Col( Authorization, (CFBamDbKeyHash224ColBuff)editPrev );
+				schema.getTableDbKeyHash224Col().updateDbKeyHash224Col( Authorization, (CFBamBuffDbKeyHash224Col)editPrev );
 			}
 			else if( classCode == ICFBamDbKeyHash224Type.CLASS_CODE ) {
-				schema.getTableDbKeyHash224Type().updateDbKeyHash224Type( Authorization, (CFBamDbKeyHash224TypeBuff)editPrev );
+				schema.getTableDbKeyHash224Type().updateDbKeyHash224Type( Authorization, (CFBamBuffDbKeyHash224Type)editPrev );
 			}
 			else if( classCode == ICFBamDbKeyHash224Gen.CLASS_CODE ) {
-				schema.getTableDbKeyHash224Gen().updateDbKeyHash224Gen( Authorization, (CFBamDbKeyHash224GenBuff)editPrev );
+				schema.getTableDbKeyHash224Gen().updateDbKeyHash224Gen( Authorization, (CFBamBuffDbKeyHash224Gen)editPrev );
 			}
 			else if( classCode == ICFBamDbKeyHash256Def.CLASS_CODE ) {
-				schema.getTableDbKeyHash256Def().updateDbKeyHash256Def( Authorization, (CFBamDbKeyHash256DefBuff)editPrev );
+				schema.getTableDbKeyHash256Def().updateDbKeyHash256Def( Authorization, (CFBamBuffDbKeyHash256Def)editPrev );
 			}
 			else if( classCode == ICFBamDbKeyHash256Col.CLASS_CODE ) {
-				schema.getTableDbKeyHash256Col().updateDbKeyHash256Col( Authorization, (CFBamDbKeyHash256ColBuff)editPrev );
+				schema.getTableDbKeyHash256Col().updateDbKeyHash256Col( Authorization, (CFBamBuffDbKeyHash256Col)editPrev );
 			}
 			else if( classCode == ICFBamDbKeyHash256Type.CLASS_CODE ) {
-				schema.getTableDbKeyHash256Type().updateDbKeyHash256Type( Authorization, (CFBamDbKeyHash256TypeBuff)editPrev );
+				schema.getTableDbKeyHash256Type().updateDbKeyHash256Type( Authorization, (CFBamBuffDbKeyHash256Type)editPrev );
 			}
 			else if( classCode == ICFBamDbKeyHash256Gen.CLASS_CODE ) {
-				schema.getTableDbKeyHash256Gen().updateDbKeyHash256Gen( Authorization, (CFBamDbKeyHash256GenBuff)editPrev );
+				schema.getTableDbKeyHash256Gen().updateDbKeyHash256Gen( Authorization, (CFBamBuffDbKeyHash256Gen)editPrev );
 			}
 			else if( classCode == ICFBamDbKeyHash384Def.CLASS_CODE ) {
-				schema.getTableDbKeyHash384Def().updateDbKeyHash384Def( Authorization, (CFBamDbKeyHash384DefBuff)editPrev );
+				schema.getTableDbKeyHash384Def().updateDbKeyHash384Def( Authorization, (CFBamBuffDbKeyHash384Def)editPrev );
 			}
 			else if( classCode == ICFBamDbKeyHash384Col.CLASS_CODE ) {
-				schema.getTableDbKeyHash384Col().updateDbKeyHash384Col( Authorization, (CFBamDbKeyHash384ColBuff)editPrev );
+				schema.getTableDbKeyHash384Col().updateDbKeyHash384Col( Authorization, (CFBamBuffDbKeyHash384Col)editPrev );
 			}
 			else if( classCode == ICFBamDbKeyHash384Type.CLASS_CODE ) {
-				schema.getTableDbKeyHash384Type().updateDbKeyHash384Type( Authorization, (CFBamDbKeyHash384TypeBuff)editPrev );
+				schema.getTableDbKeyHash384Type().updateDbKeyHash384Type( Authorization, (CFBamBuffDbKeyHash384Type)editPrev );
 			}
 			else if( classCode == ICFBamDbKeyHash384Gen.CLASS_CODE ) {
-				schema.getTableDbKeyHash384Gen().updateDbKeyHash384Gen( Authorization, (CFBamDbKeyHash384GenBuff)editPrev );
+				schema.getTableDbKeyHash384Gen().updateDbKeyHash384Gen( Authorization, (CFBamBuffDbKeyHash384Gen)editPrev );
 			}
 			else if( classCode == ICFBamDbKeyHash512Def.CLASS_CODE ) {
-				schema.getTableDbKeyHash512Def().updateDbKeyHash512Def( Authorization, (CFBamDbKeyHash512DefBuff)editPrev );
+				schema.getTableDbKeyHash512Def().updateDbKeyHash512Def( Authorization, (CFBamBuffDbKeyHash512Def)editPrev );
 			}
 			else if( classCode == ICFBamDbKeyHash512Col.CLASS_CODE ) {
-				schema.getTableDbKeyHash512Col().updateDbKeyHash512Col( Authorization, (CFBamDbKeyHash512ColBuff)editPrev );
+				schema.getTableDbKeyHash512Col().updateDbKeyHash512Col( Authorization, (CFBamBuffDbKeyHash512Col)editPrev );
 			}
 			else if( classCode == ICFBamDbKeyHash512Type.CLASS_CODE ) {
-				schema.getTableDbKeyHash512Type().updateDbKeyHash512Type( Authorization, (CFBamDbKeyHash512TypeBuff)editPrev );
+				schema.getTableDbKeyHash512Type().updateDbKeyHash512Type( Authorization, (CFBamBuffDbKeyHash512Type)editPrev );
 			}
 			else if( classCode == ICFBamDbKeyHash512Gen.CLASS_CODE ) {
-				schema.getTableDbKeyHash512Gen().updateDbKeyHash512Gen( Authorization, (CFBamDbKeyHash512GenBuff)editPrev );
+				schema.getTableDbKeyHash512Gen().updateDbKeyHash512Gen( Authorization, (CFBamBuffDbKeyHash512Gen)editPrev );
 			}
 			else if( classCode == ICFBamStringDef.CLASS_CODE ) {
-				schema.getTableStringDef().updateStringDef( Authorization, (CFBamStringDefBuff)editPrev );
+				schema.getTableStringDef().updateStringDef( Authorization, (CFBamBuffStringDef)editPrev );
 			}
 			else if( classCode == ICFBamStringType.CLASS_CODE ) {
-				schema.getTableStringType().updateStringType( Authorization, (CFBamStringTypeBuff)editPrev );
+				schema.getTableStringType().updateStringType( Authorization, (CFBamBuffStringType)editPrev );
 			}
 			else if( classCode == ICFBamStringCol.CLASS_CODE ) {
-				schema.getTableStringCol().updateStringCol( Authorization, (CFBamStringColBuff)editPrev );
+				schema.getTableStringCol().updateStringCol( Authorization, (CFBamBuffStringCol)editPrev );
 			}
 			else if( classCode == ICFBamTZDateDef.CLASS_CODE ) {
-				schema.getTableTZDateDef().updateTZDateDef( Authorization, (CFBamTZDateDefBuff)editPrev );
+				schema.getTableTZDateDef().updateTZDateDef( Authorization, (CFBamBuffTZDateDef)editPrev );
 			}
 			else if( classCode == ICFBamTZDateType.CLASS_CODE ) {
-				schema.getTableTZDateType().updateTZDateType( Authorization, (CFBamTZDateTypeBuff)editPrev );
+				schema.getTableTZDateType().updateTZDateType( Authorization, (CFBamBuffTZDateType)editPrev );
 			}
 			else if( classCode == ICFBamTZDateCol.CLASS_CODE ) {
-				schema.getTableTZDateCol().updateTZDateCol( Authorization, (CFBamTZDateColBuff)editPrev );
+				schema.getTableTZDateCol().updateTZDateCol( Authorization, (CFBamBuffTZDateCol)editPrev );
 			}
 			else if( classCode == ICFBamTZTimeDef.CLASS_CODE ) {
-				schema.getTableTZTimeDef().updateTZTimeDef( Authorization, (CFBamTZTimeDefBuff)editPrev );
+				schema.getTableTZTimeDef().updateTZTimeDef( Authorization, (CFBamBuffTZTimeDef)editPrev );
 			}
 			else if( classCode == ICFBamTZTimeType.CLASS_CODE ) {
-				schema.getTableTZTimeType().updateTZTimeType( Authorization, (CFBamTZTimeTypeBuff)editPrev );
+				schema.getTableTZTimeType().updateTZTimeType( Authorization, (CFBamBuffTZTimeType)editPrev );
 			}
 			else if( classCode == ICFBamTZTimeCol.CLASS_CODE ) {
-				schema.getTableTZTimeCol().updateTZTimeCol( Authorization, (CFBamTZTimeColBuff)editPrev );
+				schema.getTableTZTimeCol().updateTZTimeCol( Authorization, (CFBamBuffTZTimeCol)editPrev );
 			}
 			else if( classCode == ICFBamTZTimestampDef.CLASS_CODE ) {
-				schema.getTableTZTimestampDef().updateTZTimestampDef( Authorization, (CFBamTZTimestampDefBuff)editPrev );
+				schema.getTableTZTimestampDef().updateTZTimestampDef( Authorization, (CFBamBuffTZTimestampDef)editPrev );
 			}
 			else if( classCode == ICFBamTZTimestampType.CLASS_CODE ) {
-				schema.getTableTZTimestampType().updateTZTimestampType( Authorization, (CFBamTZTimestampTypeBuff)editPrev );
+				schema.getTableTZTimestampType().updateTZTimestampType( Authorization, (CFBamBuffTZTimestampType)editPrev );
 			}
 			else if( classCode == ICFBamTZTimestampCol.CLASS_CODE ) {
-				schema.getTableTZTimestampCol().updateTZTimestampCol( Authorization, (CFBamTZTimestampColBuff)editPrev );
+				schema.getTableTZTimestampCol().updateTZTimestampCol( Authorization, (CFBamBuffTZTimestampCol)editPrev );
 			}
 			else if( classCode == ICFBamTextDef.CLASS_CODE ) {
-				schema.getTableTextDef().updateTextDef( Authorization, (CFBamTextDefBuff)editPrev );
+				schema.getTableTextDef().updateTextDef( Authorization, (CFBamBuffTextDef)editPrev );
 			}
 			else if( classCode == ICFBamTextType.CLASS_CODE ) {
-				schema.getTableTextType().updateTextType( Authorization, (CFBamTextTypeBuff)editPrev );
+				schema.getTableTextType().updateTextType( Authorization, (CFBamBuffTextType)editPrev );
 			}
 			else if( classCode == ICFBamTextCol.CLASS_CODE ) {
-				schema.getTableTextCol().updateTextCol( Authorization, (CFBamTextColBuff)editPrev );
+				schema.getTableTextCol().updateTextCol( Authorization, (CFBamBuffTextCol)editPrev );
 			}
 			else if( classCode == ICFBamTimeDef.CLASS_CODE ) {
-				schema.getTableTimeDef().updateTimeDef( Authorization, (CFBamTimeDefBuff)editPrev );
+				schema.getTableTimeDef().updateTimeDef( Authorization, (CFBamBuffTimeDef)editPrev );
 			}
 			else if( classCode == ICFBamTimeType.CLASS_CODE ) {
-				schema.getTableTimeType().updateTimeType( Authorization, (CFBamTimeTypeBuff)editPrev );
+				schema.getTableTimeType().updateTimeType( Authorization, (CFBamBuffTimeType)editPrev );
 			}
 			else if( classCode == ICFBamTimeCol.CLASS_CODE ) {
-				schema.getTableTimeCol().updateTimeCol( Authorization, (CFBamTimeColBuff)editPrev );
+				schema.getTableTimeCol().updateTimeCol( Authorization, (CFBamBuffTimeCol)editPrev );
 			}
 			else if( classCode == ICFBamTimestampDef.CLASS_CODE ) {
-				schema.getTableTimestampDef().updateTimestampDef( Authorization, (CFBamTimestampDefBuff)editPrev );
+				schema.getTableTimestampDef().updateTimestampDef( Authorization, (CFBamBuffTimestampDef)editPrev );
 			}
 			else if( classCode == ICFBamTimestampType.CLASS_CODE ) {
-				schema.getTableTimestampType().updateTimestampType( Authorization, (CFBamTimestampTypeBuff)editPrev );
+				schema.getTableTimestampType().updateTimestampType( Authorization, (CFBamBuffTimestampType)editPrev );
 			}
 			else if( classCode == ICFBamTimestampCol.CLASS_CODE ) {
-				schema.getTableTimestampCol().updateTimestampCol( Authorization, (CFBamTimestampColBuff)editPrev );
+				schema.getTableTimestampCol().updateTimestampCol( Authorization, (CFBamBuffTimestampCol)editPrev );
 			}
 			else if( classCode == ICFBamTokenDef.CLASS_CODE ) {
-				schema.getTableTokenDef().updateTokenDef( Authorization, (CFBamTokenDefBuff)editPrev );
+				schema.getTableTokenDef().updateTokenDef( Authorization, (CFBamBuffTokenDef)editPrev );
 			}
 			else if( classCode == ICFBamTokenType.CLASS_CODE ) {
-				schema.getTableTokenType().updateTokenType( Authorization, (CFBamTokenTypeBuff)editPrev );
+				schema.getTableTokenType().updateTokenType( Authorization, (CFBamBuffTokenType)editPrev );
 			}
 			else if( classCode == ICFBamTokenCol.CLASS_CODE ) {
-				schema.getTableTokenCol().updateTokenCol( Authorization, (CFBamTokenColBuff)editPrev );
+				schema.getTableTokenCol().updateTokenCol( Authorization, (CFBamBuffTokenCol)editPrev );
 			}
 			else if( classCode == ICFBamUInt16Def.CLASS_CODE ) {
-				schema.getTableUInt16Def().updateUInt16Def( Authorization, (CFBamUInt16DefBuff)editPrev );
+				schema.getTableUInt16Def().updateUInt16Def( Authorization, (CFBamBuffUInt16Def)editPrev );
 			}
 			else if( classCode == ICFBamUInt16Type.CLASS_CODE ) {
-				schema.getTableUInt16Type().updateUInt16Type( Authorization, (CFBamUInt16TypeBuff)editPrev );
+				schema.getTableUInt16Type().updateUInt16Type( Authorization, (CFBamBuffUInt16Type)editPrev );
 			}
 			else if( classCode == ICFBamUInt16Col.CLASS_CODE ) {
-				schema.getTableUInt16Col().updateUInt16Col( Authorization, (CFBamUInt16ColBuff)editPrev );
+				schema.getTableUInt16Col().updateUInt16Col( Authorization, (CFBamBuffUInt16Col)editPrev );
 			}
 			else if( classCode == ICFBamUInt32Def.CLASS_CODE ) {
-				schema.getTableUInt32Def().updateUInt32Def( Authorization, (CFBamUInt32DefBuff)editPrev );
+				schema.getTableUInt32Def().updateUInt32Def( Authorization, (CFBamBuffUInt32Def)editPrev );
 			}
 			else if( classCode == ICFBamUInt32Type.CLASS_CODE ) {
-				schema.getTableUInt32Type().updateUInt32Type( Authorization, (CFBamUInt32TypeBuff)editPrev );
+				schema.getTableUInt32Type().updateUInt32Type( Authorization, (CFBamBuffUInt32Type)editPrev );
 			}
 			else if( classCode == ICFBamUInt32Col.CLASS_CODE ) {
-				schema.getTableUInt32Col().updateUInt32Col( Authorization, (CFBamUInt32ColBuff)editPrev );
+				schema.getTableUInt32Col().updateUInt32Col( Authorization, (CFBamBuffUInt32Col)editPrev );
 			}
 			else if( classCode == ICFBamUInt64Def.CLASS_CODE ) {
-				schema.getTableUInt64Def().updateUInt64Def( Authorization, (CFBamUInt64DefBuff)editPrev );
+				schema.getTableUInt64Def().updateUInt64Def( Authorization, (CFBamBuffUInt64Def)editPrev );
 			}
 			else if( classCode == ICFBamUInt64Type.CLASS_CODE ) {
-				schema.getTableUInt64Type().updateUInt64Type( Authorization, (CFBamUInt64TypeBuff)editPrev );
+				schema.getTableUInt64Type().updateUInt64Type( Authorization, (CFBamBuffUInt64Type)editPrev );
 			}
 			else if( classCode == ICFBamUInt64Col.CLASS_CODE ) {
-				schema.getTableUInt64Col().updateUInt64Col( Authorization, (CFBamUInt64ColBuff)editPrev );
+				schema.getTableUInt64Col().updateUInt64Col( Authorization, (CFBamBuffUInt64Col)editPrev );
 			}
 			else if( classCode == ICFBamUuidDef.CLASS_CODE ) {
-				schema.getTableUuidDef().updateUuidDef( Authorization, (CFBamUuidDefBuff)editPrev );
+				schema.getTableUuidDef().updateUuidDef( Authorization, (CFBamBuffUuidDef)editPrev );
 			}
 			else if( classCode == ICFBamUuidType.CLASS_CODE ) {
-				schema.getTableUuidType().updateUuidType( Authorization, (CFBamUuidTypeBuff)editPrev );
+				schema.getTableUuidType().updateUuidType( Authorization, (CFBamBuffUuidType)editPrev );
 			}
 			else if( classCode == ICFBamUuidGen.CLASS_CODE ) {
-				schema.getTableUuidGen().updateUuidGen( Authorization, (CFBamUuidGenBuff)editPrev );
+				schema.getTableUuidGen().updateUuidGen( Authorization, (CFBamBuffUuidGen)editPrev );
 			}
 			else if( classCode == ICFBamUuidCol.CLASS_CODE ) {
-				schema.getTableUuidCol().updateUuidCol( Authorization, (CFBamUuidColBuff)editPrev );
+				schema.getTableUuidCol().updateUuidCol( Authorization, (CFBamBuffUuidCol)editPrev );
 			}
 			else if( classCode == ICFBamUuid6Def.CLASS_CODE ) {
-				schema.getTableUuid6Def().updateUuid6Def( Authorization, (CFBamUuid6DefBuff)editPrev );
+				schema.getTableUuid6Def().updateUuid6Def( Authorization, (CFBamBuffUuid6Def)editPrev );
 			}
 			else if( classCode == ICFBamUuid6Type.CLASS_CODE ) {
-				schema.getTableUuid6Type().updateUuid6Type( Authorization, (CFBamUuid6TypeBuff)editPrev );
+				schema.getTableUuid6Type().updateUuid6Type( Authorization, (CFBamBuffUuid6Type)editPrev );
 			}
 			else if( classCode == ICFBamUuid6Gen.CLASS_CODE ) {
-				schema.getTableUuid6Gen().updateUuid6Gen( Authorization, (CFBamUuid6GenBuff)editPrev );
+				schema.getTableUuid6Gen().updateUuid6Gen( Authorization, (CFBamBuffUuid6Gen)editPrev );
 			}
 			else if( classCode == ICFBamUuid6Col.CLASS_CODE ) {
-				schema.getTableUuid6Col().updateUuid6Col( Authorization, (CFBamUuid6ColBuff)editPrev );
+				schema.getTableUuid6Col().updateUuid6Col( Authorization, (CFBamBuffUuid6Col)editPrev );
 			}
 			else if( classCode == ICFBamTableCol.CLASS_CODE ) {
-				schema.getTableTableCol().updateTableCol( Authorization, (CFBamTableColBuff)editPrev );
+				schema.getTableTableCol().updateTableCol( Authorization, (CFBamBuffTableCol)editPrev );
 			}
 			else {
-				throw new CFLibUnsupportedClassException(getClass(), S_ProcName, 0, "-update-prev-", "Not " + Integer.toString(classCode));
+				throw new CFLibUnsupportedClassException(getClass(), S_ProcName, "-update-prev-", (Integer)classCode, "Classcode not recognized: " + Integer.toString(classCode));
 			}
 		}
 
@@ -4930,322 +4930,322 @@ public class CFBamRamInt64DefTable
 				schema.getTableValue().updateValue( Authorization, editCur );
 			}
 			else if( classCode == ICFBamAtom.CLASS_CODE ) {
-				schema.getTableAtom().updateAtom( Authorization, (CFBamAtomBuff)editCur );
+				schema.getTableAtom().updateAtom( Authorization, (CFBamBuffAtom)editCur );
 			}
 			else if( classCode == ICFBamBlobDef.CLASS_CODE ) {
-				schema.getTableBlobDef().updateBlobDef( Authorization, (CFBamBlobDefBuff)editCur );
+				schema.getTableBlobDef().updateBlobDef( Authorization, (CFBamBuffBlobDef)editCur );
 			}
 			else if( classCode == ICFBamBlobType.CLASS_CODE ) {
-				schema.getTableBlobType().updateBlobType( Authorization, (CFBamBlobTypeBuff)editCur );
+				schema.getTableBlobType().updateBlobType( Authorization, (CFBamBuffBlobType)editCur );
 			}
 			else if( classCode == ICFBamBlobCol.CLASS_CODE ) {
-				schema.getTableBlobCol().updateBlobCol( Authorization, (CFBamBlobColBuff)editCur );
+				schema.getTableBlobCol().updateBlobCol( Authorization, (CFBamBuffBlobCol)editCur );
 			}
 			else if( classCode == ICFBamBoolDef.CLASS_CODE ) {
-				schema.getTableBoolDef().updateBoolDef( Authorization, (CFBamBoolDefBuff)editCur );
+				schema.getTableBoolDef().updateBoolDef( Authorization, (CFBamBuffBoolDef)editCur );
 			}
 			else if( classCode == ICFBamBoolType.CLASS_CODE ) {
-				schema.getTableBoolType().updateBoolType( Authorization, (CFBamBoolTypeBuff)editCur );
+				schema.getTableBoolType().updateBoolType( Authorization, (CFBamBuffBoolType)editCur );
 			}
 			else if( classCode == ICFBamBoolCol.CLASS_CODE ) {
-				schema.getTableBoolCol().updateBoolCol( Authorization, (CFBamBoolColBuff)editCur );
+				schema.getTableBoolCol().updateBoolCol( Authorization, (CFBamBuffBoolCol)editCur );
 			}
 			else if( classCode == ICFBamDateDef.CLASS_CODE ) {
-				schema.getTableDateDef().updateDateDef( Authorization, (CFBamDateDefBuff)editCur );
+				schema.getTableDateDef().updateDateDef( Authorization, (CFBamBuffDateDef)editCur );
 			}
 			else if( classCode == ICFBamDateType.CLASS_CODE ) {
-				schema.getTableDateType().updateDateType( Authorization, (CFBamDateTypeBuff)editCur );
+				schema.getTableDateType().updateDateType( Authorization, (CFBamBuffDateType)editCur );
 			}
 			else if( classCode == ICFBamDateCol.CLASS_CODE ) {
-				schema.getTableDateCol().updateDateCol( Authorization, (CFBamDateColBuff)editCur );
+				schema.getTableDateCol().updateDateCol( Authorization, (CFBamBuffDateCol)editCur );
 			}
 			else if( classCode == ICFBamDoubleDef.CLASS_CODE ) {
-				schema.getTableDoubleDef().updateDoubleDef( Authorization, (CFBamDoubleDefBuff)editCur );
+				schema.getTableDoubleDef().updateDoubleDef( Authorization, (CFBamBuffDoubleDef)editCur );
 			}
 			else if( classCode == ICFBamDoubleType.CLASS_CODE ) {
-				schema.getTableDoubleType().updateDoubleType( Authorization, (CFBamDoubleTypeBuff)editCur );
+				schema.getTableDoubleType().updateDoubleType( Authorization, (CFBamBuffDoubleType)editCur );
 			}
 			else if( classCode == ICFBamDoubleCol.CLASS_CODE ) {
-				schema.getTableDoubleCol().updateDoubleCol( Authorization, (CFBamDoubleColBuff)editCur );
+				schema.getTableDoubleCol().updateDoubleCol( Authorization, (CFBamBuffDoubleCol)editCur );
 			}
 			else if( classCode == ICFBamFloatDef.CLASS_CODE ) {
-				schema.getTableFloatDef().updateFloatDef( Authorization, (CFBamFloatDefBuff)editCur );
+				schema.getTableFloatDef().updateFloatDef( Authorization, (CFBamBuffFloatDef)editCur );
 			}
 			else if( classCode == ICFBamFloatType.CLASS_CODE ) {
-				schema.getTableFloatType().updateFloatType( Authorization, (CFBamFloatTypeBuff)editCur );
+				schema.getTableFloatType().updateFloatType( Authorization, (CFBamBuffFloatType)editCur );
 			}
 			else if( classCode == ICFBamFloatCol.CLASS_CODE ) {
-				schema.getTableFloatCol().updateFloatCol( Authorization, (CFBamFloatColBuff)editCur );
+				schema.getTableFloatCol().updateFloatCol( Authorization, (CFBamBuffFloatCol)editCur );
 			}
 			else if( classCode == ICFBamInt16Def.CLASS_CODE ) {
-				schema.getTableInt16Def().updateInt16Def( Authorization, (CFBamInt16DefBuff)editCur );
+				schema.getTableInt16Def().updateInt16Def( Authorization, (CFBamBuffInt16Def)editCur );
 			}
 			else if( classCode == ICFBamInt16Type.CLASS_CODE ) {
-				schema.getTableInt16Type().updateInt16Type( Authorization, (CFBamInt16TypeBuff)editCur );
+				schema.getTableInt16Type().updateInt16Type( Authorization, (CFBamBuffInt16Type)editCur );
 			}
 			else if( classCode == ICFBamId16Gen.CLASS_CODE ) {
-				schema.getTableId16Gen().updateId16Gen( Authorization, (CFBamId16GenBuff)editCur );
+				schema.getTableId16Gen().updateId16Gen( Authorization, (CFBamBuffId16Gen)editCur );
 			}
 			else if( classCode == ICFBamEnumDef.CLASS_CODE ) {
-				schema.getTableEnumDef().updateEnumDef( Authorization, (CFBamEnumDefBuff)editCur );
+				schema.getTableEnumDef().updateEnumDef( Authorization, (CFBamBuffEnumDef)editCur );
 			}
 			else if( classCode == ICFBamEnumType.CLASS_CODE ) {
-				schema.getTableEnumType().updateEnumType( Authorization, (CFBamEnumTypeBuff)editCur );
+				schema.getTableEnumType().updateEnumType( Authorization, (CFBamBuffEnumType)editCur );
 			}
 			else if( classCode == ICFBamInt16Col.CLASS_CODE ) {
-				schema.getTableInt16Col().updateInt16Col( Authorization, (CFBamInt16ColBuff)editCur );
+				schema.getTableInt16Col().updateInt16Col( Authorization, (CFBamBuffInt16Col)editCur );
 			}
 			else if( classCode == ICFBamInt32Def.CLASS_CODE ) {
-				schema.getTableInt32Def().updateInt32Def( Authorization, (CFBamInt32DefBuff)editCur );
+				schema.getTableInt32Def().updateInt32Def( Authorization, (CFBamBuffInt32Def)editCur );
 			}
 			else if( classCode == ICFBamInt32Type.CLASS_CODE ) {
-				schema.getTableInt32Type().updateInt32Type( Authorization, (CFBamInt32TypeBuff)editCur );
+				schema.getTableInt32Type().updateInt32Type( Authorization, (CFBamBuffInt32Type)editCur );
 			}
 			else if( classCode == ICFBamId32Gen.CLASS_CODE ) {
-				schema.getTableId32Gen().updateId32Gen( Authorization, (CFBamId32GenBuff)editCur );
+				schema.getTableId32Gen().updateId32Gen( Authorization, (CFBamBuffId32Gen)editCur );
 			}
 			else if( classCode == ICFBamInt32Col.CLASS_CODE ) {
-				schema.getTableInt32Col().updateInt32Col( Authorization, (CFBamInt32ColBuff)editCur );
+				schema.getTableInt32Col().updateInt32Col( Authorization, (CFBamBuffInt32Col)editCur );
 			}
 			else if( classCode == ICFBamInt64Def.CLASS_CODE ) {
-				schema.getTableInt64Def().updateInt64Def( Authorization, (CFBamInt64DefBuff)editCur );
+				schema.getTableInt64Def().updateInt64Def( Authorization, (CFBamBuffInt64Def)editCur );
 			}
 			else if( classCode == ICFBamInt64Type.CLASS_CODE ) {
-				schema.getTableInt64Type().updateInt64Type( Authorization, (CFBamInt64TypeBuff)editCur );
+				schema.getTableInt64Type().updateInt64Type( Authorization, (CFBamBuffInt64Type)editCur );
 			}
 			else if( classCode == ICFBamId64Gen.CLASS_CODE ) {
-				schema.getTableId64Gen().updateId64Gen( Authorization, (CFBamId64GenBuff)editCur );
+				schema.getTableId64Gen().updateId64Gen( Authorization, (CFBamBuffId64Gen)editCur );
 			}
 			else if( classCode == ICFBamInt64Col.CLASS_CODE ) {
-				schema.getTableInt64Col().updateInt64Col( Authorization, (CFBamInt64ColBuff)editCur );
+				schema.getTableInt64Col().updateInt64Col( Authorization, (CFBamBuffInt64Col)editCur );
 			}
 			else if( classCode == ICFBamNmTokenDef.CLASS_CODE ) {
-				schema.getTableNmTokenDef().updateNmTokenDef( Authorization, (CFBamNmTokenDefBuff)editCur );
+				schema.getTableNmTokenDef().updateNmTokenDef( Authorization, (CFBamBuffNmTokenDef)editCur );
 			}
 			else if( classCode == ICFBamNmTokenType.CLASS_CODE ) {
-				schema.getTableNmTokenType().updateNmTokenType( Authorization, (CFBamNmTokenTypeBuff)editCur );
+				schema.getTableNmTokenType().updateNmTokenType( Authorization, (CFBamBuffNmTokenType)editCur );
 			}
 			else if( classCode == ICFBamNmTokenCol.CLASS_CODE ) {
-				schema.getTableNmTokenCol().updateNmTokenCol( Authorization, (CFBamNmTokenColBuff)editCur );
+				schema.getTableNmTokenCol().updateNmTokenCol( Authorization, (CFBamBuffNmTokenCol)editCur );
 			}
 			else if( classCode == ICFBamNmTokensDef.CLASS_CODE ) {
-				schema.getTableNmTokensDef().updateNmTokensDef( Authorization, (CFBamNmTokensDefBuff)editCur );
+				schema.getTableNmTokensDef().updateNmTokensDef( Authorization, (CFBamBuffNmTokensDef)editCur );
 			}
 			else if( classCode == ICFBamNmTokensType.CLASS_CODE ) {
-				schema.getTableNmTokensType().updateNmTokensType( Authorization, (CFBamNmTokensTypeBuff)editCur );
+				schema.getTableNmTokensType().updateNmTokensType( Authorization, (CFBamBuffNmTokensType)editCur );
 			}
 			else if( classCode == ICFBamNmTokensCol.CLASS_CODE ) {
-				schema.getTableNmTokensCol().updateNmTokensCol( Authorization, (CFBamNmTokensColBuff)editCur );
+				schema.getTableNmTokensCol().updateNmTokensCol( Authorization, (CFBamBuffNmTokensCol)editCur );
 			}
 			else if( classCode == ICFBamNumberDef.CLASS_CODE ) {
-				schema.getTableNumberDef().updateNumberDef( Authorization, (CFBamNumberDefBuff)editCur );
+				schema.getTableNumberDef().updateNumberDef( Authorization, (CFBamBuffNumberDef)editCur );
 			}
 			else if( classCode == ICFBamNumberType.CLASS_CODE ) {
-				schema.getTableNumberType().updateNumberType( Authorization, (CFBamNumberTypeBuff)editCur );
+				schema.getTableNumberType().updateNumberType( Authorization, (CFBamBuffNumberType)editCur );
 			}
 			else if( classCode == ICFBamNumberCol.CLASS_CODE ) {
-				schema.getTableNumberCol().updateNumberCol( Authorization, (CFBamNumberColBuff)editCur );
+				schema.getTableNumberCol().updateNumberCol( Authorization, (CFBamBuffNumberCol)editCur );
 			}
 			else if( classCode == ICFBamDbKeyHash128Def.CLASS_CODE ) {
-				schema.getTableDbKeyHash128Def().updateDbKeyHash128Def( Authorization, (CFBamDbKeyHash128DefBuff)editCur );
+				schema.getTableDbKeyHash128Def().updateDbKeyHash128Def( Authorization, (CFBamBuffDbKeyHash128Def)editCur );
 			}
 			else if( classCode == ICFBamDbKeyHash128Col.CLASS_CODE ) {
-				schema.getTableDbKeyHash128Col().updateDbKeyHash128Col( Authorization, (CFBamDbKeyHash128ColBuff)editCur );
+				schema.getTableDbKeyHash128Col().updateDbKeyHash128Col( Authorization, (CFBamBuffDbKeyHash128Col)editCur );
 			}
 			else if( classCode == ICFBamDbKeyHash128Type.CLASS_CODE ) {
-				schema.getTableDbKeyHash128Type().updateDbKeyHash128Type( Authorization, (CFBamDbKeyHash128TypeBuff)editCur );
+				schema.getTableDbKeyHash128Type().updateDbKeyHash128Type( Authorization, (CFBamBuffDbKeyHash128Type)editCur );
 			}
 			else if( classCode == ICFBamDbKeyHash128Gen.CLASS_CODE ) {
-				schema.getTableDbKeyHash128Gen().updateDbKeyHash128Gen( Authorization, (CFBamDbKeyHash128GenBuff)editCur );
+				schema.getTableDbKeyHash128Gen().updateDbKeyHash128Gen( Authorization, (CFBamBuffDbKeyHash128Gen)editCur );
 			}
 			else if( classCode == ICFBamDbKeyHash160Def.CLASS_CODE ) {
-				schema.getTableDbKeyHash160Def().updateDbKeyHash160Def( Authorization, (CFBamDbKeyHash160DefBuff)editCur );
+				schema.getTableDbKeyHash160Def().updateDbKeyHash160Def( Authorization, (CFBamBuffDbKeyHash160Def)editCur );
 			}
 			else if( classCode == ICFBamDbKeyHash160Col.CLASS_CODE ) {
-				schema.getTableDbKeyHash160Col().updateDbKeyHash160Col( Authorization, (CFBamDbKeyHash160ColBuff)editCur );
+				schema.getTableDbKeyHash160Col().updateDbKeyHash160Col( Authorization, (CFBamBuffDbKeyHash160Col)editCur );
 			}
 			else if( classCode == ICFBamDbKeyHash160Type.CLASS_CODE ) {
-				schema.getTableDbKeyHash160Type().updateDbKeyHash160Type( Authorization, (CFBamDbKeyHash160TypeBuff)editCur );
+				schema.getTableDbKeyHash160Type().updateDbKeyHash160Type( Authorization, (CFBamBuffDbKeyHash160Type)editCur );
 			}
 			else if( classCode == ICFBamDbKeyHash160Gen.CLASS_CODE ) {
-				schema.getTableDbKeyHash160Gen().updateDbKeyHash160Gen( Authorization, (CFBamDbKeyHash160GenBuff)editCur );
+				schema.getTableDbKeyHash160Gen().updateDbKeyHash160Gen( Authorization, (CFBamBuffDbKeyHash160Gen)editCur );
 			}
 			else if( classCode == ICFBamDbKeyHash224Def.CLASS_CODE ) {
-				schema.getTableDbKeyHash224Def().updateDbKeyHash224Def( Authorization, (CFBamDbKeyHash224DefBuff)editCur );
+				schema.getTableDbKeyHash224Def().updateDbKeyHash224Def( Authorization, (CFBamBuffDbKeyHash224Def)editCur );
 			}
 			else if( classCode == ICFBamDbKeyHash224Col.CLASS_CODE ) {
-				schema.getTableDbKeyHash224Col().updateDbKeyHash224Col( Authorization, (CFBamDbKeyHash224ColBuff)editCur );
+				schema.getTableDbKeyHash224Col().updateDbKeyHash224Col( Authorization, (CFBamBuffDbKeyHash224Col)editCur );
 			}
 			else if( classCode == ICFBamDbKeyHash224Type.CLASS_CODE ) {
-				schema.getTableDbKeyHash224Type().updateDbKeyHash224Type( Authorization, (CFBamDbKeyHash224TypeBuff)editCur );
+				schema.getTableDbKeyHash224Type().updateDbKeyHash224Type( Authorization, (CFBamBuffDbKeyHash224Type)editCur );
 			}
 			else if( classCode == ICFBamDbKeyHash224Gen.CLASS_CODE ) {
-				schema.getTableDbKeyHash224Gen().updateDbKeyHash224Gen( Authorization, (CFBamDbKeyHash224GenBuff)editCur );
+				schema.getTableDbKeyHash224Gen().updateDbKeyHash224Gen( Authorization, (CFBamBuffDbKeyHash224Gen)editCur );
 			}
 			else if( classCode == ICFBamDbKeyHash256Def.CLASS_CODE ) {
-				schema.getTableDbKeyHash256Def().updateDbKeyHash256Def( Authorization, (CFBamDbKeyHash256DefBuff)editCur );
+				schema.getTableDbKeyHash256Def().updateDbKeyHash256Def( Authorization, (CFBamBuffDbKeyHash256Def)editCur );
 			}
 			else if( classCode == ICFBamDbKeyHash256Col.CLASS_CODE ) {
-				schema.getTableDbKeyHash256Col().updateDbKeyHash256Col( Authorization, (CFBamDbKeyHash256ColBuff)editCur );
+				schema.getTableDbKeyHash256Col().updateDbKeyHash256Col( Authorization, (CFBamBuffDbKeyHash256Col)editCur );
 			}
 			else if( classCode == ICFBamDbKeyHash256Type.CLASS_CODE ) {
-				schema.getTableDbKeyHash256Type().updateDbKeyHash256Type( Authorization, (CFBamDbKeyHash256TypeBuff)editCur );
+				schema.getTableDbKeyHash256Type().updateDbKeyHash256Type( Authorization, (CFBamBuffDbKeyHash256Type)editCur );
 			}
 			else if( classCode == ICFBamDbKeyHash256Gen.CLASS_CODE ) {
-				schema.getTableDbKeyHash256Gen().updateDbKeyHash256Gen( Authorization, (CFBamDbKeyHash256GenBuff)editCur );
+				schema.getTableDbKeyHash256Gen().updateDbKeyHash256Gen( Authorization, (CFBamBuffDbKeyHash256Gen)editCur );
 			}
 			else if( classCode == ICFBamDbKeyHash384Def.CLASS_CODE ) {
-				schema.getTableDbKeyHash384Def().updateDbKeyHash384Def( Authorization, (CFBamDbKeyHash384DefBuff)editCur );
+				schema.getTableDbKeyHash384Def().updateDbKeyHash384Def( Authorization, (CFBamBuffDbKeyHash384Def)editCur );
 			}
 			else if( classCode == ICFBamDbKeyHash384Col.CLASS_CODE ) {
-				schema.getTableDbKeyHash384Col().updateDbKeyHash384Col( Authorization, (CFBamDbKeyHash384ColBuff)editCur );
+				schema.getTableDbKeyHash384Col().updateDbKeyHash384Col( Authorization, (CFBamBuffDbKeyHash384Col)editCur );
 			}
 			else if( classCode == ICFBamDbKeyHash384Type.CLASS_CODE ) {
-				schema.getTableDbKeyHash384Type().updateDbKeyHash384Type( Authorization, (CFBamDbKeyHash384TypeBuff)editCur );
+				schema.getTableDbKeyHash384Type().updateDbKeyHash384Type( Authorization, (CFBamBuffDbKeyHash384Type)editCur );
 			}
 			else if( classCode == ICFBamDbKeyHash384Gen.CLASS_CODE ) {
-				schema.getTableDbKeyHash384Gen().updateDbKeyHash384Gen( Authorization, (CFBamDbKeyHash384GenBuff)editCur );
+				schema.getTableDbKeyHash384Gen().updateDbKeyHash384Gen( Authorization, (CFBamBuffDbKeyHash384Gen)editCur );
 			}
 			else if( classCode == ICFBamDbKeyHash512Def.CLASS_CODE ) {
-				schema.getTableDbKeyHash512Def().updateDbKeyHash512Def( Authorization, (CFBamDbKeyHash512DefBuff)editCur );
+				schema.getTableDbKeyHash512Def().updateDbKeyHash512Def( Authorization, (CFBamBuffDbKeyHash512Def)editCur );
 			}
 			else if( classCode == ICFBamDbKeyHash512Col.CLASS_CODE ) {
-				schema.getTableDbKeyHash512Col().updateDbKeyHash512Col( Authorization, (CFBamDbKeyHash512ColBuff)editCur );
+				schema.getTableDbKeyHash512Col().updateDbKeyHash512Col( Authorization, (CFBamBuffDbKeyHash512Col)editCur );
 			}
 			else if( classCode == ICFBamDbKeyHash512Type.CLASS_CODE ) {
-				schema.getTableDbKeyHash512Type().updateDbKeyHash512Type( Authorization, (CFBamDbKeyHash512TypeBuff)editCur );
+				schema.getTableDbKeyHash512Type().updateDbKeyHash512Type( Authorization, (CFBamBuffDbKeyHash512Type)editCur );
 			}
 			else if( classCode == ICFBamDbKeyHash512Gen.CLASS_CODE ) {
-				schema.getTableDbKeyHash512Gen().updateDbKeyHash512Gen( Authorization, (CFBamDbKeyHash512GenBuff)editCur );
+				schema.getTableDbKeyHash512Gen().updateDbKeyHash512Gen( Authorization, (CFBamBuffDbKeyHash512Gen)editCur );
 			}
 			else if( classCode == ICFBamStringDef.CLASS_CODE ) {
-				schema.getTableStringDef().updateStringDef( Authorization, (CFBamStringDefBuff)editCur );
+				schema.getTableStringDef().updateStringDef( Authorization, (CFBamBuffStringDef)editCur );
 			}
 			else if( classCode == ICFBamStringType.CLASS_CODE ) {
-				schema.getTableStringType().updateStringType( Authorization, (CFBamStringTypeBuff)editCur );
+				schema.getTableStringType().updateStringType( Authorization, (CFBamBuffStringType)editCur );
 			}
 			else if( classCode == ICFBamStringCol.CLASS_CODE ) {
-				schema.getTableStringCol().updateStringCol( Authorization, (CFBamStringColBuff)editCur );
+				schema.getTableStringCol().updateStringCol( Authorization, (CFBamBuffStringCol)editCur );
 			}
 			else if( classCode == ICFBamTZDateDef.CLASS_CODE ) {
-				schema.getTableTZDateDef().updateTZDateDef( Authorization, (CFBamTZDateDefBuff)editCur );
+				schema.getTableTZDateDef().updateTZDateDef( Authorization, (CFBamBuffTZDateDef)editCur );
 			}
 			else if( classCode == ICFBamTZDateType.CLASS_CODE ) {
-				schema.getTableTZDateType().updateTZDateType( Authorization, (CFBamTZDateTypeBuff)editCur );
+				schema.getTableTZDateType().updateTZDateType( Authorization, (CFBamBuffTZDateType)editCur );
 			}
 			else if( classCode == ICFBamTZDateCol.CLASS_CODE ) {
-				schema.getTableTZDateCol().updateTZDateCol( Authorization, (CFBamTZDateColBuff)editCur );
+				schema.getTableTZDateCol().updateTZDateCol( Authorization, (CFBamBuffTZDateCol)editCur );
 			}
 			else if( classCode == ICFBamTZTimeDef.CLASS_CODE ) {
-				schema.getTableTZTimeDef().updateTZTimeDef( Authorization, (CFBamTZTimeDefBuff)editCur );
+				schema.getTableTZTimeDef().updateTZTimeDef( Authorization, (CFBamBuffTZTimeDef)editCur );
 			}
 			else if( classCode == ICFBamTZTimeType.CLASS_CODE ) {
-				schema.getTableTZTimeType().updateTZTimeType( Authorization, (CFBamTZTimeTypeBuff)editCur );
+				schema.getTableTZTimeType().updateTZTimeType( Authorization, (CFBamBuffTZTimeType)editCur );
 			}
 			else if( classCode == ICFBamTZTimeCol.CLASS_CODE ) {
-				schema.getTableTZTimeCol().updateTZTimeCol( Authorization, (CFBamTZTimeColBuff)editCur );
+				schema.getTableTZTimeCol().updateTZTimeCol( Authorization, (CFBamBuffTZTimeCol)editCur );
 			}
 			else if( classCode == ICFBamTZTimestampDef.CLASS_CODE ) {
-				schema.getTableTZTimestampDef().updateTZTimestampDef( Authorization, (CFBamTZTimestampDefBuff)editCur );
+				schema.getTableTZTimestampDef().updateTZTimestampDef( Authorization, (CFBamBuffTZTimestampDef)editCur );
 			}
 			else if( classCode == ICFBamTZTimestampType.CLASS_CODE ) {
-				schema.getTableTZTimestampType().updateTZTimestampType( Authorization, (CFBamTZTimestampTypeBuff)editCur );
+				schema.getTableTZTimestampType().updateTZTimestampType( Authorization, (CFBamBuffTZTimestampType)editCur );
 			}
 			else if( classCode == ICFBamTZTimestampCol.CLASS_CODE ) {
-				schema.getTableTZTimestampCol().updateTZTimestampCol( Authorization, (CFBamTZTimestampColBuff)editCur );
+				schema.getTableTZTimestampCol().updateTZTimestampCol( Authorization, (CFBamBuffTZTimestampCol)editCur );
 			}
 			else if( classCode == ICFBamTextDef.CLASS_CODE ) {
-				schema.getTableTextDef().updateTextDef( Authorization, (CFBamTextDefBuff)editCur );
+				schema.getTableTextDef().updateTextDef( Authorization, (CFBamBuffTextDef)editCur );
 			}
 			else if( classCode == ICFBamTextType.CLASS_CODE ) {
-				schema.getTableTextType().updateTextType( Authorization, (CFBamTextTypeBuff)editCur );
+				schema.getTableTextType().updateTextType( Authorization, (CFBamBuffTextType)editCur );
 			}
 			else if( classCode == ICFBamTextCol.CLASS_CODE ) {
-				schema.getTableTextCol().updateTextCol( Authorization, (CFBamTextColBuff)editCur );
+				schema.getTableTextCol().updateTextCol( Authorization, (CFBamBuffTextCol)editCur );
 			}
 			else if( classCode == ICFBamTimeDef.CLASS_CODE ) {
-				schema.getTableTimeDef().updateTimeDef( Authorization, (CFBamTimeDefBuff)editCur );
+				schema.getTableTimeDef().updateTimeDef( Authorization, (CFBamBuffTimeDef)editCur );
 			}
 			else if( classCode == ICFBamTimeType.CLASS_CODE ) {
-				schema.getTableTimeType().updateTimeType( Authorization, (CFBamTimeTypeBuff)editCur );
+				schema.getTableTimeType().updateTimeType( Authorization, (CFBamBuffTimeType)editCur );
 			}
 			else if( classCode == ICFBamTimeCol.CLASS_CODE ) {
-				schema.getTableTimeCol().updateTimeCol( Authorization, (CFBamTimeColBuff)editCur );
+				schema.getTableTimeCol().updateTimeCol( Authorization, (CFBamBuffTimeCol)editCur );
 			}
 			else if( classCode == ICFBamTimestampDef.CLASS_CODE ) {
-				schema.getTableTimestampDef().updateTimestampDef( Authorization, (CFBamTimestampDefBuff)editCur );
+				schema.getTableTimestampDef().updateTimestampDef( Authorization, (CFBamBuffTimestampDef)editCur );
 			}
 			else if( classCode == ICFBamTimestampType.CLASS_CODE ) {
-				schema.getTableTimestampType().updateTimestampType( Authorization, (CFBamTimestampTypeBuff)editCur );
+				schema.getTableTimestampType().updateTimestampType( Authorization, (CFBamBuffTimestampType)editCur );
 			}
 			else if( classCode == ICFBamTimestampCol.CLASS_CODE ) {
-				schema.getTableTimestampCol().updateTimestampCol( Authorization, (CFBamTimestampColBuff)editCur );
+				schema.getTableTimestampCol().updateTimestampCol( Authorization, (CFBamBuffTimestampCol)editCur );
 			}
 			else if( classCode == ICFBamTokenDef.CLASS_CODE ) {
-				schema.getTableTokenDef().updateTokenDef( Authorization, (CFBamTokenDefBuff)editCur );
+				schema.getTableTokenDef().updateTokenDef( Authorization, (CFBamBuffTokenDef)editCur );
 			}
 			else if( classCode == ICFBamTokenType.CLASS_CODE ) {
-				schema.getTableTokenType().updateTokenType( Authorization, (CFBamTokenTypeBuff)editCur );
+				schema.getTableTokenType().updateTokenType( Authorization, (CFBamBuffTokenType)editCur );
 			}
 			else if( classCode == ICFBamTokenCol.CLASS_CODE ) {
-				schema.getTableTokenCol().updateTokenCol( Authorization, (CFBamTokenColBuff)editCur );
+				schema.getTableTokenCol().updateTokenCol( Authorization, (CFBamBuffTokenCol)editCur );
 			}
 			else if( classCode == ICFBamUInt16Def.CLASS_CODE ) {
-				schema.getTableUInt16Def().updateUInt16Def( Authorization, (CFBamUInt16DefBuff)editCur );
+				schema.getTableUInt16Def().updateUInt16Def( Authorization, (CFBamBuffUInt16Def)editCur );
 			}
 			else if( classCode == ICFBamUInt16Type.CLASS_CODE ) {
-				schema.getTableUInt16Type().updateUInt16Type( Authorization, (CFBamUInt16TypeBuff)editCur );
+				schema.getTableUInt16Type().updateUInt16Type( Authorization, (CFBamBuffUInt16Type)editCur );
 			}
 			else if( classCode == ICFBamUInt16Col.CLASS_CODE ) {
-				schema.getTableUInt16Col().updateUInt16Col( Authorization, (CFBamUInt16ColBuff)editCur );
+				schema.getTableUInt16Col().updateUInt16Col( Authorization, (CFBamBuffUInt16Col)editCur );
 			}
 			else if( classCode == ICFBamUInt32Def.CLASS_CODE ) {
-				schema.getTableUInt32Def().updateUInt32Def( Authorization, (CFBamUInt32DefBuff)editCur );
+				schema.getTableUInt32Def().updateUInt32Def( Authorization, (CFBamBuffUInt32Def)editCur );
 			}
 			else if( classCode == ICFBamUInt32Type.CLASS_CODE ) {
-				schema.getTableUInt32Type().updateUInt32Type( Authorization, (CFBamUInt32TypeBuff)editCur );
+				schema.getTableUInt32Type().updateUInt32Type( Authorization, (CFBamBuffUInt32Type)editCur );
 			}
 			else if( classCode == ICFBamUInt32Col.CLASS_CODE ) {
-				schema.getTableUInt32Col().updateUInt32Col( Authorization, (CFBamUInt32ColBuff)editCur );
+				schema.getTableUInt32Col().updateUInt32Col( Authorization, (CFBamBuffUInt32Col)editCur );
 			}
 			else if( classCode == ICFBamUInt64Def.CLASS_CODE ) {
-				schema.getTableUInt64Def().updateUInt64Def( Authorization, (CFBamUInt64DefBuff)editCur );
+				schema.getTableUInt64Def().updateUInt64Def( Authorization, (CFBamBuffUInt64Def)editCur );
 			}
 			else if( classCode == ICFBamUInt64Type.CLASS_CODE ) {
-				schema.getTableUInt64Type().updateUInt64Type( Authorization, (CFBamUInt64TypeBuff)editCur );
+				schema.getTableUInt64Type().updateUInt64Type( Authorization, (CFBamBuffUInt64Type)editCur );
 			}
 			else if( classCode == ICFBamUInt64Col.CLASS_CODE ) {
-				schema.getTableUInt64Col().updateUInt64Col( Authorization, (CFBamUInt64ColBuff)editCur );
+				schema.getTableUInt64Col().updateUInt64Col( Authorization, (CFBamBuffUInt64Col)editCur );
 			}
 			else if( classCode == ICFBamUuidDef.CLASS_CODE ) {
-				schema.getTableUuidDef().updateUuidDef( Authorization, (CFBamUuidDefBuff)editCur );
+				schema.getTableUuidDef().updateUuidDef( Authorization, (CFBamBuffUuidDef)editCur );
 			}
 			else if( classCode == ICFBamUuidType.CLASS_CODE ) {
-				schema.getTableUuidType().updateUuidType( Authorization, (CFBamUuidTypeBuff)editCur );
+				schema.getTableUuidType().updateUuidType( Authorization, (CFBamBuffUuidType)editCur );
 			}
 			else if( classCode == ICFBamUuidGen.CLASS_CODE ) {
-				schema.getTableUuidGen().updateUuidGen( Authorization, (CFBamUuidGenBuff)editCur );
+				schema.getTableUuidGen().updateUuidGen( Authorization, (CFBamBuffUuidGen)editCur );
 			}
 			else if( classCode == ICFBamUuidCol.CLASS_CODE ) {
-				schema.getTableUuidCol().updateUuidCol( Authorization, (CFBamUuidColBuff)editCur );
+				schema.getTableUuidCol().updateUuidCol( Authorization, (CFBamBuffUuidCol)editCur );
 			}
 			else if( classCode == ICFBamUuid6Def.CLASS_CODE ) {
-				schema.getTableUuid6Def().updateUuid6Def( Authorization, (CFBamUuid6DefBuff)editCur );
+				schema.getTableUuid6Def().updateUuid6Def( Authorization, (CFBamBuffUuid6Def)editCur );
 			}
 			else if( classCode == ICFBamUuid6Type.CLASS_CODE ) {
-				schema.getTableUuid6Type().updateUuid6Type( Authorization, (CFBamUuid6TypeBuff)editCur );
+				schema.getTableUuid6Type().updateUuid6Type( Authorization, (CFBamBuffUuid6Type)editCur );
 			}
 			else if( classCode == ICFBamUuid6Gen.CLASS_CODE ) {
-				schema.getTableUuid6Gen().updateUuid6Gen( Authorization, (CFBamUuid6GenBuff)editCur );
+				schema.getTableUuid6Gen().updateUuid6Gen( Authorization, (CFBamBuffUuid6Gen)editCur );
 			}
 			else if( classCode == ICFBamUuid6Col.CLASS_CODE ) {
-				schema.getTableUuid6Col().updateUuid6Col( Authorization, (CFBamUuid6ColBuff)editCur );
+				schema.getTableUuid6Col().updateUuid6Col( Authorization, (CFBamBuffUuid6Col)editCur );
 			}
 			else if( classCode == ICFBamTableCol.CLASS_CODE ) {
-				schema.getTableTableCol().updateTableCol( Authorization, (CFBamTableColBuff)editCur );
+				schema.getTableTableCol().updateTableCol( Authorization, (CFBamBuffTableCol)editCur );
 			}
 			else {
-				throw new CFLibUnsupportedClassException(getClass(), S_ProcName, 0, "-update-cur-", "Not " + Integer.toString(classCode));
+				throw new CFLibUnsupportedClassException(getClass(), S_ProcName, "-update-cur-", (Integer)classCode, "Classcode not recognized: " + Integer.toString(classCode));
 			}
 
 		classCode = editNext.getClassCode();
@@ -5253,322 +5253,322 @@ public class CFBamRamInt64DefTable
 				schema.getTableValue().updateValue( Authorization, editNext );
 			}
 			else if( classCode == ICFBamAtom.CLASS_CODE ) {
-				schema.getTableAtom().updateAtom( Authorization, (CFBamAtomBuff)editNext );
+				schema.getTableAtom().updateAtom( Authorization, (CFBamBuffAtom)editNext );
 			}
 			else if( classCode == ICFBamBlobDef.CLASS_CODE ) {
-				schema.getTableBlobDef().updateBlobDef( Authorization, (CFBamBlobDefBuff)editNext );
+				schema.getTableBlobDef().updateBlobDef( Authorization, (CFBamBuffBlobDef)editNext );
 			}
 			else if( classCode == ICFBamBlobType.CLASS_CODE ) {
-				schema.getTableBlobType().updateBlobType( Authorization, (CFBamBlobTypeBuff)editNext );
+				schema.getTableBlobType().updateBlobType( Authorization, (CFBamBuffBlobType)editNext );
 			}
 			else if( classCode == ICFBamBlobCol.CLASS_CODE ) {
-				schema.getTableBlobCol().updateBlobCol( Authorization, (CFBamBlobColBuff)editNext );
+				schema.getTableBlobCol().updateBlobCol( Authorization, (CFBamBuffBlobCol)editNext );
 			}
 			else if( classCode == ICFBamBoolDef.CLASS_CODE ) {
-				schema.getTableBoolDef().updateBoolDef( Authorization, (CFBamBoolDefBuff)editNext );
+				schema.getTableBoolDef().updateBoolDef( Authorization, (CFBamBuffBoolDef)editNext );
 			}
 			else if( classCode == ICFBamBoolType.CLASS_CODE ) {
-				schema.getTableBoolType().updateBoolType( Authorization, (CFBamBoolTypeBuff)editNext );
+				schema.getTableBoolType().updateBoolType( Authorization, (CFBamBuffBoolType)editNext );
 			}
 			else if( classCode == ICFBamBoolCol.CLASS_CODE ) {
-				schema.getTableBoolCol().updateBoolCol( Authorization, (CFBamBoolColBuff)editNext );
+				schema.getTableBoolCol().updateBoolCol( Authorization, (CFBamBuffBoolCol)editNext );
 			}
 			else if( classCode == ICFBamDateDef.CLASS_CODE ) {
-				schema.getTableDateDef().updateDateDef( Authorization, (CFBamDateDefBuff)editNext );
+				schema.getTableDateDef().updateDateDef( Authorization, (CFBamBuffDateDef)editNext );
 			}
 			else if( classCode == ICFBamDateType.CLASS_CODE ) {
-				schema.getTableDateType().updateDateType( Authorization, (CFBamDateTypeBuff)editNext );
+				schema.getTableDateType().updateDateType( Authorization, (CFBamBuffDateType)editNext );
 			}
 			else if( classCode == ICFBamDateCol.CLASS_CODE ) {
-				schema.getTableDateCol().updateDateCol( Authorization, (CFBamDateColBuff)editNext );
+				schema.getTableDateCol().updateDateCol( Authorization, (CFBamBuffDateCol)editNext );
 			}
 			else if( classCode == ICFBamDoubleDef.CLASS_CODE ) {
-				schema.getTableDoubleDef().updateDoubleDef( Authorization, (CFBamDoubleDefBuff)editNext );
+				schema.getTableDoubleDef().updateDoubleDef( Authorization, (CFBamBuffDoubleDef)editNext );
 			}
 			else if( classCode == ICFBamDoubleType.CLASS_CODE ) {
-				schema.getTableDoubleType().updateDoubleType( Authorization, (CFBamDoubleTypeBuff)editNext );
+				schema.getTableDoubleType().updateDoubleType( Authorization, (CFBamBuffDoubleType)editNext );
 			}
 			else if( classCode == ICFBamDoubleCol.CLASS_CODE ) {
-				schema.getTableDoubleCol().updateDoubleCol( Authorization, (CFBamDoubleColBuff)editNext );
+				schema.getTableDoubleCol().updateDoubleCol( Authorization, (CFBamBuffDoubleCol)editNext );
 			}
 			else if( classCode == ICFBamFloatDef.CLASS_CODE ) {
-				schema.getTableFloatDef().updateFloatDef( Authorization, (CFBamFloatDefBuff)editNext );
+				schema.getTableFloatDef().updateFloatDef( Authorization, (CFBamBuffFloatDef)editNext );
 			}
 			else if( classCode == ICFBamFloatType.CLASS_CODE ) {
-				schema.getTableFloatType().updateFloatType( Authorization, (CFBamFloatTypeBuff)editNext );
+				schema.getTableFloatType().updateFloatType( Authorization, (CFBamBuffFloatType)editNext );
 			}
 			else if( classCode == ICFBamFloatCol.CLASS_CODE ) {
-				schema.getTableFloatCol().updateFloatCol( Authorization, (CFBamFloatColBuff)editNext );
+				schema.getTableFloatCol().updateFloatCol( Authorization, (CFBamBuffFloatCol)editNext );
 			}
 			else if( classCode == ICFBamInt16Def.CLASS_CODE ) {
-				schema.getTableInt16Def().updateInt16Def( Authorization, (CFBamInt16DefBuff)editNext );
+				schema.getTableInt16Def().updateInt16Def( Authorization, (CFBamBuffInt16Def)editNext );
 			}
 			else if( classCode == ICFBamInt16Type.CLASS_CODE ) {
-				schema.getTableInt16Type().updateInt16Type( Authorization, (CFBamInt16TypeBuff)editNext );
+				schema.getTableInt16Type().updateInt16Type( Authorization, (CFBamBuffInt16Type)editNext );
 			}
 			else if( classCode == ICFBamId16Gen.CLASS_CODE ) {
-				schema.getTableId16Gen().updateId16Gen( Authorization, (CFBamId16GenBuff)editNext );
+				schema.getTableId16Gen().updateId16Gen( Authorization, (CFBamBuffId16Gen)editNext );
 			}
 			else if( classCode == ICFBamEnumDef.CLASS_CODE ) {
-				schema.getTableEnumDef().updateEnumDef( Authorization, (CFBamEnumDefBuff)editNext );
+				schema.getTableEnumDef().updateEnumDef( Authorization, (CFBamBuffEnumDef)editNext );
 			}
 			else if( classCode == ICFBamEnumType.CLASS_CODE ) {
-				schema.getTableEnumType().updateEnumType( Authorization, (CFBamEnumTypeBuff)editNext );
+				schema.getTableEnumType().updateEnumType( Authorization, (CFBamBuffEnumType)editNext );
 			}
 			else if( classCode == ICFBamInt16Col.CLASS_CODE ) {
-				schema.getTableInt16Col().updateInt16Col( Authorization, (CFBamInt16ColBuff)editNext );
+				schema.getTableInt16Col().updateInt16Col( Authorization, (CFBamBuffInt16Col)editNext );
 			}
 			else if( classCode == ICFBamInt32Def.CLASS_CODE ) {
-				schema.getTableInt32Def().updateInt32Def( Authorization, (CFBamInt32DefBuff)editNext );
+				schema.getTableInt32Def().updateInt32Def( Authorization, (CFBamBuffInt32Def)editNext );
 			}
 			else if( classCode == ICFBamInt32Type.CLASS_CODE ) {
-				schema.getTableInt32Type().updateInt32Type( Authorization, (CFBamInt32TypeBuff)editNext );
+				schema.getTableInt32Type().updateInt32Type( Authorization, (CFBamBuffInt32Type)editNext );
 			}
 			else if( classCode == ICFBamId32Gen.CLASS_CODE ) {
-				schema.getTableId32Gen().updateId32Gen( Authorization, (CFBamId32GenBuff)editNext );
+				schema.getTableId32Gen().updateId32Gen( Authorization, (CFBamBuffId32Gen)editNext );
 			}
 			else if( classCode == ICFBamInt32Col.CLASS_CODE ) {
-				schema.getTableInt32Col().updateInt32Col( Authorization, (CFBamInt32ColBuff)editNext );
+				schema.getTableInt32Col().updateInt32Col( Authorization, (CFBamBuffInt32Col)editNext );
 			}
 			else if( classCode == ICFBamInt64Def.CLASS_CODE ) {
-				schema.getTableInt64Def().updateInt64Def( Authorization, (CFBamInt64DefBuff)editNext );
+				schema.getTableInt64Def().updateInt64Def( Authorization, (CFBamBuffInt64Def)editNext );
 			}
 			else if( classCode == ICFBamInt64Type.CLASS_CODE ) {
-				schema.getTableInt64Type().updateInt64Type( Authorization, (CFBamInt64TypeBuff)editNext );
+				schema.getTableInt64Type().updateInt64Type( Authorization, (CFBamBuffInt64Type)editNext );
 			}
 			else if( classCode == ICFBamId64Gen.CLASS_CODE ) {
-				schema.getTableId64Gen().updateId64Gen( Authorization, (CFBamId64GenBuff)editNext );
+				schema.getTableId64Gen().updateId64Gen( Authorization, (CFBamBuffId64Gen)editNext );
 			}
 			else if( classCode == ICFBamInt64Col.CLASS_CODE ) {
-				schema.getTableInt64Col().updateInt64Col( Authorization, (CFBamInt64ColBuff)editNext );
+				schema.getTableInt64Col().updateInt64Col( Authorization, (CFBamBuffInt64Col)editNext );
 			}
 			else if( classCode == ICFBamNmTokenDef.CLASS_CODE ) {
-				schema.getTableNmTokenDef().updateNmTokenDef( Authorization, (CFBamNmTokenDefBuff)editNext );
+				schema.getTableNmTokenDef().updateNmTokenDef( Authorization, (CFBamBuffNmTokenDef)editNext );
 			}
 			else if( classCode == ICFBamNmTokenType.CLASS_CODE ) {
-				schema.getTableNmTokenType().updateNmTokenType( Authorization, (CFBamNmTokenTypeBuff)editNext );
+				schema.getTableNmTokenType().updateNmTokenType( Authorization, (CFBamBuffNmTokenType)editNext );
 			}
 			else if( classCode == ICFBamNmTokenCol.CLASS_CODE ) {
-				schema.getTableNmTokenCol().updateNmTokenCol( Authorization, (CFBamNmTokenColBuff)editNext );
+				schema.getTableNmTokenCol().updateNmTokenCol( Authorization, (CFBamBuffNmTokenCol)editNext );
 			}
 			else if( classCode == ICFBamNmTokensDef.CLASS_CODE ) {
-				schema.getTableNmTokensDef().updateNmTokensDef( Authorization, (CFBamNmTokensDefBuff)editNext );
+				schema.getTableNmTokensDef().updateNmTokensDef( Authorization, (CFBamBuffNmTokensDef)editNext );
 			}
 			else if( classCode == ICFBamNmTokensType.CLASS_CODE ) {
-				schema.getTableNmTokensType().updateNmTokensType( Authorization, (CFBamNmTokensTypeBuff)editNext );
+				schema.getTableNmTokensType().updateNmTokensType( Authorization, (CFBamBuffNmTokensType)editNext );
 			}
 			else if( classCode == ICFBamNmTokensCol.CLASS_CODE ) {
-				schema.getTableNmTokensCol().updateNmTokensCol( Authorization, (CFBamNmTokensColBuff)editNext );
+				schema.getTableNmTokensCol().updateNmTokensCol( Authorization, (CFBamBuffNmTokensCol)editNext );
 			}
 			else if( classCode == ICFBamNumberDef.CLASS_CODE ) {
-				schema.getTableNumberDef().updateNumberDef( Authorization, (CFBamNumberDefBuff)editNext );
+				schema.getTableNumberDef().updateNumberDef( Authorization, (CFBamBuffNumberDef)editNext );
 			}
 			else if( classCode == ICFBamNumberType.CLASS_CODE ) {
-				schema.getTableNumberType().updateNumberType( Authorization, (CFBamNumberTypeBuff)editNext );
+				schema.getTableNumberType().updateNumberType( Authorization, (CFBamBuffNumberType)editNext );
 			}
 			else if( classCode == ICFBamNumberCol.CLASS_CODE ) {
-				schema.getTableNumberCol().updateNumberCol( Authorization, (CFBamNumberColBuff)editNext );
+				schema.getTableNumberCol().updateNumberCol( Authorization, (CFBamBuffNumberCol)editNext );
 			}
 			else if( classCode == ICFBamDbKeyHash128Def.CLASS_CODE ) {
-				schema.getTableDbKeyHash128Def().updateDbKeyHash128Def( Authorization, (CFBamDbKeyHash128DefBuff)editNext );
+				schema.getTableDbKeyHash128Def().updateDbKeyHash128Def( Authorization, (CFBamBuffDbKeyHash128Def)editNext );
 			}
 			else if( classCode == ICFBamDbKeyHash128Col.CLASS_CODE ) {
-				schema.getTableDbKeyHash128Col().updateDbKeyHash128Col( Authorization, (CFBamDbKeyHash128ColBuff)editNext );
+				schema.getTableDbKeyHash128Col().updateDbKeyHash128Col( Authorization, (CFBamBuffDbKeyHash128Col)editNext );
 			}
 			else if( classCode == ICFBamDbKeyHash128Type.CLASS_CODE ) {
-				schema.getTableDbKeyHash128Type().updateDbKeyHash128Type( Authorization, (CFBamDbKeyHash128TypeBuff)editNext );
+				schema.getTableDbKeyHash128Type().updateDbKeyHash128Type( Authorization, (CFBamBuffDbKeyHash128Type)editNext );
 			}
 			else if( classCode == ICFBamDbKeyHash128Gen.CLASS_CODE ) {
-				schema.getTableDbKeyHash128Gen().updateDbKeyHash128Gen( Authorization, (CFBamDbKeyHash128GenBuff)editNext );
+				schema.getTableDbKeyHash128Gen().updateDbKeyHash128Gen( Authorization, (CFBamBuffDbKeyHash128Gen)editNext );
 			}
 			else if( classCode == ICFBamDbKeyHash160Def.CLASS_CODE ) {
-				schema.getTableDbKeyHash160Def().updateDbKeyHash160Def( Authorization, (CFBamDbKeyHash160DefBuff)editNext );
+				schema.getTableDbKeyHash160Def().updateDbKeyHash160Def( Authorization, (CFBamBuffDbKeyHash160Def)editNext );
 			}
 			else if( classCode == ICFBamDbKeyHash160Col.CLASS_CODE ) {
-				schema.getTableDbKeyHash160Col().updateDbKeyHash160Col( Authorization, (CFBamDbKeyHash160ColBuff)editNext );
+				schema.getTableDbKeyHash160Col().updateDbKeyHash160Col( Authorization, (CFBamBuffDbKeyHash160Col)editNext );
 			}
 			else if( classCode == ICFBamDbKeyHash160Type.CLASS_CODE ) {
-				schema.getTableDbKeyHash160Type().updateDbKeyHash160Type( Authorization, (CFBamDbKeyHash160TypeBuff)editNext );
+				schema.getTableDbKeyHash160Type().updateDbKeyHash160Type( Authorization, (CFBamBuffDbKeyHash160Type)editNext );
 			}
 			else if( classCode == ICFBamDbKeyHash160Gen.CLASS_CODE ) {
-				schema.getTableDbKeyHash160Gen().updateDbKeyHash160Gen( Authorization, (CFBamDbKeyHash160GenBuff)editNext );
+				schema.getTableDbKeyHash160Gen().updateDbKeyHash160Gen( Authorization, (CFBamBuffDbKeyHash160Gen)editNext );
 			}
 			else if( classCode == ICFBamDbKeyHash224Def.CLASS_CODE ) {
-				schema.getTableDbKeyHash224Def().updateDbKeyHash224Def( Authorization, (CFBamDbKeyHash224DefBuff)editNext );
+				schema.getTableDbKeyHash224Def().updateDbKeyHash224Def( Authorization, (CFBamBuffDbKeyHash224Def)editNext );
 			}
 			else if( classCode == ICFBamDbKeyHash224Col.CLASS_CODE ) {
-				schema.getTableDbKeyHash224Col().updateDbKeyHash224Col( Authorization, (CFBamDbKeyHash224ColBuff)editNext );
+				schema.getTableDbKeyHash224Col().updateDbKeyHash224Col( Authorization, (CFBamBuffDbKeyHash224Col)editNext );
 			}
 			else if( classCode == ICFBamDbKeyHash224Type.CLASS_CODE ) {
-				schema.getTableDbKeyHash224Type().updateDbKeyHash224Type( Authorization, (CFBamDbKeyHash224TypeBuff)editNext );
+				schema.getTableDbKeyHash224Type().updateDbKeyHash224Type( Authorization, (CFBamBuffDbKeyHash224Type)editNext );
 			}
 			else if( classCode == ICFBamDbKeyHash224Gen.CLASS_CODE ) {
-				schema.getTableDbKeyHash224Gen().updateDbKeyHash224Gen( Authorization, (CFBamDbKeyHash224GenBuff)editNext );
+				schema.getTableDbKeyHash224Gen().updateDbKeyHash224Gen( Authorization, (CFBamBuffDbKeyHash224Gen)editNext );
 			}
 			else if( classCode == ICFBamDbKeyHash256Def.CLASS_CODE ) {
-				schema.getTableDbKeyHash256Def().updateDbKeyHash256Def( Authorization, (CFBamDbKeyHash256DefBuff)editNext );
+				schema.getTableDbKeyHash256Def().updateDbKeyHash256Def( Authorization, (CFBamBuffDbKeyHash256Def)editNext );
 			}
 			else if( classCode == ICFBamDbKeyHash256Col.CLASS_CODE ) {
-				schema.getTableDbKeyHash256Col().updateDbKeyHash256Col( Authorization, (CFBamDbKeyHash256ColBuff)editNext );
+				schema.getTableDbKeyHash256Col().updateDbKeyHash256Col( Authorization, (CFBamBuffDbKeyHash256Col)editNext );
 			}
 			else if( classCode == ICFBamDbKeyHash256Type.CLASS_CODE ) {
-				schema.getTableDbKeyHash256Type().updateDbKeyHash256Type( Authorization, (CFBamDbKeyHash256TypeBuff)editNext );
+				schema.getTableDbKeyHash256Type().updateDbKeyHash256Type( Authorization, (CFBamBuffDbKeyHash256Type)editNext );
 			}
 			else if( classCode == ICFBamDbKeyHash256Gen.CLASS_CODE ) {
-				schema.getTableDbKeyHash256Gen().updateDbKeyHash256Gen( Authorization, (CFBamDbKeyHash256GenBuff)editNext );
+				schema.getTableDbKeyHash256Gen().updateDbKeyHash256Gen( Authorization, (CFBamBuffDbKeyHash256Gen)editNext );
 			}
 			else if( classCode == ICFBamDbKeyHash384Def.CLASS_CODE ) {
-				schema.getTableDbKeyHash384Def().updateDbKeyHash384Def( Authorization, (CFBamDbKeyHash384DefBuff)editNext );
+				schema.getTableDbKeyHash384Def().updateDbKeyHash384Def( Authorization, (CFBamBuffDbKeyHash384Def)editNext );
 			}
 			else if( classCode == ICFBamDbKeyHash384Col.CLASS_CODE ) {
-				schema.getTableDbKeyHash384Col().updateDbKeyHash384Col( Authorization, (CFBamDbKeyHash384ColBuff)editNext );
+				schema.getTableDbKeyHash384Col().updateDbKeyHash384Col( Authorization, (CFBamBuffDbKeyHash384Col)editNext );
 			}
 			else if( classCode == ICFBamDbKeyHash384Type.CLASS_CODE ) {
-				schema.getTableDbKeyHash384Type().updateDbKeyHash384Type( Authorization, (CFBamDbKeyHash384TypeBuff)editNext );
+				schema.getTableDbKeyHash384Type().updateDbKeyHash384Type( Authorization, (CFBamBuffDbKeyHash384Type)editNext );
 			}
 			else if( classCode == ICFBamDbKeyHash384Gen.CLASS_CODE ) {
-				schema.getTableDbKeyHash384Gen().updateDbKeyHash384Gen( Authorization, (CFBamDbKeyHash384GenBuff)editNext );
+				schema.getTableDbKeyHash384Gen().updateDbKeyHash384Gen( Authorization, (CFBamBuffDbKeyHash384Gen)editNext );
 			}
 			else if( classCode == ICFBamDbKeyHash512Def.CLASS_CODE ) {
-				schema.getTableDbKeyHash512Def().updateDbKeyHash512Def( Authorization, (CFBamDbKeyHash512DefBuff)editNext );
+				schema.getTableDbKeyHash512Def().updateDbKeyHash512Def( Authorization, (CFBamBuffDbKeyHash512Def)editNext );
 			}
 			else if( classCode == ICFBamDbKeyHash512Col.CLASS_CODE ) {
-				schema.getTableDbKeyHash512Col().updateDbKeyHash512Col( Authorization, (CFBamDbKeyHash512ColBuff)editNext );
+				schema.getTableDbKeyHash512Col().updateDbKeyHash512Col( Authorization, (CFBamBuffDbKeyHash512Col)editNext );
 			}
 			else if( classCode == ICFBamDbKeyHash512Type.CLASS_CODE ) {
-				schema.getTableDbKeyHash512Type().updateDbKeyHash512Type( Authorization, (CFBamDbKeyHash512TypeBuff)editNext );
+				schema.getTableDbKeyHash512Type().updateDbKeyHash512Type( Authorization, (CFBamBuffDbKeyHash512Type)editNext );
 			}
 			else if( classCode == ICFBamDbKeyHash512Gen.CLASS_CODE ) {
-				schema.getTableDbKeyHash512Gen().updateDbKeyHash512Gen( Authorization, (CFBamDbKeyHash512GenBuff)editNext );
+				schema.getTableDbKeyHash512Gen().updateDbKeyHash512Gen( Authorization, (CFBamBuffDbKeyHash512Gen)editNext );
 			}
 			else if( classCode == ICFBamStringDef.CLASS_CODE ) {
-				schema.getTableStringDef().updateStringDef( Authorization, (CFBamStringDefBuff)editNext );
+				schema.getTableStringDef().updateStringDef( Authorization, (CFBamBuffStringDef)editNext );
 			}
 			else if( classCode == ICFBamStringType.CLASS_CODE ) {
-				schema.getTableStringType().updateStringType( Authorization, (CFBamStringTypeBuff)editNext );
+				schema.getTableStringType().updateStringType( Authorization, (CFBamBuffStringType)editNext );
 			}
 			else if( classCode == ICFBamStringCol.CLASS_CODE ) {
-				schema.getTableStringCol().updateStringCol( Authorization, (CFBamStringColBuff)editNext );
+				schema.getTableStringCol().updateStringCol( Authorization, (CFBamBuffStringCol)editNext );
 			}
 			else if( classCode == ICFBamTZDateDef.CLASS_CODE ) {
-				schema.getTableTZDateDef().updateTZDateDef( Authorization, (CFBamTZDateDefBuff)editNext );
+				schema.getTableTZDateDef().updateTZDateDef( Authorization, (CFBamBuffTZDateDef)editNext );
 			}
 			else if( classCode == ICFBamTZDateType.CLASS_CODE ) {
-				schema.getTableTZDateType().updateTZDateType( Authorization, (CFBamTZDateTypeBuff)editNext );
+				schema.getTableTZDateType().updateTZDateType( Authorization, (CFBamBuffTZDateType)editNext );
 			}
 			else if( classCode == ICFBamTZDateCol.CLASS_CODE ) {
-				schema.getTableTZDateCol().updateTZDateCol( Authorization, (CFBamTZDateColBuff)editNext );
+				schema.getTableTZDateCol().updateTZDateCol( Authorization, (CFBamBuffTZDateCol)editNext );
 			}
 			else if( classCode == ICFBamTZTimeDef.CLASS_CODE ) {
-				schema.getTableTZTimeDef().updateTZTimeDef( Authorization, (CFBamTZTimeDefBuff)editNext );
+				schema.getTableTZTimeDef().updateTZTimeDef( Authorization, (CFBamBuffTZTimeDef)editNext );
 			}
 			else if( classCode == ICFBamTZTimeType.CLASS_CODE ) {
-				schema.getTableTZTimeType().updateTZTimeType( Authorization, (CFBamTZTimeTypeBuff)editNext );
+				schema.getTableTZTimeType().updateTZTimeType( Authorization, (CFBamBuffTZTimeType)editNext );
 			}
 			else if( classCode == ICFBamTZTimeCol.CLASS_CODE ) {
-				schema.getTableTZTimeCol().updateTZTimeCol( Authorization, (CFBamTZTimeColBuff)editNext );
+				schema.getTableTZTimeCol().updateTZTimeCol( Authorization, (CFBamBuffTZTimeCol)editNext );
 			}
 			else if( classCode == ICFBamTZTimestampDef.CLASS_CODE ) {
-				schema.getTableTZTimestampDef().updateTZTimestampDef( Authorization, (CFBamTZTimestampDefBuff)editNext );
+				schema.getTableTZTimestampDef().updateTZTimestampDef( Authorization, (CFBamBuffTZTimestampDef)editNext );
 			}
 			else if( classCode == ICFBamTZTimestampType.CLASS_CODE ) {
-				schema.getTableTZTimestampType().updateTZTimestampType( Authorization, (CFBamTZTimestampTypeBuff)editNext );
+				schema.getTableTZTimestampType().updateTZTimestampType( Authorization, (CFBamBuffTZTimestampType)editNext );
 			}
 			else if( classCode == ICFBamTZTimestampCol.CLASS_CODE ) {
-				schema.getTableTZTimestampCol().updateTZTimestampCol( Authorization, (CFBamTZTimestampColBuff)editNext );
+				schema.getTableTZTimestampCol().updateTZTimestampCol( Authorization, (CFBamBuffTZTimestampCol)editNext );
 			}
 			else if( classCode == ICFBamTextDef.CLASS_CODE ) {
-				schema.getTableTextDef().updateTextDef( Authorization, (CFBamTextDefBuff)editNext );
+				schema.getTableTextDef().updateTextDef( Authorization, (CFBamBuffTextDef)editNext );
 			}
 			else if( classCode == ICFBamTextType.CLASS_CODE ) {
-				schema.getTableTextType().updateTextType( Authorization, (CFBamTextTypeBuff)editNext );
+				schema.getTableTextType().updateTextType( Authorization, (CFBamBuffTextType)editNext );
 			}
 			else if( classCode == ICFBamTextCol.CLASS_CODE ) {
-				schema.getTableTextCol().updateTextCol( Authorization, (CFBamTextColBuff)editNext );
+				schema.getTableTextCol().updateTextCol( Authorization, (CFBamBuffTextCol)editNext );
 			}
 			else if( classCode == ICFBamTimeDef.CLASS_CODE ) {
-				schema.getTableTimeDef().updateTimeDef( Authorization, (CFBamTimeDefBuff)editNext );
+				schema.getTableTimeDef().updateTimeDef( Authorization, (CFBamBuffTimeDef)editNext );
 			}
 			else if( classCode == ICFBamTimeType.CLASS_CODE ) {
-				schema.getTableTimeType().updateTimeType( Authorization, (CFBamTimeTypeBuff)editNext );
+				schema.getTableTimeType().updateTimeType( Authorization, (CFBamBuffTimeType)editNext );
 			}
 			else if( classCode == ICFBamTimeCol.CLASS_CODE ) {
-				schema.getTableTimeCol().updateTimeCol( Authorization, (CFBamTimeColBuff)editNext );
+				schema.getTableTimeCol().updateTimeCol( Authorization, (CFBamBuffTimeCol)editNext );
 			}
 			else if( classCode == ICFBamTimestampDef.CLASS_CODE ) {
-				schema.getTableTimestampDef().updateTimestampDef( Authorization, (CFBamTimestampDefBuff)editNext );
+				schema.getTableTimestampDef().updateTimestampDef( Authorization, (CFBamBuffTimestampDef)editNext );
 			}
 			else if( classCode == ICFBamTimestampType.CLASS_CODE ) {
-				schema.getTableTimestampType().updateTimestampType( Authorization, (CFBamTimestampTypeBuff)editNext );
+				schema.getTableTimestampType().updateTimestampType( Authorization, (CFBamBuffTimestampType)editNext );
 			}
 			else if( classCode == ICFBamTimestampCol.CLASS_CODE ) {
-				schema.getTableTimestampCol().updateTimestampCol( Authorization, (CFBamTimestampColBuff)editNext );
+				schema.getTableTimestampCol().updateTimestampCol( Authorization, (CFBamBuffTimestampCol)editNext );
 			}
 			else if( classCode == ICFBamTokenDef.CLASS_CODE ) {
-				schema.getTableTokenDef().updateTokenDef( Authorization, (CFBamTokenDefBuff)editNext );
+				schema.getTableTokenDef().updateTokenDef( Authorization, (CFBamBuffTokenDef)editNext );
 			}
 			else if( classCode == ICFBamTokenType.CLASS_CODE ) {
-				schema.getTableTokenType().updateTokenType( Authorization, (CFBamTokenTypeBuff)editNext );
+				schema.getTableTokenType().updateTokenType( Authorization, (CFBamBuffTokenType)editNext );
 			}
 			else if( classCode == ICFBamTokenCol.CLASS_CODE ) {
-				schema.getTableTokenCol().updateTokenCol( Authorization, (CFBamTokenColBuff)editNext );
+				schema.getTableTokenCol().updateTokenCol( Authorization, (CFBamBuffTokenCol)editNext );
 			}
 			else if( classCode == ICFBamUInt16Def.CLASS_CODE ) {
-				schema.getTableUInt16Def().updateUInt16Def( Authorization, (CFBamUInt16DefBuff)editNext );
+				schema.getTableUInt16Def().updateUInt16Def( Authorization, (CFBamBuffUInt16Def)editNext );
 			}
 			else if( classCode == ICFBamUInt16Type.CLASS_CODE ) {
-				schema.getTableUInt16Type().updateUInt16Type( Authorization, (CFBamUInt16TypeBuff)editNext );
+				schema.getTableUInt16Type().updateUInt16Type( Authorization, (CFBamBuffUInt16Type)editNext );
 			}
 			else if( classCode == ICFBamUInt16Col.CLASS_CODE ) {
-				schema.getTableUInt16Col().updateUInt16Col( Authorization, (CFBamUInt16ColBuff)editNext );
+				schema.getTableUInt16Col().updateUInt16Col( Authorization, (CFBamBuffUInt16Col)editNext );
 			}
 			else if( classCode == ICFBamUInt32Def.CLASS_CODE ) {
-				schema.getTableUInt32Def().updateUInt32Def( Authorization, (CFBamUInt32DefBuff)editNext );
+				schema.getTableUInt32Def().updateUInt32Def( Authorization, (CFBamBuffUInt32Def)editNext );
 			}
 			else if( classCode == ICFBamUInt32Type.CLASS_CODE ) {
-				schema.getTableUInt32Type().updateUInt32Type( Authorization, (CFBamUInt32TypeBuff)editNext );
+				schema.getTableUInt32Type().updateUInt32Type( Authorization, (CFBamBuffUInt32Type)editNext );
 			}
 			else if( classCode == ICFBamUInt32Col.CLASS_CODE ) {
-				schema.getTableUInt32Col().updateUInt32Col( Authorization, (CFBamUInt32ColBuff)editNext );
+				schema.getTableUInt32Col().updateUInt32Col( Authorization, (CFBamBuffUInt32Col)editNext );
 			}
 			else if( classCode == ICFBamUInt64Def.CLASS_CODE ) {
-				schema.getTableUInt64Def().updateUInt64Def( Authorization, (CFBamUInt64DefBuff)editNext );
+				schema.getTableUInt64Def().updateUInt64Def( Authorization, (CFBamBuffUInt64Def)editNext );
 			}
 			else if( classCode == ICFBamUInt64Type.CLASS_CODE ) {
-				schema.getTableUInt64Type().updateUInt64Type( Authorization, (CFBamUInt64TypeBuff)editNext );
+				schema.getTableUInt64Type().updateUInt64Type( Authorization, (CFBamBuffUInt64Type)editNext );
 			}
 			else if( classCode == ICFBamUInt64Col.CLASS_CODE ) {
-				schema.getTableUInt64Col().updateUInt64Col( Authorization, (CFBamUInt64ColBuff)editNext );
+				schema.getTableUInt64Col().updateUInt64Col( Authorization, (CFBamBuffUInt64Col)editNext );
 			}
 			else if( classCode == ICFBamUuidDef.CLASS_CODE ) {
-				schema.getTableUuidDef().updateUuidDef( Authorization, (CFBamUuidDefBuff)editNext );
+				schema.getTableUuidDef().updateUuidDef( Authorization, (CFBamBuffUuidDef)editNext );
 			}
 			else if( classCode == ICFBamUuidType.CLASS_CODE ) {
-				schema.getTableUuidType().updateUuidType( Authorization, (CFBamUuidTypeBuff)editNext );
+				schema.getTableUuidType().updateUuidType( Authorization, (CFBamBuffUuidType)editNext );
 			}
 			else if( classCode == ICFBamUuidGen.CLASS_CODE ) {
-				schema.getTableUuidGen().updateUuidGen( Authorization, (CFBamUuidGenBuff)editNext );
+				schema.getTableUuidGen().updateUuidGen( Authorization, (CFBamBuffUuidGen)editNext );
 			}
 			else if( classCode == ICFBamUuidCol.CLASS_CODE ) {
-				schema.getTableUuidCol().updateUuidCol( Authorization, (CFBamUuidColBuff)editNext );
+				schema.getTableUuidCol().updateUuidCol( Authorization, (CFBamBuffUuidCol)editNext );
 			}
 			else if( classCode == ICFBamUuid6Def.CLASS_CODE ) {
-				schema.getTableUuid6Def().updateUuid6Def( Authorization, (CFBamUuid6DefBuff)editNext );
+				schema.getTableUuid6Def().updateUuid6Def( Authorization, (CFBamBuffUuid6Def)editNext );
 			}
 			else if( classCode == ICFBamUuid6Type.CLASS_CODE ) {
-				schema.getTableUuid6Type().updateUuid6Type( Authorization, (CFBamUuid6TypeBuff)editNext );
+				schema.getTableUuid6Type().updateUuid6Type( Authorization, (CFBamBuffUuid6Type)editNext );
 			}
 			else if( classCode == ICFBamUuid6Gen.CLASS_CODE ) {
-				schema.getTableUuid6Gen().updateUuid6Gen( Authorization, (CFBamUuid6GenBuff)editNext );
+				schema.getTableUuid6Gen().updateUuid6Gen( Authorization, (CFBamBuffUuid6Gen)editNext );
 			}
 			else if( classCode == ICFBamUuid6Col.CLASS_CODE ) {
-				schema.getTableUuid6Col().updateUuid6Col( Authorization, (CFBamUuid6ColBuff)editNext );
+				schema.getTableUuid6Col().updateUuid6Col( Authorization, (CFBamBuffUuid6Col)editNext );
 			}
 			else if( classCode == ICFBamTableCol.CLASS_CODE ) {
-				schema.getTableTableCol().updateTableCol( Authorization, (CFBamTableColBuff)editNext );
+				schema.getTableTableCol().updateTableCol( Authorization, (CFBamBuffTableCol)editNext );
 			}
 			else {
-				throw new CFLibUnsupportedClassException(getClass(), S_ProcName, 0, "-update-next-", "Not " + Integer.toString(classCode));
+				throw new CFLibUnsupportedClassException(getClass(), S_ProcName, "-update-next-", (Integer)classCode, "Classcode not recognized: " + Integer.toString(classCode));
 			}
 
 		if( editGrandnext != null ) {
@@ -5577,342 +5577,340 @@ public class CFBamRamInt64DefTable
 				schema.getTableValue().updateValue( Authorization, editGrandnext );
 			}
 			else if( classCode == ICFBamAtom.CLASS_CODE ) {
-				schema.getTableAtom().updateAtom( Authorization, (CFBamAtomBuff)editGrandnext );
+				schema.getTableAtom().updateAtom( Authorization, (CFBamBuffAtom)editGrandnext );
 			}
 			else if( classCode == ICFBamBlobDef.CLASS_CODE ) {
-				schema.getTableBlobDef().updateBlobDef( Authorization, (CFBamBlobDefBuff)editGrandnext );
+				schema.getTableBlobDef().updateBlobDef( Authorization, (CFBamBuffBlobDef)editGrandnext );
 			}
 			else if( classCode == ICFBamBlobType.CLASS_CODE ) {
-				schema.getTableBlobType().updateBlobType( Authorization, (CFBamBlobTypeBuff)editGrandnext );
+				schema.getTableBlobType().updateBlobType( Authorization, (CFBamBuffBlobType)editGrandnext );
 			}
 			else if( classCode == ICFBamBlobCol.CLASS_CODE ) {
-				schema.getTableBlobCol().updateBlobCol( Authorization, (CFBamBlobColBuff)editGrandnext );
+				schema.getTableBlobCol().updateBlobCol( Authorization, (CFBamBuffBlobCol)editGrandnext );
 			}
 			else if( classCode == ICFBamBoolDef.CLASS_CODE ) {
-				schema.getTableBoolDef().updateBoolDef( Authorization, (CFBamBoolDefBuff)editGrandnext );
+				schema.getTableBoolDef().updateBoolDef( Authorization, (CFBamBuffBoolDef)editGrandnext );
 			}
 			else if( classCode == ICFBamBoolType.CLASS_CODE ) {
-				schema.getTableBoolType().updateBoolType( Authorization, (CFBamBoolTypeBuff)editGrandnext );
+				schema.getTableBoolType().updateBoolType( Authorization, (CFBamBuffBoolType)editGrandnext );
 			}
 			else if( classCode == ICFBamBoolCol.CLASS_CODE ) {
-				schema.getTableBoolCol().updateBoolCol( Authorization, (CFBamBoolColBuff)editGrandnext );
+				schema.getTableBoolCol().updateBoolCol( Authorization, (CFBamBuffBoolCol)editGrandnext );
 			}
 			else if( classCode == ICFBamDateDef.CLASS_CODE ) {
-				schema.getTableDateDef().updateDateDef( Authorization, (CFBamDateDefBuff)editGrandnext );
+				schema.getTableDateDef().updateDateDef( Authorization, (CFBamBuffDateDef)editGrandnext );
 			}
 			else if( classCode == ICFBamDateType.CLASS_CODE ) {
-				schema.getTableDateType().updateDateType( Authorization, (CFBamDateTypeBuff)editGrandnext );
+				schema.getTableDateType().updateDateType( Authorization, (CFBamBuffDateType)editGrandnext );
 			}
 			else if( classCode == ICFBamDateCol.CLASS_CODE ) {
-				schema.getTableDateCol().updateDateCol( Authorization, (CFBamDateColBuff)editGrandnext );
+				schema.getTableDateCol().updateDateCol( Authorization, (CFBamBuffDateCol)editGrandnext );
 			}
 			else if( classCode == ICFBamDoubleDef.CLASS_CODE ) {
-				schema.getTableDoubleDef().updateDoubleDef( Authorization, (CFBamDoubleDefBuff)editGrandnext );
+				schema.getTableDoubleDef().updateDoubleDef( Authorization, (CFBamBuffDoubleDef)editGrandnext );
 			}
 			else if( classCode == ICFBamDoubleType.CLASS_CODE ) {
-				schema.getTableDoubleType().updateDoubleType( Authorization, (CFBamDoubleTypeBuff)editGrandnext );
+				schema.getTableDoubleType().updateDoubleType( Authorization, (CFBamBuffDoubleType)editGrandnext );
 			}
 			else if( classCode == ICFBamDoubleCol.CLASS_CODE ) {
-				schema.getTableDoubleCol().updateDoubleCol( Authorization, (CFBamDoubleColBuff)editGrandnext );
+				schema.getTableDoubleCol().updateDoubleCol( Authorization, (CFBamBuffDoubleCol)editGrandnext );
 			}
 			else if( classCode == ICFBamFloatDef.CLASS_CODE ) {
-				schema.getTableFloatDef().updateFloatDef( Authorization, (CFBamFloatDefBuff)editGrandnext );
+				schema.getTableFloatDef().updateFloatDef( Authorization, (CFBamBuffFloatDef)editGrandnext );
 			}
 			else if( classCode == ICFBamFloatType.CLASS_CODE ) {
-				schema.getTableFloatType().updateFloatType( Authorization, (CFBamFloatTypeBuff)editGrandnext );
+				schema.getTableFloatType().updateFloatType( Authorization, (CFBamBuffFloatType)editGrandnext );
 			}
 			else if( classCode == ICFBamFloatCol.CLASS_CODE ) {
-				schema.getTableFloatCol().updateFloatCol( Authorization, (CFBamFloatColBuff)editGrandnext );
+				schema.getTableFloatCol().updateFloatCol( Authorization, (CFBamBuffFloatCol)editGrandnext );
 			}
 			else if( classCode == ICFBamInt16Def.CLASS_CODE ) {
-				schema.getTableInt16Def().updateInt16Def( Authorization, (CFBamInt16DefBuff)editGrandnext );
+				schema.getTableInt16Def().updateInt16Def( Authorization, (CFBamBuffInt16Def)editGrandnext );
 			}
 			else if( classCode == ICFBamInt16Type.CLASS_CODE ) {
-				schema.getTableInt16Type().updateInt16Type( Authorization, (CFBamInt16TypeBuff)editGrandnext );
+				schema.getTableInt16Type().updateInt16Type( Authorization, (CFBamBuffInt16Type)editGrandnext );
 			}
 			else if( classCode == ICFBamId16Gen.CLASS_CODE ) {
-				schema.getTableId16Gen().updateId16Gen( Authorization, (CFBamId16GenBuff)editGrandnext );
+				schema.getTableId16Gen().updateId16Gen( Authorization, (CFBamBuffId16Gen)editGrandnext );
 			}
 			else if( classCode == ICFBamEnumDef.CLASS_CODE ) {
-				schema.getTableEnumDef().updateEnumDef( Authorization, (CFBamEnumDefBuff)editGrandnext );
+				schema.getTableEnumDef().updateEnumDef( Authorization, (CFBamBuffEnumDef)editGrandnext );
 			}
 			else if( classCode == ICFBamEnumType.CLASS_CODE ) {
-				schema.getTableEnumType().updateEnumType( Authorization, (CFBamEnumTypeBuff)editGrandnext );
+				schema.getTableEnumType().updateEnumType( Authorization, (CFBamBuffEnumType)editGrandnext );
 			}
 			else if( classCode == ICFBamInt16Col.CLASS_CODE ) {
-				schema.getTableInt16Col().updateInt16Col( Authorization, (CFBamInt16ColBuff)editGrandnext );
+				schema.getTableInt16Col().updateInt16Col( Authorization, (CFBamBuffInt16Col)editGrandnext );
 			}
 			else if( classCode == ICFBamInt32Def.CLASS_CODE ) {
-				schema.getTableInt32Def().updateInt32Def( Authorization, (CFBamInt32DefBuff)editGrandnext );
+				schema.getTableInt32Def().updateInt32Def( Authorization, (CFBamBuffInt32Def)editGrandnext );
 			}
 			else if( classCode == ICFBamInt32Type.CLASS_CODE ) {
-				schema.getTableInt32Type().updateInt32Type( Authorization, (CFBamInt32TypeBuff)editGrandnext );
+				schema.getTableInt32Type().updateInt32Type( Authorization, (CFBamBuffInt32Type)editGrandnext );
 			}
 			else if( classCode == ICFBamId32Gen.CLASS_CODE ) {
-				schema.getTableId32Gen().updateId32Gen( Authorization, (CFBamId32GenBuff)editGrandnext );
+				schema.getTableId32Gen().updateId32Gen( Authorization, (CFBamBuffId32Gen)editGrandnext );
 			}
 			else if( classCode == ICFBamInt32Col.CLASS_CODE ) {
-				schema.getTableInt32Col().updateInt32Col( Authorization, (CFBamInt32ColBuff)editGrandnext );
+				schema.getTableInt32Col().updateInt32Col( Authorization, (CFBamBuffInt32Col)editGrandnext );
 			}
 			else if( classCode == ICFBamInt64Def.CLASS_CODE ) {
-				schema.getTableInt64Def().updateInt64Def( Authorization, (CFBamInt64DefBuff)editGrandnext );
+				schema.getTableInt64Def().updateInt64Def( Authorization, (CFBamBuffInt64Def)editGrandnext );
 			}
 			else if( classCode == ICFBamInt64Type.CLASS_CODE ) {
-				schema.getTableInt64Type().updateInt64Type( Authorization, (CFBamInt64TypeBuff)editGrandnext );
+				schema.getTableInt64Type().updateInt64Type( Authorization, (CFBamBuffInt64Type)editGrandnext );
 			}
 			else if( classCode == ICFBamId64Gen.CLASS_CODE ) {
-				schema.getTableId64Gen().updateId64Gen( Authorization, (CFBamId64GenBuff)editGrandnext );
+				schema.getTableId64Gen().updateId64Gen( Authorization, (CFBamBuffId64Gen)editGrandnext );
 			}
 			else if( classCode == ICFBamInt64Col.CLASS_CODE ) {
-				schema.getTableInt64Col().updateInt64Col( Authorization, (CFBamInt64ColBuff)editGrandnext );
+				schema.getTableInt64Col().updateInt64Col( Authorization, (CFBamBuffInt64Col)editGrandnext );
 			}
 			else if( classCode == ICFBamNmTokenDef.CLASS_CODE ) {
-				schema.getTableNmTokenDef().updateNmTokenDef( Authorization, (CFBamNmTokenDefBuff)editGrandnext );
+				schema.getTableNmTokenDef().updateNmTokenDef( Authorization, (CFBamBuffNmTokenDef)editGrandnext );
 			}
 			else if( classCode == ICFBamNmTokenType.CLASS_CODE ) {
-				schema.getTableNmTokenType().updateNmTokenType( Authorization, (CFBamNmTokenTypeBuff)editGrandnext );
+				schema.getTableNmTokenType().updateNmTokenType( Authorization, (CFBamBuffNmTokenType)editGrandnext );
 			}
 			else if( classCode == ICFBamNmTokenCol.CLASS_CODE ) {
-				schema.getTableNmTokenCol().updateNmTokenCol( Authorization, (CFBamNmTokenColBuff)editGrandnext );
+				schema.getTableNmTokenCol().updateNmTokenCol( Authorization, (CFBamBuffNmTokenCol)editGrandnext );
 			}
 			else if( classCode == ICFBamNmTokensDef.CLASS_CODE ) {
-				schema.getTableNmTokensDef().updateNmTokensDef( Authorization, (CFBamNmTokensDefBuff)editGrandnext );
+				schema.getTableNmTokensDef().updateNmTokensDef( Authorization, (CFBamBuffNmTokensDef)editGrandnext );
 			}
 			else if( classCode == ICFBamNmTokensType.CLASS_CODE ) {
-				schema.getTableNmTokensType().updateNmTokensType( Authorization, (CFBamNmTokensTypeBuff)editGrandnext );
+				schema.getTableNmTokensType().updateNmTokensType( Authorization, (CFBamBuffNmTokensType)editGrandnext );
 			}
 			else if( classCode == ICFBamNmTokensCol.CLASS_CODE ) {
-				schema.getTableNmTokensCol().updateNmTokensCol( Authorization, (CFBamNmTokensColBuff)editGrandnext );
+				schema.getTableNmTokensCol().updateNmTokensCol( Authorization, (CFBamBuffNmTokensCol)editGrandnext );
 			}
 			else if( classCode == ICFBamNumberDef.CLASS_CODE ) {
-				schema.getTableNumberDef().updateNumberDef( Authorization, (CFBamNumberDefBuff)editGrandnext );
+				schema.getTableNumberDef().updateNumberDef( Authorization, (CFBamBuffNumberDef)editGrandnext );
 			}
 			else if( classCode == ICFBamNumberType.CLASS_CODE ) {
-				schema.getTableNumberType().updateNumberType( Authorization, (CFBamNumberTypeBuff)editGrandnext );
+				schema.getTableNumberType().updateNumberType( Authorization, (CFBamBuffNumberType)editGrandnext );
 			}
 			else if( classCode == ICFBamNumberCol.CLASS_CODE ) {
-				schema.getTableNumberCol().updateNumberCol( Authorization, (CFBamNumberColBuff)editGrandnext );
+				schema.getTableNumberCol().updateNumberCol( Authorization, (CFBamBuffNumberCol)editGrandnext );
 			}
 			else if( classCode == ICFBamDbKeyHash128Def.CLASS_CODE ) {
-				schema.getTableDbKeyHash128Def().updateDbKeyHash128Def( Authorization, (CFBamDbKeyHash128DefBuff)editGrandnext );
+				schema.getTableDbKeyHash128Def().updateDbKeyHash128Def( Authorization, (CFBamBuffDbKeyHash128Def)editGrandnext );
 			}
 			else if( classCode == ICFBamDbKeyHash128Col.CLASS_CODE ) {
-				schema.getTableDbKeyHash128Col().updateDbKeyHash128Col( Authorization, (CFBamDbKeyHash128ColBuff)editGrandnext );
+				schema.getTableDbKeyHash128Col().updateDbKeyHash128Col( Authorization, (CFBamBuffDbKeyHash128Col)editGrandnext );
 			}
 			else if( classCode == ICFBamDbKeyHash128Type.CLASS_CODE ) {
-				schema.getTableDbKeyHash128Type().updateDbKeyHash128Type( Authorization, (CFBamDbKeyHash128TypeBuff)editGrandnext );
+				schema.getTableDbKeyHash128Type().updateDbKeyHash128Type( Authorization, (CFBamBuffDbKeyHash128Type)editGrandnext );
 			}
 			else if( classCode == ICFBamDbKeyHash128Gen.CLASS_CODE ) {
-				schema.getTableDbKeyHash128Gen().updateDbKeyHash128Gen( Authorization, (CFBamDbKeyHash128GenBuff)editGrandnext );
+				schema.getTableDbKeyHash128Gen().updateDbKeyHash128Gen( Authorization, (CFBamBuffDbKeyHash128Gen)editGrandnext );
 			}
 			else if( classCode == ICFBamDbKeyHash160Def.CLASS_CODE ) {
-				schema.getTableDbKeyHash160Def().updateDbKeyHash160Def( Authorization, (CFBamDbKeyHash160DefBuff)editGrandnext );
+				schema.getTableDbKeyHash160Def().updateDbKeyHash160Def( Authorization, (CFBamBuffDbKeyHash160Def)editGrandnext );
 			}
 			else if( classCode == ICFBamDbKeyHash160Col.CLASS_CODE ) {
-				schema.getTableDbKeyHash160Col().updateDbKeyHash160Col( Authorization, (CFBamDbKeyHash160ColBuff)editGrandnext );
+				schema.getTableDbKeyHash160Col().updateDbKeyHash160Col( Authorization, (CFBamBuffDbKeyHash160Col)editGrandnext );
 			}
 			else if( classCode == ICFBamDbKeyHash160Type.CLASS_CODE ) {
-				schema.getTableDbKeyHash160Type().updateDbKeyHash160Type( Authorization, (CFBamDbKeyHash160TypeBuff)editGrandnext );
+				schema.getTableDbKeyHash160Type().updateDbKeyHash160Type( Authorization, (CFBamBuffDbKeyHash160Type)editGrandnext );
 			}
 			else if( classCode == ICFBamDbKeyHash160Gen.CLASS_CODE ) {
-				schema.getTableDbKeyHash160Gen().updateDbKeyHash160Gen( Authorization, (CFBamDbKeyHash160GenBuff)editGrandnext );
+				schema.getTableDbKeyHash160Gen().updateDbKeyHash160Gen( Authorization, (CFBamBuffDbKeyHash160Gen)editGrandnext );
 			}
 			else if( classCode == ICFBamDbKeyHash224Def.CLASS_CODE ) {
-				schema.getTableDbKeyHash224Def().updateDbKeyHash224Def( Authorization, (CFBamDbKeyHash224DefBuff)editGrandnext );
+				schema.getTableDbKeyHash224Def().updateDbKeyHash224Def( Authorization, (CFBamBuffDbKeyHash224Def)editGrandnext );
 			}
 			else if( classCode == ICFBamDbKeyHash224Col.CLASS_CODE ) {
-				schema.getTableDbKeyHash224Col().updateDbKeyHash224Col( Authorization, (CFBamDbKeyHash224ColBuff)editGrandnext );
+				schema.getTableDbKeyHash224Col().updateDbKeyHash224Col( Authorization, (CFBamBuffDbKeyHash224Col)editGrandnext );
 			}
 			else if( classCode == ICFBamDbKeyHash224Type.CLASS_CODE ) {
-				schema.getTableDbKeyHash224Type().updateDbKeyHash224Type( Authorization, (CFBamDbKeyHash224TypeBuff)editGrandnext );
+				schema.getTableDbKeyHash224Type().updateDbKeyHash224Type( Authorization, (CFBamBuffDbKeyHash224Type)editGrandnext );
 			}
 			else if( classCode == ICFBamDbKeyHash224Gen.CLASS_CODE ) {
-				schema.getTableDbKeyHash224Gen().updateDbKeyHash224Gen( Authorization, (CFBamDbKeyHash224GenBuff)editGrandnext );
+				schema.getTableDbKeyHash224Gen().updateDbKeyHash224Gen( Authorization, (CFBamBuffDbKeyHash224Gen)editGrandnext );
 			}
 			else if( classCode == ICFBamDbKeyHash256Def.CLASS_CODE ) {
-				schema.getTableDbKeyHash256Def().updateDbKeyHash256Def( Authorization, (CFBamDbKeyHash256DefBuff)editGrandnext );
+				schema.getTableDbKeyHash256Def().updateDbKeyHash256Def( Authorization, (CFBamBuffDbKeyHash256Def)editGrandnext );
 			}
 			else if( classCode == ICFBamDbKeyHash256Col.CLASS_CODE ) {
-				schema.getTableDbKeyHash256Col().updateDbKeyHash256Col( Authorization, (CFBamDbKeyHash256ColBuff)editGrandnext );
+				schema.getTableDbKeyHash256Col().updateDbKeyHash256Col( Authorization, (CFBamBuffDbKeyHash256Col)editGrandnext );
 			}
 			else if( classCode == ICFBamDbKeyHash256Type.CLASS_CODE ) {
-				schema.getTableDbKeyHash256Type().updateDbKeyHash256Type( Authorization, (CFBamDbKeyHash256TypeBuff)editGrandnext );
+				schema.getTableDbKeyHash256Type().updateDbKeyHash256Type( Authorization, (CFBamBuffDbKeyHash256Type)editGrandnext );
 			}
 			else if( classCode == ICFBamDbKeyHash256Gen.CLASS_CODE ) {
-				schema.getTableDbKeyHash256Gen().updateDbKeyHash256Gen( Authorization, (CFBamDbKeyHash256GenBuff)editGrandnext );
+				schema.getTableDbKeyHash256Gen().updateDbKeyHash256Gen( Authorization, (CFBamBuffDbKeyHash256Gen)editGrandnext );
 			}
 			else if( classCode == ICFBamDbKeyHash384Def.CLASS_CODE ) {
-				schema.getTableDbKeyHash384Def().updateDbKeyHash384Def( Authorization, (CFBamDbKeyHash384DefBuff)editGrandnext );
+				schema.getTableDbKeyHash384Def().updateDbKeyHash384Def( Authorization, (CFBamBuffDbKeyHash384Def)editGrandnext );
 			}
 			else if( classCode == ICFBamDbKeyHash384Col.CLASS_CODE ) {
-				schema.getTableDbKeyHash384Col().updateDbKeyHash384Col( Authorization, (CFBamDbKeyHash384ColBuff)editGrandnext );
+				schema.getTableDbKeyHash384Col().updateDbKeyHash384Col( Authorization, (CFBamBuffDbKeyHash384Col)editGrandnext );
 			}
 			else if( classCode == ICFBamDbKeyHash384Type.CLASS_CODE ) {
-				schema.getTableDbKeyHash384Type().updateDbKeyHash384Type( Authorization, (CFBamDbKeyHash384TypeBuff)editGrandnext );
+				schema.getTableDbKeyHash384Type().updateDbKeyHash384Type( Authorization, (CFBamBuffDbKeyHash384Type)editGrandnext );
 			}
 			else if( classCode == ICFBamDbKeyHash384Gen.CLASS_CODE ) {
-				schema.getTableDbKeyHash384Gen().updateDbKeyHash384Gen( Authorization, (CFBamDbKeyHash384GenBuff)editGrandnext );
+				schema.getTableDbKeyHash384Gen().updateDbKeyHash384Gen( Authorization, (CFBamBuffDbKeyHash384Gen)editGrandnext );
 			}
 			else if( classCode == ICFBamDbKeyHash512Def.CLASS_CODE ) {
-				schema.getTableDbKeyHash512Def().updateDbKeyHash512Def( Authorization, (CFBamDbKeyHash512DefBuff)editGrandnext );
+				schema.getTableDbKeyHash512Def().updateDbKeyHash512Def( Authorization, (CFBamBuffDbKeyHash512Def)editGrandnext );
 			}
 			else if( classCode == ICFBamDbKeyHash512Col.CLASS_CODE ) {
-				schema.getTableDbKeyHash512Col().updateDbKeyHash512Col( Authorization, (CFBamDbKeyHash512ColBuff)editGrandnext );
+				schema.getTableDbKeyHash512Col().updateDbKeyHash512Col( Authorization, (CFBamBuffDbKeyHash512Col)editGrandnext );
 			}
 			else if( classCode == ICFBamDbKeyHash512Type.CLASS_CODE ) {
-				schema.getTableDbKeyHash512Type().updateDbKeyHash512Type( Authorization, (CFBamDbKeyHash512TypeBuff)editGrandnext );
+				schema.getTableDbKeyHash512Type().updateDbKeyHash512Type( Authorization, (CFBamBuffDbKeyHash512Type)editGrandnext );
 			}
 			else if( classCode == ICFBamDbKeyHash512Gen.CLASS_CODE ) {
-				schema.getTableDbKeyHash512Gen().updateDbKeyHash512Gen( Authorization, (CFBamDbKeyHash512GenBuff)editGrandnext );
+				schema.getTableDbKeyHash512Gen().updateDbKeyHash512Gen( Authorization, (CFBamBuffDbKeyHash512Gen)editGrandnext );
 			}
 			else if( classCode == ICFBamStringDef.CLASS_CODE ) {
-				schema.getTableStringDef().updateStringDef( Authorization, (CFBamStringDefBuff)editGrandnext );
+				schema.getTableStringDef().updateStringDef( Authorization, (CFBamBuffStringDef)editGrandnext );
 			}
 			else if( classCode == ICFBamStringType.CLASS_CODE ) {
-				schema.getTableStringType().updateStringType( Authorization, (CFBamStringTypeBuff)editGrandnext );
+				schema.getTableStringType().updateStringType( Authorization, (CFBamBuffStringType)editGrandnext );
 			}
 			else if( classCode == ICFBamStringCol.CLASS_CODE ) {
-				schema.getTableStringCol().updateStringCol( Authorization, (CFBamStringColBuff)editGrandnext );
+				schema.getTableStringCol().updateStringCol( Authorization, (CFBamBuffStringCol)editGrandnext );
 			}
 			else if( classCode == ICFBamTZDateDef.CLASS_CODE ) {
-				schema.getTableTZDateDef().updateTZDateDef( Authorization, (CFBamTZDateDefBuff)editGrandnext );
+				schema.getTableTZDateDef().updateTZDateDef( Authorization, (CFBamBuffTZDateDef)editGrandnext );
 			}
 			else if( classCode == ICFBamTZDateType.CLASS_CODE ) {
-				schema.getTableTZDateType().updateTZDateType( Authorization, (CFBamTZDateTypeBuff)editGrandnext );
+				schema.getTableTZDateType().updateTZDateType( Authorization, (CFBamBuffTZDateType)editGrandnext );
 			}
 			else if( classCode == ICFBamTZDateCol.CLASS_CODE ) {
-				schema.getTableTZDateCol().updateTZDateCol( Authorization, (CFBamTZDateColBuff)editGrandnext );
+				schema.getTableTZDateCol().updateTZDateCol( Authorization, (CFBamBuffTZDateCol)editGrandnext );
 			}
 			else if( classCode == ICFBamTZTimeDef.CLASS_CODE ) {
-				schema.getTableTZTimeDef().updateTZTimeDef( Authorization, (CFBamTZTimeDefBuff)editGrandnext );
+				schema.getTableTZTimeDef().updateTZTimeDef( Authorization, (CFBamBuffTZTimeDef)editGrandnext );
 			}
 			else if( classCode == ICFBamTZTimeType.CLASS_CODE ) {
-				schema.getTableTZTimeType().updateTZTimeType( Authorization, (CFBamTZTimeTypeBuff)editGrandnext );
+				schema.getTableTZTimeType().updateTZTimeType( Authorization, (CFBamBuffTZTimeType)editGrandnext );
 			}
 			else if( classCode == ICFBamTZTimeCol.CLASS_CODE ) {
-				schema.getTableTZTimeCol().updateTZTimeCol( Authorization, (CFBamTZTimeColBuff)editGrandnext );
+				schema.getTableTZTimeCol().updateTZTimeCol( Authorization, (CFBamBuffTZTimeCol)editGrandnext );
 			}
 			else if( classCode == ICFBamTZTimestampDef.CLASS_CODE ) {
-				schema.getTableTZTimestampDef().updateTZTimestampDef( Authorization, (CFBamTZTimestampDefBuff)editGrandnext );
+				schema.getTableTZTimestampDef().updateTZTimestampDef( Authorization, (CFBamBuffTZTimestampDef)editGrandnext );
 			}
 			else if( classCode == ICFBamTZTimestampType.CLASS_CODE ) {
-				schema.getTableTZTimestampType().updateTZTimestampType( Authorization, (CFBamTZTimestampTypeBuff)editGrandnext );
+				schema.getTableTZTimestampType().updateTZTimestampType( Authorization, (CFBamBuffTZTimestampType)editGrandnext );
 			}
 			else if( classCode == ICFBamTZTimestampCol.CLASS_CODE ) {
-				schema.getTableTZTimestampCol().updateTZTimestampCol( Authorization, (CFBamTZTimestampColBuff)editGrandnext );
+				schema.getTableTZTimestampCol().updateTZTimestampCol( Authorization, (CFBamBuffTZTimestampCol)editGrandnext );
 			}
 			else if( classCode == ICFBamTextDef.CLASS_CODE ) {
-				schema.getTableTextDef().updateTextDef( Authorization, (CFBamTextDefBuff)editGrandnext );
+				schema.getTableTextDef().updateTextDef( Authorization, (CFBamBuffTextDef)editGrandnext );
 			}
 			else if( classCode == ICFBamTextType.CLASS_CODE ) {
-				schema.getTableTextType().updateTextType( Authorization, (CFBamTextTypeBuff)editGrandnext );
+				schema.getTableTextType().updateTextType( Authorization, (CFBamBuffTextType)editGrandnext );
 			}
 			else if( classCode == ICFBamTextCol.CLASS_CODE ) {
-				schema.getTableTextCol().updateTextCol( Authorization, (CFBamTextColBuff)editGrandnext );
+				schema.getTableTextCol().updateTextCol( Authorization, (CFBamBuffTextCol)editGrandnext );
 			}
 			else if( classCode == ICFBamTimeDef.CLASS_CODE ) {
-				schema.getTableTimeDef().updateTimeDef( Authorization, (CFBamTimeDefBuff)editGrandnext );
+				schema.getTableTimeDef().updateTimeDef( Authorization, (CFBamBuffTimeDef)editGrandnext );
 			}
 			else if( classCode == ICFBamTimeType.CLASS_CODE ) {
-				schema.getTableTimeType().updateTimeType( Authorization, (CFBamTimeTypeBuff)editGrandnext );
+				schema.getTableTimeType().updateTimeType( Authorization, (CFBamBuffTimeType)editGrandnext );
 			}
 			else if( classCode == ICFBamTimeCol.CLASS_CODE ) {
-				schema.getTableTimeCol().updateTimeCol( Authorization, (CFBamTimeColBuff)editGrandnext );
+				schema.getTableTimeCol().updateTimeCol( Authorization, (CFBamBuffTimeCol)editGrandnext );
 			}
 			else if( classCode == ICFBamTimestampDef.CLASS_CODE ) {
-				schema.getTableTimestampDef().updateTimestampDef( Authorization, (CFBamTimestampDefBuff)editGrandnext );
+				schema.getTableTimestampDef().updateTimestampDef( Authorization, (CFBamBuffTimestampDef)editGrandnext );
 			}
 			else if( classCode == ICFBamTimestampType.CLASS_CODE ) {
-				schema.getTableTimestampType().updateTimestampType( Authorization, (CFBamTimestampTypeBuff)editGrandnext );
+				schema.getTableTimestampType().updateTimestampType( Authorization, (CFBamBuffTimestampType)editGrandnext );
 			}
 			else if( classCode == ICFBamTimestampCol.CLASS_CODE ) {
-				schema.getTableTimestampCol().updateTimestampCol( Authorization, (CFBamTimestampColBuff)editGrandnext );
+				schema.getTableTimestampCol().updateTimestampCol( Authorization, (CFBamBuffTimestampCol)editGrandnext );
 			}
 			else if( classCode == ICFBamTokenDef.CLASS_CODE ) {
-				schema.getTableTokenDef().updateTokenDef( Authorization, (CFBamTokenDefBuff)editGrandnext );
+				schema.getTableTokenDef().updateTokenDef( Authorization, (CFBamBuffTokenDef)editGrandnext );
 			}
 			else if( classCode == ICFBamTokenType.CLASS_CODE ) {
-				schema.getTableTokenType().updateTokenType( Authorization, (CFBamTokenTypeBuff)editGrandnext );
+				schema.getTableTokenType().updateTokenType( Authorization, (CFBamBuffTokenType)editGrandnext );
 			}
 			else if( classCode == ICFBamTokenCol.CLASS_CODE ) {
-				schema.getTableTokenCol().updateTokenCol( Authorization, (CFBamTokenColBuff)editGrandnext );
+				schema.getTableTokenCol().updateTokenCol( Authorization, (CFBamBuffTokenCol)editGrandnext );
 			}
 			else if( classCode == ICFBamUInt16Def.CLASS_CODE ) {
-				schema.getTableUInt16Def().updateUInt16Def( Authorization, (CFBamUInt16DefBuff)editGrandnext );
+				schema.getTableUInt16Def().updateUInt16Def( Authorization, (CFBamBuffUInt16Def)editGrandnext );
 			}
 			else if( classCode == ICFBamUInt16Type.CLASS_CODE ) {
-				schema.getTableUInt16Type().updateUInt16Type( Authorization, (CFBamUInt16TypeBuff)editGrandnext );
+				schema.getTableUInt16Type().updateUInt16Type( Authorization, (CFBamBuffUInt16Type)editGrandnext );
 			}
 			else if( classCode == ICFBamUInt16Col.CLASS_CODE ) {
-				schema.getTableUInt16Col().updateUInt16Col( Authorization, (CFBamUInt16ColBuff)editGrandnext );
+				schema.getTableUInt16Col().updateUInt16Col( Authorization, (CFBamBuffUInt16Col)editGrandnext );
 			}
 			else if( classCode == ICFBamUInt32Def.CLASS_CODE ) {
-				schema.getTableUInt32Def().updateUInt32Def( Authorization, (CFBamUInt32DefBuff)editGrandnext );
+				schema.getTableUInt32Def().updateUInt32Def( Authorization, (CFBamBuffUInt32Def)editGrandnext );
 			}
 			else if( classCode == ICFBamUInt32Type.CLASS_CODE ) {
-				schema.getTableUInt32Type().updateUInt32Type( Authorization, (CFBamUInt32TypeBuff)editGrandnext );
+				schema.getTableUInt32Type().updateUInt32Type( Authorization, (CFBamBuffUInt32Type)editGrandnext );
 			}
 			else if( classCode == ICFBamUInt32Col.CLASS_CODE ) {
-				schema.getTableUInt32Col().updateUInt32Col( Authorization, (CFBamUInt32ColBuff)editGrandnext );
+				schema.getTableUInt32Col().updateUInt32Col( Authorization, (CFBamBuffUInt32Col)editGrandnext );
 			}
 			else if( classCode == ICFBamUInt64Def.CLASS_CODE ) {
-				schema.getTableUInt64Def().updateUInt64Def( Authorization, (CFBamUInt64DefBuff)editGrandnext );
+				schema.getTableUInt64Def().updateUInt64Def( Authorization, (CFBamBuffUInt64Def)editGrandnext );
 			}
 			else if( classCode == ICFBamUInt64Type.CLASS_CODE ) {
-				schema.getTableUInt64Type().updateUInt64Type( Authorization, (CFBamUInt64TypeBuff)editGrandnext );
+				schema.getTableUInt64Type().updateUInt64Type( Authorization, (CFBamBuffUInt64Type)editGrandnext );
 			}
 			else if( classCode == ICFBamUInt64Col.CLASS_CODE ) {
-				schema.getTableUInt64Col().updateUInt64Col( Authorization, (CFBamUInt64ColBuff)editGrandnext );
+				schema.getTableUInt64Col().updateUInt64Col( Authorization, (CFBamBuffUInt64Col)editGrandnext );
 			}
 			else if( classCode == ICFBamUuidDef.CLASS_CODE ) {
-				schema.getTableUuidDef().updateUuidDef( Authorization, (CFBamUuidDefBuff)editGrandnext );
+				schema.getTableUuidDef().updateUuidDef( Authorization, (CFBamBuffUuidDef)editGrandnext );
 			}
 			else if( classCode == ICFBamUuidType.CLASS_CODE ) {
-				schema.getTableUuidType().updateUuidType( Authorization, (CFBamUuidTypeBuff)editGrandnext );
+				schema.getTableUuidType().updateUuidType( Authorization, (CFBamBuffUuidType)editGrandnext );
 			}
 			else if( classCode == ICFBamUuidGen.CLASS_CODE ) {
-				schema.getTableUuidGen().updateUuidGen( Authorization, (CFBamUuidGenBuff)editGrandnext );
+				schema.getTableUuidGen().updateUuidGen( Authorization, (CFBamBuffUuidGen)editGrandnext );
 			}
 			else if( classCode == ICFBamUuidCol.CLASS_CODE ) {
-				schema.getTableUuidCol().updateUuidCol( Authorization, (CFBamUuidColBuff)editGrandnext );
+				schema.getTableUuidCol().updateUuidCol( Authorization, (CFBamBuffUuidCol)editGrandnext );
 			}
 			else if( classCode == ICFBamUuid6Def.CLASS_CODE ) {
-				schema.getTableUuid6Def().updateUuid6Def( Authorization, (CFBamUuid6DefBuff)editGrandnext );
+				schema.getTableUuid6Def().updateUuid6Def( Authorization, (CFBamBuffUuid6Def)editGrandnext );
 			}
 			else if( classCode == ICFBamUuid6Type.CLASS_CODE ) {
-				schema.getTableUuid6Type().updateUuid6Type( Authorization, (CFBamUuid6TypeBuff)editGrandnext );
+				schema.getTableUuid6Type().updateUuid6Type( Authorization, (CFBamBuffUuid6Type)editGrandnext );
 			}
 			else if( classCode == ICFBamUuid6Gen.CLASS_CODE ) {
-				schema.getTableUuid6Gen().updateUuid6Gen( Authorization, (CFBamUuid6GenBuff)editGrandnext );
+				schema.getTableUuid6Gen().updateUuid6Gen( Authorization, (CFBamBuffUuid6Gen)editGrandnext );
 			}
 			else if( classCode == ICFBamUuid6Col.CLASS_CODE ) {
-				schema.getTableUuid6Col().updateUuid6Col( Authorization, (CFBamUuid6ColBuff)editGrandnext );
+				schema.getTableUuid6Col().updateUuid6Col( Authorization, (CFBamBuffUuid6Col)editGrandnext );
 			}
 			else if( classCode == ICFBamTableCol.CLASS_CODE ) {
-				schema.getTableTableCol().updateTableCol( Authorization, (CFBamTableColBuff)editGrandnext );
+				schema.getTableTableCol().updateTableCol( Authorization, (CFBamBuffTableCol)editGrandnext );
 			}
 			else {
-				throw new CFLibUnsupportedClassException(getClass(), S_ProcName, 0, "-update-grand-next-", "Not " + Integer.toString(classCode));
+				throw new CFLibUnsupportedClassException(getClass(), S_ProcName, "-update-grand-next-", (Integer)classCode, "Classcode not recognized: " + Integer.toString(classCode));
 			}
 		}
 
-		return( (CFBamInt64DefBuff)editCur );
+		return( (CFBamBuffInt64Def)editCur );
 	}
 
 	public ICFBamInt64Def updateInt64Def( ICFSecAuthorization Authorization,
-		ICFBamInt64Def Buff )
+		ICFBamInt64Def iBuff )
 	{
-		ICFBamInt64Def repl = schema.getTableAtom().updateAtom( Authorization,
-			Buff );
-		if (repl != Buff) {
-			throw new CFLibInvalidStateException(getClass(), S_ProcName, "repl != Buff", "repl != Buff");
-		}
+		CFBamBuffInt64Def Buff = (CFBamBuffInt64Def)schema.getTableAtom().updateAtom( Authorization,	Buff );
 		CFLibDbKeyHash256 pkey = Buff.getPKey();
-		ICFBamInt64Def existing = dictByPKey.get( pkey );
+		CFBamBuffInt64Def existing = dictByPKey.get( pkey );
 		if( existing == null ) {
 			throw new CFLibStaleCacheDetectedException( getClass(),
 				"updateInt64Def",
 				"Existing record not found",
+				"Existing record not found",
+				"Int64Def",
 				"Int64Def",
 				pkey );
 		}
@@ -5948,13 +5946,13 @@ public class CFBamRamInt64DefTable
 	}
 
 	public void deleteInt64Def( ICFSecAuthorization Authorization,
-		ICFBamInt64Def Buff )
+		ICFBamInt64Def iBuff )
 	{
 		final String S_ProcName = "CFBamRamInt64DefTable.deleteInt64Def() ";
-		String classCode;
-		CFLibDbKeyHash256 pkey = schema.getFactoryValue().newPKey();
-		pkey.setRequiredId( Buff.getRequiredId() );
-		ICFBamInt64Def existing = dictByPKey.get( pkey );
+		CFBamBuffInt64Def Buff = ensureRec(iBuff);
+		int classCode;
+		CFLibDbKeyHash256 pkey = (CFLibDbKeyHash256)(Buff.getPKey());
+		CFBamBuffInt64Def existing = dictByPKey.get( pkey );
 		if( existing == null ) {
 			return;
 		}
@@ -5965,7 +5963,7 @@ public class CFBamRamInt64DefTable
 				pkey );
 		}
 		CFLibDbKeyHash256 varScopeId = existing.getRequiredScopeId();
-		CFBamScopeBuff container = schema.getTableScope().readDerivedByIdIdx( Authorization,
+		CFBamBuffScope container = schema.getTableScope().readDerivedByIdIdx( Authorization,
 			varScopeId );
 		if( container == null ) {
 			throw new CFLibNullArgumentException( getClass(),
@@ -5977,7 +5975,7 @@ public class CFBamRamInt64DefTable
 		CFLibDbKeyHash256 prevId = existing.getOptionalPrevId();
 		CFLibDbKeyHash256 nextId = existing.getOptionalNextId();
 
-		CFBamValueBuff prev = null;
+		CFBamBuffValue prev = null;
 		if( ( prevId != null ) )
 		{
 			prev = schema.getTableValue().readDerivedByIdIdx( Authorization,
@@ -5988,7 +5986,7 @@ public class CFBamRamInt64DefTable
 					0,
 					"prev" );
 			}
-			CFBamValueBuff editPrev;
+			CFBamBuffValue editPrev;
 			classCode = prev.getClassCode();
 			if( classCode.equals( "a809" ) ) {
 				editPrev = schema.getFactoryValue().newBuff();
@@ -6309,7 +6307,7 @@ public class CFBamRamInt64DefTable
 				editPrev = schema.getFactoryTableCol().newBuff();
 			}
 			else {
-				throw new CFLibUnsupportedClassException(getClass(), S_ProcName, 0, "-delete-update-prev-", "Not " + Integer.toString(classCode));
+				throw new CFLibUnsupportedClassException(getClass(), S_ProcName, "-delete-update-prev-", (Integer)classCode, "Classcode not recognized: " + Integer.toString(classCode));
 			}
 			editPrev.set( prev );
 			editPrev.setOptionalNextId( nextId );
@@ -6317,326 +6315,326 @@ public class CFBamRamInt64DefTable
 				schema.getTableValue().updateValue( Authorization, editPrev );
 			}
 			else if( classCode == ICFBamAtom.CLASS_CODE ) {
-				schema.getTableAtom().updateAtom( Authorization, (CFBamAtomBuff)editPrev );
+				schema.getTableAtom().updateAtom( Authorization, (CFBamBuffAtom)editPrev );
 			}
 			else if( classCode == ICFBamBlobDef.CLASS_CODE ) {
-				schema.getTableBlobDef().updateBlobDef( Authorization, (CFBamBlobDefBuff)editPrev );
+				schema.getTableBlobDef().updateBlobDef( Authorization, (CFBamBuffBlobDef)editPrev );
 			}
 			else if( classCode == ICFBamBlobType.CLASS_CODE ) {
-				schema.getTableBlobType().updateBlobType( Authorization, (CFBamBlobTypeBuff)editPrev );
+				schema.getTableBlobType().updateBlobType( Authorization, (CFBamBuffBlobType)editPrev );
 			}
 			else if( classCode == ICFBamBlobCol.CLASS_CODE ) {
-				schema.getTableBlobCol().updateBlobCol( Authorization, (CFBamBlobColBuff)editPrev );
+				schema.getTableBlobCol().updateBlobCol( Authorization, (CFBamBuffBlobCol)editPrev );
 			}
 			else if( classCode == ICFBamBoolDef.CLASS_CODE ) {
-				schema.getTableBoolDef().updateBoolDef( Authorization, (CFBamBoolDefBuff)editPrev );
+				schema.getTableBoolDef().updateBoolDef( Authorization, (CFBamBuffBoolDef)editPrev );
 			}
 			else if( classCode == ICFBamBoolType.CLASS_CODE ) {
-				schema.getTableBoolType().updateBoolType( Authorization, (CFBamBoolTypeBuff)editPrev );
+				schema.getTableBoolType().updateBoolType( Authorization, (CFBamBuffBoolType)editPrev );
 			}
 			else if( classCode == ICFBamBoolCol.CLASS_CODE ) {
-				schema.getTableBoolCol().updateBoolCol( Authorization, (CFBamBoolColBuff)editPrev );
+				schema.getTableBoolCol().updateBoolCol( Authorization, (CFBamBuffBoolCol)editPrev );
 			}
 			else if( classCode == ICFBamDateDef.CLASS_CODE ) {
-				schema.getTableDateDef().updateDateDef( Authorization, (CFBamDateDefBuff)editPrev );
+				schema.getTableDateDef().updateDateDef( Authorization, (CFBamBuffDateDef)editPrev );
 			}
 			else if( classCode == ICFBamDateType.CLASS_CODE ) {
-				schema.getTableDateType().updateDateType( Authorization, (CFBamDateTypeBuff)editPrev );
+				schema.getTableDateType().updateDateType( Authorization, (CFBamBuffDateType)editPrev );
 			}
 			else if( classCode == ICFBamDateCol.CLASS_CODE ) {
-				schema.getTableDateCol().updateDateCol( Authorization, (CFBamDateColBuff)editPrev );
+				schema.getTableDateCol().updateDateCol( Authorization, (CFBamBuffDateCol)editPrev );
 			}
 			else if( classCode == ICFBamDoubleDef.CLASS_CODE ) {
-				schema.getTableDoubleDef().updateDoubleDef( Authorization, (CFBamDoubleDefBuff)editPrev );
+				schema.getTableDoubleDef().updateDoubleDef( Authorization, (CFBamBuffDoubleDef)editPrev );
 			}
 			else if( classCode == ICFBamDoubleType.CLASS_CODE ) {
-				schema.getTableDoubleType().updateDoubleType( Authorization, (CFBamDoubleTypeBuff)editPrev );
+				schema.getTableDoubleType().updateDoubleType( Authorization, (CFBamBuffDoubleType)editPrev );
 			}
 			else if( classCode == ICFBamDoubleCol.CLASS_CODE ) {
-				schema.getTableDoubleCol().updateDoubleCol( Authorization, (CFBamDoubleColBuff)editPrev );
+				schema.getTableDoubleCol().updateDoubleCol( Authorization, (CFBamBuffDoubleCol)editPrev );
 			}
 			else if( classCode == ICFBamFloatDef.CLASS_CODE ) {
-				schema.getTableFloatDef().updateFloatDef( Authorization, (CFBamFloatDefBuff)editPrev );
+				schema.getTableFloatDef().updateFloatDef( Authorization, (CFBamBuffFloatDef)editPrev );
 			}
 			else if( classCode == ICFBamFloatType.CLASS_CODE ) {
-				schema.getTableFloatType().updateFloatType( Authorization, (CFBamFloatTypeBuff)editPrev );
+				schema.getTableFloatType().updateFloatType( Authorization, (CFBamBuffFloatType)editPrev );
 			}
 			else if( classCode == ICFBamFloatCol.CLASS_CODE ) {
-				schema.getTableFloatCol().updateFloatCol( Authorization, (CFBamFloatColBuff)editPrev );
+				schema.getTableFloatCol().updateFloatCol( Authorization, (CFBamBuffFloatCol)editPrev );
 			}
 			else if( classCode == ICFBamInt16Def.CLASS_CODE ) {
-				schema.getTableInt16Def().updateInt16Def( Authorization, (CFBamInt16DefBuff)editPrev );
+				schema.getTableInt16Def().updateInt16Def( Authorization, (CFBamBuffInt16Def)editPrev );
 			}
 			else if( classCode == ICFBamInt16Type.CLASS_CODE ) {
-				schema.getTableInt16Type().updateInt16Type( Authorization, (CFBamInt16TypeBuff)editPrev );
+				schema.getTableInt16Type().updateInt16Type( Authorization, (CFBamBuffInt16Type)editPrev );
 			}
 			else if( classCode == ICFBamId16Gen.CLASS_CODE ) {
-				schema.getTableId16Gen().updateId16Gen( Authorization, (CFBamId16GenBuff)editPrev );
+				schema.getTableId16Gen().updateId16Gen( Authorization, (CFBamBuffId16Gen)editPrev );
 			}
 			else if( classCode == ICFBamEnumDef.CLASS_CODE ) {
-				schema.getTableEnumDef().updateEnumDef( Authorization, (CFBamEnumDefBuff)editPrev );
+				schema.getTableEnumDef().updateEnumDef( Authorization, (CFBamBuffEnumDef)editPrev );
 			}
 			else if( classCode == ICFBamEnumType.CLASS_CODE ) {
-				schema.getTableEnumType().updateEnumType( Authorization, (CFBamEnumTypeBuff)editPrev );
+				schema.getTableEnumType().updateEnumType( Authorization, (CFBamBuffEnumType)editPrev );
 			}
 			else if( classCode == ICFBamInt16Col.CLASS_CODE ) {
-				schema.getTableInt16Col().updateInt16Col( Authorization, (CFBamInt16ColBuff)editPrev );
+				schema.getTableInt16Col().updateInt16Col( Authorization, (CFBamBuffInt16Col)editPrev );
 			}
 			else if( classCode == ICFBamInt32Def.CLASS_CODE ) {
-				schema.getTableInt32Def().updateInt32Def( Authorization, (CFBamInt32DefBuff)editPrev );
+				schema.getTableInt32Def().updateInt32Def( Authorization, (CFBamBuffInt32Def)editPrev );
 			}
 			else if( classCode == ICFBamInt32Type.CLASS_CODE ) {
-				schema.getTableInt32Type().updateInt32Type( Authorization, (CFBamInt32TypeBuff)editPrev );
+				schema.getTableInt32Type().updateInt32Type( Authorization, (CFBamBuffInt32Type)editPrev );
 			}
 			else if( classCode == ICFBamId32Gen.CLASS_CODE ) {
-				schema.getTableId32Gen().updateId32Gen( Authorization, (CFBamId32GenBuff)editPrev );
+				schema.getTableId32Gen().updateId32Gen( Authorization, (CFBamBuffId32Gen)editPrev );
 			}
 			else if( classCode == ICFBamInt32Col.CLASS_CODE ) {
-				schema.getTableInt32Col().updateInt32Col( Authorization, (CFBamInt32ColBuff)editPrev );
+				schema.getTableInt32Col().updateInt32Col( Authorization, (CFBamBuffInt32Col)editPrev );
 			}
 			else if( classCode == ICFBamInt64Def.CLASS_CODE ) {
-				schema.getTableInt64Def().updateInt64Def( Authorization, (CFBamInt64DefBuff)editPrev );
+				schema.getTableInt64Def().updateInt64Def( Authorization, (CFBamBuffInt64Def)editPrev );
 			}
 			else if( classCode == ICFBamInt64Type.CLASS_CODE ) {
-				schema.getTableInt64Type().updateInt64Type( Authorization, (CFBamInt64TypeBuff)editPrev );
+				schema.getTableInt64Type().updateInt64Type( Authorization, (CFBamBuffInt64Type)editPrev );
 			}
 			else if( classCode == ICFBamId64Gen.CLASS_CODE ) {
-				schema.getTableId64Gen().updateId64Gen( Authorization, (CFBamId64GenBuff)editPrev );
+				schema.getTableId64Gen().updateId64Gen( Authorization, (CFBamBuffId64Gen)editPrev );
 			}
 			else if( classCode == ICFBamInt64Col.CLASS_CODE ) {
-				schema.getTableInt64Col().updateInt64Col( Authorization, (CFBamInt64ColBuff)editPrev );
+				schema.getTableInt64Col().updateInt64Col( Authorization, (CFBamBuffInt64Col)editPrev );
 			}
 			else if( classCode == ICFBamNmTokenDef.CLASS_CODE ) {
-				schema.getTableNmTokenDef().updateNmTokenDef( Authorization, (CFBamNmTokenDefBuff)editPrev );
+				schema.getTableNmTokenDef().updateNmTokenDef( Authorization, (CFBamBuffNmTokenDef)editPrev );
 			}
 			else if( classCode == ICFBamNmTokenType.CLASS_CODE ) {
-				schema.getTableNmTokenType().updateNmTokenType( Authorization, (CFBamNmTokenTypeBuff)editPrev );
+				schema.getTableNmTokenType().updateNmTokenType( Authorization, (CFBamBuffNmTokenType)editPrev );
 			}
 			else if( classCode == ICFBamNmTokenCol.CLASS_CODE ) {
-				schema.getTableNmTokenCol().updateNmTokenCol( Authorization, (CFBamNmTokenColBuff)editPrev );
+				schema.getTableNmTokenCol().updateNmTokenCol( Authorization, (CFBamBuffNmTokenCol)editPrev );
 			}
 			else if( classCode == ICFBamNmTokensDef.CLASS_CODE ) {
-				schema.getTableNmTokensDef().updateNmTokensDef( Authorization, (CFBamNmTokensDefBuff)editPrev );
+				schema.getTableNmTokensDef().updateNmTokensDef( Authorization, (CFBamBuffNmTokensDef)editPrev );
 			}
 			else if( classCode == ICFBamNmTokensType.CLASS_CODE ) {
-				schema.getTableNmTokensType().updateNmTokensType( Authorization, (CFBamNmTokensTypeBuff)editPrev );
+				schema.getTableNmTokensType().updateNmTokensType( Authorization, (CFBamBuffNmTokensType)editPrev );
 			}
 			else if( classCode == ICFBamNmTokensCol.CLASS_CODE ) {
-				schema.getTableNmTokensCol().updateNmTokensCol( Authorization, (CFBamNmTokensColBuff)editPrev );
+				schema.getTableNmTokensCol().updateNmTokensCol( Authorization, (CFBamBuffNmTokensCol)editPrev );
 			}
 			else if( classCode == ICFBamNumberDef.CLASS_CODE ) {
-				schema.getTableNumberDef().updateNumberDef( Authorization, (CFBamNumberDefBuff)editPrev );
+				schema.getTableNumberDef().updateNumberDef( Authorization, (CFBamBuffNumberDef)editPrev );
 			}
 			else if( classCode == ICFBamNumberType.CLASS_CODE ) {
-				schema.getTableNumberType().updateNumberType( Authorization, (CFBamNumberTypeBuff)editPrev );
+				schema.getTableNumberType().updateNumberType( Authorization, (CFBamBuffNumberType)editPrev );
 			}
 			else if( classCode == ICFBamNumberCol.CLASS_CODE ) {
-				schema.getTableNumberCol().updateNumberCol( Authorization, (CFBamNumberColBuff)editPrev );
+				schema.getTableNumberCol().updateNumberCol( Authorization, (CFBamBuffNumberCol)editPrev );
 			}
 			else if( classCode == ICFBamDbKeyHash128Def.CLASS_CODE ) {
-				schema.getTableDbKeyHash128Def().updateDbKeyHash128Def( Authorization, (CFBamDbKeyHash128DefBuff)editPrev );
+				schema.getTableDbKeyHash128Def().updateDbKeyHash128Def( Authorization, (CFBamBuffDbKeyHash128Def)editPrev );
 			}
 			else if( classCode == ICFBamDbKeyHash128Col.CLASS_CODE ) {
-				schema.getTableDbKeyHash128Col().updateDbKeyHash128Col( Authorization, (CFBamDbKeyHash128ColBuff)editPrev );
+				schema.getTableDbKeyHash128Col().updateDbKeyHash128Col( Authorization, (CFBamBuffDbKeyHash128Col)editPrev );
 			}
 			else if( classCode == ICFBamDbKeyHash128Type.CLASS_CODE ) {
-				schema.getTableDbKeyHash128Type().updateDbKeyHash128Type( Authorization, (CFBamDbKeyHash128TypeBuff)editPrev );
+				schema.getTableDbKeyHash128Type().updateDbKeyHash128Type( Authorization, (CFBamBuffDbKeyHash128Type)editPrev );
 			}
 			else if( classCode == ICFBamDbKeyHash128Gen.CLASS_CODE ) {
-				schema.getTableDbKeyHash128Gen().updateDbKeyHash128Gen( Authorization, (CFBamDbKeyHash128GenBuff)editPrev );
+				schema.getTableDbKeyHash128Gen().updateDbKeyHash128Gen( Authorization, (CFBamBuffDbKeyHash128Gen)editPrev );
 			}
 			else if( classCode == ICFBamDbKeyHash160Def.CLASS_CODE ) {
-				schema.getTableDbKeyHash160Def().updateDbKeyHash160Def( Authorization, (CFBamDbKeyHash160DefBuff)editPrev );
+				schema.getTableDbKeyHash160Def().updateDbKeyHash160Def( Authorization, (CFBamBuffDbKeyHash160Def)editPrev );
 			}
 			else if( classCode == ICFBamDbKeyHash160Col.CLASS_CODE ) {
-				schema.getTableDbKeyHash160Col().updateDbKeyHash160Col( Authorization, (CFBamDbKeyHash160ColBuff)editPrev );
+				schema.getTableDbKeyHash160Col().updateDbKeyHash160Col( Authorization, (CFBamBuffDbKeyHash160Col)editPrev );
 			}
 			else if( classCode == ICFBamDbKeyHash160Type.CLASS_CODE ) {
-				schema.getTableDbKeyHash160Type().updateDbKeyHash160Type( Authorization, (CFBamDbKeyHash160TypeBuff)editPrev );
+				schema.getTableDbKeyHash160Type().updateDbKeyHash160Type( Authorization, (CFBamBuffDbKeyHash160Type)editPrev );
 			}
 			else if( classCode == ICFBamDbKeyHash160Gen.CLASS_CODE ) {
-				schema.getTableDbKeyHash160Gen().updateDbKeyHash160Gen( Authorization, (CFBamDbKeyHash160GenBuff)editPrev );
+				schema.getTableDbKeyHash160Gen().updateDbKeyHash160Gen( Authorization, (CFBamBuffDbKeyHash160Gen)editPrev );
 			}
 			else if( classCode == ICFBamDbKeyHash224Def.CLASS_CODE ) {
-				schema.getTableDbKeyHash224Def().updateDbKeyHash224Def( Authorization, (CFBamDbKeyHash224DefBuff)editPrev );
+				schema.getTableDbKeyHash224Def().updateDbKeyHash224Def( Authorization, (CFBamBuffDbKeyHash224Def)editPrev );
 			}
 			else if( classCode == ICFBamDbKeyHash224Col.CLASS_CODE ) {
-				schema.getTableDbKeyHash224Col().updateDbKeyHash224Col( Authorization, (CFBamDbKeyHash224ColBuff)editPrev );
+				schema.getTableDbKeyHash224Col().updateDbKeyHash224Col( Authorization, (CFBamBuffDbKeyHash224Col)editPrev );
 			}
 			else if( classCode == ICFBamDbKeyHash224Type.CLASS_CODE ) {
-				schema.getTableDbKeyHash224Type().updateDbKeyHash224Type( Authorization, (CFBamDbKeyHash224TypeBuff)editPrev );
+				schema.getTableDbKeyHash224Type().updateDbKeyHash224Type( Authorization, (CFBamBuffDbKeyHash224Type)editPrev );
 			}
 			else if( classCode == ICFBamDbKeyHash224Gen.CLASS_CODE ) {
-				schema.getTableDbKeyHash224Gen().updateDbKeyHash224Gen( Authorization, (CFBamDbKeyHash224GenBuff)editPrev );
+				schema.getTableDbKeyHash224Gen().updateDbKeyHash224Gen( Authorization, (CFBamBuffDbKeyHash224Gen)editPrev );
 			}
 			else if( classCode == ICFBamDbKeyHash256Def.CLASS_CODE ) {
-				schema.getTableDbKeyHash256Def().updateDbKeyHash256Def( Authorization, (CFBamDbKeyHash256DefBuff)editPrev );
+				schema.getTableDbKeyHash256Def().updateDbKeyHash256Def( Authorization, (CFBamBuffDbKeyHash256Def)editPrev );
 			}
 			else if( classCode == ICFBamDbKeyHash256Col.CLASS_CODE ) {
-				schema.getTableDbKeyHash256Col().updateDbKeyHash256Col( Authorization, (CFBamDbKeyHash256ColBuff)editPrev );
+				schema.getTableDbKeyHash256Col().updateDbKeyHash256Col( Authorization, (CFBamBuffDbKeyHash256Col)editPrev );
 			}
 			else if( classCode == ICFBamDbKeyHash256Type.CLASS_CODE ) {
-				schema.getTableDbKeyHash256Type().updateDbKeyHash256Type( Authorization, (CFBamDbKeyHash256TypeBuff)editPrev );
+				schema.getTableDbKeyHash256Type().updateDbKeyHash256Type( Authorization, (CFBamBuffDbKeyHash256Type)editPrev );
 			}
 			else if( classCode == ICFBamDbKeyHash256Gen.CLASS_CODE ) {
-				schema.getTableDbKeyHash256Gen().updateDbKeyHash256Gen( Authorization, (CFBamDbKeyHash256GenBuff)editPrev );
+				schema.getTableDbKeyHash256Gen().updateDbKeyHash256Gen( Authorization, (CFBamBuffDbKeyHash256Gen)editPrev );
 			}
 			else if( classCode == ICFBamDbKeyHash384Def.CLASS_CODE ) {
-				schema.getTableDbKeyHash384Def().updateDbKeyHash384Def( Authorization, (CFBamDbKeyHash384DefBuff)editPrev );
+				schema.getTableDbKeyHash384Def().updateDbKeyHash384Def( Authorization, (CFBamBuffDbKeyHash384Def)editPrev );
 			}
 			else if( classCode == ICFBamDbKeyHash384Col.CLASS_CODE ) {
-				schema.getTableDbKeyHash384Col().updateDbKeyHash384Col( Authorization, (CFBamDbKeyHash384ColBuff)editPrev );
+				schema.getTableDbKeyHash384Col().updateDbKeyHash384Col( Authorization, (CFBamBuffDbKeyHash384Col)editPrev );
 			}
 			else if( classCode == ICFBamDbKeyHash384Type.CLASS_CODE ) {
-				schema.getTableDbKeyHash384Type().updateDbKeyHash384Type( Authorization, (CFBamDbKeyHash384TypeBuff)editPrev );
+				schema.getTableDbKeyHash384Type().updateDbKeyHash384Type( Authorization, (CFBamBuffDbKeyHash384Type)editPrev );
 			}
 			else if( classCode == ICFBamDbKeyHash384Gen.CLASS_CODE ) {
-				schema.getTableDbKeyHash384Gen().updateDbKeyHash384Gen( Authorization, (CFBamDbKeyHash384GenBuff)editPrev );
+				schema.getTableDbKeyHash384Gen().updateDbKeyHash384Gen( Authorization, (CFBamBuffDbKeyHash384Gen)editPrev );
 			}
 			else if( classCode == ICFBamDbKeyHash512Def.CLASS_CODE ) {
-				schema.getTableDbKeyHash512Def().updateDbKeyHash512Def( Authorization, (CFBamDbKeyHash512DefBuff)editPrev );
+				schema.getTableDbKeyHash512Def().updateDbKeyHash512Def( Authorization, (CFBamBuffDbKeyHash512Def)editPrev );
 			}
 			else if( classCode == ICFBamDbKeyHash512Col.CLASS_CODE ) {
-				schema.getTableDbKeyHash512Col().updateDbKeyHash512Col( Authorization, (CFBamDbKeyHash512ColBuff)editPrev );
+				schema.getTableDbKeyHash512Col().updateDbKeyHash512Col( Authorization, (CFBamBuffDbKeyHash512Col)editPrev );
 			}
 			else if( classCode == ICFBamDbKeyHash512Type.CLASS_CODE ) {
-				schema.getTableDbKeyHash512Type().updateDbKeyHash512Type( Authorization, (CFBamDbKeyHash512TypeBuff)editPrev );
+				schema.getTableDbKeyHash512Type().updateDbKeyHash512Type( Authorization, (CFBamBuffDbKeyHash512Type)editPrev );
 			}
 			else if( classCode == ICFBamDbKeyHash512Gen.CLASS_CODE ) {
-				schema.getTableDbKeyHash512Gen().updateDbKeyHash512Gen( Authorization, (CFBamDbKeyHash512GenBuff)editPrev );
+				schema.getTableDbKeyHash512Gen().updateDbKeyHash512Gen( Authorization, (CFBamBuffDbKeyHash512Gen)editPrev );
 			}
 			else if( classCode == ICFBamStringDef.CLASS_CODE ) {
-				schema.getTableStringDef().updateStringDef( Authorization, (CFBamStringDefBuff)editPrev );
+				schema.getTableStringDef().updateStringDef( Authorization, (CFBamBuffStringDef)editPrev );
 			}
 			else if( classCode == ICFBamStringType.CLASS_CODE ) {
-				schema.getTableStringType().updateStringType( Authorization, (CFBamStringTypeBuff)editPrev );
+				schema.getTableStringType().updateStringType( Authorization, (CFBamBuffStringType)editPrev );
 			}
 			else if( classCode == ICFBamStringCol.CLASS_CODE ) {
-				schema.getTableStringCol().updateStringCol( Authorization, (CFBamStringColBuff)editPrev );
+				schema.getTableStringCol().updateStringCol( Authorization, (CFBamBuffStringCol)editPrev );
 			}
 			else if( classCode == ICFBamTZDateDef.CLASS_CODE ) {
-				schema.getTableTZDateDef().updateTZDateDef( Authorization, (CFBamTZDateDefBuff)editPrev );
+				schema.getTableTZDateDef().updateTZDateDef( Authorization, (CFBamBuffTZDateDef)editPrev );
 			}
 			else if( classCode == ICFBamTZDateType.CLASS_CODE ) {
-				schema.getTableTZDateType().updateTZDateType( Authorization, (CFBamTZDateTypeBuff)editPrev );
+				schema.getTableTZDateType().updateTZDateType( Authorization, (CFBamBuffTZDateType)editPrev );
 			}
 			else if( classCode == ICFBamTZDateCol.CLASS_CODE ) {
-				schema.getTableTZDateCol().updateTZDateCol( Authorization, (CFBamTZDateColBuff)editPrev );
+				schema.getTableTZDateCol().updateTZDateCol( Authorization, (CFBamBuffTZDateCol)editPrev );
 			}
 			else if( classCode == ICFBamTZTimeDef.CLASS_CODE ) {
-				schema.getTableTZTimeDef().updateTZTimeDef( Authorization, (CFBamTZTimeDefBuff)editPrev );
+				schema.getTableTZTimeDef().updateTZTimeDef( Authorization, (CFBamBuffTZTimeDef)editPrev );
 			}
 			else if( classCode == ICFBamTZTimeType.CLASS_CODE ) {
-				schema.getTableTZTimeType().updateTZTimeType( Authorization, (CFBamTZTimeTypeBuff)editPrev );
+				schema.getTableTZTimeType().updateTZTimeType( Authorization, (CFBamBuffTZTimeType)editPrev );
 			}
 			else if( classCode == ICFBamTZTimeCol.CLASS_CODE ) {
-				schema.getTableTZTimeCol().updateTZTimeCol( Authorization, (CFBamTZTimeColBuff)editPrev );
+				schema.getTableTZTimeCol().updateTZTimeCol( Authorization, (CFBamBuffTZTimeCol)editPrev );
 			}
 			else if( classCode == ICFBamTZTimestampDef.CLASS_CODE ) {
-				schema.getTableTZTimestampDef().updateTZTimestampDef( Authorization, (CFBamTZTimestampDefBuff)editPrev );
+				schema.getTableTZTimestampDef().updateTZTimestampDef( Authorization, (CFBamBuffTZTimestampDef)editPrev );
 			}
 			else if( classCode == ICFBamTZTimestampType.CLASS_CODE ) {
-				schema.getTableTZTimestampType().updateTZTimestampType( Authorization, (CFBamTZTimestampTypeBuff)editPrev );
+				schema.getTableTZTimestampType().updateTZTimestampType( Authorization, (CFBamBuffTZTimestampType)editPrev );
 			}
 			else if( classCode == ICFBamTZTimestampCol.CLASS_CODE ) {
-				schema.getTableTZTimestampCol().updateTZTimestampCol( Authorization, (CFBamTZTimestampColBuff)editPrev );
+				schema.getTableTZTimestampCol().updateTZTimestampCol( Authorization, (CFBamBuffTZTimestampCol)editPrev );
 			}
 			else if( classCode == ICFBamTextDef.CLASS_CODE ) {
-				schema.getTableTextDef().updateTextDef( Authorization, (CFBamTextDefBuff)editPrev );
+				schema.getTableTextDef().updateTextDef( Authorization, (CFBamBuffTextDef)editPrev );
 			}
 			else if( classCode == ICFBamTextType.CLASS_CODE ) {
-				schema.getTableTextType().updateTextType( Authorization, (CFBamTextTypeBuff)editPrev );
+				schema.getTableTextType().updateTextType( Authorization, (CFBamBuffTextType)editPrev );
 			}
 			else if( classCode == ICFBamTextCol.CLASS_CODE ) {
-				schema.getTableTextCol().updateTextCol( Authorization, (CFBamTextColBuff)editPrev );
+				schema.getTableTextCol().updateTextCol( Authorization, (CFBamBuffTextCol)editPrev );
 			}
 			else if( classCode == ICFBamTimeDef.CLASS_CODE ) {
-				schema.getTableTimeDef().updateTimeDef( Authorization, (CFBamTimeDefBuff)editPrev );
+				schema.getTableTimeDef().updateTimeDef( Authorization, (CFBamBuffTimeDef)editPrev );
 			}
 			else if( classCode == ICFBamTimeType.CLASS_CODE ) {
-				schema.getTableTimeType().updateTimeType( Authorization, (CFBamTimeTypeBuff)editPrev );
+				schema.getTableTimeType().updateTimeType( Authorization, (CFBamBuffTimeType)editPrev );
 			}
 			else if( classCode == ICFBamTimeCol.CLASS_CODE ) {
-				schema.getTableTimeCol().updateTimeCol( Authorization, (CFBamTimeColBuff)editPrev );
+				schema.getTableTimeCol().updateTimeCol( Authorization, (CFBamBuffTimeCol)editPrev );
 			}
 			else if( classCode == ICFBamTimestampDef.CLASS_CODE ) {
-				schema.getTableTimestampDef().updateTimestampDef( Authorization, (CFBamTimestampDefBuff)editPrev );
+				schema.getTableTimestampDef().updateTimestampDef( Authorization, (CFBamBuffTimestampDef)editPrev );
 			}
 			else if( classCode == ICFBamTimestampType.CLASS_CODE ) {
-				schema.getTableTimestampType().updateTimestampType( Authorization, (CFBamTimestampTypeBuff)editPrev );
+				schema.getTableTimestampType().updateTimestampType( Authorization, (CFBamBuffTimestampType)editPrev );
 			}
 			else if( classCode == ICFBamTimestampCol.CLASS_CODE ) {
-				schema.getTableTimestampCol().updateTimestampCol( Authorization, (CFBamTimestampColBuff)editPrev );
+				schema.getTableTimestampCol().updateTimestampCol( Authorization, (CFBamBuffTimestampCol)editPrev );
 			}
 			else if( classCode == ICFBamTokenDef.CLASS_CODE ) {
-				schema.getTableTokenDef().updateTokenDef( Authorization, (CFBamTokenDefBuff)editPrev );
+				schema.getTableTokenDef().updateTokenDef( Authorization, (CFBamBuffTokenDef)editPrev );
 			}
 			else if( classCode == ICFBamTokenType.CLASS_CODE ) {
-				schema.getTableTokenType().updateTokenType( Authorization, (CFBamTokenTypeBuff)editPrev );
+				schema.getTableTokenType().updateTokenType( Authorization, (CFBamBuffTokenType)editPrev );
 			}
 			else if( classCode == ICFBamTokenCol.CLASS_CODE ) {
-				schema.getTableTokenCol().updateTokenCol( Authorization, (CFBamTokenColBuff)editPrev );
+				schema.getTableTokenCol().updateTokenCol( Authorization, (CFBamBuffTokenCol)editPrev );
 			}
 			else if( classCode == ICFBamUInt16Def.CLASS_CODE ) {
-				schema.getTableUInt16Def().updateUInt16Def( Authorization, (CFBamUInt16DefBuff)editPrev );
+				schema.getTableUInt16Def().updateUInt16Def( Authorization, (CFBamBuffUInt16Def)editPrev );
 			}
 			else if( classCode == ICFBamUInt16Type.CLASS_CODE ) {
-				schema.getTableUInt16Type().updateUInt16Type( Authorization, (CFBamUInt16TypeBuff)editPrev );
+				schema.getTableUInt16Type().updateUInt16Type( Authorization, (CFBamBuffUInt16Type)editPrev );
 			}
 			else if( classCode == ICFBamUInt16Col.CLASS_CODE ) {
-				schema.getTableUInt16Col().updateUInt16Col( Authorization, (CFBamUInt16ColBuff)editPrev );
+				schema.getTableUInt16Col().updateUInt16Col( Authorization, (CFBamBuffUInt16Col)editPrev );
 			}
 			else if( classCode == ICFBamUInt32Def.CLASS_CODE ) {
-				schema.getTableUInt32Def().updateUInt32Def( Authorization, (CFBamUInt32DefBuff)editPrev );
+				schema.getTableUInt32Def().updateUInt32Def( Authorization, (CFBamBuffUInt32Def)editPrev );
 			}
 			else if( classCode == ICFBamUInt32Type.CLASS_CODE ) {
-				schema.getTableUInt32Type().updateUInt32Type( Authorization, (CFBamUInt32TypeBuff)editPrev );
+				schema.getTableUInt32Type().updateUInt32Type( Authorization, (CFBamBuffUInt32Type)editPrev );
 			}
 			else if( classCode == ICFBamUInt32Col.CLASS_CODE ) {
-				schema.getTableUInt32Col().updateUInt32Col( Authorization, (CFBamUInt32ColBuff)editPrev );
+				schema.getTableUInt32Col().updateUInt32Col( Authorization, (CFBamBuffUInt32Col)editPrev );
 			}
 			else if( classCode == ICFBamUInt64Def.CLASS_CODE ) {
-				schema.getTableUInt64Def().updateUInt64Def( Authorization, (CFBamUInt64DefBuff)editPrev );
+				schema.getTableUInt64Def().updateUInt64Def( Authorization, (CFBamBuffUInt64Def)editPrev );
 			}
 			else if( classCode == ICFBamUInt64Type.CLASS_CODE ) {
-				schema.getTableUInt64Type().updateUInt64Type( Authorization, (CFBamUInt64TypeBuff)editPrev );
+				schema.getTableUInt64Type().updateUInt64Type( Authorization, (CFBamBuffUInt64Type)editPrev );
 			}
 			else if( classCode == ICFBamUInt64Col.CLASS_CODE ) {
-				schema.getTableUInt64Col().updateUInt64Col( Authorization, (CFBamUInt64ColBuff)editPrev );
+				schema.getTableUInt64Col().updateUInt64Col( Authorization, (CFBamBuffUInt64Col)editPrev );
 			}
 			else if( classCode == ICFBamUuidDef.CLASS_CODE ) {
-				schema.getTableUuidDef().updateUuidDef( Authorization, (CFBamUuidDefBuff)editPrev );
+				schema.getTableUuidDef().updateUuidDef( Authorization, (CFBamBuffUuidDef)editPrev );
 			}
 			else if( classCode == ICFBamUuidType.CLASS_CODE ) {
-				schema.getTableUuidType().updateUuidType( Authorization, (CFBamUuidTypeBuff)editPrev );
+				schema.getTableUuidType().updateUuidType( Authorization, (CFBamBuffUuidType)editPrev );
 			}
 			else if( classCode == ICFBamUuidGen.CLASS_CODE ) {
-				schema.getTableUuidGen().updateUuidGen( Authorization, (CFBamUuidGenBuff)editPrev );
+				schema.getTableUuidGen().updateUuidGen( Authorization, (CFBamBuffUuidGen)editPrev );
 			}
 			else if( classCode == ICFBamUuidCol.CLASS_CODE ) {
-				schema.getTableUuidCol().updateUuidCol( Authorization, (CFBamUuidColBuff)editPrev );
+				schema.getTableUuidCol().updateUuidCol( Authorization, (CFBamBuffUuidCol)editPrev );
 			}
 			else if( classCode == ICFBamUuid6Def.CLASS_CODE ) {
-				schema.getTableUuid6Def().updateUuid6Def( Authorization, (CFBamUuid6DefBuff)editPrev );
+				schema.getTableUuid6Def().updateUuid6Def( Authorization, (CFBamBuffUuid6Def)editPrev );
 			}
 			else if( classCode == ICFBamUuid6Type.CLASS_CODE ) {
-				schema.getTableUuid6Type().updateUuid6Type( Authorization, (CFBamUuid6TypeBuff)editPrev );
+				schema.getTableUuid6Type().updateUuid6Type( Authorization, (CFBamBuffUuid6Type)editPrev );
 			}
 			else if( classCode == ICFBamUuid6Gen.CLASS_CODE ) {
-				schema.getTableUuid6Gen().updateUuid6Gen( Authorization, (CFBamUuid6GenBuff)editPrev );
+				schema.getTableUuid6Gen().updateUuid6Gen( Authorization, (CFBamBuffUuid6Gen)editPrev );
 			}
 			else if( classCode == ICFBamUuid6Col.CLASS_CODE ) {
-				schema.getTableUuid6Col().updateUuid6Col( Authorization, (CFBamUuid6ColBuff)editPrev );
+				schema.getTableUuid6Col().updateUuid6Col( Authorization, (CFBamBuffUuid6Col)editPrev );
 			}
 			else if( classCode == ICFBamTableCol.CLASS_CODE ) {
-				schema.getTableTableCol().updateTableCol( Authorization, (CFBamTableColBuff)editPrev );
+				schema.getTableTableCol().updateTableCol( Authorization, (CFBamBuffTableCol)editPrev );
 			}
 			else {
-				throw new CFLibUnsupportedClassException(getClass(), S_ProcName, 0, "-delete-edit-prev-", "Not " + Integer.toString(classCode));
+				throw new CFLibUnsupportedClassException(getClass(), S_ProcName, "-delete-edit-prev-", (Integer)classCode, "Classcode not recognized: " + Integer.toString(classCode));
 			}
 		}
 
-		CFBamValueBuff next = null;
+		CFBamBuffValue next = null;
 		if( ( nextId != null ) )
 		{
 			next = schema.getTableValue().readDerivedByIdIdx( Authorization,
@@ -6647,7 +6645,7 @@ public class CFBamRamInt64DefTable
 					0,
 					"next" );
 			}
-			CFBamValueBuff editNext;
+			CFBamBuffValue editNext;
 			classCode = next.getClassCode();
 			if( classCode.equals( "a809" ) ) {
 				editNext = schema.getFactoryValue().newBuff();
@@ -6968,7 +6966,7 @@ public class CFBamRamInt64DefTable
 				editNext = schema.getFactoryTableCol().newBuff();
 			}
 			else {
-				throw new CFLibUnsupportedClassException(getClass(), S_ProcName, 0, "-delete-update-next-", "Not " + Integer.toString(classCode));
+				throw new CFLibUnsupportedClassException(getClass(), S_ProcName, "-delete-update-next-", (Integer)classCode, "Classcode not recognized: " + Integer.toString(classCode));
 			}
 			editNext.set( next );
 			editNext.setOptionalPrevId( prevId );
@@ -6976,322 +6974,322 @@ public class CFBamRamInt64DefTable
 				schema.getTableValue().updateValue( Authorization, editNext );
 			}
 			else if( classCode == ICFBamAtom.CLASS_CODE ) {
-				schema.getTableAtom().updateAtom( Authorization, (CFBamAtomBuff)editNext );
+				schema.getTableAtom().updateAtom( Authorization, (CFBamBuffAtom)editNext );
 			}
 			else if( classCode == ICFBamBlobDef.CLASS_CODE ) {
-				schema.getTableBlobDef().updateBlobDef( Authorization, (CFBamBlobDefBuff)editNext );
+				schema.getTableBlobDef().updateBlobDef( Authorization, (CFBamBuffBlobDef)editNext );
 			}
 			else if( classCode == ICFBamBlobType.CLASS_CODE ) {
-				schema.getTableBlobType().updateBlobType( Authorization, (CFBamBlobTypeBuff)editNext );
+				schema.getTableBlobType().updateBlobType( Authorization, (CFBamBuffBlobType)editNext );
 			}
 			else if( classCode == ICFBamBlobCol.CLASS_CODE ) {
-				schema.getTableBlobCol().updateBlobCol( Authorization, (CFBamBlobColBuff)editNext );
+				schema.getTableBlobCol().updateBlobCol( Authorization, (CFBamBuffBlobCol)editNext );
 			}
 			else if( classCode == ICFBamBoolDef.CLASS_CODE ) {
-				schema.getTableBoolDef().updateBoolDef( Authorization, (CFBamBoolDefBuff)editNext );
+				schema.getTableBoolDef().updateBoolDef( Authorization, (CFBamBuffBoolDef)editNext );
 			}
 			else if( classCode == ICFBamBoolType.CLASS_CODE ) {
-				schema.getTableBoolType().updateBoolType( Authorization, (CFBamBoolTypeBuff)editNext );
+				schema.getTableBoolType().updateBoolType( Authorization, (CFBamBuffBoolType)editNext );
 			}
 			else if( classCode == ICFBamBoolCol.CLASS_CODE ) {
-				schema.getTableBoolCol().updateBoolCol( Authorization, (CFBamBoolColBuff)editNext );
+				schema.getTableBoolCol().updateBoolCol( Authorization, (CFBamBuffBoolCol)editNext );
 			}
 			else if( classCode == ICFBamDateDef.CLASS_CODE ) {
-				schema.getTableDateDef().updateDateDef( Authorization, (CFBamDateDefBuff)editNext );
+				schema.getTableDateDef().updateDateDef( Authorization, (CFBamBuffDateDef)editNext );
 			}
 			else if( classCode == ICFBamDateType.CLASS_CODE ) {
-				schema.getTableDateType().updateDateType( Authorization, (CFBamDateTypeBuff)editNext );
+				schema.getTableDateType().updateDateType( Authorization, (CFBamBuffDateType)editNext );
 			}
 			else if( classCode == ICFBamDateCol.CLASS_CODE ) {
-				schema.getTableDateCol().updateDateCol( Authorization, (CFBamDateColBuff)editNext );
+				schema.getTableDateCol().updateDateCol( Authorization, (CFBamBuffDateCol)editNext );
 			}
 			else if( classCode == ICFBamDoubleDef.CLASS_CODE ) {
-				schema.getTableDoubleDef().updateDoubleDef( Authorization, (CFBamDoubleDefBuff)editNext );
+				schema.getTableDoubleDef().updateDoubleDef( Authorization, (CFBamBuffDoubleDef)editNext );
 			}
 			else if( classCode == ICFBamDoubleType.CLASS_CODE ) {
-				schema.getTableDoubleType().updateDoubleType( Authorization, (CFBamDoubleTypeBuff)editNext );
+				schema.getTableDoubleType().updateDoubleType( Authorization, (CFBamBuffDoubleType)editNext );
 			}
 			else if( classCode == ICFBamDoubleCol.CLASS_CODE ) {
-				schema.getTableDoubleCol().updateDoubleCol( Authorization, (CFBamDoubleColBuff)editNext );
+				schema.getTableDoubleCol().updateDoubleCol( Authorization, (CFBamBuffDoubleCol)editNext );
 			}
 			else if( classCode == ICFBamFloatDef.CLASS_CODE ) {
-				schema.getTableFloatDef().updateFloatDef( Authorization, (CFBamFloatDefBuff)editNext );
+				schema.getTableFloatDef().updateFloatDef( Authorization, (CFBamBuffFloatDef)editNext );
 			}
 			else if( classCode == ICFBamFloatType.CLASS_CODE ) {
-				schema.getTableFloatType().updateFloatType( Authorization, (CFBamFloatTypeBuff)editNext );
+				schema.getTableFloatType().updateFloatType( Authorization, (CFBamBuffFloatType)editNext );
 			}
 			else if( classCode == ICFBamFloatCol.CLASS_CODE ) {
-				schema.getTableFloatCol().updateFloatCol( Authorization, (CFBamFloatColBuff)editNext );
+				schema.getTableFloatCol().updateFloatCol( Authorization, (CFBamBuffFloatCol)editNext );
 			}
 			else if( classCode == ICFBamInt16Def.CLASS_CODE ) {
-				schema.getTableInt16Def().updateInt16Def( Authorization, (CFBamInt16DefBuff)editNext );
+				schema.getTableInt16Def().updateInt16Def( Authorization, (CFBamBuffInt16Def)editNext );
 			}
 			else if( classCode == ICFBamInt16Type.CLASS_CODE ) {
-				schema.getTableInt16Type().updateInt16Type( Authorization, (CFBamInt16TypeBuff)editNext );
+				schema.getTableInt16Type().updateInt16Type( Authorization, (CFBamBuffInt16Type)editNext );
 			}
 			else if( classCode == ICFBamId16Gen.CLASS_CODE ) {
-				schema.getTableId16Gen().updateId16Gen( Authorization, (CFBamId16GenBuff)editNext );
+				schema.getTableId16Gen().updateId16Gen( Authorization, (CFBamBuffId16Gen)editNext );
 			}
 			else if( classCode == ICFBamEnumDef.CLASS_CODE ) {
-				schema.getTableEnumDef().updateEnumDef( Authorization, (CFBamEnumDefBuff)editNext );
+				schema.getTableEnumDef().updateEnumDef( Authorization, (CFBamBuffEnumDef)editNext );
 			}
 			else if( classCode == ICFBamEnumType.CLASS_CODE ) {
-				schema.getTableEnumType().updateEnumType( Authorization, (CFBamEnumTypeBuff)editNext );
+				schema.getTableEnumType().updateEnumType( Authorization, (CFBamBuffEnumType)editNext );
 			}
 			else if( classCode == ICFBamInt16Col.CLASS_CODE ) {
-				schema.getTableInt16Col().updateInt16Col( Authorization, (CFBamInt16ColBuff)editNext );
+				schema.getTableInt16Col().updateInt16Col( Authorization, (CFBamBuffInt16Col)editNext );
 			}
 			else if( classCode == ICFBamInt32Def.CLASS_CODE ) {
-				schema.getTableInt32Def().updateInt32Def( Authorization, (CFBamInt32DefBuff)editNext );
+				schema.getTableInt32Def().updateInt32Def( Authorization, (CFBamBuffInt32Def)editNext );
 			}
 			else if( classCode == ICFBamInt32Type.CLASS_CODE ) {
-				schema.getTableInt32Type().updateInt32Type( Authorization, (CFBamInt32TypeBuff)editNext );
+				schema.getTableInt32Type().updateInt32Type( Authorization, (CFBamBuffInt32Type)editNext );
 			}
 			else if( classCode == ICFBamId32Gen.CLASS_CODE ) {
-				schema.getTableId32Gen().updateId32Gen( Authorization, (CFBamId32GenBuff)editNext );
+				schema.getTableId32Gen().updateId32Gen( Authorization, (CFBamBuffId32Gen)editNext );
 			}
 			else if( classCode == ICFBamInt32Col.CLASS_CODE ) {
-				schema.getTableInt32Col().updateInt32Col( Authorization, (CFBamInt32ColBuff)editNext );
+				schema.getTableInt32Col().updateInt32Col( Authorization, (CFBamBuffInt32Col)editNext );
 			}
 			else if( classCode == ICFBamInt64Def.CLASS_CODE ) {
-				schema.getTableInt64Def().updateInt64Def( Authorization, (CFBamInt64DefBuff)editNext );
+				schema.getTableInt64Def().updateInt64Def( Authorization, (CFBamBuffInt64Def)editNext );
 			}
 			else if( classCode == ICFBamInt64Type.CLASS_CODE ) {
-				schema.getTableInt64Type().updateInt64Type( Authorization, (CFBamInt64TypeBuff)editNext );
+				schema.getTableInt64Type().updateInt64Type( Authorization, (CFBamBuffInt64Type)editNext );
 			}
 			else if( classCode == ICFBamId64Gen.CLASS_CODE ) {
-				schema.getTableId64Gen().updateId64Gen( Authorization, (CFBamId64GenBuff)editNext );
+				schema.getTableId64Gen().updateId64Gen( Authorization, (CFBamBuffId64Gen)editNext );
 			}
 			else if( classCode == ICFBamInt64Col.CLASS_CODE ) {
-				schema.getTableInt64Col().updateInt64Col( Authorization, (CFBamInt64ColBuff)editNext );
+				schema.getTableInt64Col().updateInt64Col( Authorization, (CFBamBuffInt64Col)editNext );
 			}
 			else if( classCode == ICFBamNmTokenDef.CLASS_CODE ) {
-				schema.getTableNmTokenDef().updateNmTokenDef( Authorization, (CFBamNmTokenDefBuff)editNext );
+				schema.getTableNmTokenDef().updateNmTokenDef( Authorization, (CFBamBuffNmTokenDef)editNext );
 			}
 			else if( classCode == ICFBamNmTokenType.CLASS_CODE ) {
-				schema.getTableNmTokenType().updateNmTokenType( Authorization, (CFBamNmTokenTypeBuff)editNext );
+				schema.getTableNmTokenType().updateNmTokenType( Authorization, (CFBamBuffNmTokenType)editNext );
 			}
 			else if( classCode == ICFBamNmTokenCol.CLASS_CODE ) {
-				schema.getTableNmTokenCol().updateNmTokenCol( Authorization, (CFBamNmTokenColBuff)editNext );
+				schema.getTableNmTokenCol().updateNmTokenCol( Authorization, (CFBamBuffNmTokenCol)editNext );
 			}
 			else if( classCode == ICFBamNmTokensDef.CLASS_CODE ) {
-				schema.getTableNmTokensDef().updateNmTokensDef( Authorization, (CFBamNmTokensDefBuff)editNext );
+				schema.getTableNmTokensDef().updateNmTokensDef( Authorization, (CFBamBuffNmTokensDef)editNext );
 			}
 			else if( classCode == ICFBamNmTokensType.CLASS_CODE ) {
-				schema.getTableNmTokensType().updateNmTokensType( Authorization, (CFBamNmTokensTypeBuff)editNext );
+				schema.getTableNmTokensType().updateNmTokensType( Authorization, (CFBamBuffNmTokensType)editNext );
 			}
 			else if( classCode == ICFBamNmTokensCol.CLASS_CODE ) {
-				schema.getTableNmTokensCol().updateNmTokensCol( Authorization, (CFBamNmTokensColBuff)editNext );
+				schema.getTableNmTokensCol().updateNmTokensCol( Authorization, (CFBamBuffNmTokensCol)editNext );
 			}
 			else if( classCode == ICFBamNumberDef.CLASS_CODE ) {
-				schema.getTableNumberDef().updateNumberDef( Authorization, (CFBamNumberDefBuff)editNext );
+				schema.getTableNumberDef().updateNumberDef( Authorization, (CFBamBuffNumberDef)editNext );
 			}
 			else if( classCode == ICFBamNumberType.CLASS_CODE ) {
-				schema.getTableNumberType().updateNumberType( Authorization, (CFBamNumberTypeBuff)editNext );
+				schema.getTableNumberType().updateNumberType( Authorization, (CFBamBuffNumberType)editNext );
 			}
 			else if( classCode == ICFBamNumberCol.CLASS_CODE ) {
-				schema.getTableNumberCol().updateNumberCol( Authorization, (CFBamNumberColBuff)editNext );
+				schema.getTableNumberCol().updateNumberCol( Authorization, (CFBamBuffNumberCol)editNext );
 			}
 			else if( classCode == ICFBamDbKeyHash128Def.CLASS_CODE ) {
-				schema.getTableDbKeyHash128Def().updateDbKeyHash128Def( Authorization, (CFBamDbKeyHash128DefBuff)editNext );
+				schema.getTableDbKeyHash128Def().updateDbKeyHash128Def( Authorization, (CFBamBuffDbKeyHash128Def)editNext );
 			}
 			else if( classCode == ICFBamDbKeyHash128Col.CLASS_CODE ) {
-				schema.getTableDbKeyHash128Col().updateDbKeyHash128Col( Authorization, (CFBamDbKeyHash128ColBuff)editNext );
+				schema.getTableDbKeyHash128Col().updateDbKeyHash128Col( Authorization, (CFBamBuffDbKeyHash128Col)editNext );
 			}
 			else if( classCode == ICFBamDbKeyHash128Type.CLASS_CODE ) {
-				schema.getTableDbKeyHash128Type().updateDbKeyHash128Type( Authorization, (CFBamDbKeyHash128TypeBuff)editNext );
+				schema.getTableDbKeyHash128Type().updateDbKeyHash128Type( Authorization, (CFBamBuffDbKeyHash128Type)editNext );
 			}
 			else if( classCode == ICFBamDbKeyHash128Gen.CLASS_CODE ) {
-				schema.getTableDbKeyHash128Gen().updateDbKeyHash128Gen( Authorization, (CFBamDbKeyHash128GenBuff)editNext );
+				schema.getTableDbKeyHash128Gen().updateDbKeyHash128Gen( Authorization, (CFBamBuffDbKeyHash128Gen)editNext );
 			}
 			else if( classCode == ICFBamDbKeyHash160Def.CLASS_CODE ) {
-				schema.getTableDbKeyHash160Def().updateDbKeyHash160Def( Authorization, (CFBamDbKeyHash160DefBuff)editNext );
+				schema.getTableDbKeyHash160Def().updateDbKeyHash160Def( Authorization, (CFBamBuffDbKeyHash160Def)editNext );
 			}
 			else if( classCode == ICFBamDbKeyHash160Col.CLASS_CODE ) {
-				schema.getTableDbKeyHash160Col().updateDbKeyHash160Col( Authorization, (CFBamDbKeyHash160ColBuff)editNext );
+				schema.getTableDbKeyHash160Col().updateDbKeyHash160Col( Authorization, (CFBamBuffDbKeyHash160Col)editNext );
 			}
 			else if( classCode == ICFBamDbKeyHash160Type.CLASS_CODE ) {
-				schema.getTableDbKeyHash160Type().updateDbKeyHash160Type( Authorization, (CFBamDbKeyHash160TypeBuff)editNext );
+				schema.getTableDbKeyHash160Type().updateDbKeyHash160Type( Authorization, (CFBamBuffDbKeyHash160Type)editNext );
 			}
 			else if( classCode == ICFBamDbKeyHash160Gen.CLASS_CODE ) {
-				schema.getTableDbKeyHash160Gen().updateDbKeyHash160Gen( Authorization, (CFBamDbKeyHash160GenBuff)editNext );
+				schema.getTableDbKeyHash160Gen().updateDbKeyHash160Gen( Authorization, (CFBamBuffDbKeyHash160Gen)editNext );
 			}
 			else if( classCode == ICFBamDbKeyHash224Def.CLASS_CODE ) {
-				schema.getTableDbKeyHash224Def().updateDbKeyHash224Def( Authorization, (CFBamDbKeyHash224DefBuff)editNext );
+				schema.getTableDbKeyHash224Def().updateDbKeyHash224Def( Authorization, (CFBamBuffDbKeyHash224Def)editNext );
 			}
 			else if( classCode == ICFBamDbKeyHash224Col.CLASS_CODE ) {
-				schema.getTableDbKeyHash224Col().updateDbKeyHash224Col( Authorization, (CFBamDbKeyHash224ColBuff)editNext );
+				schema.getTableDbKeyHash224Col().updateDbKeyHash224Col( Authorization, (CFBamBuffDbKeyHash224Col)editNext );
 			}
 			else if( classCode == ICFBamDbKeyHash224Type.CLASS_CODE ) {
-				schema.getTableDbKeyHash224Type().updateDbKeyHash224Type( Authorization, (CFBamDbKeyHash224TypeBuff)editNext );
+				schema.getTableDbKeyHash224Type().updateDbKeyHash224Type( Authorization, (CFBamBuffDbKeyHash224Type)editNext );
 			}
 			else if( classCode == ICFBamDbKeyHash224Gen.CLASS_CODE ) {
-				schema.getTableDbKeyHash224Gen().updateDbKeyHash224Gen( Authorization, (CFBamDbKeyHash224GenBuff)editNext );
+				schema.getTableDbKeyHash224Gen().updateDbKeyHash224Gen( Authorization, (CFBamBuffDbKeyHash224Gen)editNext );
 			}
 			else if( classCode == ICFBamDbKeyHash256Def.CLASS_CODE ) {
-				schema.getTableDbKeyHash256Def().updateDbKeyHash256Def( Authorization, (CFBamDbKeyHash256DefBuff)editNext );
+				schema.getTableDbKeyHash256Def().updateDbKeyHash256Def( Authorization, (CFBamBuffDbKeyHash256Def)editNext );
 			}
 			else if( classCode == ICFBamDbKeyHash256Col.CLASS_CODE ) {
-				schema.getTableDbKeyHash256Col().updateDbKeyHash256Col( Authorization, (CFBamDbKeyHash256ColBuff)editNext );
+				schema.getTableDbKeyHash256Col().updateDbKeyHash256Col( Authorization, (CFBamBuffDbKeyHash256Col)editNext );
 			}
 			else if( classCode == ICFBamDbKeyHash256Type.CLASS_CODE ) {
-				schema.getTableDbKeyHash256Type().updateDbKeyHash256Type( Authorization, (CFBamDbKeyHash256TypeBuff)editNext );
+				schema.getTableDbKeyHash256Type().updateDbKeyHash256Type( Authorization, (CFBamBuffDbKeyHash256Type)editNext );
 			}
 			else if( classCode == ICFBamDbKeyHash256Gen.CLASS_CODE ) {
-				schema.getTableDbKeyHash256Gen().updateDbKeyHash256Gen( Authorization, (CFBamDbKeyHash256GenBuff)editNext );
+				schema.getTableDbKeyHash256Gen().updateDbKeyHash256Gen( Authorization, (CFBamBuffDbKeyHash256Gen)editNext );
 			}
 			else if( classCode == ICFBamDbKeyHash384Def.CLASS_CODE ) {
-				schema.getTableDbKeyHash384Def().updateDbKeyHash384Def( Authorization, (CFBamDbKeyHash384DefBuff)editNext );
+				schema.getTableDbKeyHash384Def().updateDbKeyHash384Def( Authorization, (CFBamBuffDbKeyHash384Def)editNext );
 			}
 			else if( classCode == ICFBamDbKeyHash384Col.CLASS_CODE ) {
-				schema.getTableDbKeyHash384Col().updateDbKeyHash384Col( Authorization, (CFBamDbKeyHash384ColBuff)editNext );
+				schema.getTableDbKeyHash384Col().updateDbKeyHash384Col( Authorization, (CFBamBuffDbKeyHash384Col)editNext );
 			}
 			else if( classCode == ICFBamDbKeyHash384Type.CLASS_CODE ) {
-				schema.getTableDbKeyHash384Type().updateDbKeyHash384Type( Authorization, (CFBamDbKeyHash384TypeBuff)editNext );
+				schema.getTableDbKeyHash384Type().updateDbKeyHash384Type( Authorization, (CFBamBuffDbKeyHash384Type)editNext );
 			}
 			else if( classCode == ICFBamDbKeyHash384Gen.CLASS_CODE ) {
-				schema.getTableDbKeyHash384Gen().updateDbKeyHash384Gen( Authorization, (CFBamDbKeyHash384GenBuff)editNext );
+				schema.getTableDbKeyHash384Gen().updateDbKeyHash384Gen( Authorization, (CFBamBuffDbKeyHash384Gen)editNext );
 			}
 			else if( classCode == ICFBamDbKeyHash512Def.CLASS_CODE ) {
-				schema.getTableDbKeyHash512Def().updateDbKeyHash512Def( Authorization, (CFBamDbKeyHash512DefBuff)editNext );
+				schema.getTableDbKeyHash512Def().updateDbKeyHash512Def( Authorization, (CFBamBuffDbKeyHash512Def)editNext );
 			}
 			else if( classCode == ICFBamDbKeyHash512Col.CLASS_CODE ) {
-				schema.getTableDbKeyHash512Col().updateDbKeyHash512Col( Authorization, (CFBamDbKeyHash512ColBuff)editNext );
+				schema.getTableDbKeyHash512Col().updateDbKeyHash512Col( Authorization, (CFBamBuffDbKeyHash512Col)editNext );
 			}
 			else if( classCode == ICFBamDbKeyHash512Type.CLASS_CODE ) {
-				schema.getTableDbKeyHash512Type().updateDbKeyHash512Type( Authorization, (CFBamDbKeyHash512TypeBuff)editNext );
+				schema.getTableDbKeyHash512Type().updateDbKeyHash512Type( Authorization, (CFBamBuffDbKeyHash512Type)editNext );
 			}
 			else if( classCode == ICFBamDbKeyHash512Gen.CLASS_CODE ) {
-				schema.getTableDbKeyHash512Gen().updateDbKeyHash512Gen( Authorization, (CFBamDbKeyHash512GenBuff)editNext );
+				schema.getTableDbKeyHash512Gen().updateDbKeyHash512Gen( Authorization, (CFBamBuffDbKeyHash512Gen)editNext );
 			}
 			else if( classCode == ICFBamStringDef.CLASS_CODE ) {
-				schema.getTableStringDef().updateStringDef( Authorization, (CFBamStringDefBuff)editNext );
+				schema.getTableStringDef().updateStringDef( Authorization, (CFBamBuffStringDef)editNext );
 			}
 			else if( classCode == ICFBamStringType.CLASS_CODE ) {
-				schema.getTableStringType().updateStringType( Authorization, (CFBamStringTypeBuff)editNext );
+				schema.getTableStringType().updateStringType( Authorization, (CFBamBuffStringType)editNext );
 			}
 			else if( classCode == ICFBamStringCol.CLASS_CODE ) {
-				schema.getTableStringCol().updateStringCol( Authorization, (CFBamStringColBuff)editNext );
+				schema.getTableStringCol().updateStringCol( Authorization, (CFBamBuffStringCol)editNext );
 			}
 			else if( classCode == ICFBamTZDateDef.CLASS_CODE ) {
-				schema.getTableTZDateDef().updateTZDateDef( Authorization, (CFBamTZDateDefBuff)editNext );
+				schema.getTableTZDateDef().updateTZDateDef( Authorization, (CFBamBuffTZDateDef)editNext );
 			}
 			else if( classCode == ICFBamTZDateType.CLASS_CODE ) {
-				schema.getTableTZDateType().updateTZDateType( Authorization, (CFBamTZDateTypeBuff)editNext );
+				schema.getTableTZDateType().updateTZDateType( Authorization, (CFBamBuffTZDateType)editNext );
 			}
 			else if( classCode == ICFBamTZDateCol.CLASS_CODE ) {
-				schema.getTableTZDateCol().updateTZDateCol( Authorization, (CFBamTZDateColBuff)editNext );
+				schema.getTableTZDateCol().updateTZDateCol( Authorization, (CFBamBuffTZDateCol)editNext );
 			}
 			else if( classCode == ICFBamTZTimeDef.CLASS_CODE ) {
-				schema.getTableTZTimeDef().updateTZTimeDef( Authorization, (CFBamTZTimeDefBuff)editNext );
+				schema.getTableTZTimeDef().updateTZTimeDef( Authorization, (CFBamBuffTZTimeDef)editNext );
 			}
 			else if( classCode == ICFBamTZTimeType.CLASS_CODE ) {
-				schema.getTableTZTimeType().updateTZTimeType( Authorization, (CFBamTZTimeTypeBuff)editNext );
+				schema.getTableTZTimeType().updateTZTimeType( Authorization, (CFBamBuffTZTimeType)editNext );
 			}
 			else if( classCode == ICFBamTZTimeCol.CLASS_CODE ) {
-				schema.getTableTZTimeCol().updateTZTimeCol( Authorization, (CFBamTZTimeColBuff)editNext );
+				schema.getTableTZTimeCol().updateTZTimeCol( Authorization, (CFBamBuffTZTimeCol)editNext );
 			}
 			else if( classCode == ICFBamTZTimestampDef.CLASS_CODE ) {
-				schema.getTableTZTimestampDef().updateTZTimestampDef( Authorization, (CFBamTZTimestampDefBuff)editNext );
+				schema.getTableTZTimestampDef().updateTZTimestampDef( Authorization, (CFBamBuffTZTimestampDef)editNext );
 			}
 			else if( classCode == ICFBamTZTimestampType.CLASS_CODE ) {
-				schema.getTableTZTimestampType().updateTZTimestampType( Authorization, (CFBamTZTimestampTypeBuff)editNext );
+				schema.getTableTZTimestampType().updateTZTimestampType( Authorization, (CFBamBuffTZTimestampType)editNext );
 			}
 			else if( classCode == ICFBamTZTimestampCol.CLASS_CODE ) {
-				schema.getTableTZTimestampCol().updateTZTimestampCol( Authorization, (CFBamTZTimestampColBuff)editNext );
+				schema.getTableTZTimestampCol().updateTZTimestampCol( Authorization, (CFBamBuffTZTimestampCol)editNext );
 			}
 			else if( classCode == ICFBamTextDef.CLASS_CODE ) {
-				schema.getTableTextDef().updateTextDef( Authorization, (CFBamTextDefBuff)editNext );
+				schema.getTableTextDef().updateTextDef( Authorization, (CFBamBuffTextDef)editNext );
 			}
 			else if( classCode == ICFBamTextType.CLASS_CODE ) {
-				schema.getTableTextType().updateTextType( Authorization, (CFBamTextTypeBuff)editNext );
+				schema.getTableTextType().updateTextType( Authorization, (CFBamBuffTextType)editNext );
 			}
 			else if( classCode == ICFBamTextCol.CLASS_CODE ) {
-				schema.getTableTextCol().updateTextCol( Authorization, (CFBamTextColBuff)editNext );
+				schema.getTableTextCol().updateTextCol( Authorization, (CFBamBuffTextCol)editNext );
 			}
 			else if( classCode == ICFBamTimeDef.CLASS_CODE ) {
-				schema.getTableTimeDef().updateTimeDef( Authorization, (CFBamTimeDefBuff)editNext );
+				schema.getTableTimeDef().updateTimeDef( Authorization, (CFBamBuffTimeDef)editNext );
 			}
 			else if( classCode == ICFBamTimeType.CLASS_CODE ) {
-				schema.getTableTimeType().updateTimeType( Authorization, (CFBamTimeTypeBuff)editNext );
+				schema.getTableTimeType().updateTimeType( Authorization, (CFBamBuffTimeType)editNext );
 			}
 			else if( classCode == ICFBamTimeCol.CLASS_CODE ) {
-				schema.getTableTimeCol().updateTimeCol( Authorization, (CFBamTimeColBuff)editNext );
+				schema.getTableTimeCol().updateTimeCol( Authorization, (CFBamBuffTimeCol)editNext );
 			}
 			else if( classCode == ICFBamTimestampDef.CLASS_CODE ) {
-				schema.getTableTimestampDef().updateTimestampDef( Authorization, (CFBamTimestampDefBuff)editNext );
+				schema.getTableTimestampDef().updateTimestampDef( Authorization, (CFBamBuffTimestampDef)editNext );
 			}
 			else if( classCode == ICFBamTimestampType.CLASS_CODE ) {
-				schema.getTableTimestampType().updateTimestampType( Authorization, (CFBamTimestampTypeBuff)editNext );
+				schema.getTableTimestampType().updateTimestampType( Authorization, (CFBamBuffTimestampType)editNext );
 			}
 			else if( classCode == ICFBamTimestampCol.CLASS_CODE ) {
-				schema.getTableTimestampCol().updateTimestampCol( Authorization, (CFBamTimestampColBuff)editNext );
+				schema.getTableTimestampCol().updateTimestampCol( Authorization, (CFBamBuffTimestampCol)editNext );
 			}
 			else if( classCode == ICFBamTokenDef.CLASS_CODE ) {
-				schema.getTableTokenDef().updateTokenDef( Authorization, (CFBamTokenDefBuff)editNext );
+				schema.getTableTokenDef().updateTokenDef( Authorization, (CFBamBuffTokenDef)editNext );
 			}
 			else if( classCode == ICFBamTokenType.CLASS_CODE ) {
-				schema.getTableTokenType().updateTokenType( Authorization, (CFBamTokenTypeBuff)editNext );
+				schema.getTableTokenType().updateTokenType( Authorization, (CFBamBuffTokenType)editNext );
 			}
 			else if( classCode == ICFBamTokenCol.CLASS_CODE ) {
-				schema.getTableTokenCol().updateTokenCol( Authorization, (CFBamTokenColBuff)editNext );
+				schema.getTableTokenCol().updateTokenCol( Authorization, (CFBamBuffTokenCol)editNext );
 			}
 			else if( classCode == ICFBamUInt16Def.CLASS_CODE ) {
-				schema.getTableUInt16Def().updateUInt16Def( Authorization, (CFBamUInt16DefBuff)editNext );
+				schema.getTableUInt16Def().updateUInt16Def( Authorization, (CFBamBuffUInt16Def)editNext );
 			}
 			else if( classCode == ICFBamUInt16Type.CLASS_CODE ) {
-				schema.getTableUInt16Type().updateUInt16Type( Authorization, (CFBamUInt16TypeBuff)editNext );
+				schema.getTableUInt16Type().updateUInt16Type( Authorization, (CFBamBuffUInt16Type)editNext );
 			}
 			else if( classCode == ICFBamUInt16Col.CLASS_CODE ) {
-				schema.getTableUInt16Col().updateUInt16Col( Authorization, (CFBamUInt16ColBuff)editNext );
+				schema.getTableUInt16Col().updateUInt16Col( Authorization, (CFBamBuffUInt16Col)editNext );
 			}
 			else if( classCode == ICFBamUInt32Def.CLASS_CODE ) {
-				schema.getTableUInt32Def().updateUInt32Def( Authorization, (CFBamUInt32DefBuff)editNext );
+				schema.getTableUInt32Def().updateUInt32Def( Authorization, (CFBamBuffUInt32Def)editNext );
 			}
 			else if( classCode == ICFBamUInt32Type.CLASS_CODE ) {
-				schema.getTableUInt32Type().updateUInt32Type( Authorization, (CFBamUInt32TypeBuff)editNext );
+				schema.getTableUInt32Type().updateUInt32Type( Authorization, (CFBamBuffUInt32Type)editNext );
 			}
 			else if( classCode == ICFBamUInt32Col.CLASS_CODE ) {
-				schema.getTableUInt32Col().updateUInt32Col( Authorization, (CFBamUInt32ColBuff)editNext );
+				schema.getTableUInt32Col().updateUInt32Col( Authorization, (CFBamBuffUInt32Col)editNext );
 			}
 			else if( classCode == ICFBamUInt64Def.CLASS_CODE ) {
-				schema.getTableUInt64Def().updateUInt64Def( Authorization, (CFBamUInt64DefBuff)editNext );
+				schema.getTableUInt64Def().updateUInt64Def( Authorization, (CFBamBuffUInt64Def)editNext );
 			}
 			else if( classCode == ICFBamUInt64Type.CLASS_CODE ) {
-				schema.getTableUInt64Type().updateUInt64Type( Authorization, (CFBamUInt64TypeBuff)editNext );
+				schema.getTableUInt64Type().updateUInt64Type( Authorization, (CFBamBuffUInt64Type)editNext );
 			}
 			else if( classCode == ICFBamUInt64Col.CLASS_CODE ) {
-				schema.getTableUInt64Col().updateUInt64Col( Authorization, (CFBamUInt64ColBuff)editNext );
+				schema.getTableUInt64Col().updateUInt64Col( Authorization, (CFBamBuffUInt64Col)editNext );
 			}
 			else if( classCode == ICFBamUuidDef.CLASS_CODE ) {
-				schema.getTableUuidDef().updateUuidDef( Authorization, (CFBamUuidDefBuff)editNext );
+				schema.getTableUuidDef().updateUuidDef( Authorization, (CFBamBuffUuidDef)editNext );
 			}
 			else if( classCode == ICFBamUuidType.CLASS_CODE ) {
-				schema.getTableUuidType().updateUuidType( Authorization, (CFBamUuidTypeBuff)editNext );
+				schema.getTableUuidType().updateUuidType( Authorization, (CFBamBuffUuidType)editNext );
 			}
 			else if( classCode == ICFBamUuidGen.CLASS_CODE ) {
-				schema.getTableUuidGen().updateUuidGen( Authorization, (CFBamUuidGenBuff)editNext );
+				schema.getTableUuidGen().updateUuidGen( Authorization, (CFBamBuffUuidGen)editNext );
 			}
 			else if( classCode == ICFBamUuidCol.CLASS_CODE ) {
-				schema.getTableUuidCol().updateUuidCol( Authorization, (CFBamUuidColBuff)editNext );
+				schema.getTableUuidCol().updateUuidCol( Authorization, (CFBamBuffUuidCol)editNext );
 			}
 			else if( classCode == ICFBamUuid6Def.CLASS_CODE ) {
-				schema.getTableUuid6Def().updateUuid6Def( Authorization, (CFBamUuid6DefBuff)editNext );
+				schema.getTableUuid6Def().updateUuid6Def( Authorization, (CFBamBuffUuid6Def)editNext );
 			}
 			else if( classCode == ICFBamUuid6Type.CLASS_CODE ) {
-				schema.getTableUuid6Type().updateUuid6Type( Authorization, (CFBamUuid6TypeBuff)editNext );
+				schema.getTableUuid6Type().updateUuid6Type( Authorization, (CFBamBuffUuid6Type)editNext );
 			}
 			else if( classCode == ICFBamUuid6Gen.CLASS_CODE ) {
-				schema.getTableUuid6Gen().updateUuid6Gen( Authorization, (CFBamUuid6GenBuff)editNext );
+				schema.getTableUuid6Gen().updateUuid6Gen( Authorization, (CFBamBuffUuid6Gen)editNext );
 			}
 			else if( classCode == ICFBamUuid6Col.CLASS_CODE ) {
-				schema.getTableUuid6Col().updateUuid6Col( Authorization, (CFBamUuid6ColBuff)editNext );
+				schema.getTableUuid6Col().updateUuid6Col( Authorization, (CFBamBuffUuid6Col)editNext );
 			}
 			else if( classCode == ICFBamTableCol.CLASS_CODE ) {
-				schema.getTableTableCol().updateTableCol( Authorization, (CFBamTableColBuff)editNext );
+				schema.getTableTableCol().updateTableCol( Authorization, (CFBamBuffTableCol)editNext );
 			}
 			else {
-				throw new CFLibUnsupportedClassException(getClass(), S_ProcName, 0, "-delete-edit-next-", "Not " + Integer.toString(classCode));
+				throw new CFLibUnsupportedClassException(getClass(), S_ProcName, "-delete-edit-next-", (Integer)classCode, "Classcode not recognized: " + Integer.toString(classCode));
 			}
 		}
 
@@ -7378,7 +7376,7 @@ public class CFBamRamInt64DefTable
 				schema.getTableInt64Col().deleteInt64Col( Authorization, (ICFBamInt64Col)cur );
 			}
 			else {
-				throw new CFLibUnsupportedClassException(getClass(), S_ProcName, 0, "-delete-by-suffix-class-walker-", "Not " + Integer.toString(classCode));
+				throw new CFLibUnsupportedClassException(getClass(), S_ProcName, "-delete-by-suffix-class-walker-", (Integer)classCode, "Classcode not recognized: " + Integer.toString(classCode));
 			}
 		}
 	}
@@ -7431,7 +7429,7 @@ public class CFBamRamInt64DefTable
 				schema.getTableInt64Col().deleteInt64Col( Authorization, (ICFBamInt64Col)cur );
 			}
 			else {
-				throw new CFLibUnsupportedClassException(getClass(), S_ProcName, 0, "-delete-by-suffix-class-walker-", "Not " + Integer.toString(classCode));
+				throw new CFLibUnsupportedClassException(getClass(), S_ProcName, "-delete-by-suffix-class-walker-", (Integer)classCode, "Classcode not recognized: " + Integer.toString(classCode));
 			}
 		}
 	}
@@ -7481,7 +7479,7 @@ public class CFBamRamInt64DefTable
 				schema.getTableInt64Col().deleteInt64Col( Authorization, (ICFBamInt64Col)cur );
 			}
 			else {
-				throw new CFLibUnsupportedClassException(getClass(), S_ProcName, 0, "-delete-by-suffix-class-walker-", "Not " + Integer.toString(classCode));
+				throw new CFLibUnsupportedClassException(getClass(), S_ProcName, "-delete-by-suffix-class-walker-", (Integer)classCode, "Classcode not recognized: " + Integer.toString(classCode));
 			}
 		}
 	}
@@ -7533,7 +7531,7 @@ public class CFBamRamInt64DefTable
 				schema.getTableInt64Col().deleteInt64Col( Authorization, (ICFBamInt64Col)cur );
 			}
 			else {
-				throw new CFLibUnsupportedClassException(getClass(), S_ProcName, 0, "-delete-by-suffix-class-walker-", "Not " + Integer.toString(classCode));
+				throw new CFLibUnsupportedClassException(getClass(), S_ProcName, "-delete-by-suffix-class-walker-", (Integer)classCode, "Classcode not recognized: " + Integer.toString(classCode));
 			}
 		}
 	}
@@ -7585,7 +7583,7 @@ public class CFBamRamInt64DefTable
 				schema.getTableInt64Col().deleteInt64Col( Authorization, (ICFBamInt64Col)cur );
 			}
 			else {
-				throw new CFLibUnsupportedClassException(getClass(), S_ProcName, 0, "-delete-by-suffix-class-walker-", "Not " + Integer.toString(classCode));
+				throw new CFLibUnsupportedClassException(getClass(), S_ProcName, "-delete-by-suffix-class-walker-", (Integer)classCode, "Classcode not recognized: " + Integer.toString(classCode));
 			}
 		}
 	}
@@ -7637,7 +7635,7 @@ public class CFBamRamInt64DefTable
 				schema.getTableInt64Col().deleteInt64Col( Authorization, (ICFBamInt64Col)cur );
 			}
 			else {
-				throw new CFLibUnsupportedClassException(getClass(), S_ProcName, 0, "-delete-by-suffix-class-walker-", "Not " + Integer.toString(classCode));
+				throw new CFLibUnsupportedClassException(getClass(), S_ProcName, "-delete-by-suffix-class-walker-", (Integer)classCode, "Classcode not recognized: " + Integer.toString(classCode));
 			}
 		}
 	}
@@ -7692,7 +7690,7 @@ public class CFBamRamInt64DefTable
 				schema.getTableInt64Col().deleteInt64Col( Authorization, (ICFBamInt64Col)cur );
 			}
 			else {
-				throw new CFLibUnsupportedClassException(getClass(), S_ProcName, 0, "-delete-by-suffix-class-walker-", "Not " + Integer.toString(classCode));
+				throw new CFLibUnsupportedClassException(getClass(), S_ProcName, "-delete-by-suffix-class-walker-", (Integer)classCode, "Classcode not recognized: " + Integer.toString(classCode));
 			}
 		}
 	}
@@ -7747,7 +7745,7 @@ public class CFBamRamInt64DefTable
 				schema.getTableInt64Col().deleteInt64Col( Authorization, (ICFBamInt64Col)cur );
 			}
 			else {
-				throw new CFLibUnsupportedClassException(getClass(), S_ProcName, 0, "-delete-by-suffix-class-walker-", "Not " + Integer.toString(classCode));
+				throw new CFLibUnsupportedClassException(getClass(), S_ProcName, "-delete-by-suffix-class-walker-", (Integer)classCode, "Classcode not recognized: " + Integer.toString(classCode));
 			}
 		}
 	}

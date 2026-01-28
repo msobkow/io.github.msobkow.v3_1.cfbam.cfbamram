@@ -139,7 +139,7 @@ public class CFBamRamServerListFuncTable
 				return( retbuff );
 			}
 			else {
-				throw new CFLibUnsupportedClassException(getClass(), S_ProcName, 0, "-create-buff-cloning-", "Not " + Integer.toString(classCode));
+				throw new CFLibUnsupportedClassException(getClass(), S_ProcName, "-create-buff-cloning-", (Integer)classCode, "Classcode not recognized: " + Integer.toString(classCode));
 			}
 		}
 	}
@@ -175,7 +175,7 @@ public class CFBamRamServerListFuncTable
 	public ICFBamServerListFunc[] readAllDerived( ICFSecAuthorization Authorization ) {
 		final String S_ProcName = "CFBamRamServerListFunc.readAllDerived";
 		ICFBamServerListFunc[] retList = new ICFBamServerListFunc[ dictByPKey.values().size() ];
-		Iterator< ICFBamServerListFunc > iter = dictByPKey.values().iterator();
+		Iterator< CFBamBuffServerListFunc > iter = dictByPKey.values().iterator();
 		int idx = 0;
 		while( iter.hasNext() ) {
 			retList[ idx++ ] = iter.next();
@@ -280,7 +280,7 @@ public class CFBamRamServerListFuncTable
 			Map< CFLibDbKeyHash256, CFBamBuffServerListFunc > subdictRetTblIdx
 				= dictByRetTblIdx.get( key );
 			recArray = new ICFBamServerListFunc[ subdictRetTblIdx.size() ];
-			Iterator< ICFBamServerListFunc > iter = subdictRetTblIdx.values().iterator();
+			Iterator< CFBamBuffServerListFunc > iter = subdictRetTblIdx.values().iterator();
 			int idx = 0;
 			while( iter.hasNext() ) {
 				recArray[ idx++ ] = iter.next();
@@ -502,19 +502,17 @@ public class CFBamRamServerListFuncTable
 	}
 
 	public ICFBamServerListFunc updateServerListFunc( ICFSecAuthorization Authorization,
-		ICFBamServerListFunc Buff )
+		ICFBamServerListFunc iBuff )
 	{
-		ICFBamServerListFunc repl = schema.getTableServerMethod().updateServerMethod( Authorization,
-			Buff );
-		if (repl != Buff) {
-			throw new CFLibInvalidStateException(getClass(), S_ProcName, "repl != Buff", "repl != Buff");
-		}
+		CFBamBuffServerListFunc Buff = (CFBamBuffServerListFunc)schema.getTableServerMethod().updateServerMethod( Authorization,	Buff );
 		CFLibDbKeyHash256 pkey = Buff.getPKey();
-		ICFBamServerListFunc existing = dictByPKey.get( pkey );
+		CFBamBuffServerListFunc existing = dictByPKey.get( pkey );
 		if( existing == null ) {
 			throw new CFLibStaleCacheDetectedException( getClass(),
 				"updateServerListFunc",
 				"Existing record not found",
+				"Existing record not found",
+				"ServerListFunc",
 				"ServerListFunc",
 				pkey );
 		}
@@ -569,13 +567,13 @@ public class CFBamRamServerListFuncTable
 	}
 
 	public void deleteServerListFunc( ICFSecAuthorization Authorization,
-		ICFBamServerListFunc Buff )
+		ICFBamServerListFunc iBuff )
 	{
 		final String S_ProcName = "CFBamRamServerListFuncTable.deleteServerListFunc() ";
-		String classCode;
-		CFLibDbKeyHash256 pkey = schema.getFactoryScope().newPKey();
-		pkey.setRequiredId( Buff.getRequiredId() );
-		ICFBamServerListFunc existing = dictByPKey.get( pkey );
+		CFBamBuffServerListFunc Buff = ensureRec(iBuff);
+		int classCode;
+		CFLibDbKeyHash256 pkey = (CFLibDbKeyHash256)(Buff.getPKey());
+		CFBamBuffServerListFunc existing = dictByPKey.get( pkey );
 		if( existing == null ) {
 			return;
 		}

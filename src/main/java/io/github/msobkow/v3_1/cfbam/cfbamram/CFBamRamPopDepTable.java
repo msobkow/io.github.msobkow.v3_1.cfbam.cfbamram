@@ -195,7 +195,7 @@ public class CFBamRamPopDepTable
 				return( retbuff );
 			}
 			else {
-				throw new CFLibUnsupportedClassException(getClass(), S_ProcName, 0, "-create-buff-cloning-", "Not " + Integer.toString(classCode));
+				throw new CFLibUnsupportedClassException(getClass(), S_ProcName, "-create-buff-cloning-", (Integer)classCode, "Classcode not recognized: " + Integer.toString(classCode));
 			}
 		}
 	}
@@ -231,7 +231,7 @@ public class CFBamRamPopDepTable
 	public ICFBamPopDep[] readAllDerived( ICFSecAuthorization Authorization ) {
 		final String S_ProcName = "CFBamRamPopDep.readAllDerived";
 		ICFBamPopDep[] retList = new ICFBamPopDep[ dictByPKey.values().size() ];
-		Iterator< ICFBamPopDep > iter = dictByPKey.values().iterator();
+		Iterator< CFBamBuffPopDep > iter = dictByPKey.values().iterator();
 		int idx = 0;
 		while( iter.hasNext() ) {
 			retList[ idx++ ] = iter.next();
@@ -273,7 +273,7 @@ public class CFBamRamPopDepTable
 			Map< CFLibDbKeyHash256, CFBamBuffPopDep > subdictRelationIdx
 				= dictByRelationIdx.get( key );
 			recArray = new ICFBamPopDep[ subdictRelationIdx.size() ];
-			Iterator< ICFBamPopDep > iter = subdictRelationIdx.values().iterator();
+			Iterator< CFBamBuffPopDep > iter = subdictRelationIdx.values().iterator();
 			int idx = 0;
 			while( iter.hasNext() ) {
 				recArray[ idx++ ] = iter.next();
@@ -300,7 +300,7 @@ public class CFBamRamPopDepTable
 			Map< CFLibDbKeyHash256, CFBamBuffPopDep > subdictDefSchemaIdx
 				= dictByDefSchemaIdx.get( key );
 			recArray = new ICFBamPopDep[ subdictDefSchemaIdx.size() ];
-			Iterator< ICFBamPopDep > iter = subdictDefSchemaIdx.values().iterator();
+			Iterator< CFBamBuffPopDep > iter = subdictDefSchemaIdx.values().iterator();
 			int idx = 0;
 			while( iter.hasNext() ) {
 				recArray[ idx++ ] = iter.next();
@@ -470,19 +470,17 @@ public class CFBamRamPopDepTable
 	}
 
 	public ICFBamPopDep updatePopDep( ICFSecAuthorization Authorization,
-		ICFBamPopDep Buff )
+		ICFBamPopDep iBuff )
 	{
-		ICFBamPopDep repl = schema.getTableScope().updateScope( Authorization,
-			Buff );
-		if (repl != Buff) {
-			throw new CFLibInvalidStateException(getClass(), S_ProcName, "repl != Buff", "repl != Buff");
-		}
+		CFBamBuffPopDep Buff = (CFBamBuffPopDep)schema.getTableScope().updateScope( Authorization,	Buff );
 		CFLibDbKeyHash256 pkey = Buff.getPKey();
-		ICFBamPopDep existing = dictByPKey.get( pkey );
+		CFBamBuffPopDep existing = dictByPKey.get( pkey );
 		if( existing == null ) {
 			throw new CFLibStaleCacheDetectedException( getClass(),
 				"updatePopDep",
 				"Existing record not found",
+				"Existing record not found",
+				"PopDep",
 				"PopDep",
 				pkey );
 		}
@@ -573,13 +571,13 @@ public class CFBamRamPopDepTable
 	}
 
 	public void deletePopDep( ICFSecAuthorization Authorization,
-		ICFBamPopDep Buff )
+		ICFBamPopDep iBuff )
 	{
 		final String S_ProcName = "CFBamRamPopDepTable.deletePopDep() ";
-		String classCode;
-		CFLibDbKeyHash256 pkey = schema.getFactoryScope().newPKey();
-		pkey.setRequiredId( Buff.getRequiredId() );
-		ICFBamPopDep existing = dictByPKey.get( pkey );
+		CFBamBuffPopDep Buff = ensureRec(iBuff);
+		int classCode;
+		CFLibDbKeyHash256 pkey = (CFLibDbKeyHash256)(Buff.getPKey());
+		CFBamBuffPopDep existing = dictByPKey.get( pkey );
 		if( existing == null ) {
 			return;
 		}
@@ -703,7 +701,7 @@ public class CFBamRamPopDepTable
 				schema.getTablePopTopDep().deletePopTopDep( Authorization, (ICFBamPopTopDep)cur );
 			}
 			else {
-				throw new CFLibUnsupportedClassException(getClass(), S_ProcName, 0, "-delete-by-suffix-class-walker-", "Not " + Integer.toString(classCode));
+				throw new CFLibUnsupportedClassException(getClass(), S_ProcName, "-delete-by-suffix-class-walker-", (Integer)classCode, "Classcode not recognized: " + Integer.toString(classCode));
 			}
 		}
 	}
@@ -758,7 +756,7 @@ public class CFBamRamPopDepTable
 				schema.getTablePopTopDep().deletePopTopDep( Authorization, (ICFBamPopTopDep)cur );
 			}
 			else {
-				throw new CFLibUnsupportedClassException(getClass(), S_ProcName, 0, "-delete-by-suffix-class-walker-", "Not " + Integer.toString(classCode));
+				throw new CFLibUnsupportedClassException(getClass(), S_ProcName, "-delete-by-suffix-class-walker-", (Integer)classCode, "Classcode not recognized: " + Integer.toString(classCode));
 			}
 		}
 	}
@@ -803,7 +801,7 @@ public class CFBamRamPopDepTable
 				schema.getTablePopTopDep().deletePopTopDep( Authorization, (ICFBamPopTopDep)cur );
 			}
 			else {
-				throw new CFLibUnsupportedClassException(getClass(), S_ProcName, 0, "-delete-by-suffix-class-walker-", "Not " + Integer.toString(classCode));
+				throw new CFLibUnsupportedClassException(getClass(), S_ProcName, "-delete-by-suffix-class-walker-", (Integer)classCode, "Classcode not recognized: " + Integer.toString(classCode));
 			}
 		}
 	}
@@ -856,7 +854,7 @@ public class CFBamRamPopDepTable
 				schema.getTablePopTopDep().deletePopTopDep( Authorization, (ICFBamPopTopDep)cur );
 			}
 			else {
-				throw new CFLibUnsupportedClassException(getClass(), S_ProcName, 0, "-delete-by-suffix-class-walker-", "Not " + Integer.toString(classCode));
+				throw new CFLibUnsupportedClassException(getClass(), S_ProcName, "-delete-by-suffix-class-walker-", (Integer)classCode, "Classcode not recognized: " + Integer.toString(classCode));
 			}
 		}
 	}

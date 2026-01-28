@@ -89,7 +89,7 @@ public class CFBamRamClusterTable
 				return( ((CFSecBuffClusterDefaultFactory)(schema.getFactoryCluster())).ensureRec(rec) );
 			}
 			else {
-				throw new CFLibUnsupportedClassException(getClass(), "ensureRec", 1, "rec", "Not " + Integer.toString(classCode));
+				throw new CFLibUnsupportedClassException(getClass(), "ensureRec", "rec", (Integer)classCode, "Classcode not recognized: " + Integer.toString(classCode));
 			}
 		}
 	}
@@ -152,7 +152,7 @@ public class CFBamRamClusterTable
 				return( retbuff );
 			}
 			else {
-				throw new CFLibUnsupportedClassException(getClass(), S_ProcName, 0, "-create-buff-cloning-", "Not " + Integer.toString(classCode));
+				throw new CFLibUnsupportedClassException(getClass(), S_ProcName, "-create-buff-cloning-", (Integer)classCode, "Classcode not recognized: " + Integer.toString(classCode));
 			}
 		}
 	}
@@ -188,7 +188,7 @@ public class CFBamRamClusterTable
 	public ICFSecCluster[] readAllDerived( ICFSecAuthorization Authorization ) {
 		final String S_ProcName = "CFBamRamCluster.readAllDerived";
 		ICFSecCluster[] retList = new ICFSecCluster[ dictByPKey.values().size() ];
-		Iterator< ICFSecCluster > iter = dictByPKey.values().iterator();
+		Iterator< CFSecBuffCluster > iter = dictByPKey.values().iterator();
 		int idx = 0;
 		while( iter.hasNext() ) {
 			retList[ idx++ ] = iter.next();
@@ -338,14 +338,17 @@ public class CFBamRamClusterTable
 	}
 
 	public ICFSecCluster updateCluster( ICFSecAuthorization Authorization,
-		ICFSecCluster Buff )
+		ICFSecCluster iBuff )
 	{
+		CFSecBuffCluster Buff = ensureRec(iBuff);
 		Long pkey = Buff.getPKey();
-		ICFSecCluster existing = dictByPKey.get( pkey );
+		CFSecBuffCluster existing = dictByPKey.get( pkey );
 		if( existing == null ) {
 			throw new CFLibStaleCacheDetectedException( getClass(),
 				"updateCluster",
 				"Existing record not found",
+				"Existing record not found",
+				"Cluster",
 				"Cluster",
 				pkey );
 		}
@@ -408,13 +411,13 @@ public class CFBamRamClusterTable
 	}
 
 	public void deleteCluster( ICFSecAuthorization Authorization,
-		ICFSecCluster Buff )
+		ICFSecCluster iBuff )
 	{
 		final String S_ProcName = "CFBamRamClusterTable.deleteCluster() ";
-		String classCode;
-		Long pkey = schema.getFactoryCluster().newPKey();
-		pkey.setRequiredId( Buff.getRequiredId() );
-		ICFSecCluster existing = dictByPKey.get( pkey );
+		CFSecBuffCluster Buff = ensureRec(iBuff);
+		int classCode;
+		Long pkey = (Long)(Buff.getPKey());
+		CFSecBuffCluster existing = dictByPKey.get( pkey );
 		if( existing == null ) {
 			return;
 		}
@@ -424,24 +427,24 @@ public class CFBamRamClusterTable
 				"deleteCluster",
 				pkey );
 		}
-		CFSecSecGroupBuff buffDelSecGrpIncByGroup;
-		CFSecSecGroupBuff arrDelSecGrpIncByGroup[] = schema.getTableSecGroup().readDerivedByClusterIdx( Authorization,
+		CFSecBuffSecGroup buffDelSecGrpIncByGroup;
+		CFSecBuffSecGroup arrDelSecGrpIncByGroup[] = schema.getTableSecGroup().readDerivedByClusterIdx( Authorization,
 			existing.getRequiredId() );
 		for( int idxDelSecGrpIncByGroup = 0; idxDelSecGrpIncByGroup < arrDelSecGrpIncByGroup.length; idxDelSecGrpIncByGroup++ ) {
 			buffDelSecGrpIncByGroup = arrDelSecGrpIncByGroup[idxDelSecGrpIncByGroup];
 					schema.getTableSecGrpInc().deleteSecGrpIncByIncludeIdx( Authorization,
 						buffDelSecGrpIncByGroup.getRequiredSecGroupId() );
 		}
-		CFSecSecGroupBuff buffDelSecGrpMembs;
-		CFSecSecGroupBuff arrDelSecGrpMembs[] = schema.getTableSecGroup().readDerivedByClusterIdx( Authorization,
+		CFSecBuffSecGroup buffDelSecGrpMembs;
+		CFSecBuffSecGroup arrDelSecGrpMembs[] = schema.getTableSecGroup().readDerivedByClusterIdx( Authorization,
 			existing.getRequiredId() );
 		for( int idxDelSecGrpMembs = 0; idxDelSecGrpMembs < arrDelSecGrpMembs.length; idxDelSecGrpMembs++ ) {
 			buffDelSecGrpMembs = arrDelSecGrpMembs[idxDelSecGrpMembs];
 					schema.getTableSecGrpMemb().deleteSecGrpMembByGroupIdx( Authorization,
 						buffDelSecGrpMembs.getRequiredSecGroupId() );
 		}
-		CFSecSecGroupBuff buffDelSecGrpIncs;
-		CFSecSecGroupBuff arrDelSecGrpIncs[] = schema.getTableSecGroup().readDerivedByClusterIdx( Authorization,
+		CFSecBuffSecGroup buffDelSecGrpIncs;
+		CFSecBuffSecGroup arrDelSecGrpIncs[] = schema.getTableSecGroup().readDerivedByClusterIdx( Authorization,
 			existing.getRequiredId() );
 		for( int idxDelSecGrpIncs = 0; idxDelSecGrpIncs < arrDelSecGrpIncs.length; idxDelSecGrpIncs++ ) {
 			buffDelSecGrpIncs = arrDelSecGrpIncs[idxDelSecGrpIncs];

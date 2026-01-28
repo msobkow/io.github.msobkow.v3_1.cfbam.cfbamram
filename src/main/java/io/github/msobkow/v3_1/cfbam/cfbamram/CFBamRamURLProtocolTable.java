@@ -91,7 +91,7 @@ public class CFBamRamURLProtocolTable
 				return( ((CFIntBuffURLProtocolDefaultFactory)(schema.getFactoryURLProtocol())).ensureRec(rec) );
 			}
 			else {
-				throw new CFLibUnsupportedClassException(getClass(), "ensureRec", 1, "rec", "Not " + Integer.toString(classCode));
+				throw new CFLibUnsupportedClassException(getClass(), "ensureRec", "rec", (Integer)classCode, "Classcode not recognized: " + Integer.toString(classCode));
 			}
 		}
 	}
@@ -154,7 +154,7 @@ public class CFBamRamURLProtocolTable
 				return( retbuff );
 			}
 			else {
-				throw new CFLibUnsupportedClassException(getClass(), S_ProcName, 0, "-create-buff-cloning-", "Not " + Integer.toString(classCode));
+				throw new CFLibUnsupportedClassException(getClass(), S_ProcName, "-create-buff-cloning-", (Integer)classCode, "Classcode not recognized: " + Integer.toString(classCode));
 			}
 		}
 	}
@@ -190,7 +190,7 @@ public class CFBamRamURLProtocolTable
 	public ICFIntURLProtocol[] readAllDerived( ICFSecAuthorization Authorization ) {
 		final String S_ProcName = "CFBamRamURLProtocol.readAllDerived";
 		ICFIntURLProtocol[] retList = new ICFIntURLProtocol[ dictByPKey.values().size() ];
-		Iterator< ICFIntURLProtocol > iter = dictByPKey.values().iterator();
+		Iterator< CFIntBuffURLProtocol > iter = dictByPKey.values().iterator();
 		int idx = 0;
 		while( iter.hasNext() ) {
 			retList[ idx++ ] = iter.next();
@@ -227,7 +227,7 @@ public class CFBamRamURLProtocolTable
 			Map< Integer, CFIntBuffURLProtocol > subdictIsSecureIdx
 				= dictByIsSecureIdx.get( key );
 			recArray = new ICFIntURLProtocol[ subdictIsSecureIdx.size() ];
-			Iterator< ICFIntURLProtocol > iter = subdictIsSecureIdx.values().iterator();
+			Iterator< CFIntBuffURLProtocol > iter = subdictIsSecureIdx.values().iterator();
 			int idx = 0;
 			while( iter.hasNext() ) {
 				recArray[ idx++ ] = iter.next();
@@ -339,14 +339,17 @@ public class CFBamRamURLProtocolTable
 	}
 
 	public ICFIntURLProtocol updateURLProtocol( ICFSecAuthorization Authorization,
-		ICFIntURLProtocol Buff )
+		ICFIntURLProtocol iBuff )
 	{
+		CFIntBuffURLProtocol Buff = ensureRec(iBuff);
 		Integer pkey = Buff.getPKey();
-		ICFIntURLProtocol existing = dictByPKey.get( pkey );
+		CFIntBuffURLProtocol existing = dictByPKey.get( pkey );
 		if( existing == null ) {
 			throw new CFLibStaleCacheDetectedException( getClass(),
 				"updateURLProtocol",
 				"Existing record not found",
+				"Existing record not found",
+				"URLProtocol",
 				"URLProtocol",
 				pkey );
 		}
@@ -409,13 +412,13 @@ public class CFBamRamURLProtocolTable
 	}
 
 	public void deleteURLProtocol( ICFSecAuthorization Authorization,
-		ICFIntURLProtocol Buff )
+		ICFIntURLProtocol iBuff )
 	{
 		final String S_ProcName = "CFBamRamURLProtocolTable.deleteURLProtocol() ";
-		String classCode;
-		Integer pkey = schema.getFactoryURLProtocol().newPKey();
-		pkey.setRequiredURLProtocolId( Buff.getRequiredURLProtocolId() );
-		ICFIntURLProtocol existing = dictByPKey.get( pkey );
+		CFIntBuffURLProtocol Buff = ensureRec(iBuff);
+		int classCode;
+		Integer pkey = (Integer)(Buff.getPKey());
+		CFIntBuffURLProtocol existing = dictByPKey.get( pkey );
 		if( existing == null ) {
 			return;
 		}

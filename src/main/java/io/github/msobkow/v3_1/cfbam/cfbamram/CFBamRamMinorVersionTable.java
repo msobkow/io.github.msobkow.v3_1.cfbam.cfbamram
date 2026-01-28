@@ -97,7 +97,7 @@ public class CFBamRamMinorVersionTable
 				return( ((CFIntBuffMinorVersionDefaultFactory)(schema.getFactoryMinorVersion())).ensureRec(rec) );
 			}
 			else {
-				throw new CFLibUnsupportedClassException(getClass(), "ensureRec", 1, "rec", "Not " + Integer.toString(classCode));
+				throw new CFLibUnsupportedClassException(getClass(), "ensureRec", "rec", (Integer)classCode, "Classcode not recognized: " + Integer.toString(classCode));
 			}
 		}
 	}
@@ -208,7 +208,7 @@ public class CFBamRamMinorVersionTable
 				return( retbuff );
 			}
 			else {
-				throw new CFLibUnsupportedClassException(getClass(), S_ProcName, 0, "-create-buff-cloning-", "Not " + Integer.toString(classCode));
+				throw new CFLibUnsupportedClassException(getClass(), S_ProcName, "-create-buff-cloning-", (Integer)classCode, "Classcode not recognized: " + Integer.toString(classCode));
 			}
 		}
 	}
@@ -244,7 +244,7 @@ public class CFBamRamMinorVersionTable
 	public ICFIntMinorVersion[] readAllDerived( ICFSecAuthorization Authorization ) {
 		final String S_ProcName = "CFBamRamMinorVersion.readAllDerived";
 		ICFIntMinorVersion[] retList = new ICFIntMinorVersion[ dictByPKey.values().size() ];
-		Iterator< ICFIntMinorVersion > iter = dictByPKey.values().iterator();
+		Iterator< CFIntBuffMinorVersion > iter = dictByPKey.values().iterator();
 		int idx = 0;
 		while( iter.hasNext() ) {
 			retList[ idx++ ] = iter.next();
@@ -264,7 +264,7 @@ public class CFBamRamMinorVersionTable
 			Map< CFLibDbKeyHash256, CFIntBuffMinorVersion > subdictTenantIdx
 				= dictByTenantIdx.get( key );
 			recArray = new ICFIntMinorVersion[ subdictTenantIdx.size() ];
-			Iterator< ICFIntMinorVersion > iter = subdictTenantIdx.values().iterator();
+			Iterator< CFIntBuffMinorVersion > iter = subdictTenantIdx.values().iterator();
 			int idx = 0;
 			while( iter.hasNext() ) {
 				recArray[ idx++ ] = iter.next();
@@ -291,7 +291,7 @@ public class CFBamRamMinorVersionTable
 			Map< CFLibDbKeyHash256, CFIntBuffMinorVersion > subdictMajorVerIdx
 				= dictByMajorVerIdx.get( key );
 			recArray = new ICFIntMinorVersion[ subdictMajorVerIdx.size() ];
-			Iterator< ICFIntMinorVersion > iter = subdictMajorVerIdx.values().iterator();
+			Iterator< CFIntBuffMinorVersion > iter = subdictMajorVerIdx.values().iterator();
 			int idx = 0;
 			while( iter.hasNext() ) {
 				recArray[ idx++ ] = iter.next();
@@ -441,14 +441,17 @@ public class CFBamRamMinorVersionTable
 	}
 
 	public ICFIntMinorVersion updateMinorVersion( ICFSecAuthorization Authorization,
-		ICFIntMinorVersion Buff )
+		ICFIntMinorVersion iBuff )
 	{
+		CFIntBuffMinorVersion Buff = ensureRec(iBuff);
 		CFLibDbKeyHash256 pkey = Buff.getPKey();
-		ICFIntMinorVersion existing = dictByPKey.get( pkey );
+		CFIntBuffMinorVersion existing = dictByPKey.get( pkey );
 		if( existing == null ) {
 			throw new CFLibStaleCacheDetectedException( getClass(),
 				"updateMinorVersion",
 				"Existing record not found",
+				"Existing record not found",
+				"MinorVersion",
 				"MinorVersion",
 				pkey );
 		}
@@ -566,13 +569,13 @@ public class CFBamRamMinorVersionTable
 	}
 
 	public void deleteMinorVersion( ICFSecAuthorization Authorization,
-		ICFIntMinorVersion Buff )
+		ICFIntMinorVersion iBuff )
 	{
 		final String S_ProcName = "CFBamRamMinorVersionTable.deleteMinorVersion() ";
-		String classCode;
-		CFLibDbKeyHash256 pkey = schema.getFactoryMinorVersion().newPKey();
-		pkey.setRequiredId( Buff.getRequiredId() );
-		ICFIntMinorVersion existing = dictByPKey.get( pkey );
+		CFIntBuffMinorVersion Buff = ensureRec(iBuff);
+		int classCode;
+		CFLibDbKeyHash256 pkey = (CFLibDbKeyHash256)(Buff.getPKey());
+		CFIntBuffMinorVersion existing = dictByPKey.get( pkey );
 		if( existing == null ) {
 			return;
 		}

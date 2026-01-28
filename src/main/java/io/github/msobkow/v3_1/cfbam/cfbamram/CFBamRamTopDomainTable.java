@@ -97,7 +97,7 @@ public class CFBamRamTopDomainTable
 				return( ((CFIntBuffTopDomainDefaultFactory)(schema.getFactoryTopDomain())).ensureRec(rec) );
 			}
 			else {
-				throw new CFLibUnsupportedClassException(getClass(), "ensureRec", 1, "rec", "Not " + Integer.toString(classCode));
+				throw new CFLibUnsupportedClassException(getClass(), "ensureRec", "rec", (Integer)classCode, "Classcode not recognized: " + Integer.toString(classCode));
 			}
 		}
 	}
@@ -208,7 +208,7 @@ public class CFBamRamTopDomainTable
 				return( retbuff );
 			}
 			else {
-				throw new CFLibUnsupportedClassException(getClass(), S_ProcName, 0, "-create-buff-cloning-", "Not " + Integer.toString(classCode));
+				throw new CFLibUnsupportedClassException(getClass(), S_ProcName, "-create-buff-cloning-", (Integer)classCode, "Classcode not recognized: " + Integer.toString(classCode));
 			}
 		}
 	}
@@ -244,7 +244,7 @@ public class CFBamRamTopDomainTable
 	public ICFIntTopDomain[] readAllDerived( ICFSecAuthorization Authorization ) {
 		final String S_ProcName = "CFBamRamTopDomain.readAllDerived";
 		ICFIntTopDomain[] retList = new ICFIntTopDomain[ dictByPKey.values().size() ];
-		Iterator< ICFIntTopDomain > iter = dictByPKey.values().iterator();
+		Iterator< CFIntBuffTopDomain > iter = dictByPKey.values().iterator();
 		int idx = 0;
 		while( iter.hasNext() ) {
 			retList[ idx++ ] = iter.next();
@@ -264,7 +264,7 @@ public class CFBamRamTopDomainTable
 			Map< CFLibDbKeyHash256, CFIntBuffTopDomain > subdictTenantIdx
 				= dictByTenantIdx.get( key );
 			recArray = new ICFIntTopDomain[ subdictTenantIdx.size() ];
-			Iterator< ICFIntTopDomain > iter = subdictTenantIdx.values().iterator();
+			Iterator< CFIntBuffTopDomain > iter = subdictTenantIdx.values().iterator();
 			int idx = 0;
 			while( iter.hasNext() ) {
 				recArray[ idx++ ] = iter.next();
@@ -291,7 +291,7 @@ public class CFBamRamTopDomainTable
 			Map< CFLibDbKeyHash256, CFIntBuffTopDomain > subdictTldIdx
 				= dictByTldIdx.get( key );
 			recArray = new ICFIntTopDomain[ subdictTldIdx.size() ];
-			Iterator< ICFIntTopDomain > iter = subdictTldIdx.values().iterator();
+			Iterator< CFIntBuffTopDomain > iter = subdictTldIdx.values().iterator();
 			int idx = 0;
 			while( iter.hasNext() ) {
 				recArray[ idx++ ] = iter.next();
@@ -441,14 +441,17 @@ public class CFBamRamTopDomainTable
 	}
 
 	public ICFIntTopDomain updateTopDomain( ICFSecAuthorization Authorization,
-		ICFIntTopDomain Buff )
+		ICFIntTopDomain iBuff )
 	{
+		CFIntBuffTopDomain Buff = ensureRec(iBuff);
 		CFLibDbKeyHash256 pkey = Buff.getPKey();
-		ICFIntTopDomain existing = dictByPKey.get( pkey );
+		CFIntBuffTopDomain existing = dictByPKey.get( pkey );
 		if( existing == null ) {
 			throw new CFLibStaleCacheDetectedException( getClass(),
 				"updateTopDomain",
 				"Existing record not found",
+				"Existing record not found",
+				"TopDomain",
 				"TopDomain",
 				pkey );
 		}
@@ -566,13 +569,13 @@ public class CFBamRamTopDomainTable
 	}
 
 	public void deleteTopDomain( ICFSecAuthorization Authorization,
-		ICFIntTopDomain Buff )
+		ICFIntTopDomain iBuff )
 	{
 		final String S_ProcName = "CFBamRamTopDomainTable.deleteTopDomain() ";
-		String classCode;
-		CFLibDbKeyHash256 pkey = schema.getFactoryTopDomain().newPKey();
-		pkey.setRequiredId( Buff.getRequiredId() );
-		ICFIntTopDomain existing = dictByPKey.get( pkey );
+		CFIntBuffTopDomain Buff = ensureRec(iBuff);
+		int classCode;
+		CFLibDbKeyHash256 pkey = (CFLibDbKeyHash256)(Buff.getPKey());
+		CFIntBuffTopDomain existing = dictByPKey.get( pkey );
 		if( existing == null ) {
 			return;
 		}

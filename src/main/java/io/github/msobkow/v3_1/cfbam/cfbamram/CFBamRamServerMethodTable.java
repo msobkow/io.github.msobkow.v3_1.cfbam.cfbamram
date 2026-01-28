@@ -208,7 +208,7 @@ public class CFBamRamServerMethodTable
 				return( retbuff );
 			}
 			else {
-				throw new CFLibUnsupportedClassException(getClass(), S_ProcName, 0, "-create-buff-cloning-", "Not " + Integer.toString(classCode));
+				throw new CFLibUnsupportedClassException(getClass(), S_ProcName, "-create-buff-cloning-", (Integer)classCode, "Classcode not recognized: " + Integer.toString(classCode));
 			}
 		}
 	}
@@ -244,7 +244,7 @@ public class CFBamRamServerMethodTable
 	public ICFBamServerMethod[] readAllDerived( ICFSecAuthorization Authorization ) {
 		final String S_ProcName = "CFBamRamServerMethod.readAllDerived";
 		ICFBamServerMethod[] retList = new ICFBamServerMethod[ dictByPKey.values().size() ];
-		Iterator< ICFBamServerMethod > iter = dictByPKey.values().iterator();
+		Iterator< CFBamBuffServerMethod > iter = dictByPKey.values().iterator();
 		int idx = 0;
 		while( iter.hasNext() ) {
 			retList[ idx++ ] = iter.next();
@@ -305,7 +305,7 @@ public class CFBamRamServerMethodTable
 			Map< CFLibDbKeyHash256, CFBamBuffServerMethod > subdictMethTableIdx
 				= dictByMethTableIdx.get( key );
 			recArray = new ICFBamServerMethod[ subdictMethTableIdx.size() ];
-			Iterator< ICFBamServerMethod > iter = subdictMethTableIdx.values().iterator();
+			Iterator< CFBamBuffServerMethod > iter = subdictMethTableIdx.values().iterator();
 			int idx = 0;
 			while( iter.hasNext() ) {
 				recArray[ idx++ ] = iter.next();
@@ -332,7 +332,7 @@ public class CFBamRamServerMethodTable
 			Map< CFLibDbKeyHash256, CFBamBuffServerMethod > subdictDefSchemaIdx
 				= dictByDefSchemaIdx.get( key );
 			recArray = new ICFBamServerMethod[ subdictDefSchemaIdx.size() ];
-			Iterator< ICFBamServerMethod > iter = subdictDefSchemaIdx.values().iterator();
+			Iterator< CFBamBuffServerMethod > iter = subdictDefSchemaIdx.values().iterator();
 			int idx = 0;
 			while( iter.hasNext() ) {
 				recArray[ idx++ ] = iter.next();
@@ -518,19 +518,17 @@ public class CFBamRamServerMethodTable
 	}
 
 	public ICFBamServerMethod updateServerMethod( ICFSecAuthorization Authorization,
-		ICFBamServerMethod Buff )
+		ICFBamServerMethod iBuff )
 	{
-		ICFBamServerMethod repl = schema.getTableScope().updateScope( Authorization,
-			Buff );
-		if (repl != Buff) {
-			throw new CFLibInvalidStateException(getClass(), S_ProcName, "repl != Buff", "repl != Buff");
-		}
+		CFBamBuffServerMethod Buff = (CFBamBuffServerMethod)schema.getTableScope().updateScope( Authorization,	Buff );
 		CFLibDbKeyHash256 pkey = Buff.getPKey();
-		ICFBamServerMethod existing = dictByPKey.get( pkey );
+		CFBamBuffServerMethod existing = dictByPKey.get( pkey );
 		if( existing == null ) {
 			throw new CFLibStaleCacheDetectedException( getClass(),
 				"updateServerMethod",
 				"Existing record not found",
+				"Existing record not found",
+				"ServerMethod",
 				"ServerMethod",
 				pkey );
 		}
@@ -642,13 +640,13 @@ public class CFBamRamServerMethodTable
 	}
 
 	public void deleteServerMethod( ICFSecAuthorization Authorization,
-		ICFBamServerMethod Buff )
+		ICFBamServerMethod iBuff )
 	{
 		final String S_ProcName = "CFBamRamServerMethodTable.deleteServerMethod() ";
-		String classCode;
-		CFLibDbKeyHash256 pkey = schema.getFactoryScope().newPKey();
-		pkey.setRequiredId( Buff.getRequiredId() );
-		ICFBamServerMethod existing = dictByPKey.get( pkey );
+		CFBamBuffServerMethod Buff = ensureRec(iBuff);
+		int classCode;
+		CFLibDbKeyHash256 pkey = (CFLibDbKeyHash256)(Buff.getPKey());
+		CFBamBuffServerMethod existing = dictByPKey.get( pkey );
 		if( existing == null ) {
 			return;
 		}
@@ -774,7 +772,7 @@ public class CFBamRamServerMethodTable
 				schema.getTableServerListFunc().deleteServerListFunc( Authorization, (ICFBamServerListFunc)cur );
 			}
 			else {
-				throw new CFLibUnsupportedClassException(getClass(), S_ProcName, 0, "-delete-by-suffix-class-walker-", "Not " + Integer.toString(classCode));
+				throw new CFLibUnsupportedClassException(getClass(), S_ProcName, "-delete-by-suffix-class-walker-", (Integer)classCode, "Classcode not recognized: " + Integer.toString(classCode));
 			}
 		}
 	}
@@ -824,7 +822,7 @@ public class CFBamRamServerMethodTable
 				schema.getTableServerListFunc().deleteServerListFunc( Authorization, (ICFBamServerListFunc)cur );
 			}
 			else {
-				throw new CFLibUnsupportedClassException(getClass(), S_ProcName, 0, "-delete-by-suffix-class-walker-", "Not " + Integer.toString(classCode));
+				throw new CFLibUnsupportedClassException(getClass(), S_ProcName, "-delete-by-suffix-class-walker-", (Integer)classCode, "Classcode not recognized: " + Integer.toString(classCode));
 			}
 		}
 	}
@@ -876,7 +874,7 @@ public class CFBamRamServerMethodTable
 				schema.getTableServerListFunc().deleteServerListFunc( Authorization, (ICFBamServerListFunc)cur );
 			}
 			else {
-				throw new CFLibUnsupportedClassException(getClass(), S_ProcName, 0, "-delete-by-suffix-class-walker-", "Not " + Integer.toString(classCode));
+				throw new CFLibUnsupportedClassException(getClass(), S_ProcName, "-delete-by-suffix-class-walker-", (Integer)classCode, "Classcode not recognized: " + Integer.toString(classCode));
 			}
 		}
 	}
@@ -918,7 +916,7 @@ public class CFBamRamServerMethodTable
 				schema.getTableServerListFunc().deleteServerListFunc( Authorization, (ICFBamServerListFunc)cur );
 			}
 			else {
-				throw new CFLibUnsupportedClassException(getClass(), S_ProcName, 0, "-delete-by-suffix-class-walker-", "Not " + Integer.toString(classCode));
+				throw new CFLibUnsupportedClassException(getClass(), S_ProcName, "-delete-by-suffix-class-walker-", (Integer)classCode, "Classcode not recognized: " + Integer.toString(classCode));
 			}
 		}
 	}
@@ -968,7 +966,7 @@ public class CFBamRamServerMethodTable
 				schema.getTableServerListFunc().deleteServerListFunc( Authorization, (ICFBamServerListFunc)cur );
 			}
 			else {
-				throw new CFLibUnsupportedClassException(getClass(), S_ProcName, 0, "-delete-by-suffix-class-walker-", "Not " + Integer.toString(classCode));
+				throw new CFLibUnsupportedClassException(getClass(), S_ProcName, "-delete-by-suffix-class-walker-", (Integer)classCode, "Classcode not recognized: " + Integer.toString(classCode));
 			}
 		}
 	}

@@ -97,7 +97,7 @@ public class CFBamRamTSecGroupTable
 				return( ((CFSecBuffTSecGroupDefaultFactory)(schema.getFactoryTSecGroup())).ensureRec(rec) );
 			}
 			else {
-				throw new CFLibUnsupportedClassException(getClass(), "ensureRec", 1, "rec", "Not " + Integer.toString(classCode));
+				throw new CFLibUnsupportedClassException(getClass(), "ensureRec", "rec", (Integer)classCode, "Classcode not recognized: " + Integer.toString(classCode));
 			}
 		}
 	}
@@ -192,7 +192,7 @@ public class CFBamRamTSecGroupTable
 				return( retbuff );
 			}
 			else {
-				throw new CFLibUnsupportedClassException(getClass(), S_ProcName, 0, "-create-buff-cloning-", "Not " + Integer.toString(classCode));
+				throw new CFLibUnsupportedClassException(getClass(), S_ProcName, "-create-buff-cloning-", (Integer)classCode, "Classcode not recognized: " + Integer.toString(classCode));
 			}
 		}
 	}
@@ -228,7 +228,7 @@ public class CFBamRamTSecGroupTable
 	public ICFSecTSecGroup[] readAllDerived( ICFSecAuthorization Authorization ) {
 		final String S_ProcName = "CFBamRamTSecGroup.readAllDerived";
 		ICFSecTSecGroup[] retList = new ICFSecTSecGroup[ dictByPKey.values().size() ];
-		Iterator< ICFSecTSecGroup > iter = dictByPKey.values().iterator();
+		Iterator< CFSecBuffTSecGroup > iter = dictByPKey.values().iterator();
 		int idx = 0;
 		while( iter.hasNext() ) {
 			retList[ idx++ ] = iter.next();
@@ -248,7 +248,7 @@ public class CFBamRamTSecGroupTable
 			Map< CFLibDbKeyHash256, CFSecBuffTSecGroup > subdictTenantIdx
 				= dictByTenantIdx.get( key );
 			recArray = new ICFSecTSecGroup[ subdictTenantIdx.size() ];
-			Iterator< ICFSecTSecGroup > iter = subdictTenantIdx.values().iterator();
+			Iterator< CFSecBuffTSecGroup > iter = subdictTenantIdx.values().iterator();
 			int idx = 0;
 			while( iter.hasNext() ) {
 				recArray[ idx++ ] = iter.next();
@@ -277,7 +277,7 @@ public class CFBamRamTSecGroupTable
 			Map< CFLibDbKeyHash256, CFSecBuffTSecGroup > subdictTenantVisIdx
 				= dictByTenantVisIdx.get( key );
 			recArray = new ICFSecTSecGroup[ subdictTenantVisIdx.size() ];
-			Iterator< ICFSecTSecGroup > iter = subdictTenantVisIdx.values().iterator();
+			Iterator< CFSecBuffTSecGroup > iter = subdictTenantVisIdx.values().iterator();
 			int idx = 0;
 			while( iter.hasNext() ) {
 				recArray[ idx++ ] = iter.next();
@@ -429,14 +429,17 @@ public class CFBamRamTSecGroupTable
 	}
 
 	public ICFSecTSecGroup updateTSecGroup( ICFSecAuthorization Authorization,
-		ICFSecTSecGroup Buff )
+		ICFSecTSecGroup iBuff )
 	{
+		CFSecBuffTSecGroup Buff = ensureRec(iBuff);
 		CFLibDbKeyHash256 pkey = Buff.getPKey();
-		ICFSecTSecGroup existing = dictByPKey.get( pkey );
+		CFSecBuffTSecGroup existing = dictByPKey.get( pkey );
 		if( existing == null ) {
 			throw new CFLibStaleCacheDetectedException( getClass(),
 				"updateTSecGroup",
 				"Existing record not found",
+				"Existing record not found",
+				"TSecGroup",
 				"TSecGroup",
 				pkey );
 		}
@@ -539,13 +542,13 @@ public class CFBamRamTSecGroupTable
 	}
 
 	public void deleteTSecGroup( ICFSecAuthorization Authorization,
-		ICFSecTSecGroup Buff )
+		ICFSecTSecGroup iBuff )
 	{
 		final String S_ProcName = "CFBamRamTSecGroupTable.deleteTSecGroup() ";
-		String classCode;
-		CFLibDbKeyHash256 pkey = schema.getFactoryTSecGroup().newPKey();
-		pkey.setRequiredTSecGroupId( Buff.getRequiredTSecGroupId() );
-		ICFSecTSecGroup existing = dictByPKey.get( pkey );
+		CFSecBuffTSecGroup Buff = ensureRec(iBuff);
+		int classCode;
+		CFLibDbKeyHash256 pkey = (CFLibDbKeyHash256)(Buff.getPKey());
+		CFSecBuffTSecGroup existing = dictByPKey.get( pkey );
 		if( existing == null ) {
 			return;
 		}

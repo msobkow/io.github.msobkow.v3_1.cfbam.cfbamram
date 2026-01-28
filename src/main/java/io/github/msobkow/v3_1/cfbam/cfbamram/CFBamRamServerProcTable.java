@@ -120,7 +120,7 @@ public class CFBamRamServerProcTable
 				return( retbuff );
 			}
 			else {
-				throw new CFLibUnsupportedClassException(getClass(), S_ProcName, 0, "-create-buff-cloning-", "Not " + Integer.toString(classCode));
+				throw new CFLibUnsupportedClassException(getClass(), S_ProcName, "-create-buff-cloning-", (Integer)classCode, "Classcode not recognized: " + Integer.toString(classCode));
 			}
 		}
 	}
@@ -156,7 +156,7 @@ public class CFBamRamServerProcTable
 	public ICFBamServerProc[] readAllDerived( ICFSecAuthorization Authorization ) {
 		final String S_ProcName = "CFBamRamServerProc.readAllDerived";
 		ICFBamServerProc[] retList = new ICFBamServerProc[ dictByPKey.values().size() ];
-		Iterator< ICFBamServerProc > iter = dictByPKey.values().iterator();
+		Iterator< CFBamBuffServerProc > iter = dictByPKey.values().iterator();
 		int idx = 0;
 		while( iter.hasNext() ) {
 			retList[ idx++ ] = iter.next();
@@ -420,19 +420,17 @@ public class CFBamRamServerProcTable
 	}
 
 	public ICFBamServerProc updateServerProc( ICFSecAuthorization Authorization,
-		ICFBamServerProc Buff )
+		ICFBamServerProc iBuff )
 	{
-		ICFBamServerProc repl = schema.getTableServerMethod().updateServerMethod( Authorization,
-			Buff );
-		if (repl != Buff) {
-			throw new CFLibInvalidStateException(getClass(), S_ProcName, "repl != Buff", "repl != Buff");
-		}
+		CFBamBuffServerProc Buff = (CFBamBuffServerProc)schema.getTableServerMethod().updateServerMethod( Authorization,	Buff );
 		CFLibDbKeyHash256 pkey = Buff.getPKey();
-		ICFBamServerProc existing = dictByPKey.get( pkey );
+		CFBamBuffServerProc existing = dictByPKey.get( pkey );
 		if( existing == null ) {
 			throw new CFLibStaleCacheDetectedException( getClass(),
 				"updateServerProc",
 				"Existing record not found",
+				"Existing record not found",
+				"ServerProc",
 				"ServerProc",
 				pkey );
 		}
@@ -468,13 +466,13 @@ public class CFBamRamServerProcTable
 	}
 
 	public void deleteServerProc( ICFSecAuthorization Authorization,
-		ICFBamServerProc Buff )
+		ICFBamServerProc iBuff )
 	{
 		final String S_ProcName = "CFBamRamServerProcTable.deleteServerProc() ";
-		String classCode;
-		CFLibDbKeyHash256 pkey = schema.getFactoryScope().newPKey();
-		pkey.setRequiredId( Buff.getRequiredId() );
-		ICFBamServerProc existing = dictByPKey.get( pkey );
+		CFBamBuffServerProc Buff = ensureRec(iBuff);
+		int classCode;
+		CFLibDbKeyHash256 pkey = (CFLibDbKeyHash256)(Buff.getPKey());
+		CFBamBuffServerProc existing = dictByPKey.get( pkey );
 		if( existing == null ) {
 			return;
 		}

@@ -91,7 +91,7 @@ public class CFBamRamTldTable
 				return( ((CFIntBuffTldDefaultFactory)(schema.getFactoryTld())).ensureRec(rec) );
 			}
 			else {
-				throw new CFLibUnsupportedClassException(getClass(), "ensureRec", 1, "rec", "Not " + Integer.toString(classCode));
+				throw new CFLibUnsupportedClassException(getClass(), "ensureRec", "rec", (Integer)classCode, "Classcode not recognized: " + Integer.toString(classCode));
 			}
 		}
 	}
@@ -171,7 +171,7 @@ public class CFBamRamTldTable
 				return( retbuff );
 			}
 			else {
-				throw new CFLibUnsupportedClassException(getClass(), S_ProcName, 0, "-create-buff-cloning-", "Not " + Integer.toString(classCode));
+				throw new CFLibUnsupportedClassException(getClass(), S_ProcName, "-create-buff-cloning-", (Integer)classCode, "Classcode not recognized: " + Integer.toString(classCode));
 			}
 		}
 	}
@@ -207,7 +207,7 @@ public class CFBamRamTldTable
 	public ICFIntTld[] readAllDerived( ICFSecAuthorization Authorization ) {
 		final String S_ProcName = "CFBamRamTld.readAllDerived";
 		ICFIntTld[] retList = new ICFIntTld[ dictByPKey.values().size() ];
-		Iterator< ICFIntTld > iter = dictByPKey.values().iterator();
+		Iterator< CFIntBuffTld > iter = dictByPKey.values().iterator();
 		int idx = 0;
 		while( iter.hasNext() ) {
 			retList[ idx++ ] = iter.next();
@@ -227,7 +227,7 @@ public class CFBamRamTldTable
 			Map< CFLibDbKeyHash256, CFIntBuffTld > subdictTenantIdx
 				= dictByTenantIdx.get( key );
 			recArray = new ICFIntTld[ subdictTenantIdx.size() ];
-			Iterator< ICFIntTld > iter = subdictTenantIdx.values().iterator();
+			Iterator< CFIntBuffTld > iter = subdictTenantIdx.values().iterator();
 			int idx = 0;
 			while( iter.hasNext() ) {
 				recArray[ idx++ ] = iter.next();
@@ -356,14 +356,17 @@ public class CFBamRamTldTable
 	}
 
 	public ICFIntTld updateTld( ICFSecAuthorization Authorization,
-		ICFIntTld Buff )
+		ICFIntTld iBuff )
 	{
+		CFIntBuffTld Buff = ensureRec(iBuff);
 		CFLibDbKeyHash256 pkey = Buff.getPKey();
-		ICFIntTld existing = dictByPKey.get( pkey );
+		CFIntBuffTld existing = dictByPKey.get( pkey );
 		if( existing == null ) {
 			throw new CFLibStaleCacheDetectedException( getClass(),
 				"updateTld",
 				"Existing record not found",
+				"Existing record not found",
+				"Tld",
 				"Tld",
 				pkey );
 		}
@@ -443,13 +446,13 @@ public class CFBamRamTldTable
 	}
 
 	public void deleteTld( ICFSecAuthorization Authorization,
-		ICFIntTld Buff )
+		ICFIntTld iBuff )
 	{
 		final String S_ProcName = "CFBamRamTldTable.deleteTld() ";
-		String classCode;
-		CFLibDbKeyHash256 pkey = schema.getFactoryTld().newPKey();
-		pkey.setRequiredId( Buff.getRequiredId() );
-		ICFIntTld existing = dictByPKey.get( pkey );
+		CFIntBuffTld Buff = ensureRec(iBuff);
+		int classCode;
+		CFLibDbKeyHash256 pkey = (CFLibDbKeyHash256)(Buff.getPKey());
+		CFIntBuffTld existing = dictByPKey.get( pkey );
 		if( existing == null ) {
 			return;
 		}
