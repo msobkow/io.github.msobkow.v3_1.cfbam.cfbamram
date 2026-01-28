@@ -148,6 +148,9 @@ public class CFBamRamLicenseTable
 						S_ProcName,
 						"Owner",
 						"Owner",
+						"Owner",
+						"Owner",
+						"Tenant",
 						"Tenant",
 						null );
 				}
@@ -164,6 +167,9 @@ public class CFBamRamLicenseTable
 					throw new CFLibUnresolvedRelationException( getClass(),
 						S_ProcName,
 						"Container",
+						"Container",
+						"TopDomain",
+						"TopDomain",
 						"TopDomain",
 						"TopDomain",
 						null );
@@ -506,6 +512,9 @@ public class CFBamRamLicenseTable
 						"updateLicense",
 						"Owner",
 						"Owner",
+						"Owner",
+						"Owner",
+						"Tenant",
 						"Tenant",
 						null );
 				}
@@ -522,6 +531,9 @@ public class CFBamRamLicenseTable
 					throw new CFLibUnresolvedRelationException( getClass(),
 						"updateLicense",
 						"Container",
+						"Container",
+						"TopDomain",
+						"TopDomain",
 						"TopDomain",
 						"TopDomain",
 						null );

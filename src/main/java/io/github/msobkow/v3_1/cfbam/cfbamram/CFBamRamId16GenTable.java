@@ -115,7 +115,10 @@ public class CFBamRamId16GenTable
 					throw new CFLibUnresolvedRelationException( getClass(),
 						S_ProcName,
 						"Superclass",
+						"Superclass",
 						"SuperClass",
+						"SuperClass",
+						"Int16Type",
 						"Int16Type",
 						null );
 				}
@@ -6632,7 +6635,10 @@ public class CFBamRamId16GenTable
 					throw new CFLibUnresolvedRelationException( getClass(),
 						"updateId16Gen",
 						"Superclass",
+						"Superclass",
 						"SuperClass",
+						"SuperClass",
+						"Int16Type",
 						"Int16Type",
 						null );
 				}

@@ -182,6 +182,9 @@ public class CFBamRamEnumTagTable
 					throw new CFLibUnresolvedRelationException( getClass(),
 						S_ProcName,
 						"Container",
+						"Container",
+						"EnumDef",
+						"EnumDef",
 						"EnumDef",
 						"EnumDef",
 						null );
@@ -987,6 +990,9 @@ public class CFBamRamEnumTagTable
 					throw new CFLibUnresolvedRelationException( getClass(),
 						"updateEnumTag",
 						"Container",
+						"Container",
+						"EnumDef",
+						"EnumDef",
 						"EnumDef",
 						"EnumDef",
 						null );

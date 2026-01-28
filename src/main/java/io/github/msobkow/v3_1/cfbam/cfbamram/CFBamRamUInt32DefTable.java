@@ -98,7 +98,10 @@ public class CFBamRamUInt32DefTable
 					throw new CFLibUnresolvedRelationException( getClass(),
 						S_ProcName,
 						"Superclass",
+						"Superclass",
 						"SuperClass",
+						"SuperClass",
+						"Atom",
 						"Atom",
 						null );
 				}
@@ -5923,7 +5926,10 @@ public class CFBamRamUInt32DefTable
 					throw new CFLibUnresolvedRelationException( getClass(),
 						"updateUInt32Def",
 						"Superclass",
+						"Superclass",
 						"SuperClass",
+						"SuperClass",
+						"Atom",
 						"Atom",
 						null );
 				}

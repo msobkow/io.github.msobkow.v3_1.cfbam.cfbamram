@@ -124,7 +124,10 @@ public class CFBamRamDbKeyHash384TypeTable
 					throw new CFLibUnresolvedRelationException( getClass(),
 						S_ProcName,
 						"Superclass",
+						"Superclass",
 						"SuperClass",
+						"SuperClass",
+						"DbKeyHash384Def",
 						"DbKeyHash384Def",
 						null );
 				}
@@ -141,6 +144,9 @@ public class CFBamRamDbKeyHash384TypeTable
 					throw new CFLibUnresolvedRelationException( getClass(),
 						S_ProcName,
 						"Container",
+						"Container",
+						"SchemaDef",
+						"SchemaDef",
 						"SchemaDef",
 						"SchemaDef",
 						null );
@@ -6684,7 +6690,10 @@ public class CFBamRamDbKeyHash384TypeTable
 					throw new CFLibUnresolvedRelationException( getClass(),
 						"updateDbKeyHash384Type",
 						"Superclass",
+						"Superclass",
 						"SuperClass",
+						"SuperClass",
+						"DbKeyHash384Def",
 						"DbKeyHash384Def",
 						null );
 				}
@@ -6701,6 +6710,9 @@ public class CFBamRamDbKeyHash384TypeTable
 					throw new CFLibUnresolvedRelationException( getClass(),
 						"updateDbKeyHash384Type",
 						"Container",
+						"Container",
+						"SchemaDef",
+						"SchemaDef",
 						"SchemaDef",
 						"SchemaDef",
 						null );

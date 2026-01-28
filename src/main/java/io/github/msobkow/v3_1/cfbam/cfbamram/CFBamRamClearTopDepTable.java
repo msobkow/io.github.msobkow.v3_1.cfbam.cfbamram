@@ -158,7 +158,10 @@ public class CFBamRamClearTopDepTable
 					throw new CFLibUnresolvedRelationException( getClass(),
 						S_ProcName,
 						"Superclass",
+						"Superclass",
 						"SuperClass",
+						"SuperClass",
+						"ClearDep",
 						"ClearDep",
 						null );
 				}
@@ -175,6 +178,9 @@ public class CFBamRamClearTopDepTable
 					throw new CFLibUnresolvedRelationException( getClass(),
 						S_ProcName,
 						"Container",
+						"Container",
+						"Table",
+						"Table",
 						"Table",
 						"Table",
 						null );
@@ -1134,7 +1140,10 @@ public class CFBamRamClearTopDepTable
 					throw new CFLibUnresolvedRelationException( getClass(),
 						"updateClearTopDep",
 						"Superclass",
+						"Superclass",
 						"SuperClass",
+						"SuperClass",
+						"ClearDep",
 						"ClearDep",
 						null );
 				}
@@ -1151,6 +1160,9 @@ public class CFBamRamClearTopDepTable
 					throw new CFLibUnresolvedRelationException( getClass(),
 						"updateClearTopDep",
 						"Container",
+						"Container",
+						"Table",
+						"Table",
 						"Table",
 						"Table",
 						null );

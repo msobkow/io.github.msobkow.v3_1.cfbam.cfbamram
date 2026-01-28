@@ -98,7 +98,10 @@ public class CFBamRamDoubleDefTable
 					throw new CFLibUnresolvedRelationException( getClass(),
 						S_ProcName,
 						"Superclass",
+						"Superclass",
 						"SuperClass",
+						"SuperClass",
+						"Atom",
 						"Atom",
 						null );
 				}
@@ -5923,7 +5926,10 @@ public class CFBamRamDoubleDefTable
 					throw new CFLibUnresolvedRelationException( getClass(),
 						"updateDoubleDef",
 						"Superclass",
+						"Superclass",
 						"SuperClass",
+						"SuperClass",
+						"Atom",
 						"Atom",
 						null );
 				}

@@ -148,7 +148,10 @@ public class CFBamRamSecGroupTable
 					throw new CFLibUnresolvedRelationException( getClass(),
 						S_ProcName,
 						"Container",
+						"Container",
 						"SecGroupCluster",
+						"SecGroupCluster",
+						"Cluster",
 						"Cluster",
 						null );
 				}
@@ -495,7 +498,10 @@ public class CFBamRamSecGroupTable
 					throw new CFLibUnresolvedRelationException( getClass(),
 						"updateSecGroup",
 						"Container",
+						"Container",
 						"SecGroupCluster",
+						"SecGroupCluster",
+						"Cluster",
 						"Cluster",
 						null );
 				}

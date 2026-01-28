@@ -147,6 +147,9 @@ public class CFBamRamMinorVersionTable
 					throw new CFLibUnresolvedRelationException( getClass(),
 						S_ProcName,
 						"Owner",
+						"Owner",
+						"Tenant",
+						"Tenant",
 						"Tenant",
 						"Tenant",
 						null );
@@ -164,7 +167,10 @@ public class CFBamRamMinorVersionTable
 					throw new CFLibUnresolvedRelationException( getClass(),
 						S_ProcName,
 						"Container",
+						"Container",
 						"ParentMajorVersion",
+						"ParentMajorVersion",
+						"MajorVersion",
 						"MajorVersion",
 						null );
 				}
@@ -505,6 +511,9 @@ public class CFBamRamMinorVersionTable
 					throw new CFLibUnresolvedRelationException( getClass(),
 						"updateMinorVersion",
 						"Owner",
+						"Owner",
+						"Tenant",
+						"Tenant",
 						"Tenant",
 						"Tenant",
 						null );
@@ -522,7 +531,10 @@ public class CFBamRamMinorVersionTable
 					throw new CFLibUnresolvedRelationException( getClass(),
 						"updateMinorVersion",
 						"Container",
+						"Container",
 						"ParentMajorVersion",
+						"ParentMajorVersion",
+						"MajorVersion",
 						"MajorVersion",
 						null );
 				}

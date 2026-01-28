@@ -124,7 +124,10 @@ public class CFBamRamInt64ColTable
 					throw new CFLibUnresolvedRelationException( getClass(),
 						S_ProcName,
 						"Superclass",
+						"Superclass",
 						"SuperClass",
+						"SuperClass",
+						"Int64Def",
 						"Int64Def",
 						null );
 				}
@@ -141,6 +144,9 @@ public class CFBamRamInt64ColTable
 					throw new CFLibUnresolvedRelationException( getClass(),
 						S_ProcName,
 						"Container",
+						"Container",
+						"Table",
+						"Table",
 						"Table",
 						"Table",
 						null );
@@ -6679,7 +6685,10 @@ public class CFBamRamInt64ColTable
 					throw new CFLibUnresolvedRelationException( getClass(),
 						"updateInt64Col",
 						"Superclass",
+						"Superclass",
 						"SuperClass",
+						"SuperClass",
+						"Int64Def",
 						"Int64Def",
 						null );
 				}
@@ -6696,6 +6705,9 @@ public class CFBamRamInt64ColTable
 					throw new CFLibUnresolvedRelationException( getClass(),
 						"updateInt64Col",
 						"Container",
+						"Container",
+						"Table",
+						"Table",
 						"Table",
 						"Table",
 						null );

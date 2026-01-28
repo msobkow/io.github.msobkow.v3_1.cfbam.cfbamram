@@ -165,6 +165,9 @@ public class CFBamRamChainTable
 					throw new CFLibUnresolvedRelationException( getClass(),
 						S_ProcName,
 						"Container",
+						"Container",
+						"Table",
+						"Table",
 						"Table",
 						"Table",
 						null );
@@ -182,7 +185,10 @@ public class CFBamRamChainTable
 					throw new CFLibUnresolvedRelationException( getClass(),
 						S_ProcName,
 						"Lookup",
+						"Lookup",
 						"PrevRelation",
+						"PrevRelation",
+						"Relation",
 						"Relation",
 						null );
 				}
@@ -199,7 +205,10 @@ public class CFBamRamChainTable
 					throw new CFLibUnresolvedRelationException( getClass(),
 						S_ProcName,
 						"Lookup",
+						"Lookup",
 						"NextRelation",
+						"NextRelation",
+						"Relation",
 						"Relation",
 						null );
 				}
@@ -660,6 +669,9 @@ public class CFBamRamChainTable
 					throw new CFLibUnresolvedRelationException( getClass(),
 						"updateChain",
 						"Container",
+						"Container",
+						"Table",
+						"Table",
 						"Table",
 						"Table",
 						null );
@@ -677,7 +689,10 @@ public class CFBamRamChainTable
 					throw new CFLibUnresolvedRelationException( getClass(),
 						"updateChain",
 						"Lookup",
+						"Lookup",
 						"PrevRelation",
+						"PrevRelation",
+						"Relation",
 						"Relation",
 						null );
 				}
@@ -694,7 +709,10 @@ public class CFBamRamChainTable
 					throw new CFLibUnresolvedRelationException( getClass(),
 						"updateChain",
 						"Lookup",
+						"Lookup",
 						"NextRelation",
+						"NextRelation",
+						"Relation",
 						"Relation",
 						null );
 				}

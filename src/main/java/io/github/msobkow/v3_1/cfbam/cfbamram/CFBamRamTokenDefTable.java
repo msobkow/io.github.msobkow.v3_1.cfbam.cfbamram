@@ -98,7 +98,10 @@ public class CFBamRamTokenDefTable
 					throw new CFLibUnresolvedRelationException( getClass(),
 						S_ProcName,
 						"Superclass",
+						"Superclass",
 						"SuperClass",
+						"SuperClass",
+						"Atom",
 						"Atom",
 						null );
 				}
@@ -5923,7 +5926,10 @@ public class CFBamRamTokenDefTable
 					throw new CFLibUnresolvedRelationException( getClass(),
 						"updateTokenDef",
 						"Superclass",
+						"Superclass",
 						"SuperClass",
+						"SuperClass",
+						"Atom",
 						"Atom",
 						null );
 				}

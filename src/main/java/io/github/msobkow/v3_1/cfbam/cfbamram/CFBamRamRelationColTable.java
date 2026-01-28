@@ -220,6 +220,9 @@ public class CFBamRamRelationColTable
 					throw new CFLibUnresolvedRelationException( getClass(),
 						S_ProcName,
 						"Container",
+						"Container",
+						"Relation",
+						"Relation",
 						"Relation",
 						"Relation",
 						null );
@@ -237,7 +240,10 @@ public class CFBamRamRelationColTable
 					throw new CFLibUnresolvedRelationException( getClass(),
 						S_ProcName,
 						"Lookup",
+						"Lookup",
 						"LookupFromCol",
+						"LookupFromCol",
+						"IndexCol",
 						"IndexCol",
 						null );
 				}
@@ -254,7 +260,10 @@ public class CFBamRamRelationColTable
 					throw new CFLibUnresolvedRelationException( getClass(),
 						S_ProcName,
 						"Lookup",
+						"Lookup",
 						"LookupToCol",
+						"LookupToCol",
+						"IndexCol",
 						"IndexCol",
 						null );
 				}
@@ -1311,6 +1320,9 @@ public class CFBamRamRelationColTable
 					throw new CFLibUnresolvedRelationException( getClass(),
 						"updateRelationCol",
 						"Container",
+						"Container",
+						"Relation",
+						"Relation",
 						"Relation",
 						"Relation",
 						null );
@@ -1328,7 +1340,10 @@ public class CFBamRamRelationColTable
 					throw new CFLibUnresolvedRelationException( getClass(),
 						"updateRelationCol",
 						"Lookup",
+						"Lookup",
 						"LookupFromCol",
+						"LookupFromCol",
+						"IndexCol",
 						"IndexCol",
 						null );
 				}
@@ -1345,7 +1360,10 @@ public class CFBamRamRelationColTable
 					throw new CFLibUnresolvedRelationException( getClass(),
 						"updateRelationCol",
 						"Lookup",
+						"Lookup",
 						"LookupToCol",
+						"LookupToCol",
+						"IndexCol",
 						"IndexCol",
 						null );
 				}

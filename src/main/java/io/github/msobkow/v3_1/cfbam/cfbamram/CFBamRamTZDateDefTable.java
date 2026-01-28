@@ -98,7 +98,10 @@ public class CFBamRamTZDateDefTable
 					throw new CFLibUnresolvedRelationException( getClass(),
 						S_ProcName,
 						"Superclass",
+						"Superclass",
 						"SuperClass",
+						"SuperClass",
+						"Atom",
 						"Atom",
 						null );
 				}
@@ -5923,7 +5926,10 @@ public class CFBamRamTZDateDefTable
 					throw new CFLibUnresolvedRelationException( getClass(),
 						"updateTZDateDef",
 						"Superclass",
+						"Superclass",
 						"SuperClass",
+						"SuperClass",
+						"Atom",
 						"Atom",
 						null );
 				}

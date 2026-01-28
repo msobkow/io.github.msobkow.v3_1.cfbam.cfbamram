@@ -124,7 +124,10 @@ public class CFBamRamUuidTypeTable
 					throw new CFLibUnresolvedRelationException( getClass(),
 						S_ProcName,
 						"Superclass",
+						"Superclass",
 						"SuperClass",
+						"SuperClass",
+						"UuidDef",
 						"UuidDef",
 						null );
 				}
@@ -141,6 +144,9 @@ public class CFBamRamUuidTypeTable
 					throw new CFLibUnresolvedRelationException( getClass(),
 						S_ProcName,
 						"Container",
+						"Container",
+						"SchemaDef",
+						"SchemaDef",
 						"SchemaDef",
 						"SchemaDef",
 						null );
@@ -6684,7 +6690,10 @@ public class CFBamRamUuidTypeTable
 					throw new CFLibUnresolvedRelationException( getClass(),
 						"updateUuidType",
 						"Superclass",
+						"Superclass",
 						"SuperClass",
+						"SuperClass",
+						"UuidDef",
 						"UuidDef",
 						null );
 				}
@@ -6701,6 +6710,9 @@ public class CFBamRamUuidTypeTable
 					throw new CFLibUnresolvedRelationException( getClass(),
 						"updateUuidType",
 						"Container",
+						"Container",
+						"SchemaDef",
+						"SchemaDef",
 						"SchemaDef",
 						"SchemaDef",
 						null );

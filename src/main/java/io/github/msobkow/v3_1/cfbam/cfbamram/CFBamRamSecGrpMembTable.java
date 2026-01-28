@@ -157,7 +157,10 @@ public class CFBamRamSecGrpMembTable
 					throw new CFLibUnresolvedRelationException( getClass(),
 						S_ProcName,
 						"Owner",
+						"Owner",
 						"SecGrpMembCluster",
+						"SecGrpMembCluster",
+						"Cluster",
 						"Cluster",
 						null );
 				}
@@ -174,7 +177,10 @@ public class CFBamRamSecGrpMembTable
 					throw new CFLibUnresolvedRelationException( getClass(),
 						S_ProcName,
 						"Container",
+						"Container",
 						"SecGrpMembGroup",
+						"SecGrpMembGroup",
+						"SecGroup",
 						"SecGroup",
 						null );
 				}
@@ -652,7 +658,10 @@ public class CFBamRamSecGrpMembTable
 					throw new CFLibUnresolvedRelationException( getClass(),
 						"updateSecGrpMemb",
 						"Owner",
+						"Owner",
 						"SecGrpMembCluster",
+						"SecGrpMembCluster",
+						"Cluster",
 						"Cluster",
 						null );
 				}
@@ -669,7 +678,10 @@ public class CFBamRamSecGrpMembTable
 					throw new CFLibUnresolvedRelationException( getClass(),
 						"updateSecGrpMemb",
 						"Container",
+						"Container",
 						"SecGrpMembGroup",
+						"SecGrpMembGroup",
+						"SecGroup",
 						"SecGroup",
 						null );
 				}

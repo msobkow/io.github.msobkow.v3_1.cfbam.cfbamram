@@ -102,7 +102,7 @@ public class CFBamRamSecDeviceTable
 		final String S_ProcName = "createSecDevice";
 		
 		CFSecBuffSecDevice Buff = ensureRec(iBuff);
-		ICFSecSecDevicePKey pkey = schema.getFactorySecDevice().newPKey();
+		CFSecBuffSecDevicePKey pkey = (CFSecBuffSecDevicePKey)(schema.getFactorySecDevice().newPKey());
 		pkey.setRequiredSecUserId( Buff.getRequiredSecUserId() );
 		pkey.setRequiredDevName( Buff.getRequiredDevName() );
 		Buff.setRequiredSecUserId( pkey.getRequiredSecUserId() );
@@ -140,7 +140,10 @@ public class CFBamRamSecDeviceTable
 					throw new CFLibUnresolvedRelationException( getClass(),
 						S_ProcName,
 						"Container",
+						"Container",
 						"SecDeviceSecUser",
+						"SecDeviceSecUser",
+						"SecUser",
 						"SecUser",
 						null );
 				}
@@ -471,7 +474,10 @@ public class CFBamRamSecDeviceTable
 					throw new CFLibUnresolvedRelationException( getClass(),
 						"updateSecDevice",
 						"Container",
+						"Container",
 						"SecDeviceSecUser",
+						"SecDeviceSecUser",
+						"SecUser",
 						"SecUser",
 						null );
 				}

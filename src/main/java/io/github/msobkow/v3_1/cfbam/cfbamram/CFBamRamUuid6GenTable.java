@@ -115,7 +115,10 @@ public class CFBamRamUuid6GenTable
 					throw new CFLibUnresolvedRelationException( getClass(),
 						S_ProcName,
 						"Superclass",
+						"Superclass",
 						"SuperClass",
+						"SuperClass",
+						"Uuid6Type",
 						"Uuid6Type",
 						null );
 				}
@@ -6632,7 +6635,10 @@ public class CFBamRamUuid6GenTable
 					throw new CFLibUnresolvedRelationException( getClass(),
 						"updateUuid6Gen",
 						"Superclass",
+						"Superclass",
 						"SuperClass",
+						"SuperClass",
+						"Uuid6Type",
 						"Uuid6Type",
 						null );
 				}

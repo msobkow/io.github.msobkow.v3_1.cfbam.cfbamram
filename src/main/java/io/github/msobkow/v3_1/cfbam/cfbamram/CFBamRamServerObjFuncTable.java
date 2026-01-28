@@ -107,7 +107,10 @@ public class CFBamRamServerObjFuncTable
 					throw new CFLibUnresolvedRelationException( getClass(),
 						S_ProcName,
 						"Superclass",
+						"Superclass",
 						"SuperClass",
+						"SuperClass",
+						"ServerMethod",
 						"ServerMethod",
 						null );
 				}
@@ -536,7 +539,10 @@ public class CFBamRamServerObjFuncTable
 					throw new CFLibUnresolvedRelationException( getClass(),
 						"updateServerObjFunc",
 						"Superclass",
+						"Superclass",
 						"SuperClass",
+						"SuperClass",
+						"ServerMethod",
 						"ServerMethod",
 						null );
 				}

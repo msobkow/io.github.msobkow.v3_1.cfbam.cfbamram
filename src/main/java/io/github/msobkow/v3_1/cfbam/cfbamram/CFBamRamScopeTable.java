@@ -194,6 +194,9 @@ public class CFBamRamScopeTable
 					throw new CFLibUnresolvedRelationException( getClass(),
 						S_ProcName,
 						"Owner",
+						"Owner",
+						"Tenant",
+						"Tenant",
 						"Tenant",
 						"Tenant",
 						null );
@@ -540,6 +543,9 @@ public class CFBamRamScopeTable
 					throw new CFLibUnresolvedRelationException( getClass(),
 						"updateScope",
 						"Owner",
+						"Owner",
+						"Tenant",
+						"Tenant",
 						"Tenant",
 						"Tenant",
 						null );

@@ -98,7 +98,10 @@ public class CFBamRamEnumDefTable
 					throw new CFLibUnresolvedRelationException( getClass(),
 						S_ProcName,
 						"Superclass",
+						"Superclass",
 						"SuperClass",
+						"SuperClass",
+						"Int16Def",
 						"Int16Def",
 						null );
 				}
@@ -5918,7 +5921,10 @@ public class CFBamRamEnumDefTable
 					throw new CFLibUnresolvedRelationException( getClass(),
 						"updateEnumDef",
 						"Superclass",
+						"Superclass",
 						"SuperClass",
+						"SuperClass",
+						"Int16Def",
 						"Int16Def",
 						null );
 				}

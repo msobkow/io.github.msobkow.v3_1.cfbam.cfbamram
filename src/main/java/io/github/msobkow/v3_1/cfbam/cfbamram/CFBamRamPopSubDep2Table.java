@@ -123,7 +123,10 @@ public class CFBamRamPopSubDep2Table
 					throw new CFLibUnresolvedRelationException( getClass(),
 						S_ProcName,
 						"Superclass",
+						"Superclass",
 						"SuperClass",
+						"SuperClass",
+						"PopDep",
 						"PopDep",
 						null );
 				}
@@ -140,6 +143,9 @@ public class CFBamRamPopSubDep2Table
 					throw new CFLibUnresolvedRelationException( getClass(),
 						S_ProcName,
 						"Container",
+						"Container",
+						"PopSubDep1",
+						"PopSubDep1",
 						"PopSubDep1",
 						"PopSubDep1",
 						null );
@@ -589,7 +595,10 @@ public class CFBamRamPopSubDep2Table
 					throw new CFLibUnresolvedRelationException( getClass(),
 						"updatePopSubDep2",
 						"Superclass",
+						"Superclass",
 						"SuperClass",
+						"SuperClass",
+						"PopDep",
 						"PopDep",
 						null );
 				}
@@ -606,6 +615,9 @@ public class CFBamRamPopSubDep2Table
 					throw new CFLibUnresolvedRelationException( getClass(),
 						"updatePopSubDep2",
 						"Container",
+						"Container",
+						"PopSubDep1",
+						"PopSubDep1",
 						"PopSubDep1",
 						"PopSubDep1",
 						null );

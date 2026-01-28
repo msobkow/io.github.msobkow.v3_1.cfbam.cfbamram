@@ -124,7 +124,10 @@ public class CFBamRamUInt32TypeTable
 					throw new CFLibUnresolvedRelationException( getClass(),
 						S_ProcName,
 						"Superclass",
+						"Superclass",
 						"SuperClass",
+						"SuperClass",
+						"UInt32Def",
 						"UInt32Def",
 						null );
 				}
@@ -141,6 +144,9 @@ public class CFBamRamUInt32TypeTable
 					throw new CFLibUnresolvedRelationException( getClass(),
 						S_ProcName,
 						"Container",
+						"Container",
+						"SchemaDef",
+						"SchemaDef",
 						"SchemaDef",
 						"SchemaDef",
 						null );
@@ -6679,7 +6685,10 @@ public class CFBamRamUInt32TypeTable
 					throw new CFLibUnresolvedRelationException( getClass(),
 						"updateUInt32Type",
 						"Superclass",
+						"Superclass",
 						"SuperClass",
+						"SuperClass",
+						"UInt32Def",
 						"UInt32Def",
 						null );
 				}
@@ -6696,6 +6705,9 @@ public class CFBamRamUInt32TypeTable
 					throw new CFLibUnresolvedRelationException( getClass(),
 						"updateUInt32Type",
 						"Container",
+						"Container",
+						"SchemaDef",
+						"SchemaDef",
 						"SchemaDef",
 						"SchemaDef",
 						null );

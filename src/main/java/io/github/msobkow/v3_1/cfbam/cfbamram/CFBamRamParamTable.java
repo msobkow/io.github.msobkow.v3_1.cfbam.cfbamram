@@ -211,6 +211,9 @@ public class CFBamRamParamTable
 					throw new CFLibUnresolvedRelationException( getClass(),
 						S_ProcName,
 						"Container",
+						"Container",
+						"ServerMethod",
+						"ServerMethod",
 						"ServerMethod",
 						"ServerMethod",
 						null );
@@ -230,7 +233,10 @@ public class CFBamRamParamTable
 					throw new CFLibUnresolvedRelationException( getClass(),
 						S_ProcName,
 						"Lookup",
+						"Lookup",
 						"Type",
+						"Type",
+						"Value",
 						"Value",
 						null );
 				}
@@ -1227,6 +1233,9 @@ public class CFBamRamParamTable
 					throw new CFLibUnresolvedRelationException( getClass(),
 						"updateParam",
 						"Container",
+						"Container",
+						"ServerMethod",
+						"ServerMethod",
 						"ServerMethod",
 						"ServerMethod",
 						null );
@@ -1246,7 +1255,10 @@ public class CFBamRamParamTable
 					throw new CFLibUnresolvedRelationException( getClass(),
 						"updateParam",
 						"Lookup",
+						"Lookup",
 						"Type",
+						"Type",
+						"Value",
 						"Value",
 						null );
 				}

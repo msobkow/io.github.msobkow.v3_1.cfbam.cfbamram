@@ -132,7 +132,10 @@ public class CFBamRamServerMethodTable
 					throw new CFLibUnresolvedRelationException( getClass(),
 						S_ProcName,
 						"Superclass",
+						"Superclass",
 						"SuperClass",
+						"SuperClass",
+						"Scope",
 						"Scope",
 						null );
 				}
@@ -149,7 +152,10 @@ public class CFBamRamServerMethodTable
 					throw new CFLibUnresolvedRelationException( getClass(),
 						S_ProcName,
 						"Container",
+						"Container",
 						"ForTable",
+						"ForTable",
+						"Table",
 						"Table",
 						null );
 				}
@@ -576,7 +582,10 @@ public class CFBamRamServerMethodTable
 					throw new CFLibUnresolvedRelationException( getClass(),
 						"updateServerMethod",
 						"Superclass",
+						"Superclass",
 						"SuperClass",
+						"SuperClass",
+						"Scope",
 						"Scope",
 						null );
 				}
@@ -593,7 +602,10 @@ public class CFBamRamServerMethodTable
 					throw new CFLibUnresolvedRelationException( getClass(),
 						"updateServerMethod",
 						"Container",
+						"Container",
 						"ForTable",
+						"ForTable",
+						"Table",
 						"Table",
 						null );
 				}

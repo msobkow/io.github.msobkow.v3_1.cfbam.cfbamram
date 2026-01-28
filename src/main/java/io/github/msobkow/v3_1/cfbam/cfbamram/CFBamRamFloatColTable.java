@@ -124,7 +124,10 @@ public class CFBamRamFloatColTable
 					throw new CFLibUnresolvedRelationException( getClass(),
 						S_ProcName,
 						"Superclass",
+						"Superclass",
 						"SuperClass",
+						"SuperClass",
+						"FloatDef",
 						"FloatDef",
 						null );
 				}
@@ -141,6 +144,9 @@ public class CFBamRamFloatColTable
 					throw new CFLibUnresolvedRelationException( getClass(),
 						S_ProcName,
 						"Container",
+						"Container",
+						"Table",
+						"Table",
 						"Table",
 						"Table",
 						null );
@@ -6679,7 +6685,10 @@ public class CFBamRamFloatColTable
 					throw new CFLibUnresolvedRelationException( getClass(),
 						"updateFloatCol",
 						"Superclass",
+						"Superclass",
 						"SuperClass",
+						"SuperClass",
+						"FloatDef",
 						"FloatDef",
 						null );
 				}
@@ -6696,6 +6705,9 @@ public class CFBamRamFloatColTable
 					throw new CFLibUnresolvedRelationException( getClass(),
 						"updateFloatCol",
 						"Container",
+						"Container",
+						"Table",
+						"Table",
 						"Table",
 						"Table",
 						null );

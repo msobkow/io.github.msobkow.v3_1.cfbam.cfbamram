@@ -124,7 +124,10 @@ public class CFBamRamDbKeyHash224TypeTable
 					throw new CFLibUnresolvedRelationException( getClass(),
 						S_ProcName,
 						"Superclass",
+						"Superclass",
 						"SuperClass",
+						"SuperClass",
+						"DbKeyHash224Def",
 						"DbKeyHash224Def",
 						null );
 				}
@@ -141,6 +144,9 @@ public class CFBamRamDbKeyHash224TypeTable
 					throw new CFLibUnresolvedRelationException( getClass(),
 						S_ProcName,
 						"Container",
+						"Container",
+						"SchemaDef",
+						"SchemaDef",
 						"SchemaDef",
 						"SchemaDef",
 						null );
@@ -6684,7 +6690,10 @@ public class CFBamRamDbKeyHash224TypeTable
 					throw new CFLibUnresolvedRelationException( getClass(),
 						"updateDbKeyHash224Type",
 						"Superclass",
+						"Superclass",
 						"SuperClass",
+						"SuperClass",
+						"DbKeyHash224Def",
 						"DbKeyHash224Def",
 						null );
 				}
@@ -6701,6 +6710,9 @@ public class CFBamRamDbKeyHash224TypeTable
 					throw new CFLibUnresolvedRelationException( getClass(),
 						"updateDbKeyHash224Type",
 						"Container",
+						"Container",
+						"SchemaDef",
+						"SchemaDef",
 						"SchemaDef",
 						"SchemaDef",
 						null );

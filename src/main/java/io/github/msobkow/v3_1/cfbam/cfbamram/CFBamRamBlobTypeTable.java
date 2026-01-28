@@ -124,7 +124,10 @@ public class CFBamRamBlobTypeTable
 					throw new CFLibUnresolvedRelationException( getClass(),
 						S_ProcName,
 						"Superclass",
+						"Superclass",
 						"SuperClass",
+						"SuperClass",
+						"BlobDef",
 						"BlobDef",
 						null );
 				}
@@ -141,6 +144,9 @@ public class CFBamRamBlobTypeTable
 					throw new CFLibUnresolvedRelationException( getClass(),
 						S_ProcName,
 						"Container",
+						"Container",
+						"SchemaDef",
+						"SchemaDef",
 						"SchemaDef",
 						"SchemaDef",
 						null );
@@ -6679,7 +6685,10 @@ public class CFBamRamBlobTypeTable
 					throw new CFLibUnresolvedRelationException( getClass(),
 						"updateBlobType",
 						"Superclass",
+						"Superclass",
 						"SuperClass",
+						"SuperClass",
+						"BlobDef",
 						"BlobDef",
 						null );
 				}
@@ -6696,6 +6705,9 @@ public class CFBamRamBlobTypeTable
 					throw new CFLibUnresolvedRelationException( getClass(),
 						"updateBlobType",
 						"Container",
+						"Container",
+						"SchemaDef",
+						"SchemaDef",
 						"SchemaDef",
 						"SchemaDef",
 						null );

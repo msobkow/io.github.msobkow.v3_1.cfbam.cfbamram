@@ -147,6 +147,9 @@ public class CFBamRamMajorVersionTable
 					throw new CFLibUnresolvedRelationException( getClass(),
 						S_ProcName,
 						"Owner",
+						"Owner",
+						"Tenant",
+						"Tenant",
 						"Tenant",
 						"Tenant",
 						null );
@@ -164,7 +167,10 @@ public class CFBamRamMajorVersionTable
 					throw new CFLibUnresolvedRelationException( getClass(),
 						S_ProcName,
 						"Container",
+						"Container",
 						"ParentSubProject",
+						"ParentSubProject",
+						"SubProject",
 						"SubProject",
 						null );
 				}
@@ -505,6 +511,9 @@ public class CFBamRamMajorVersionTable
 					throw new CFLibUnresolvedRelationException( getClass(),
 						"updateMajorVersion",
 						"Owner",
+						"Owner",
+						"Tenant",
+						"Tenant",
 						"Tenant",
 						"Tenant",
 						null );
@@ -522,7 +531,10 @@ public class CFBamRamMajorVersionTable
 					throw new CFLibUnresolvedRelationException( getClass(),
 						"updateMajorVersion",
 						"Container",
+						"Container",
 						"ParentSubProject",
+						"ParentSubProject",
+						"SubProject",
 						"SubProject",
 						null );
 				}

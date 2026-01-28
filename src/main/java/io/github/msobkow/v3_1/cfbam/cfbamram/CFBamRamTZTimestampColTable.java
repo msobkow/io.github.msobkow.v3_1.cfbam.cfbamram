@@ -124,7 +124,10 @@ public class CFBamRamTZTimestampColTable
 					throw new CFLibUnresolvedRelationException( getClass(),
 						S_ProcName,
 						"Superclass",
+						"Superclass",
 						"SuperClass",
+						"SuperClass",
+						"TZTimestampDef",
 						"TZTimestampDef",
 						null );
 				}
@@ -141,6 +144,9 @@ public class CFBamRamTZTimestampColTable
 					throw new CFLibUnresolvedRelationException( getClass(),
 						S_ProcName,
 						"Container",
+						"Container",
+						"Table",
+						"Table",
 						"Table",
 						"Table",
 						null );
@@ -6679,7 +6685,10 @@ public class CFBamRamTZTimestampColTable
 					throw new CFLibUnresolvedRelationException( getClass(),
 						"updateTZTimestampCol",
 						"Superclass",
+						"Superclass",
 						"SuperClass",
+						"SuperClass",
+						"TZTimestampDef",
 						"TZTimestampDef",
 						null );
 				}
@@ -6696,6 +6705,9 @@ public class CFBamRamTZTimestampColTable
 					throw new CFLibUnresolvedRelationException( getClass(),
 						"updateTZTimestampCol",
 						"Container",
+						"Container",
+						"Table",
+						"Table",
 						"Table",
 						"Table",
 						null );

@@ -98,7 +98,10 @@ public class CFBamRamAtomTable
 					throw new CFLibUnresolvedRelationException( getClass(),
 						S_ProcName,
 						"Superclass",
+						"Superclass",
 						"SuperClass",
+						"SuperClass",
+						"Value",
 						"Value",
 						null );
 				}
@@ -6428,7 +6431,10 @@ public class CFBamRamAtomTable
 					throw new CFLibUnresolvedRelationException( getClass(),
 						"updateAtom",
 						"Superclass",
+						"Superclass",
 						"SuperClass",
+						"SuperClass",
+						"Value",
 						"Value",
 						null );
 				}

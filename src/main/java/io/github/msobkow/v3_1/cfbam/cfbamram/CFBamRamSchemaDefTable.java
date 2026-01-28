@@ -168,7 +168,10 @@ public class CFBamRamSchemaDefTable
 					throw new CFLibUnresolvedRelationException( getClass(),
 						S_ProcName,
 						"Superclass",
+						"Superclass",
 						"SuperClass",
+						"SuperClass",
+						"Scope",
 						"Scope",
 						null );
 				}
@@ -185,6 +188,9 @@ public class CFBamRamSchemaDefTable
 					throw new CFLibUnresolvedRelationException( getClass(),
 						S_ProcName,
 						"Container",
+						"Container",
+						"MinorVersion",
+						"MinorVersion",
 						"MinorVersion",
 						"MinorVersion",
 						null );
@@ -202,7 +208,10 @@ public class CFBamRamSchemaDefTable
 					throw new CFLibUnresolvedRelationException( getClass(),
 						S_ProcName,
 						"Owner",
+						"Owner",
 						"CTenant",
+						"CTenant",
+						"Tenant",
 						"Tenant",
 						null );
 				}
@@ -845,7 +854,10 @@ public class CFBamRamSchemaDefTable
 					throw new CFLibUnresolvedRelationException( getClass(),
 						"updateSchemaDef",
 						"Superclass",
+						"Superclass",
 						"SuperClass",
+						"SuperClass",
+						"Scope",
 						"Scope",
 						null );
 				}
@@ -862,6 +874,9 @@ public class CFBamRamSchemaDefTable
 					throw new CFLibUnresolvedRelationException( getClass(),
 						"updateSchemaDef",
 						"Container",
+						"Container",
+						"MinorVersion",
+						"MinorVersion",
 						"MinorVersion",
 						"MinorVersion",
 						null );
@@ -879,7 +894,10 @@ public class CFBamRamSchemaDefTable
 					throw new CFLibUnresolvedRelationException( getClass(),
 						"updateSchemaDef",
 						"Owner",
+						"Owner",
 						"CTenant",
+						"CTenant",
+						"Tenant",
 						"Tenant",
 						null );
 				}

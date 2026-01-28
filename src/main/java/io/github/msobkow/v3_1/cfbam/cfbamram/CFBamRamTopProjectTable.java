@@ -147,6 +147,9 @@ public class CFBamRamTopProjectTable
 					throw new CFLibUnresolvedRelationException( getClass(),
 						S_ProcName,
 						"Owner",
+						"Owner",
+						"Tenant",
+						"Tenant",
 						"Tenant",
 						"Tenant",
 						null );
@@ -164,7 +167,10 @@ public class CFBamRamTopProjectTable
 					throw new CFLibUnresolvedRelationException( getClass(),
 						S_ProcName,
 						"Container",
+						"Container",
 						"ParentTopDomain",
+						"ParentTopDomain",
+						"TopDomain",
 						"TopDomain",
 						null );
 				}
@@ -505,6 +511,9 @@ public class CFBamRamTopProjectTable
 					throw new CFLibUnresolvedRelationException( getClass(),
 						"updateTopProject",
 						"Owner",
+						"Owner",
+						"Tenant",
+						"Tenant",
 						"Tenant",
 						"Tenant",
 						null );
@@ -522,7 +531,10 @@ public class CFBamRamTopProjectTable
 					throw new CFLibUnresolvedRelationException( getClass(),
 						"updateTopProject",
 						"Container",
+						"Container",
 						"ParentTopDomain",
+						"ParentTopDomain",
+						"TopDomain",
 						"TopDomain",
 						null );
 				}

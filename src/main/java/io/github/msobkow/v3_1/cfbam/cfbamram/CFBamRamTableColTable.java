@@ -133,7 +133,10 @@ public class CFBamRamTableColTable
 					throw new CFLibUnresolvedRelationException( getClass(),
 						S_ProcName,
 						"Superclass",
+						"Superclass",
 						"SuperClass",
+						"SuperClass",
+						"Value",
 						"Value",
 						null );
 				}
@@ -150,6 +153,9 @@ public class CFBamRamTableColTable
 					throw new CFLibUnresolvedRelationException( getClass(),
 						S_ProcName,
 						"Container",
+						"Container",
+						"Table",
+						"Table",
 						"Table",
 						"Table",
 						null );
@@ -6767,7 +6773,10 @@ public class CFBamRamTableColTable
 					throw new CFLibUnresolvedRelationException( getClass(),
 						"updateTableCol",
 						"Superclass",
+						"Superclass",
 						"SuperClass",
+						"SuperClass",
+						"Value",
 						"Value",
 						null );
 				}
@@ -6784,6 +6793,9 @@ public class CFBamRamTableColTable
 					throw new CFLibUnresolvedRelationException( getClass(),
 						"updateTableCol",
 						"Container",
+						"Container",
+						"Table",
+						"Table",
 						"Table",
 						"Table",
 						null );

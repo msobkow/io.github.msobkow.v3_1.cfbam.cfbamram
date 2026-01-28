@@ -167,7 +167,10 @@ public class CFBamRamSchemaRefTable
 					throw new CFLibUnresolvedRelationException( getClass(),
 						S_ProcName,
 						"Superclass",
+						"Superclass",
 						"SuperClass",
+						"SuperClass",
+						"Scope",
 						"Scope",
 						null );
 				}
@@ -184,7 +187,10 @@ public class CFBamRamSchemaRefTable
 					throw new CFLibUnresolvedRelationException( getClass(),
 						S_ProcName,
 						"Container",
+						"Container",
 						"Schema",
+						"Schema",
+						"SchemaDef",
 						"SchemaDef",
 						null );
 				}
@@ -1106,7 +1112,10 @@ public class CFBamRamSchemaRefTable
 					throw new CFLibUnresolvedRelationException( getClass(),
 						"updateSchemaRef",
 						"Superclass",
+						"Superclass",
 						"SuperClass",
+						"SuperClass",
+						"Scope",
 						"Scope",
 						null );
 				}
@@ -1123,7 +1132,10 @@ public class CFBamRamSchemaRefTable
 					throw new CFLibUnresolvedRelationException( getClass(),
 						"updateSchemaRef",
 						"Container",
+						"Container",
 						"Schema",
+						"Schema",
+						"SchemaDef",
 						"SchemaDef",
 						null );
 				}

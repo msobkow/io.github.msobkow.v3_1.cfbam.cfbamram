@@ -124,7 +124,10 @@ public class CFBamRamDateTypeTable
 					throw new CFLibUnresolvedRelationException( getClass(),
 						S_ProcName,
 						"Superclass",
+						"Superclass",
 						"SuperClass",
+						"SuperClass",
+						"DateDef",
 						"DateDef",
 						null );
 				}
@@ -141,6 +144,9 @@ public class CFBamRamDateTypeTable
 					throw new CFLibUnresolvedRelationException( getClass(),
 						S_ProcName,
 						"Container",
+						"Container",
+						"SchemaDef",
+						"SchemaDef",
 						"SchemaDef",
 						"SchemaDef",
 						null );
@@ -6679,7 +6685,10 @@ public class CFBamRamDateTypeTable
 					throw new CFLibUnresolvedRelationException( getClass(),
 						"updateDateType",
 						"Superclass",
+						"Superclass",
 						"SuperClass",
+						"SuperClass",
+						"DateDef",
 						"DateDef",
 						null );
 				}
@@ -6696,6 +6705,9 @@ public class CFBamRamDateTypeTable
 					throw new CFLibUnresolvedRelationException( getClass(),
 						"updateDateType",
 						"Container",
+						"Container",
+						"SchemaDef",
+						"SchemaDef",
 						"SchemaDef",
 						"SchemaDef",
 						null );

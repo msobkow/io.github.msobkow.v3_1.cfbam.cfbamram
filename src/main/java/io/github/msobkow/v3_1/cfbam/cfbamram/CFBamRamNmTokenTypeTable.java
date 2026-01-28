@@ -124,7 +124,10 @@ public class CFBamRamNmTokenTypeTable
 					throw new CFLibUnresolvedRelationException( getClass(),
 						S_ProcName,
 						"Superclass",
+						"Superclass",
 						"SuperClass",
+						"SuperClass",
+						"NmTokenDef",
 						"NmTokenDef",
 						null );
 				}
@@ -141,6 +144,9 @@ public class CFBamRamNmTokenTypeTable
 					throw new CFLibUnresolvedRelationException( getClass(),
 						S_ProcName,
 						"Container",
+						"Container",
+						"SchemaDef",
+						"SchemaDef",
 						"SchemaDef",
 						"SchemaDef",
 						null );
@@ -6679,7 +6685,10 @@ public class CFBamRamNmTokenTypeTable
 					throw new CFLibUnresolvedRelationException( getClass(),
 						"updateNmTokenType",
 						"Superclass",
+						"Superclass",
 						"SuperClass",
+						"SuperClass",
+						"NmTokenDef",
 						"NmTokenDef",
 						null );
 				}
@@ -6696,6 +6705,9 @@ public class CFBamRamNmTokenTypeTable
 					throw new CFLibUnresolvedRelationException( getClass(),
 						"updateNmTokenType",
 						"Container",
+						"Container",
+						"SchemaDef",
+						"SchemaDef",
 						"SchemaDef",
 						"SchemaDef",
 						null );

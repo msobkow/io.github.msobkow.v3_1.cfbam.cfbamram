@@ -115,7 +115,10 @@ public class CFBamRamId64GenTable
 					throw new CFLibUnresolvedRelationException( getClass(),
 						S_ProcName,
 						"Superclass",
+						"Superclass",
 						"SuperClass",
+						"SuperClass",
+						"Int64Type",
 						"Int64Type",
 						null );
 				}
@@ -6632,7 +6635,10 @@ public class CFBamRamId64GenTable
 					throw new CFLibUnresolvedRelationException( getClass(),
 						"updateId64Gen",
 						"Superclass",
+						"Superclass",
 						"SuperClass",
+						"SuperClass",
+						"Int64Type",
 						"Int64Type",
 						null );
 				}

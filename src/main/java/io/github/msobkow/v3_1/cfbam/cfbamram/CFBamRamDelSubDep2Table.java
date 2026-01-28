@@ -123,7 +123,10 @@ public class CFBamRamDelSubDep2Table
 					throw new CFLibUnresolvedRelationException( getClass(),
 						S_ProcName,
 						"Superclass",
+						"Superclass",
 						"SuperClass",
+						"SuperClass",
+						"DelDep",
 						"DelDep",
 						null );
 				}
@@ -140,6 +143,9 @@ public class CFBamRamDelSubDep2Table
 					throw new CFLibUnresolvedRelationException( getClass(),
 						S_ProcName,
 						"Container",
+						"Container",
+						"DelSubDep1",
+						"DelSubDep1",
 						"DelSubDep1",
 						"DelSubDep1",
 						null );
@@ -589,7 +595,10 @@ public class CFBamRamDelSubDep2Table
 					throw new CFLibUnresolvedRelationException( getClass(),
 						"updateDelSubDep2",
 						"Superclass",
+						"Superclass",
 						"SuperClass",
+						"SuperClass",
+						"DelDep",
 						"DelDep",
 						null );
 				}
@@ -606,6 +615,9 @@ public class CFBamRamDelSubDep2Table
 					throw new CFLibUnresolvedRelationException( getClass(),
 						"updateDelSubDep2",
 						"Container",
+						"Container",
+						"DelSubDep1",
+						"DelSubDep1",
 						"DelSubDep1",
 						"DelSubDep1",
 						null );

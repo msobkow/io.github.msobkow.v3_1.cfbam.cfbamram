@@ -168,7 +168,10 @@ public class CFBamRamRelationTable
 					throw new CFLibUnresolvedRelationException( getClass(),
 						S_ProcName,
 						"Superclass",
+						"Superclass",
 						"SuperClass",
+						"SuperClass",
+						"Scope",
 						"Scope",
 						null );
 				}
@@ -185,7 +188,10 @@ public class CFBamRamRelationTable
 					throw new CFLibUnresolvedRelationException( getClass(),
 						S_ProcName,
 						"Container",
+						"Container",
 						"FromTable",
+						"FromTable",
+						"Table",
 						"Table",
 						null );
 				}
@@ -202,7 +208,10 @@ public class CFBamRamRelationTable
 					throw new CFLibUnresolvedRelationException( getClass(),
 						S_ProcName,
 						"Lookup",
+						"Lookup",
 						"FromIndex",
+						"FromIndex",
+						"Index",
 						"Index",
 						null );
 				}
@@ -219,7 +228,10 @@ public class CFBamRamRelationTable
 					throw new CFLibUnresolvedRelationException( getClass(),
 						S_ProcName,
 						"Lookup",
+						"Lookup",
 						"ToTable",
+						"ToTable",
+						"Table",
 						"Table",
 						null );
 				}
@@ -236,7 +248,10 @@ public class CFBamRamRelationTable
 					throw new CFLibUnresolvedRelationException( getClass(),
 						S_ProcName,
 						"Lookup",
+						"Lookup",
 						"ToIndex",
+						"ToIndex",
+						"Index",
 						"Index",
 						null );
 				}
@@ -964,7 +979,10 @@ public class CFBamRamRelationTable
 					throw new CFLibUnresolvedRelationException( getClass(),
 						"updateRelation",
 						"Superclass",
+						"Superclass",
 						"SuperClass",
+						"SuperClass",
+						"Scope",
 						"Scope",
 						null );
 				}
@@ -981,7 +999,10 @@ public class CFBamRamRelationTable
 					throw new CFLibUnresolvedRelationException( getClass(),
 						"updateRelation",
 						"Container",
+						"Container",
 						"FromTable",
+						"FromTable",
+						"Table",
 						"Table",
 						null );
 				}
@@ -998,7 +1019,10 @@ public class CFBamRamRelationTable
 					throw new CFLibUnresolvedRelationException( getClass(),
 						"updateRelation",
 						"Lookup",
+						"Lookup",
 						"FromIndex",
+						"FromIndex",
+						"Index",
 						"Index",
 						null );
 				}
@@ -1015,7 +1039,10 @@ public class CFBamRamRelationTable
 					throw new CFLibUnresolvedRelationException( getClass(),
 						"updateRelation",
 						"Lookup",
+						"Lookup",
 						"ToTable",
+						"ToTable",
+						"Table",
 						"Table",
 						null );
 				}
@@ -1032,7 +1059,10 @@ public class CFBamRamRelationTable
 					throw new CFLibUnresolvedRelationException( getClass(),
 						"updateRelation",
 						"Lookup",
+						"Lookup",
 						"ToIndex",
+						"ToIndex",
+						"Index",
 						"Index",
 						null );
 				}

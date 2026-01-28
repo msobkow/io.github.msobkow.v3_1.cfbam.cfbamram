@@ -500,6 +500,9 @@ public class CFBamRamValueTable
 					throw new CFLibUnresolvedRelationException( getClass(),
 						S_ProcName,
 						"Container",
+						"Container",
+						"Scope",
+						"Scope",
 						"Scope",
 						"Scope",
 						null );
@@ -6996,6 +6999,9 @@ public class CFBamRamValueTable
 					throw new CFLibUnresolvedRelationException( getClass(),
 						"updateValue",
 						"Container",
+						"Container",
+						"Scope",
+						"Scope",
 						"Scope",
 						"Scope",
 						null );

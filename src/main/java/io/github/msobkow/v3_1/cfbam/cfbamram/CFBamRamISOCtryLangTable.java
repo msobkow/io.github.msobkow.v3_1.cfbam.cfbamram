@@ -104,7 +104,7 @@ public class CFBamRamISOCtryLangTable
 		final String S_ProcName = "createISOCtryLang";
 		
 		CFSecBuffISOCtryLang Buff = ensureRec(iBuff);
-		ICFSecISOCtryLangPKey pkey = schema.getFactoryISOCtryLang().newPKey();
+		CFSecBuffISOCtryLangPKey pkey = (CFSecBuffISOCtryLangPKey)(schema.getFactoryISOCtryLang().newPKey());
 		pkey.setRequiredISOCtryId( Buff.getRequiredISOCtryId() );
 		pkey.setRequiredISOLangId( Buff.getRequiredISOLangId() );
 		Buff.setRequiredISOCtryId( pkey.getRequiredISOCtryId() );
@@ -133,7 +133,10 @@ public class CFBamRamISOCtryLangTable
 					throw new CFLibUnresolvedRelationException( getClass(),
 						S_ProcName,
 						"Container",
+						"Container",
 						"ISOCtryLangCtry",
+						"ISOCtryLangCtry",
+						"ISOCtry",
 						"ISOCtry",
 						null );
 				}
@@ -434,7 +437,10 @@ public class CFBamRamISOCtryLangTable
 					throw new CFLibUnresolvedRelationException( getClass(),
 						"updateISOCtryLang",
 						"Container",
+						"Container",
 						"ISOCtryLangCtry",
+						"ISOCtryLangCtry",
+						"ISOCtry",
 						"ISOCtry",
 						null );
 				}
