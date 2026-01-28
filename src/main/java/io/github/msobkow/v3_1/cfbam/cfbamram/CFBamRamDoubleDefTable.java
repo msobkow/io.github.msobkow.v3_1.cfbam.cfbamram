@@ -5958,8 +5958,8 @@ public class CFBamRamDoubleDefTable
 				pkey );
 		}
 		CFLibDbKeyHash256 varScopeId = existing.getRequiredScopeId();
-		CFBamBuffScope container = schema.getTableScope().readDerivedByIdIdx( Authorization,
-			varScopeId );
+		CFBamBuffScope container = (CFBamBuffScope)(schema.getTableScope().readDerivedByIdIdx( Authorization,
+			varScopeId ));
 		if( container == null ) {
 			throw new CFLibNullArgumentException( getClass(),
 				S_ProcName,
@@ -7343,28 +7343,28 @@ public class CFBamRamDoubleDefTable
 		if( ! anyNotNull ) {
 			return;
 		}
-		ICFBamDoubleDef cur;
-		LinkedList<ICFBamDoubleDef> matchSet = new LinkedList<ICFBamDoubleDef>();
-		Iterator<ICFBamDoubleDef> values = dictByPKey.values().iterator();
+		CFBamBuffDoubleDef cur;
+		LinkedList<CFBamBuffDoubleDef> matchSet = new LinkedList<CFBamBuffDoubleDef>();
+		Iterator<CFBamBuffDoubleDef> values = dictByPKey.values().iterator();
 		while( values.hasNext() ) {
 			cur = values.next();
 			if( argKey.equals( cur ) ) {
 				matchSet.add( cur );
 			}
 		}
-		Iterator<ICFBamDoubleDef> iterMatch = matchSet.iterator();
+		Iterator<CFBamBuffDoubleDef> iterMatch = matchSet.iterator();
 		while( iterMatch.hasNext() ) {
 			cur = iterMatch.next();
-			cur = schema.getTableDoubleDef().readDerivedByIdIdx( Authorization,
-				cur.getRequiredId() );
-			String subClassCode = cur.getClassCode();
-			if( "a81c".equals( subClassCode ) ) {
+			cur = (CFBamBuffDoubleDef)(schema.getTableDoubleDef().readDerivedByIdIdx( Authorization,
+				cur.getRequiredId() ));
+			int subClassCode = cur.getClassCode();
+			if( CFBamDoubleDef.CLASS_CODE == subClassCode ) {
 				schema.getTableDoubleDef().deleteDoubleDef( Authorization, cur );
 			}
-			else if( "a81d".equals( subClassCode ) ) {
+			else if( CFBamDoubleType.CLASS_CODE == subClassCode ) {
 				schema.getTableDoubleType().deleteDoubleType( Authorization, (ICFBamDoubleType)cur );
 			}
-			else if( "a86e".equals( subClassCode ) ) {
+			else if( CFBamDoubleCol.CLASS_CODE == subClassCode ) {
 				schema.getTableDoubleCol().deleteDoubleCol( Authorization, (ICFBamDoubleCol)cur );
 			}
 			else {
@@ -7387,34 +7387,34 @@ public class CFBamRamDoubleDefTable
 		ICFBamValueByUNameIdxKey argKey )
 	{
 		final String S_ProcName = "deleteDoubleDefByUNameIdx";
-		ICFBamDoubleDef cur;
+		CFBamBuffDoubleDef cur;
 		boolean anyNotNull = false;
 		anyNotNull = true;
 		anyNotNull = true;
 		if( ! anyNotNull ) {
 			return;
 		}
-		LinkedList<ICFBamDoubleDef> matchSet = new LinkedList<ICFBamDoubleDef>();
-		Iterator<ICFBamDoubleDef> values = dictByPKey.values().iterator();
+		LinkedList<CFBamBuffDoubleDef> matchSet = new LinkedList<CFBamBuffDoubleDef>();
+		Iterator<CFBamBuffDoubleDef> values = dictByPKey.values().iterator();
 		while( values.hasNext() ) {
 			cur = values.next();
 			if( argKey.equals( cur ) ) {
 				matchSet.add( cur );
 			}
 		}
-		Iterator<ICFBamDoubleDef> iterMatch = matchSet.iterator();
+		Iterator<CFBamBuffDoubleDef> iterMatch = matchSet.iterator();
 		while( iterMatch.hasNext() ) {
 			cur = iterMatch.next();
-			cur = schema.getTableDoubleDef().readDerivedByIdIdx( Authorization,
-				cur.getRequiredId() );
-			String subClassCode = cur.getClassCode();
-			if( "a81c".equals( subClassCode ) ) {
+			cur = (CFBamBuffDoubleDef)(schema.getTableDoubleDef().readDerivedByIdIdx( Authorization,
+				cur.getRequiredId() ));
+			int subClassCode = cur.getClassCode();
+			if( CFBamDoubleDef.CLASS_CODE == subClassCode ) {
 				schema.getTableDoubleDef().deleteDoubleDef( Authorization, cur );
 			}
-			else if( "a81d".equals( subClassCode ) ) {
+			else if( CFBamDoubleType.CLASS_CODE == subClassCode ) {
 				schema.getTableDoubleType().deleteDoubleType( Authorization, (ICFBamDoubleType)cur );
 			}
-			else if( "a86e".equals( subClassCode ) ) {
+			else if( CFBamDoubleCol.CLASS_CODE == subClassCode ) {
 				schema.getTableDoubleCol().deleteDoubleCol( Authorization, (ICFBamDoubleCol)cur );
 			}
 			else {
@@ -7435,33 +7435,33 @@ public class CFBamRamDoubleDefTable
 		ICFBamValueByScopeIdxKey argKey )
 	{
 		final String S_ProcName = "deleteDoubleDefByScopeIdx";
-		ICFBamDoubleDef cur;
+		CFBamBuffDoubleDef cur;
 		boolean anyNotNull = false;
 		anyNotNull = true;
 		if( ! anyNotNull ) {
 			return;
 		}
-		LinkedList<ICFBamDoubleDef> matchSet = new LinkedList<ICFBamDoubleDef>();
-		Iterator<ICFBamDoubleDef> values = dictByPKey.values().iterator();
+		LinkedList<CFBamBuffDoubleDef> matchSet = new LinkedList<CFBamBuffDoubleDef>();
+		Iterator<CFBamBuffDoubleDef> values = dictByPKey.values().iterator();
 		while( values.hasNext() ) {
 			cur = values.next();
 			if( argKey.equals( cur ) ) {
 				matchSet.add( cur );
 			}
 		}
-		Iterator<ICFBamDoubleDef> iterMatch = matchSet.iterator();
+		Iterator<CFBamBuffDoubleDef> iterMatch = matchSet.iterator();
 		while( iterMatch.hasNext() ) {
 			cur = iterMatch.next();
-			cur = schema.getTableDoubleDef().readDerivedByIdIdx( Authorization,
-				cur.getRequiredId() );
-			String subClassCode = cur.getClassCode();
-			if( "a81c".equals( subClassCode ) ) {
+			cur = (CFBamBuffDoubleDef)(schema.getTableDoubleDef().readDerivedByIdIdx( Authorization,
+				cur.getRequiredId() ));
+			int subClassCode = cur.getClassCode();
+			if( CFBamDoubleDef.CLASS_CODE == subClassCode ) {
 				schema.getTableDoubleDef().deleteDoubleDef( Authorization, cur );
 			}
-			else if( "a81d".equals( subClassCode ) ) {
+			else if( CFBamDoubleType.CLASS_CODE == subClassCode ) {
 				schema.getTableDoubleType().deleteDoubleType( Authorization, (ICFBamDoubleType)cur );
 			}
-			else if( "a86e".equals( subClassCode ) ) {
+			else if( CFBamDoubleCol.CLASS_CODE == subClassCode ) {
 				schema.getTableDoubleCol().deleteDoubleCol( Authorization, (ICFBamDoubleCol)cur );
 			}
 			else {
@@ -7482,7 +7482,7 @@ public class CFBamRamDoubleDefTable
 		ICFBamValueByDefSchemaIdxKey argKey )
 	{
 		final String S_ProcName = "deleteDoubleDefByDefSchemaIdx";
-		ICFBamDoubleDef cur;
+		CFBamBuffDoubleDef cur;
 		boolean anyNotNull = false;
 		if( argKey.getOptionalDefSchemaId() != null ) {
 			anyNotNull = true;
@@ -7490,27 +7490,27 @@ public class CFBamRamDoubleDefTable
 		if( ! anyNotNull ) {
 			return;
 		}
-		LinkedList<ICFBamDoubleDef> matchSet = new LinkedList<ICFBamDoubleDef>();
-		Iterator<ICFBamDoubleDef> values = dictByPKey.values().iterator();
+		LinkedList<CFBamBuffDoubleDef> matchSet = new LinkedList<CFBamBuffDoubleDef>();
+		Iterator<CFBamBuffDoubleDef> values = dictByPKey.values().iterator();
 		while( values.hasNext() ) {
 			cur = values.next();
 			if( argKey.equals( cur ) ) {
 				matchSet.add( cur );
 			}
 		}
-		Iterator<ICFBamDoubleDef> iterMatch = matchSet.iterator();
+		Iterator<CFBamBuffDoubleDef> iterMatch = matchSet.iterator();
 		while( iterMatch.hasNext() ) {
 			cur = iterMatch.next();
-			cur = schema.getTableDoubleDef().readDerivedByIdIdx( Authorization,
-				cur.getRequiredId() );
-			String subClassCode = cur.getClassCode();
-			if( "a81c".equals( subClassCode ) ) {
+			cur = (CFBamBuffDoubleDef)(schema.getTableDoubleDef().readDerivedByIdIdx( Authorization,
+				cur.getRequiredId() ));
+			int subClassCode = cur.getClassCode();
+			if( CFBamDoubleDef.CLASS_CODE == subClassCode ) {
 				schema.getTableDoubleDef().deleteDoubleDef( Authorization, cur );
 			}
-			else if( "a81d".equals( subClassCode ) ) {
+			else if( CFBamDoubleType.CLASS_CODE == subClassCode ) {
 				schema.getTableDoubleType().deleteDoubleType( Authorization, (ICFBamDoubleType)cur );
 			}
-			else if( "a86e".equals( subClassCode ) ) {
+			else if( CFBamDoubleCol.CLASS_CODE == subClassCode ) {
 				schema.getTableDoubleCol().deleteDoubleCol( Authorization, (ICFBamDoubleCol)cur );
 			}
 			else {
@@ -7531,7 +7531,7 @@ public class CFBamRamDoubleDefTable
 		ICFBamValueByPrevIdxKey argKey )
 	{
 		final String S_ProcName = "deleteDoubleDefByPrevIdx";
-		ICFBamDoubleDef cur;
+		CFBamBuffDoubleDef cur;
 		boolean anyNotNull = false;
 		if( argKey.getOptionalPrevId() != null ) {
 			anyNotNull = true;
@@ -7539,27 +7539,27 @@ public class CFBamRamDoubleDefTable
 		if( ! anyNotNull ) {
 			return;
 		}
-		LinkedList<ICFBamDoubleDef> matchSet = new LinkedList<ICFBamDoubleDef>();
-		Iterator<ICFBamDoubleDef> values = dictByPKey.values().iterator();
+		LinkedList<CFBamBuffDoubleDef> matchSet = new LinkedList<CFBamBuffDoubleDef>();
+		Iterator<CFBamBuffDoubleDef> values = dictByPKey.values().iterator();
 		while( values.hasNext() ) {
 			cur = values.next();
 			if( argKey.equals( cur ) ) {
 				matchSet.add( cur );
 			}
 		}
-		Iterator<ICFBamDoubleDef> iterMatch = matchSet.iterator();
+		Iterator<CFBamBuffDoubleDef> iterMatch = matchSet.iterator();
 		while( iterMatch.hasNext() ) {
 			cur = iterMatch.next();
-			cur = schema.getTableDoubleDef().readDerivedByIdIdx( Authorization,
-				cur.getRequiredId() );
-			String subClassCode = cur.getClassCode();
-			if( "a81c".equals( subClassCode ) ) {
+			cur = (CFBamBuffDoubleDef)(schema.getTableDoubleDef().readDerivedByIdIdx( Authorization,
+				cur.getRequiredId() ));
+			int subClassCode = cur.getClassCode();
+			if( CFBamDoubleDef.CLASS_CODE == subClassCode ) {
 				schema.getTableDoubleDef().deleteDoubleDef( Authorization, cur );
 			}
-			else if( "a81d".equals( subClassCode ) ) {
+			else if( CFBamDoubleType.CLASS_CODE == subClassCode ) {
 				schema.getTableDoubleType().deleteDoubleType( Authorization, (ICFBamDoubleType)cur );
 			}
-			else if( "a86e".equals( subClassCode ) ) {
+			else if( CFBamDoubleCol.CLASS_CODE == subClassCode ) {
 				schema.getTableDoubleCol().deleteDoubleCol( Authorization, (ICFBamDoubleCol)cur );
 			}
 			else {
@@ -7580,7 +7580,7 @@ public class CFBamRamDoubleDefTable
 		ICFBamValueByNextIdxKey argKey )
 	{
 		final String S_ProcName = "deleteDoubleDefByNextIdx";
-		ICFBamDoubleDef cur;
+		CFBamBuffDoubleDef cur;
 		boolean anyNotNull = false;
 		if( argKey.getOptionalNextId() != null ) {
 			anyNotNull = true;
@@ -7588,27 +7588,27 @@ public class CFBamRamDoubleDefTable
 		if( ! anyNotNull ) {
 			return;
 		}
-		LinkedList<ICFBamDoubleDef> matchSet = new LinkedList<ICFBamDoubleDef>();
-		Iterator<ICFBamDoubleDef> values = dictByPKey.values().iterator();
+		LinkedList<CFBamBuffDoubleDef> matchSet = new LinkedList<CFBamBuffDoubleDef>();
+		Iterator<CFBamBuffDoubleDef> values = dictByPKey.values().iterator();
 		while( values.hasNext() ) {
 			cur = values.next();
 			if( argKey.equals( cur ) ) {
 				matchSet.add( cur );
 			}
 		}
-		Iterator<ICFBamDoubleDef> iterMatch = matchSet.iterator();
+		Iterator<CFBamBuffDoubleDef> iterMatch = matchSet.iterator();
 		while( iterMatch.hasNext() ) {
 			cur = iterMatch.next();
-			cur = schema.getTableDoubleDef().readDerivedByIdIdx( Authorization,
-				cur.getRequiredId() );
-			String subClassCode = cur.getClassCode();
-			if( "a81c".equals( subClassCode ) ) {
+			cur = (CFBamBuffDoubleDef)(schema.getTableDoubleDef().readDerivedByIdIdx( Authorization,
+				cur.getRequiredId() ));
+			int subClassCode = cur.getClassCode();
+			if( CFBamDoubleDef.CLASS_CODE == subClassCode ) {
 				schema.getTableDoubleDef().deleteDoubleDef( Authorization, cur );
 			}
-			else if( "a81d".equals( subClassCode ) ) {
+			else if( CFBamDoubleType.CLASS_CODE == subClassCode ) {
 				schema.getTableDoubleType().deleteDoubleType( Authorization, (ICFBamDoubleType)cur );
 			}
-			else if( "a86e".equals( subClassCode ) ) {
+			else if( CFBamDoubleCol.CLASS_CODE == subClassCode ) {
 				schema.getTableDoubleCol().deleteDoubleCol( Authorization, (ICFBamDoubleCol)cur );
 			}
 			else {
@@ -7631,7 +7631,7 @@ public class CFBamRamDoubleDefTable
 		ICFBamValueByContPrevIdxKey argKey )
 	{
 		final String S_ProcName = "deleteDoubleDefByContPrevIdx";
-		ICFBamDoubleDef cur;
+		CFBamBuffDoubleDef cur;
 		boolean anyNotNull = false;
 		anyNotNull = true;
 		if( argKey.getOptionalPrevId() != null ) {
@@ -7640,27 +7640,27 @@ public class CFBamRamDoubleDefTable
 		if( ! anyNotNull ) {
 			return;
 		}
-		LinkedList<ICFBamDoubleDef> matchSet = new LinkedList<ICFBamDoubleDef>();
-		Iterator<ICFBamDoubleDef> values = dictByPKey.values().iterator();
+		LinkedList<CFBamBuffDoubleDef> matchSet = new LinkedList<CFBamBuffDoubleDef>();
+		Iterator<CFBamBuffDoubleDef> values = dictByPKey.values().iterator();
 		while( values.hasNext() ) {
 			cur = values.next();
 			if( argKey.equals( cur ) ) {
 				matchSet.add( cur );
 			}
 		}
-		Iterator<ICFBamDoubleDef> iterMatch = matchSet.iterator();
+		Iterator<CFBamBuffDoubleDef> iterMatch = matchSet.iterator();
 		while( iterMatch.hasNext() ) {
 			cur = iterMatch.next();
-			cur = schema.getTableDoubleDef().readDerivedByIdIdx( Authorization,
-				cur.getRequiredId() );
-			String subClassCode = cur.getClassCode();
-			if( "a81c".equals( subClassCode ) ) {
+			cur = (CFBamBuffDoubleDef)(schema.getTableDoubleDef().readDerivedByIdIdx( Authorization,
+				cur.getRequiredId() ));
+			int subClassCode = cur.getClassCode();
+			if( CFBamDoubleDef.CLASS_CODE == subClassCode ) {
 				schema.getTableDoubleDef().deleteDoubleDef( Authorization, cur );
 			}
-			else if( "a81d".equals( subClassCode ) ) {
+			else if( CFBamDoubleType.CLASS_CODE == subClassCode ) {
 				schema.getTableDoubleType().deleteDoubleType( Authorization, (ICFBamDoubleType)cur );
 			}
-			else if( "a86e".equals( subClassCode ) ) {
+			else if( CFBamDoubleCol.CLASS_CODE == subClassCode ) {
 				schema.getTableDoubleCol().deleteDoubleCol( Authorization, (ICFBamDoubleCol)cur );
 			}
 			else {
@@ -7683,7 +7683,7 @@ public class CFBamRamDoubleDefTable
 		ICFBamValueByContNextIdxKey argKey )
 	{
 		final String S_ProcName = "deleteDoubleDefByContNextIdx";
-		ICFBamDoubleDef cur;
+		CFBamBuffDoubleDef cur;
 		boolean anyNotNull = false;
 		anyNotNull = true;
 		if( argKey.getOptionalNextId() != null ) {
@@ -7692,27 +7692,27 @@ public class CFBamRamDoubleDefTable
 		if( ! anyNotNull ) {
 			return;
 		}
-		LinkedList<ICFBamDoubleDef> matchSet = new LinkedList<ICFBamDoubleDef>();
-		Iterator<ICFBamDoubleDef> values = dictByPKey.values().iterator();
+		LinkedList<CFBamBuffDoubleDef> matchSet = new LinkedList<CFBamBuffDoubleDef>();
+		Iterator<CFBamBuffDoubleDef> values = dictByPKey.values().iterator();
 		while( values.hasNext() ) {
 			cur = values.next();
 			if( argKey.equals( cur ) ) {
 				matchSet.add( cur );
 			}
 		}
-		Iterator<ICFBamDoubleDef> iterMatch = matchSet.iterator();
+		Iterator<CFBamBuffDoubleDef> iterMatch = matchSet.iterator();
 		while( iterMatch.hasNext() ) {
 			cur = iterMatch.next();
-			cur = schema.getTableDoubleDef().readDerivedByIdIdx( Authorization,
-				cur.getRequiredId() );
-			String subClassCode = cur.getClassCode();
-			if( "a81c".equals( subClassCode ) ) {
+			cur = (CFBamBuffDoubleDef)(schema.getTableDoubleDef().readDerivedByIdIdx( Authorization,
+				cur.getRequiredId() ));
+			int subClassCode = cur.getClassCode();
+			if( CFBamDoubleDef.CLASS_CODE == subClassCode ) {
 				schema.getTableDoubleDef().deleteDoubleDef( Authorization, cur );
 			}
-			else if( "a81d".equals( subClassCode ) ) {
+			else if( CFBamDoubleType.CLASS_CODE == subClassCode ) {
 				schema.getTableDoubleType().deleteDoubleType( Authorization, (ICFBamDoubleType)cur );
 			}
-			else if( "a86e".equals( subClassCode ) ) {
+			else if( CFBamDoubleCol.CLASS_CODE == subClassCode ) {
 				schema.getTableDoubleCol().deleteDoubleCol( Authorization, (ICFBamDoubleCol)cur );
 			}
 			else {

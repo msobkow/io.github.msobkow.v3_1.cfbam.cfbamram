@@ -621,20 +621,20 @@ public class CFBamRamMajorVersionTable
 		if( ! anyNotNull ) {
 			return;
 		}
-		ICFIntMajorVersion cur;
-		LinkedList<ICFIntMajorVersion> matchSet = new LinkedList<ICFIntMajorVersion>();
-		Iterator<ICFIntMajorVersion> values = dictByPKey.values().iterator();
+		CFIntBuffMajorVersion cur;
+		LinkedList<CFIntBuffMajorVersion> matchSet = new LinkedList<CFIntBuffMajorVersion>();
+		Iterator<CFIntBuffMajorVersion> values = dictByPKey.values().iterator();
 		while( values.hasNext() ) {
 			cur = values.next();
 			if( argKey.equals( cur ) ) {
 				matchSet.add( cur );
 			}
 		}
-		Iterator<ICFIntMajorVersion> iterMatch = matchSet.iterator();
+		Iterator<CFIntBuffMajorVersion> iterMatch = matchSet.iterator();
 		while( iterMatch.hasNext() ) {
 			cur = iterMatch.next();
-			cur = schema.getTableMajorVersion().readDerivedByIdIdx( Authorization,
-				cur.getRequiredId() );
+			cur = (CFIntBuffMajorVersion)(schema.getTableMajorVersion().readDerivedByIdIdx( Authorization,
+				cur.getRequiredId() ));
 			deleteMajorVersion( Authorization, cur );
 		}
 	}
@@ -650,25 +650,25 @@ public class CFBamRamMajorVersionTable
 	public void deleteMajorVersionByTenantIdx( ICFSecAuthorization Authorization,
 		ICFIntMajorVersionByTenantIdxKey argKey )
 	{
-		ICFIntMajorVersion cur;
+		CFIntBuffMajorVersion cur;
 		boolean anyNotNull = false;
 		anyNotNull = true;
 		if( ! anyNotNull ) {
 			return;
 		}
-		LinkedList<ICFIntMajorVersion> matchSet = new LinkedList<ICFIntMajorVersion>();
-		Iterator<ICFIntMajorVersion> values = dictByPKey.values().iterator();
+		LinkedList<CFIntBuffMajorVersion> matchSet = new LinkedList<CFIntBuffMajorVersion>();
+		Iterator<CFIntBuffMajorVersion> values = dictByPKey.values().iterator();
 		while( values.hasNext() ) {
 			cur = values.next();
 			if( argKey.equals( cur ) ) {
 				matchSet.add( cur );
 			}
 		}
-		Iterator<ICFIntMajorVersion> iterMatch = matchSet.iterator();
+		Iterator<CFIntBuffMajorVersion> iterMatch = matchSet.iterator();
 		while( iterMatch.hasNext() ) {
 			cur = iterMatch.next();
-			cur = schema.getTableMajorVersion().readDerivedByIdIdx( Authorization,
-				cur.getRequiredId() );
+			cur = (CFIntBuffMajorVersion)(schema.getTableMajorVersion().readDerivedByIdIdx( Authorization,
+				cur.getRequiredId() ));
 			deleteMajorVersion( Authorization, cur );
 		}
 	}
@@ -684,25 +684,25 @@ public class CFBamRamMajorVersionTable
 	public void deleteMajorVersionBySubProjectIdx( ICFSecAuthorization Authorization,
 		ICFIntMajorVersionBySubProjectIdxKey argKey )
 	{
-		ICFIntMajorVersion cur;
+		CFIntBuffMajorVersion cur;
 		boolean anyNotNull = false;
 		anyNotNull = true;
 		if( ! anyNotNull ) {
 			return;
 		}
-		LinkedList<ICFIntMajorVersion> matchSet = new LinkedList<ICFIntMajorVersion>();
-		Iterator<ICFIntMajorVersion> values = dictByPKey.values().iterator();
+		LinkedList<CFIntBuffMajorVersion> matchSet = new LinkedList<CFIntBuffMajorVersion>();
+		Iterator<CFIntBuffMajorVersion> values = dictByPKey.values().iterator();
 		while( values.hasNext() ) {
 			cur = values.next();
 			if( argKey.equals( cur ) ) {
 				matchSet.add( cur );
 			}
 		}
-		Iterator<ICFIntMajorVersion> iterMatch = matchSet.iterator();
+		Iterator<CFIntBuffMajorVersion> iterMatch = matchSet.iterator();
 		while( iterMatch.hasNext() ) {
 			cur = iterMatch.next();
-			cur = schema.getTableMajorVersion().readDerivedByIdIdx( Authorization,
-				cur.getRequiredId() );
+			cur = (CFIntBuffMajorVersion)(schema.getTableMajorVersion().readDerivedByIdIdx( Authorization,
+				cur.getRequiredId() ));
 			deleteMajorVersion( Authorization, cur );
 		}
 	}
@@ -720,26 +720,26 @@ public class CFBamRamMajorVersionTable
 	public void deleteMajorVersionByNameIdx( ICFSecAuthorization Authorization,
 		ICFIntMajorVersionByNameIdxKey argKey )
 	{
-		ICFIntMajorVersion cur;
+		CFIntBuffMajorVersion cur;
 		boolean anyNotNull = false;
 		anyNotNull = true;
 		anyNotNull = true;
 		if( ! anyNotNull ) {
 			return;
 		}
-		LinkedList<ICFIntMajorVersion> matchSet = new LinkedList<ICFIntMajorVersion>();
-		Iterator<ICFIntMajorVersion> values = dictByPKey.values().iterator();
+		LinkedList<CFIntBuffMajorVersion> matchSet = new LinkedList<CFIntBuffMajorVersion>();
+		Iterator<CFIntBuffMajorVersion> values = dictByPKey.values().iterator();
 		while( values.hasNext() ) {
 			cur = values.next();
 			if( argKey.equals( cur ) ) {
 				matchSet.add( cur );
 			}
 		}
-		Iterator<ICFIntMajorVersion> iterMatch = matchSet.iterator();
+		Iterator<CFIntBuffMajorVersion> iterMatch = matchSet.iterator();
 		while( iterMatch.hasNext() ) {
 			cur = iterMatch.next();
-			cur = schema.getTableMajorVersion().readDerivedByIdIdx( Authorization,
-				cur.getRequiredId() );
+			cur = (CFIntBuffMajorVersion)(schema.getTableMajorVersion().readDerivedByIdIdx( Authorization,
+				cur.getRequiredId() ));
 			deleteMajorVersion( Authorization, cur );
 		}
 	}

@@ -599,20 +599,20 @@ public class CFBamRamTSecGroupTable
 		if( ! anyNotNull ) {
 			return;
 		}
-		ICFSecTSecGroup cur;
-		LinkedList<ICFSecTSecGroup> matchSet = new LinkedList<ICFSecTSecGroup>();
-		Iterator<ICFSecTSecGroup> values = dictByPKey.values().iterator();
+		CFSecBuffTSecGroup cur;
+		LinkedList<CFSecBuffTSecGroup> matchSet = new LinkedList<CFSecBuffTSecGroup>();
+		Iterator<CFSecBuffTSecGroup> values = dictByPKey.values().iterator();
 		while( values.hasNext() ) {
 			cur = values.next();
 			if( argKey.equals( cur ) ) {
 				matchSet.add( cur );
 			}
 		}
-		Iterator<ICFSecTSecGroup> iterMatch = matchSet.iterator();
+		Iterator<CFSecBuffTSecGroup> iterMatch = matchSet.iterator();
 		while( iterMatch.hasNext() ) {
 			cur = iterMatch.next();
-			cur = schema.getTableTSecGroup().readDerivedByIdIdx( Authorization,
-				cur.getRequiredTSecGroupId() );
+			cur = (CFSecBuffTSecGroup)(schema.getTableTSecGroup().readDerivedByIdIdx( Authorization,
+				cur.getRequiredTSecGroupId() ));
 			deleteTSecGroup( Authorization, cur );
 		}
 	}
@@ -628,25 +628,25 @@ public class CFBamRamTSecGroupTable
 	public void deleteTSecGroupByTenantIdx( ICFSecAuthorization Authorization,
 		ICFSecTSecGroupByTenantIdxKey argKey )
 	{
-		ICFSecTSecGroup cur;
+		CFSecBuffTSecGroup cur;
 		boolean anyNotNull = false;
 		anyNotNull = true;
 		if( ! anyNotNull ) {
 			return;
 		}
-		LinkedList<ICFSecTSecGroup> matchSet = new LinkedList<ICFSecTSecGroup>();
-		Iterator<ICFSecTSecGroup> values = dictByPKey.values().iterator();
+		LinkedList<CFSecBuffTSecGroup> matchSet = new LinkedList<CFSecBuffTSecGroup>();
+		Iterator<CFSecBuffTSecGroup> values = dictByPKey.values().iterator();
 		while( values.hasNext() ) {
 			cur = values.next();
 			if( argKey.equals( cur ) ) {
 				matchSet.add( cur );
 			}
 		}
-		Iterator<ICFSecTSecGroup> iterMatch = matchSet.iterator();
+		Iterator<CFSecBuffTSecGroup> iterMatch = matchSet.iterator();
 		while( iterMatch.hasNext() ) {
 			cur = iterMatch.next();
-			cur = schema.getTableTSecGroup().readDerivedByIdIdx( Authorization,
-				cur.getRequiredTSecGroupId() );
+			cur = (CFSecBuffTSecGroup)(schema.getTableTSecGroup().readDerivedByIdIdx( Authorization,
+				cur.getRequiredTSecGroupId() ));
 			deleteTSecGroup( Authorization, cur );
 		}
 	}
@@ -664,26 +664,26 @@ public class CFBamRamTSecGroupTable
 	public void deleteTSecGroupByTenantVisIdx( ICFSecAuthorization Authorization,
 		ICFSecTSecGroupByTenantVisIdxKey argKey )
 	{
-		ICFSecTSecGroup cur;
+		CFSecBuffTSecGroup cur;
 		boolean anyNotNull = false;
 		anyNotNull = true;
 		anyNotNull = true;
 		if( ! anyNotNull ) {
 			return;
 		}
-		LinkedList<ICFSecTSecGroup> matchSet = new LinkedList<ICFSecTSecGroup>();
-		Iterator<ICFSecTSecGroup> values = dictByPKey.values().iterator();
+		LinkedList<CFSecBuffTSecGroup> matchSet = new LinkedList<CFSecBuffTSecGroup>();
+		Iterator<CFSecBuffTSecGroup> values = dictByPKey.values().iterator();
 		while( values.hasNext() ) {
 			cur = values.next();
 			if( argKey.equals( cur ) ) {
 				matchSet.add( cur );
 			}
 		}
-		Iterator<ICFSecTSecGroup> iterMatch = matchSet.iterator();
+		Iterator<CFSecBuffTSecGroup> iterMatch = matchSet.iterator();
 		while( iterMatch.hasNext() ) {
 			cur = iterMatch.next();
-			cur = schema.getTableTSecGroup().readDerivedByIdIdx( Authorization,
-				cur.getRequiredTSecGroupId() );
+			cur = (CFSecBuffTSecGroup)(schema.getTableTSecGroup().readDerivedByIdIdx( Authorization,
+				cur.getRequiredTSecGroupId() ));
 			deleteTSecGroup( Authorization, cur );
 		}
 	}
@@ -701,26 +701,26 @@ public class CFBamRamTSecGroupTable
 	public void deleteTSecGroupByUNameIdx( ICFSecAuthorization Authorization,
 		ICFSecTSecGroupByUNameIdxKey argKey )
 	{
-		ICFSecTSecGroup cur;
+		CFSecBuffTSecGroup cur;
 		boolean anyNotNull = false;
 		anyNotNull = true;
 		anyNotNull = true;
 		if( ! anyNotNull ) {
 			return;
 		}
-		LinkedList<ICFSecTSecGroup> matchSet = new LinkedList<ICFSecTSecGroup>();
-		Iterator<ICFSecTSecGroup> values = dictByPKey.values().iterator();
+		LinkedList<CFSecBuffTSecGroup> matchSet = new LinkedList<CFSecBuffTSecGroup>();
+		Iterator<CFSecBuffTSecGroup> values = dictByPKey.values().iterator();
 		while( values.hasNext() ) {
 			cur = values.next();
 			if( argKey.equals( cur ) ) {
 				matchSet.add( cur );
 			}
 		}
-		Iterator<ICFSecTSecGroup> iterMatch = matchSet.iterator();
+		Iterator<CFSecBuffTSecGroup> iterMatch = matchSet.iterator();
 		while( iterMatch.hasNext() ) {
 			cur = iterMatch.next();
-			cur = schema.getTableTSecGroup().readDerivedByIdIdx( Authorization,
-				cur.getRequiredTSecGroupId() );
+			cur = (CFSecBuffTSecGroup)(schema.getTableTSecGroup().readDerivedByIdIdx( Authorization,
+				cur.getRequiredTSecGroupId() ));
 			deleteTSecGroup( Authorization, cur );
 		}
 	}

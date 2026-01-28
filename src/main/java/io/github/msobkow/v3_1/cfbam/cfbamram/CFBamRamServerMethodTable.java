@@ -738,37 +738,37 @@ public class CFBamRamServerMethodTable
 		ICFBamServerMethodByUNameIdxKey argKey )
 	{
 		final String S_ProcName = "deleteServerMethodByUNameIdx";
-		ICFBamServerMethod cur;
+		CFBamBuffServerMethod cur;
 		boolean anyNotNull = false;
 		anyNotNull = true;
 		anyNotNull = true;
 		if( ! anyNotNull ) {
 			return;
 		}
-		LinkedList<ICFBamServerMethod> matchSet = new LinkedList<ICFBamServerMethod>();
-		Iterator<ICFBamServerMethod> values = dictByPKey.values().iterator();
+		LinkedList<CFBamBuffServerMethod> matchSet = new LinkedList<CFBamBuffServerMethod>();
+		Iterator<CFBamBuffServerMethod> values = dictByPKey.values().iterator();
 		while( values.hasNext() ) {
 			cur = values.next();
 			if( argKey.equals( cur ) ) {
 				matchSet.add( cur );
 			}
 		}
-		Iterator<ICFBamServerMethod> iterMatch = matchSet.iterator();
+		Iterator<CFBamBuffServerMethod> iterMatch = matchSet.iterator();
 		while( iterMatch.hasNext() ) {
 			cur = iterMatch.next();
-			cur = schema.getTableServerMethod().readDerivedByIdIdx( Authorization,
-				cur.getRequiredId() );
-			String subClassCode = cur.getClassCode();
-			if( "a805".equals( subClassCode ) ) {
+			cur = (CFBamBuffServerMethod)(schema.getTableServerMethod().readDerivedByIdIdx( Authorization,
+				cur.getRequiredId() ));
+			int subClassCode = cur.getClassCode();
+			if( CFBamServerMethod.CLASS_CODE == subClassCode ) {
 				schema.getTableServerMethod().deleteServerMethod( Authorization, cur );
 			}
-			else if( "a806".equals( subClassCode ) ) {
+			else if( CFBamServerObjFunc.CLASS_CODE == subClassCode ) {
 				schema.getTableServerObjFunc().deleteServerObjFunc( Authorization, (ICFBamServerObjFunc)cur );
 			}
-			else if( "a807".equals( subClassCode ) ) {
+			else if( CFBamServerProc.CLASS_CODE == subClassCode ) {
 				schema.getTableServerProc().deleteServerProc( Authorization, (ICFBamServerProc)cur );
 			}
-			else if( "a837".equals( subClassCode ) ) {
+			else if( CFBamServerListFunc.CLASS_CODE == subClassCode ) {
 				schema.getTableServerListFunc().deleteServerListFunc( Authorization, (ICFBamServerListFunc)cur );
 			}
 			else {
@@ -789,36 +789,36 @@ public class CFBamRamServerMethodTable
 		ICFBamServerMethodByMethTableIdxKey argKey )
 	{
 		final String S_ProcName = "deleteServerMethodByMethTableIdx";
-		ICFBamServerMethod cur;
+		CFBamBuffServerMethod cur;
 		boolean anyNotNull = false;
 		anyNotNull = true;
 		if( ! anyNotNull ) {
 			return;
 		}
-		LinkedList<ICFBamServerMethod> matchSet = new LinkedList<ICFBamServerMethod>();
-		Iterator<ICFBamServerMethod> values = dictByPKey.values().iterator();
+		LinkedList<CFBamBuffServerMethod> matchSet = new LinkedList<CFBamBuffServerMethod>();
+		Iterator<CFBamBuffServerMethod> values = dictByPKey.values().iterator();
 		while( values.hasNext() ) {
 			cur = values.next();
 			if( argKey.equals( cur ) ) {
 				matchSet.add( cur );
 			}
 		}
-		Iterator<ICFBamServerMethod> iterMatch = matchSet.iterator();
+		Iterator<CFBamBuffServerMethod> iterMatch = matchSet.iterator();
 		while( iterMatch.hasNext() ) {
 			cur = iterMatch.next();
-			cur = schema.getTableServerMethod().readDerivedByIdIdx( Authorization,
-				cur.getRequiredId() );
-			String subClassCode = cur.getClassCode();
-			if( "a805".equals( subClassCode ) ) {
+			cur = (CFBamBuffServerMethod)(schema.getTableServerMethod().readDerivedByIdIdx( Authorization,
+				cur.getRequiredId() ));
+			int subClassCode = cur.getClassCode();
+			if( CFBamServerMethod.CLASS_CODE == subClassCode ) {
 				schema.getTableServerMethod().deleteServerMethod( Authorization, cur );
 			}
-			else if( "a806".equals( subClassCode ) ) {
+			else if( CFBamServerObjFunc.CLASS_CODE == subClassCode ) {
 				schema.getTableServerObjFunc().deleteServerObjFunc( Authorization, (ICFBamServerObjFunc)cur );
 			}
-			else if( "a807".equals( subClassCode ) ) {
+			else if( CFBamServerProc.CLASS_CODE == subClassCode ) {
 				schema.getTableServerProc().deleteServerProc( Authorization, (ICFBamServerProc)cur );
 			}
-			else if( "a837".equals( subClassCode ) ) {
+			else if( CFBamServerListFunc.CLASS_CODE == subClassCode ) {
 				schema.getTableServerListFunc().deleteServerListFunc( Authorization, (ICFBamServerListFunc)cur );
 			}
 			else {
@@ -839,7 +839,7 @@ public class CFBamRamServerMethodTable
 		ICFBamServerMethodByDefSchemaIdxKey argKey )
 	{
 		final String S_ProcName = "deleteServerMethodByDefSchemaIdx";
-		ICFBamServerMethod cur;
+		CFBamBuffServerMethod cur;
 		boolean anyNotNull = false;
 		if( argKey.getOptionalDefSchemaId() != null ) {
 			anyNotNull = true;
@@ -847,30 +847,30 @@ public class CFBamRamServerMethodTable
 		if( ! anyNotNull ) {
 			return;
 		}
-		LinkedList<ICFBamServerMethod> matchSet = new LinkedList<ICFBamServerMethod>();
-		Iterator<ICFBamServerMethod> values = dictByPKey.values().iterator();
+		LinkedList<CFBamBuffServerMethod> matchSet = new LinkedList<CFBamBuffServerMethod>();
+		Iterator<CFBamBuffServerMethod> values = dictByPKey.values().iterator();
 		while( values.hasNext() ) {
 			cur = values.next();
 			if( argKey.equals( cur ) ) {
 				matchSet.add( cur );
 			}
 		}
-		Iterator<ICFBamServerMethod> iterMatch = matchSet.iterator();
+		Iterator<CFBamBuffServerMethod> iterMatch = matchSet.iterator();
 		while( iterMatch.hasNext() ) {
 			cur = iterMatch.next();
-			cur = schema.getTableServerMethod().readDerivedByIdIdx( Authorization,
-				cur.getRequiredId() );
-			String subClassCode = cur.getClassCode();
-			if( "a805".equals( subClassCode ) ) {
+			cur = (CFBamBuffServerMethod)(schema.getTableServerMethod().readDerivedByIdIdx( Authorization,
+				cur.getRequiredId() ));
+			int subClassCode = cur.getClassCode();
+			if( CFBamServerMethod.CLASS_CODE == subClassCode ) {
 				schema.getTableServerMethod().deleteServerMethod( Authorization, cur );
 			}
-			else if( "a806".equals( subClassCode ) ) {
+			else if( CFBamServerObjFunc.CLASS_CODE == subClassCode ) {
 				schema.getTableServerObjFunc().deleteServerObjFunc( Authorization, (ICFBamServerObjFunc)cur );
 			}
-			else if( "a807".equals( subClassCode ) ) {
+			else if( CFBamServerProc.CLASS_CODE == subClassCode ) {
 				schema.getTableServerProc().deleteServerProc( Authorization, (ICFBamServerProc)cur );
 			}
-			else if( "a837".equals( subClassCode ) ) {
+			else if( CFBamServerListFunc.CLASS_CODE == subClassCode ) {
 				schema.getTableServerListFunc().deleteServerListFunc( Authorization, (ICFBamServerListFunc)cur );
 			}
 			else {
@@ -888,31 +888,31 @@ public class CFBamRamServerMethodTable
 		if( ! anyNotNull ) {
 			return;
 		}
-		ICFBamServerMethod cur;
-		LinkedList<ICFBamServerMethod> matchSet = new LinkedList<ICFBamServerMethod>();
-		Iterator<ICFBamServerMethod> values = dictByPKey.values().iterator();
+		CFBamBuffServerMethod cur;
+		LinkedList<CFBamBuffServerMethod> matchSet = new LinkedList<CFBamBuffServerMethod>();
+		Iterator<CFBamBuffServerMethod> values = dictByPKey.values().iterator();
 		while( values.hasNext() ) {
 			cur = values.next();
 			if( argKey.equals( cur ) ) {
 				matchSet.add( cur );
 			}
 		}
-		Iterator<ICFBamServerMethod> iterMatch = matchSet.iterator();
+		Iterator<CFBamBuffServerMethod> iterMatch = matchSet.iterator();
 		while( iterMatch.hasNext() ) {
 			cur = iterMatch.next();
-			cur = schema.getTableServerMethod().readDerivedByIdIdx( Authorization,
-				cur.getRequiredId() );
-			String subClassCode = cur.getClassCode();
-			if( "a805".equals( subClassCode ) ) {
+			cur = (CFBamBuffServerMethod)(schema.getTableServerMethod().readDerivedByIdIdx( Authorization,
+				cur.getRequiredId() ));
+			int subClassCode = cur.getClassCode();
+			if( CFBamServerMethod.CLASS_CODE == subClassCode ) {
 				schema.getTableServerMethod().deleteServerMethod( Authorization, cur );
 			}
-			else if( "a806".equals( subClassCode ) ) {
+			else if( CFBamServerObjFunc.CLASS_CODE == subClassCode ) {
 				schema.getTableServerObjFunc().deleteServerObjFunc( Authorization, (ICFBamServerObjFunc)cur );
 			}
-			else if( "a807".equals( subClassCode ) ) {
+			else if( CFBamServerProc.CLASS_CODE == subClassCode ) {
 				schema.getTableServerProc().deleteServerProc( Authorization, (ICFBamServerProc)cur );
 			}
-			else if( "a837".equals( subClassCode ) ) {
+			else if( CFBamServerListFunc.CLASS_CODE == subClassCode ) {
 				schema.getTableServerListFunc().deleteServerListFunc( Authorization, (ICFBamServerListFunc)cur );
 			}
 			else {
@@ -933,36 +933,36 @@ public class CFBamRamServerMethodTable
 		ICFBamScopeByTenantIdxKey argKey )
 	{
 		final String S_ProcName = "deleteServerMethodByTenantIdx";
-		ICFBamServerMethod cur;
+		CFBamBuffServerMethod cur;
 		boolean anyNotNull = false;
 		anyNotNull = true;
 		if( ! anyNotNull ) {
 			return;
 		}
-		LinkedList<ICFBamServerMethod> matchSet = new LinkedList<ICFBamServerMethod>();
-		Iterator<ICFBamServerMethod> values = dictByPKey.values().iterator();
+		LinkedList<CFBamBuffServerMethod> matchSet = new LinkedList<CFBamBuffServerMethod>();
+		Iterator<CFBamBuffServerMethod> values = dictByPKey.values().iterator();
 		while( values.hasNext() ) {
 			cur = values.next();
 			if( argKey.equals( cur ) ) {
 				matchSet.add( cur );
 			}
 		}
-		Iterator<ICFBamServerMethod> iterMatch = matchSet.iterator();
+		Iterator<CFBamBuffServerMethod> iterMatch = matchSet.iterator();
 		while( iterMatch.hasNext() ) {
 			cur = iterMatch.next();
-			cur = schema.getTableServerMethod().readDerivedByIdIdx( Authorization,
-				cur.getRequiredId() );
-			String subClassCode = cur.getClassCode();
-			if( "a805".equals( subClassCode ) ) {
+			cur = (CFBamBuffServerMethod)(schema.getTableServerMethod().readDerivedByIdIdx( Authorization,
+				cur.getRequiredId() ));
+			int subClassCode = cur.getClassCode();
+			if( CFBamServerMethod.CLASS_CODE == subClassCode ) {
 				schema.getTableServerMethod().deleteServerMethod( Authorization, cur );
 			}
-			else if( "a806".equals( subClassCode ) ) {
+			else if( CFBamServerObjFunc.CLASS_CODE == subClassCode ) {
 				schema.getTableServerObjFunc().deleteServerObjFunc( Authorization, (ICFBamServerObjFunc)cur );
 			}
-			else if( "a807".equals( subClassCode ) ) {
+			else if( CFBamServerProc.CLASS_CODE == subClassCode ) {
 				schema.getTableServerProc().deleteServerProc( Authorization, (ICFBamServerProc)cur );
 			}
-			else if( "a837".equals( subClassCode ) ) {
+			else if( CFBamServerListFunc.CLASS_CODE == subClassCode ) {
 				schema.getTableServerListFunc().deleteServerListFunc( Authorization, (ICFBamServerListFunc)cur );
 			}
 			else {

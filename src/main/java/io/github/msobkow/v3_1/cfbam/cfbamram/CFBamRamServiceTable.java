@@ -840,20 +840,20 @@ public class CFBamRamServiceTable
 		if( ! anyNotNull ) {
 			return;
 		}
-		ICFSecService cur;
-		LinkedList<ICFSecService> matchSet = new LinkedList<ICFSecService>();
-		Iterator<ICFSecService> values = dictByPKey.values().iterator();
+		CFSecBuffService cur;
+		LinkedList<CFSecBuffService> matchSet = new LinkedList<CFSecBuffService>();
+		Iterator<CFSecBuffService> values = dictByPKey.values().iterator();
 		while( values.hasNext() ) {
 			cur = values.next();
 			if( argKey.equals( cur ) ) {
 				matchSet.add( cur );
 			}
 		}
-		Iterator<ICFSecService> iterMatch = matchSet.iterator();
+		Iterator<CFSecBuffService> iterMatch = matchSet.iterator();
 		while( iterMatch.hasNext() ) {
 			cur = iterMatch.next();
-			cur = schema.getTableService().readDerivedByIdIdx( Authorization,
-				cur.getRequiredServiceId() );
+			cur = (CFSecBuffService)(schema.getTableService().readDerivedByIdIdx( Authorization,
+				cur.getRequiredServiceId() ));
 			deleteService( Authorization, cur );
 		}
 	}
@@ -869,25 +869,25 @@ public class CFBamRamServiceTable
 	public void deleteServiceByClusterIdx( ICFSecAuthorization Authorization,
 		ICFSecServiceByClusterIdxKey argKey )
 	{
-		ICFSecService cur;
+		CFSecBuffService cur;
 		boolean anyNotNull = false;
 		anyNotNull = true;
 		if( ! anyNotNull ) {
 			return;
 		}
-		LinkedList<ICFSecService> matchSet = new LinkedList<ICFSecService>();
-		Iterator<ICFSecService> values = dictByPKey.values().iterator();
+		LinkedList<CFSecBuffService> matchSet = new LinkedList<CFSecBuffService>();
+		Iterator<CFSecBuffService> values = dictByPKey.values().iterator();
 		while( values.hasNext() ) {
 			cur = values.next();
 			if( argKey.equals( cur ) ) {
 				matchSet.add( cur );
 			}
 		}
-		Iterator<ICFSecService> iterMatch = matchSet.iterator();
+		Iterator<CFSecBuffService> iterMatch = matchSet.iterator();
 		while( iterMatch.hasNext() ) {
 			cur = iterMatch.next();
-			cur = schema.getTableService().readDerivedByIdIdx( Authorization,
-				cur.getRequiredServiceId() );
+			cur = (CFSecBuffService)(schema.getTableService().readDerivedByIdIdx( Authorization,
+				cur.getRequiredServiceId() ));
 			deleteService( Authorization, cur );
 		}
 	}
@@ -903,25 +903,25 @@ public class CFBamRamServiceTable
 	public void deleteServiceByHostIdx( ICFSecAuthorization Authorization,
 		ICFSecServiceByHostIdxKey argKey )
 	{
-		ICFSecService cur;
+		CFSecBuffService cur;
 		boolean anyNotNull = false;
 		anyNotNull = true;
 		if( ! anyNotNull ) {
 			return;
 		}
-		LinkedList<ICFSecService> matchSet = new LinkedList<ICFSecService>();
-		Iterator<ICFSecService> values = dictByPKey.values().iterator();
+		LinkedList<CFSecBuffService> matchSet = new LinkedList<CFSecBuffService>();
+		Iterator<CFSecBuffService> values = dictByPKey.values().iterator();
 		while( values.hasNext() ) {
 			cur = values.next();
 			if( argKey.equals( cur ) ) {
 				matchSet.add( cur );
 			}
 		}
-		Iterator<ICFSecService> iterMatch = matchSet.iterator();
+		Iterator<CFSecBuffService> iterMatch = matchSet.iterator();
 		while( iterMatch.hasNext() ) {
 			cur = iterMatch.next();
-			cur = schema.getTableService().readDerivedByIdIdx( Authorization,
-				cur.getRequiredServiceId() );
+			cur = (CFSecBuffService)(schema.getTableService().readDerivedByIdIdx( Authorization,
+				cur.getRequiredServiceId() ));
 			deleteService( Authorization, cur );
 		}
 	}
@@ -937,25 +937,25 @@ public class CFBamRamServiceTable
 	public void deleteServiceByTypeIdx( ICFSecAuthorization Authorization,
 		ICFSecServiceByTypeIdxKey argKey )
 	{
-		ICFSecService cur;
+		CFSecBuffService cur;
 		boolean anyNotNull = false;
 		anyNotNull = true;
 		if( ! anyNotNull ) {
 			return;
 		}
-		LinkedList<ICFSecService> matchSet = new LinkedList<ICFSecService>();
-		Iterator<ICFSecService> values = dictByPKey.values().iterator();
+		LinkedList<CFSecBuffService> matchSet = new LinkedList<CFSecBuffService>();
+		Iterator<CFSecBuffService> values = dictByPKey.values().iterator();
 		while( values.hasNext() ) {
 			cur = values.next();
 			if( argKey.equals( cur ) ) {
 				matchSet.add( cur );
 			}
 		}
-		Iterator<ICFSecService> iterMatch = matchSet.iterator();
+		Iterator<CFSecBuffService> iterMatch = matchSet.iterator();
 		while( iterMatch.hasNext() ) {
 			cur = iterMatch.next();
-			cur = schema.getTableService().readDerivedByIdIdx( Authorization,
-				cur.getRequiredServiceId() );
+			cur = (CFSecBuffService)(schema.getTableService().readDerivedByIdIdx( Authorization,
+				cur.getRequiredServiceId() ));
 			deleteService( Authorization, cur );
 		}
 	}
@@ -975,7 +975,7 @@ public class CFBamRamServiceTable
 	public void deleteServiceByUTypeIdx( ICFSecAuthorization Authorization,
 		ICFSecServiceByUTypeIdxKey argKey )
 	{
-		ICFSecService cur;
+		CFSecBuffService cur;
 		boolean anyNotNull = false;
 		anyNotNull = true;
 		anyNotNull = true;
@@ -983,19 +983,19 @@ public class CFBamRamServiceTable
 		if( ! anyNotNull ) {
 			return;
 		}
-		LinkedList<ICFSecService> matchSet = new LinkedList<ICFSecService>();
-		Iterator<ICFSecService> values = dictByPKey.values().iterator();
+		LinkedList<CFSecBuffService> matchSet = new LinkedList<CFSecBuffService>();
+		Iterator<CFSecBuffService> values = dictByPKey.values().iterator();
 		while( values.hasNext() ) {
 			cur = values.next();
 			if( argKey.equals( cur ) ) {
 				matchSet.add( cur );
 			}
 		}
-		Iterator<ICFSecService> iterMatch = matchSet.iterator();
+		Iterator<CFSecBuffService> iterMatch = matchSet.iterator();
 		while( iterMatch.hasNext() ) {
 			cur = iterMatch.next();
-			cur = schema.getTableService().readDerivedByIdIdx( Authorization,
-				cur.getRequiredServiceId() );
+			cur = (CFSecBuffService)(schema.getTableService().readDerivedByIdIdx( Authorization,
+				cur.getRequiredServiceId() ));
 			deleteService( Authorization, cur );
 		}
 	}
@@ -1015,7 +1015,7 @@ public class CFBamRamServiceTable
 	public void deleteServiceByUHostPortIdx( ICFSecAuthorization Authorization,
 		ICFSecServiceByUHostPortIdxKey argKey )
 	{
-		ICFSecService cur;
+		CFSecBuffService cur;
 		boolean anyNotNull = false;
 		anyNotNull = true;
 		anyNotNull = true;
@@ -1023,19 +1023,19 @@ public class CFBamRamServiceTable
 		if( ! anyNotNull ) {
 			return;
 		}
-		LinkedList<ICFSecService> matchSet = new LinkedList<ICFSecService>();
-		Iterator<ICFSecService> values = dictByPKey.values().iterator();
+		LinkedList<CFSecBuffService> matchSet = new LinkedList<CFSecBuffService>();
+		Iterator<CFSecBuffService> values = dictByPKey.values().iterator();
 		while( values.hasNext() ) {
 			cur = values.next();
 			if( argKey.equals( cur ) ) {
 				matchSet.add( cur );
 			}
 		}
-		Iterator<ICFSecService> iterMatch = matchSet.iterator();
+		Iterator<CFSecBuffService> iterMatch = matchSet.iterator();
 		while( iterMatch.hasNext() ) {
 			cur = iterMatch.next();
-			cur = schema.getTableService().readDerivedByIdIdx( Authorization,
-				cur.getRequiredServiceId() );
+			cur = (CFSecBuffService)(schema.getTableService().readDerivedByIdIdx( Authorization,
+				cur.getRequiredServiceId() ));
 			deleteService( Authorization, cur );
 		}
 	}

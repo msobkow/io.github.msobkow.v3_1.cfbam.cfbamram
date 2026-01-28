@@ -6744,8 +6744,8 @@ public class CFBamRamTimestampTypeTable
 				pkey );
 		}
 		CFLibDbKeyHash256 varSchemaDefId = existing.getRequiredSchemaDefId();
-		CFBamBuffSchemaDef container = schema.getTableSchemaDef().readDerivedByIdIdx( Authorization,
-			varSchemaDefId );
+		CFBamBuffSchemaDef container = (CFBamBuffSchemaDef)(schema.getTableSchemaDef().readDerivedByIdIdx( Authorization,
+			varSchemaDefId ));
 		if( container == null ) {
 			throw new CFLibNullArgumentException( getClass(),
 				S_ProcName,
@@ -8115,25 +8115,25 @@ public class CFBamRamTimestampTypeTable
 	public void deleteTimestampTypeBySchemaIdx( ICFSecAuthorization Authorization,
 		ICFBamTimestampTypeBySchemaIdxKey argKey )
 	{
-		ICFBamTimestampType cur;
+		CFBamBuffTimestampType cur;
 		boolean anyNotNull = false;
 		anyNotNull = true;
 		if( ! anyNotNull ) {
 			return;
 		}
-		LinkedList<ICFBamTimestampType> matchSet = new LinkedList<ICFBamTimestampType>();
-		Iterator<ICFBamTimestampType> values = dictByPKey.values().iterator();
+		LinkedList<CFBamBuffTimestampType> matchSet = new LinkedList<CFBamBuffTimestampType>();
+		Iterator<CFBamBuffTimestampType> values = dictByPKey.values().iterator();
 		while( values.hasNext() ) {
 			cur = values.next();
 			if( argKey.equals( cur ) ) {
 				matchSet.add( cur );
 			}
 		}
-		Iterator<ICFBamTimestampType> iterMatch = matchSet.iterator();
+		Iterator<CFBamBuffTimestampType> iterMatch = matchSet.iterator();
 		while( iterMatch.hasNext() ) {
 			cur = iterMatch.next();
-			cur = schema.getTableTimestampType().readDerivedByIdIdx( Authorization,
-				cur.getRequiredId() );
+			cur = (CFBamBuffTimestampType)(schema.getTableTimestampType().readDerivedByIdIdx( Authorization,
+				cur.getRequiredId() ));
 			deleteTimestampType( Authorization, cur );
 		}
 	}
@@ -8146,20 +8146,20 @@ public class CFBamRamTimestampTypeTable
 		if( ! anyNotNull ) {
 			return;
 		}
-		ICFBamTimestampType cur;
-		LinkedList<ICFBamTimestampType> matchSet = new LinkedList<ICFBamTimestampType>();
-		Iterator<ICFBamTimestampType> values = dictByPKey.values().iterator();
+		CFBamBuffTimestampType cur;
+		LinkedList<CFBamBuffTimestampType> matchSet = new LinkedList<CFBamBuffTimestampType>();
+		Iterator<CFBamBuffTimestampType> values = dictByPKey.values().iterator();
 		while( values.hasNext() ) {
 			cur = values.next();
 			if( argKey.equals( cur ) ) {
 				matchSet.add( cur );
 			}
 		}
-		Iterator<ICFBamTimestampType> iterMatch = matchSet.iterator();
+		Iterator<CFBamBuffTimestampType> iterMatch = matchSet.iterator();
 		while( iterMatch.hasNext() ) {
 			cur = iterMatch.next();
-			cur = schema.getTableTimestampType().readDerivedByIdIdx( Authorization,
-				cur.getRequiredId() );
+			cur = (CFBamBuffTimestampType)(schema.getTableTimestampType().readDerivedByIdIdx( Authorization,
+				cur.getRequiredId() ));
 			deleteTimestampType( Authorization, cur );
 		}
 	}
@@ -8177,26 +8177,26 @@ public class CFBamRamTimestampTypeTable
 	public void deleteTimestampTypeByUNameIdx( ICFSecAuthorization Authorization,
 		ICFBamValueByUNameIdxKey argKey )
 	{
-		ICFBamTimestampType cur;
+		CFBamBuffTimestampType cur;
 		boolean anyNotNull = false;
 		anyNotNull = true;
 		anyNotNull = true;
 		if( ! anyNotNull ) {
 			return;
 		}
-		LinkedList<ICFBamTimestampType> matchSet = new LinkedList<ICFBamTimestampType>();
-		Iterator<ICFBamTimestampType> values = dictByPKey.values().iterator();
+		LinkedList<CFBamBuffTimestampType> matchSet = new LinkedList<CFBamBuffTimestampType>();
+		Iterator<CFBamBuffTimestampType> values = dictByPKey.values().iterator();
 		while( values.hasNext() ) {
 			cur = values.next();
 			if( argKey.equals( cur ) ) {
 				matchSet.add( cur );
 			}
 		}
-		Iterator<ICFBamTimestampType> iterMatch = matchSet.iterator();
+		Iterator<CFBamBuffTimestampType> iterMatch = matchSet.iterator();
 		while( iterMatch.hasNext() ) {
 			cur = iterMatch.next();
-			cur = schema.getTableTimestampType().readDerivedByIdIdx( Authorization,
-				cur.getRequiredId() );
+			cur = (CFBamBuffTimestampType)(schema.getTableTimestampType().readDerivedByIdIdx( Authorization,
+				cur.getRequiredId() ));
 			deleteTimestampType( Authorization, cur );
 		}
 	}
@@ -8212,25 +8212,25 @@ public class CFBamRamTimestampTypeTable
 	public void deleteTimestampTypeByScopeIdx( ICFSecAuthorization Authorization,
 		ICFBamValueByScopeIdxKey argKey )
 	{
-		ICFBamTimestampType cur;
+		CFBamBuffTimestampType cur;
 		boolean anyNotNull = false;
 		anyNotNull = true;
 		if( ! anyNotNull ) {
 			return;
 		}
-		LinkedList<ICFBamTimestampType> matchSet = new LinkedList<ICFBamTimestampType>();
-		Iterator<ICFBamTimestampType> values = dictByPKey.values().iterator();
+		LinkedList<CFBamBuffTimestampType> matchSet = new LinkedList<CFBamBuffTimestampType>();
+		Iterator<CFBamBuffTimestampType> values = dictByPKey.values().iterator();
 		while( values.hasNext() ) {
 			cur = values.next();
 			if( argKey.equals( cur ) ) {
 				matchSet.add( cur );
 			}
 		}
-		Iterator<ICFBamTimestampType> iterMatch = matchSet.iterator();
+		Iterator<CFBamBuffTimestampType> iterMatch = matchSet.iterator();
 		while( iterMatch.hasNext() ) {
 			cur = iterMatch.next();
-			cur = schema.getTableTimestampType().readDerivedByIdIdx( Authorization,
-				cur.getRequiredId() );
+			cur = (CFBamBuffTimestampType)(schema.getTableTimestampType().readDerivedByIdIdx( Authorization,
+				cur.getRequiredId() ));
 			deleteTimestampType( Authorization, cur );
 		}
 	}
@@ -8246,7 +8246,7 @@ public class CFBamRamTimestampTypeTable
 	public void deleteTimestampTypeByDefSchemaIdx( ICFSecAuthorization Authorization,
 		ICFBamValueByDefSchemaIdxKey argKey )
 	{
-		ICFBamTimestampType cur;
+		CFBamBuffTimestampType cur;
 		boolean anyNotNull = false;
 		if( argKey.getOptionalDefSchemaId() != null ) {
 			anyNotNull = true;
@@ -8254,19 +8254,19 @@ public class CFBamRamTimestampTypeTable
 		if( ! anyNotNull ) {
 			return;
 		}
-		LinkedList<ICFBamTimestampType> matchSet = new LinkedList<ICFBamTimestampType>();
-		Iterator<ICFBamTimestampType> values = dictByPKey.values().iterator();
+		LinkedList<CFBamBuffTimestampType> matchSet = new LinkedList<CFBamBuffTimestampType>();
+		Iterator<CFBamBuffTimestampType> values = dictByPKey.values().iterator();
 		while( values.hasNext() ) {
 			cur = values.next();
 			if( argKey.equals( cur ) ) {
 				matchSet.add( cur );
 			}
 		}
-		Iterator<ICFBamTimestampType> iterMatch = matchSet.iterator();
+		Iterator<CFBamBuffTimestampType> iterMatch = matchSet.iterator();
 		while( iterMatch.hasNext() ) {
 			cur = iterMatch.next();
-			cur = schema.getTableTimestampType().readDerivedByIdIdx( Authorization,
-				cur.getRequiredId() );
+			cur = (CFBamBuffTimestampType)(schema.getTableTimestampType().readDerivedByIdIdx( Authorization,
+				cur.getRequiredId() ));
 			deleteTimestampType( Authorization, cur );
 		}
 	}
@@ -8282,7 +8282,7 @@ public class CFBamRamTimestampTypeTable
 	public void deleteTimestampTypeByPrevIdx( ICFSecAuthorization Authorization,
 		ICFBamValueByPrevIdxKey argKey )
 	{
-		ICFBamTimestampType cur;
+		CFBamBuffTimestampType cur;
 		boolean anyNotNull = false;
 		if( argKey.getOptionalPrevId() != null ) {
 			anyNotNull = true;
@@ -8290,19 +8290,19 @@ public class CFBamRamTimestampTypeTable
 		if( ! anyNotNull ) {
 			return;
 		}
-		LinkedList<ICFBamTimestampType> matchSet = new LinkedList<ICFBamTimestampType>();
-		Iterator<ICFBamTimestampType> values = dictByPKey.values().iterator();
+		LinkedList<CFBamBuffTimestampType> matchSet = new LinkedList<CFBamBuffTimestampType>();
+		Iterator<CFBamBuffTimestampType> values = dictByPKey.values().iterator();
 		while( values.hasNext() ) {
 			cur = values.next();
 			if( argKey.equals( cur ) ) {
 				matchSet.add( cur );
 			}
 		}
-		Iterator<ICFBamTimestampType> iterMatch = matchSet.iterator();
+		Iterator<CFBamBuffTimestampType> iterMatch = matchSet.iterator();
 		while( iterMatch.hasNext() ) {
 			cur = iterMatch.next();
-			cur = schema.getTableTimestampType().readDerivedByIdIdx( Authorization,
-				cur.getRequiredId() );
+			cur = (CFBamBuffTimestampType)(schema.getTableTimestampType().readDerivedByIdIdx( Authorization,
+				cur.getRequiredId() ));
 			deleteTimestampType( Authorization, cur );
 		}
 	}
@@ -8318,7 +8318,7 @@ public class CFBamRamTimestampTypeTable
 	public void deleteTimestampTypeByNextIdx( ICFSecAuthorization Authorization,
 		ICFBamValueByNextIdxKey argKey )
 	{
-		ICFBamTimestampType cur;
+		CFBamBuffTimestampType cur;
 		boolean anyNotNull = false;
 		if( argKey.getOptionalNextId() != null ) {
 			anyNotNull = true;
@@ -8326,19 +8326,19 @@ public class CFBamRamTimestampTypeTable
 		if( ! anyNotNull ) {
 			return;
 		}
-		LinkedList<ICFBamTimestampType> matchSet = new LinkedList<ICFBamTimestampType>();
-		Iterator<ICFBamTimestampType> values = dictByPKey.values().iterator();
+		LinkedList<CFBamBuffTimestampType> matchSet = new LinkedList<CFBamBuffTimestampType>();
+		Iterator<CFBamBuffTimestampType> values = dictByPKey.values().iterator();
 		while( values.hasNext() ) {
 			cur = values.next();
 			if( argKey.equals( cur ) ) {
 				matchSet.add( cur );
 			}
 		}
-		Iterator<ICFBamTimestampType> iterMatch = matchSet.iterator();
+		Iterator<CFBamBuffTimestampType> iterMatch = matchSet.iterator();
 		while( iterMatch.hasNext() ) {
 			cur = iterMatch.next();
-			cur = schema.getTableTimestampType().readDerivedByIdIdx( Authorization,
-				cur.getRequiredId() );
+			cur = (CFBamBuffTimestampType)(schema.getTableTimestampType().readDerivedByIdIdx( Authorization,
+				cur.getRequiredId() ));
 			deleteTimestampType( Authorization, cur );
 		}
 	}
@@ -8356,7 +8356,7 @@ public class CFBamRamTimestampTypeTable
 	public void deleteTimestampTypeByContPrevIdx( ICFSecAuthorization Authorization,
 		ICFBamValueByContPrevIdxKey argKey )
 	{
-		ICFBamTimestampType cur;
+		CFBamBuffTimestampType cur;
 		boolean anyNotNull = false;
 		anyNotNull = true;
 		if( argKey.getOptionalPrevId() != null ) {
@@ -8365,19 +8365,19 @@ public class CFBamRamTimestampTypeTable
 		if( ! anyNotNull ) {
 			return;
 		}
-		LinkedList<ICFBamTimestampType> matchSet = new LinkedList<ICFBamTimestampType>();
-		Iterator<ICFBamTimestampType> values = dictByPKey.values().iterator();
+		LinkedList<CFBamBuffTimestampType> matchSet = new LinkedList<CFBamBuffTimestampType>();
+		Iterator<CFBamBuffTimestampType> values = dictByPKey.values().iterator();
 		while( values.hasNext() ) {
 			cur = values.next();
 			if( argKey.equals( cur ) ) {
 				matchSet.add( cur );
 			}
 		}
-		Iterator<ICFBamTimestampType> iterMatch = matchSet.iterator();
+		Iterator<CFBamBuffTimestampType> iterMatch = matchSet.iterator();
 		while( iterMatch.hasNext() ) {
 			cur = iterMatch.next();
-			cur = schema.getTableTimestampType().readDerivedByIdIdx( Authorization,
-				cur.getRequiredId() );
+			cur = (CFBamBuffTimestampType)(schema.getTableTimestampType().readDerivedByIdIdx( Authorization,
+				cur.getRequiredId() ));
 			deleteTimestampType( Authorization, cur );
 		}
 	}
@@ -8395,7 +8395,7 @@ public class CFBamRamTimestampTypeTable
 	public void deleteTimestampTypeByContNextIdx( ICFSecAuthorization Authorization,
 		ICFBamValueByContNextIdxKey argKey )
 	{
-		ICFBamTimestampType cur;
+		CFBamBuffTimestampType cur;
 		boolean anyNotNull = false;
 		anyNotNull = true;
 		if( argKey.getOptionalNextId() != null ) {
@@ -8404,19 +8404,19 @@ public class CFBamRamTimestampTypeTable
 		if( ! anyNotNull ) {
 			return;
 		}
-		LinkedList<ICFBamTimestampType> matchSet = new LinkedList<ICFBamTimestampType>();
-		Iterator<ICFBamTimestampType> values = dictByPKey.values().iterator();
+		LinkedList<CFBamBuffTimestampType> matchSet = new LinkedList<CFBamBuffTimestampType>();
+		Iterator<CFBamBuffTimestampType> values = dictByPKey.values().iterator();
 		while( values.hasNext() ) {
 			cur = values.next();
 			if( argKey.equals( cur ) ) {
 				matchSet.add( cur );
 			}
 		}
-		Iterator<ICFBamTimestampType> iterMatch = matchSet.iterator();
+		Iterator<CFBamBuffTimestampType> iterMatch = matchSet.iterator();
 		while( iterMatch.hasNext() ) {
 			cur = iterMatch.next();
-			cur = schema.getTableTimestampType().readDerivedByIdIdx( Authorization,
-				cur.getRequiredId() );
+			cur = (CFBamBuffTimestampType)(schema.getTableTimestampType().readDerivedByIdIdx( Authorization,
+				cur.getRequiredId() ));
 			deleteTimestampType( Authorization, cur );
 		}
 	}

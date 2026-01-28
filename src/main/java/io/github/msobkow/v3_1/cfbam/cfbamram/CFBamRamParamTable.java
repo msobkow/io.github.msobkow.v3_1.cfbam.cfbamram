@@ -1375,8 +1375,8 @@ public class CFBamRamParamTable
 				pkey );
 		}
 		CFLibDbKeyHash256 varServerMethodId = existing.getRequiredServerMethodId();
-		CFBamBuffServerMethod container = schema.getTableServerMethod().readDerivedByIdIdx( Authorization,
-			varServerMethodId );
+		CFBamBuffServerMethod container = (CFBamBuffServerMethod)(schema.getTableServerMethod().readDerivedByIdIdx( Authorization,
+			varServerMethodId ));
 		if( container == null ) {
 			throw new CFLibNullArgumentException( getClass(),
 				S_ProcName,
@@ -1511,20 +1511,20 @@ public class CFBamRamParamTable
 		if( ! anyNotNull ) {
 			return;
 		}
-		ICFBamParam cur;
-		LinkedList<ICFBamParam> matchSet = new LinkedList<ICFBamParam>();
-		Iterator<ICFBamParam> values = dictByPKey.values().iterator();
+		CFBamBuffParam cur;
+		LinkedList<CFBamBuffParam> matchSet = new LinkedList<CFBamBuffParam>();
+		Iterator<CFBamBuffParam> values = dictByPKey.values().iterator();
 		while( values.hasNext() ) {
 			cur = values.next();
 			if( argKey.equals( cur ) ) {
 				matchSet.add( cur );
 			}
 		}
-		Iterator<ICFBamParam> iterMatch = matchSet.iterator();
+		Iterator<CFBamBuffParam> iterMatch = matchSet.iterator();
 		while( iterMatch.hasNext() ) {
 			cur = iterMatch.next();
-			cur = schema.getTableParam().readDerivedByIdIdx( Authorization,
-				cur.getRequiredId() );
+			cur = (CFBamBuffParam)(schema.getTableParam().readDerivedByIdIdx( Authorization,
+				cur.getRequiredId() ));
 			deleteParam( Authorization, cur );
 		}
 	}
@@ -1542,26 +1542,26 @@ public class CFBamRamParamTable
 	public void deleteParamByUNameIdx( ICFSecAuthorization Authorization,
 		ICFBamParamByUNameIdxKey argKey )
 	{
-		ICFBamParam cur;
+		CFBamBuffParam cur;
 		boolean anyNotNull = false;
 		anyNotNull = true;
 		anyNotNull = true;
 		if( ! anyNotNull ) {
 			return;
 		}
-		LinkedList<ICFBamParam> matchSet = new LinkedList<ICFBamParam>();
-		Iterator<ICFBamParam> values = dictByPKey.values().iterator();
+		LinkedList<CFBamBuffParam> matchSet = new LinkedList<CFBamBuffParam>();
+		Iterator<CFBamBuffParam> values = dictByPKey.values().iterator();
 		while( values.hasNext() ) {
 			cur = values.next();
 			if( argKey.equals( cur ) ) {
 				matchSet.add( cur );
 			}
 		}
-		Iterator<ICFBamParam> iterMatch = matchSet.iterator();
+		Iterator<CFBamBuffParam> iterMatch = matchSet.iterator();
 		while( iterMatch.hasNext() ) {
 			cur = iterMatch.next();
-			cur = schema.getTableParam().readDerivedByIdIdx( Authorization,
-				cur.getRequiredId() );
+			cur = (CFBamBuffParam)(schema.getTableParam().readDerivedByIdIdx( Authorization,
+				cur.getRequiredId() ));
 			deleteParam( Authorization, cur );
 		}
 	}
@@ -1577,25 +1577,25 @@ public class CFBamRamParamTable
 	public void deleteParamByServerMethodIdx( ICFSecAuthorization Authorization,
 		ICFBamParamByServerMethodIdxKey argKey )
 	{
-		ICFBamParam cur;
+		CFBamBuffParam cur;
 		boolean anyNotNull = false;
 		anyNotNull = true;
 		if( ! anyNotNull ) {
 			return;
 		}
-		LinkedList<ICFBamParam> matchSet = new LinkedList<ICFBamParam>();
-		Iterator<ICFBamParam> values = dictByPKey.values().iterator();
+		LinkedList<CFBamBuffParam> matchSet = new LinkedList<CFBamBuffParam>();
+		Iterator<CFBamBuffParam> values = dictByPKey.values().iterator();
 		while( values.hasNext() ) {
 			cur = values.next();
 			if( argKey.equals( cur ) ) {
 				matchSet.add( cur );
 			}
 		}
-		Iterator<ICFBamParam> iterMatch = matchSet.iterator();
+		Iterator<CFBamBuffParam> iterMatch = matchSet.iterator();
 		while( iterMatch.hasNext() ) {
 			cur = iterMatch.next();
-			cur = schema.getTableParam().readDerivedByIdIdx( Authorization,
-				cur.getRequiredId() );
+			cur = (CFBamBuffParam)(schema.getTableParam().readDerivedByIdIdx( Authorization,
+				cur.getRequiredId() ));
 			deleteParam( Authorization, cur );
 		}
 	}
@@ -1611,7 +1611,7 @@ public class CFBamRamParamTable
 	public void deleteParamByDefSchemaIdx( ICFSecAuthorization Authorization,
 		ICFBamParamByDefSchemaIdxKey argKey )
 	{
-		ICFBamParam cur;
+		CFBamBuffParam cur;
 		boolean anyNotNull = false;
 		if( argKey.getOptionalDefSchemaId() != null ) {
 			anyNotNull = true;
@@ -1619,19 +1619,19 @@ public class CFBamRamParamTable
 		if( ! anyNotNull ) {
 			return;
 		}
-		LinkedList<ICFBamParam> matchSet = new LinkedList<ICFBamParam>();
-		Iterator<ICFBamParam> values = dictByPKey.values().iterator();
+		LinkedList<CFBamBuffParam> matchSet = new LinkedList<CFBamBuffParam>();
+		Iterator<CFBamBuffParam> values = dictByPKey.values().iterator();
 		while( values.hasNext() ) {
 			cur = values.next();
 			if( argKey.equals( cur ) ) {
 				matchSet.add( cur );
 			}
 		}
-		Iterator<ICFBamParam> iterMatch = matchSet.iterator();
+		Iterator<CFBamBuffParam> iterMatch = matchSet.iterator();
 		while( iterMatch.hasNext() ) {
 			cur = iterMatch.next();
-			cur = schema.getTableParam().readDerivedByIdIdx( Authorization,
-				cur.getRequiredId() );
+			cur = (CFBamBuffParam)(schema.getTableParam().readDerivedByIdIdx( Authorization,
+				cur.getRequiredId() ));
 			deleteParam( Authorization, cur );
 		}
 	}
@@ -1647,7 +1647,7 @@ public class CFBamRamParamTable
 	public void deleteParamByServerTypeIdx( ICFSecAuthorization Authorization,
 		ICFBamParamByServerTypeIdxKey argKey )
 	{
-		ICFBamParam cur;
+		CFBamBuffParam cur;
 		boolean anyNotNull = false;
 		if( argKey.getOptionalTypeId() != null ) {
 			anyNotNull = true;
@@ -1655,19 +1655,19 @@ public class CFBamRamParamTable
 		if( ! anyNotNull ) {
 			return;
 		}
-		LinkedList<ICFBamParam> matchSet = new LinkedList<ICFBamParam>();
-		Iterator<ICFBamParam> values = dictByPKey.values().iterator();
+		LinkedList<CFBamBuffParam> matchSet = new LinkedList<CFBamBuffParam>();
+		Iterator<CFBamBuffParam> values = dictByPKey.values().iterator();
 		while( values.hasNext() ) {
 			cur = values.next();
 			if( argKey.equals( cur ) ) {
 				matchSet.add( cur );
 			}
 		}
-		Iterator<ICFBamParam> iterMatch = matchSet.iterator();
+		Iterator<CFBamBuffParam> iterMatch = matchSet.iterator();
 		while( iterMatch.hasNext() ) {
 			cur = iterMatch.next();
-			cur = schema.getTableParam().readDerivedByIdIdx( Authorization,
-				cur.getRequiredId() );
+			cur = (CFBamBuffParam)(schema.getTableParam().readDerivedByIdIdx( Authorization,
+				cur.getRequiredId() ));
 			deleteParam( Authorization, cur );
 		}
 	}
@@ -1683,7 +1683,7 @@ public class CFBamRamParamTable
 	public void deleteParamByPrevIdx( ICFSecAuthorization Authorization,
 		ICFBamParamByPrevIdxKey argKey )
 	{
-		ICFBamParam cur;
+		CFBamBuffParam cur;
 		boolean anyNotNull = false;
 		if( argKey.getOptionalPrevId() != null ) {
 			anyNotNull = true;
@@ -1691,19 +1691,19 @@ public class CFBamRamParamTable
 		if( ! anyNotNull ) {
 			return;
 		}
-		LinkedList<ICFBamParam> matchSet = new LinkedList<ICFBamParam>();
-		Iterator<ICFBamParam> values = dictByPKey.values().iterator();
+		LinkedList<CFBamBuffParam> matchSet = new LinkedList<CFBamBuffParam>();
+		Iterator<CFBamBuffParam> values = dictByPKey.values().iterator();
 		while( values.hasNext() ) {
 			cur = values.next();
 			if( argKey.equals( cur ) ) {
 				matchSet.add( cur );
 			}
 		}
-		Iterator<ICFBamParam> iterMatch = matchSet.iterator();
+		Iterator<CFBamBuffParam> iterMatch = matchSet.iterator();
 		while( iterMatch.hasNext() ) {
 			cur = iterMatch.next();
-			cur = schema.getTableParam().readDerivedByIdIdx( Authorization,
-				cur.getRequiredId() );
+			cur = (CFBamBuffParam)(schema.getTableParam().readDerivedByIdIdx( Authorization,
+				cur.getRequiredId() ));
 			deleteParam( Authorization, cur );
 		}
 	}
@@ -1719,7 +1719,7 @@ public class CFBamRamParamTable
 	public void deleteParamByNextIdx( ICFSecAuthorization Authorization,
 		ICFBamParamByNextIdxKey argKey )
 	{
-		ICFBamParam cur;
+		CFBamBuffParam cur;
 		boolean anyNotNull = false;
 		if( argKey.getOptionalNextId() != null ) {
 			anyNotNull = true;
@@ -1727,19 +1727,19 @@ public class CFBamRamParamTable
 		if( ! anyNotNull ) {
 			return;
 		}
-		LinkedList<ICFBamParam> matchSet = new LinkedList<ICFBamParam>();
-		Iterator<ICFBamParam> values = dictByPKey.values().iterator();
+		LinkedList<CFBamBuffParam> matchSet = new LinkedList<CFBamBuffParam>();
+		Iterator<CFBamBuffParam> values = dictByPKey.values().iterator();
 		while( values.hasNext() ) {
 			cur = values.next();
 			if( argKey.equals( cur ) ) {
 				matchSet.add( cur );
 			}
 		}
-		Iterator<ICFBamParam> iterMatch = matchSet.iterator();
+		Iterator<CFBamBuffParam> iterMatch = matchSet.iterator();
 		while( iterMatch.hasNext() ) {
 			cur = iterMatch.next();
-			cur = schema.getTableParam().readDerivedByIdIdx( Authorization,
-				cur.getRequiredId() );
+			cur = (CFBamBuffParam)(schema.getTableParam().readDerivedByIdIdx( Authorization,
+				cur.getRequiredId() ));
 			deleteParam( Authorization, cur );
 		}
 	}
@@ -1757,7 +1757,7 @@ public class CFBamRamParamTable
 	public void deleteParamByContPrevIdx( ICFSecAuthorization Authorization,
 		ICFBamParamByContPrevIdxKey argKey )
 	{
-		ICFBamParam cur;
+		CFBamBuffParam cur;
 		boolean anyNotNull = false;
 		anyNotNull = true;
 		if( argKey.getOptionalPrevId() != null ) {
@@ -1766,19 +1766,19 @@ public class CFBamRamParamTable
 		if( ! anyNotNull ) {
 			return;
 		}
-		LinkedList<ICFBamParam> matchSet = new LinkedList<ICFBamParam>();
-		Iterator<ICFBamParam> values = dictByPKey.values().iterator();
+		LinkedList<CFBamBuffParam> matchSet = new LinkedList<CFBamBuffParam>();
+		Iterator<CFBamBuffParam> values = dictByPKey.values().iterator();
 		while( values.hasNext() ) {
 			cur = values.next();
 			if( argKey.equals( cur ) ) {
 				matchSet.add( cur );
 			}
 		}
-		Iterator<ICFBamParam> iterMatch = matchSet.iterator();
+		Iterator<CFBamBuffParam> iterMatch = matchSet.iterator();
 		while( iterMatch.hasNext() ) {
 			cur = iterMatch.next();
-			cur = schema.getTableParam().readDerivedByIdIdx( Authorization,
-				cur.getRequiredId() );
+			cur = (CFBamBuffParam)(schema.getTableParam().readDerivedByIdIdx( Authorization,
+				cur.getRequiredId() ));
 			deleteParam( Authorization, cur );
 		}
 	}
@@ -1796,7 +1796,7 @@ public class CFBamRamParamTable
 	public void deleteParamByContNextIdx( ICFSecAuthorization Authorization,
 		ICFBamParamByContNextIdxKey argKey )
 	{
-		ICFBamParam cur;
+		CFBamBuffParam cur;
 		boolean anyNotNull = false;
 		anyNotNull = true;
 		if( argKey.getOptionalNextId() != null ) {
@@ -1805,19 +1805,19 @@ public class CFBamRamParamTable
 		if( ! anyNotNull ) {
 			return;
 		}
-		LinkedList<ICFBamParam> matchSet = new LinkedList<ICFBamParam>();
-		Iterator<ICFBamParam> values = dictByPKey.values().iterator();
+		LinkedList<CFBamBuffParam> matchSet = new LinkedList<CFBamBuffParam>();
+		Iterator<CFBamBuffParam> values = dictByPKey.values().iterator();
 		while( values.hasNext() ) {
 			cur = values.next();
 			if( argKey.equals( cur ) ) {
 				matchSet.add( cur );
 			}
 		}
-		Iterator<ICFBamParam> iterMatch = matchSet.iterator();
+		Iterator<CFBamBuffParam> iterMatch = matchSet.iterator();
 		while( iterMatch.hasNext() ) {
 			cur = iterMatch.next();
-			cur = schema.getTableParam().readDerivedByIdIdx( Authorization,
-				cur.getRequiredId() );
+			cur = (CFBamBuffParam)(schema.getTableParam().readDerivedByIdIdx( Authorization,
+				cur.getRequiredId() ));
 			deleteParam( Authorization, cur );
 		}
 	}

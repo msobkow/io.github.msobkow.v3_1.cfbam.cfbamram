@@ -5958,8 +5958,8 @@ public class CFBamRamTZTimestampDefTable
 				pkey );
 		}
 		CFLibDbKeyHash256 varScopeId = existing.getRequiredScopeId();
-		CFBamBuffScope container = schema.getTableScope().readDerivedByIdIdx( Authorization,
-			varScopeId );
+		CFBamBuffScope container = (CFBamBuffScope)(schema.getTableScope().readDerivedByIdIdx( Authorization,
+			varScopeId ));
 		if( container == null ) {
 			throw new CFLibNullArgumentException( getClass(),
 				S_ProcName,
@@ -7343,28 +7343,28 @@ public class CFBamRamTZTimestampDefTable
 		if( ! anyNotNull ) {
 			return;
 		}
-		ICFBamTZTimestampDef cur;
-		LinkedList<ICFBamTZTimestampDef> matchSet = new LinkedList<ICFBamTZTimestampDef>();
-		Iterator<ICFBamTZTimestampDef> values = dictByPKey.values().iterator();
+		CFBamBuffTZTimestampDef cur;
+		LinkedList<CFBamBuffTZTimestampDef> matchSet = new LinkedList<CFBamBuffTZTimestampDef>();
+		Iterator<CFBamBuffTZTimestampDef> values = dictByPKey.values().iterator();
 		while( values.hasNext() ) {
 			cur = values.next();
 			if( argKey.equals( cur ) ) {
 				matchSet.add( cur );
 			}
 		}
-		Iterator<ICFBamTZTimestampDef> iterMatch = matchSet.iterator();
+		Iterator<CFBamBuffTZTimestampDef> iterMatch = matchSet.iterator();
 		while( iterMatch.hasNext() ) {
 			cur = iterMatch.next();
-			cur = schema.getTableTZTimestampDef().readDerivedByIdIdx( Authorization,
-				cur.getRequiredId() );
-			String subClassCode = cur.getClassCode();
-			if( "a856".equals( subClassCode ) ) {
+			cur = (CFBamBuffTZTimestampDef)(schema.getTableTZTimestampDef().readDerivedByIdIdx( Authorization,
+				cur.getRequiredId() ));
+			int subClassCode = cur.getClassCode();
+			if( CFBamTZTimestampDef.CLASS_CODE == subClassCode ) {
 				schema.getTableTZTimestampDef().deleteTZTimestampDef( Authorization, cur );
 			}
-			else if( "a857".equals( subClassCode ) ) {
+			else if( CFBamTZTimestampType.CLASS_CODE == subClassCode ) {
 				schema.getTableTZTimestampType().deleteTZTimestampType( Authorization, (ICFBamTZTimestampType)cur );
 			}
-			else if( "a87e".equals( subClassCode ) ) {
+			else if( CFBamTZTimestampCol.CLASS_CODE == subClassCode ) {
 				schema.getTableTZTimestampCol().deleteTZTimestampCol( Authorization, (ICFBamTZTimestampCol)cur );
 			}
 			else {
@@ -7387,34 +7387,34 @@ public class CFBamRamTZTimestampDefTable
 		ICFBamValueByUNameIdxKey argKey )
 	{
 		final String S_ProcName = "deleteTZTimestampDefByUNameIdx";
-		ICFBamTZTimestampDef cur;
+		CFBamBuffTZTimestampDef cur;
 		boolean anyNotNull = false;
 		anyNotNull = true;
 		anyNotNull = true;
 		if( ! anyNotNull ) {
 			return;
 		}
-		LinkedList<ICFBamTZTimestampDef> matchSet = new LinkedList<ICFBamTZTimestampDef>();
-		Iterator<ICFBamTZTimestampDef> values = dictByPKey.values().iterator();
+		LinkedList<CFBamBuffTZTimestampDef> matchSet = new LinkedList<CFBamBuffTZTimestampDef>();
+		Iterator<CFBamBuffTZTimestampDef> values = dictByPKey.values().iterator();
 		while( values.hasNext() ) {
 			cur = values.next();
 			if( argKey.equals( cur ) ) {
 				matchSet.add( cur );
 			}
 		}
-		Iterator<ICFBamTZTimestampDef> iterMatch = matchSet.iterator();
+		Iterator<CFBamBuffTZTimestampDef> iterMatch = matchSet.iterator();
 		while( iterMatch.hasNext() ) {
 			cur = iterMatch.next();
-			cur = schema.getTableTZTimestampDef().readDerivedByIdIdx( Authorization,
-				cur.getRequiredId() );
-			String subClassCode = cur.getClassCode();
-			if( "a856".equals( subClassCode ) ) {
+			cur = (CFBamBuffTZTimestampDef)(schema.getTableTZTimestampDef().readDerivedByIdIdx( Authorization,
+				cur.getRequiredId() ));
+			int subClassCode = cur.getClassCode();
+			if( CFBamTZTimestampDef.CLASS_CODE == subClassCode ) {
 				schema.getTableTZTimestampDef().deleteTZTimestampDef( Authorization, cur );
 			}
-			else if( "a857".equals( subClassCode ) ) {
+			else if( CFBamTZTimestampType.CLASS_CODE == subClassCode ) {
 				schema.getTableTZTimestampType().deleteTZTimestampType( Authorization, (ICFBamTZTimestampType)cur );
 			}
-			else if( "a87e".equals( subClassCode ) ) {
+			else if( CFBamTZTimestampCol.CLASS_CODE == subClassCode ) {
 				schema.getTableTZTimestampCol().deleteTZTimestampCol( Authorization, (ICFBamTZTimestampCol)cur );
 			}
 			else {
@@ -7435,33 +7435,33 @@ public class CFBamRamTZTimestampDefTable
 		ICFBamValueByScopeIdxKey argKey )
 	{
 		final String S_ProcName = "deleteTZTimestampDefByScopeIdx";
-		ICFBamTZTimestampDef cur;
+		CFBamBuffTZTimestampDef cur;
 		boolean anyNotNull = false;
 		anyNotNull = true;
 		if( ! anyNotNull ) {
 			return;
 		}
-		LinkedList<ICFBamTZTimestampDef> matchSet = new LinkedList<ICFBamTZTimestampDef>();
-		Iterator<ICFBamTZTimestampDef> values = dictByPKey.values().iterator();
+		LinkedList<CFBamBuffTZTimestampDef> matchSet = new LinkedList<CFBamBuffTZTimestampDef>();
+		Iterator<CFBamBuffTZTimestampDef> values = dictByPKey.values().iterator();
 		while( values.hasNext() ) {
 			cur = values.next();
 			if( argKey.equals( cur ) ) {
 				matchSet.add( cur );
 			}
 		}
-		Iterator<ICFBamTZTimestampDef> iterMatch = matchSet.iterator();
+		Iterator<CFBamBuffTZTimestampDef> iterMatch = matchSet.iterator();
 		while( iterMatch.hasNext() ) {
 			cur = iterMatch.next();
-			cur = schema.getTableTZTimestampDef().readDerivedByIdIdx( Authorization,
-				cur.getRequiredId() );
-			String subClassCode = cur.getClassCode();
-			if( "a856".equals( subClassCode ) ) {
+			cur = (CFBamBuffTZTimestampDef)(schema.getTableTZTimestampDef().readDerivedByIdIdx( Authorization,
+				cur.getRequiredId() ));
+			int subClassCode = cur.getClassCode();
+			if( CFBamTZTimestampDef.CLASS_CODE == subClassCode ) {
 				schema.getTableTZTimestampDef().deleteTZTimestampDef( Authorization, cur );
 			}
-			else if( "a857".equals( subClassCode ) ) {
+			else if( CFBamTZTimestampType.CLASS_CODE == subClassCode ) {
 				schema.getTableTZTimestampType().deleteTZTimestampType( Authorization, (ICFBamTZTimestampType)cur );
 			}
-			else if( "a87e".equals( subClassCode ) ) {
+			else if( CFBamTZTimestampCol.CLASS_CODE == subClassCode ) {
 				schema.getTableTZTimestampCol().deleteTZTimestampCol( Authorization, (ICFBamTZTimestampCol)cur );
 			}
 			else {
@@ -7482,7 +7482,7 @@ public class CFBamRamTZTimestampDefTable
 		ICFBamValueByDefSchemaIdxKey argKey )
 	{
 		final String S_ProcName = "deleteTZTimestampDefByDefSchemaIdx";
-		ICFBamTZTimestampDef cur;
+		CFBamBuffTZTimestampDef cur;
 		boolean anyNotNull = false;
 		if( argKey.getOptionalDefSchemaId() != null ) {
 			anyNotNull = true;
@@ -7490,27 +7490,27 @@ public class CFBamRamTZTimestampDefTable
 		if( ! anyNotNull ) {
 			return;
 		}
-		LinkedList<ICFBamTZTimestampDef> matchSet = new LinkedList<ICFBamTZTimestampDef>();
-		Iterator<ICFBamTZTimestampDef> values = dictByPKey.values().iterator();
+		LinkedList<CFBamBuffTZTimestampDef> matchSet = new LinkedList<CFBamBuffTZTimestampDef>();
+		Iterator<CFBamBuffTZTimestampDef> values = dictByPKey.values().iterator();
 		while( values.hasNext() ) {
 			cur = values.next();
 			if( argKey.equals( cur ) ) {
 				matchSet.add( cur );
 			}
 		}
-		Iterator<ICFBamTZTimestampDef> iterMatch = matchSet.iterator();
+		Iterator<CFBamBuffTZTimestampDef> iterMatch = matchSet.iterator();
 		while( iterMatch.hasNext() ) {
 			cur = iterMatch.next();
-			cur = schema.getTableTZTimestampDef().readDerivedByIdIdx( Authorization,
-				cur.getRequiredId() );
-			String subClassCode = cur.getClassCode();
-			if( "a856".equals( subClassCode ) ) {
+			cur = (CFBamBuffTZTimestampDef)(schema.getTableTZTimestampDef().readDerivedByIdIdx( Authorization,
+				cur.getRequiredId() ));
+			int subClassCode = cur.getClassCode();
+			if( CFBamTZTimestampDef.CLASS_CODE == subClassCode ) {
 				schema.getTableTZTimestampDef().deleteTZTimestampDef( Authorization, cur );
 			}
-			else if( "a857".equals( subClassCode ) ) {
+			else if( CFBamTZTimestampType.CLASS_CODE == subClassCode ) {
 				schema.getTableTZTimestampType().deleteTZTimestampType( Authorization, (ICFBamTZTimestampType)cur );
 			}
-			else if( "a87e".equals( subClassCode ) ) {
+			else if( CFBamTZTimestampCol.CLASS_CODE == subClassCode ) {
 				schema.getTableTZTimestampCol().deleteTZTimestampCol( Authorization, (ICFBamTZTimestampCol)cur );
 			}
 			else {
@@ -7531,7 +7531,7 @@ public class CFBamRamTZTimestampDefTable
 		ICFBamValueByPrevIdxKey argKey )
 	{
 		final String S_ProcName = "deleteTZTimestampDefByPrevIdx";
-		ICFBamTZTimestampDef cur;
+		CFBamBuffTZTimestampDef cur;
 		boolean anyNotNull = false;
 		if( argKey.getOptionalPrevId() != null ) {
 			anyNotNull = true;
@@ -7539,27 +7539,27 @@ public class CFBamRamTZTimestampDefTable
 		if( ! anyNotNull ) {
 			return;
 		}
-		LinkedList<ICFBamTZTimestampDef> matchSet = new LinkedList<ICFBamTZTimestampDef>();
-		Iterator<ICFBamTZTimestampDef> values = dictByPKey.values().iterator();
+		LinkedList<CFBamBuffTZTimestampDef> matchSet = new LinkedList<CFBamBuffTZTimestampDef>();
+		Iterator<CFBamBuffTZTimestampDef> values = dictByPKey.values().iterator();
 		while( values.hasNext() ) {
 			cur = values.next();
 			if( argKey.equals( cur ) ) {
 				matchSet.add( cur );
 			}
 		}
-		Iterator<ICFBamTZTimestampDef> iterMatch = matchSet.iterator();
+		Iterator<CFBamBuffTZTimestampDef> iterMatch = matchSet.iterator();
 		while( iterMatch.hasNext() ) {
 			cur = iterMatch.next();
-			cur = schema.getTableTZTimestampDef().readDerivedByIdIdx( Authorization,
-				cur.getRequiredId() );
-			String subClassCode = cur.getClassCode();
-			if( "a856".equals( subClassCode ) ) {
+			cur = (CFBamBuffTZTimestampDef)(schema.getTableTZTimestampDef().readDerivedByIdIdx( Authorization,
+				cur.getRequiredId() ));
+			int subClassCode = cur.getClassCode();
+			if( CFBamTZTimestampDef.CLASS_CODE == subClassCode ) {
 				schema.getTableTZTimestampDef().deleteTZTimestampDef( Authorization, cur );
 			}
-			else if( "a857".equals( subClassCode ) ) {
+			else if( CFBamTZTimestampType.CLASS_CODE == subClassCode ) {
 				schema.getTableTZTimestampType().deleteTZTimestampType( Authorization, (ICFBamTZTimestampType)cur );
 			}
-			else if( "a87e".equals( subClassCode ) ) {
+			else if( CFBamTZTimestampCol.CLASS_CODE == subClassCode ) {
 				schema.getTableTZTimestampCol().deleteTZTimestampCol( Authorization, (ICFBamTZTimestampCol)cur );
 			}
 			else {
@@ -7580,7 +7580,7 @@ public class CFBamRamTZTimestampDefTable
 		ICFBamValueByNextIdxKey argKey )
 	{
 		final String S_ProcName = "deleteTZTimestampDefByNextIdx";
-		ICFBamTZTimestampDef cur;
+		CFBamBuffTZTimestampDef cur;
 		boolean anyNotNull = false;
 		if( argKey.getOptionalNextId() != null ) {
 			anyNotNull = true;
@@ -7588,27 +7588,27 @@ public class CFBamRamTZTimestampDefTable
 		if( ! anyNotNull ) {
 			return;
 		}
-		LinkedList<ICFBamTZTimestampDef> matchSet = new LinkedList<ICFBamTZTimestampDef>();
-		Iterator<ICFBamTZTimestampDef> values = dictByPKey.values().iterator();
+		LinkedList<CFBamBuffTZTimestampDef> matchSet = new LinkedList<CFBamBuffTZTimestampDef>();
+		Iterator<CFBamBuffTZTimestampDef> values = dictByPKey.values().iterator();
 		while( values.hasNext() ) {
 			cur = values.next();
 			if( argKey.equals( cur ) ) {
 				matchSet.add( cur );
 			}
 		}
-		Iterator<ICFBamTZTimestampDef> iterMatch = matchSet.iterator();
+		Iterator<CFBamBuffTZTimestampDef> iterMatch = matchSet.iterator();
 		while( iterMatch.hasNext() ) {
 			cur = iterMatch.next();
-			cur = schema.getTableTZTimestampDef().readDerivedByIdIdx( Authorization,
-				cur.getRequiredId() );
-			String subClassCode = cur.getClassCode();
-			if( "a856".equals( subClassCode ) ) {
+			cur = (CFBamBuffTZTimestampDef)(schema.getTableTZTimestampDef().readDerivedByIdIdx( Authorization,
+				cur.getRequiredId() ));
+			int subClassCode = cur.getClassCode();
+			if( CFBamTZTimestampDef.CLASS_CODE == subClassCode ) {
 				schema.getTableTZTimestampDef().deleteTZTimestampDef( Authorization, cur );
 			}
-			else if( "a857".equals( subClassCode ) ) {
+			else if( CFBamTZTimestampType.CLASS_CODE == subClassCode ) {
 				schema.getTableTZTimestampType().deleteTZTimestampType( Authorization, (ICFBamTZTimestampType)cur );
 			}
-			else if( "a87e".equals( subClassCode ) ) {
+			else if( CFBamTZTimestampCol.CLASS_CODE == subClassCode ) {
 				schema.getTableTZTimestampCol().deleteTZTimestampCol( Authorization, (ICFBamTZTimestampCol)cur );
 			}
 			else {
@@ -7631,7 +7631,7 @@ public class CFBamRamTZTimestampDefTable
 		ICFBamValueByContPrevIdxKey argKey )
 	{
 		final String S_ProcName = "deleteTZTimestampDefByContPrevIdx";
-		ICFBamTZTimestampDef cur;
+		CFBamBuffTZTimestampDef cur;
 		boolean anyNotNull = false;
 		anyNotNull = true;
 		if( argKey.getOptionalPrevId() != null ) {
@@ -7640,27 +7640,27 @@ public class CFBamRamTZTimestampDefTable
 		if( ! anyNotNull ) {
 			return;
 		}
-		LinkedList<ICFBamTZTimestampDef> matchSet = new LinkedList<ICFBamTZTimestampDef>();
-		Iterator<ICFBamTZTimestampDef> values = dictByPKey.values().iterator();
+		LinkedList<CFBamBuffTZTimestampDef> matchSet = new LinkedList<CFBamBuffTZTimestampDef>();
+		Iterator<CFBamBuffTZTimestampDef> values = dictByPKey.values().iterator();
 		while( values.hasNext() ) {
 			cur = values.next();
 			if( argKey.equals( cur ) ) {
 				matchSet.add( cur );
 			}
 		}
-		Iterator<ICFBamTZTimestampDef> iterMatch = matchSet.iterator();
+		Iterator<CFBamBuffTZTimestampDef> iterMatch = matchSet.iterator();
 		while( iterMatch.hasNext() ) {
 			cur = iterMatch.next();
-			cur = schema.getTableTZTimestampDef().readDerivedByIdIdx( Authorization,
-				cur.getRequiredId() );
-			String subClassCode = cur.getClassCode();
-			if( "a856".equals( subClassCode ) ) {
+			cur = (CFBamBuffTZTimestampDef)(schema.getTableTZTimestampDef().readDerivedByIdIdx( Authorization,
+				cur.getRequiredId() ));
+			int subClassCode = cur.getClassCode();
+			if( CFBamTZTimestampDef.CLASS_CODE == subClassCode ) {
 				schema.getTableTZTimestampDef().deleteTZTimestampDef( Authorization, cur );
 			}
-			else if( "a857".equals( subClassCode ) ) {
+			else if( CFBamTZTimestampType.CLASS_CODE == subClassCode ) {
 				schema.getTableTZTimestampType().deleteTZTimestampType( Authorization, (ICFBamTZTimestampType)cur );
 			}
-			else if( "a87e".equals( subClassCode ) ) {
+			else if( CFBamTZTimestampCol.CLASS_CODE == subClassCode ) {
 				schema.getTableTZTimestampCol().deleteTZTimestampCol( Authorization, (ICFBamTZTimestampCol)cur );
 			}
 			else {
@@ -7683,7 +7683,7 @@ public class CFBamRamTZTimestampDefTable
 		ICFBamValueByContNextIdxKey argKey )
 	{
 		final String S_ProcName = "deleteTZTimestampDefByContNextIdx";
-		ICFBamTZTimestampDef cur;
+		CFBamBuffTZTimestampDef cur;
 		boolean anyNotNull = false;
 		anyNotNull = true;
 		if( argKey.getOptionalNextId() != null ) {
@@ -7692,27 +7692,27 @@ public class CFBamRamTZTimestampDefTable
 		if( ! anyNotNull ) {
 			return;
 		}
-		LinkedList<ICFBamTZTimestampDef> matchSet = new LinkedList<ICFBamTZTimestampDef>();
-		Iterator<ICFBamTZTimestampDef> values = dictByPKey.values().iterator();
+		LinkedList<CFBamBuffTZTimestampDef> matchSet = new LinkedList<CFBamBuffTZTimestampDef>();
+		Iterator<CFBamBuffTZTimestampDef> values = dictByPKey.values().iterator();
 		while( values.hasNext() ) {
 			cur = values.next();
 			if( argKey.equals( cur ) ) {
 				matchSet.add( cur );
 			}
 		}
-		Iterator<ICFBamTZTimestampDef> iterMatch = matchSet.iterator();
+		Iterator<CFBamBuffTZTimestampDef> iterMatch = matchSet.iterator();
 		while( iterMatch.hasNext() ) {
 			cur = iterMatch.next();
-			cur = schema.getTableTZTimestampDef().readDerivedByIdIdx( Authorization,
-				cur.getRequiredId() );
-			String subClassCode = cur.getClassCode();
-			if( "a856".equals( subClassCode ) ) {
+			cur = (CFBamBuffTZTimestampDef)(schema.getTableTZTimestampDef().readDerivedByIdIdx( Authorization,
+				cur.getRequiredId() ));
+			int subClassCode = cur.getClassCode();
+			if( CFBamTZTimestampDef.CLASS_CODE == subClassCode ) {
 				schema.getTableTZTimestampDef().deleteTZTimestampDef( Authorization, cur );
 			}
-			else if( "a857".equals( subClassCode ) ) {
+			else if( CFBamTZTimestampType.CLASS_CODE == subClassCode ) {
 				schema.getTableTZTimestampType().deleteTZTimestampType( Authorization, (ICFBamTZTimestampType)cur );
 			}
-			else if( "a87e".equals( subClassCode ) ) {
+			else if( CFBamTZTimestampCol.CLASS_CODE == subClassCode ) {
 				schema.getTableTZTimestampCol().deleteTZTimestampCol( Authorization, (ICFBamTZTimestampCol)cur );
 			}
 			else {

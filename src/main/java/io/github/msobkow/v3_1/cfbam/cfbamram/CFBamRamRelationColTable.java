@@ -1487,8 +1487,8 @@ public class CFBamRamRelationColTable
 				pkey );
 		}
 		CFLibDbKeyHash256 varRelationId = existing.getRequiredRelationId();
-		CFBamBuffRelation container = schema.getTableRelation().readDerivedByIdIdx( Authorization,
-			varRelationId );
+		CFBamBuffRelation container = (CFBamBuffRelation)(schema.getTableRelation().readDerivedByIdIdx( Authorization,
+			varRelationId ));
 		if( container == null ) {
 			throw new CFLibNullArgumentException( getClass(),
 				S_ProcName,
@@ -1629,20 +1629,20 @@ public class CFBamRamRelationColTable
 		if( ! anyNotNull ) {
 			return;
 		}
-		ICFBamRelationCol cur;
-		LinkedList<ICFBamRelationCol> matchSet = new LinkedList<ICFBamRelationCol>();
-		Iterator<ICFBamRelationCol> values = dictByPKey.values().iterator();
+		CFBamBuffRelationCol cur;
+		LinkedList<CFBamBuffRelationCol> matchSet = new LinkedList<CFBamBuffRelationCol>();
+		Iterator<CFBamBuffRelationCol> values = dictByPKey.values().iterator();
 		while( values.hasNext() ) {
 			cur = values.next();
 			if( argKey.equals( cur ) ) {
 				matchSet.add( cur );
 			}
 		}
-		Iterator<ICFBamRelationCol> iterMatch = matchSet.iterator();
+		Iterator<CFBamBuffRelationCol> iterMatch = matchSet.iterator();
 		while( iterMatch.hasNext() ) {
 			cur = iterMatch.next();
-			cur = schema.getTableRelationCol().readDerivedByIdIdx( Authorization,
-				cur.getRequiredId() );
+			cur = (CFBamBuffRelationCol)(schema.getTableRelationCol().readDerivedByIdIdx( Authorization,
+				cur.getRequiredId() ));
 			deleteRelationCol( Authorization, cur );
 		}
 	}
@@ -1660,26 +1660,26 @@ public class CFBamRamRelationColTable
 	public void deleteRelationColByUNameIdx( ICFSecAuthorization Authorization,
 		ICFBamRelationColByUNameIdxKey argKey )
 	{
-		ICFBamRelationCol cur;
+		CFBamBuffRelationCol cur;
 		boolean anyNotNull = false;
 		anyNotNull = true;
 		anyNotNull = true;
 		if( ! anyNotNull ) {
 			return;
 		}
-		LinkedList<ICFBamRelationCol> matchSet = new LinkedList<ICFBamRelationCol>();
-		Iterator<ICFBamRelationCol> values = dictByPKey.values().iterator();
+		LinkedList<CFBamBuffRelationCol> matchSet = new LinkedList<CFBamBuffRelationCol>();
+		Iterator<CFBamBuffRelationCol> values = dictByPKey.values().iterator();
 		while( values.hasNext() ) {
 			cur = values.next();
 			if( argKey.equals( cur ) ) {
 				matchSet.add( cur );
 			}
 		}
-		Iterator<ICFBamRelationCol> iterMatch = matchSet.iterator();
+		Iterator<CFBamBuffRelationCol> iterMatch = matchSet.iterator();
 		while( iterMatch.hasNext() ) {
 			cur = iterMatch.next();
-			cur = schema.getTableRelationCol().readDerivedByIdIdx( Authorization,
-				cur.getRequiredId() );
+			cur = (CFBamBuffRelationCol)(schema.getTableRelationCol().readDerivedByIdIdx( Authorization,
+				cur.getRequiredId() ));
 			deleteRelationCol( Authorization, cur );
 		}
 	}
@@ -1695,25 +1695,25 @@ public class CFBamRamRelationColTable
 	public void deleteRelationColByRelationIdx( ICFSecAuthorization Authorization,
 		ICFBamRelationColByRelationIdxKey argKey )
 	{
-		ICFBamRelationCol cur;
+		CFBamBuffRelationCol cur;
 		boolean anyNotNull = false;
 		anyNotNull = true;
 		if( ! anyNotNull ) {
 			return;
 		}
-		LinkedList<ICFBamRelationCol> matchSet = new LinkedList<ICFBamRelationCol>();
-		Iterator<ICFBamRelationCol> values = dictByPKey.values().iterator();
+		LinkedList<CFBamBuffRelationCol> matchSet = new LinkedList<CFBamBuffRelationCol>();
+		Iterator<CFBamBuffRelationCol> values = dictByPKey.values().iterator();
 		while( values.hasNext() ) {
 			cur = values.next();
 			if( argKey.equals( cur ) ) {
 				matchSet.add( cur );
 			}
 		}
-		Iterator<ICFBamRelationCol> iterMatch = matchSet.iterator();
+		Iterator<CFBamBuffRelationCol> iterMatch = matchSet.iterator();
 		while( iterMatch.hasNext() ) {
 			cur = iterMatch.next();
-			cur = schema.getTableRelationCol().readDerivedByIdIdx( Authorization,
-				cur.getRequiredId() );
+			cur = (CFBamBuffRelationCol)(schema.getTableRelationCol().readDerivedByIdIdx( Authorization,
+				cur.getRequiredId() ));
 			deleteRelationCol( Authorization, cur );
 		}
 	}
@@ -1729,7 +1729,7 @@ public class CFBamRamRelationColTable
 	public void deleteRelationColByDefSchemaIdx( ICFSecAuthorization Authorization,
 		ICFBamRelationColByDefSchemaIdxKey argKey )
 	{
-		ICFBamRelationCol cur;
+		CFBamBuffRelationCol cur;
 		boolean anyNotNull = false;
 		if( argKey.getOptionalDefSchemaId() != null ) {
 			anyNotNull = true;
@@ -1737,19 +1737,19 @@ public class CFBamRamRelationColTable
 		if( ! anyNotNull ) {
 			return;
 		}
-		LinkedList<ICFBamRelationCol> matchSet = new LinkedList<ICFBamRelationCol>();
-		Iterator<ICFBamRelationCol> values = dictByPKey.values().iterator();
+		LinkedList<CFBamBuffRelationCol> matchSet = new LinkedList<CFBamBuffRelationCol>();
+		Iterator<CFBamBuffRelationCol> values = dictByPKey.values().iterator();
 		while( values.hasNext() ) {
 			cur = values.next();
 			if( argKey.equals( cur ) ) {
 				matchSet.add( cur );
 			}
 		}
-		Iterator<ICFBamRelationCol> iterMatch = matchSet.iterator();
+		Iterator<CFBamBuffRelationCol> iterMatch = matchSet.iterator();
 		while( iterMatch.hasNext() ) {
 			cur = iterMatch.next();
-			cur = schema.getTableRelationCol().readDerivedByIdIdx( Authorization,
-				cur.getRequiredId() );
+			cur = (CFBamBuffRelationCol)(schema.getTableRelationCol().readDerivedByIdIdx( Authorization,
+				cur.getRequiredId() ));
 			deleteRelationCol( Authorization, cur );
 		}
 	}
@@ -1765,25 +1765,25 @@ public class CFBamRamRelationColTable
 	public void deleteRelationColByFromColIdx( ICFSecAuthorization Authorization,
 		ICFBamRelationColByFromColIdxKey argKey )
 	{
-		ICFBamRelationCol cur;
+		CFBamBuffRelationCol cur;
 		boolean anyNotNull = false;
 		anyNotNull = true;
 		if( ! anyNotNull ) {
 			return;
 		}
-		LinkedList<ICFBamRelationCol> matchSet = new LinkedList<ICFBamRelationCol>();
-		Iterator<ICFBamRelationCol> values = dictByPKey.values().iterator();
+		LinkedList<CFBamBuffRelationCol> matchSet = new LinkedList<CFBamBuffRelationCol>();
+		Iterator<CFBamBuffRelationCol> values = dictByPKey.values().iterator();
 		while( values.hasNext() ) {
 			cur = values.next();
 			if( argKey.equals( cur ) ) {
 				matchSet.add( cur );
 			}
 		}
-		Iterator<ICFBamRelationCol> iterMatch = matchSet.iterator();
+		Iterator<CFBamBuffRelationCol> iterMatch = matchSet.iterator();
 		while( iterMatch.hasNext() ) {
 			cur = iterMatch.next();
-			cur = schema.getTableRelationCol().readDerivedByIdIdx( Authorization,
-				cur.getRequiredId() );
+			cur = (CFBamBuffRelationCol)(schema.getTableRelationCol().readDerivedByIdIdx( Authorization,
+				cur.getRequiredId() ));
 			deleteRelationCol( Authorization, cur );
 		}
 	}
@@ -1799,25 +1799,25 @@ public class CFBamRamRelationColTable
 	public void deleteRelationColByToColIdx( ICFSecAuthorization Authorization,
 		ICFBamRelationColByToColIdxKey argKey )
 	{
-		ICFBamRelationCol cur;
+		CFBamBuffRelationCol cur;
 		boolean anyNotNull = false;
 		anyNotNull = true;
 		if( ! anyNotNull ) {
 			return;
 		}
-		LinkedList<ICFBamRelationCol> matchSet = new LinkedList<ICFBamRelationCol>();
-		Iterator<ICFBamRelationCol> values = dictByPKey.values().iterator();
+		LinkedList<CFBamBuffRelationCol> matchSet = new LinkedList<CFBamBuffRelationCol>();
+		Iterator<CFBamBuffRelationCol> values = dictByPKey.values().iterator();
 		while( values.hasNext() ) {
 			cur = values.next();
 			if( argKey.equals( cur ) ) {
 				matchSet.add( cur );
 			}
 		}
-		Iterator<ICFBamRelationCol> iterMatch = matchSet.iterator();
+		Iterator<CFBamBuffRelationCol> iterMatch = matchSet.iterator();
 		while( iterMatch.hasNext() ) {
 			cur = iterMatch.next();
-			cur = schema.getTableRelationCol().readDerivedByIdIdx( Authorization,
-				cur.getRequiredId() );
+			cur = (CFBamBuffRelationCol)(schema.getTableRelationCol().readDerivedByIdIdx( Authorization,
+				cur.getRequiredId() ));
 			deleteRelationCol( Authorization, cur );
 		}
 	}
@@ -1833,7 +1833,7 @@ public class CFBamRamRelationColTable
 	public void deleteRelationColByPrevIdx( ICFSecAuthorization Authorization,
 		ICFBamRelationColByPrevIdxKey argKey )
 	{
-		ICFBamRelationCol cur;
+		CFBamBuffRelationCol cur;
 		boolean anyNotNull = false;
 		if( argKey.getOptionalPrevId() != null ) {
 			anyNotNull = true;
@@ -1841,19 +1841,19 @@ public class CFBamRamRelationColTable
 		if( ! anyNotNull ) {
 			return;
 		}
-		LinkedList<ICFBamRelationCol> matchSet = new LinkedList<ICFBamRelationCol>();
-		Iterator<ICFBamRelationCol> values = dictByPKey.values().iterator();
+		LinkedList<CFBamBuffRelationCol> matchSet = new LinkedList<CFBamBuffRelationCol>();
+		Iterator<CFBamBuffRelationCol> values = dictByPKey.values().iterator();
 		while( values.hasNext() ) {
 			cur = values.next();
 			if( argKey.equals( cur ) ) {
 				matchSet.add( cur );
 			}
 		}
-		Iterator<ICFBamRelationCol> iterMatch = matchSet.iterator();
+		Iterator<CFBamBuffRelationCol> iterMatch = matchSet.iterator();
 		while( iterMatch.hasNext() ) {
 			cur = iterMatch.next();
-			cur = schema.getTableRelationCol().readDerivedByIdIdx( Authorization,
-				cur.getRequiredId() );
+			cur = (CFBamBuffRelationCol)(schema.getTableRelationCol().readDerivedByIdIdx( Authorization,
+				cur.getRequiredId() ));
 			deleteRelationCol( Authorization, cur );
 		}
 	}
@@ -1869,7 +1869,7 @@ public class CFBamRamRelationColTable
 	public void deleteRelationColByNextIdx( ICFSecAuthorization Authorization,
 		ICFBamRelationColByNextIdxKey argKey )
 	{
-		ICFBamRelationCol cur;
+		CFBamBuffRelationCol cur;
 		boolean anyNotNull = false;
 		if( argKey.getOptionalNextId() != null ) {
 			anyNotNull = true;
@@ -1877,19 +1877,19 @@ public class CFBamRamRelationColTable
 		if( ! anyNotNull ) {
 			return;
 		}
-		LinkedList<ICFBamRelationCol> matchSet = new LinkedList<ICFBamRelationCol>();
-		Iterator<ICFBamRelationCol> values = dictByPKey.values().iterator();
+		LinkedList<CFBamBuffRelationCol> matchSet = new LinkedList<CFBamBuffRelationCol>();
+		Iterator<CFBamBuffRelationCol> values = dictByPKey.values().iterator();
 		while( values.hasNext() ) {
 			cur = values.next();
 			if( argKey.equals( cur ) ) {
 				matchSet.add( cur );
 			}
 		}
-		Iterator<ICFBamRelationCol> iterMatch = matchSet.iterator();
+		Iterator<CFBamBuffRelationCol> iterMatch = matchSet.iterator();
 		while( iterMatch.hasNext() ) {
 			cur = iterMatch.next();
-			cur = schema.getTableRelationCol().readDerivedByIdIdx( Authorization,
-				cur.getRequiredId() );
+			cur = (CFBamBuffRelationCol)(schema.getTableRelationCol().readDerivedByIdIdx( Authorization,
+				cur.getRequiredId() ));
 			deleteRelationCol( Authorization, cur );
 		}
 	}
@@ -1907,7 +1907,7 @@ public class CFBamRamRelationColTable
 	public void deleteRelationColByRelPrevIdx( ICFSecAuthorization Authorization,
 		ICFBamRelationColByRelPrevIdxKey argKey )
 	{
-		ICFBamRelationCol cur;
+		CFBamBuffRelationCol cur;
 		boolean anyNotNull = false;
 		anyNotNull = true;
 		if( argKey.getOptionalPrevId() != null ) {
@@ -1916,19 +1916,19 @@ public class CFBamRamRelationColTable
 		if( ! anyNotNull ) {
 			return;
 		}
-		LinkedList<ICFBamRelationCol> matchSet = new LinkedList<ICFBamRelationCol>();
-		Iterator<ICFBamRelationCol> values = dictByPKey.values().iterator();
+		LinkedList<CFBamBuffRelationCol> matchSet = new LinkedList<CFBamBuffRelationCol>();
+		Iterator<CFBamBuffRelationCol> values = dictByPKey.values().iterator();
 		while( values.hasNext() ) {
 			cur = values.next();
 			if( argKey.equals( cur ) ) {
 				matchSet.add( cur );
 			}
 		}
-		Iterator<ICFBamRelationCol> iterMatch = matchSet.iterator();
+		Iterator<CFBamBuffRelationCol> iterMatch = matchSet.iterator();
 		while( iterMatch.hasNext() ) {
 			cur = iterMatch.next();
-			cur = schema.getTableRelationCol().readDerivedByIdIdx( Authorization,
-				cur.getRequiredId() );
+			cur = (CFBamBuffRelationCol)(schema.getTableRelationCol().readDerivedByIdIdx( Authorization,
+				cur.getRequiredId() ));
 			deleteRelationCol( Authorization, cur );
 		}
 	}
@@ -1946,7 +1946,7 @@ public class CFBamRamRelationColTable
 	public void deleteRelationColByRelNextIdx( ICFSecAuthorization Authorization,
 		ICFBamRelationColByRelNextIdxKey argKey )
 	{
-		ICFBamRelationCol cur;
+		CFBamBuffRelationCol cur;
 		boolean anyNotNull = false;
 		anyNotNull = true;
 		if( argKey.getOptionalNextId() != null ) {
@@ -1955,19 +1955,19 @@ public class CFBamRamRelationColTable
 		if( ! anyNotNull ) {
 			return;
 		}
-		LinkedList<ICFBamRelationCol> matchSet = new LinkedList<ICFBamRelationCol>();
-		Iterator<ICFBamRelationCol> values = dictByPKey.values().iterator();
+		LinkedList<CFBamBuffRelationCol> matchSet = new LinkedList<CFBamBuffRelationCol>();
+		Iterator<CFBamBuffRelationCol> values = dictByPKey.values().iterator();
 		while( values.hasNext() ) {
 			cur = values.next();
 			if( argKey.equals( cur ) ) {
 				matchSet.add( cur );
 			}
 		}
-		Iterator<ICFBamRelationCol> iterMatch = matchSet.iterator();
+		Iterator<CFBamBuffRelationCol> iterMatch = matchSet.iterator();
 		while( iterMatch.hasNext() ) {
 			cur = iterMatch.next();
-			cur = schema.getTableRelationCol().readDerivedByIdIdx( Authorization,
-				cur.getRequiredId() );
+			cur = (CFBamBuffRelationCol)(schema.getTableRelationCol().readDerivedByIdIdx( Authorization,
+				cur.getRequiredId() ));
 			deleteRelationCol( Authorization, cur );
 		}
 	}

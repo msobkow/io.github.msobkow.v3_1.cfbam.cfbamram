@@ -5963,8 +5963,8 @@ public class CFBamRamDbKeyHash256DefTable
 				pkey );
 		}
 		CFLibDbKeyHash256 varScopeId = existing.getRequiredScopeId();
-		CFBamBuffScope container = schema.getTableScope().readDerivedByIdIdx( Authorization,
-			varScopeId );
+		CFBamBuffScope container = (CFBamBuffScope)(schema.getTableScope().readDerivedByIdIdx( Authorization,
+			varScopeId ));
 		if( container == null ) {
 			throw new CFLibNullArgumentException( getClass(),
 				S_ProcName,
@@ -7348,31 +7348,31 @@ public class CFBamRamDbKeyHash256DefTable
 		if( ! anyNotNull ) {
 			return;
 		}
-		ICFBamDbKeyHash256Def cur;
-		LinkedList<ICFBamDbKeyHash256Def> matchSet = new LinkedList<ICFBamDbKeyHash256Def>();
-		Iterator<ICFBamDbKeyHash256Def> values = dictByPKey.values().iterator();
+		CFBamBuffDbKeyHash256Def cur;
+		LinkedList<CFBamBuffDbKeyHash256Def> matchSet = new LinkedList<CFBamBuffDbKeyHash256Def>();
+		Iterator<CFBamBuffDbKeyHash256Def> values = dictByPKey.values().iterator();
 		while( values.hasNext() ) {
 			cur = values.next();
 			if( argKey.equals( cur ) ) {
 				matchSet.add( cur );
 			}
 		}
-		Iterator<ICFBamDbKeyHash256Def> iterMatch = matchSet.iterator();
+		Iterator<CFBamBuffDbKeyHash256Def> iterMatch = matchSet.iterator();
 		while( iterMatch.hasNext() ) {
 			cur = iterMatch.next();
-			cur = schema.getTableDbKeyHash256Def().readDerivedByIdIdx( Authorization,
-				cur.getRequiredId() );
-			String subClassCode = cur.getClassCode();
-			if( "a845".equals( subClassCode ) ) {
+			cur = (CFBamBuffDbKeyHash256Def)(schema.getTableDbKeyHash256Def().readDerivedByIdIdx( Authorization,
+				cur.getRequiredId() ));
+			int subClassCode = cur.getClassCode();
+			if( CFBamDbKeyHash256Def.CLASS_CODE == subClassCode ) {
 				schema.getTableDbKeyHash256Def().deleteDbKeyHash256Def( Authorization, cur );
 			}
-			else if( "a844".equals( subClassCode ) ) {
+			else if( CFBamDbKeyHash256Col.CLASS_CODE == subClassCode ) {
 				schema.getTableDbKeyHash256Col().deleteDbKeyHash256Col( Authorization, (ICFBamDbKeyHash256Col)cur );
 			}
-			else if( "a846".equals( subClassCode ) ) {
+			else if( CFBamDbKeyHash256Type.CLASS_CODE == subClassCode ) {
 				schema.getTableDbKeyHash256Type().deleteDbKeyHash256Type( Authorization, (ICFBamDbKeyHash256Type)cur );
 			}
-			else if( "a847".equals( subClassCode ) ) {
+			else if( CFBamDbKeyHash256Gen.CLASS_CODE == subClassCode ) {
 				schema.getTableDbKeyHash256Gen().deleteDbKeyHash256Gen( Authorization, (ICFBamDbKeyHash256Gen)cur );
 			}
 			else {
@@ -7395,37 +7395,37 @@ public class CFBamRamDbKeyHash256DefTable
 		ICFBamValueByUNameIdxKey argKey )
 	{
 		final String S_ProcName = "deleteDbKeyHash256DefByUNameIdx";
-		ICFBamDbKeyHash256Def cur;
+		CFBamBuffDbKeyHash256Def cur;
 		boolean anyNotNull = false;
 		anyNotNull = true;
 		anyNotNull = true;
 		if( ! anyNotNull ) {
 			return;
 		}
-		LinkedList<ICFBamDbKeyHash256Def> matchSet = new LinkedList<ICFBamDbKeyHash256Def>();
-		Iterator<ICFBamDbKeyHash256Def> values = dictByPKey.values().iterator();
+		LinkedList<CFBamBuffDbKeyHash256Def> matchSet = new LinkedList<CFBamBuffDbKeyHash256Def>();
+		Iterator<CFBamBuffDbKeyHash256Def> values = dictByPKey.values().iterator();
 		while( values.hasNext() ) {
 			cur = values.next();
 			if( argKey.equals( cur ) ) {
 				matchSet.add( cur );
 			}
 		}
-		Iterator<ICFBamDbKeyHash256Def> iterMatch = matchSet.iterator();
+		Iterator<CFBamBuffDbKeyHash256Def> iterMatch = matchSet.iterator();
 		while( iterMatch.hasNext() ) {
 			cur = iterMatch.next();
-			cur = schema.getTableDbKeyHash256Def().readDerivedByIdIdx( Authorization,
-				cur.getRequiredId() );
-			String subClassCode = cur.getClassCode();
-			if( "a845".equals( subClassCode ) ) {
+			cur = (CFBamBuffDbKeyHash256Def)(schema.getTableDbKeyHash256Def().readDerivedByIdIdx( Authorization,
+				cur.getRequiredId() ));
+			int subClassCode = cur.getClassCode();
+			if( CFBamDbKeyHash256Def.CLASS_CODE == subClassCode ) {
 				schema.getTableDbKeyHash256Def().deleteDbKeyHash256Def( Authorization, cur );
 			}
-			else if( "a844".equals( subClassCode ) ) {
+			else if( CFBamDbKeyHash256Col.CLASS_CODE == subClassCode ) {
 				schema.getTableDbKeyHash256Col().deleteDbKeyHash256Col( Authorization, (ICFBamDbKeyHash256Col)cur );
 			}
-			else if( "a846".equals( subClassCode ) ) {
+			else if( CFBamDbKeyHash256Type.CLASS_CODE == subClassCode ) {
 				schema.getTableDbKeyHash256Type().deleteDbKeyHash256Type( Authorization, (ICFBamDbKeyHash256Type)cur );
 			}
-			else if( "a847".equals( subClassCode ) ) {
+			else if( CFBamDbKeyHash256Gen.CLASS_CODE == subClassCode ) {
 				schema.getTableDbKeyHash256Gen().deleteDbKeyHash256Gen( Authorization, (ICFBamDbKeyHash256Gen)cur );
 			}
 			else {
@@ -7446,36 +7446,36 @@ public class CFBamRamDbKeyHash256DefTable
 		ICFBamValueByScopeIdxKey argKey )
 	{
 		final String S_ProcName = "deleteDbKeyHash256DefByScopeIdx";
-		ICFBamDbKeyHash256Def cur;
+		CFBamBuffDbKeyHash256Def cur;
 		boolean anyNotNull = false;
 		anyNotNull = true;
 		if( ! anyNotNull ) {
 			return;
 		}
-		LinkedList<ICFBamDbKeyHash256Def> matchSet = new LinkedList<ICFBamDbKeyHash256Def>();
-		Iterator<ICFBamDbKeyHash256Def> values = dictByPKey.values().iterator();
+		LinkedList<CFBamBuffDbKeyHash256Def> matchSet = new LinkedList<CFBamBuffDbKeyHash256Def>();
+		Iterator<CFBamBuffDbKeyHash256Def> values = dictByPKey.values().iterator();
 		while( values.hasNext() ) {
 			cur = values.next();
 			if( argKey.equals( cur ) ) {
 				matchSet.add( cur );
 			}
 		}
-		Iterator<ICFBamDbKeyHash256Def> iterMatch = matchSet.iterator();
+		Iterator<CFBamBuffDbKeyHash256Def> iterMatch = matchSet.iterator();
 		while( iterMatch.hasNext() ) {
 			cur = iterMatch.next();
-			cur = schema.getTableDbKeyHash256Def().readDerivedByIdIdx( Authorization,
-				cur.getRequiredId() );
-			String subClassCode = cur.getClassCode();
-			if( "a845".equals( subClassCode ) ) {
+			cur = (CFBamBuffDbKeyHash256Def)(schema.getTableDbKeyHash256Def().readDerivedByIdIdx( Authorization,
+				cur.getRequiredId() ));
+			int subClassCode = cur.getClassCode();
+			if( CFBamDbKeyHash256Def.CLASS_CODE == subClassCode ) {
 				schema.getTableDbKeyHash256Def().deleteDbKeyHash256Def( Authorization, cur );
 			}
-			else if( "a844".equals( subClassCode ) ) {
+			else if( CFBamDbKeyHash256Col.CLASS_CODE == subClassCode ) {
 				schema.getTableDbKeyHash256Col().deleteDbKeyHash256Col( Authorization, (ICFBamDbKeyHash256Col)cur );
 			}
-			else if( "a846".equals( subClassCode ) ) {
+			else if( CFBamDbKeyHash256Type.CLASS_CODE == subClassCode ) {
 				schema.getTableDbKeyHash256Type().deleteDbKeyHash256Type( Authorization, (ICFBamDbKeyHash256Type)cur );
 			}
-			else if( "a847".equals( subClassCode ) ) {
+			else if( CFBamDbKeyHash256Gen.CLASS_CODE == subClassCode ) {
 				schema.getTableDbKeyHash256Gen().deleteDbKeyHash256Gen( Authorization, (ICFBamDbKeyHash256Gen)cur );
 			}
 			else {
@@ -7496,7 +7496,7 @@ public class CFBamRamDbKeyHash256DefTable
 		ICFBamValueByDefSchemaIdxKey argKey )
 	{
 		final String S_ProcName = "deleteDbKeyHash256DefByDefSchemaIdx";
-		ICFBamDbKeyHash256Def cur;
+		CFBamBuffDbKeyHash256Def cur;
 		boolean anyNotNull = false;
 		if( argKey.getOptionalDefSchemaId() != null ) {
 			anyNotNull = true;
@@ -7504,30 +7504,30 @@ public class CFBamRamDbKeyHash256DefTable
 		if( ! anyNotNull ) {
 			return;
 		}
-		LinkedList<ICFBamDbKeyHash256Def> matchSet = new LinkedList<ICFBamDbKeyHash256Def>();
-		Iterator<ICFBamDbKeyHash256Def> values = dictByPKey.values().iterator();
+		LinkedList<CFBamBuffDbKeyHash256Def> matchSet = new LinkedList<CFBamBuffDbKeyHash256Def>();
+		Iterator<CFBamBuffDbKeyHash256Def> values = dictByPKey.values().iterator();
 		while( values.hasNext() ) {
 			cur = values.next();
 			if( argKey.equals( cur ) ) {
 				matchSet.add( cur );
 			}
 		}
-		Iterator<ICFBamDbKeyHash256Def> iterMatch = matchSet.iterator();
+		Iterator<CFBamBuffDbKeyHash256Def> iterMatch = matchSet.iterator();
 		while( iterMatch.hasNext() ) {
 			cur = iterMatch.next();
-			cur = schema.getTableDbKeyHash256Def().readDerivedByIdIdx( Authorization,
-				cur.getRequiredId() );
-			String subClassCode = cur.getClassCode();
-			if( "a845".equals( subClassCode ) ) {
+			cur = (CFBamBuffDbKeyHash256Def)(schema.getTableDbKeyHash256Def().readDerivedByIdIdx( Authorization,
+				cur.getRequiredId() ));
+			int subClassCode = cur.getClassCode();
+			if( CFBamDbKeyHash256Def.CLASS_CODE == subClassCode ) {
 				schema.getTableDbKeyHash256Def().deleteDbKeyHash256Def( Authorization, cur );
 			}
-			else if( "a844".equals( subClassCode ) ) {
+			else if( CFBamDbKeyHash256Col.CLASS_CODE == subClassCode ) {
 				schema.getTableDbKeyHash256Col().deleteDbKeyHash256Col( Authorization, (ICFBamDbKeyHash256Col)cur );
 			}
-			else if( "a846".equals( subClassCode ) ) {
+			else if( CFBamDbKeyHash256Type.CLASS_CODE == subClassCode ) {
 				schema.getTableDbKeyHash256Type().deleteDbKeyHash256Type( Authorization, (ICFBamDbKeyHash256Type)cur );
 			}
-			else if( "a847".equals( subClassCode ) ) {
+			else if( CFBamDbKeyHash256Gen.CLASS_CODE == subClassCode ) {
 				schema.getTableDbKeyHash256Gen().deleteDbKeyHash256Gen( Authorization, (ICFBamDbKeyHash256Gen)cur );
 			}
 			else {
@@ -7548,7 +7548,7 @@ public class CFBamRamDbKeyHash256DefTable
 		ICFBamValueByPrevIdxKey argKey )
 	{
 		final String S_ProcName = "deleteDbKeyHash256DefByPrevIdx";
-		ICFBamDbKeyHash256Def cur;
+		CFBamBuffDbKeyHash256Def cur;
 		boolean anyNotNull = false;
 		if( argKey.getOptionalPrevId() != null ) {
 			anyNotNull = true;
@@ -7556,30 +7556,30 @@ public class CFBamRamDbKeyHash256DefTable
 		if( ! anyNotNull ) {
 			return;
 		}
-		LinkedList<ICFBamDbKeyHash256Def> matchSet = new LinkedList<ICFBamDbKeyHash256Def>();
-		Iterator<ICFBamDbKeyHash256Def> values = dictByPKey.values().iterator();
+		LinkedList<CFBamBuffDbKeyHash256Def> matchSet = new LinkedList<CFBamBuffDbKeyHash256Def>();
+		Iterator<CFBamBuffDbKeyHash256Def> values = dictByPKey.values().iterator();
 		while( values.hasNext() ) {
 			cur = values.next();
 			if( argKey.equals( cur ) ) {
 				matchSet.add( cur );
 			}
 		}
-		Iterator<ICFBamDbKeyHash256Def> iterMatch = matchSet.iterator();
+		Iterator<CFBamBuffDbKeyHash256Def> iterMatch = matchSet.iterator();
 		while( iterMatch.hasNext() ) {
 			cur = iterMatch.next();
-			cur = schema.getTableDbKeyHash256Def().readDerivedByIdIdx( Authorization,
-				cur.getRequiredId() );
-			String subClassCode = cur.getClassCode();
-			if( "a845".equals( subClassCode ) ) {
+			cur = (CFBamBuffDbKeyHash256Def)(schema.getTableDbKeyHash256Def().readDerivedByIdIdx( Authorization,
+				cur.getRequiredId() ));
+			int subClassCode = cur.getClassCode();
+			if( CFBamDbKeyHash256Def.CLASS_CODE == subClassCode ) {
 				schema.getTableDbKeyHash256Def().deleteDbKeyHash256Def( Authorization, cur );
 			}
-			else if( "a844".equals( subClassCode ) ) {
+			else if( CFBamDbKeyHash256Col.CLASS_CODE == subClassCode ) {
 				schema.getTableDbKeyHash256Col().deleteDbKeyHash256Col( Authorization, (ICFBamDbKeyHash256Col)cur );
 			}
-			else if( "a846".equals( subClassCode ) ) {
+			else if( CFBamDbKeyHash256Type.CLASS_CODE == subClassCode ) {
 				schema.getTableDbKeyHash256Type().deleteDbKeyHash256Type( Authorization, (ICFBamDbKeyHash256Type)cur );
 			}
-			else if( "a847".equals( subClassCode ) ) {
+			else if( CFBamDbKeyHash256Gen.CLASS_CODE == subClassCode ) {
 				schema.getTableDbKeyHash256Gen().deleteDbKeyHash256Gen( Authorization, (ICFBamDbKeyHash256Gen)cur );
 			}
 			else {
@@ -7600,7 +7600,7 @@ public class CFBamRamDbKeyHash256DefTable
 		ICFBamValueByNextIdxKey argKey )
 	{
 		final String S_ProcName = "deleteDbKeyHash256DefByNextIdx";
-		ICFBamDbKeyHash256Def cur;
+		CFBamBuffDbKeyHash256Def cur;
 		boolean anyNotNull = false;
 		if( argKey.getOptionalNextId() != null ) {
 			anyNotNull = true;
@@ -7608,30 +7608,30 @@ public class CFBamRamDbKeyHash256DefTable
 		if( ! anyNotNull ) {
 			return;
 		}
-		LinkedList<ICFBamDbKeyHash256Def> matchSet = new LinkedList<ICFBamDbKeyHash256Def>();
-		Iterator<ICFBamDbKeyHash256Def> values = dictByPKey.values().iterator();
+		LinkedList<CFBamBuffDbKeyHash256Def> matchSet = new LinkedList<CFBamBuffDbKeyHash256Def>();
+		Iterator<CFBamBuffDbKeyHash256Def> values = dictByPKey.values().iterator();
 		while( values.hasNext() ) {
 			cur = values.next();
 			if( argKey.equals( cur ) ) {
 				matchSet.add( cur );
 			}
 		}
-		Iterator<ICFBamDbKeyHash256Def> iterMatch = matchSet.iterator();
+		Iterator<CFBamBuffDbKeyHash256Def> iterMatch = matchSet.iterator();
 		while( iterMatch.hasNext() ) {
 			cur = iterMatch.next();
-			cur = schema.getTableDbKeyHash256Def().readDerivedByIdIdx( Authorization,
-				cur.getRequiredId() );
-			String subClassCode = cur.getClassCode();
-			if( "a845".equals( subClassCode ) ) {
+			cur = (CFBamBuffDbKeyHash256Def)(schema.getTableDbKeyHash256Def().readDerivedByIdIdx( Authorization,
+				cur.getRequiredId() ));
+			int subClassCode = cur.getClassCode();
+			if( CFBamDbKeyHash256Def.CLASS_CODE == subClassCode ) {
 				schema.getTableDbKeyHash256Def().deleteDbKeyHash256Def( Authorization, cur );
 			}
-			else if( "a844".equals( subClassCode ) ) {
+			else if( CFBamDbKeyHash256Col.CLASS_CODE == subClassCode ) {
 				schema.getTableDbKeyHash256Col().deleteDbKeyHash256Col( Authorization, (ICFBamDbKeyHash256Col)cur );
 			}
-			else if( "a846".equals( subClassCode ) ) {
+			else if( CFBamDbKeyHash256Type.CLASS_CODE == subClassCode ) {
 				schema.getTableDbKeyHash256Type().deleteDbKeyHash256Type( Authorization, (ICFBamDbKeyHash256Type)cur );
 			}
-			else if( "a847".equals( subClassCode ) ) {
+			else if( CFBamDbKeyHash256Gen.CLASS_CODE == subClassCode ) {
 				schema.getTableDbKeyHash256Gen().deleteDbKeyHash256Gen( Authorization, (ICFBamDbKeyHash256Gen)cur );
 			}
 			else {
@@ -7654,7 +7654,7 @@ public class CFBamRamDbKeyHash256DefTable
 		ICFBamValueByContPrevIdxKey argKey )
 	{
 		final String S_ProcName = "deleteDbKeyHash256DefByContPrevIdx";
-		ICFBamDbKeyHash256Def cur;
+		CFBamBuffDbKeyHash256Def cur;
 		boolean anyNotNull = false;
 		anyNotNull = true;
 		if( argKey.getOptionalPrevId() != null ) {
@@ -7663,30 +7663,30 @@ public class CFBamRamDbKeyHash256DefTable
 		if( ! anyNotNull ) {
 			return;
 		}
-		LinkedList<ICFBamDbKeyHash256Def> matchSet = new LinkedList<ICFBamDbKeyHash256Def>();
-		Iterator<ICFBamDbKeyHash256Def> values = dictByPKey.values().iterator();
+		LinkedList<CFBamBuffDbKeyHash256Def> matchSet = new LinkedList<CFBamBuffDbKeyHash256Def>();
+		Iterator<CFBamBuffDbKeyHash256Def> values = dictByPKey.values().iterator();
 		while( values.hasNext() ) {
 			cur = values.next();
 			if( argKey.equals( cur ) ) {
 				matchSet.add( cur );
 			}
 		}
-		Iterator<ICFBamDbKeyHash256Def> iterMatch = matchSet.iterator();
+		Iterator<CFBamBuffDbKeyHash256Def> iterMatch = matchSet.iterator();
 		while( iterMatch.hasNext() ) {
 			cur = iterMatch.next();
-			cur = schema.getTableDbKeyHash256Def().readDerivedByIdIdx( Authorization,
-				cur.getRequiredId() );
-			String subClassCode = cur.getClassCode();
-			if( "a845".equals( subClassCode ) ) {
+			cur = (CFBamBuffDbKeyHash256Def)(schema.getTableDbKeyHash256Def().readDerivedByIdIdx( Authorization,
+				cur.getRequiredId() ));
+			int subClassCode = cur.getClassCode();
+			if( CFBamDbKeyHash256Def.CLASS_CODE == subClassCode ) {
 				schema.getTableDbKeyHash256Def().deleteDbKeyHash256Def( Authorization, cur );
 			}
-			else if( "a844".equals( subClassCode ) ) {
+			else if( CFBamDbKeyHash256Col.CLASS_CODE == subClassCode ) {
 				schema.getTableDbKeyHash256Col().deleteDbKeyHash256Col( Authorization, (ICFBamDbKeyHash256Col)cur );
 			}
-			else if( "a846".equals( subClassCode ) ) {
+			else if( CFBamDbKeyHash256Type.CLASS_CODE == subClassCode ) {
 				schema.getTableDbKeyHash256Type().deleteDbKeyHash256Type( Authorization, (ICFBamDbKeyHash256Type)cur );
 			}
-			else if( "a847".equals( subClassCode ) ) {
+			else if( CFBamDbKeyHash256Gen.CLASS_CODE == subClassCode ) {
 				schema.getTableDbKeyHash256Gen().deleteDbKeyHash256Gen( Authorization, (ICFBamDbKeyHash256Gen)cur );
 			}
 			else {
@@ -7709,7 +7709,7 @@ public class CFBamRamDbKeyHash256DefTable
 		ICFBamValueByContNextIdxKey argKey )
 	{
 		final String S_ProcName = "deleteDbKeyHash256DefByContNextIdx";
-		ICFBamDbKeyHash256Def cur;
+		CFBamBuffDbKeyHash256Def cur;
 		boolean anyNotNull = false;
 		anyNotNull = true;
 		if( argKey.getOptionalNextId() != null ) {
@@ -7718,30 +7718,30 @@ public class CFBamRamDbKeyHash256DefTable
 		if( ! anyNotNull ) {
 			return;
 		}
-		LinkedList<ICFBamDbKeyHash256Def> matchSet = new LinkedList<ICFBamDbKeyHash256Def>();
-		Iterator<ICFBamDbKeyHash256Def> values = dictByPKey.values().iterator();
+		LinkedList<CFBamBuffDbKeyHash256Def> matchSet = new LinkedList<CFBamBuffDbKeyHash256Def>();
+		Iterator<CFBamBuffDbKeyHash256Def> values = dictByPKey.values().iterator();
 		while( values.hasNext() ) {
 			cur = values.next();
 			if( argKey.equals( cur ) ) {
 				matchSet.add( cur );
 			}
 		}
-		Iterator<ICFBamDbKeyHash256Def> iterMatch = matchSet.iterator();
+		Iterator<CFBamBuffDbKeyHash256Def> iterMatch = matchSet.iterator();
 		while( iterMatch.hasNext() ) {
 			cur = iterMatch.next();
-			cur = schema.getTableDbKeyHash256Def().readDerivedByIdIdx( Authorization,
-				cur.getRequiredId() );
-			String subClassCode = cur.getClassCode();
-			if( "a845".equals( subClassCode ) ) {
+			cur = (CFBamBuffDbKeyHash256Def)(schema.getTableDbKeyHash256Def().readDerivedByIdIdx( Authorization,
+				cur.getRequiredId() ));
+			int subClassCode = cur.getClassCode();
+			if( CFBamDbKeyHash256Def.CLASS_CODE == subClassCode ) {
 				schema.getTableDbKeyHash256Def().deleteDbKeyHash256Def( Authorization, cur );
 			}
-			else if( "a844".equals( subClassCode ) ) {
+			else if( CFBamDbKeyHash256Col.CLASS_CODE == subClassCode ) {
 				schema.getTableDbKeyHash256Col().deleteDbKeyHash256Col( Authorization, (ICFBamDbKeyHash256Col)cur );
 			}
-			else if( "a846".equals( subClassCode ) ) {
+			else if( CFBamDbKeyHash256Type.CLASS_CODE == subClassCode ) {
 				schema.getTableDbKeyHash256Type().deleteDbKeyHash256Type( Authorization, (ICFBamDbKeyHash256Type)cur );
 			}
-			else if( "a847".equals( subClassCode ) ) {
+			else if( CFBamDbKeyHash256Gen.CLASS_CODE == subClassCode ) {
 				schema.getTableDbKeyHash256Gen().deleteDbKeyHash256Gen( Authorization, (ICFBamDbKeyHash256Gen)cur );
 			}
 			else {

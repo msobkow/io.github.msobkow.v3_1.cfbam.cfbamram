@@ -617,7 +617,7 @@ public class CFBamRamServerObjFuncTable
 	public void deleteServerObjFuncByRetTblIdx( ICFSecAuthorization Authorization,
 		ICFBamServerObjFuncByRetTblIdxKey argKey )
 	{
-		ICFBamServerObjFunc cur;
+		CFBamBuffServerObjFunc cur;
 		boolean anyNotNull = false;
 		if( argKey.getOptionalRetTableId() != null ) {
 			anyNotNull = true;
@@ -625,19 +625,19 @@ public class CFBamRamServerObjFuncTable
 		if( ! anyNotNull ) {
 			return;
 		}
-		LinkedList<ICFBamServerObjFunc> matchSet = new LinkedList<ICFBamServerObjFunc>();
-		Iterator<ICFBamServerObjFunc> values = dictByPKey.values().iterator();
+		LinkedList<CFBamBuffServerObjFunc> matchSet = new LinkedList<CFBamBuffServerObjFunc>();
+		Iterator<CFBamBuffServerObjFunc> values = dictByPKey.values().iterator();
 		while( values.hasNext() ) {
 			cur = values.next();
 			if( argKey.equals( cur ) ) {
 				matchSet.add( cur );
 			}
 		}
-		Iterator<ICFBamServerObjFunc> iterMatch = matchSet.iterator();
+		Iterator<CFBamBuffServerObjFunc> iterMatch = matchSet.iterator();
 		while( iterMatch.hasNext() ) {
 			cur = iterMatch.next();
-			cur = schema.getTableServerObjFunc().readDerivedByIdIdx( Authorization,
-				cur.getRequiredId() );
+			cur = (CFBamBuffServerObjFunc)(schema.getTableServerObjFunc().readDerivedByIdIdx( Authorization,
+				cur.getRequiredId() ));
 			deleteServerObjFunc( Authorization, cur );
 		}
 	}
@@ -655,26 +655,26 @@ public class CFBamRamServerObjFuncTable
 	public void deleteServerObjFuncByUNameIdx( ICFSecAuthorization Authorization,
 		ICFBamServerMethodByUNameIdxKey argKey )
 	{
-		ICFBamServerObjFunc cur;
+		CFBamBuffServerObjFunc cur;
 		boolean anyNotNull = false;
 		anyNotNull = true;
 		anyNotNull = true;
 		if( ! anyNotNull ) {
 			return;
 		}
-		LinkedList<ICFBamServerObjFunc> matchSet = new LinkedList<ICFBamServerObjFunc>();
-		Iterator<ICFBamServerObjFunc> values = dictByPKey.values().iterator();
+		LinkedList<CFBamBuffServerObjFunc> matchSet = new LinkedList<CFBamBuffServerObjFunc>();
+		Iterator<CFBamBuffServerObjFunc> values = dictByPKey.values().iterator();
 		while( values.hasNext() ) {
 			cur = values.next();
 			if( argKey.equals( cur ) ) {
 				matchSet.add( cur );
 			}
 		}
-		Iterator<ICFBamServerObjFunc> iterMatch = matchSet.iterator();
+		Iterator<CFBamBuffServerObjFunc> iterMatch = matchSet.iterator();
 		while( iterMatch.hasNext() ) {
 			cur = iterMatch.next();
-			cur = schema.getTableServerObjFunc().readDerivedByIdIdx( Authorization,
-				cur.getRequiredId() );
+			cur = (CFBamBuffServerObjFunc)(schema.getTableServerObjFunc().readDerivedByIdIdx( Authorization,
+				cur.getRequiredId() ));
 			deleteServerObjFunc( Authorization, cur );
 		}
 	}
@@ -690,25 +690,25 @@ public class CFBamRamServerObjFuncTable
 	public void deleteServerObjFuncByMethTableIdx( ICFSecAuthorization Authorization,
 		ICFBamServerMethodByMethTableIdxKey argKey )
 	{
-		ICFBamServerObjFunc cur;
+		CFBamBuffServerObjFunc cur;
 		boolean anyNotNull = false;
 		anyNotNull = true;
 		if( ! anyNotNull ) {
 			return;
 		}
-		LinkedList<ICFBamServerObjFunc> matchSet = new LinkedList<ICFBamServerObjFunc>();
-		Iterator<ICFBamServerObjFunc> values = dictByPKey.values().iterator();
+		LinkedList<CFBamBuffServerObjFunc> matchSet = new LinkedList<CFBamBuffServerObjFunc>();
+		Iterator<CFBamBuffServerObjFunc> values = dictByPKey.values().iterator();
 		while( values.hasNext() ) {
 			cur = values.next();
 			if( argKey.equals( cur ) ) {
 				matchSet.add( cur );
 			}
 		}
-		Iterator<ICFBamServerObjFunc> iterMatch = matchSet.iterator();
+		Iterator<CFBamBuffServerObjFunc> iterMatch = matchSet.iterator();
 		while( iterMatch.hasNext() ) {
 			cur = iterMatch.next();
-			cur = schema.getTableServerObjFunc().readDerivedByIdIdx( Authorization,
-				cur.getRequiredId() );
+			cur = (CFBamBuffServerObjFunc)(schema.getTableServerObjFunc().readDerivedByIdIdx( Authorization,
+				cur.getRequiredId() ));
 			deleteServerObjFunc( Authorization, cur );
 		}
 	}
@@ -724,7 +724,7 @@ public class CFBamRamServerObjFuncTable
 	public void deleteServerObjFuncByDefSchemaIdx( ICFSecAuthorization Authorization,
 		ICFBamServerMethodByDefSchemaIdxKey argKey )
 	{
-		ICFBamServerObjFunc cur;
+		CFBamBuffServerObjFunc cur;
 		boolean anyNotNull = false;
 		if( argKey.getOptionalDefSchemaId() != null ) {
 			anyNotNull = true;
@@ -732,19 +732,19 @@ public class CFBamRamServerObjFuncTable
 		if( ! anyNotNull ) {
 			return;
 		}
-		LinkedList<ICFBamServerObjFunc> matchSet = new LinkedList<ICFBamServerObjFunc>();
-		Iterator<ICFBamServerObjFunc> values = dictByPKey.values().iterator();
+		LinkedList<CFBamBuffServerObjFunc> matchSet = new LinkedList<CFBamBuffServerObjFunc>();
+		Iterator<CFBamBuffServerObjFunc> values = dictByPKey.values().iterator();
 		while( values.hasNext() ) {
 			cur = values.next();
 			if( argKey.equals( cur ) ) {
 				matchSet.add( cur );
 			}
 		}
-		Iterator<ICFBamServerObjFunc> iterMatch = matchSet.iterator();
+		Iterator<CFBamBuffServerObjFunc> iterMatch = matchSet.iterator();
 		while( iterMatch.hasNext() ) {
 			cur = iterMatch.next();
-			cur = schema.getTableServerObjFunc().readDerivedByIdIdx( Authorization,
-				cur.getRequiredId() );
+			cur = (CFBamBuffServerObjFunc)(schema.getTableServerObjFunc().readDerivedByIdIdx( Authorization,
+				cur.getRequiredId() ));
 			deleteServerObjFunc( Authorization, cur );
 		}
 	}
@@ -757,20 +757,20 @@ public class CFBamRamServerObjFuncTable
 		if( ! anyNotNull ) {
 			return;
 		}
-		ICFBamServerObjFunc cur;
-		LinkedList<ICFBamServerObjFunc> matchSet = new LinkedList<ICFBamServerObjFunc>();
-		Iterator<ICFBamServerObjFunc> values = dictByPKey.values().iterator();
+		CFBamBuffServerObjFunc cur;
+		LinkedList<CFBamBuffServerObjFunc> matchSet = new LinkedList<CFBamBuffServerObjFunc>();
+		Iterator<CFBamBuffServerObjFunc> values = dictByPKey.values().iterator();
 		while( values.hasNext() ) {
 			cur = values.next();
 			if( argKey.equals( cur ) ) {
 				matchSet.add( cur );
 			}
 		}
-		Iterator<ICFBamServerObjFunc> iterMatch = matchSet.iterator();
+		Iterator<CFBamBuffServerObjFunc> iterMatch = matchSet.iterator();
 		while( iterMatch.hasNext() ) {
 			cur = iterMatch.next();
-			cur = schema.getTableServerObjFunc().readDerivedByIdIdx( Authorization,
-				cur.getRequiredId() );
+			cur = (CFBamBuffServerObjFunc)(schema.getTableServerObjFunc().readDerivedByIdIdx( Authorization,
+				cur.getRequiredId() ));
 			deleteServerObjFunc( Authorization, cur );
 		}
 	}
@@ -786,25 +786,25 @@ public class CFBamRamServerObjFuncTable
 	public void deleteServerObjFuncByTenantIdx( ICFSecAuthorization Authorization,
 		ICFBamScopeByTenantIdxKey argKey )
 	{
-		ICFBamServerObjFunc cur;
+		CFBamBuffServerObjFunc cur;
 		boolean anyNotNull = false;
 		anyNotNull = true;
 		if( ! anyNotNull ) {
 			return;
 		}
-		LinkedList<ICFBamServerObjFunc> matchSet = new LinkedList<ICFBamServerObjFunc>();
-		Iterator<ICFBamServerObjFunc> values = dictByPKey.values().iterator();
+		LinkedList<CFBamBuffServerObjFunc> matchSet = new LinkedList<CFBamBuffServerObjFunc>();
+		Iterator<CFBamBuffServerObjFunc> values = dictByPKey.values().iterator();
 		while( values.hasNext() ) {
 			cur = values.next();
 			if( argKey.equals( cur ) ) {
 				matchSet.add( cur );
 			}
 		}
-		Iterator<ICFBamServerObjFunc> iterMatch = matchSet.iterator();
+		Iterator<CFBamBuffServerObjFunc> iterMatch = matchSet.iterator();
 		while( iterMatch.hasNext() ) {
 			cur = iterMatch.next();
-			cur = schema.getTableServerObjFunc().readDerivedByIdIdx( Authorization,
-				cur.getRequiredId() );
+			cur = (CFBamBuffServerObjFunc)(schema.getTableServerObjFunc().readDerivedByIdIdx( Authorization,
+				cur.getRequiredId() ));
 			deleteServerObjFunc( Authorization, cur );
 		}
 	}

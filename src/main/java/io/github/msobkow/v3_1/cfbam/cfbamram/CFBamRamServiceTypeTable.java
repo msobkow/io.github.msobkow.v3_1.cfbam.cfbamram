@@ -374,20 +374,20 @@ public class CFBamRamServiceTypeTable
 		if( ! anyNotNull ) {
 			return;
 		}
-		ICFSecServiceType cur;
-		LinkedList<ICFSecServiceType> matchSet = new LinkedList<ICFSecServiceType>();
-		Iterator<ICFSecServiceType> values = dictByPKey.values().iterator();
+		CFSecBuffServiceType cur;
+		LinkedList<CFSecBuffServiceType> matchSet = new LinkedList<CFSecBuffServiceType>();
+		Iterator<CFSecBuffServiceType> values = dictByPKey.values().iterator();
 		while( values.hasNext() ) {
 			cur = values.next();
 			if( argKey.equals( cur ) ) {
 				matchSet.add( cur );
 			}
 		}
-		Iterator<ICFSecServiceType> iterMatch = matchSet.iterator();
+		Iterator<CFSecBuffServiceType> iterMatch = matchSet.iterator();
 		while( iterMatch.hasNext() ) {
 			cur = iterMatch.next();
-			cur = schema.getTableServiceType().readDerivedByIdIdx( Authorization,
-				cur.getRequiredServiceTypeId() );
+			cur = (CFSecBuffServiceType)(schema.getTableServiceType().readDerivedByIdIdx( Authorization,
+				cur.getRequiredServiceTypeId() ));
 			deleteServiceType( Authorization, cur );
 		}
 	}
@@ -403,25 +403,25 @@ public class CFBamRamServiceTypeTable
 	public void deleteServiceTypeByUDescrIdx( ICFSecAuthorization Authorization,
 		ICFSecServiceTypeByUDescrIdxKey argKey )
 	{
-		ICFSecServiceType cur;
+		CFSecBuffServiceType cur;
 		boolean anyNotNull = false;
 		anyNotNull = true;
 		if( ! anyNotNull ) {
 			return;
 		}
-		LinkedList<ICFSecServiceType> matchSet = new LinkedList<ICFSecServiceType>();
-		Iterator<ICFSecServiceType> values = dictByPKey.values().iterator();
+		LinkedList<CFSecBuffServiceType> matchSet = new LinkedList<CFSecBuffServiceType>();
+		Iterator<CFSecBuffServiceType> values = dictByPKey.values().iterator();
 		while( values.hasNext() ) {
 			cur = values.next();
 			if( argKey.equals( cur ) ) {
 				matchSet.add( cur );
 			}
 		}
-		Iterator<ICFSecServiceType> iterMatch = matchSet.iterator();
+		Iterator<CFSecBuffServiceType> iterMatch = matchSet.iterator();
 		while( iterMatch.hasNext() ) {
 			cur = iterMatch.next();
-			cur = schema.getTableServiceType().readDerivedByIdIdx( Authorization,
-				cur.getRequiredServiceTypeId() );
+			cur = (CFSecBuffServiceType)(schema.getTableServiceType().readDerivedByIdIdx( Authorization,
+				cur.getRequiredServiceTypeId() ));
 			deleteServiceType( Authorization, cur );
 		}
 	}

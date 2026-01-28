@@ -6749,8 +6749,8 @@ public class CFBamRamInt64TypeTable
 				pkey );
 		}
 		CFLibDbKeyHash256 varSchemaDefId = existing.getRequiredSchemaDefId();
-		CFBamBuffSchemaDef container = schema.getTableSchemaDef().readDerivedByIdIdx( Authorization,
-			varSchemaDefId );
+		CFBamBuffSchemaDef container = (CFBamBuffSchemaDef)(schema.getTableSchemaDef().readDerivedByIdIdx( Authorization,
+			varSchemaDefId ));
 		if( container == null ) {
 			throw new CFLibNullArgumentException( getClass(),
 				S_ProcName,
@@ -8132,30 +8132,30 @@ public class CFBamRamInt64TypeTable
 		ICFBamInt64TypeBySchemaIdxKey argKey )
 	{
 		final String S_ProcName = "deleteInt64TypeBySchemaIdx";
-		ICFBamInt64Type cur;
+		CFBamBuffInt64Type cur;
 		boolean anyNotNull = false;
 		anyNotNull = true;
 		if( ! anyNotNull ) {
 			return;
 		}
-		LinkedList<ICFBamInt64Type> matchSet = new LinkedList<ICFBamInt64Type>();
-		Iterator<ICFBamInt64Type> values = dictByPKey.values().iterator();
+		LinkedList<CFBamBuffInt64Type> matchSet = new LinkedList<CFBamBuffInt64Type>();
+		Iterator<CFBamBuffInt64Type> values = dictByPKey.values().iterator();
 		while( values.hasNext() ) {
 			cur = values.next();
 			if( argKey.equals( cur ) ) {
 				matchSet.add( cur );
 			}
 		}
-		Iterator<ICFBamInt64Type> iterMatch = matchSet.iterator();
+		Iterator<CFBamBuffInt64Type> iterMatch = matchSet.iterator();
 		while( iterMatch.hasNext() ) {
 			cur = iterMatch.next();
-			cur = schema.getTableInt64Type().readDerivedByIdIdx( Authorization,
-				cur.getRequiredId() );
-			String subClassCode = cur.getClassCode();
-			if( "a828".equals( subClassCode ) ) {
+			cur = (CFBamBuffInt64Type)(schema.getTableInt64Type().readDerivedByIdIdx( Authorization,
+				cur.getRequiredId() ));
+			int subClassCode = cur.getClassCode();
+			if( CFBamInt64Type.CLASS_CODE == subClassCode ) {
 				schema.getTableInt64Type().deleteInt64Type( Authorization, cur );
 			}
-			else if( "a874".equals( subClassCode ) ) {
+			else if( CFBamId64Gen.CLASS_CODE == subClassCode ) {
 				schema.getTableId64Gen().deleteId64Gen( Authorization, (ICFBamId64Gen)cur );
 			}
 			else {
@@ -8173,25 +8173,25 @@ public class CFBamRamInt64TypeTable
 		if( ! anyNotNull ) {
 			return;
 		}
-		ICFBamInt64Type cur;
-		LinkedList<ICFBamInt64Type> matchSet = new LinkedList<ICFBamInt64Type>();
-		Iterator<ICFBamInt64Type> values = dictByPKey.values().iterator();
+		CFBamBuffInt64Type cur;
+		LinkedList<CFBamBuffInt64Type> matchSet = new LinkedList<CFBamBuffInt64Type>();
+		Iterator<CFBamBuffInt64Type> values = dictByPKey.values().iterator();
 		while( values.hasNext() ) {
 			cur = values.next();
 			if( argKey.equals( cur ) ) {
 				matchSet.add( cur );
 			}
 		}
-		Iterator<ICFBamInt64Type> iterMatch = matchSet.iterator();
+		Iterator<CFBamBuffInt64Type> iterMatch = matchSet.iterator();
 		while( iterMatch.hasNext() ) {
 			cur = iterMatch.next();
-			cur = schema.getTableInt64Type().readDerivedByIdIdx( Authorization,
-				cur.getRequiredId() );
-			String subClassCode = cur.getClassCode();
-			if( "a828".equals( subClassCode ) ) {
+			cur = (CFBamBuffInt64Type)(schema.getTableInt64Type().readDerivedByIdIdx( Authorization,
+				cur.getRequiredId() ));
+			int subClassCode = cur.getClassCode();
+			if( CFBamInt64Type.CLASS_CODE == subClassCode ) {
 				schema.getTableInt64Type().deleteInt64Type( Authorization, cur );
 			}
-			else if( "a874".equals( subClassCode ) ) {
+			else if( CFBamId64Gen.CLASS_CODE == subClassCode ) {
 				schema.getTableId64Gen().deleteId64Gen( Authorization, (ICFBamId64Gen)cur );
 			}
 			else {
@@ -8214,31 +8214,31 @@ public class CFBamRamInt64TypeTable
 		ICFBamValueByUNameIdxKey argKey )
 	{
 		final String S_ProcName = "deleteInt64TypeByUNameIdx";
-		ICFBamInt64Type cur;
+		CFBamBuffInt64Type cur;
 		boolean anyNotNull = false;
 		anyNotNull = true;
 		anyNotNull = true;
 		if( ! anyNotNull ) {
 			return;
 		}
-		LinkedList<ICFBamInt64Type> matchSet = new LinkedList<ICFBamInt64Type>();
-		Iterator<ICFBamInt64Type> values = dictByPKey.values().iterator();
+		LinkedList<CFBamBuffInt64Type> matchSet = new LinkedList<CFBamBuffInt64Type>();
+		Iterator<CFBamBuffInt64Type> values = dictByPKey.values().iterator();
 		while( values.hasNext() ) {
 			cur = values.next();
 			if( argKey.equals( cur ) ) {
 				matchSet.add( cur );
 			}
 		}
-		Iterator<ICFBamInt64Type> iterMatch = matchSet.iterator();
+		Iterator<CFBamBuffInt64Type> iterMatch = matchSet.iterator();
 		while( iterMatch.hasNext() ) {
 			cur = iterMatch.next();
-			cur = schema.getTableInt64Type().readDerivedByIdIdx( Authorization,
-				cur.getRequiredId() );
-			String subClassCode = cur.getClassCode();
-			if( "a828".equals( subClassCode ) ) {
+			cur = (CFBamBuffInt64Type)(schema.getTableInt64Type().readDerivedByIdIdx( Authorization,
+				cur.getRequiredId() ));
+			int subClassCode = cur.getClassCode();
+			if( CFBamInt64Type.CLASS_CODE == subClassCode ) {
 				schema.getTableInt64Type().deleteInt64Type( Authorization, cur );
 			}
-			else if( "a874".equals( subClassCode ) ) {
+			else if( CFBamId64Gen.CLASS_CODE == subClassCode ) {
 				schema.getTableId64Gen().deleteId64Gen( Authorization, (ICFBamId64Gen)cur );
 			}
 			else {
@@ -8259,30 +8259,30 @@ public class CFBamRamInt64TypeTable
 		ICFBamValueByScopeIdxKey argKey )
 	{
 		final String S_ProcName = "deleteInt64TypeByScopeIdx";
-		ICFBamInt64Type cur;
+		CFBamBuffInt64Type cur;
 		boolean anyNotNull = false;
 		anyNotNull = true;
 		if( ! anyNotNull ) {
 			return;
 		}
-		LinkedList<ICFBamInt64Type> matchSet = new LinkedList<ICFBamInt64Type>();
-		Iterator<ICFBamInt64Type> values = dictByPKey.values().iterator();
+		LinkedList<CFBamBuffInt64Type> matchSet = new LinkedList<CFBamBuffInt64Type>();
+		Iterator<CFBamBuffInt64Type> values = dictByPKey.values().iterator();
 		while( values.hasNext() ) {
 			cur = values.next();
 			if( argKey.equals( cur ) ) {
 				matchSet.add( cur );
 			}
 		}
-		Iterator<ICFBamInt64Type> iterMatch = matchSet.iterator();
+		Iterator<CFBamBuffInt64Type> iterMatch = matchSet.iterator();
 		while( iterMatch.hasNext() ) {
 			cur = iterMatch.next();
-			cur = schema.getTableInt64Type().readDerivedByIdIdx( Authorization,
-				cur.getRequiredId() );
-			String subClassCode = cur.getClassCode();
-			if( "a828".equals( subClassCode ) ) {
+			cur = (CFBamBuffInt64Type)(schema.getTableInt64Type().readDerivedByIdIdx( Authorization,
+				cur.getRequiredId() ));
+			int subClassCode = cur.getClassCode();
+			if( CFBamInt64Type.CLASS_CODE == subClassCode ) {
 				schema.getTableInt64Type().deleteInt64Type( Authorization, cur );
 			}
-			else if( "a874".equals( subClassCode ) ) {
+			else if( CFBamId64Gen.CLASS_CODE == subClassCode ) {
 				schema.getTableId64Gen().deleteId64Gen( Authorization, (ICFBamId64Gen)cur );
 			}
 			else {
@@ -8303,7 +8303,7 @@ public class CFBamRamInt64TypeTable
 		ICFBamValueByDefSchemaIdxKey argKey )
 	{
 		final String S_ProcName = "deleteInt64TypeByDefSchemaIdx";
-		ICFBamInt64Type cur;
+		CFBamBuffInt64Type cur;
 		boolean anyNotNull = false;
 		if( argKey.getOptionalDefSchemaId() != null ) {
 			anyNotNull = true;
@@ -8311,24 +8311,24 @@ public class CFBamRamInt64TypeTable
 		if( ! anyNotNull ) {
 			return;
 		}
-		LinkedList<ICFBamInt64Type> matchSet = new LinkedList<ICFBamInt64Type>();
-		Iterator<ICFBamInt64Type> values = dictByPKey.values().iterator();
+		LinkedList<CFBamBuffInt64Type> matchSet = new LinkedList<CFBamBuffInt64Type>();
+		Iterator<CFBamBuffInt64Type> values = dictByPKey.values().iterator();
 		while( values.hasNext() ) {
 			cur = values.next();
 			if( argKey.equals( cur ) ) {
 				matchSet.add( cur );
 			}
 		}
-		Iterator<ICFBamInt64Type> iterMatch = matchSet.iterator();
+		Iterator<CFBamBuffInt64Type> iterMatch = matchSet.iterator();
 		while( iterMatch.hasNext() ) {
 			cur = iterMatch.next();
-			cur = schema.getTableInt64Type().readDerivedByIdIdx( Authorization,
-				cur.getRequiredId() );
-			String subClassCode = cur.getClassCode();
-			if( "a828".equals( subClassCode ) ) {
+			cur = (CFBamBuffInt64Type)(schema.getTableInt64Type().readDerivedByIdIdx( Authorization,
+				cur.getRequiredId() ));
+			int subClassCode = cur.getClassCode();
+			if( CFBamInt64Type.CLASS_CODE == subClassCode ) {
 				schema.getTableInt64Type().deleteInt64Type( Authorization, cur );
 			}
-			else if( "a874".equals( subClassCode ) ) {
+			else if( CFBamId64Gen.CLASS_CODE == subClassCode ) {
 				schema.getTableId64Gen().deleteId64Gen( Authorization, (ICFBamId64Gen)cur );
 			}
 			else {
@@ -8349,7 +8349,7 @@ public class CFBamRamInt64TypeTable
 		ICFBamValueByPrevIdxKey argKey )
 	{
 		final String S_ProcName = "deleteInt64TypeByPrevIdx";
-		ICFBamInt64Type cur;
+		CFBamBuffInt64Type cur;
 		boolean anyNotNull = false;
 		if( argKey.getOptionalPrevId() != null ) {
 			anyNotNull = true;
@@ -8357,24 +8357,24 @@ public class CFBamRamInt64TypeTable
 		if( ! anyNotNull ) {
 			return;
 		}
-		LinkedList<ICFBamInt64Type> matchSet = new LinkedList<ICFBamInt64Type>();
-		Iterator<ICFBamInt64Type> values = dictByPKey.values().iterator();
+		LinkedList<CFBamBuffInt64Type> matchSet = new LinkedList<CFBamBuffInt64Type>();
+		Iterator<CFBamBuffInt64Type> values = dictByPKey.values().iterator();
 		while( values.hasNext() ) {
 			cur = values.next();
 			if( argKey.equals( cur ) ) {
 				matchSet.add( cur );
 			}
 		}
-		Iterator<ICFBamInt64Type> iterMatch = matchSet.iterator();
+		Iterator<CFBamBuffInt64Type> iterMatch = matchSet.iterator();
 		while( iterMatch.hasNext() ) {
 			cur = iterMatch.next();
-			cur = schema.getTableInt64Type().readDerivedByIdIdx( Authorization,
-				cur.getRequiredId() );
-			String subClassCode = cur.getClassCode();
-			if( "a828".equals( subClassCode ) ) {
+			cur = (CFBamBuffInt64Type)(schema.getTableInt64Type().readDerivedByIdIdx( Authorization,
+				cur.getRequiredId() ));
+			int subClassCode = cur.getClassCode();
+			if( CFBamInt64Type.CLASS_CODE == subClassCode ) {
 				schema.getTableInt64Type().deleteInt64Type( Authorization, cur );
 			}
-			else if( "a874".equals( subClassCode ) ) {
+			else if( CFBamId64Gen.CLASS_CODE == subClassCode ) {
 				schema.getTableId64Gen().deleteId64Gen( Authorization, (ICFBamId64Gen)cur );
 			}
 			else {
@@ -8395,7 +8395,7 @@ public class CFBamRamInt64TypeTable
 		ICFBamValueByNextIdxKey argKey )
 	{
 		final String S_ProcName = "deleteInt64TypeByNextIdx";
-		ICFBamInt64Type cur;
+		CFBamBuffInt64Type cur;
 		boolean anyNotNull = false;
 		if( argKey.getOptionalNextId() != null ) {
 			anyNotNull = true;
@@ -8403,24 +8403,24 @@ public class CFBamRamInt64TypeTable
 		if( ! anyNotNull ) {
 			return;
 		}
-		LinkedList<ICFBamInt64Type> matchSet = new LinkedList<ICFBamInt64Type>();
-		Iterator<ICFBamInt64Type> values = dictByPKey.values().iterator();
+		LinkedList<CFBamBuffInt64Type> matchSet = new LinkedList<CFBamBuffInt64Type>();
+		Iterator<CFBamBuffInt64Type> values = dictByPKey.values().iterator();
 		while( values.hasNext() ) {
 			cur = values.next();
 			if( argKey.equals( cur ) ) {
 				matchSet.add( cur );
 			}
 		}
-		Iterator<ICFBamInt64Type> iterMatch = matchSet.iterator();
+		Iterator<CFBamBuffInt64Type> iterMatch = matchSet.iterator();
 		while( iterMatch.hasNext() ) {
 			cur = iterMatch.next();
-			cur = schema.getTableInt64Type().readDerivedByIdIdx( Authorization,
-				cur.getRequiredId() );
-			String subClassCode = cur.getClassCode();
-			if( "a828".equals( subClassCode ) ) {
+			cur = (CFBamBuffInt64Type)(schema.getTableInt64Type().readDerivedByIdIdx( Authorization,
+				cur.getRequiredId() ));
+			int subClassCode = cur.getClassCode();
+			if( CFBamInt64Type.CLASS_CODE == subClassCode ) {
 				schema.getTableInt64Type().deleteInt64Type( Authorization, cur );
 			}
-			else if( "a874".equals( subClassCode ) ) {
+			else if( CFBamId64Gen.CLASS_CODE == subClassCode ) {
 				schema.getTableId64Gen().deleteId64Gen( Authorization, (ICFBamId64Gen)cur );
 			}
 			else {
@@ -8443,7 +8443,7 @@ public class CFBamRamInt64TypeTable
 		ICFBamValueByContPrevIdxKey argKey )
 	{
 		final String S_ProcName = "deleteInt64TypeByContPrevIdx";
-		ICFBamInt64Type cur;
+		CFBamBuffInt64Type cur;
 		boolean anyNotNull = false;
 		anyNotNull = true;
 		if( argKey.getOptionalPrevId() != null ) {
@@ -8452,24 +8452,24 @@ public class CFBamRamInt64TypeTable
 		if( ! anyNotNull ) {
 			return;
 		}
-		LinkedList<ICFBamInt64Type> matchSet = new LinkedList<ICFBamInt64Type>();
-		Iterator<ICFBamInt64Type> values = dictByPKey.values().iterator();
+		LinkedList<CFBamBuffInt64Type> matchSet = new LinkedList<CFBamBuffInt64Type>();
+		Iterator<CFBamBuffInt64Type> values = dictByPKey.values().iterator();
 		while( values.hasNext() ) {
 			cur = values.next();
 			if( argKey.equals( cur ) ) {
 				matchSet.add( cur );
 			}
 		}
-		Iterator<ICFBamInt64Type> iterMatch = matchSet.iterator();
+		Iterator<CFBamBuffInt64Type> iterMatch = matchSet.iterator();
 		while( iterMatch.hasNext() ) {
 			cur = iterMatch.next();
-			cur = schema.getTableInt64Type().readDerivedByIdIdx( Authorization,
-				cur.getRequiredId() );
-			String subClassCode = cur.getClassCode();
-			if( "a828".equals( subClassCode ) ) {
+			cur = (CFBamBuffInt64Type)(schema.getTableInt64Type().readDerivedByIdIdx( Authorization,
+				cur.getRequiredId() ));
+			int subClassCode = cur.getClassCode();
+			if( CFBamInt64Type.CLASS_CODE == subClassCode ) {
 				schema.getTableInt64Type().deleteInt64Type( Authorization, cur );
 			}
-			else if( "a874".equals( subClassCode ) ) {
+			else if( CFBamId64Gen.CLASS_CODE == subClassCode ) {
 				schema.getTableId64Gen().deleteId64Gen( Authorization, (ICFBamId64Gen)cur );
 			}
 			else {
@@ -8492,7 +8492,7 @@ public class CFBamRamInt64TypeTable
 		ICFBamValueByContNextIdxKey argKey )
 	{
 		final String S_ProcName = "deleteInt64TypeByContNextIdx";
-		ICFBamInt64Type cur;
+		CFBamBuffInt64Type cur;
 		boolean anyNotNull = false;
 		anyNotNull = true;
 		if( argKey.getOptionalNextId() != null ) {
@@ -8501,24 +8501,24 @@ public class CFBamRamInt64TypeTable
 		if( ! anyNotNull ) {
 			return;
 		}
-		LinkedList<ICFBamInt64Type> matchSet = new LinkedList<ICFBamInt64Type>();
-		Iterator<ICFBamInt64Type> values = dictByPKey.values().iterator();
+		LinkedList<CFBamBuffInt64Type> matchSet = new LinkedList<CFBamBuffInt64Type>();
+		Iterator<CFBamBuffInt64Type> values = dictByPKey.values().iterator();
 		while( values.hasNext() ) {
 			cur = values.next();
 			if( argKey.equals( cur ) ) {
 				matchSet.add( cur );
 			}
 		}
-		Iterator<ICFBamInt64Type> iterMatch = matchSet.iterator();
+		Iterator<CFBamBuffInt64Type> iterMatch = matchSet.iterator();
 		while( iterMatch.hasNext() ) {
 			cur = iterMatch.next();
-			cur = schema.getTableInt64Type().readDerivedByIdIdx( Authorization,
-				cur.getRequiredId() );
-			String subClassCode = cur.getClassCode();
-			if( "a828".equals( subClassCode ) ) {
+			cur = (CFBamBuffInt64Type)(schema.getTableInt64Type().readDerivedByIdIdx( Authorization,
+				cur.getRequiredId() ));
+			int subClassCode = cur.getClassCode();
+			if( CFBamInt64Type.CLASS_CODE == subClassCode ) {
 				schema.getTableInt64Type().deleteInt64Type( Authorization, cur );
 			}
-			else if( "a874".equals( subClassCode ) ) {
+			else if( CFBamId64Gen.CLASS_CODE == subClassCode ) {
 				schema.getTableId64Gen().deleteId64Gen( Authorization, (ICFBamId64Gen)cur );
 			}
 			else {

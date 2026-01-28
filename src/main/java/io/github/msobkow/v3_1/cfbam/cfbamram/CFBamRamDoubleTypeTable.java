@@ -6744,8 +6744,8 @@ public class CFBamRamDoubleTypeTable
 				pkey );
 		}
 		CFLibDbKeyHash256 varSchemaDefId = existing.getRequiredSchemaDefId();
-		CFBamBuffSchemaDef container = schema.getTableSchemaDef().readDerivedByIdIdx( Authorization,
-			varSchemaDefId );
+		CFBamBuffSchemaDef container = (CFBamBuffSchemaDef)(schema.getTableSchemaDef().readDerivedByIdIdx( Authorization,
+			varSchemaDefId ));
 		if( container == null ) {
 			throw new CFLibNullArgumentException( getClass(),
 				S_ProcName,
@@ -8115,25 +8115,25 @@ public class CFBamRamDoubleTypeTable
 	public void deleteDoubleTypeBySchemaIdx( ICFSecAuthorization Authorization,
 		ICFBamDoubleTypeBySchemaIdxKey argKey )
 	{
-		ICFBamDoubleType cur;
+		CFBamBuffDoubleType cur;
 		boolean anyNotNull = false;
 		anyNotNull = true;
 		if( ! anyNotNull ) {
 			return;
 		}
-		LinkedList<ICFBamDoubleType> matchSet = new LinkedList<ICFBamDoubleType>();
-		Iterator<ICFBamDoubleType> values = dictByPKey.values().iterator();
+		LinkedList<CFBamBuffDoubleType> matchSet = new LinkedList<CFBamBuffDoubleType>();
+		Iterator<CFBamBuffDoubleType> values = dictByPKey.values().iterator();
 		while( values.hasNext() ) {
 			cur = values.next();
 			if( argKey.equals( cur ) ) {
 				matchSet.add( cur );
 			}
 		}
-		Iterator<ICFBamDoubleType> iterMatch = matchSet.iterator();
+		Iterator<CFBamBuffDoubleType> iterMatch = matchSet.iterator();
 		while( iterMatch.hasNext() ) {
 			cur = iterMatch.next();
-			cur = schema.getTableDoubleType().readDerivedByIdIdx( Authorization,
-				cur.getRequiredId() );
+			cur = (CFBamBuffDoubleType)(schema.getTableDoubleType().readDerivedByIdIdx( Authorization,
+				cur.getRequiredId() ));
 			deleteDoubleType( Authorization, cur );
 		}
 	}
@@ -8146,20 +8146,20 @@ public class CFBamRamDoubleTypeTable
 		if( ! anyNotNull ) {
 			return;
 		}
-		ICFBamDoubleType cur;
-		LinkedList<ICFBamDoubleType> matchSet = new LinkedList<ICFBamDoubleType>();
-		Iterator<ICFBamDoubleType> values = dictByPKey.values().iterator();
+		CFBamBuffDoubleType cur;
+		LinkedList<CFBamBuffDoubleType> matchSet = new LinkedList<CFBamBuffDoubleType>();
+		Iterator<CFBamBuffDoubleType> values = dictByPKey.values().iterator();
 		while( values.hasNext() ) {
 			cur = values.next();
 			if( argKey.equals( cur ) ) {
 				matchSet.add( cur );
 			}
 		}
-		Iterator<ICFBamDoubleType> iterMatch = matchSet.iterator();
+		Iterator<CFBamBuffDoubleType> iterMatch = matchSet.iterator();
 		while( iterMatch.hasNext() ) {
 			cur = iterMatch.next();
-			cur = schema.getTableDoubleType().readDerivedByIdIdx( Authorization,
-				cur.getRequiredId() );
+			cur = (CFBamBuffDoubleType)(schema.getTableDoubleType().readDerivedByIdIdx( Authorization,
+				cur.getRequiredId() ));
 			deleteDoubleType( Authorization, cur );
 		}
 	}
@@ -8177,26 +8177,26 @@ public class CFBamRamDoubleTypeTable
 	public void deleteDoubleTypeByUNameIdx( ICFSecAuthorization Authorization,
 		ICFBamValueByUNameIdxKey argKey )
 	{
-		ICFBamDoubleType cur;
+		CFBamBuffDoubleType cur;
 		boolean anyNotNull = false;
 		anyNotNull = true;
 		anyNotNull = true;
 		if( ! anyNotNull ) {
 			return;
 		}
-		LinkedList<ICFBamDoubleType> matchSet = new LinkedList<ICFBamDoubleType>();
-		Iterator<ICFBamDoubleType> values = dictByPKey.values().iterator();
+		LinkedList<CFBamBuffDoubleType> matchSet = new LinkedList<CFBamBuffDoubleType>();
+		Iterator<CFBamBuffDoubleType> values = dictByPKey.values().iterator();
 		while( values.hasNext() ) {
 			cur = values.next();
 			if( argKey.equals( cur ) ) {
 				matchSet.add( cur );
 			}
 		}
-		Iterator<ICFBamDoubleType> iterMatch = matchSet.iterator();
+		Iterator<CFBamBuffDoubleType> iterMatch = matchSet.iterator();
 		while( iterMatch.hasNext() ) {
 			cur = iterMatch.next();
-			cur = schema.getTableDoubleType().readDerivedByIdIdx( Authorization,
-				cur.getRequiredId() );
+			cur = (CFBamBuffDoubleType)(schema.getTableDoubleType().readDerivedByIdIdx( Authorization,
+				cur.getRequiredId() ));
 			deleteDoubleType( Authorization, cur );
 		}
 	}
@@ -8212,25 +8212,25 @@ public class CFBamRamDoubleTypeTable
 	public void deleteDoubleTypeByScopeIdx( ICFSecAuthorization Authorization,
 		ICFBamValueByScopeIdxKey argKey )
 	{
-		ICFBamDoubleType cur;
+		CFBamBuffDoubleType cur;
 		boolean anyNotNull = false;
 		anyNotNull = true;
 		if( ! anyNotNull ) {
 			return;
 		}
-		LinkedList<ICFBamDoubleType> matchSet = new LinkedList<ICFBamDoubleType>();
-		Iterator<ICFBamDoubleType> values = dictByPKey.values().iterator();
+		LinkedList<CFBamBuffDoubleType> matchSet = new LinkedList<CFBamBuffDoubleType>();
+		Iterator<CFBamBuffDoubleType> values = dictByPKey.values().iterator();
 		while( values.hasNext() ) {
 			cur = values.next();
 			if( argKey.equals( cur ) ) {
 				matchSet.add( cur );
 			}
 		}
-		Iterator<ICFBamDoubleType> iterMatch = matchSet.iterator();
+		Iterator<CFBamBuffDoubleType> iterMatch = matchSet.iterator();
 		while( iterMatch.hasNext() ) {
 			cur = iterMatch.next();
-			cur = schema.getTableDoubleType().readDerivedByIdIdx( Authorization,
-				cur.getRequiredId() );
+			cur = (CFBamBuffDoubleType)(schema.getTableDoubleType().readDerivedByIdIdx( Authorization,
+				cur.getRequiredId() ));
 			deleteDoubleType( Authorization, cur );
 		}
 	}
@@ -8246,7 +8246,7 @@ public class CFBamRamDoubleTypeTable
 	public void deleteDoubleTypeByDefSchemaIdx( ICFSecAuthorization Authorization,
 		ICFBamValueByDefSchemaIdxKey argKey )
 	{
-		ICFBamDoubleType cur;
+		CFBamBuffDoubleType cur;
 		boolean anyNotNull = false;
 		if( argKey.getOptionalDefSchemaId() != null ) {
 			anyNotNull = true;
@@ -8254,19 +8254,19 @@ public class CFBamRamDoubleTypeTable
 		if( ! anyNotNull ) {
 			return;
 		}
-		LinkedList<ICFBamDoubleType> matchSet = new LinkedList<ICFBamDoubleType>();
-		Iterator<ICFBamDoubleType> values = dictByPKey.values().iterator();
+		LinkedList<CFBamBuffDoubleType> matchSet = new LinkedList<CFBamBuffDoubleType>();
+		Iterator<CFBamBuffDoubleType> values = dictByPKey.values().iterator();
 		while( values.hasNext() ) {
 			cur = values.next();
 			if( argKey.equals( cur ) ) {
 				matchSet.add( cur );
 			}
 		}
-		Iterator<ICFBamDoubleType> iterMatch = matchSet.iterator();
+		Iterator<CFBamBuffDoubleType> iterMatch = matchSet.iterator();
 		while( iterMatch.hasNext() ) {
 			cur = iterMatch.next();
-			cur = schema.getTableDoubleType().readDerivedByIdIdx( Authorization,
-				cur.getRequiredId() );
+			cur = (CFBamBuffDoubleType)(schema.getTableDoubleType().readDerivedByIdIdx( Authorization,
+				cur.getRequiredId() ));
 			deleteDoubleType( Authorization, cur );
 		}
 	}
@@ -8282,7 +8282,7 @@ public class CFBamRamDoubleTypeTable
 	public void deleteDoubleTypeByPrevIdx( ICFSecAuthorization Authorization,
 		ICFBamValueByPrevIdxKey argKey )
 	{
-		ICFBamDoubleType cur;
+		CFBamBuffDoubleType cur;
 		boolean anyNotNull = false;
 		if( argKey.getOptionalPrevId() != null ) {
 			anyNotNull = true;
@@ -8290,19 +8290,19 @@ public class CFBamRamDoubleTypeTable
 		if( ! anyNotNull ) {
 			return;
 		}
-		LinkedList<ICFBamDoubleType> matchSet = new LinkedList<ICFBamDoubleType>();
-		Iterator<ICFBamDoubleType> values = dictByPKey.values().iterator();
+		LinkedList<CFBamBuffDoubleType> matchSet = new LinkedList<CFBamBuffDoubleType>();
+		Iterator<CFBamBuffDoubleType> values = dictByPKey.values().iterator();
 		while( values.hasNext() ) {
 			cur = values.next();
 			if( argKey.equals( cur ) ) {
 				matchSet.add( cur );
 			}
 		}
-		Iterator<ICFBamDoubleType> iterMatch = matchSet.iterator();
+		Iterator<CFBamBuffDoubleType> iterMatch = matchSet.iterator();
 		while( iterMatch.hasNext() ) {
 			cur = iterMatch.next();
-			cur = schema.getTableDoubleType().readDerivedByIdIdx( Authorization,
-				cur.getRequiredId() );
+			cur = (CFBamBuffDoubleType)(schema.getTableDoubleType().readDerivedByIdIdx( Authorization,
+				cur.getRequiredId() ));
 			deleteDoubleType( Authorization, cur );
 		}
 	}
@@ -8318,7 +8318,7 @@ public class CFBamRamDoubleTypeTable
 	public void deleteDoubleTypeByNextIdx( ICFSecAuthorization Authorization,
 		ICFBamValueByNextIdxKey argKey )
 	{
-		ICFBamDoubleType cur;
+		CFBamBuffDoubleType cur;
 		boolean anyNotNull = false;
 		if( argKey.getOptionalNextId() != null ) {
 			anyNotNull = true;
@@ -8326,19 +8326,19 @@ public class CFBamRamDoubleTypeTable
 		if( ! anyNotNull ) {
 			return;
 		}
-		LinkedList<ICFBamDoubleType> matchSet = new LinkedList<ICFBamDoubleType>();
-		Iterator<ICFBamDoubleType> values = dictByPKey.values().iterator();
+		LinkedList<CFBamBuffDoubleType> matchSet = new LinkedList<CFBamBuffDoubleType>();
+		Iterator<CFBamBuffDoubleType> values = dictByPKey.values().iterator();
 		while( values.hasNext() ) {
 			cur = values.next();
 			if( argKey.equals( cur ) ) {
 				matchSet.add( cur );
 			}
 		}
-		Iterator<ICFBamDoubleType> iterMatch = matchSet.iterator();
+		Iterator<CFBamBuffDoubleType> iterMatch = matchSet.iterator();
 		while( iterMatch.hasNext() ) {
 			cur = iterMatch.next();
-			cur = schema.getTableDoubleType().readDerivedByIdIdx( Authorization,
-				cur.getRequiredId() );
+			cur = (CFBamBuffDoubleType)(schema.getTableDoubleType().readDerivedByIdIdx( Authorization,
+				cur.getRequiredId() ));
 			deleteDoubleType( Authorization, cur );
 		}
 	}
@@ -8356,7 +8356,7 @@ public class CFBamRamDoubleTypeTable
 	public void deleteDoubleTypeByContPrevIdx( ICFSecAuthorization Authorization,
 		ICFBamValueByContPrevIdxKey argKey )
 	{
-		ICFBamDoubleType cur;
+		CFBamBuffDoubleType cur;
 		boolean anyNotNull = false;
 		anyNotNull = true;
 		if( argKey.getOptionalPrevId() != null ) {
@@ -8365,19 +8365,19 @@ public class CFBamRamDoubleTypeTable
 		if( ! anyNotNull ) {
 			return;
 		}
-		LinkedList<ICFBamDoubleType> matchSet = new LinkedList<ICFBamDoubleType>();
-		Iterator<ICFBamDoubleType> values = dictByPKey.values().iterator();
+		LinkedList<CFBamBuffDoubleType> matchSet = new LinkedList<CFBamBuffDoubleType>();
+		Iterator<CFBamBuffDoubleType> values = dictByPKey.values().iterator();
 		while( values.hasNext() ) {
 			cur = values.next();
 			if( argKey.equals( cur ) ) {
 				matchSet.add( cur );
 			}
 		}
-		Iterator<ICFBamDoubleType> iterMatch = matchSet.iterator();
+		Iterator<CFBamBuffDoubleType> iterMatch = matchSet.iterator();
 		while( iterMatch.hasNext() ) {
 			cur = iterMatch.next();
-			cur = schema.getTableDoubleType().readDerivedByIdIdx( Authorization,
-				cur.getRequiredId() );
+			cur = (CFBamBuffDoubleType)(schema.getTableDoubleType().readDerivedByIdIdx( Authorization,
+				cur.getRequiredId() ));
 			deleteDoubleType( Authorization, cur );
 		}
 	}
@@ -8395,7 +8395,7 @@ public class CFBamRamDoubleTypeTable
 	public void deleteDoubleTypeByContNextIdx( ICFSecAuthorization Authorization,
 		ICFBamValueByContNextIdxKey argKey )
 	{
-		ICFBamDoubleType cur;
+		CFBamBuffDoubleType cur;
 		boolean anyNotNull = false;
 		anyNotNull = true;
 		if( argKey.getOptionalNextId() != null ) {
@@ -8404,19 +8404,19 @@ public class CFBamRamDoubleTypeTable
 		if( ! anyNotNull ) {
 			return;
 		}
-		LinkedList<ICFBamDoubleType> matchSet = new LinkedList<ICFBamDoubleType>();
-		Iterator<ICFBamDoubleType> values = dictByPKey.values().iterator();
+		LinkedList<CFBamBuffDoubleType> matchSet = new LinkedList<CFBamBuffDoubleType>();
+		Iterator<CFBamBuffDoubleType> values = dictByPKey.values().iterator();
 		while( values.hasNext() ) {
 			cur = values.next();
 			if( argKey.equals( cur ) ) {
 				matchSet.add( cur );
 			}
 		}
-		Iterator<ICFBamDoubleType> iterMatch = matchSet.iterator();
+		Iterator<CFBamBuffDoubleType> iterMatch = matchSet.iterator();
 		while( iterMatch.hasNext() ) {
 			cur = iterMatch.next();
-			cur = schema.getTableDoubleType().readDerivedByIdIdx( Authorization,
-				cur.getRequiredId() );
+			cur = (CFBamBuffDoubleType)(schema.getTableDoubleType().readDerivedByIdIdx( Authorization,
+				cur.getRequiredId() ));
 			deleteDoubleType( Authorization, cur );
 		}
 	}

@@ -6744,8 +6744,8 @@ public class CFBamRamUInt32TypeTable
 				pkey );
 		}
 		CFLibDbKeyHash256 varSchemaDefId = existing.getRequiredSchemaDefId();
-		CFBamBuffSchemaDef container = schema.getTableSchemaDef().readDerivedByIdIdx( Authorization,
-			varSchemaDefId );
+		CFBamBuffSchemaDef container = (CFBamBuffSchemaDef)(schema.getTableSchemaDef().readDerivedByIdIdx( Authorization,
+			varSchemaDefId ));
 		if( container == null ) {
 			throw new CFLibNullArgumentException( getClass(),
 				S_ProcName,
@@ -8115,25 +8115,25 @@ public class CFBamRamUInt32TypeTable
 	public void deleteUInt32TypeBySchemaIdx( ICFSecAuthorization Authorization,
 		ICFBamUInt32TypeBySchemaIdxKey argKey )
 	{
-		ICFBamUInt32Type cur;
+		CFBamBuffUInt32Type cur;
 		boolean anyNotNull = false;
 		anyNotNull = true;
 		if( ! anyNotNull ) {
 			return;
 		}
-		LinkedList<ICFBamUInt32Type> matchSet = new LinkedList<ICFBamUInt32Type>();
-		Iterator<ICFBamUInt32Type> values = dictByPKey.values().iterator();
+		LinkedList<CFBamBuffUInt32Type> matchSet = new LinkedList<CFBamBuffUInt32Type>();
+		Iterator<CFBamBuffUInt32Type> values = dictByPKey.values().iterator();
 		while( values.hasNext() ) {
 			cur = values.next();
 			if( argKey.equals( cur ) ) {
 				matchSet.add( cur );
 			}
 		}
-		Iterator<ICFBamUInt32Type> iterMatch = matchSet.iterator();
+		Iterator<CFBamBuffUInt32Type> iterMatch = matchSet.iterator();
 		while( iterMatch.hasNext() ) {
 			cur = iterMatch.next();
-			cur = schema.getTableUInt32Type().readDerivedByIdIdx( Authorization,
-				cur.getRequiredId() );
+			cur = (CFBamBuffUInt32Type)(schema.getTableUInt32Type().readDerivedByIdIdx( Authorization,
+				cur.getRequiredId() ));
 			deleteUInt32Type( Authorization, cur );
 		}
 	}
@@ -8146,20 +8146,20 @@ public class CFBamRamUInt32TypeTable
 		if( ! anyNotNull ) {
 			return;
 		}
-		ICFBamUInt32Type cur;
-		LinkedList<ICFBamUInt32Type> matchSet = new LinkedList<ICFBamUInt32Type>();
-		Iterator<ICFBamUInt32Type> values = dictByPKey.values().iterator();
+		CFBamBuffUInt32Type cur;
+		LinkedList<CFBamBuffUInt32Type> matchSet = new LinkedList<CFBamBuffUInt32Type>();
+		Iterator<CFBamBuffUInt32Type> values = dictByPKey.values().iterator();
 		while( values.hasNext() ) {
 			cur = values.next();
 			if( argKey.equals( cur ) ) {
 				matchSet.add( cur );
 			}
 		}
-		Iterator<ICFBamUInt32Type> iterMatch = matchSet.iterator();
+		Iterator<CFBamBuffUInt32Type> iterMatch = matchSet.iterator();
 		while( iterMatch.hasNext() ) {
 			cur = iterMatch.next();
-			cur = schema.getTableUInt32Type().readDerivedByIdIdx( Authorization,
-				cur.getRequiredId() );
+			cur = (CFBamBuffUInt32Type)(schema.getTableUInt32Type().readDerivedByIdIdx( Authorization,
+				cur.getRequiredId() ));
 			deleteUInt32Type( Authorization, cur );
 		}
 	}
@@ -8177,26 +8177,26 @@ public class CFBamRamUInt32TypeTable
 	public void deleteUInt32TypeByUNameIdx( ICFSecAuthorization Authorization,
 		ICFBamValueByUNameIdxKey argKey )
 	{
-		ICFBamUInt32Type cur;
+		CFBamBuffUInt32Type cur;
 		boolean anyNotNull = false;
 		anyNotNull = true;
 		anyNotNull = true;
 		if( ! anyNotNull ) {
 			return;
 		}
-		LinkedList<ICFBamUInt32Type> matchSet = new LinkedList<ICFBamUInt32Type>();
-		Iterator<ICFBamUInt32Type> values = dictByPKey.values().iterator();
+		LinkedList<CFBamBuffUInt32Type> matchSet = new LinkedList<CFBamBuffUInt32Type>();
+		Iterator<CFBamBuffUInt32Type> values = dictByPKey.values().iterator();
 		while( values.hasNext() ) {
 			cur = values.next();
 			if( argKey.equals( cur ) ) {
 				matchSet.add( cur );
 			}
 		}
-		Iterator<ICFBamUInt32Type> iterMatch = matchSet.iterator();
+		Iterator<CFBamBuffUInt32Type> iterMatch = matchSet.iterator();
 		while( iterMatch.hasNext() ) {
 			cur = iterMatch.next();
-			cur = schema.getTableUInt32Type().readDerivedByIdIdx( Authorization,
-				cur.getRequiredId() );
+			cur = (CFBamBuffUInt32Type)(schema.getTableUInt32Type().readDerivedByIdIdx( Authorization,
+				cur.getRequiredId() ));
 			deleteUInt32Type( Authorization, cur );
 		}
 	}
@@ -8212,25 +8212,25 @@ public class CFBamRamUInt32TypeTable
 	public void deleteUInt32TypeByScopeIdx( ICFSecAuthorization Authorization,
 		ICFBamValueByScopeIdxKey argKey )
 	{
-		ICFBamUInt32Type cur;
+		CFBamBuffUInt32Type cur;
 		boolean anyNotNull = false;
 		anyNotNull = true;
 		if( ! anyNotNull ) {
 			return;
 		}
-		LinkedList<ICFBamUInt32Type> matchSet = new LinkedList<ICFBamUInt32Type>();
-		Iterator<ICFBamUInt32Type> values = dictByPKey.values().iterator();
+		LinkedList<CFBamBuffUInt32Type> matchSet = new LinkedList<CFBamBuffUInt32Type>();
+		Iterator<CFBamBuffUInt32Type> values = dictByPKey.values().iterator();
 		while( values.hasNext() ) {
 			cur = values.next();
 			if( argKey.equals( cur ) ) {
 				matchSet.add( cur );
 			}
 		}
-		Iterator<ICFBamUInt32Type> iterMatch = matchSet.iterator();
+		Iterator<CFBamBuffUInt32Type> iterMatch = matchSet.iterator();
 		while( iterMatch.hasNext() ) {
 			cur = iterMatch.next();
-			cur = schema.getTableUInt32Type().readDerivedByIdIdx( Authorization,
-				cur.getRequiredId() );
+			cur = (CFBamBuffUInt32Type)(schema.getTableUInt32Type().readDerivedByIdIdx( Authorization,
+				cur.getRequiredId() ));
 			deleteUInt32Type( Authorization, cur );
 		}
 	}
@@ -8246,7 +8246,7 @@ public class CFBamRamUInt32TypeTable
 	public void deleteUInt32TypeByDefSchemaIdx( ICFSecAuthorization Authorization,
 		ICFBamValueByDefSchemaIdxKey argKey )
 	{
-		ICFBamUInt32Type cur;
+		CFBamBuffUInt32Type cur;
 		boolean anyNotNull = false;
 		if( argKey.getOptionalDefSchemaId() != null ) {
 			anyNotNull = true;
@@ -8254,19 +8254,19 @@ public class CFBamRamUInt32TypeTable
 		if( ! anyNotNull ) {
 			return;
 		}
-		LinkedList<ICFBamUInt32Type> matchSet = new LinkedList<ICFBamUInt32Type>();
-		Iterator<ICFBamUInt32Type> values = dictByPKey.values().iterator();
+		LinkedList<CFBamBuffUInt32Type> matchSet = new LinkedList<CFBamBuffUInt32Type>();
+		Iterator<CFBamBuffUInt32Type> values = dictByPKey.values().iterator();
 		while( values.hasNext() ) {
 			cur = values.next();
 			if( argKey.equals( cur ) ) {
 				matchSet.add( cur );
 			}
 		}
-		Iterator<ICFBamUInt32Type> iterMatch = matchSet.iterator();
+		Iterator<CFBamBuffUInt32Type> iterMatch = matchSet.iterator();
 		while( iterMatch.hasNext() ) {
 			cur = iterMatch.next();
-			cur = schema.getTableUInt32Type().readDerivedByIdIdx( Authorization,
-				cur.getRequiredId() );
+			cur = (CFBamBuffUInt32Type)(schema.getTableUInt32Type().readDerivedByIdIdx( Authorization,
+				cur.getRequiredId() ));
 			deleteUInt32Type( Authorization, cur );
 		}
 	}
@@ -8282,7 +8282,7 @@ public class CFBamRamUInt32TypeTable
 	public void deleteUInt32TypeByPrevIdx( ICFSecAuthorization Authorization,
 		ICFBamValueByPrevIdxKey argKey )
 	{
-		ICFBamUInt32Type cur;
+		CFBamBuffUInt32Type cur;
 		boolean anyNotNull = false;
 		if( argKey.getOptionalPrevId() != null ) {
 			anyNotNull = true;
@@ -8290,19 +8290,19 @@ public class CFBamRamUInt32TypeTable
 		if( ! anyNotNull ) {
 			return;
 		}
-		LinkedList<ICFBamUInt32Type> matchSet = new LinkedList<ICFBamUInt32Type>();
-		Iterator<ICFBamUInt32Type> values = dictByPKey.values().iterator();
+		LinkedList<CFBamBuffUInt32Type> matchSet = new LinkedList<CFBamBuffUInt32Type>();
+		Iterator<CFBamBuffUInt32Type> values = dictByPKey.values().iterator();
 		while( values.hasNext() ) {
 			cur = values.next();
 			if( argKey.equals( cur ) ) {
 				matchSet.add( cur );
 			}
 		}
-		Iterator<ICFBamUInt32Type> iterMatch = matchSet.iterator();
+		Iterator<CFBamBuffUInt32Type> iterMatch = matchSet.iterator();
 		while( iterMatch.hasNext() ) {
 			cur = iterMatch.next();
-			cur = schema.getTableUInt32Type().readDerivedByIdIdx( Authorization,
-				cur.getRequiredId() );
+			cur = (CFBamBuffUInt32Type)(schema.getTableUInt32Type().readDerivedByIdIdx( Authorization,
+				cur.getRequiredId() ));
 			deleteUInt32Type( Authorization, cur );
 		}
 	}
@@ -8318,7 +8318,7 @@ public class CFBamRamUInt32TypeTable
 	public void deleteUInt32TypeByNextIdx( ICFSecAuthorization Authorization,
 		ICFBamValueByNextIdxKey argKey )
 	{
-		ICFBamUInt32Type cur;
+		CFBamBuffUInt32Type cur;
 		boolean anyNotNull = false;
 		if( argKey.getOptionalNextId() != null ) {
 			anyNotNull = true;
@@ -8326,19 +8326,19 @@ public class CFBamRamUInt32TypeTable
 		if( ! anyNotNull ) {
 			return;
 		}
-		LinkedList<ICFBamUInt32Type> matchSet = new LinkedList<ICFBamUInt32Type>();
-		Iterator<ICFBamUInt32Type> values = dictByPKey.values().iterator();
+		LinkedList<CFBamBuffUInt32Type> matchSet = new LinkedList<CFBamBuffUInt32Type>();
+		Iterator<CFBamBuffUInt32Type> values = dictByPKey.values().iterator();
 		while( values.hasNext() ) {
 			cur = values.next();
 			if( argKey.equals( cur ) ) {
 				matchSet.add( cur );
 			}
 		}
-		Iterator<ICFBamUInt32Type> iterMatch = matchSet.iterator();
+		Iterator<CFBamBuffUInt32Type> iterMatch = matchSet.iterator();
 		while( iterMatch.hasNext() ) {
 			cur = iterMatch.next();
-			cur = schema.getTableUInt32Type().readDerivedByIdIdx( Authorization,
-				cur.getRequiredId() );
+			cur = (CFBamBuffUInt32Type)(schema.getTableUInt32Type().readDerivedByIdIdx( Authorization,
+				cur.getRequiredId() ));
 			deleteUInt32Type( Authorization, cur );
 		}
 	}
@@ -8356,7 +8356,7 @@ public class CFBamRamUInt32TypeTable
 	public void deleteUInt32TypeByContPrevIdx( ICFSecAuthorization Authorization,
 		ICFBamValueByContPrevIdxKey argKey )
 	{
-		ICFBamUInt32Type cur;
+		CFBamBuffUInt32Type cur;
 		boolean anyNotNull = false;
 		anyNotNull = true;
 		if( argKey.getOptionalPrevId() != null ) {
@@ -8365,19 +8365,19 @@ public class CFBamRamUInt32TypeTable
 		if( ! anyNotNull ) {
 			return;
 		}
-		LinkedList<ICFBamUInt32Type> matchSet = new LinkedList<ICFBamUInt32Type>();
-		Iterator<ICFBamUInt32Type> values = dictByPKey.values().iterator();
+		LinkedList<CFBamBuffUInt32Type> matchSet = new LinkedList<CFBamBuffUInt32Type>();
+		Iterator<CFBamBuffUInt32Type> values = dictByPKey.values().iterator();
 		while( values.hasNext() ) {
 			cur = values.next();
 			if( argKey.equals( cur ) ) {
 				matchSet.add( cur );
 			}
 		}
-		Iterator<ICFBamUInt32Type> iterMatch = matchSet.iterator();
+		Iterator<CFBamBuffUInt32Type> iterMatch = matchSet.iterator();
 		while( iterMatch.hasNext() ) {
 			cur = iterMatch.next();
-			cur = schema.getTableUInt32Type().readDerivedByIdIdx( Authorization,
-				cur.getRequiredId() );
+			cur = (CFBamBuffUInt32Type)(schema.getTableUInt32Type().readDerivedByIdIdx( Authorization,
+				cur.getRequiredId() ));
 			deleteUInt32Type( Authorization, cur );
 		}
 	}
@@ -8395,7 +8395,7 @@ public class CFBamRamUInt32TypeTable
 	public void deleteUInt32TypeByContNextIdx( ICFSecAuthorization Authorization,
 		ICFBamValueByContNextIdxKey argKey )
 	{
-		ICFBamUInt32Type cur;
+		CFBamBuffUInt32Type cur;
 		boolean anyNotNull = false;
 		anyNotNull = true;
 		if( argKey.getOptionalNextId() != null ) {
@@ -8404,19 +8404,19 @@ public class CFBamRamUInt32TypeTable
 		if( ! anyNotNull ) {
 			return;
 		}
-		LinkedList<ICFBamUInt32Type> matchSet = new LinkedList<ICFBamUInt32Type>();
-		Iterator<ICFBamUInt32Type> values = dictByPKey.values().iterator();
+		LinkedList<CFBamBuffUInt32Type> matchSet = new LinkedList<CFBamBuffUInt32Type>();
+		Iterator<CFBamBuffUInt32Type> values = dictByPKey.values().iterator();
 		while( values.hasNext() ) {
 			cur = values.next();
 			if( argKey.equals( cur ) ) {
 				matchSet.add( cur );
 			}
 		}
-		Iterator<ICFBamUInt32Type> iterMatch = matchSet.iterator();
+		Iterator<CFBamBuffUInt32Type> iterMatch = matchSet.iterator();
 		while( iterMatch.hasNext() ) {
 			cur = iterMatch.next();
-			cur = schema.getTableUInt32Type().readDerivedByIdIdx( Authorization,
-				cur.getRequiredId() );
+			cur = (CFBamBuffUInt32Type)(schema.getTableUInt32Type().readDerivedByIdIdx( Authorization,
+				cur.getRequiredId() ));
 			deleteUInt32Type( Authorization, cur );
 		}
 	}

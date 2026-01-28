@@ -5958,8 +5958,8 @@ public class CFBamRamTimestampDefTable
 				pkey );
 		}
 		CFLibDbKeyHash256 varScopeId = existing.getRequiredScopeId();
-		CFBamBuffScope container = schema.getTableScope().readDerivedByIdIdx( Authorization,
-			varScopeId );
+		CFBamBuffScope container = (CFBamBuffScope)(schema.getTableScope().readDerivedByIdIdx( Authorization,
+			varScopeId ));
 		if( container == null ) {
 			throw new CFLibNullArgumentException( getClass(),
 				S_ProcName,
@@ -7343,28 +7343,28 @@ public class CFBamRamTimestampDefTable
 		if( ! anyNotNull ) {
 			return;
 		}
-		ICFBamTimestampDef cur;
-		LinkedList<ICFBamTimestampDef> matchSet = new LinkedList<ICFBamTimestampDef>();
-		Iterator<ICFBamTimestampDef> values = dictByPKey.values().iterator();
+		CFBamBuffTimestampDef cur;
+		LinkedList<CFBamBuffTimestampDef> matchSet = new LinkedList<CFBamBuffTimestampDef>();
+		Iterator<CFBamBuffTimestampDef> values = dictByPKey.values().iterator();
 		while( values.hasNext() ) {
 			cur = values.next();
 			if( argKey.equals( cur ) ) {
 				matchSet.add( cur );
 			}
 		}
-		Iterator<ICFBamTimestampDef> iterMatch = matchSet.iterator();
+		Iterator<CFBamBuffTimestampDef> iterMatch = matchSet.iterator();
 		while( iterMatch.hasNext() ) {
 			cur = iterMatch.next();
-			cur = schema.getTableTimestampDef().readDerivedByIdIdx( Authorization,
-				cur.getRequiredId() );
-			String subClassCode = cur.getClassCode();
-			if( "a85d".equals( subClassCode ) ) {
+			cur = (CFBamBuffTimestampDef)(schema.getTableTimestampDef().readDerivedByIdIdx( Authorization,
+				cur.getRequiredId() ));
+			int subClassCode = cur.getClassCode();
+			if( CFBamTimestampDef.CLASS_CODE == subClassCode ) {
 				schema.getTableTimestampDef().deleteTimestampDef( Authorization, cur );
 			}
-			else if( "a85e".equals( subClassCode ) ) {
+			else if( CFBamTimestampType.CLASS_CODE == subClassCode ) {
 				schema.getTableTimestampType().deleteTimestampType( Authorization, (ICFBamTimestampType)cur );
 			}
-			else if( "a881".equals( subClassCode ) ) {
+			else if( CFBamTimestampCol.CLASS_CODE == subClassCode ) {
 				schema.getTableTimestampCol().deleteTimestampCol( Authorization, (ICFBamTimestampCol)cur );
 			}
 			else {
@@ -7387,34 +7387,34 @@ public class CFBamRamTimestampDefTable
 		ICFBamValueByUNameIdxKey argKey )
 	{
 		final String S_ProcName = "deleteTimestampDefByUNameIdx";
-		ICFBamTimestampDef cur;
+		CFBamBuffTimestampDef cur;
 		boolean anyNotNull = false;
 		anyNotNull = true;
 		anyNotNull = true;
 		if( ! anyNotNull ) {
 			return;
 		}
-		LinkedList<ICFBamTimestampDef> matchSet = new LinkedList<ICFBamTimestampDef>();
-		Iterator<ICFBamTimestampDef> values = dictByPKey.values().iterator();
+		LinkedList<CFBamBuffTimestampDef> matchSet = new LinkedList<CFBamBuffTimestampDef>();
+		Iterator<CFBamBuffTimestampDef> values = dictByPKey.values().iterator();
 		while( values.hasNext() ) {
 			cur = values.next();
 			if( argKey.equals( cur ) ) {
 				matchSet.add( cur );
 			}
 		}
-		Iterator<ICFBamTimestampDef> iterMatch = matchSet.iterator();
+		Iterator<CFBamBuffTimestampDef> iterMatch = matchSet.iterator();
 		while( iterMatch.hasNext() ) {
 			cur = iterMatch.next();
-			cur = schema.getTableTimestampDef().readDerivedByIdIdx( Authorization,
-				cur.getRequiredId() );
-			String subClassCode = cur.getClassCode();
-			if( "a85d".equals( subClassCode ) ) {
+			cur = (CFBamBuffTimestampDef)(schema.getTableTimestampDef().readDerivedByIdIdx( Authorization,
+				cur.getRequiredId() ));
+			int subClassCode = cur.getClassCode();
+			if( CFBamTimestampDef.CLASS_CODE == subClassCode ) {
 				schema.getTableTimestampDef().deleteTimestampDef( Authorization, cur );
 			}
-			else if( "a85e".equals( subClassCode ) ) {
+			else if( CFBamTimestampType.CLASS_CODE == subClassCode ) {
 				schema.getTableTimestampType().deleteTimestampType( Authorization, (ICFBamTimestampType)cur );
 			}
-			else if( "a881".equals( subClassCode ) ) {
+			else if( CFBamTimestampCol.CLASS_CODE == subClassCode ) {
 				schema.getTableTimestampCol().deleteTimestampCol( Authorization, (ICFBamTimestampCol)cur );
 			}
 			else {
@@ -7435,33 +7435,33 @@ public class CFBamRamTimestampDefTable
 		ICFBamValueByScopeIdxKey argKey )
 	{
 		final String S_ProcName = "deleteTimestampDefByScopeIdx";
-		ICFBamTimestampDef cur;
+		CFBamBuffTimestampDef cur;
 		boolean anyNotNull = false;
 		anyNotNull = true;
 		if( ! anyNotNull ) {
 			return;
 		}
-		LinkedList<ICFBamTimestampDef> matchSet = new LinkedList<ICFBamTimestampDef>();
-		Iterator<ICFBamTimestampDef> values = dictByPKey.values().iterator();
+		LinkedList<CFBamBuffTimestampDef> matchSet = new LinkedList<CFBamBuffTimestampDef>();
+		Iterator<CFBamBuffTimestampDef> values = dictByPKey.values().iterator();
 		while( values.hasNext() ) {
 			cur = values.next();
 			if( argKey.equals( cur ) ) {
 				matchSet.add( cur );
 			}
 		}
-		Iterator<ICFBamTimestampDef> iterMatch = matchSet.iterator();
+		Iterator<CFBamBuffTimestampDef> iterMatch = matchSet.iterator();
 		while( iterMatch.hasNext() ) {
 			cur = iterMatch.next();
-			cur = schema.getTableTimestampDef().readDerivedByIdIdx( Authorization,
-				cur.getRequiredId() );
-			String subClassCode = cur.getClassCode();
-			if( "a85d".equals( subClassCode ) ) {
+			cur = (CFBamBuffTimestampDef)(schema.getTableTimestampDef().readDerivedByIdIdx( Authorization,
+				cur.getRequiredId() ));
+			int subClassCode = cur.getClassCode();
+			if( CFBamTimestampDef.CLASS_CODE == subClassCode ) {
 				schema.getTableTimestampDef().deleteTimestampDef( Authorization, cur );
 			}
-			else if( "a85e".equals( subClassCode ) ) {
+			else if( CFBamTimestampType.CLASS_CODE == subClassCode ) {
 				schema.getTableTimestampType().deleteTimestampType( Authorization, (ICFBamTimestampType)cur );
 			}
-			else if( "a881".equals( subClassCode ) ) {
+			else if( CFBamTimestampCol.CLASS_CODE == subClassCode ) {
 				schema.getTableTimestampCol().deleteTimestampCol( Authorization, (ICFBamTimestampCol)cur );
 			}
 			else {
@@ -7482,7 +7482,7 @@ public class CFBamRamTimestampDefTable
 		ICFBamValueByDefSchemaIdxKey argKey )
 	{
 		final String S_ProcName = "deleteTimestampDefByDefSchemaIdx";
-		ICFBamTimestampDef cur;
+		CFBamBuffTimestampDef cur;
 		boolean anyNotNull = false;
 		if( argKey.getOptionalDefSchemaId() != null ) {
 			anyNotNull = true;
@@ -7490,27 +7490,27 @@ public class CFBamRamTimestampDefTable
 		if( ! anyNotNull ) {
 			return;
 		}
-		LinkedList<ICFBamTimestampDef> matchSet = new LinkedList<ICFBamTimestampDef>();
-		Iterator<ICFBamTimestampDef> values = dictByPKey.values().iterator();
+		LinkedList<CFBamBuffTimestampDef> matchSet = new LinkedList<CFBamBuffTimestampDef>();
+		Iterator<CFBamBuffTimestampDef> values = dictByPKey.values().iterator();
 		while( values.hasNext() ) {
 			cur = values.next();
 			if( argKey.equals( cur ) ) {
 				matchSet.add( cur );
 			}
 		}
-		Iterator<ICFBamTimestampDef> iterMatch = matchSet.iterator();
+		Iterator<CFBamBuffTimestampDef> iterMatch = matchSet.iterator();
 		while( iterMatch.hasNext() ) {
 			cur = iterMatch.next();
-			cur = schema.getTableTimestampDef().readDerivedByIdIdx( Authorization,
-				cur.getRequiredId() );
-			String subClassCode = cur.getClassCode();
-			if( "a85d".equals( subClassCode ) ) {
+			cur = (CFBamBuffTimestampDef)(schema.getTableTimestampDef().readDerivedByIdIdx( Authorization,
+				cur.getRequiredId() ));
+			int subClassCode = cur.getClassCode();
+			if( CFBamTimestampDef.CLASS_CODE == subClassCode ) {
 				schema.getTableTimestampDef().deleteTimestampDef( Authorization, cur );
 			}
-			else if( "a85e".equals( subClassCode ) ) {
+			else if( CFBamTimestampType.CLASS_CODE == subClassCode ) {
 				schema.getTableTimestampType().deleteTimestampType( Authorization, (ICFBamTimestampType)cur );
 			}
-			else if( "a881".equals( subClassCode ) ) {
+			else if( CFBamTimestampCol.CLASS_CODE == subClassCode ) {
 				schema.getTableTimestampCol().deleteTimestampCol( Authorization, (ICFBamTimestampCol)cur );
 			}
 			else {
@@ -7531,7 +7531,7 @@ public class CFBamRamTimestampDefTable
 		ICFBamValueByPrevIdxKey argKey )
 	{
 		final String S_ProcName = "deleteTimestampDefByPrevIdx";
-		ICFBamTimestampDef cur;
+		CFBamBuffTimestampDef cur;
 		boolean anyNotNull = false;
 		if( argKey.getOptionalPrevId() != null ) {
 			anyNotNull = true;
@@ -7539,27 +7539,27 @@ public class CFBamRamTimestampDefTable
 		if( ! anyNotNull ) {
 			return;
 		}
-		LinkedList<ICFBamTimestampDef> matchSet = new LinkedList<ICFBamTimestampDef>();
-		Iterator<ICFBamTimestampDef> values = dictByPKey.values().iterator();
+		LinkedList<CFBamBuffTimestampDef> matchSet = new LinkedList<CFBamBuffTimestampDef>();
+		Iterator<CFBamBuffTimestampDef> values = dictByPKey.values().iterator();
 		while( values.hasNext() ) {
 			cur = values.next();
 			if( argKey.equals( cur ) ) {
 				matchSet.add( cur );
 			}
 		}
-		Iterator<ICFBamTimestampDef> iterMatch = matchSet.iterator();
+		Iterator<CFBamBuffTimestampDef> iterMatch = matchSet.iterator();
 		while( iterMatch.hasNext() ) {
 			cur = iterMatch.next();
-			cur = schema.getTableTimestampDef().readDerivedByIdIdx( Authorization,
-				cur.getRequiredId() );
-			String subClassCode = cur.getClassCode();
-			if( "a85d".equals( subClassCode ) ) {
+			cur = (CFBamBuffTimestampDef)(schema.getTableTimestampDef().readDerivedByIdIdx( Authorization,
+				cur.getRequiredId() ));
+			int subClassCode = cur.getClassCode();
+			if( CFBamTimestampDef.CLASS_CODE == subClassCode ) {
 				schema.getTableTimestampDef().deleteTimestampDef( Authorization, cur );
 			}
-			else if( "a85e".equals( subClassCode ) ) {
+			else if( CFBamTimestampType.CLASS_CODE == subClassCode ) {
 				schema.getTableTimestampType().deleteTimestampType( Authorization, (ICFBamTimestampType)cur );
 			}
-			else if( "a881".equals( subClassCode ) ) {
+			else if( CFBamTimestampCol.CLASS_CODE == subClassCode ) {
 				schema.getTableTimestampCol().deleteTimestampCol( Authorization, (ICFBamTimestampCol)cur );
 			}
 			else {
@@ -7580,7 +7580,7 @@ public class CFBamRamTimestampDefTable
 		ICFBamValueByNextIdxKey argKey )
 	{
 		final String S_ProcName = "deleteTimestampDefByNextIdx";
-		ICFBamTimestampDef cur;
+		CFBamBuffTimestampDef cur;
 		boolean anyNotNull = false;
 		if( argKey.getOptionalNextId() != null ) {
 			anyNotNull = true;
@@ -7588,27 +7588,27 @@ public class CFBamRamTimestampDefTable
 		if( ! anyNotNull ) {
 			return;
 		}
-		LinkedList<ICFBamTimestampDef> matchSet = new LinkedList<ICFBamTimestampDef>();
-		Iterator<ICFBamTimestampDef> values = dictByPKey.values().iterator();
+		LinkedList<CFBamBuffTimestampDef> matchSet = new LinkedList<CFBamBuffTimestampDef>();
+		Iterator<CFBamBuffTimestampDef> values = dictByPKey.values().iterator();
 		while( values.hasNext() ) {
 			cur = values.next();
 			if( argKey.equals( cur ) ) {
 				matchSet.add( cur );
 			}
 		}
-		Iterator<ICFBamTimestampDef> iterMatch = matchSet.iterator();
+		Iterator<CFBamBuffTimestampDef> iterMatch = matchSet.iterator();
 		while( iterMatch.hasNext() ) {
 			cur = iterMatch.next();
-			cur = schema.getTableTimestampDef().readDerivedByIdIdx( Authorization,
-				cur.getRequiredId() );
-			String subClassCode = cur.getClassCode();
-			if( "a85d".equals( subClassCode ) ) {
+			cur = (CFBamBuffTimestampDef)(schema.getTableTimestampDef().readDerivedByIdIdx( Authorization,
+				cur.getRequiredId() ));
+			int subClassCode = cur.getClassCode();
+			if( CFBamTimestampDef.CLASS_CODE == subClassCode ) {
 				schema.getTableTimestampDef().deleteTimestampDef( Authorization, cur );
 			}
-			else if( "a85e".equals( subClassCode ) ) {
+			else if( CFBamTimestampType.CLASS_CODE == subClassCode ) {
 				schema.getTableTimestampType().deleteTimestampType( Authorization, (ICFBamTimestampType)cur );
 			}
-			else if( "a881".equals( subClassCode ) ) {
+			else if( CFBamTimestampCol.CLASS_CODE == subClassCode ) {
 				schema.getTableTimestampCol().deleteTimestampCol( Authorization, (ICFBamTimestampCol)cur );
 			}
 			else {
@@ -7631,7 +7631,7 @@ public class CFBamRamTimestampDefTable
 		ICFBamValueByContPrevIdxKey argKey )
 	{
 		final String S_ProcName = "deleteTimestampDefByContPrevIdx";
-		ICFBamTimestampDef cur;
+		CFBamBuffTimestampDef cur;
 		boolean anyNotNull = false;
 		anyNotNull = true;
 		if( argKey.getOptionalPrevId() != null ) {
@@ -7640,27 +7640,27 @@ public class CFBamRamTimestampDefTable
 		if( ! anyNotNull ) {
 			return;
 		}
-		LinkedList<ICFBamTimestampDef> matchSet = new LinkedList<ICFBamTimestampDef>();
-		Iterator<ICFBamTimestampDef> values = dictByPKey.values().iterator();
+		LinkedList<CFBamBuffTimestampDef> matchSet = new LinkedList<CFBamBuffTimestampDef>();
+		Iterator<CFBamBuffTimestampDef> values = dictByPKey.values().iterator();
 		while( values.hasNext() ) {
 			cur = values.next();
 			if( argKey.equals( cur ) ) {
 				matchSet.add( cur );
 			}
 		}
-		Iterator<ICFBamTimestampDef> iterMatch = matchSet.iterator();
+		Iterator<CFBamBuffTimestampDef> iterMatch = matchSet.iterator();
 		while( iterMatch.hasNext() ) {
 			cur = iterMatch.next();
-			cur = schema.getTableTimestampDef().readDerivedByIdIdx( Authorization,
-				cur.getRequiredId() );
-			String subClassCode = cur.getClassCode();
-			if( "a85d".equals( subClassCode ) ) {
+			cur = (CFBamBuffTimestampDef)(schema.getTableTimestampDef().readDerivedByIdIdx( Authorization,
+				cur.getRequiredId() ));
+			int subClassCode = cur.getClassCode();
+			if( CFBamTimestampDef.CLASS_CODE == subClassCode ) {
 				schema.getTableTimestampDef().deleteTimestampDef( Authorization, cur );
 			}
-			else if( "a85e".equals( subClassCode ) ) {
+			else if( CFBamTimestampType.CLASS_CODE == subClassCode ) {
 				schema.getTableTimestampType().deleteTimestampType( Authorization, (ICFBamTimestampType)cur );
 			}
-			else if( "a881".equals( subClassCode ) ) {
+			else if( CFBamTimestampCol.CLASS_CODE == subClassCode ) {
 				schema.getTableTimestampCol().deleteTimestampCol( Authorization, (ICFBamTimestampCol)cur );
 			}
 			else {
@@ -7683,7 +7683,7 @@ public class CFBamRamTimestampDefTable
 		ICFBamValueByContNextIdxKey argKey )
 	{
 		final String S_ProcName = "deleteTimestampDefByContNextIdx";
-		ICFBamTimestampDef cur;
+		CFBamBuffTimestampDef cur;
 		boolean anyNotNull = false;
 		anyNotNull = true;
 		if( argKey.getOptionalNextId() != null ) {
@@ -7692,27 +7692,27 @@ public class CFBamRamTimestampDefTable
 		if( ! anyNotNull ) {
 			return;
 		}
-		LinkedList<ICFBamTimestampDef> matchSet = new LinkedList<ICFBamTimestampDef>();
-		Iterator<ICFBamTimestampDef> values = dictByPKey.values().iterator();
+		LinkedList<CFBamBuffTimestampDef> matchSet = new LinkedList<CFBamBuffTimestampDef>();
+		Iterator<CFBamBuffTimestampDef> values = dictByPKey.values().iterator();
 		while( values.hasNext() ) {
 			cur = values.next();
 			if( argKey.equals( cur ) ) {
 				matchSet.add( cur );
 			}
 		}
-		Iterator<ICFBamTimestampDef> iterMatch = matchSet.iterator();
+		Iterator<CFBamBuffTimestampDef> iterMatch = matchSet.iterator();
 		while( iterMatch.hasNext() ) {
 			cur = iterMatch.next();
-			cur = schema.getTableTimestampDef().readDerivedByIdIdx( Authorization,
-				cur.getRequiredId() );
-			String subClassCode = cur.getClassCode();
-			if( "a85d".equals( subClassCode ) ) {
+			cur = (CFBamBuffTimestampDef)(schema.getTableTimestampDef().readDerivedByIdIdx( Authorization,
+				cur.getRequiredId() ));
+			int subClassCode = cur.getClassCode();
+			if( CFBamTimestampDef.CLASS_CODE == subClassCode ) {
 				schema.getTableTimestampDef().deleteTimestampDef( Authorization, cur );
 			}
-			else if( "a85e".equals( subClassCode ) ) {
+			else if( CFBamTimestampType.CLASS_CODE == subClassCode ) {
 				schema.getTableTimestampType().deleteTimestampType( Authorization, (ICFBamTimestampType)cur );
 			}
-			else if( "a881".equals( subClassCode ) ) {
+			else if( CFBamTimestampCol.CLASS_CODE == subClassCode ) {
 				schema.getTableTimestampCol().deleteTimestampCol( Authorization, (ICFBamTimestampCol)cur );
 			}
 			else {

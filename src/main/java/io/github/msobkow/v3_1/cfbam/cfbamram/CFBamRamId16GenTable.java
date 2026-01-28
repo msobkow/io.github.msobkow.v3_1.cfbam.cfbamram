@@ -6667,8 +6667,8 @@ public class CFBamRamId16GenTable
 				pkey );
 		}
 		CFLibDbKeyHash256 varSchemaDefId = existing.getRequiredSchemaDefId();
-		CFBamBuffSchemaDef container = schema.getTableSchemaDef().readDerivedByIdIdx( Authorization,
-			varSchemaDefId );
+		CFBamBuffSchemaDef container = (CFBamBuffSchemaDef)(schema.getTableSchemaDef().readDerivedByIdIdx( Authorization,
+			varSchemaDefId ));
 		if( container == null ) {
 			throw new CFLibNullArgumentException( getClass(),
 				S_ProcName,
@@ -8032,25 +8032,25 @@ public class CFBamRamId16GenTable
 	public void deleteId16GenBySchemaIdx( ICFSecAuthorization Authorization,
 		ICFBamInt16TypeBySchemaIdxKey argKey )
 	{
-		ICFBamId16Gen cur;
+		CFBamBuffId16Gen cur;
 		boolean anyNotNull = false;
 		anyNotNull = true;
 		if( ! anyNotNull ) {
 			return;
 		}
-		LinkedList<ICFBamId16Gen> matchSet = new LinkedList<ICFBamId16Gen>();
-		Iterator<ICFBamId16Gen> values = dictByPKey.values().iterator();
+		LinkedList<CFBamBuffId16Gen> matchSet = new LinkedList<CFBamBuffId16Gen>();
+		Iterator<CFBamBuffId16Gen> values = dictByPKey.values().iterator();
 		while( values.hasNext() ) {
 			cur = values.next();
 			if( argKey.equals( cur ) ) {
 				matchSet.add( cur );
 			}
 		}
-		Iterator<ICFBamId16Gen> iterMatch = matchSet.iterator();
+		Iterator<CFBamBuffId16Gen> iterMatch = matchSet.iterator();
 		while( iterMatch.hasNext() ) {
 			cur = iterMatch.next();
-			cur = schema.getTableId16Gen().readDerivedByIdIdx( Authorization,
-				cur.getRequiredId() );
+			cur = (CFBamBuffId16Gen)(schema.getTableId16Gen().readDerivedByIdIdx( Authorization,
+				cur.getRequiredId() ));
 			deleteId16Gen( Authorization, cur );
 		}
 	}
@@ -8063,20 +8063,20 @@ public class CFBamRamId16GenTable
 		if( ! anyNotNull ) {
 			return;
 		}
-		ICFBamId16Gen cur;
-		LinkedList<ICFBamId16Gen> matchSet = new LinkedList<ICFBamId16Gen>();
-		Iterator<ICFBamId16Gen> values = dictByPKey.values().iterator();
+		CFBamBuffId16Gen cur;
+		LinkedList<CFBamBuffId16Gen> matchSet = new LinkedList<CFBamBuffId16Gen>();
+		Iterator<CFBamBuffId16Gen> values = dictByPKey.values().iterator();
 		while( values.hasNext() ) {
 			cur = values.next();
 			if( argKey.equals( cur ) ) {
 				matchSet.add( cur );
 			}
 		}
-		Iterator<ICFBamId16Gen> iterMatch = matchSet.iterator();
+		Iterator<CFBamBuffId16Gen> iterMatch = matchSet.iterator();
 		while( iterMatch.hasNext() ) {
 			cur = iterMatch.next();
-			cur = schema.getTableId16Gen().readDerivedByIdIdx( Authorization,
-				cur.getRequiredId() );
+			cur = (CFBamBuffId16Gen)(schema.getTableId16Gen().readDerivedByIdIdx( Authorization,
+				cur.getRequiredId() ));
 			deleteId16Gen( Authorization, cur );
 		}
 	}
@@ -8094,26 +8094,26 @@ public class CFBamRamId16GenTable
 	public void deleteId16GenByUNameIdx( ICFSecAuthorization Authorization,
 		ICFBamValueByUNameIdxKey argKey )
 	{
-		ICFBamId16Gen cur;
+		CFBamBuffId16Gen cur;
 		boolean anyNotNull = false;
 		anyNotNull = true;
 		anyNotNull = true;
 		if( ! anyNotNull ) {
 			return;
 		}
-		LinkedList<ICFBamId16Gen> matchSet = new LinkedList<ICFBamId16Gen>();
-		Iterator<ICFBamId16Gen> values = dictByPKey.values().iterator();
+		LinkedList<CFBamBuffId16Gen> matchSet = new LinkedList<CFBamBuffId16Gen>();
+		Iterator<CFBamBuffId16Gen> values = dictByPKey.values().iterator();
 		while( values.hasNext() ) {
 			cur = values.next();
 			if( argKey.equals( cur ) ) {
 				matchSet.add( cur );
 			}
 		}
-		Iterator<ICFBamId16Gen> iterMatch = matchSet.iterator();
+		Iterator<CFBamBuffId16Gen> iterMatch = matchSet.iterator();
 		while( iterMatch.hasNext() ) {
 			cur = iterMatch.next();
-			cur = schema.getTableId16Gen().readDerivedByIdIdx( Authorization,
-				cur.getRequiredId() );
+			cur = (CFBamBuffId16Gen)(schema.getTableId16Gen().readDerivedByIdIdx( Authorization,
+				cur.getRequiredId() ));
 			deleteId16Gen( Authorization, cur );
 		}
 	}
@@ -8129,25 +8129,25 @@ public class CFBamRamId16GenTable
 	public void deleteId16GenByScopeIdx( ICFSecAuthorization Authorization,
 		ICFBamValueByScopeIdxKey argKey )
 	{
-		ICFBamId16Gen cur;
+		CFBamBuffId16Gen cur;
 		boolean anyNotNull = false;
 		anyNotNull = true;
 		if( ! anyNotNull ) {
 			return;
 		}
-		LinkedList<ICFBamId16Gen> matchSet = new LinkedList<ICFBamId16Gen>();
-		Iterator<ICFBamId16Gen> values = dictByPKey.values().iterator();
+		LinkedList<CFBamBuffId16Gen> matchSet = new LinkedList<CFBamBuffId16Gen>();
+		Iterator<CFBamBuffId16Gen> values = dictByPKey.values().iterator();
 		while( values.hasNext() ) {
 			cur = values.next();
 			if( argKey.equals( cur ) ) {
 				matchSet.add( cur );
 			}
 		}
-		Iterator<ICFBamId16Gen> iterMatch = matchSet.iterator();
+		Iterator<CFBamBuffId16Gen> iterMatch = matchSet.iterator();
 		while( iterMatch.hasNext() ) {
 			cur = iterMatch.next();
-			cur = schema.getTableId16Gen().readDerivedByIdIdx( Authorization,
-				cur.getRequiredId() );
+			cur = (CFBamBuffId16Gen)(schema.getTableId16Gen().readDerivedByIdIdx( Authorization,
+				cur.getRequiredId() ));
 			deleteId16Gen( Authorization, cur );
 		}
 	}
@@ -8163,7 +8163,7 @@ public class CFBamRamId16GenTable
 	public void deleteId16GenByDefSchemaIdx( ICFSecAuthorization Authorization,
 		ICFBamValueByDefSchemaIdxKey argKey )
 	{
-		ICFBamId16Gen cur;
+		CFBamBuffId16Gen cur;
 		boolean anyNotNull = false;
 		if( argKey.getOptionalDefSchemaId() != null ) {
 			anyNotNull = true;
@@ -8171,19 +8171,19 @@ public class CFBamRamId16GenTable
 		if( ! anyNotNull ) {
 			return;
 		}
-		LinkedList<ICFBamId16Gen> matchSet = new LinkedList<ICFBamId16Gen>();
-		Iterator<ICFBamId16Gen> values = dictByPKey.values().iterator();
+		LinkedList<CFBamBuffId16Gen> matchSet = new LinkedList<CFBamBuffId16Gen>();
+		Iterator<CFBamBuffId16Gen> values = dictByPKey.values().iterator();
 		while( values.hasNext() ) {
 			cur = values.next();
 			if( argKey.equals( cur ) ) {
 				matchSet.add( cur );
 			}
 		}
-		Iterator<ICFBamId16Gen> iterMatch = matchSet.iterator();
+		Iterator<CFBamBuffId16Gen> iterMatch = matchSet.iterator();
 		while( iterMatch.hasNext() ) {
 			cur = iterMatch.next();
-			cur = schema.getTableId16Gen().readDerivedByIdIdx( Authorization,
-				cur.getRequiredId() );
+			cur = (CFBamBuffId16Gen)(schema.getTableId16Gen().readDerivedByIdIdx( Authorization,
+				cur.getRequiredId() ));
 			deleteId16Gen( Authorization, cur );
 		}
 	}
@@ -8199,7 +8199,7 @@ public class CFBamRamId16GenTable
 	public void deleteId16GenByPrevIdx( ICFSecAuthorization Authorization,
 		ICFBamValueByPrevIdxKey argKey )
 	{
-		ICFBamId16Gen cur;
+		CFBamBuffId16Gen cur;
 		boolean anyNotNull = false;
 		if( argKey.getOptionalPrevId() != null ) {
 			anyNotNull = true;
@@ -8207,19 +8207,19 @@ public class CFBamRamId16GenTable
 		if( ! anyNotNull ) {
 			return;
 		}
-		LinkedList<ICFBamId16Gen> matchSet = new LinkedList<ICFBamId16Gen>();
-		Iterator<ICFBamId16Gen> values = dictByPKey.values().iterator();
+		LinkedList<CFBamBuffId16Gen> matchSet = new LinkedList<CFBamBuffId16Gen>();
+		Iterator<CFBamBuffId16Gen> values = dictByPKey.values().iterator();
 		while( values.hasNext() ) {
 			cur = values.next();
 			if( argKey.equals( cur ) ) {
 				matchSet.add( cur );
 			}
 		}
-		Iterator<ICFBamId16Gen> iterMatch = matchSet.iterator();
+		Iterator<CFBamBuffId16Gen> iterMatch = matchSet.iterator();
 		while( iterMatch.hasNext() ) {
 			cur = iterMatch.next();
-			cur = schema.getTableId16Gen().readDerivedByIdIdx( Authorization,
-				cur.getRequiredId() );
+			cur = (CFBamBuffId16Gen)(schema.getTableId16Gen().readDerivedByIdIdx( Authorization,
+				cur.getRequiredId() ));
 			deleteId16Gen( Authorization, cur );
 		}
 	}
@@ -8235,7 +8235,7 @@ public class CFBamRamId16GenTable
 	public void deleteId16GenByNextIdx( ICFSecAuthorization Authorization,
 		ICFBamValueByNextIdxKey argKey )
 	{
-		ICFBamId16Gen cur;
+		CFBamBuffId16Gen cur;
 		boolean anyNotNull = false;
 		if( argKey.getOptionalNextId() != null ) {
 			anyNotNull = true;
@@ -8243,19 +8243,19 @@ public class CFBamRamId16GenTable
 		if( ! anyNotNull ) {
 			return;
 		}
-		LinkedList<ICFBamId16Gen> matchSet = new LinkedList<ICFBamId16Gen>();
-		Iterator<ICFBamId16Gen> values = dictByPKey.values().iterator();
+		LinkedList<CFBamBuffId16Gen> matchSet = new LinkedList<CFBamBuffId16Gen>();
+		Iterator<CFBamBuffId16Gen> values = dictByPKey.values().iterator();
 		while( values.hasNext() ) {
 			cur = values.next();
 			if( argKey.equals( cur ) ) {
 				matchSet.add( cur );
 			}
 		}
-		Iterator<ICFBamId16Gen> iterMatch = matchSet.iterator();
+		Iterator<CFBamBuffId16Gen> iterMatch = matchSet.iterator();
 		while( iterMatch.hasNext() ) {
 			cur = iterMatch.next();
-			cur = schema.getTableId16Gen().readDerivedByIdIdx( Authorization,
-				cur.getRequiredId() );
+			cur = (CFBamBuffId16Gen)(schema.getTableId16Gen().readDerivedByIdIdx( Authorization,
+				cur.getRequiredId() ));
 			deleteId16Gen( Authorization, cur );
 		}
 	}
@@ -8273,7 +8273,7 @@ public class CFBamRamId16GenTable
 	public void deleteId16GenByContPrevIdx( ICFSecAuthorization Authorization,
 		ICFBamValueByContPrevIdxKey argKey )
 	{
-		ICFBamId16Gen cur;
+		CFBamBuffId16Gen cur;
 		boolean anyNotNull = false;
 		anyNotNull = true;
 		if( argKey.getOptionalPrevId() != null ) {
@@ -8282,19 +8282,19 @@ public class CFBamRamId16GenTable
 		if( ! anyNotNull ) {
 			return;
 		}
-		LinkedList<ICFBamId16Gen> matchSet = new LinkedList<ICFBamId16Gen>();
-		Iterator<ICFBamId16Gen> values = dictByPKey.values().iterator();
+		LinkedList<CFBamBuffId16Gen> matchSet = new LinkedList<CFBamBuffId16Gen>();
+		Iterator<CFBamBuffId16Gen> values = dictByPKey.values().iterator();
 		while( values.hasNext() ) {
 			cur = values.next();
 			if( argKey.equals( cur ) ) {
 				matchSet.add( cur );
 			}
 		}
-		Iterator<ICFBamId16Gen> iterMatch = matchSet.iterator();
+		Iterator<CFBamBuffId16Gen> iterMatch = matchSet.iterator();
 		while( iterMatch.hasNext() ) {
 			cur = iterMatch.next();
-			cur = schema.getTableId16Gen().readDerivedByIdIdx( Authorization,
-				cur.getRequiredId() );
+			cur = (CFBamBuffId16Gen)(schema.getTableId16Gen().readDerivedByIdIdx( Authorization,
+				cur.getRequiredId() ));
 			deleteId16Gen( Authorization, cur );
 		}
 	}
@@ -8312,7 +8312,7 @@ public class CFBamRamId16GenTable
 	public void deleteId16GenByContNextIdx( ICFSecAuthorization Authorization,
 		ICFBamValueByContNextIdxKey argKey )
 	{
-		ICFBamId16Gen cur;
+		CFBamBuffId16Gen cur;
 		boolean anyNotNull = false;
 		anyNotNull = true;
 		if( argKey.getOptionalNextId() != null ) {
@@ -8321,19 +8321,19 @@ public class CFBamRamId16GenTable
 		if( ! anyNotNull ) {
 			return;
 		}
-		LinkedList<ICFBamId16Gen> matchSet = new LinkedList<ICFBamId16Gen>();
-		Iterator<ICFBamId16Gen> values = dictByPKey.values().iterator();
+		LinkedList<CFBamBuffId16Gen> matchSet = new LinkedList<CFBamBuffId16Gen>();
+		Iterator<CFBamBuffId16Gen> values = dictByPKey.values().iterator();
 		while( values.hasNext() ) {
 			cur = values.next();
 			if( argKey.equals( cur ) ) {
 				matchSet.add( cur );
 			}
 		}
-		Iterator<ICFBamId16Gen> iterMatch = matchSet.iterator();
+		Iterator<CFBamBuffId16Gen> iterMatch = matchSet.iterator();
 		while( iterMatch.hasNext() ) {
 			cur = iterMatch.next();
-			cur = schema.getTableId16Gen().readDerivedByIdIdx( Authorization,
-				cur.getRequiredId() );
+			cur = (CFBamBuffId16Gen)(schema.getTableId16Gen().readDerivedByIdIdx( Authorization,
+				cur.getRequiredId() ));
 			deleteId16Gen( Authorization, cur );
 		}
 	}

@@ -6744,8 +6744,8 @@ public class CFBamRamTZTimeColTable
 				pkey );
 		}
 		CFLibDbKeyHash256 varTableId = existing.getRequiredTableId();
-		CFBamBuffTable container = schema.getTableTable().readDerivedByIdIdx( Authorization,
-			varTableId );
+		CFBamBuffTable container = (CFBamBuffTable)(schema.getTableTable().readDerivedByIdIdx( Authorization,
+			varTableId ));
 		if( container == null ) {
 			throw new CFLibNullArgumentException( getClass(),
 				S_ProcName,
@@ -8115,25 +8115,25 @@ public class CFBamRamTZTimeColTable
 	public void deleteTZTimeColByTableIdx( ICFSecAuthorization Authorization,
 		ICFBamTZTimeColByTableIdxKey argKey )
 	{
-		ICFBamTZTimeCol cur;
+		CFBamBuffTZTimeCol cur;
 		boolean anyNotNull = false;
 		anyNotNull = true;
 		if( ! anyNotNull ) {
 			return;
 		}
-		LinkedList<ICFBamTZTimeCol> matchSet = new LinkedList<ICFBamTZTimeCol>();
-		Iterator<ICFBamTZTimeCol> values = dictByPKey.values().iterator();
+		LinkedList<CFBamBuffTZTimeCol> matchSet = new LinkedList<CFBamBuffTZTimeCol>();
+		Iterator<CFBamBuffTZTimeCol> values = dictByPKey.values().iterator();
 		while( values.hasNext() ) {
 			cur = values.next();
 			if( argKey.equals( cur ) ) {
 				matchSet.add( cur );
 			}
 		}
-		Iterator<ICFBamTZTimeCol> iterMatch = matchSet.iterator();
+		Iterator<CFBamBuffTZTimeCol> iterMatch = matchSet.iterator();
 		while( iterMatch.hasNext() ) {
 			cur = iterMatch.next();
-			cur = schema.getTableTZTimeCol().readDerivedByIdIdx( Authorization,
-				cur.getRequiredId() );
+			cur = (CFBamBuffTZTimeCol)(schema.getTableTZTimeCol().readDerivedByIdIdx( Authorization,
+				cur.getRequiredId() ));
 			deleteTZTimeCol( Authorization, cur );
 		}
 	}
@@ -8146,20 +8146,20 @@ public class CFBamRamTZTimeColTable
 		if( ! anyNotNull ) {
 			return;
 		}
-		ICFBamTZTimeCol cur;
-		LinkedList<ICFBamTZTimeCol> matchSet = new LinkedList<ICFBamTZTimeCol>();
-		Iterator<ICFBamTZTimeCol> values = dictByPKey.values().iterator();
+		CFBamBuffTZTimeCol cur;
+		LinkedList<CFBamBuffTZTimeCol> matchSet = new LinkedList<CFBamBuffTZTimeCol>();
+		Iterator<CFBamBuffTZTimeCol> values = dictByPKey.values().iterator();
 		while( values.hasNext() ) {
 			cur = values.next();
 			if( argKey.equals( cur ) ) {
 				matchSet.add( cur );
 			}
 		}
-		Iterator<ICFBamTZTimeCol> iterMatch = matchSet.iterator();
+		Iterator<CFBamBuffTZTimeCol> iterMatch = matchSet.iterator();
 		while( iterMatch.hasNext() ) {
 			cur = iterMatch.next();
-			cur = schema.getTableTZTimeCol().readDerivedByIdIdx( Authorization,
-				cur.getRequiredId() );
+			cur = (CFBamBuffTZTimeCol)(schema.getTableTZTimeCol().readDerivedByIdIdx( Authorization,
+				cur.getRequiredId() ));
 			deleteTZTimeCol( Authorization, cur );
 		}
 	}
@@ -8177,26 +8177,26 @@ public class CFBamRamTZTimeColTable
 	public void deleteTZTimeColByUNameIdx( ICFSecAuthorization Authorization,
 		ICFBamValueByUNameIdxKey argKey )
 	{
-		ICFBamTZTimeCol cur;
+		CFBamBuffTZTimeCol cur;
 		boolean anyNotNull = false;
 		anyNotNull = true;
 		anyNotNull = true;
 		if( ! anyNotNull ) {
 			return;
 		}
-		LinkedList<ICFBamTZTimeCol> matchSet = new LinkedList<ICFBamTZTimeCol>();
-		Iterator<ICFBamTZTimeCol> values = dictByPKey.values().iterator();
+		LinkedList<CFBamBuffTZTimeCol> matchSet = new LinkedList<CFBamBuffTZTimeCol>();
+		Iterator<CFBamBuffTZTimeCol> values = dictByPKey.values().iterator();
 		while( values.hasNext() ) {
 			cur = values.next();
 			if( argKey.equals( cur ) ) {
 				matchSet.add( cur );
 			}
 		}
-		Iterator<ICFBamTZTimeCol> iterMatch = matchSet.iterator();
+		Iterator<CFBamBuffTZTimeCol> iterMatch = matchSet.iterator();
 		while( iterMatch.hasNext() ) {
 			cur = iterMatch.next();
-			cur = schema.getTableTZTimeCol().readDerivedByIdIdx( Authorization,
-				cur.getRequiredId() );
+			cur = (CFBamBuffTZTimeCol)(schema.getTableTZTimeCol().readDerivedByIdIdx( Authorization,
+				cur.getRequiredId() ));
 			deleteTZTimeCol( Authorization, cur );
 		}
 	}
@@ -8212,25 +8212,25 @@ public class CFBamRamTZTimeColTable
 	public void deleteTZTimeColByScopeIdx( ICFSecAuthorization Authorization,
 		ICFBamValueByScopeIdxKey argKey )
 	{
-		ICFBamTZTimeCol cur;
+		CFBamBuffTZTimeCol cur;
 		boolean anyNotNull = false;
 		anyNotNull = true;
 		if( ! anyNotNull ) {
 			return;
 		}
-		LinkedList<ICFBamTZTimeCol> matchSet = new LinkedList<ICFBamTZTimeCol>();
-		Iterator<ICFBamTZTimeCol> values = dictByPKey.values().iterator();
+		LinkedList<CFBamBuffTZTimeCol> matchSet = new LinkedList<CFBamBuffTZTimeCol>();
+		Iterator<CFBamBuffTZTimeCol> values = dictByPKey.values().iterator();
 		while( values.hasNext() ) {
 			cur = values.next();
 			if( argKey.equals( cur ) ) {
 				matchSet.add( cur );
 			}
 		}
-		Iterator<ICFBamTZTimeCol> iterMatch = matchSet.iterator();
+		Iterator<CFBamBuffTZTimeCol> iterMatch = matchSet.iterator();
 		while( iterMatch.hasNext() ) {
 			cur = iterMatch.next();
-			cur = schema.getTableTZTimeCol().readDerivedByIdIdx( Authorization,
-				cur.getRequiredId() );
+			cur = (CFBamBuffTZTimeCol)(schema.getTableTZTimeCol().readDerivedByIdIdx( Authorization,
+				cur.getRequiredId() ));
 			deleteTZTimeCol( Authorization, cur );
 		}
 	}
@@ -8246,7 +8246,7 @@ public class CFBamRamTZTimeColTable
 	public void deleteTZTimeColByDefSchemaIdx( ICFSecAuthorization Authorization,
 		ICFBamValueByDefSchemaIdxKey argKey )
 	{
-		ICFBamTZTimeCol cur;
+		CFBamBuffTZTimeCol cur;
 		boolean anyNotNull = false;
 		if( argKey.getOptionalDefSchemaId() != null ) {
 			anyNotNull = true;
@@ -8254,19 +8254,19 @@ public class CFBamRamTZTimeColTable
 		if( ! anyNotNull ) {
 			return;
 		}
-		LinkedList<ICFBamTZTimeCol> matchSet = new LinkedList<ICFBamTZTimeCol>();
-		Iterator<ICFBamTZTimeCol> values = dictByPKey.values().iterator();
+		LinkedList<CFBamBuffTZTimeCol> matchSet = new LinkedList<CFBamBuffTZTimeCol>();
+		Iterator<CFBamBuffTZTimeCol> values = dictByPKey.values().iterator();
 		while( values.hasNext() ) {
 			cur = values.next();
 			if( argKey.equals( cur ) ) {
 				matchSet.add( cur );
 			}
 		}
-		Iterator<ICFBamTZTimeCol> iterMatch = matchSet.iterator();
+		Iterator<CFBamBuffTZTimeCol> iterMatch = matchSet.iterator();
 		while( iterMatch.hasNext() ) {
 			cur = iterMatch.next();
-			cur = schema.getTableTZTimeCol().readDerivedByIdIdx( Authorization,
-				cur.getRequiredId() );
+			cur = (CFBamBuffTZTimeCol)(schema.getTableTZTimeCol().readDerivedByIdIdx( Authorization,
+				cur.getRequiredId() ));
 			deleteTZTimeCol( Authorization, cur );
 		}
 	}
@@ -8282,7 +8282,7 @@ public class CFBamRamTZTimeColTable
 	public void deleteTZTimeColByPrevIdx( ICFSecAuthorization Authorization,
 		ICFBamValueByPrevIdxKey argKey )
 	{
-		ICFBamTZTimeCol cur;
+		CFBamBuffTZTimeCol cur;
 		boolean anyNotNull = false;
 		if( argKey.getOptionalPrevId() != null ) {
 			anyNotNull = true;
@@ -8290,19 +8290,19 @@ public class CFBamRamTZTimeColTable
 		if( ! anyNotNull ) {
 			return;
 		}
-		LinkedList<ICFBamTZTimeCol> matchSet = new LinkedList<ICFBamTZTimeCol>();
-		Iterator<ICFBamTZTimeCol> values = dictByPKey.values().iterator();
+		LinkedList<CFBamBuffTZTimeCol> matchSet = new LinkedList<CFBamBuffTZTimeCol>();
+		Iterator<CFBamBuffTZTimeCol> values = dictByPKey.values().iterator();
 		while( values.hasNext() ) {
 			cur = values.next();
 			if( argKey.equals( cur ) ) {
 				matchSet.add( cur );
 			}
 		}
-		Iterator<ICFBamTZTimeCol> iterMatch = matchSet.iterator();
+		Iterator<CFBamBuffTZTimeCol> iterMatch = matchSet.iterator();
 		while( iterMatch.hasNext() ) {
 			cur = iterMatch.next();
-			cur = schema.getTableTZTimeCol().readDerivedByIdIdx( Authorization,
-				cur.getRequiredId() );
+			cur = (CFBamBuffTZTimeCol)(schema.getTableTZTimeCol().readDerivedByIdIdx( Authorization,
+				cur.getRequiredId() ));
 			deleteTZTimeCol( Authorization, cur );
 		}
 	}
@@ -8318,7 +8318,7 @@ public class CFBamRamTZTimeColTable
 	public void deleteTZTimeColByNextIdx( ICFSecAuthorization Authorization,
 		ICFBamValueByNextIdxKey argKey )
 	{
-		ICFBamTZTimeCol cur;
+		CFBamBuffTZTimeCol cur;
 		boolean anyNotNull = false;
 		if( argKey.getOptionalNextId() != null ) {
 			anyNotNull = true;
@@ -8326,19 +8326,19 @@ public class CFBamRamTZTimeColTable
 		if( ! anyNotNull ) {
 			return;
 		}
-		LinkedList<ICFBamTZTimeCol> matchSet = new LinkedList<ICFBamTZTimeCol>();
-		Iterator<ICFBamTZTimeCol> values = dictByPKey.values().iterator();
+		LinkedList<CFBamBuffTZTimeCol> matchSet = new LinkedList<CFBamBuffTZTimeCol>();
+		Iterator<CFBamBuffTZTimeCol> values = dictByPKey.values().iterator();
 		while( values.hasNext() ) {
 			cur = values.next();
 			if( argKey.equals( cur ) ) {
 				matchSet.add( cur );
 			}
 		}
-		Iterator<ICFBamTZTimeCol> iterMatch = matchSet.iterator();
+		Iterator<CFBamBuffTZTimeCol> iterMatch = matchSet.iterator();
 		while( iterMatch.hasNext() ) {
 			cur = iterMatch.next();
-			cur = schema.getTableTZTimeCol().readDerivedByIdIdx( Authorization,
-				cur.getRequiredId() );
+			cur = (CFBamBuffTZTimeCol)(schema.getTableTZTimeCol().readDerivedByIdIdx( Authorization,
+				cur.getRequiredId() ));
 			deleteTZTimeCol( Authorization, cur );
 		}
 	}
@@ -8356,7 +8356,7 @@ public class CFBamRamTZTimeColTable
 	public void deleteTZTimeColByContPrevIdx( ICFSecAuthorization Authorization,
 		ICFBamValueByContPrevIdxKey argKey )
 	{
-		ICFBamTZTimeCol cur;
+		CFBamBuffTZTimeCol cur;
 		boolean anyNotNull = false;
 		anyNotNull = true;
 		if( argKey.getOptionalPrevId() != null ) {
@@ -8365,19 +8365,19 @@ public class CFBamRamTZTimeColTable
 		if( ! anyNotNull ) {
 			return;
 		}
-		LinkedList<ICFBamTZTimeCol> matchSet = new LinkedList<ICFBamTZTimeCol>();
-		Iterator<ICFBamTZTimeCol> values = dictByPKey.values().iterator();
+		LinkedList<CFBamBuffTZTimeCol> matchSet = new LinkedList<CFBamBuffTZTimeCol>();
+		Iterator<CFBamBuffTZTimeCol> values = dictByPKey.values().iterator();
 		while( values.hasNext() ) {
 			cur = values.next();
 			if( argKey.equals( cur ) ) {
 				matchSet.add( cur );
 			}
 		}
-		Iterator<ICFBamTZTimeCol> iterMatch = matchSet.iterator();
+		Iterator<CFBamBuffTZTimeCol> iterMatch = matchSet.iterator();
 		while( iterMatch.hasNext() ) {
 			cur = iterMatch.next();
-			cur = schema.getTableTZTimeCol().readDerivedByIdIdx( Authorization,
-				cur.getRequiredId() );
+			cur = (CFBamBuffTZTimeCol)(schema.getTableTZTimeCol().readDerivedByIdIdx( Authorization,
+				cur.getRequiredId() ));
 			deleteTZTimeCol( Authorization, cur );
 		}
 	}
@@ -8395,7 +8395,7 @@ public class CFBamRamTZTimeColTable
 	public void deleteTZTimeColByContNextIdx( ICFSecAuthorization Authorization,
 		ICFBamValueByContNextIdxKey argKey )
 	{
-		ICFBamTZTimeCol cur;
+		CFBamBuffTZTimeCol cur;
 		boolean anyNotNull = false;
 		anyNotNull = true;
 		if( argKey.getOptionalNextId() != null ) {
@@ -8404,19 +8404,19 @@ public class CFBamRamTZTimeColTable
 		if( ! anyNotNull ) {
 			return;
 		}
-		LinkedList<ICFBamTZTimeCol> matchSet = new LinkedList<ICFBamTZTimeCol>();
-		Iterator<ICFBamTZTimeCol> values = dictByPKey.values().iterator();
+		LinkedList<CFBamBuffTZTimeCol> matchSet = new LinkedList<CFBamBuffTZTimeCol>();
+		Iterator<CFBamBuffTZTimeCol> values = dictByPKey.values().iterator();
 		while( values.hasNext() ) {
 			cur = values.next();
 			if( argKey.equals( cur ) ) {
 				matchSet.add( cur );
 			}
 		}
-		Iterator<ICFBamTZTimeCol> iterMatch = matchSet.iterator();
+		Iterator<CFBamBuffTZTimeCol> iterMatch = matchSet.iterator();
 		while( iterMatch.hasNext() ) {
 			cur = iterMatch.next();
-			cur = schema.getTableTZTimeCol().readDerivedByIdIdx( Authorization,
-				cur.getRequiredId() );
+			cur = (CFBamBuffTZTimeCol)(schema.getTableTZTimeCol().readDerivedByIdIdx( Authorization,
+				cur.getRequiredId() ));
 			deleteTZTimeCol( Authorization, cur );
 		}
 	}

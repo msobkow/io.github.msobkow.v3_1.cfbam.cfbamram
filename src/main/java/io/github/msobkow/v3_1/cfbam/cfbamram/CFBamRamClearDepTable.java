@@ -665,39 +665,39 @@ public class CFBamRamClearDepTable
 		ICFBamClearDepByClearDepIdxKey argKey )
 	{
 		final String S_ProcName = "deleteClearDepByClearDepIdx";
-		ICFBamClearDep cur;
+		CFBamBuffClearDep cur;
 		boolean anyNotNull = false;
 		anyNotNull = true;
 		if( ! anyNotNull ) {
 			return;
 		}
-		LinkedList<ICFBamClearDep> matchSet = new LinkedList<ICFBamClearDep>();
-		Iterator<ICFBamClearDep> values = dictByPKey.values().iterator();
+		LinkedList<CFBamBuffClearDep> matchSet = new LinkedList<CFBamBuffClearDep>();
+		Iterator<CFBamBuffClearDep> values = dictByPKey.values().iterator();
 		while( values.hasNext() ) {
 			cur = values.next();
 			if( argKey.equals( cur ) ) {
 				matchSet.add( cur );
 			}
 		}
-		Iterator<ICFBamClearDep> iterMatch = matchSet.iterator();
+		Iterator<CFBamBuffClearDep> iterMatch = matchSet.iterator();
 		while( iterMatch.hasNext() ) {
 			cur = iterMatch.next();
-			cur = schema.getTableClearDep().readDerivedByIdIdx( Authorization,
-				cur.getRequiredId() );
-			String subClassCode = cur.getClassCode();
-			if( "a810".equals( subClassCode ) ) {
+			cur = (CFBamBuffClearDep)(schema.getTableClearDep().readDerivedByIdIdx( Authorization,
+				cur.getRequiredId() ));
+			int subClassCode = cur.getClassCode();
+			if( CFBamClearDep.CLASS_CODE == subClassCode ) {
 				schema.getTableClearDep().deleteClearDep( Authorization, cur );
 			}
-			else if( "a811".equals( subClassCode ) ) {
+			else if( CFBamClearSubDep1.CLASS_CODE == subClassCode ) {
 				schema.getTableClearSubDep1().deleteClearSubDep1( Authorization, (ICFBamClearSubDep1)cur );
 			}
-			else if( "a812".equals( subClassCode ) ) {
+			else if( CFBamClearSubDep2.CLASS_CODE == subClassCode ) {
 				schema.getTableClearSubDep2().deleteClearSubDep2( Authorization, (ICFBamClearSubDep2)cur );
 			}
-			else if( "a813".equals( subClassCode ) ) {
+			else if( CFBamClearSubDep3.CLASS_CODE == subClassCode ) {
 				schema.getTableClearSubDep3().deleteClearSubDep3( Authorization, (ICFBamClearSubDep3)cur );
 			}
-			else if( "a814".equals( subClassCode ) ) {
+			else if( CFBamClearTopDep.CLASS_CODE == subClassCode ) {
 				schema.getTableClearTopDep().deleteClearTopDep( Authorization, (ICFBamClearTopDep)cur );
 			}
 			else {
@@ -718,7 +718,7 @@ public class CFBamRamClearDepTable
 		ICFBamClearDepByDefSchemaIdxKey argKey )
 	{
 		final String S_ProcName = "deleteClearDepByDefSchemaIdx";
-		ICFBamClearDep cur;
+		CFBamBuffClearDep cur;
 		boolean anyNotNull = false;
 		if( argKey.getOptionalDefSchemaId() != null ) {
 			anyNotNull = true;
@@ -726,33 +726,33 @@ public class CFBamRamClearDepTable
 		if( ! anyNotNull ) {
 			return;
 		}
-		LinkedList<ICFBamClearDep> matchSet = new LinkedList<ICFBamClearDep>();
-		Iterator<ICFBamClearDep> values = dictByPKey.values().iterator();
+		LinkedList<CFBamBuffClearDep> matchSet = new LinkedList<CFBamBuffClearDep>();
+		Iterator<CFBamBuffClearDep> values = dictByPKey.values().iterator();
 		while( values.hasNext() ) {
 			cur = values.next();
 			if( argKey.equals( cur ) ) {
 				matchSet.add( cur );
 			}
 		}
-		Iterator<ICFBamClearDep> iterMatch = matchSet.iterator();
+		Iterator<CFBamBuffClearDep> iterMatch = matchSet.iterator();
 		while( iterMatch.hasNext() ) {
 			cur = iterMatch.next();
-			cur = schema.getTableClearDep().readDerivedByIdIdx( Authorization,
-				cur.getRequiredId() );
-			String subClassCode = cur.getClassCode();
-			if( "a810".equals( subClassCode ) ) {
+			cur = (CFBamBuffClearDep)(schema.getTableClearDep().readDerivedByIdIdx( Authorization,
+				cur.getRequiredId() ));
+			int subClassCode = cur.getClassCode();
+			if( CFBamClearDep.CLASS_CODE == subClassCode ) {
 				schema.getTableClearDep().deleteClearDep( Authorization, cur );
 			}
-			else if( "a811".equals( subClassCode ) ) {
+			else if( CFBamClearSubDep1.CLASS_CODE == subClassCode ) {
 				schema.getTableClearSubDep1().deleteClearSubDep1( Authorization, (ICFBamClearSubDep1)cur );
 			}
-			else if( "a812".equals( subClassCode ) ) {
+			else if( CFBamClearSubDep2.CLASS_CODE == subClassCode ) {
 				schema.getTableClearSubDep2().deleteClearSubDep2( Authorization, (ICFBamClearSubDep2)cur );
 			}
-			else if( "a813".equals( subClassCode ) ) {
+			else if( CFBamClearSubDep3.CLASS_CODE == subClassCode ) {
 				schema.getTableClearSubDep3().deleteClearSubDep3( Authorization, (ICFBamClearSubDep3)cur );
 			}
-			else if( "a814".equals( subClassCode ) ) {
+			else if( CFBamClearTopDep.CLASS_CODE == subClassCode ) {
 				schema.getTableClearTopDep().deleteClearTopDep( Authorization, (ICFBamClearTopDep)cur );
 			}
 			else {
@@ -770,34 +770,34 @@ public class CFBamRamClearDepTable
 		if( ! anyNotNull ) {
 			return;
 		}
-		ICFBamClearDep cur;
-		LinkedList<ICFBamClearDep> matchSet = new LinkedList<ICFBamClearDep>();
-		Iterator<ICFBamClearDep> values = dictByPKey.values().iterator();
+		CFBamBuffClearDep cur;
+		LinkedList<CFBamBuffClearDep> matchSet = new LinkedList<CFBamBuffClearDep>();
+		Iterator<CFBamBuffClearDep> values = dictByPKey.values().iterator();
 		while( values.hasNext() ) {
 			cur = values.next();
 			if( argKey.equals( cur ) ) {
 				matchSet.add( cur );
 			}
 		}
-		Iterator<ICFBamClearDep> iterMatch = matchSet.iterator();
+		Iterator<CFBamBuffClearDep> iterMatch = matchSet.iterator();
 		while( iterMatch.hasNext() ) {
 			cur = iterMatch.next();
-			cur = schema.getTableClearDep().readDerivedByIdIdx( Authorization,
-				cur.getRequiredId() );
-			String subClassCode = cur.getClassCode();
-			if( "a810".equals( subClassCode ) ) {
+			cur = (CFBamBuffClearDep)(schema.getTableClearDep().readDerivedByIdIdx( Authorization,
+				cur.getRequiredId() ));
+			int subClassCode = cur.getClassCode();
+			if( CFBamClearDep.CLASS_CODE == subClassCode ) {
 				schema.getTableClearDep().deleteClearDep( Authorization, cur );
 			}
-			else if( "a811".equals( subClassCode ) ) {
+			else if( CFBamClearSubDep1.CLASS_CODE == subClassCode ) {
 				schema.getTableClearSubDep1().deleteClearSubDep1( Authorization, (ICFBamClearSubDep1)cur );
 			}
-			else if( "a812".equals( subClassCode ) ) {
+			else if( CFBamClearSubDep2.CLASS_CODE == subClassCode ) {
 				schema.getTableClearSubDep2().deleteClearSubDep2( Authorization, (ICFBamClearSubDep2)cur );
 			}
-			else if( "a813".equals( subClassCode ) ) {
+			else if( CFBamClearSubDep3.CLASS_CODE == subClassCode ) {
 				schema.getTableClearSubDep3().deleteClearSubDep3( Authorization, (ICFBamClearSubDep3)cur );
 			}
-			else if( "a814".equals( subClassCode ) ) {
+			else if( CFBamClearTopDep.CLASS_CODE == subClassCode ) {
 				schema.getTableClearTopDep().deleteClearTopDep( Authorization, (ICFBamClearTopDep)cur );
 			}
 			else {
@@ -818,39 +818,39 @@ public class CFBamRamClearDepTable
 		ICFBamScopeByTenantIdxKey argKey )
 	{
 		final String S_ProcName = "deleteClearDepByTenantIdx";
-		ICFBamClearDep cur;
+		CFBamBuffClearDep cur;
 		boolean anyNotNull = false;
 		anyNotNull = true;
 		if( ! anyNotNull ) {
 			return;
 		}
-		LinkedList<ICFBamClearDep> matchSet = new LinkedList<ICFBamClearDep>();
-		Iterator<ICFBamClearDep> values = dictByPKey.values().iterator();
+		LinkedList<CFBamBuffClearDep> matchSet = new LinkedList<CFBamBuffClearDep>();
+		Iterator<CFBamBuffClearDep> values = dictByPKey.values().iterator();
 		while( values.hasNext() ) {
 			cur = values.next();
 			if( argKey.equals( cur ) ) {
 				matchSet.add( cur );
 			}
 		}
-		Iterator<ICFBamClearDep> iterMatch = matchSet.iterator();
+		Iterator<CFBamBuffClearDep> iterMatch = matchSet.iterator();
 		while( iterMatch.hasNext() ) {
 			cur = iterMatch.next();
-			cur = schema.getTableClearDep().readDerivedByIdIdx( Authorization,
-				cur.getRequiredId() );
-			String subClassCode = cur.getClassCode();
-			if( "a810".equals( subClassCode ) ) {
+			cur = (CFBamBuffClearDep)(schema.getTableClearDep().readDerivedByIdIdx( Authorization,
+				cur.getRequiredId() ));
+			int subClassCode = cur.getClassCode();
+			if( CFBamClearDep.CLASS_CODE == subClassCode ) {
 				schema.getTableClearDep().deleteClearDep( Authorization, cur );
 			}
-			else if( "a811".equals( subClassCode ) ) {
+			else if( CFBamClearSubDep1.CLASS_CODE == subClassCode ) {
 				schema.getTableClearSubDep1().deleteClearSubDep1( Authorization, (ICFBamClearSubDep1)cur );
 			}
-			else if( "a812".equals( subClassCode ) ) {
+			else if( CFBamClearSubDep2.CLASS_CODE == subClassCode ) {
 				schema.getTableClearSubDep2().deleteClearSubDep2( Authorization, (ICFBamClearSubDep2)cur );
 			}
-			else if( "a813".equals( subClassCode ) ) {
+			else if( CFBamClearSubDep3.CLASS_CODE == subClassCode ) {
 				schema.getTableClearSubDep3().deleteClearSubDep3( Authorization, (ICFBamClearSubDep3)cur );
 			}
-			else if( "a814".equals( subClassCode ) ) {
+			else if( CFBamClearTopDep.CLASS_CODE == subClassCode ) {
 				schema.getTableClearTopDep().deleteClearTopDep( Authorization, (ICFBamClearTopDep)cur );
 			}
 			else {

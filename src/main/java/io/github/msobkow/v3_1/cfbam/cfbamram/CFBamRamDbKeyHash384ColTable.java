@@ -6744,8 +6744,8 @@ public class CFBamRamDbKeyHash384ColTable
 				pkey );
 		}
 		CFLibDbKeyHash256 varTableId = existing.getRequiredTableId();
-		CFBamBuffTable container = schema.getTableTable().readDerivedByIdIdx( Authorization,
-			varTableId );
+		CFBamBuffTable container = (CFBamBuffTable)(schema.getTableTable().readDerivedByIdIdx( Authorization,
+			varTableId ));
 		if( container == null ) {
 			throw new CFLibNullArgumentException( getClass(),
 				S_ProcName,
@@ -8115,25 +8115,25 @@ public class CFBamRamDbKeyHash384ColTable
 	public void deleteDbKeyHash384ColByTableIdx( ICFSecAuthorization Authorization,
 		ICFBamDbKeyHash384ColByTableIdxKey argKey )
 	{
-		ICFBamDbKeyHash384Col cur;
+		CFBamBuffDbKeyHash384Col cur;
 		boolean anyNotNull = false;
 		anyNotNull = true;
 		if( ! anyNotNull ) {
 			return;
 		}
-		LinkedList<ICFBamDbKeyHash384Col> matchSet = new LinkedList<ICFBamDbKeyHash384Col>();
-		Iterator<ICFBamDbKeyHash384Col> values = dictByPKey.values().iterator();
+		LinkedList<CFBamBuffDbKeyHash384Col> matchSet = new LinkedList<CFBamBuffDbKeyHash384Col>();
+		Iterator<CFBamBuffDbKeyHash384Col> values = dictByPKey.values().iterator();
 		while( values.hasNext() ) {
 			cur = values.next();
 			if( argKey.equals( cur ) ) {
 				matchSet.add( cur );
 			}
 		}
-		Iterator<ICFBamDbKeyHash384Col> iterMatch = matchSet.iterator();
+		Iterator<CFBamBuffDbKeyHash384Col> iterMatch = matchSet.iterator();
 		while( iterMatch.hasNext() ) {
 			cur = iterMatch.next();
-			cur = schema.getTableDbKeyHash384Col().readDerivedByIdIdx( Authorization,
-				cur.getRequiredId() );
+			cur = (CFBamBuffDbKeyHash384Col)(schema.getTableDbKeyHash384Col().readDerivedByIdIdx( Authorization,
+				cur.getRequiredId() ));
 			deleteDbKeyHash384Col( Authorization, cur );
 		}
 	}
@@ -8146,20 +8146,20 @@ public class CFBamRamDbKeyHash384ColTable
 		if( ! anyNotNull ) {
 			return;
 		}
-		ICFBamDbKeyHash384Col cur;
-		LinkedList<ICFBamDbKeyHash384Col> matchSet = new LinkedList<ICFBamDbKeyHash384Col>();
-		Iterator<ICFBamDbKeyHash384Col> values = dictByPKey.values().iterator();
+		CFBamBuffDbKeyHash384Col cur;
+		LinkedList<CFBamBuffDbKeyHash384Col> matchSet = new LinkedList<CFBamBuffDbKeyHash384Col>();
+		Iterator<CFBamBuffDbKeyHash384Col> values = dictByPKey.values().iterator();
 		while( values.hasNext() ) {
 			cur = values.next();
 			if( argKey.equals( cur ) ) {
 				matchSet.add( cur );
 			}
 		}
-		Iterator<ICFBamDbKeyHash384Col> iterMatch = matchSet.iterator();
+		Iterator<CFBamBuffDbKeyHash384Col> iterMatch = matchSet.iterator();
 		while( iterMatch.hasNext() ) {
 			cur = iterMatch.next();
-			cur = schema.getTableDbKeyHash384Col().readDerivedByIdIdx( Authorization,
-				cur.getRequiredId() );
+			cur = (CFBamBuffDbKeyHash384Col)(schema.getTableDbKeyHash384Col().readDerivedByIdIdx( Authorization,
+				cur.getRequiredId() ));
 			deleteDbKeyHash384Col( Authorization, cur );
 		}
 	}
@@ -8177,26 +8177,26 @@ public class CFBamRamDbKeyHash384ColTable
 	public void deleteDbKeyHash384ColByUNameIdx( ICFSecAuthorization Authorization,
 		ICFBamValueByUNameIdxKey argKey )
 	{
-		ICFBamDbKeyHash384Col cur;
+		CFBamBuffDbKeyHash384Col cur;
 		boolean anyNotNull = false;
 		anyNotNull = true;
 		anyNotNull = true;
 		if( ! anyNotNull ) {
 			return;
 		}
-		LinkedList<ICFBamDbKeyHash384Col> matchSet = new LinkedList<ICFBamDbKeyHash384Col>();
-		Iterator<ICFBamDbKeyHash384Col> values = dictByPKey.values().iterator();
+		LinkedList<CFBamBuffDbKeyHash384Col> matchSet = new LinkedList<CFBamBuffDbKeyHash384Col>();
+		Iterator<CFBamBuffDbKeyHash384Col> values = dictByPKey.values().iterator();
 		while( values.hasNext() ) {
 			cur = values.next();
 			if( argKey.equals( cur ) ) {
 				matchSet.add( cur );
 			}
 		}
-		Iterator<ICFBamDbKeyHash384Col> iterMatch = matchSet.iterator();
+		Iterator<CFBamBuffDbKeyHash384Col> iterMatch = matchSet.iterator();
 		while( iterMatch.hasNext() ) {
 			cur = iterMatch.next();
-			cur = schema.getTableDbKeyHash384Col().readDerivedByIdIdx( Authorization,
-				cur.getRequiredId() );
+			cur = (CFBamBuffDbKeyHash384Col)(schema.getTableDbKeyHash384Col().readDerivedByIdIdx( Authorization,
+				cur.getRequiredId() ));
 			deleteDbKeyHash384Col( Authorization, cur );
 		}
 	}
@@ -8212,25 +8212,25 @@ public class CFBamRamDbKeyHash384ColTable
 	public void deleteDbKeyHash384ColByScopeIdx( ICFSecAuthorization Authorization,
 		ICFBamValueByScopeIdxKey argKey )
 	{
-		ICFBamDbKeyHash384Col cur;
+		CFBamBuffDbKeyHash384Col cur;
 		boolean anyNotNull = false;
 		anyNotNull = true;
 		if( ! anyNotNull ) {
 			return;
 		}
-		LinkedList<ICFBamDbKeyHash384Col> matchSet = new LinkedList<ICFBamDbKeyHash384Col>();
-		Iterator<ICFBamDbKeyHash384Col> values = dictByPKey.values().iterator();
+		LinkedList<CFBamBuffDbKeyHash384Col> matchSet = new LinkedList<CFBamBuffDbKeyHash384Col>();
+		Iterator<CFBamBuffDbKeyHash384Col> values = dictByPKey.values().iterator();
 		while( values.hasNext() ) {
 			cur = values.next();
 			if( argKey.equals( cur ) ) {
 				matchSet.add( cur );
 			}
 		}
-		Iterator<ICFBamDbKeyHash384Col> iterMatch = matchSet.iterator();
+		Iterator<CFBamBuffDbKeyHash384Col> iterMatch = matchSet.iterator();
 		while( iterMatch.hasNext() ) {
 			cur = iterMatch.next();
-			cur = schema.getTableDbKeyHash384Col().readDerivedByIdIdx( Authorization,
-				cur.getRequiredId() );
+			cur = (CFBamBuffDbKeyHash384Col)(schema.getTableDbKeyHash384Col().readDerivedByIdIdx( Authorization,
+				cur.getRequiredId() ));
 			deleteDbKeyHash384Col( Authorization, cur );
 		}
 	}
@@ -8246,7 +8246,7 @@ public class CFBamRamDbKeyHash384ColTable
 	public void deleteDbKeyHash384ColByDefSchemaIdx( ICFSecAuthorization Authorization,
 		ICFBamValueByDefSchemaIdxKey argKey )
 	{
-		ICFBamDbKeyHash384Col cur;
+		CFBamBuffDbKeyHash384Col cur;
 		boolean anyNotNull = false;
 		if( argKey.getOptionalDefSchemaId() != null ) {
 			anyNotNull = true;
@@ -8254,19 +8254,19 @@ public class CFBamRamDbKeyHash384ColTable
 		if( ! anyNotNull ) {
 			return;
 		}
-		LinkedList<ICFBamDbKeyHash384Col> matchSet = new LinkedList<ICFBamDbKeyHash384Col>();
-		Iterator<ICFBamDbKeyHash384Col> values = dictByPKey.values().iterator();
+		LinkedList<CFBamBuffDbKeyHash384Col> matchSet = new LinkedList<CFBamBuffDbKeyHash384Col>();
+		Iterator<CFBamBuffDbKeyHash384Col> values = dictByPKey.values().iterator();
 		while( values.hasNext() ) {
 			cur = values.next();
 			if( argKey.equals( cur ) ) {
 				matchSet.add( cur );
 			}
 		}
-		Iterator<ICFBamDbKeyHash384Col> iterMatch = matchSet.iterator();
+		Iterator<CFBamBuffDbKeyHash384Col> iterMatch = matchSet.iterator();
 		while( iterMatch.hasNext() ) {
 			cur = iterMatch.next();
-			cur = schema.getTableDbKeyHash384Col().readDerivedByIdIdx( Authorization,
-				cur.getRequiredId() );
+			cur = (CFBamBuffDbKeyHash384Col)(schema.getTableDbKeyHash384Col().readDerivedByIdIdx( Authorization,
+				cur.getRequiredId() ));
 			deleteDbKeyHash384Col( Authorization, cur );
 		}
 	}
@@ -8282,7 +8282,7 @@ public class CFBamRamDbKeyHash384ColTable
 	public void deleteDbKeyHash384ColByPrevIdx( ICFSecAuthorization Authorization,
 		ICFBamValueByPrevIdxKey argKey )
 	{
-		ICFBamDbKeyHash384Col cur;
+		CFBamBuffDbKeyHash384Col cur;
 		boolean anyNotNull = false;
 		if( argKey.getOptionalPrevId() != null ) {
 			anyNotNull = true;
@@ -8290,19 +8290,19 @@ public class CFBamRamDbKeyHash384ColTable
 		if( ! anyNotNull ) {
 			return;
 		}
-		LinkedList<ICFBamDbKeyHash384Col> matchSet = new LinkedList<ICFBamDbKeyHash384Col>();
-		Iterator<ICFBamDbKeyHash384Col> values = dictByPKey.values().iterator();
+		LinkedList<CFBamBuffDbKeyHash384Col> matchSet = new LinkedList<CFBamBuffDbKeyHash384Col>();
+		Iterator<CFBamBuffDbKeyHash384Col> values = dictByPKey.values().iterator();
 		while( values.hasNext() ) {
 			cur = values.next();
 			if( argKey.equals( cur ) ) {
 				matchSet.add( cur );
 			}
 		}
-		Iterator<ICFBamDbKeyHash384Col> iterMatch = matchSet.iterator();
+		Iterator<CFBamBuffDbKeyHash384Col> iterMatch = matchSet.iterator();
 		while( iterMatch.hasNext() ) {
 			cur = iterMatch.next();
-			cur = schema.getTableDbKeyHash384Col().readDerivedByIdIdx( Authorization,
-				cur.getRequiredId() );
+			cur = (CFBamBuffDbKeyHash384Col)(schema.getTableDbKeyHash384Col().readDerivedByIdIdx( Authorization,
+				cur.getRequiredId() ));
 			deleteDbKeyHash384Col( Authorization, cur );
 		}
 	}
@@ -8318,7 +8318,7 @@ public class CFBamRamDbKeyHash384ColTable
 	public void deleteDbKeyHash384ColByNextIdx( ICFSecAuthorization Authorization,
 		ICFBamValueByNextIdxKey argKey )
 	{
-		ICFBamDbKeyHash384Col cur;
+		CFBamBuffDbKeyHash384Col cur;
 		boolean anyNotNull = false;
 		if( argKey.getOptionalNextId() != null ) {
 			anyNotNull = true;
@@ -8326,19 +8326,19 @@ public class CFBamRamDbKeyHash384ColTable
 		if( ! anyNotNull ) {
 			return;
 		}
-		LinkedList<ICFBamDbKeyHash384Col> matchSet = new LinkedList<ICFBamDbKeyHash384Col>();
-		Iterator<ICFBamDbKeyHash384Col> values = dictByPKey.values().iterator();
+		LinkedList<CFBamBuffDbKeyHash384Col> matchSet = new LinkedList<CFBamBuffDbKeyHash384Col>();
+		Iterator<CFBamBuffDbKeyHash384Col> values = dictByPKey.values().iterator();
 		while( values.hasNext() ) {
 			cur = values.next();
 			if( argKey.equals( cur ) ) {
 				matchSet.add( cur );
 			}
 		}
-		Iterator<ICFBamDbKeyHash384Col> iterMatch = matchSet.iterator();
+		Iterator<CFBamBuffDbKeyHash384Col> iterMatch = matchSet.iterator();
 		while( iterMatch.hasNext() ) {
 			cur = iterMatch.next();
-			cur = schema.getTableDbKeyHash384Col().readDerivedByIdIdx( Authorization,
-				cur.getRequiredId() );
+			cur = (CFBamBuffDbKeyHash384Col)(schema.getTableDbKeyHash384Col().readDerivedByIdIdx( Authorization,
+				cur.getRequiredId() ));
 			deleteDbKeyHash384Col( Authorization, cur );
 		}
 	}
@@ -8356,7 +8356,7 @@ public class CFBamRamDbKeyHash384ColTable
 	public void deleteDbKeyHash384ColByContPrevIdx( ICFSecAuthorization Authorization,
 		ICFBamValueByContPrevIdxKey argKey )
 	{
-		ICFBamDbKeyHash384Col cur;
+		CFBamBuffDbKeyHash384Col cur;
 		boolean anyNotNull = false;
 		anyNotNull = true;
 		if( argKey.getOptionalPrevId() != null ) {
@@ -8365,19 +8365,19 @@ public class CFBamRamDbKeyHash384ColTable
 		if( ! anyNotNull ) {
 			return;
 		}
-		LinkedList<ICFBamDbKeyHash384Col> matchSet = new LinkedList<ICFBamDbKeyHash384Col>();
-		Iterator<ICFBamDbKeyHash384Col> values = dictByPKey.values().iterator();
+		LinkedList<CFBamBuffDbKeyHash384Col> matchSet = new LinkedList<CFBamBuffDbKeyHash384Col>();
+		Iterator<CFBamBuffDbKeyHash384Col> values = dictByPKey.values().iterator();
 		while( values.hasNext() ) {
 			cur = values.next();
 			if( argKey.equals( cur ) ) {
 				matchSet.add( cur );
 			}
 		}
-		Iterator<ICFBamDbKeyHash384Col> iterMatch = matchSet.iterator();
+		Iterator<CFBamBuffDbKeyHash384Col> iterMatch = matchSet.iterator();
 		while( iterMatch.hasNext() ) {
 			cur = iterMatch.next();
-			cur = schema.getTableDbKeyHash384Col().readDerivedByIdIdx( Authorization,
-				cur.getRequiredId() );
+			cur = (CFBamBuffDbKeyHash384Col)(schema.getTableDbKeyHash384Col().readDerivedByIdIdx( Authorization,
+				cur.getRequiredId() ));
 			deleteDbKeyHash384Col( Authorization, cur );
 		}
 	}
@@ -8395,7 +8395,7 @@ public class CFBamRamDbKeyHash384ColTable
 	public void deleteDbKeyHash384ColByContNextIdx( ICFSecAuthorization Authorization,
 		ICFBamValueByContNextIdxKey argKey )
 	{
-		ICFBamDbKeyHash384Col cur;
+		CFBamBuffDbKeyHash384Col cur;
 		boolean anyNotNull = false;
 		anyNotNull = true;
 		if( argKey.getOptionalNextId() != null ) {
@@ -8404,19 +8404,19 @@ public class CFBamRamDbKeyHash384ColTable
 		if( ! anyNotNull ) {
 			return;
 		}
-		LinkedList<ICFBamDbKeyHash384Col> matchSet = new LinkedList<ICFBamDbKeyHash384Col>();
-		Iterator<ICFBamDbKeyHash384Col> values = dictByPKey.values().iterator();
+		LinkedList<CFBamBuffDbKeyHash384Col> matchSet = new LinkedList<CFBamBuffDbKeyHash384Col>();
+		Iterator<CFBamBuffDbKeyHash384Col> values = dictByPKey.values().iterator();
 		while( values.hasNext() ) {
 			cur = values.next();
 			if( argKey.equals( cur ) ) {
 				matchSet.add( cur );
 			}
 		}
-		Iterator<ICFBamDbKeyHash384Col> iterMatch = matchSet.iterator();
+		Iterator<CFBamBuffDbKeyHash384Col> iterMatch = matchSet.iterator();
 		while( iterMatch.hasNext() ) {
 			cur = iterMatch.next();
-			cur = schema.getTableDbKeyHash384Col().readDerivedByIdIdx( Authorization,
-				cur.getRequiredId() );
+			cur = (CFBamBuffDbKeyHash384Col)(schema.getTableDbKeyHash384Col().readDerivedByIdIdx( Authorization,
+				cur.getRequiredId() ));
 			deleteDbKeyHash384Col( Authorization, cur );
 		}
 	}

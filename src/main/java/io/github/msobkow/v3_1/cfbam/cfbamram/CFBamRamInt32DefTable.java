@@ -5963,8 +5963,8 @@ public class CFBamRamInt32DefTable
 				pkey );
 		}
 		CFLibDbKeyHash256 varScopeId = existing.getRequiredScopeId();
-		CFBamBuffScope container = schema.getTableScope().readDerivedByIdIdx( Authorization,
-			varScopeId );
+		CFBamBuffScope container = (CFBamBuffScope)(schema.getTableScope().readDerivedByIdIdx( Authorization,
+			varScopeId ));
 		if( container == null ) {
 			throw new CFLibNullArgumentException( getClass(),
 				S_ProcName,
@@ -7348,31 +7348,31 @@ public class CFBamRamInt32DefTable
 		if( ! anyNotNull ) {
 			return;
 		}
-		ICFBamInt32Def cur;
-		LinkedList<ICFBamInt32Def> matchSet = new LinkedList<ICFBamInt32Def>();
-		Iterator<ICFBamInt32Def> values = dictByPKey.values().iterator();
+		CFBamBuffInt32Def cur;
+		LinkedList<CFBamBuffInt32Def> matchSet = new LinkedList<CFBamBuffInt32Def>();
+		Iterator<CFBamBuffInt32Def> values = dictByPKey.values().iterator();
 		while( values.hasNext() ) {
 			cur = values.next();
 			if( argKey.equals( cur ) ) {
 				matchSet.add( cur );
 			}
 		}
-		Iterator<ICFBamInt32Def> iterMatch = matchSet.iterator();
+		Iterator<CFBamBuffInt32Def> iterMatch = matchSet.iterator();
 		while( iterMatch.hasNext() ) {
 			cur = iterMatch.next();
-			cur = schema.getTableInt32Def().readDerivedByIdIdx( Authorization,
-				cur.getRequiredId() );
-			String subClassCode = cur.getClassCode();
-			if( "a825".equals( subClassCode ) ) {
+			cur = (CFBamBuffInt32Def)(schema.getTableInt32Def().readDerivedByIdIdx( Authorization,
+				cur.getRequiredId() ));
+			int subClassCode = cur.getClassCode();
+			if( CFBamInt32Def.CLASS_CODE == subClassCode ) {
 				schema.getTableInt32Def().deleteInt32Def( Authorization, cur );
 			}
-			else if( "a826".equals( subClassCode ) ) {
+			else if( CFBamInt32Type.CLASS_CODE == subClassCode ) {
 				schema.getTableInt32Type().deleteInt32Type( Authorization, (ICFBamInt32Type)cur );
 			}
-			else if( "a873".equals( subClassCode ) ) {
+			else if( CFBamId32Gen.CLASS_CODE == subClassCode ) {
 				schema.getTableId32Gen().deleteId32Gen( Authorization, (ICFBamId32Gen)cur );
 			}
-			else if( "a876".equals( subClassCode ) ) {
+			else if( CFBamInt32Col.CLASS_CODE == subClassCode ) {
 				schema.getTableInt32Col().deleteInt32Col( Authorization, (ICFBamInt32Col)cur );
 			}
 			else {
@@ -7395,37 +7395,37 @@ public class CFBamRamInt32DefTable
 		ICFBamValueByUNameIdxKey argKey )
 	{
 		final String S_ProcName = "deleteInt32DefByUNameIdx";
-		ICFBamInt32Def cur;
+		CFBamBuffInt32Def cur;
 		boolean anyNotNull = false;
 		anyNotNull = true;
 		anyNotNull = true;
 		if( ! anyNotNull ) {
 			return;
 		}
-		LinkedList<ICFBamInt32Def> matchSet = new LinkedList<ICFBamInt32Def>();
-		Iterator<ICFBamInt32Def> values = dictByPKey.values().iterator();
+		LinkedList<CFBamBuffInt32Def> matchSet = new LinkedList<CFBamBuffInt32Def>();
+		Iterator<CFBamBuffInt32Def> values = dictByPKey.values().iterator();
 		while( values.hasNext() ) {
 			cur = values.next();
 			if( argKey.equals( cur ) ) {
 				matchSet.add( cur );
 			}
 		}
-		Iterator<ICFBamInt32Def> iterMatch = matchSet.iterator();
+		Iterator<CFBamBuffInt32Def> iterMatch = matchSet.iterator();
 		while( iterMatch.hasNext() ) {
 			cur = iterMatch.next();
-			cur = schema.getTableInt32Def().readDerivedByIdIdx( Authorization,
-				cur.getRequiredId() );
-			String subClassCode = cur.getClassCode();
-			if( "a825".equals( subClassCode ) ) {
+			cur = (CFBamBuffInt32Def)(schema.getTableInt32Def().readDerivedByIdIdx( Authorization,
+				cur.getRequiredId() ));
+			int subClassCode = cur.getClassCode();
+			if( CFBamInt32Def.CLASS_CODE == subClassCode ) {
 				schema.getTableInt32Def().deleteInt32Def( Authorization, cur );
 			}
-			else if( "a826".equals( subClassCode ) ) {
+			else if( CFBamInt32Type.CLASS_CODE == subClassCode ) {
 				schema.getTableInt32Type().deleteInt32Type( Authorization, (ICFBamInt32Type)cur );
 			}
-			else if( "a873".equals( subClassCode ) ) {
+			else if( CFBamId32Gen.CLASS_CODE == subClassCode ) {
 				schema.getTableId32Gen().deleteId32Gen( Authorization, (ICFBamId32Gen)cur );
 			}
-			else if( "a876".equals( subClassCode ) ) {
+			else if( CFBamInt32Col.CLASS_CODE == subClassCode ) {
 				schema.getTableInt32Col().deleteInt32Col( Authorization, (ICFBamInt32Col)cur );
 			}
 			else {
@@ -7446,36 +7446,36 @@ public class CFBamRamInt32DefTable
 		ICFBamValueByScopeIdxKey argKey )
 	{
 		final String S_ProcName = "deleteInt32DefByScopeIdx";
-		ICFBamInt32Def cur;
+		CFBamBuffInt32Def cur;
 		boolean anyNotNull = false;
 		anyNotNull = true;
 		if( ! anyNotNull ) {
 			return;
 		}
-		LinkedList<ICFBamInt32Def> matchSet = new LinkedList<ICFBamInt32Def>();
-		Iterator<ICFBamInt32Def> values = dictByPKey.values().iterator();
+		LinkedList<CFBamBuffInt32Def> matchSet = new LinkedList<CFBamBuffInt32Def>();
+		Iterator<CFBamBuffInt32Def> values = dictByPKey.values().iterator();
 		while( values.hasNext() ) {
 			cur = values.next();
 			if( argKey.equals( cur ) ) {
 				matchSet.add( cur );
 			}
 		}
-		Iterator<ICFBamInt32Def> iterMatch = matchSet.iterator();
+		Iterator<CFBamBuffInt32Def> iterMatch = matchSet.iterator();
 		while( iterMatch.hasNext() ) {
 			cur = iterMatch.next();
-			cur = schema.getTableInt32Def().readDerivedByIdIdx( Authorization,
-				cur.getRequiredId() );
-			String subClassCode = cur.getClassCode();
-			if( "a825".equals( subClassCode ) ) {
+			cur = (CFBamBuffInt32Def)(schema.getTableInt32Def().readDerivedByIdIdx( Authorization,
+				cur.getRequiredId() ));
+			int subClassCode = cur.getClassCode();
+			if( CFBamInt32Def.CLASS_CODE == subClassCode ) {
 				schema.getTableInt32Def().deleteInt32Def( Authorization, cur );
 			}
-			else if( "a826".equals( subClassCode ) ) {
+			else if( CFBamInt32Type.CLASS_CODE == subClassCode ) {
 				schema.getTableInt32Type().deleteInt32Type( Authorization, (ICFBamInt32Type)cur );
 			}
-			else if( "a873".equals( subClassCode ) ) {
+			else if( CFBamId32Gen.CLASS_CODE == subClassCode ) {
 				schema.getTableId32Gen().deleteId32Gen( Authorization, (ICFBamId32Gen)cur );
 			}
-			else if( "a876".equals( subClassCode ) ) {
+			else if( CFBamInt32Col.CLASS_CODE == subClassCode ) {
 				schema.getTableInt32Col().deleteInt32Col( Authorization, (ICFBamInt32Col)cur );
 			}
 			else {
@@ -7496,7 +7496,7 @@ public class CFBamRamInt32DefTable
 		ICFBamValueByDefSchemaIdxKey argKey )
 	{
 		final String S_ProcName = "deleteInt32DefByDefSchemaIdx";
-		ICFBamInt32Def cur;
+		CFBamBuffInt32Def cur;
 		boolean anyNotNull = false;
 		if( argKey.getOptionalDefSchemaId() != null ) {
 			anyNotNull = true;
@@ -7504,30 +7504,30 @@ public class CFBamRamInt32DefTable
 		if( ! anyNotNull ) {
 			return;
 		}
-		LinkedList<ICFBamInt32Def> matchSet = new LinkedList<ICFBamInt32Def>();
-		Iterator<ICFBamInt32Def> values = dictByPKey.values().iterator();
+		LinkedList<CFBamBuffInt32Def> matchSet = new LinkedList<CFBamBuffInt32Def>();
+		Iterator<CFBamBuffInt32Def> values = dictByPKey.values().iterator();
 		while( values.hasNext() ) {
 			cur = values.next();
 			if( argKey.equals( cur ) ) {
 				matchSet.add( cur );
 			}
 		}
-		Iterator<ICFBamInt32Def> iterMatch = matchSet.iterator();
+		Iterator<CFBamBuffInt32Def> iterMatch = matchSet.iterator();
 		while( iterMatch.hasNext() ) {
 			cur = iterMatch.next();
-			cur = schema.getTableInt32Def().readDerivedByIdIdx( Authorization,
-				cur.getRequiredId() );
-			String subClassCode = cur.getClassCode();
-			if( "a825".equals( subClassCode ) ) {
+			cur = (CFBamBuffInt32Def)(schema.getTableInt32Def().readDerivedByIdIdx( Authorization,
+				cur.getRequiredId() ));
+			int subClassCode = cur.getClassCode();
+			if( CFBamInt32Def.CLASS_CODE == subClassCode ) {
 				schema.getTableInt32Def().deleteInt32Def( Authorization, cur );
 			}
-			else if( "a826".equals( subClassCode ) ) {
+			else if( CFBamInt32Type.CLASS_CODE == subClassCode ) {
 				schema.getTableInt32Type().deleteInt32Type( Authorization, (ICFBamInt32Type)cur );
 			}
-			else if( "a873".equals( subClassCode ) ) {
+			else if( CFBamId32Gen.CLASS_CODE == subClassCode ) {
 				schema.getTableId32Gen().deleteId32Gen( Authorization, (ICFBamId32Gen)cur );
 			}
-			else if( "a876".equals( subClassCode ) ) {
+			else if( CFBamInt32Col.CLASS_CODE == subClassCode ) {
 				schema.getTableInt32Col().deleteInt32Col( Authorization, (ICFBamInt32Col)cur );
 			}
 			else {
@@ -7548,7 +7548,7 @@ public class CFBamRamInt32DefTable
 		ICFBamValueByPrevIdxKey argKey )
 	{
 		final String S_ProcName = "deleteInt32DefByPrevIdx";
-		ICFBamInt32Def cur;
+		CFBamBuffInt32Def cur;
 		boolean anyNotNull = false;
 		if( argKey.getOptionalPrevId() != null ) {
 			anyNotNull = true;
@@ -7556,30 +7556,30 @@ public class CFBamRamInt32DefTable
 		if( ! anyNotNull ) {
 			return;
 		}
-		LinkedList<ICFBamInt32Def> matchSet = new LinkedList<ICFBamInt32Def>();
-		Iterator<ICFBamInt32Def> values = dictByPKey.values().iterator();
+		LinkedList<CFBamBuffInt32Def> matchSet = new LinkedList<CFBamBuffInt32Def>();
+		Iterator<CFBamBuffInt32Def> values = dictByPKey.values().iterator();
 		while( values.hasNext() ) {
 			cur = values.next();
 			if( argKey.equals( cur ) ) {
 				matchSet.add( cur );
 			}
 		}
-		Iterator<ICFBamInt32Def> iterMatch = matchSet.iterator();
+		Iterator<CFBamBuffInt32Def> iterMatch = matchSet.iterator();
 		while( iterMatch.hasNext() ) {
 			cur = iterMatch.next();
-			cur = schema.getTableInt32Def().readDerivedByIdIdx( Authorization,
-				cur.getRequiredId() );
-			String subClassCode = cur.getClassCode();
-			if( "a825".equals( subClassCode ) ) {
+			cur = (CFBamBuffInt32Def)(schema.getTableInt32Def().readDerivedByIdIdx( Authorization,
+				cur.getRequiredId() ));
+			int subClassCode = cur.getClassCode();
+			if( CFBamInt32Def.CLASS_CODE == subClassCode ) {
 				schema.getTableInt32Def().deleteInt32Def( Authorization, cur );
 			}
-			else if( "a826".equals( subClassCode ) ) {
+			else if( CFBamInt32Type.CLASS_CODE == subClassCode ) {
 				schema.getTableInt32Type().deleteInt32Type( Authorization, (ICFBamInt32Type)cur );
 			}
-			else if( "a873".equals( subClassCode ) ) {
+			else if( CFBamId32Gen.CLASS_CODE == subClassCode ) {
 				schema.getTableId32Gen().deleteId32Gen( Authorization, (ICFBamId32Gen)cur );
 			}
-			else if( "a876".equals( subClassCode ) ) {
+			else if( CFBamInt32Col.CLASS_CODE == subClassCode ) {
 				schema.getTableInt32Col().deleteInt32Col( Authorization, (ICFBamInt32Col)cur );
 			}
 			else {
@@ -7600,7 +7600,7 @@ public class CFBamRamInt32DefTable
 		ICFBamValueByNextIdxKey argKey )
 	{
 		final String S_ProcName = "deleteInt32DefByNextIdx";
-		ICFBamInt32Def cur;
+		CFBamBuffInt32Def cur;
 		boolean anyNotNull = false;
 		if( argKey.getOptionalNextId() != null ) {
 			anyNotNull = true;
@@ -7608,30 +7608,30 @@ public class CFBamRamInt32DefTable
 		if( ! anyNotNull ) {
 			return;
 		}
-		LinkedList<ICFBamInt32Def> matchSet = new LinkedList<ICFBamInt32Def>();
-		Iterator<ICFBamInt32Def> values = dictByPKey.values().iterator();
+		LinkedList<CFBamBuffInt32Def> matchSet = new LinkedList<CFBamBuffInt32Def>();
+		Iterator<CFBamBuffInt32Def> values = dictByPKey.values().iterator();
 		while( values.hasNext() ) {
 			cur = values.next();
 			if( argKey.equals( cur ) ) {
 				matchSet.add( cur );
 			}
 		}
-		Iterator<ICFBamInt32Def> iterMatch = matchSet.iterator();
+		Iterator<CFBamBuffInt32Def> iterMatch = matchSet.iterator();
 		while( iterMatch.hasNext() ) {
 			cur = iterMatch.next();
-			cur = schema.getTableInt32Def().readDerivedByIdIdx( Authorization,
-				cur.getRequiredId() );
-			String subClassCode = cur.getClassCode();
-			if( "a825".equals( subClassCode ) ) {
+			cur = (CFBamBuffInt32Def)(schema.getTableInt32Def().readDerivedByIdIdx( Authorization,
+				cur.getRequiredId() ));
+			int subClassCode = cur.getClassCode();
+			if( CFBamInt32Def.CLASS_CODE == subClassCode ) {
 				schema.getTableInt32Def().deleteInt32Def( Authorization, cur );
 			}
-			else if( "a826".equals( subClassCode ) ) {
+			else if( CFBamInt32Type.CLASS_CODE == subClassCode ) {
 				schema.getTableInt32Type().deleteInt32Type( Authorization, (ICFBamInt32Type)cur );
 			}
-			else if( "a873".equals( subClassCode ) ) {
+			else if( CFBamId32Gen.CLASS_CODE == subClassCode ) {
 				schema.getTableId32Gen().deleteId32Gen( Authorization, (ICFBamId32Gen)cur );
 			}
-			else if( "a876".equals( subClassCode ) ) {
+			else if( CFBamInt32Col.CLASS_CODE == subClassCode ) {
 				schema.getTableInt32Col().deleteInt32Col( Authorization, (ICFBamInt32Col)cur );
 			}
 			else {
@@ -7654,7 +7654,7 @@ public class CFBamRamInt32DefTable
 		ICFBamValueByContPrevIdxKey argKey )
 	{
 		final String S_ProcName = "deleteInt32DefByContPrevIdx";
-		ICFBamInt32Def cur;
+		CFBamBuffInt32Def cur;
 		boolean anyNotNull = false;
 		anyNotNull = true;
 		if( argKey.getOptionalPrevId() != null ) {
@@ -7663,30 +7663,30 @@ public class CFBamRamInt32DefTable
 		if( ! anyNotNull ) {
 			return;
 		}
-		LinkedList<ICFBamInt32Def> matchSet = new LinkedList<ICFBamInt32Def>();
-		Iterator<ICFBamInt32Def> values = dictByPKey.values().iterator();
+		LinkedList<CFBamBuffInt32Def> matchSet = new LinkedList<CFBamBuffInt32Def>();
+		Iterator<CFBamBuffInt32Def> values = dictByPKey.values().iterator();
 		while( values.hasNext() ) {
 			cur = values.next();
 			if( argKey.equals( cur ) ) {
 				matchSet.add( cur );
 			}
 		}
-		Iterator<ICFBamInt32Def> iterMatch = matchSet.iterator();
+		Iterator<CFBamBuffInt32Def> iterMatch = matchSet.iterator();
 		while( iterMatch.hasNext() ) {
 			cur = iterMatch.next();
-			cur = schema.getTableInt32Def().readDerivedByIdIdx( Authorization,
-				cur.getRequiredId() );
-			String subClassCode = cur.getClassCode();
-			if( "a825".equals( subClassCode ) ) {
+			cur = (CFBamBuffInt32Def)(schema.getTableInt32Def().readDerivedByIdIdx( Authorization,
+				cur.getRequiredId() ));
+			int subClassCode = cur.getClassCode();
+			if( CFBamInt32Def.CLASS_CODE == subClassCode ) {
 				schema.getTableInt32Def().deleteInt32Def( Authorization, cur );
 			}
-			else if( "a826".equals( subClassCode ) ) {
+			else if( CFBamInt32Type.CLASS_CODE == subClassCode ) {
 				schema.getTableInt32Type().deleteInt32Type( Authorization, (ICFBamInt32Type)cur );
 			}
-			else if( "a873".equals( subClassCode ) ) {
+			else if( CFBamId32Gen.CLASS_CODE == subClassCode ) {
 				schema.getTableId32Gen().deleteId32Gen( Authorization, (ICFBamId32Gen)cur );
 			}
-			else if( "a876".equals( subClassCode ) ) {
+			else if( CFBamInt32Col.CLASS_CODE == subClassCode ) {
 				schema.getTableInt32Col().deleteInt32Col( Authorization, (ICFBamInt32Col)cur );
 			}
 			else {
@@ -7709,7 +7709,7 @@ public class CFBamRamInt32DefTable
 		ICFBamValueByContNextIdxKey argKey )
 	{
 		final String S_ProcName = "deleteInt32DefByContNextIdx";
-		ICFBamInt32Def cur;
+		CFBamBuffInt32Def cur;
 		boolean anyNotNull = false;
 		anyNotNull = true;
 		if( argKey.getOptionalNextId() != null ) {
@@ -7718,30 +7718,30 @@ public class CFBamRamInt32DefTable
 		if( ! anyNotNull ) {
 			return;
 		}
-		LinkedList<ICFBamInt32Def> matchSet = new LinkedList<ICFBamInt32Def>();
-		Iterator<ICFBamInt32Def> values = dictByPKey.values().iterator();
+		LinkedList<CFBamBuffInt32Def> matchSet = new LinkedList<CFBamBuffInt32Def>();
+		Iterator<CFBamBuffInt32Def> values = dictByPKey.values().iterator();
 		while( values.hasNext() ) {
 			cur = values.next();
 			if( argKey.equals( cur ) ) {
 				matchSet.add( cur );
 			}
 		}
-		Iterator<ICFBamInt32Def> iterMatch = matchSet.iterator();
+		Iterator<CFBamBuffInt32Def> iterMatch = matchSet.iterator();
 		while( iterMatch.hasNext() ) {
 			cur = iterMatch.next();
-			cur = schema.getTableInt32Def().readDerivedByIdIdx( Authorization,
-				cur.getRequiredId() );
-			String subClassCode = cur.getClassCode();
-			if( "a825".equals( subClassCode ) ) {
+			cur = (CFBamBuffInt32Def)(schema.getTableInt32Def().readDerivedByIdIdx( Authorization,
+				cur.getRequiredId() ));
+			int subClassCode = cur.getClassCode();
+			if( CFBamInt32Def.CLASS_CODE == subClassCode ) {
 				schema.getTableInt32Def().deleteInt32Def( Authorization, cur );
 			}
-			else if( "a826".equals( subClassCode ) ) {
+			else if( CFBamInt32Type.CLASS_CODE == subClassCode ) {
 				schema.getTableInt32Type().deleteInt32Type( Authorization, (ICFBamInt32Type)cur );
 			}
-			else if( "a873".equals( subClassCode ) ) {
+			else if( CFBamId32Gen.CLASS_CODE == subClassCode ) {
 				schema.getTableId32Gen().deleteId32Gen( Authorization, (ICFBamId32Gen)cur );
 			}
-			else if( "a876".equals( subClassCode ) ) {
+			else if( CFBamInt32Col.CLASS_CODE == subClassCode ) {
 				schema.getTableInt32Col().deleteInt32Col( Authorization, (ICFBamInt32Col)cur );
 			}
 			else {

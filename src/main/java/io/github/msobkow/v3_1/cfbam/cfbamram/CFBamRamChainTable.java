@@ -829,20 +829,20 @@ public class CFBamRamChainTable
 		if( ! anyNotNull ) {
 			return;
 		}
-		ICFBamChain cur;
-		LinkedList<ICFBamChain> matchSet = new LinkedList<ICFBamChain>();
-		Iterator<ICFBamChain> values = dictByPKey.values().iterator();
+		CFBamBuffChain cur;
+		LinkedList<CFBamBuffChain> matchSet = new LinkedList<CFBamBuffChain>();
+		Iterator<CFBamBuffChain> values = dictByPKey.values().iterator();
 		while( values.hasNext() ) {
 			cur = values.next();
 			if( argKey.equals( cur ) ) {
 				matchSet.add( cur );
 			}
 		}
-		Iterator<ICFBamChain> iterMatch = matchSet.iterator();
+		Iterator<CFBamBuffChain> iterMatch = matchSet.iterator();
 		while( iterMatch.hasNext() ) {
 			cur = iterMatch.next();
-			cur = schema.getTableChain().readDerivedByIdIdx( Authorization,
-				cur.getRequiredId() );
+			cur = (CFBamBuffChain)(schema.getTableChain().readDerivedByIdIdx( Authorization,
+				cur.getRequiredId() ));
 			deleteChain( Authorization, cur );
 		}
 	}
@@ -858,25 +858,25 @@ public class CFBamRamChainTable
 	public void deleteChainByChainTableIdx( ICFSecAuthorization Authorization,
 		ICFBamChainByChainTableIdxKey argKey )
 	{
-		ICFBamChain cur;
+		CFBamBuffChain cur;
 		boolean anyNotNull = false;
 		anyNotNull = true;
 		if( ! anyNotNull ) {
 			return;
 		}
-		LinkedList<ICFBamChain> matchSet = new LinkedList<ICFBamChain>();
-		Iterator<ICFBamChain> values = dictByPKey.values().iterator();
+		LinkedList<CFBamBuffChain> matchSet = new LinkedList<CFBamBuffChain>();
+		Iterator<CFBamBuffChain> values = dictByPKey.values().iterator();
 		while( values.hasNext() ) {
 			cur = values.next();
 			if( argKey.equals( cur ) ) {
 				matchSet.add( cur );
 			}
 		}
-		Iterator<ICFBamChain> iterMatch = matchSet.iterator();
+		Iterator<CFBamBuffChain> iterMatch = matchSet.iterator();
 		while( iterMatch.hasNext() ) {
 			cur = iterMatch.next();
-			cur = schema.getTableChain().readDerivedByIdIdx( Authorization,
-				cur.getRequiredId() );
+			cur = (CFBamBuffChain)(schema.getTableChain().readDerivedByIdIdx( Authorization,
+				cur.getRequiredId() ));
 			deleteChain( Authorization, cur );
 		}
 	}
@@ -892,7 +892,7 @@ public class CFBamRamChainTable
 	public void deleteChainByDefSchemaIdx( ICFSecAuthorization Authorization,
 		ICFBamChainByDefSchemaIdxKey argKey )
 	{
-		ICFBamChain cur;
+		CFBamBuffChain cur;
 		boolean anyNotNull = false;
 		if( argKey.getOptionalDefSchemaId() != null ) {
 			anyNotNull = true;
@@ -900,19 +900,19 @@ public class CFBamRamChainTable
 		if( ! anyNotNull ) {
 			return;
 		}
-		LinkedList<ICFBamChain> matchSet = new LinkedList<ICFBamChain>();
-		Iterator<ICFBamChain> values = dictByPKey.values().iterator();
+		LinkedList<CFBamBuffChain> matchSet = new LinkedList<CFBamBuffChain>();
+		Iterator<CFBamBuffChain> values = dictByPKey.values().iterator();
 		while( values.hasNext() ) {
 			cur = values.next();
 			if( argKey.equals( cur ) ) {
 				matchSet.add( cur );
 			}
 		}
-		Iterator<ICFBamChain> iterMatch = matchSet.iterator();
+		Iterator<CFBamBuffChain> iterMatch = matchSet.iterator();
 		while( iterMatch.hasNext() ) {
 			cur = iterMatch.next();
-			cur = schema.getTableChain().readDerivedByIdIdx( Authorization,
-				cur.getRequiredId() );
+			cur = (CFBamBuffChain)(schema.getTableChain().readDerivedByIdIdx( Authorization,
+				cur.getRequiredId() ));
 			deleteChain( Authorization, cur );
 		}
 	}
@@ -930,26 +930,26 @@ public class CFBamRamChainTable
 	public void deleteChainByUNameIdx( ICFSecAuthorization Authorization,
 		ICFBamChainByUNameIdxKey argKey )
 	{
-		ICFBamChain cur;
+		CFBamBuffChain cur;
 		boolean anyNotNull = false;
 		anyNotNull = true;
 		anyNotNull = true;
 		if( ! anyNotNull ) {
 			return;
 		}
-		LinkedList<ICFBamChain> matchSet = new LinkedList<ICFBamChain>();
-		Iterator<ICFBamChain> values = dictByPKey.values().iterator();
+		LinkedList<CFBamBuffChain> matchSet = new LinkedList<CFBamBuffChain>();
+		Iterator<CFBamBuffChain> values = dictByPKey.values().iterator();
 		while( values.hasNext() ) {
 			cur = values.next();
 			if( argKey.equals( cur ) ) {
 				matchSet.add( cur );
 			}
 		}
-		Iterator<ICFBamChain> iterMatch = matchSet.iterator();
+		Iterator<CFBamBuffChain> iterMatch = matchSet.iterator();
 		while( iterMatch.hasNext() ) {
 			cur = iterMatch.next();
-			cur = schema.getTableChain().readDerivedByIdIdx( Authorization,
-				cur.getRequiredId() );
+			cur = (CFBamBuffChain)(schema.getTableChain().readDerivedByIdIdx( Authorization,
+				cur.getRequiredId() ));
 			deleteChain( Authorization, cur );
 		}
 	}
@@ -965,25 +965,25 @@ public class CFBamRamChainTable
 	public void deleteChainByPrevRelIdx( ICFSecAuthorization Authorization,
 		ICFBamChainByPrevRelIdxKey argKey )
 	{
-		ICFBamChain cur;
+		CFBamBuffChain cur;
 		boolean anyNotNull = false;
 		anyNotNull = true;
 		if( ! anyNotNull ) {
 			return;
 		}
-		LinkedList<ICFBamChain> matchSet = new LinkedList<ICFBamChain>();
-		Iterator<ICFBamChain> values = dictByPKey.values().iterator();
+		LinkedList<CFBamBuffChain> matchSet = new LinkedList<CFBamBuffChain>();
+		Iterator<CFBamBuffChain> values = dictByPKey.values().iterator();
 		while( values.hasNext() ) {
 			cur = values.next();
 			if( argKey.equals( cur ) ) {
 				matchSet.add( cur );
 			}
 		}
-		Iterator<ICFBamChain> iterMatch = matchSet.iterator();
+		Iterator<CFBamBuffChain> iterMatch = matchSet.iterator();
 		while( iterMatch.hasNext() ) {
 			cur = iterMatch.next();
-			cur = schema.getTableChain().readDerivedByIdIdx( Authorization,
-				cur.getRequiredId() );
+			cur = (CFBamBuffChain)(schema.getTableChain().readDerivedByIdIdx( Authorization,
+				cur.getRequiredId() ));
 			deleteChain( Authorization, cur );
 		}
 	}
@@ -999,25 +999,25 @@ public class CFBamRamChainTable
 	public void deleteChainByNextRelIdx( ICFSecAuthorization Authorization,
 		ICFBamChainByNextRelIdxKey argKey )
 	{
-		ICFBamChain cur;
+		CFBamBuffChain cur;
 		boolean anyNotNull = false;
 		anyNotNull = true;
 		if( ! anyNotNull ) {
 			return;
 		}
-		LinkedList<ICFBamChain> matchSet = new LinkedList<ICFBamChain>();
-		Iterator<ICFBamChain> values = dictByPKey.values().iterator();
+		LinkedList<CFBamBuffChain> matchSet = new LinkedList<CFBamBuffChain>();
+		Iterator<CFBamBuffChain> values = dictByPKey.values().iterator();
 		while( values.hasNext() ) {
 			cur = values.next();
 			if( argKey.equals( cur ) ) {
 				matchSet.add( cur );
 			}
 		}
-		Iterator<ICFBamChain> iterMatch = matchSet.iterator();
+		Iterator<CFBamBuffChain> iterMatch = matchSet.iterator();
 		while( iterMatch.hasNext() ) {
 			cur = iterMatch.next();
-			cur = schema.getTableChain().readDerivedByIdIdx( Authorization,
-				cur.getRequiredId() );
+			cur = (CFBamBuffChain)(schema.getTableChain().readDerivedByIdIdx( Authorization,
+				cur.getRequiredId() ));
 			deleteChain( Authorization, cur );
 		}
 	}

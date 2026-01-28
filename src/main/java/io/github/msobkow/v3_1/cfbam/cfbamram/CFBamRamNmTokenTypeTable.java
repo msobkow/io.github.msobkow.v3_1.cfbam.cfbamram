@@ -6744,8 +6744,8 @@ public class CFBamRamNmTokenTypeTable
 				pkey );
 		}
 		CFLibDbKeyHash256 varSchemaDefId = existing.getRequiredSchemaDefId();
-		CFBamBuffSchemaDef container = schema.getTableSchemaDef().readDerivedByIdIdx( Authorization,
-			varSchemaDefId );
+		CFBamBuffSchemaDef container = (CFBamBuffSchemaDef)(schema.getTableSchemaDef().readDerivedByIdIdx( Authorization,
+			varSchemaDefId ));
 		if( container == null ) {
 			throw new CFLibNullArgumentException( getClass(),
 				S_ProcName,
@@ -8115,25 +8115,25 @@ public class CFBamRamNmTokenTypeTable
 	public void deleteNmTokenTypeBySchemaIdx( ICFSecAuthorization Authorization,
 		ICFBamNmTokenTypeBySchemaIdxKey argKey )
 	{
-		ICFBamNmTokenType cur;
+		CFBamBuffNmTokenType cur;
 		boolean anyNotNull = false;
 		anyNotNull = true;
 		if( ! anyNotNull ) {
 			return;
 		}
-		LinkedList<ICFBamNmTokenType> matchSet = new LinkedList<ICFBamNmTokenType>();
-		Iterator<ICFBamNmTokenType> values = dictByPKey.values().iterator();
+		LinkedList<CFBamBuffNmTokenType> matchSet = new LinkedList<CFBamBuffNmTokenType>();
+		Iterator<CFBamBuffNmTokenType> values = dictByPKey.values().iterator();
 		while( values.hasNext() ) {
 			cur = values.next();
 			if( argKey.equals( cur ) ) {
 				matchSet.add( cur );
 			}
 		}
-		Iterator<ICFBamNmTokenType> iterMatch = matchSet.iterator();
+		Iterator<CFBamBuffNmTokenType> iterMatch = matchSet.iterator();
 		while( iterMatch.hasNext() ) {
 			cur = iterMatch.next();
-			cur = schema.getTableNmTokenType().readDerivedByIdIdx( Authorization,
-				cur.getRequiredId() );
+			cur = (CFBamBuffNmTokenType)(schema.getTableNmTokenType().readDerivedByIdIdx( Authorization,
+				cur.getRequiredId() ));
 			deleteNmTokenType( Authorization, cur );
 		}
 	}
@@ -8146,20 +8146,20 @@ public class CFBamRamNmTokenTypeTable
 		if( ! anyNotNull ) {
 			return;
 		}
-		ICFBamNmTokenType cur;
-		LinkedList<ICFBamNmTokenType> matchSet = new LinkedList<ICFBamNmTokenType>();
-		Iterator<ICFBamNmTokenType> values = dictByPKey.values().iterator();
+		CFBamBuffNmTokenType cur;
+		LinkedList<CFBamBuffNmTokenType> matchSet = new LinkedList<CFBamBuffNmTokenType>();
+		Iterator<CFBamBuffNmTokenType> values = dictByPKey.values().iterator();
 		while( values.hasNext() ) {
 			cur = values.next();
 			if( argKey.equals( cur ) ) {
 				matchSet.add( cur );
 			}
 		}
-		Iterator<ICFBamNmTokenType> iterMatch = matchSet.iterator();
+		Iterator<CFBamBuffNmTokenType> iterMatch = matchSet.iterator();
 		while( iterMatch.hasNext() ) {
 			cur = iterMatch.next();
-			cur = schema.getTableNmTokenType().readDerivedByIdIdx( Authorization,
-				cur.getRequiredId() );
+			cur = (CFBamBuffNmTokenType)(schema.getTableNmTokenType().readDerivedByIdIdx( Authorization,
+				cur.getRequiredId() ));
 			deleteNmTokenType( Authorization, cur );
 		}
 	}
@@ -8177,26 +8177,26 @@ public class CFBamRamNmTokenTypeTable
 	public void deleteNmTokenTypeByUNameIdx( ICFSecAuthorization Authorization,
 		ICFBamValueByUNameIdxKey argKey )
 	{
-		ICFBamNmTokenType cur;
+		CFBamBuffNmTokenType cur;
 		boolean anyNotNull = false;
 		anyNotNull = true;
 		anyNotNull = true;
 		if( ! anyNotNull ) {
 			return;
 		}
-		LinkedList<ICFBamNmTokenType> matchSet = new LinkedList<ICFBamNmTokenType>();
-		Iterator<ICFBamNmTokenType> values = dictByPKey.values().iterator();
+		LinkedList<CFBamBuffNmTokenType> matchSet = new LinkedList<CFBamBuffNmTokenType>();
+		Iterator<CFBamBuffNmTokenType> values = dictByPKey.values().iterator();
 		while( values.hasNext() ) {
 			cur = values.next();
 			if( argKey.equals( cur ) ) {
 				matchSet.add( cur );
 			}
 		}
-		Iterator<ICFBamNmTokenType> iterMatch = matchSet.iterator();
+		Iterator<CFBamBuffNmTokenType> iterMatch = matchSet.iterator();
 		while( iterMatch.hasNext() ) {
 			cur = iterMatch.next();
-			cur = schema.getTableNmTokenType().readDerivedByIdIdx( Authorization,
-				cur.getRequiredId() );
+			cur = (CFBamBuffNmTokenType)(schema.getTableNmTokenType().readDerivedByIdIdx( Authorization,
+				cur.getRequiredId() ));
 			deleteNmTokenType( Authorization, cur );
 		}
 	}
@@ -8212,25 +8212,25 @@ public class CFBamRamNmTokenTypeTable
 	public void deleteNmTokenTypeByScopeIdx( ICFSecAuthorization Authorization,
 		ICFBamValueByScopeIdxKey argKey )
 	{
-		ICFBamNmTokenType cur;
+		CFBamBuffNmTokenType cur;
 		boolean anyNotNull = false;
 		anyNotNull = true;
 		if( ! anyNotNull ) {
 			return;
 		}
-		LinkedList<ICFBamNmTokenType> matchSet = new LinkedList<ICFBamNmTokenType>();
-		Iterator<ICFBamNmTokenType> values = dictByPKey.values().iterator();
+		LinkedList<CFBamBuffNmTokenType> matchSet = new LinkedList<CFBamBuffNmTokenType>();
+		Iterator<CFBamBuffNmTokenType> values = dictByPKey.values().iterator();
 		while( values.hasNext() ) {
 			cur = values.next();
 			if( argKey.equals( cur ) ) {
 				matchSet.add( cur );
 			}
 		}
-		Iterator<ICFBamNmTokenType> iterMatch = matchSet.iterator();
+		Iterator<CFBamBuffNmTokenType> iterMatch = matchSet.iterator();
 		while( iterMatch.hasNext() ) {
 			cur = iterMatch.next();
-			cur = schema.getTableNmTokenType().readDerivedByIdIdx( Authorization,
-				cur.getRequiredId() );
+			cur = (CFBamBuffNmTokenType)(schema.getTableNmTokenType().readDerivedByIdIdx( Authorization,
+				cur.getRequiredId() ));
 			deleteNmTokenType( Authorization, cur );
 		}
 	}
@@ -8246,7 +8246,7 @@ public class CFBamRamNmTokenTypeTable
 	public void deleteNmTokenTypeByDefSchemaIdx( ICFSecAuthorization Authorization,
 		ICFBamValueByDefSchemaIdxKey argKey )
 	{
-		ICFBamNmTokenType cur;
+		CFBamBuffNmTokenType cur;
 		boolean anyNotNull = false;
 		if( argKey.getOptionalDefSchemaId() != null ) {
 			anyNotNull = true;
@@ -8254,19 +8254,19 @@ public class CFBamRamNmTokenTypeTable
 		if( ! anyNotNull ) {
 			return;
 		}
-		LinkedList<ICFBamNmTokenType> matchSet = new LinkedList<ICFBamNmTokenType>();
-		Iterator<ICFBamNmTokenType> values = dictByPKey.values().iterator();
+		LinkedList<CFBamBuffNmTokenType> matchSet = new LinkedList<CFBamBuffNmTokenType>();
+		Iterator<CFBamBuffNmTokenType> values = dictByPKey.values().iterator();
 		while( values.hasNext() ) {
 			cur = values.next();
 			if( argKey.equals( cur ) ) {
 				matchSet.add( cur );
 			}
 		}
-		Iterator<ICFBamNmTokenType> iterMatch = matchSet.iterator();
+		Iterator<CFBamBuffNmTokenType> iterMatch = matchSet.iterator();
 		while( iterMatch.hasNext() ) {
 			cur = iterMatch.next();
-			cur = schema.getTableNmTokenType().readDerivedByIdIdx( Authorization,
-				cur.getRequiredId() );
+			cur = (CFBamBuffNmTokenType)(schema.getTableNmTokenType().readDerivedByIdIdx( Authorization,
+				cur.getRequiredId() ));
 			deleteNmTokenType( Authorization, cur );
 		}
 	}
@@ -8282,7 +8282,7 @@ public class CFBamRamNmTokenTypeTable
 	public void deleteNmTokenTypeByPrevIdx( ICFSecAuthorization Authorization,
 		ICFBamValueByPrevIdxKey argKey )
 	{
-		ICFBamNmTokenType cur;
+		CFBamBuffNmTokenType cur;
 		boolean anyNotNull = false;
 		if( argKey.getOptionalPrevId() != null ) {
 			anyNotNull = true;
@@ -8290,19 +8290,19 @@ public class CFBamRamNmTokenTypeTable
 		if( ! anyNotNull ) {
 			return;
 		}
-		LinkedList<ICFBamNmTokenType> matchSet = new LinkedList<ICFBamNmTokenType>();
-		Iterator<ICFBamNmTokenType> values = dictByPKey.values().iterator();
+		LinkedList<CFBamBuffNmTokenType> matchSet = new LinkedList<CFBamBuffNmTokenType>();
+		Iterator<CFBamBuffNmTokenType> values = dictByPKey.values().iterator();
 		while( values.hasNext() ) {
 			cur = values.next();
 			if( argKey.equals( cur ) ) {
 				matchSet.add( cur );
 			}
 		}
-		Iterator<ICFBamNmTokenType> iterMatch = matchSet.iterator();
+		Iterator<CFBamBuffNmTokenType> iterMatch = matchSet.iterator();
 		while( iterMatch.hasNext() ) {
 			cur = iterMatch.next();
-			cur = schema.getTableNmTokenType().readDerivedByIdIdx( Authorization,
-				cur.getRequiredId() );
+			cur = (CFBamBuffNmTokenType)(schema.getTableNmTokenType().readDerivedByIdIdx( Authorization,
+				cur.getRequiredId() ));
 			deleteNmTokenType( Authorization, cur );
 		}
 	}
@@ -8318,7 +8318,7 @@ public class CFBamRamNmTokenTypeTable
 	public void deleteNmTokenTypeByNextIdx( ICFSecAuthorization Authorization,
 		ICFBamValueByNextIdxKey argKey )
 	{
-		ICFBamNmTokenType cur;
+		CFBamBuffNmTokenType cur;
 		boolean anyNotNull = false;
 		if( argKey.getOptionalNextId() != null ) {
 			anyNotNull = true;
@@ -8326,19 +8326,19 @@ public class CFBamRamNmTokenTypeTable
 		if( ! anyNotNull ) {
 			return;
 		}
-		LinkedList<ICFBamNmTokenType> matchSet = new LinkedList<ICFBamNmTokenType>();
-		Iterator<ICFBamNmTokenType> values = dictByPKey.values().iterator();
+		LinkedList<CFBamBuffNmTokenType> matchSet = new LinkedList<CFBamBuffNmTokenType>();
+		Iterator<CFBamBuffNmTokenType> values = dictByPKey.values().iterator();
 		while( values.hasNext() ) {
 			cur = values.next();
 			if( argKey.equals( cur ) ) {
 				matchSet.add( cur );
 			}
 		}
-		Iterator<ICFBamNmTokenType> iterMatch = matchSet.iterator();
+		Iterator<CFBamBuffNmTokenType> iterMatch = matchSet.iterator();
 		while( iterMatch.hasNext() ) {
 			cur = iterMatch.next();
-			cur = schema.getTableNmTokenType().readDerivedByIdIdx( Authorization,
-				cur.getRequiredId() );
+			cur = (CFBamBuffNmTokenType)(schema.getTableNmTokenType().readDerivedByIdIdx( Authorization,
+				cur.getRequiredId() ));
 			deleteNmTokenType( Authorization, cur );
 		}
 	}
@@ -8356,7 +8356,7 @@ public class CFBamRamNmTokenTypeTable
 	public void deleteNmTokenTypeByContPrevIdx( ICFSecAuthorization Authorization,
 		ICFBamValueByContPrevIdxKey argKey )
 	{
-		ICFBamNmTokenType cur;
+		CFBamBuffNmTokenType cur;
 		boolean anyNotNull = false;
 		anyNotNull = true;
 		if( argKey.getOptionalPrevId() != null ) {
@@ -8365,19 +8365,19 @@ public class CFBamRamNmTokenTypeTable
 		if( ! anyNotNull ) {
 			return;
 		}
-		LinkedList<ICFBamNmTokenType> matchSet = new LinkedList<ICFBamNmTokenType>();
-		Iterator<ICFBamNmTokenType> values = dictByPKey.values().iterator();
+		LinkedList<CFBamBuffNmTokenType> matchSet = new LinkedList<CFBamBuffNmTokenType>();
+		Iterator<CFBamBuffNmTokenType> values = dictByPKey.values().iterator();
 		while( values.hasNext() ) {
 			cur = values.next();
 			if( argKey.equals( cur ) ) {
 				matchSet.add( cur );
 			}
 		}
-		Iterator<ICFBamNmTokenType> iterMatch = matchSet.iterator();
+		Iterator<CFBamBuffNmTokenType> iterMatch = matchSet.iterator();
 		while( iterMatch.hasNext() ) {
 			cur = iterMatch.next();
-			cur = schema.getTableNmTokenType().readDerivedByIdIdx( Authorization,
-				cur.getRequiredId() );
+			cur = (CFBamBuffNmTokenType)(schema.getTableNmTokenType().readDerivedByIdIdx( Authorization,
+				cur.getRequiredId() ));
 			deleteNmTokenType( Authorization, cur );
 		}
 	}
@@ -8395,7 +8395,7 @@ public class CFBamRamNmTokenTypeTable
 	public void deleteNmTokenTypeByContNextIdx( ICFSecAuthorization Authorization,
 		ICFBamValueByContNextIdxKey argKey )
 	{
-		ICFBamNmTokenType cur;
+		CFBamBuffNmTokenType cur;
 		boolean anyNotNull = false;
 		anyNotNull = true;
 		if( argKey.getOptionalNextId() != null ) {
@@ -8404,19 +8404,19 @@ public class CFBamRamNmTokenTypeTable
 		if( ! anyNotNull ) {
 			return;
 		}
-		LinkedList<ICFBamNmTokenType> matchSet = new LinkedList<ICFBamNmTokenType>();
-		Iterator<ICFBamNmTokenType> values = dictByPKey.values().iterator();
+		LinkedList<CFBamBuffNmTokenType> matchSet = new LinkedList<CFBamBuffNmTokenType>();
+		Iterator<CFBamBuffNmTokenType> values = dictByPKey.values().iterator();
 		while( values.hasNext() ) {
 			cur = values.next();
 			if( argKey.equals( cur ) ) {
 				matchSet.add( cur );
 			}
 		}
-		Iterator<ICFBamNmTokenType> iterMatch = matchSet.iterator();
+		Iterator<CFBamBuffNmTokenType> iterMatch = matchSet.iterator();
 		while( iterMatch.hasNext() ) {
 			cur = iterMatch.next();
-			cur = schema.getTableNmTokenType().readDerivedByIdIdx( Authorization,
-				cur.getRequiredId() );
+			cur = (CFBamBuffNmTokenType)(schema.getTableNmTokenType().readDerivedByIdIdx( Authorization,
+				cur.getRequiredId() ));
 			deleteNmTokenType( Authorization, cur );
 		}
 	}

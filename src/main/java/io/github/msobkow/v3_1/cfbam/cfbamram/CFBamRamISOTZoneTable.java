@@ -551,20 +551,20 @@ public class CFBamRamISOTZoneTable
 		if( ! anyNotNull ) {
 			return;
 		}
-		ICFSecISOTZone cur;
-		LinkedList<ICFSecISOTZone> matchSet = new LinkedList<ICFSecISOTZone>();
-		Iterator<ICFSecISOTZone> values = dictByPKey.values().iterator();
+		CFSecBuffISOTZone cur;
+		LinkedList<CFSecBuffISOTZone> matchSet = new LinkedList<CFSecBuffISOTZone>();
+		Iterator<CFSecBuffISOTZone> values = dictByPKey.values().iterator();
 		while( values.hasNext() ) {
 			cur = values.next();
 			if( argKey.equals( cur ) ) {
 				matchSet.add( cur );
 			}
 		}
-		Iterator<ICFSecISOTZone> iterMatch = matchSet.iterator();
+		Iterator<CFSecBuffISOTZone> iterMatch = matchSet.iterator();
 		while( iterMatch.hasNext() ) {
 			cur = iterMatch.next();
-			cur = schema.getTableISOTZone().readDerivedByIdIdx( Authorization,
-				cur.getRequiredISOTZoneId() );
+			cur = (CFSecBuffISOTZone)(schema.getTableISOTZone().readDerivedByIdIdx( Authorization,
+				cur.getRequiredISOTZoneId() ));
 			deleteISOTZone( Authorization, cur );
 		}
 	}
@@ -582,26 +582,26 @@ public class CFBamRamISOTZoneTable
 	public void deleteISOTZoneByOffsetIdx( ICFSecAuthorization Authorization,
 		ICFSecISOTZoneByOffsetIdxKey argKey )
 	{
-		ICFSecISOTZone cur;
+		CFSecBuffISOTZone cur;
 		boolean anyNotNull = false;
 		anyNotNull = true;
 		anyNotNull = true;
 		if( ! anyNotNull ) {
 			return;
 		}
-		LinkedList<ICFSecISOTZone> matchSet = new LinkedList<ICFSecISOTZone>();
-		Iterator<ICFSecISOTZone> values = dictByPKey.values().iterator();
+		LinkedList<CFSecBuffISOTZone> matchSet = new LinkedList<CFSecBuffISOTZone>();
+		Iterator<CFSecBuffISOTZone> values = dictByPKey.values().iterator();
 		while( values.hasNext() ) {
 			cur = values.next();
 			if( argKey.equals( cur ) ) {
 				matchSet.add( cur );
 			}
 		}
-		Iterator<ICFSecISOTZone> iterMatch = matchSet.iterator();
+		Iterator<CFSecBuffISOTZone> iterMatch = matchSet.iterator();
 		while( iterMatch.hasNext() ) {
 			cur = iterMatch.next();
-			cur = schema.getTableISOTZone().readDerivedByIdIdx( Authorization,
-				cur.getRequiredISOTZoneId() );
+			cur = (CFSecBuffISOTZone)(schema.getTableISOTZone().readDerivedByIdIdx( Authorization,
+				cur.getRequiredISOTZoneId() ));
 			deleteISOTZone( Authorization, cur );
 		}
 	}
@@ -617,25 +617,25 @@ public class CFBamRamISOTZoneTable
 	public void deleteISOTZoneByUTZNameIdx( ICFSecAuthorization Authorization,
 		ICFSecISOTZoneByUTZNameIdxKey argKey )
 	{
-		ICFSecISOTZone cur;
+		CFSecBuffISOTZone cur;
 		boolean anyNotNull = false;
 		anyNotNull = true;
 		if( ! anyNotNull ) {
 			return;
 		}
-		LinkedList<ICFSecISOTZone> matchSet = new LinkedList<ICFSecISOTZone>();
-		Iterator<ICFSecISOTZone> values = dictByPKey.values().iterator();
+		LinkedList<CFSecBuffISOTZone> matchSet = new LinkedList<CFSecBuffISOTZone>();
+		Iterator<CFSecBuffISOTZone> values = dictByPKey.values().iterator();
 		while( values.hasNext() ) {
 			cur = values.next();
 			if( argKey.equals( cur ) ) {
 				matchSet.add( cur );
 			}
 		}
-		Iterator<ICFSecISOTZone> iterMatch = matchSet.iterator();
+		Iterator<CFSecBuffISOTZone> iterMatch = matchSet.iterator();
 		while( iterMatch.hasNext() ) {
 			cur = iterMatch.next();
-			cur = schema.getTableISOTZone().readDerivedByIdIdx( Authorization,
-				cur.getRequiredISOTZoneId() );
+			cur = (CFSecBuffISOTZone)(schema.getTableISOTZone().readDerivedByIdIdx( Authorization,
+				cur.getRequiredISOTZoneId() ));
 			deleteISOTZone( Authorization, cur );
 		}
 	}
@@ -651,25 +651,25 @@ public class CFBamRamISOTZoneTable
 	public void deleteISOTZoneByIso8601Idx( ICFSecAuthorization Authorization,
 		ICFSecISOTZoneByIso8601IdxKey argKey )
 	{
-		ICFSecISOTZone cur;
+		CFSecBuffISOTZone cur;
 		boolean anyNotNull = false;
 		anyNotNull = true;
 		if( ! anyNotNull ) {
 			return;
 		}
-		LinkedList<ICFSecISOTZone> matchSet = new LinkedList<ICFSecISOTZone>();
-		Iterator<ICFSecISOTZone> values = dictByPKey.values().iterator();
+		LinkedList<CFSecBuffISOTZone> matchSet = new LinkedList<CFSecBuffISOTZone>();
+		Iterator<CFSecBuffISOTZone> values = dictByPKey.values().iterator();
 		while( values.hasNext() ) {
 			cur = values.next();
 			if( argKey.equals( cur ) ) {
 				matchSet.add( cur );
 			}
 		}
-		Iterator<ICFSecISOTZone> iterMatch = matchSet.iterator();
+		Iterator<CFSecBuffISOTZone> iterMatch = matchSet.iterator();
 		while( iterMatch.hasNext() ) {
 			cur = iterMatch.next();
-			cur = schema.getTableISOTZone().readDerivedByIdIdx( Authorization,
-				cur.getRequiredISOTZoneId() );
+			cur = (CFSecBuffISOTZone)(schema.getTableISOTZone().readDerivedByIdIdx( Authorization,
+				cur.getRequiredISOTZoneId() ));
 			deleteISOTZone( Authorization, cur );
 		}
 	}

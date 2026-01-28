@@ -6744,8 +6744,8 @@ public class CFBamRamBoolColTable
 				pkey );
 		}
 		CFLibDbKeyHash256 varTableId = existing.getRequiredTableId();
-		CFBamBuffTable container = schema.getTableTable().readDerivedByIdIdx( Authorization,
-			varTableId );
+		CFBamBuffTable container = (CFBamBuffTable)(schema.getTableTable().readDerivedByIdIdx( Authorization,
+			varTableId ));
 		if( container == null ) {
 			throw new CFLibNullArgumentException( getClass(),
 				S_ProcName,
@@ -8115,25 +8115,25 @@ public class CFBamRamBoolColTable
 	public void deleteBoolColByTableIdx( ICFSecAuthorization Authorization,
 		ICFBamBoolColByTableIdxKey argKey )
 	{
-		ICFBamBoolCol cur;
+		CFBamBuffBoolCol cur;
 		boolean anyNotNull = false;
 		anyNotNull = true;
 		if( ! anyNotNull ) {
 			return;
 		}
-		LinkedList<ICFBamBoolCol> matchSet = new LinkedList<ICFBamBoolCol>();
-		Iterator<ICFBamBoolCol> values = dictByPKey.values().iterator();
+		LinkedList<CFBamBuffBoolCol> matchSet = new LinkedList<CFBamBuffBoolCol>();
+		Iterator<CFBamBuffBoolCol> values = dictByPKey.values().iterator();
 		while( values.hasNext() ) {
 			cur = values.next();
 			if( argKey.equals( cur ) ) {
 				matchSet.add( cur );
 			}
 		}
-		Iterator<ICFBamBoolCol> iterMatch = matchSet.iterator();
+		Iterator<CFBamBuffBoolCol> iterMatch = matchSet.iterator();
 		while( iterMatch.hasNext() ) {
 			cur = iterMatch.next();
-			cur = schema.getTableBoolCol().readDerivedByIdIdx( Authorization,
-				cur.getRequiredId() );
+			cur = (CFBamBuffBoolCol)(schema.getTableBoolCol().readDerivedByIdIdx( Authorization,
+				cur.getRequiredId() ));
 			deleteBoolCol( Authorization, cur );
 		}
 	}
@@ -8146,20 +8146,20 @@ public class CFBamRamBoolColTable
 		if( ! anyNotNull ) {
 			return;
 		}
-		ICFBamBoolCol cur;
-		LinkedList<ICFBamBoolCol> matchSet = new LinkedList<ICFBamBoolCol>();
-		Iterator<ICFBamBoolCol> values = dictByPKey.values().iterator();
+		CFBamBuffBoolCol cur;
+		LinkedList<CFBamBuffBoolCol> matchSet = new LinkedList<CFBamBuffBoolCol>();
+		Iterator<CFBamBuffBoolCol> values = dictByPKey.values().iterator();
 		while( values.hasNext() ) {
 			cur = values.next();
 			if( argKey.equals( cur ) ) {
 				matchSet.add( cur );
 			}
 		}
-		Iterator<ICFBamBoolCol> iterMatch = matchSet.iterator();
+		Iterator<CFBamBuffBoolCol> iterMatch = matchSet.iterator();
 		while( iterMatch.hasNext() ) {
 			cur = iterMatch.next();
-			cur = schema.getTableBoolCol().readDerivedByIdIdx( Authorization,
-				cur.getRequiredId() );
+			cur = (CFBamBuffBoolCol)(schema.getTableBoolCol().readDerivedByIdIdx( Authorization,
+				cur.getRequiredId() ));
 			deleteBoolCol( Authorization, cur );
 		}
 	}
@@ -8177,26 +8177,26 @@ public class CFBamRamBoolColTable
 	public void deleteBoolColByUNameIdx( ICFSecAuthorization Authorization,
 		ICFBamValueByUNameIdxKey argKey )
 	{
-		ICFBamBoolCol cur;
+		CFBamBuffBoolCol cur;
 		boolean anyNotNull = false;
 		anyNotNull = true;
 		anyNotNull = true;
 		if( ! anyNotNull ) {
 			return;
 		}
-		LinkedList<ICFBamBoolCol> matchSet = new LinkedList<ICFBamBoolCol>();
-		Iterator<ICFBamBoolCol> values = dictByPKey.values().iterator();
+		LinkedList<CFBamBuffBoolCol> matchSet = new LinkedList<CFBamBuffBoolCol>();
+		Iterator<CFBamBuffBoolCol> values = dictByPKey.values().iterator();
 		while( values.hasNext() ) {
 			cur = values.next();
 			if( argKey.equals( cur ) ) {
 				matchSet.add( cur );
 			}
 		}
-		Iterator<ICFBamBoolCol> iterMatch = matchSet.iterator();
+		Iterator<CFBamBuffBoolCol> iterMatch = matchSet.iterator();
 		while( iterMatch.hasNext() ) {
 			cur = iterMatch.next();
-			cur = schema.getTableBoolCol().readDerivedByIdIdx( Authorization,
-				cur.getRequiredId() );
+			cur = (CFBamBuffBoolCol)(schema.getTableBoolCol().readDerivedByIdIdx( Authorization,
+				cur.getRequiredId() ));
 			deleteBoolCol( Authorization, cur );
 		}
 	}
@@ -8212,25 +8212,25 @@ public class CFBamRamBoolColTable
 	public void deleteBoolColByScopeIdx( ICFSecAuthorization Authorization,
 		ICFBamValueByScopeIdxKey argKey )
 	{
-		ICFBamBoolCol cur;
+		CFBamBuffBoolCol cur;
 		boolean anyNotNull = false;
 		anyNotNull = true;
 		if( ! anyNotNull ) {
 			return;
 		}
-		LinkedList<ICFBamBoolCol> matchSet = new LinkedList<ICFBamBoolCol>();
-		Iterator<ICFBamBoolCol> values = dictByPKey.values().iterator();
+		LinkedList<CFBamBuffBoolCol> matchSet = new LinkedList<CFBamBuffBoolCol>();
+		Iterator<CFBamBuffBoolCol> values = dictByPKey.values().iterator();
 		while( values.hasNext() ) {
 			cur = values.next();
 			if( argKey.equals( cur ) ) {
 				matchSet.add( cur );
 			}
 		}
-		Iterator<ICFBamBoolCol> iterMatch = matchSet.iterator();
+		Iterator<CFBamBuffBoolCol> iterMatch = matchSet.iterator();
 		while( iterMatch.hasNext() ) {
 			cur = iterMatch.next();
-			cur = schema.getTableBoolCol().readDerivedByIdIdx( Authorization,
-				cur.getRequiredId() );
+			cur = (CFBamBuffBoolCol)(schema.getTableBoolCol().readDerivedByIdIdx( Authorization,
+				cur.getRequiredId() ));
 			deleteBoolCol( Authorization, cur );
 		}
 	}
@@ -8246,7 +8246,7 @@ public class CFBamRamBoolColTable
 	public void deleteBoolColByDefSchemaIdx( ICFSecAuthorization Authorization,
 		ICFBamValueByDefSchemaIdxKey argKey )
 	{
-		ICFBamBoolCol cur;
+		CFBamBuffBoolCol cur;
 		boolean anyNotNull = false;
 		if( argKey.getOptionalDefSchemaId() != null ) {
 			anyNotNull = true;
@@ -8254,19 +8254,19 @@ public class CFBamRamBoolColTable
 		if( ! anyNotNull ) {
 			return;
 		}
-		LinkedList<ICFBamBoolCol> matchSet = new LinkedList<ICFBamBoolCol>();
-		Iterator<ICFBamBoolCol> values = dictByPKey.values().iterator();
+		LinkedList<CFBamBuffBoolCol> matchSet = new LinkedList<CFBamBuffBoolCol>();
+		Iterator<CFBamBuffBoolCol> values = dictByPKey.values().iterator();
 		while( values.hasNext() ) {
 			cur = values.next();
 			if( argKey.equals( cur ) ) {
 				matchSet.add( cur );
 			}
 		}
-		Iterator<ICFBamBoolCol> iterMatch = matchSet.iterator();
+		Iterator<CFBamBuffBoolCol> iterMatch = matchSet.iterator();
 		while( iterMatch.hasNext() ) {
 			cur = iterMatch.next();
-			cur = schema.getTableBoolCol().readDerivedByIdIdx( Authorization,
-				cur.getRequiredId() );
+			cur = (CFBamBuffBoolCol)(schema.getTableBoolCol().readDerivedByIdIdx( Authorization,
+				cur.getRequiredId() ));
 			deleteBoolCol( Authorization, cur );
 		}
 	}
@@ -8282,7 +8282,7 @@ public class CFBamRamBoolColTable
 	public void deleteBoolColByPrevIdx( ICFSecAuthorization Authorization,
 		ICFBamValueByPrevIdxKey argKey )
 	{
-		ICFBamBoolCol cur;
+		CFBamBuffBoolCol cur;
 		boolean anyNotNull = false;
 		if( argKey.getOptionalPrevId() != null ) {
 			anyNotNull = true;
@@ -8290,19 +8290,19 @@ public class CFBamRamBoolColTable
 		if( ! anyNotNull ) {
 			return;
 		}
-		LinkedList<ICFBamBoolCol> matchSet = new LinkedList<ICFBamBoolCol>();
-		Iterator<ICFBamBoolCol> values = dictByPKey.values().iterator();
+		LinkedList<CFBamBuffBoolCol> matchSet = new LinkedList<CFBamBuffBoolCol>();
+		Iterator<CFBamBuffBoolCol> values = dictByPKey.values().iterator();
 		while( values.hasNext() ) {
 			cur = values.next();
 			if( argKey.equals( cur ) ) {
 				matchSet.add( cur );
 			}
 		}
-		Iterator<ICFBamBoolCol> iterMatch = matchSet.iterator();
+		Iterator<CFBamBuffBoolCol> iterMatch = matchSet.iterator();
 		while( iterMatch.hasNext() ) {
 			cur = iterMatch.next();
-			cur = schema.getTableBoolCol().readDerivedByIdIdx( Authorization,
-				cur.getRequiredId() );
+			cur = (CFBamBuffBoolCol)(schema.getTableBoolCol().readDerivedByIdIdx( Authorization,
+				cur.getRequiredId() ));
 			deleteBoolCol( Authorization, cur );
 		}
 	}
@@ -8318,7 +8318,7 @@ public class CFBamRamBoolColTable
 	public void deleteBoolColByNextIdx( ICFSecAuthorization Authorization,
 		ICFBamValueByNextIdxKey argKey )
 	{
-		ICFBamBoolCol cur;
+		CFBamBuffBoolCol cur;
 		boolean anyNotNull = false;
 		if( argKey.getOptionalNextId() != null ) {
 			anyNotNull = true;
@@ -8326,19 +8326,19 @@ public class CFBamRamBoolColTable
 		if( ! anyNotNull ) {
 			return;
 		}
-		LinkedList<ICFBamBoolCol> matchSet = new LinkedList<ICFBamBoolCol>();
-		Iterator<ICFBamBoolCol> values = dictByPKey.values().iterator();
+		LinkedList<CFBamBuffBoolCol> matchSet = new LinkedList<CFBamBuffBoolCol>();
+		Iterator<CFBamBuffBoolCol> values = dictByPKey.values().iterator();
 		while( values.hasNext() ) {
 			cur = values.next();
 			if( argKey.equals( cur ) ) {
 				matchSet.add( cur );
 			}
 		}
-		Iterator<ICFBamBoolCol> iterMatch = matchSet.iterator();
+		Iterator<CFBamBuffBoolCol> iterMatch = matchSet.iterator();
 		while( iterMatch.hasNext() ) {
 			cur = iterMatch.next();
-			cur = schema.getTableBoolCol().readDerivedByIdIdx( Authorization,
-				cur.getRequiredId() );
+			cur = (CFBamBuffBoolCol)(schema.getTableBoolCol().readDerivedByIdIdx( Authorization,
+				cur.getRequiredId() ));
 			deleteBoolCol( Authorization, cur );
 		}
 	}
@@ -8356,7 +8356,7 @@ public class CFBamRamBoolColTable
 	public void deleteBoolColByContPrevIdx( ICFSecAuthorization Authorization,
 		ICFBamValueByContPrevIdxKey argKey )
 	{
-		ICFBamBoolCol cur;
+		CFBamBuffBoolCol cur;
 		boolean anyNotNull = false;
 		anyNotNull = true;
 		if( argKey.getOptionalPrevId() != null ) {
@@ -8365,19 +8365,19 @@ public class CFBamRamBoolColTable
 		if( ! anyNotNull ) {
 			return;
 		}
-		LinkedList<ICFBamBoolCol> matchSet = new LinkedList<ICFBamBoolCol>();
-		Iterator<ICFBamBoolCol> values = dictByPKey.values().iterator();
+		LinkedList<CFBamBuffBoolCol> matchSet = new LinkedList<CFBamBuffBoolCol>();
+		Iterator<CFBamBuffBoolCol> values = dictByPKey.values().iterator();
 		while( values.hasNext() ) {
 			cur = values.next();
 			if( argKey.equals( cur ) ) {
 				matchSet.add( cur );
 			}
 		}
-		Iterator<ICFBamBoolCol> iterMatch = matchSet.iterator();
+		Iterator<CFBamBuffBoolCol> iterMatch = matchSet.iterator();
 		while( iterMatch.hasNext() ) {
 			cur = iterMatch.next();
-			cur = schema.getTableBoolCol().readDerivedByIdIdx( Authorization,
-				cur.getRequiredId() );
+			cur = (CFBamBuffBoolCol)(schema.getTableBoolCol().readDerivedByIdIdx( Authorization,
+				cur.getRequiredId() ));
 			deleteBoolCol( Authorization, cur );
 		}
 	}
@@ -8395,7 +8395,7 @@ public class CFBamRamBoolColTable
 	public void deleteBoolColByContNextIdx( ICFSecAuthorization Authorization,
 		ICFBamValueByContNextIdxKey argKey )
 	{
-		ICFBamBoolCol cur;
+		CFBamBuffBoolCol cur;
 		boolean anyNotNull = false;
 		anyNotNull = true;
 		if( argKey.getOptionalNextId() != null ) {
@@ -8404,19 +8404,19 @@ public class CFBamRamBoolColTable
 		if( ! anyNotNull ) {
 			return;
 		}
-		LinkedList<ICFBamBoolCol> matchSet = new LinkedList<ICFBamBoolCol>();
-		Iterator<ICFBamBoolCol> values = dictByPKey.values().iterator();
+		LinkedList<CFBamBuffBoolCol> matchSet = new LinkedList<CFBamBuffBoolCol>();
+		Iterator<CFBamBuffBoolCol> values = dictByPKey.values().iterator();
 		while( values.hasNext() ) {
 			cur = values.next();
 			if( argKey.equals( cur ) ) {
 				matchSet.add( cur );
 			}
 		}
-		Iterator<ICFBamBoolCol> iterMatch = matchSet.iterator();
+		Iterator<CFBamBuffBoolCol> iterMatch = matchSet.iterator();
 		while( iterMatch.hasNext() ) {
 			cur = iterMatch.next();
-			cur = schema.getTableBoolCol().readDerivedByIdIdx( Authorization,
-				cur.getRequiredId() );
+			cur = (CFBamBuffBoolCol)(schema.getTableBoolCol().readDerivedByIdIdx( Authorization,
+				cur.getRequiredId() ));
 			deleteBoolCol( Authorization, cur );
 		}
 	}

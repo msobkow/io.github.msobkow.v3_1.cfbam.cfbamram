@@ -6744,8 +6744,8 @@ public class CFBamRamTimeTypeTable
 				pkey );
 		}
 		CFLibDbKeyHash256 varSchemaDefId = existing.getRequiredSchemaDefId();
-		CFBamBuffSchemaDef container = schema.getTableSchemaDef().readDerivedByIdIdx( Authorization,
-			varSchemaDefId );
+		CFBamBuffSchemaDef container = (CFBamBuffSchemaDef)(schema.getTableSchemaDef().readDerivedByIdIdx( Authorization,
+			varSchemaDefId ));
 		if( container == null ) {
 			throw new CFLibNullArgumentException( getClass(),
 				S_ProcName,
@@ -8115,25 +8115,25 @@ public class CFBamRamTimeTypeTable
 	public void deleteTimeTypeBySchemaIdx( ICFSecAuthorization Authorization,
 		ICFBamTimeTypeBySchemaIdxKey argKey )
 	{
-		ICFBamTimeType cur;
+		CFBamBuffTimeType cur;
 		boolean anyNotNull = false;
 		anyNotNull = true;
 		if( ! anyNotNull ) {
 			return;
 		}
-		LinkedList<ICFBamTimeType> matchSet = new LinkedList<ICFBamTimeType>();
-		Iterator<ICFBamTimeType> values = dictByPKey.values().iterator();
+		LinkedList<CFBamBuffTimeType> matchSet = new LinkedList<CFBamBuffTimeType>();
+		Iterator<CFBamBuffTimeType> values = dictByPKey.values().iterator();
 		while( values.hasNext() ) {
 			cur = values.next();
 			if( argKey.equals( cur ) ) {
 				matchSet.add( cur );
 			}
 		}
-		Iterator<ICFBamTimeType> iterMatch = matchSet.iterator();
+		Iterator<CFBamBuffTimeType> iterMatch = matchSet.iterator();
 		while( iterMatch.hasNext() ) {
 			cur = iterMatch.next();
-			cur = schema.getTableTimeType().readDerivedByIdIdx( Authorization,
-				cur.getRequiredId() );
+			cur = (CFBamBuffTimeType)(schema.getTableTimeType().readDerivedByIdIdx( Authorization,
+				cur.getRequiredId() ));
 			deleteTimeType( Authorization, cur );
 		}
 	}
@@ -8146,20 +8146,20 @@ public class CFBamRamTimeTypeTable
 		if( ! anyNotNull ) {
 			return;
 		}
-		ICFBamTimeType cur;
-		LinkedList<ICFBamTimeType> matchSet = new LinkedList<ICFBamTimeType>();
-		Iterator<ICFBamTimeType> values = dictByPKey.values().iterator();
+		CFBamBuffTimeType cur;
+		LinkedList<CFBamBuffTimeType> matchSet = new LinkedList<CFBamBuffTimeType>();
+		Iterator<CFBamBuffTimeType> values = dictByPKey.values().iterator();
 		while( values.hasNext() ) {
 			cur = values.next();
 			if( argKey.equals( cur ) ) {
 				matchSet.add( cur );
 			}
 		}
-		Iterator<ICFBamTimeType> iterMatch = matchSet.iterator();
+		Iterator<CFBamBuffTimeType> iterMatch = matchSet.iterator();
 		while( iterMatch.hasNext() ) {
 			cur = iterMatch.next();
-			cur = schema.getTableTimeType().readDerivedByIdIdx( Authorization,
-				cur.getRequiredId() );
+			cur = (CFBamBuffTimeType)(schema.getTableTimeType().readDerivedByIdIdx( Authorization,
+				cur.getRequiredId() ));
 			deleteTimeType( Authorization, cur );
 		}
 	}
@@ -8177,26 +8177,26 @@ public class CFBamRamTimeTypeTable
 	public void deleteTimeTypeByUNameIdx( ICFSecAuthorization Authorization,
 		ICFBamValueByUNameIdxKey argKey )
 	{
-		ICFBamTimeType cur;
+		CFBamBuffTimeType cur;
 		boolean anyNotNull = false;
 		anyNotNull = true;
 		anyNotNull = true;
 		if( ! anyNotNull ) {
 			return;
 		}
-		LinkedList<ICFBamTimeType> matchSet = new LinkedList<ICFBamTimeType>();
-		Iterator<ICFBamTimeType> values = dictByPKey.values().iterator();
+		LinkedList<CFBamBuffTimeType> matchSet = new LinkedList<CFBamBuffTimeType>();
+		Iterator<CFBamBuffTimeType> values = dictByPKey.values().iterator();
 		while( values.hasNext() ) {
 			cur = values.next();
 			if( argKey.equals( cur ) ) {
 				matchSet.add( cur );
 			}
 		}
-		Iterator<ICFBamTimeType> iterMatch = matchSet.iterator();
+		Iterator<CFBamBuffTimeType> iterMatch = matchSet.iterator();
 		while( iterMatch.hasNext() ) {
 			cur = iterMatch.next();
-			cur = schema.getTableTimeType().readDerivedByIdIdx( Authorization,
-				cur.getRequiredId() );
+			cur = (CFBamBuffTimeType)(schema.getTableTimeType().readDerivedByIdIdx( Authorization,
+				cur.getRequiredId() ));
 			deleteTimeType( Authorization, cur );
 		}
 	}
@@ -8212,25 +8212,25 @@ public class CFBamRamTimeTypeTable
 	public void deleteTimeTypeByScopeIdx( ICFSecAuthorization Authorization,
 		ICFBamValueByScopeIdxKey argKey )
 	{
-		ICFBamTimeType cur;
+		CFBamBuffTimeType cur;
 		boolean anyNotNull = false;
 		anyNotNull = true;
 		if( ! anyNotNull ) {
 			return;
 		}
-		LinkedList<ICFBamTimeType> matchSet = new LinkedList<ICFBamTimeType>();
-		Iterator<ICFBamTimeType> values = dictByPKey.values().iterator();
+		LinkedList<CFBamBuffTimeType> matchSet = new LinkedList<CFBamBuffTimeType>();
+		Iterator<CFBamBuffTimeType> values = dictByPKey.values().iterator();
 		while( values.hasNext() ) {
 			cur = values.next();
 			if( argKey.equals( cur ) ) {
 				matchSet.add( cur );
 			}
 		}
-		Iterator<ICFBamTimeType> iterMatch = matchSet.iterator();
+		Iterator<CFBamBuffTimeType> iterMatch = matchSet.iterator();
 		while( iterMatch.hasNext() ) {
 			cur = iterMatch.next();
-			cur = schema.getTableTimeType().readDerivedByIdIdx( Authorization,
-				cur.getRequiredId() );
+			cur = (CFBamBuffTimeType)(schema.getTableTimeType().readDerivedByIdIdx( Authorization,
+				cur.getRequiredId() ));
 			deleteTimeType( Authorization, cur );
 		}
 	}
@@ -8246,7 +8246,7 @@ public class CFBamRamTimeTypeTable
 	public void deleteTimeTypeByDefSchemaIdx( ICFSecAuthorization Authorization,
 		ICFBamValueByDefSchemaIdxKey argKey )
 	{
-		ICFBamTimeType cur;
+		CFBamBuffTimeType cur;
 		boolean anyNotNull = false;
 		if( argKey.getOptionalDefSchemaId() != null ) {
 			anyNotNull = true;
@@ -8254,19 +8254,19 @@ public class CFBamRamTimeTypeTable
 		if( ! anyNotNull ) {
 			return;
 		}
-		LinkedList<ICFBamTimeType> matchSet = new LinkedList<ICFBamTimeType>();
-		Iterator<ICFBamTimeType> values = dictByPKey.values().iterator();
+		LinkedList<CFBamBuffTimeType> matchSet = new LinkedList<CFBamBuffTimeType>();
+		Iterator<CFBamBuffTimeType> values = dictByPKey.values().iterator();
 		while( values.hasNext() ) {
 			cur = values.next();
 			if( argKey.equals( cur ) ) {
 				matchSet.add( cur );
 			}
 		}
-		Iterator<ICFBamTimeType> iterMatch = matchSet.iterator();
+		Iterator<CFBamBuffTimeType> iterMatch = matchSet.iterator();
 		while( iterMatch.hasNext() ) {
 			cur = iterMatch.next();
-			cur = schema.getTableTimeType().readDerivedByIdIdx( Authorization,
-				cur.getRequiredId() );
+			cur = (CFBamBuffTimeType)(schema.getTableTimeType().readDerivedByIdIdx( Authorization,
+				cur.getRequiredId() ));
 			deleteTimeType( Authorization, cur );
 		}
 	}
@@ -8282,7 +8282,7 @@ public class CFBamRamTimeTypeTable
 	public void deleteTimeTypeByPrevIdx( ICFSecAuthorization Authorization,
 		ICFBamValueByPrevIdxKey argKey )
 	{
-		ICFBamTimeType cur;
+		CFBamBuffTimeType cur;
 		boolean anyNotNull = false;
 		if( argKey.getOptionalPrevId() != null ) {
 			anyNotNull = true;
@@ -8290,19 +8290,19 @@ public class CFBamRamTimeTypeTable
 		if( ! anyNotNull ) {
 			return;
 		}
-		LinkedList<ICFBamTimeType> matchSet = new LinkedList<ICFBamTimeType>();
-		Iterator<ICFBamTimeType> values = dictByPKey.values().iterator();
+		LinkedList<CFBamBuffTimeType> matchSet = new LinkedList<CFBamBuffTimeType>();
+		Iterator<CFBamBuffTimeType> values = dictByPKey.values().iterator();
 		while( values.hasNext() ) {
 			cur = values.next();
 			if( argKey.equals( cur ) ) {
 				matchSet.add( cur );
 			}
 		}
-		Iterator<ICFBamTimeType> iterMatch = matchSet.iterator();
+		Iterator<CFBamBuffTimeType> iterMatch = matchSet.iterator();
 		while( iterMatch.hasNext() ) {
 			cur = iterMatch.next();
-			cur = schema.getTableTimeType().readDerivedByIdIdx( Authorization,
-				cur.getRequiredId() );
+			cur = (CFBamBuffTimeType)(schema.getTableTimeType().readDerivedByIdIdx( Authorization,
+				cur.getRequiredId() ));
 			deleteTimeType( Authorization, cur );
 		}
 	}
@@ -8318,7 +8318,7 @@ public class CFBamRamTimeTypeTable
 	public void deleteTimeTypeByNextIdx( ICFSecAuthorization Authorization,
 		ICFBamValueByNextIdxKey argKey )
 	{
-		ICFBamTimeType cur;
+		CFBamBuffTimeType cur;
 		boolean anyNotNull = false;
 		if( argKey.getOptionalNextId() != null ) {
 			anyNotNull = true;
@@ -8326,19 +8326,19 @@ public class CFBamRamTimeTypeTable
 		if( ! anyNotNull ) {
 			return;
 		}
-		LinkedList<ICFBamTimeType> matchSet = new LinkedList<ICFBamTimeType>();
-		Iterator<ICFBamTimeType> values = dictByPKey.values().iterator();
+		LinkedList<CFBamBuffTimeType> matchSet = new LinkedList<CFBamBuffTimeType>();
+		Iterator<CFBamBuffTimeType> values = dictByPKey.values().iterator();
 		while( values.hasNext() ) {
 			cur = values.next();
 			if( argKey.equals( cur ) ) {
 				matchSet.add( cur );
 			}
 		}
-		Iterator<ICFBamTimeType> iterMatch = matchSet.iterator();
+		Iterator<CFBamBuffTimeType> iterMatch = matchSet.iterator();
 		while( iterMatch.hasNext() ) {
 			cur = iterMatch.next();
-			cur = schema.getTableTimeType().readDerivedByIdIdx( Authorization,
-				cur.getRequiredId() );
+			cur = (CFBamBuffTimeType)(schema.getTableTimeType().readDerivedByIdIdx( Authorization,
+				cur.getRequiredId() ));
 			deleteTimeType( Authorization, cur );
 		}
 	}
@@ -8356,7 +8356,7 @@ public class CFBamRamTimeTypeTable
 	public void deleteTimeTypeByContPrevIdx( ICFSecAuthorization Authorization,
 		ICFBamValueByContPrevIdxKey argKey )
 	{
-		ICFBamTimeType cur;
+		CFBamBuffTimeType cur;
 		boolean anyNotNull = false;
 		anyNotNull = true;
 		if( argKey.getOptionalPrevId() != null ) {
@@ -8365,19 +8365,19 @@ public class CFBamRamTimeTypeTable
 		if( ! anyNotNull ) {
 			return;
 		}
-		LinkedList<ICFBamTimeType> matchSet = new LinkedList<ICFBamTimeType>();
-		Iterator<ICFBamTimeType> values = dictByPKey.values().iterator();
+		LinkedList<CFBamBuffTimeType> matchSet = new LinkedList<CFBamBuffTimeType>();
+		Iterator<CFBamBuffTimeType> values = dictByPKey.values().iterator();
 		while( values.hasNext() ) {
 			cur = values.next();
 			if( argKey.equals( cur ) ) {
 				matchSet.add( cur );
 			}
 		}
-		Iterator<ICFBamTimeType> iterMatch = matchSet.iterator();
+		Iterator<CFBamBuffTimeType> iterMatch = matchSet.iterator();
 		while( iterMatch.hasNext() ) {
 			cur = iterMatch.next();
-			cur = schema.getTableTimeType().readDerivedByIdIdx( Authorization,
-				cur.getRequiredId() );
+			cur = (CFBamBuffTimeType)(schema.getTableTimeType().readDerivedByIdIdx( Authorization,
+				cur.getRequiredId() ));
 			deleteTimeType( Authorization, cur );
 		}
 	}
@@ -8395,7 +8395,7 @@ public class CFBamRamTimeTypeTable
 	public void deleteTimeTypeByContNextIdx( ICFSecAuthorization Authorization,
 		ICFBamValueByContNextIdxKey argKey )
 	{
-		ICFBamTimeType cur;
+		CFBamBuffTimeType cur;
 		boolean anyNotNull = false;
 		anyNotNull = true;
 		if( argKey.getOptionalNextId() != null ) {
@@ -8404,19 +8404,19 @@ public class CFBamRamTimeTypeTable
 		if( ! anyNotNull ) {
 			return;
 		}
-		LinkedList<ICFBamTimeType> matchSet = new LinkedList<ICFBamTimeType>();
-		Iterator<ICFBamTimeType> values = dictByPKey.values().iterator();
+		LinkedList<CFBamBuffTimeType> matchSet = new LinkedList<CFBamBuffTimeType>();
+		Iterator<CFBamBuffTimeType> values = dictByPKey.values().iterator();
 		while( values.hasNext() ) {
 			cur = values.next();
 			if( argKey.equals( cur ) ) {
 				matchSet.add( cur );
 			}
 		}
-		Iterator<ICFBamTimeType> iterMatch = matchSet.iterator();
+		Iterator<CFBamBuffTimeType> iterMatch = matchSet.iterator();
 		while( iterMatch.hasNext() ) {
 			cur = iterMatch.next();
-			cur = schema.getTableTimeType().readDerivedByIdIdx( Authorization,
-				cur.getRequiredId() );
+			cur = (CFBamBuffTimeType)(schema.getTableTimeType().readDerivedByIdIdx( Authorization,
+				cur.getRequiredId() ));
 			deleteTimeType( Authorization, cur );
 		}
 	}

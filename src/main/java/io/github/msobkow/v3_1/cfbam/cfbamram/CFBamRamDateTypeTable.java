@@ -6744,8 +6744,8 @@ public class CFBamRamDateTypeTable
 				pkey );
 		}
 		CFLibDbKeyHash256 varSchemaDefId = existing.getRequiredSchemaDefId();
-		CFBamBuffSchemaDef container = schema.getTableSchemaDef().readDerivedByIdIdx( Authorization,
-			varSchemaDefId );
+		CFBamBuffSchemaDef container = (CFBamBuffSchemaDef)(schema.getTableSchemaDef().readDerivedByIdIdx( Authorization,
+			varSchemaDefId ));
 		if( container == null ) {
 			throw new CFLibNullArgumentException( getClass(),
 				S_ProcName,
@@ -8115,25 +8115,25 @@ public class CFBamRamDateTypeTable
 	public void deleteDateTypeBySchemaIdx( ICFSecAuthorization Authorization,
 		ICFBamDateTypeBySchemaIdxKey argKey )
 	{
-		ICFBamDateType cur;
+		CFBamBuffDateType cur;
 		boolean anyNotNull = false;
 		anyNotNull = true;
 		if( ! anyNotNull ) {
 			return;
 		}
-		LinkedList<ICFBamDateType> matchSet = new LinkedList<ICFBamDateType>();
-		Iterator<ICFBamDateType> values = dictByPKey.values().iterator();
+		LinkedList<CFBamBuffDateType> matchSet = new LinkedList<CFBamBuffDateType>();
+		Iterator<CFBamBuffDateType> values = dictByPKey.values().iterator();
 		while( values.hasNext() ) {
 			cur = values.next();
 			if( argKey.equals( cur ) ) {
 				matchSet.add( cur );
 			}
 		}
-		Iterator<ICFBamDateType> iterMatch = matchSet.iterator();
+		Iterator<CFBamBuffDateType> iterMatch = matchSet.iterator();
 		while( iterMatch.hasNext() ) {
 			cur = iterMatch.next();
-			cur = schema.getTableDateType().readDerivedByIdIdx( Authorization,
-				cur.getRequiredId() );
+			cur = (CFBamBuffDateType)(schema.getTableDateType().readDerivedByIdIdx( Authorization,
+				cur.getRequiredId() ));
 			deleteDateType( Authorization, cur );
 		}
 	}
@@ -8146,20 +8146,20 @@ public class CFBamRamDateTypeTable
 		if( ! anyNotNull ) {
 			return;
 		}
-		ICFBamDateType cur;
-		LinkedList<ICFBamDateType> matchSet = new LinkedList<ICFBamDateType>();
-		Iterator<ICFBamDateType> values = dictByPKey.values().iterator();
+		CFBamBuffDateType cur;
+		LinkedList<CFBamBuffDateType> matchSet = new LinkedList<CFBamBuffDateType>();
+		Iterator<CFBamBuffDateType> values = dictByPKey.values().iterator();
 		while( values.hasNext() ) {
 			cur = values.next();
 			if( argKey.equals( cur ) ) {
 				matchSet.add( cur );
 			}
 		}
-		Iterator<ICFBamDateType> iterMatch = matchSet.iterator();
+		Iterator<CFBamBuffDateType> iterMatch = matchSet.iterator();
 		while( iterMatch.hasNext() ) {
 			cur = iterMatch.next();
-			cur = schema.getTableDateType().readDerivedByIdIdx( Authorization,
-				cur.getRequiredId() );
+			cur = (CFBamBuffDateType)(schema.getTableDateType().readDerivedByIdIdx( Authorization,
+				cur.getRequiredId() ));
 			deleteDateType( Authorization, cur );
 		}
 	}
@@ -8177,26 +8177,26 @@ public class CFBamRamDateTypeTable
 	public void deleteDateTypeByUNameIdx( ICFSecAuthorization Authorization,
 		ICFBamValueByUNameIdxKey argKey )
 	{
-		ICFBamDateType cur;
+		CFBamBuffDateType cur;
 		boolean anyNotNull = false;
 		anyNotNull = true;
 		anyNotNull = true;
 		if( ! anyNotNull ) {
 			return;
 		}
-		LinkedList<ICFBamDateType> matchSet = new LinkedList<ICFBamDateType>();
-		Iterator<ICFBamDateType> values = dictByPKey.values().iterator();
+		LinkedList<CFBamBuffDateType> matchSet = new LinkedList<CFBamBuffDateType>();
+		Iterator<CFBamBuffDateType> values = dictByPKey.values().iterator();
 		while( values.hasNext() ) {
 			cur = values.next();
 			if( argKey.equals( cur ) ) {
 				matchSet.add( cur );
 			}
 		}
-		Iterator<ICFBamDateType> iterMatch = matchSet.iterator();
+		Iterator<CFBamBuffDateType> iterMatch = matchSet.iterator();
 		while( iterMatch.hasNext() ) {
 			cur = iterMatch.next();
-			cur = schema.getTableDateType().readDerivedByIdIdx( Authorization,
-				cur.getRequiredId() );
+			cur = (CFBamBuffDateType)(schema.getTableDateType().readDerivedByIdIdx( Authorization,
+				cur.getRequiredId() ));
 			deleteDateType( Authorization, cur );
 		}
 	}
@@ -8212,25 +8212,25 @@ public class CFBamRamDateTypeTable
 	public void deleteDateTypeByScopeIdx( ICFSecAuthorization Authorization,
 		ICFBamValueByScopeIdxKey argKey )
 	{
-		ICFBamDateType cur;
+		CFBamBuffDateType cur;
 		boolean anyNotNull = false;
 		anyNotNull = true;
 		if( ! anyNotNull ) {
 			return;
 		}
-		LinkedList<ICFBamDateType> matchSet = new LinkedList<ICFBamDateType>();
-		Iterator<ICFBamDateType> values = dictByPKey.values().iterator();
+		LinkedList<CFBamBuffDateType> matchSet = new LinkedList<CFBamBuffDateType>();
+		Iterator<CFBamBuffDateType> values = dictByPKey.values().iterator();
 		while( values.hasNext() ) {
 			cur = values.next();
 			if( argKey.equals( cur ) ) {
 				matchSet.add( cur );
 			}
 		}
-		Iterator<ICFBamDateType> iterMatch = matchSet.iterator();
+		Iterator<CFBamBuffDateType> iterMatch = matchSet.iterator();
 		while( iterMatch.hasNext() ) {
 			cur = iterMatch.next();
-			cur = schema.getTableDateType().readDerivedByIdIdx( Authorization,
-				cur.getRequiredId() );
+			cur = (CFBamBuffDateType)(schema.getTableDateType().readDerivedByIdIdx( Authorization,
+				cur.getRequiredId() ));
 			deleteDateType( Authorization, cur );
 		}
 	}
@@ -8246,7 +8246,7 @@ public class CFBamRamDateTypeTable
 	public void deleteDateTypeByDefSchemaIdx( ICFSecAuthorization Authorization,
 		ICFBamValueByDefSchemaIdxKey argKey )
 	{
-		ICFBamDateType cur;
+		CFBamBuffDateType cur;
 		boolean anyNotNull = false;
 		if( argKey.getOptionalDefSchemaId() != null ) {
 			anyNotNull = true;
@@ -8254,19 +8254,19 @@ public class CFBamRamDateTypeTable
 		if( ! anyNotNull ) {
 			return;
 		}
-		LinkedList<ICFBamDateType> matchSet = new LinkedList<ICFBamDateType>();
-		Iterator<ICFBamDateType> values = dictByPKey.values().iterator();
+		LinkedList<CFBamBuffDateType> matchSet = new LinkedList<CFBamBuffDateType>();
+		Iterator<CFBamBuffDateType> values = dictByPKey.values().iterator();
 		while( values.hasNext() ) {
 			cur = values.next();
 			if( argKey.equals( cur ) ) {
 				matchSet.add( cur );
 			}
 		}
-		Iterator<ICFBamDateType> iterMatch = matchSet.iterator();
+		Iterator<CFBamBuffDateType> iterMatch = matchSet.iterator();
 		while( iterMatch.hasNext() ) {
 			cur = iterMatch.next();
-			cur = schema.getTableDateType().readDerivedByIdIdx( Authorization,
-				cur.getRequiredId() );
+			cur = (CFBamBuffDateType)(schema.getTableDateType().readDerivedByIdIdx( Authorization,
+				cur.getRequiredId() ));
 			deleteDateType( Authorization, cur );
 		}
 	}
@@ -8282,7 +8282,7 @@ public class CFBamRamDateTypeTable
 	public void deleteDateTypeByPrevIdx( ICFSecAuthorization Authorization,
 		ICFBamValueByPrevIdxKey argKey )
 	{
-		ICFBamDateType cur;
+		CFBamBuffDateType cur;
 		boolean anyNotNull = false;
 		if( argKey.getOptionalPrevId() != null ) {
 			anyNotNull = true;
@@ -8290,19 +8290,19 @@ public class CFBamRamDateTypeTable
 		if( ! anyNotNull ) {
 			return;
 		}
-		LinkedList<ICFBamDateType> matchSet = new LinkedList<ICFBamDateType>();
-		Iterator<ICFBamDateType> values = dictByPKey.values().iterator();
+		LinkedList<CFBamBuffDateType> matchSet = new LinkedList<CFBamBuffDateType>();
+		Iterator<CFBamBuffDateType> values = dictByPKey.values().iterator();
 		while( values.hasNext() ) {
 			cur = values.next();
 			if( argKey.equals( cur ) ) {
 				matchSet.add( cur );
 			}
 		}
-		Iterator<ICFBamDateType> iterMatch = matchSet.iterator();
+		Iterator<CFBamBuffDateType> iterMatch = matchSet.iterator();
 		while( iterMatch.hasNext() ) {
 			cur = iterMatch.next();
-			cur = schema.getTableDateType().readDerivedByIdIdx( Authorization,
-				cur.getRequiredId() );
+			cur = (CFBamBuffDateType)(schema.getTableDateType().readDerivedByIdIdx( Authorization,
+				cur.getRequiredId() ));
 			deleteDateType( Authorization, cur );
 		}
 	}
@@ -8318,7 +8318,7 @@ public class CFBamRamDateTypeTable
 	public void deleteDateTypeByNextIdx( ICFSecAuthorization Authorization,
 		ICFBamValueByNextIdxKey argKey )
 	{
-		ICFBamDateType cur;
+		CFBamBuffDateType cur;
 		boolean anyNotNull = false;
 		if( argKey.getOptionalNextId() != null ) {
 			anyNotNull = true;
@@ -8326,19 +8326,19 @@ public class CFBamRamDateTypeTable
 		if( ! anyNotNull ) {
 			return;
 		}
-		LinkedList<ICFBamDateType> matchSet = new LinkedList<ICFBamDateType>();
-		Iterator<ICFBamDateType> values = dictByPKey.values().iterator();
+		LinkedList<CFBamBuffDateType> matchSet = new LinkedList<CFBamBuffDateType>();
+		Iterator<CFBamBuffDateType> values = dictByPKey.values().iterator();
 		while( values.hasNext() ) {
 			cur = values.next();
 			if( argKey.equals( cur ) ) {
 				matchSet.add( cur );
 			}
 		}
-		Iterator<ICFBamDateType> iterMatch = matchSet.iterator();
+		Iterator<CFBamBuffDateType> iterMatch = matchSet.iterator();
 		while( iterMatch.hasNext() ) {
 			cur = iterMatch.next();
-			cur = schema.getTableDateType().readDerivedByIdIdx( Authorization,
-				cur.getRequiredId() );
+			cur = (CFBamBuffDateType)(schema.getTableDateType().readDerivedByIdIdx( Authorization,
+				cur.getRequiredId() ));
 			deleteDateType( Authorization, cur );
 		}
 	}
@@ -8356,7 +8356,7 @@ public class CFBamRamDateTypeTable
 	public void deleteDateTypeByContPrevIdx( ICFSecAuthorization Authorization,
 		ICFBamValueByContPrevIdxKey argKey )
 	{
-		ICFBamDateType cur;
+		CFBamBuffDateType cur;
 		boolean anyNotNull = false;
 		anyNotNull = true;
 		if( argKey.getOptionalPrevId() != null ) {
@@ -8365,19 +8365,19 @@ public class CFBamRamDateTypeTable
 		if( ! anyNotNull ) {
 			return;
 		}
-		LinkedList<ICFBamDateType> matchSet = new LinkedList<ICFBamDateType>();
-		Iterator<ICFBamDateType> values = dictByPKey.values().iterator();
+		LinkedList<CFBamBuffDateType> matchSet = new LinkedList<CFBamBuffDateType>();
+		Iterator<CFBamBuffDateType> values = dictByPKey.values().iterator();
 		while( values.hasNext() ) {
 			cur = values.next();
 			if( argKey.equals( cur ) ) {
 				matchSet.add( cur );
 			}
 		}
-		Iterator<ICFBamDateType> iterMatch = matchSet.iterator();
+		Iterator<CFBamBuffDateType> iterMatch = matchSet.iterator();
 		while( iterMatch.hasNext() ) {
 			cur = iterMatch.next();
-			cur = schema.getTableDateType().readDerivedByIdIdx( Authorization,
-				cur.getRequiredId() );
+			cur = (CFBamBuffDateType)(schema.getTableDateType().readDerivedByIdIdx( Authorization,
+				cur.getRequiredId() ));
 			deleteDateType( Authorization, cur );
 		}
 	}
@@ -8395,7 +8395,7 @@ public class CFBamRamDateTypeTable
 	public void deleteDateTypeByContNextIdx( ICFSecAuthorization Authorization,
 		ICFBamValueByContNextIdxKey argKey )
 	{
-		ICFBamDateType cur;
+		CFBamBuffDateType cur;
 		boolean anyNotNull = false;
 		anyNotNull = true;
 		if( argKey.getOptionalNextId() != null ) {
@@ -8404,19 +8404,19 @@ public class CFBamRamDateTypeTable
 		if( ! anyNotNull ) {
 			return;
 		}
-		LinkedList<ICFBamDateType> matchSet = new LinkedList<ICFBamDateType>();
-		Iterator<ICFBamDateType> values = dictByPKey.values().iterator();
+		LinkedList<CFBamBuffDateType> matchSet = new LinkedList<CFBamBuffDateType>();
+		Iterator<CFBamBuffDateType> values = dictByPKey.values().iterator();
 		while( values.hasNext() ) {
 			cur = values.next();
 			if( argKey.equals( cur ) ) {
 				matchSet.add( cur );
 			}
 		}
-		Iterator<ICFBamDateType> iterMatch = matchSet.iterator();
+		Iterator<CFBamBuffDateType> iterMatch = matchSet.iterator();
 		while( iterMatch.hasNext() ) {
 			cur = iterMatch.next();
-			cur = schema.getTableDateType().readDerivedByIdIdx( Authorization,
-				cur.getRequiredId() );
+			cur = (CFBamBuffDateType)(schema.getTableDateType().readDerivedByIdIdx( Authorization,
+				cur.getRequiredId() ));
 			deleteDateType( Authorization, cur );
 		}
 	}

@@ -696,25 +696,25 @@ public class CFBamRamPopTopDepTable
 	public void deletePopTopDepByContRelIdx( ICFSecAuthorization Authorization,
 		ICFBamPopTopDepByContRelIdxKey argKey )
 	{
-		ICFBamPopTopDep cur;
+		CFBamBuffPopTopDep cur;
 		boolean anyNotNull = false;
 		anyNotNull = true;
 		if( ! anyNotNull ) {
 			return;
 		}
-		LinkedList<ICFBamPopTopDep> matchSet = new LinkedList<ICFBamPopTopDep>();
-		Iterator<ICFBamPopTopDep> values = dictByPKey.values().iterator();
+		LinkedList<CFBamBuffPopTopDep> matchSet = new LinkedList<CFBamBuffPopTopDep>();
+		Iterator<CFBamBuffPopTopDep> values = dictByPKey.values().iterator();
 		while( values.hasNext() ) {
 			cur = values.next();
 			if( argKey.equals( cur ) ) {
 				matchSet.add( cur );
 			}
 		}
-		Iterator<ICFBamPopTopDep> iterMatch = matchSet.iterator();
+		Iterator<CFBamBuffPopTopDep> iterMatch = matchSet.iterator();
 		while( iterMatch.hasNext() ) {
 			cur = iterMatch.next();
-			cur = schema.getTablePopTopDep().readDerivedByIdIdx( Authorization,
-				cur.getRequiredId() );
+			cur = (CFBamBuffPopTopDep)(schema.getTablePopTopDep().readDerivedByIdIdx( Authorization,
+				cur.getRequiredId() ));
 			deletePopTopDep( Authorization, cur );
 		}
 	}
@@ -732,26 +732,26 @@ public class CFBamRamPopTopDepTable
 	public void deletePopTopDepByUNameIdx( ICFSecAuthorization Authorization,
 		ICFBamPopTopDepByUNameIdxKey argKey )
 	{
-		ICFBamPopTopDep cur;
+		CFBamBuffPopTopDep cur;
 		boolean anyNotNull = false;
 		anyNotNull = true;
 		anyNotNull = true;
 		if( ! anyNotNull ) {
 			return;
 		}
-		LinkedList<ICFBamPopTopDep> matchSet = new LinkedList<ICFBamPopTopDep>();
-		Iterator<ICFBamPopTopDep> values = dictByPKey.values().iterator();
+		LinkedList<CFBamBuffPopTopDep> matchSet = new LinkedList<CFBamBuffPopTopDep>();
+		Iterator<CFBamBuffPopTopDep> values = dictByPKey.values().iterator();
 		while( values.hasNext() ) {
 			cur = values.next();
 			if( argKey.equals( cur ) ) {
 				matchSet.add( cur );
 			}
 		}
-		Iterator<ICFBamPopTopDep> iterMatch = matchSet.iterator();
+		Iterator<CFBamBuffPopTopDep> iterMatch = matchSet.iterator();
 		while( iterMatch.hasNext() ) {
 			cur = iterMatch.next();
-			cur = schema.getTablePopTopDep().readDerivedByIdIdx( Authorization,
-				cur.getRequiredId() );
+			cur = (CFBamBuffPopTopDep)(schema.getTablePopTopDep().readDerivedByIdIdx( Authorization,
+				cur.getRequiredId() ));
 			deletePopTopDep( Authorization, cur );
 		}
 	}
@@ -767,25 +767,25 @@ public class CFBamRamPopTopDepTable
 	public void deletePopTopDepByRelationIdx( ICFSecAuthorization Authorization,
 		ICFBamPopDepByRelationIdxKey argKey )
 	{
-		ICFBamPopTopDep cur;
+		CFBamBuffPopTopDep cur;
 		boolean anyNotNull = false;
 		anyNotNull = true;
 		if( ! anyNotNull ) {
 			return;
 		}
-		LinkedList<ICFBamPopTopDep> matchSet = new LinkedList<ICFBamPopTopDep>();
-		Iterator<ICFBamPopTopDep> values = dictByPKey.values().iterator();
+		LinkedList<CFBamBuffPopTopDep> matchSet = new LinkedList<CFBamBuffPopTopDep>();
+		Iterator<CFBamBuffPopTopDep> values = dictByPKey.values().iterator();
 		while( values.hasNext() ) {
 			cur = values.next();
 			if( argKey.equals( cur ) ) {
 				matchSet.add( cur );
 			}
 		}
-		Iterator<ICFBamPopTopDep> iterMatch = matchSet.iterator();
+		Iterator<CFBamBuffPopTopDep> iterMatch = matchSet.iterator();
 		while( iterMatch.hasNext() ) {
 			cur = iterMatch.next();
-			cur = schema.getTablePopTopDep().readDerivedByIdIdx( Authorization,
-				cur.getRequiredId() );
+			cur = (CFBamBuffPopTopDep)(schema.getTablePopTopDep().readDerivedByIdIdx( Authorization,
+				cur.getRequiredId() ));
 			deletePopTopDep( Authorization, cur );
 		}
 	}
@@ -801,7 +801,7 @@ public class CFBamRamPopTopDepTable
 	public void deletePopTopDepByDefSchemaIdx( ICFSecAuthorization Authorization,
 		ICFBamPopDepByDefSchemaIdxKey argKey )
 	{
-		ICFBamPopTopDep cur;
+		CFBamBuffPopTopDep cur;
 		boolean anyNotNull = false;
 		if( argKey.getOptionalDefSchemaId() != null ) {
 			anyNotNull = true;
@@ -809,19 +809,19 @@ public class CFBamRamPopTopDepTable
 		if( ! anyNotNull ) {
 			return;
 		}
-		LinkedList<ICFBamPopTopDep> matchSet = new LinkedList<ICFBamPopTopDep>();
-		Iterator<ICFBamPopTopDep> values = dictByPKey.values().iterator();
+		LinkedList<CFBamBuffPopTopDep> matchSet = new LinkedList<CFBamBuffPopTopDep>();
+		Iterator<CFBamBuffPopTopDep> values = dictByPKey.values().iterator();
 		while( values.hasNext() ) {
 			cur = values.next();
 			if( argKey.equals( cur ) ) {
 				matchSet.add( cur );
 			}
 		}
-		Iterator<ICFBamPopTopDep> iterMatch = matchSet.iterator();
+		Iterator<CFBamBuffPopTopDep> iterMatch = matchSet.iterator();
 		while( iterMatch.hasNext() ) {
 			cur = iterMatch.next();
-			cur = schema.getTablePopTopDep().readDerivedByIdIdx( Authorization,
-				cur.getRequiredId() );
+			cur = (CFBamBuffPopTopDep)(schema.getTablePopTopDep().readDerivedByIdIdx( Authorization,
+				cur.getRequiredId() ));
 			deletePopTopDep( Authorization, cur );
 		}
 	}
@@ -834,20 +834,20 @@ public class CFBamRamPopTopDepTable
 		if( ! anyNotNull ) {
 			return;
 		}
-		ICFBamPopTopDep cur;
-		LinkedList<ICFBamPopTopDep> matchSet = new LinkedList<ICFBamPopTopDep>();
-		Iterator<ICFBamPopTopDep> values = dictByPKey.values().iterator();
+		CFBamBuffPopTopDep cur;
+		LinkedList<CFBamBuffPopTopDep> matchSet = new LinkedList<CFBamBuffPopTopDep>();
+		Iterator<CFBamBuffPopTopDep> values = dictByPKey.values().iterator();
 		while( values.hasNext() ) {
 			cur = values.next();
 			if( argKey.equals( cur ) ) {
 				matchSet.add( cur );
 			}
 		}
-		Iterator<ICFBamPopTopDep> iterMatch = matchSet.iterator();
+		Iterator<CFBamBuffPopTopDep> iterMatch = matchSet.iterator();
 		while( iterMatch.hasNext() ) {
 			cur = iterMatch.next();
-			cur = schema.getTablePopTopDep().readDerivedByIdIdx( Authorization,
-				cur.getRequiredId() );
+			cur = (CFBamBuffPopTopDep)(schema.getTablePopTopDep().readDerivedByIdIdx( Authorization,
+				cur.getRequiredId() ));
 			deletePopTopDep( Authorization, cur );
 		}
 	}
@@ -863,25 +863,25 @@ public class CFBamRamPopTopDepTable
 	public void deletePopTopDepByTenantIdx( ICFSecAuthorization Authorization,
 		ICFBamScopeByTenantIdxKey argKey )
 	{
-		ICFBamPopTopDep cur;
+		CFBamBuffPopTopDep cur;
 		boolean anyNotNull = false;
 		anyNotNull = true;
 		if( ! anyNotNull ) {
 			return;
 		}
-		LinkedList<ICFBamPopTopDep> matchSet = new LinkedList<ICFBamPopTopDep>();
-		Iterator<ICFBamPopTopDep> values = dictByPKey.values().iterator();
+		LinkedList<CFBamBuffPopTopDep> matchSet = new LinkedList<CFBamBuffPopTopDep>();
+		Iterator<CFBamBuffPopTopDep> values = dictByPKey.values().iterator();
 		while( values.hasNext() ) {
 			cur = values.next();
 			if( argKey.equals( cur ) ) {
 				matchSet.add( cur );
 			}
 		}
-		Iterator<ICFBamPopTopDep> iterMatch = matchSet.iterator();
+		Iterator<CFBamBuffPopTopDep> iterMatch = matchSet.iterator();
 		while( iterMatch.hasNext() ) {
 			cur = iterMatch.next();
-			cur = schema.getTablePopTopDep().readDerivedByIdIdx( Authorization,
-				cur.getRequiredId() );
+			cur = (CFBamBuffPopTopDep)(schema.getTablePopTopDep().readDerivedByIdIdx( Authorization,
+				cur.getRequiredId() ));
 			deletePopTopDep( Authorization, cur );
 		}
 	}

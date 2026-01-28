@@ -5958,8 +5958,8 @@ public class CFBamRamBlobDefTable
 				pkey );
 		}
 		CFLibDbKeyHash256 varScopeId = existing.getRequiredScopeId();
-		CFBamBuffScope container = schema.getTableScope().readDerivedByIdIdx( Authorization,
-			varScopeId );
+		CFBamBuffScope container = (CFBamBuffScope)(schema.getTableScope().readDerivedByIdIdx( Authorization,
+			varScopeId ));
 		if( container == null ) {
 			throw new CFLibNullArgumentException( getClass(),
 				S_ProcName,
@@ -7343,28 +7343,28 @@ public class CFBamRamBlobDefTable
 		if( ! anyNotNull ) {
 			return;
 		}
-		ICFBamBlobDef cur;
-		LinkedList<ICFBamBlobDef> matchSet = new LinkedList<ICFBamBlobDef>();
-		Iterator<ICFBamBlobDef> values = dictByPKey.values().iterator();
+		CFBamBuffBlobDef cur;
+		LinkedList<CFBamBuffBlobDef> matchSet = new LinkedList<CFBamBuffBlobDef>();
+		Iterator<CFBamBuffBlobDef> values = dictByPKey.values().iterator();
 		while( values.hasNext() ) {
 			cur = values.next();
 			if( argKey.equals( cur ) ) {
 				matchSet.add( cur );
 			}
 		}
-		Iterator<ICFBamBlobDef> iterMatch = matchSet.iterator();
+		Iterator<CFBamBuffBlobDef> iterMatch = matchSet.iterator();
 		while( iterMatch.hasNext() ) {
 			cur = iterMatch.next();
-			cur = schema.getTableBlobDef().readDerivedByIdIdx( Authorization,
-				cur.getRequiredId() );
-			String subClassCode = cur.getClassCode();
-			if( "a80b".equals( subClassCode ) ) {
+			cur = (CFBamBuffBlobDef)(schema.getTableBlobDef().readDerivedByIdIdx( Authorization,
+				cur.getRequiredId() ));
+			int subClassCode = cur.getClassCode();
+			if( CFBamBlobDef.CLASS_CODE == subClassCode ) {
 				schema.getTableBlobDef().deleteBlobDef( Authorization, cur );
 			}
-			else if( "a80c".equals( subClassCode ) ) {
+			else if( CFBamBlobType.CLASS_CODE == subClassCode ) {
 				schema.getTableBlobType().deleteBlobType( Authorization, (ICFBamBlobType)cur );
 			}
-			else if( "a86b".equals( subClassCode ) ) {
+			else if( CFBamBlobCol.CLASS_CODE == subClassCode ) {
 				schema.getTableBlobCol().deleteBlobCol( Authorization, (ICFBamBlobCol)cur );
 			}
 			else {
@@ -7387,34 +7387,34 @@ public class CFBamRamBlobDefTable
 		ICFBamValueByUNameIdxKey argKey )
 	{
 		final String S_ProcName = "deleteBlobDefByUNameIdx";
-		ICFBamBlobDef cur;
+		CFBamBuffBlobDef cur;
 		boolean anyNotNull = false;
 		anyNotNull = true;
 		anyNotNull = true;
 		if( ! anyNotNull ) {
 			return;
 		}
-		LinkedList<ICFBamBlobDef> matchSet = new LinkedList<ICFBamBlobDef>();
-		Iterator<ICFBamBlobDef> values = dictByPKey.values().iterator();
+		LinkedList<CFBamBuffBlobDef> matchSet = new LinkedList<CFBamBuffBlobDef>();
+		Iterator<CFBamBuffBlobDef> values = dictByPKey.values().iterator();
 		while( values.hasNext() ) {
 			cur = values.next();
 			if( argKey.equals( cur ) ) {
 				matchSet.add( cur );
 			}
 		}
-		Iterator<ICFBamBlobDef> iterMatch = matchSet.iterator();
+		Iterator<CFBamBuffBlobDef> iterMatch = matchSet.iterator();
 		while( iterMatch.hasNext() ) {
 			cur = iterMatch.next();
-			cur = schema.getTableBlobDef().readDerivedByIdIdx( Authorization,
-				cur.getRequiredId() );
-			String subClassCode = cur.getClassCode();
-			if( "a80b".equals( subClassCode ) ) {
+			cur = (CFBamBuffBlobDef)(schema.getTableBlobDef().readDerivedByIdIdx( Authorization,
+				cur.getRequiredId() ));
+			int subClassCode = cur.getClassCode();
+			if( CFBamBlobDef.CLASS_CODE == subClassCode ) {
 				schema.getTableBlobDef().deleteBlobDef( Authorization, cur );
 			}
-			else if( "a80c".equals( subClassCode ) ) {
+			else if( CFBamBlobType.CLASS_CODE == subClassCode ) {
 				schema.getTableBlobType().deleteBlobType( Authorization, (ICFBamBlobType)cur );
 			}
-			else if( "a86b".equals( subClassCode ) ) {
+			else if( CFBamBlobCol.CLASS_CODE == subClassCode ) {
 				schema.getTableBlobCol().deleteBlobCol( Authorization, (ICFBamBlobCol)cur );
 			}
 			else {
@@ -7435,33 +7435,33 @@ public class CFBamRamBlobDefTable
 		ICFBamValueByScopeIdxKey argKey )
 	{
 		final String S_ProcName = "deleteBlobDefByScopeIdx";
-		ICFBamBlobDef cur;
+		CFBamBuffBlobDef cur;
 		boolean anyNotNull = false;
 		anyNotNull = true;
 		if( ! anyNotNull ) {
 			return;
 		}
-		LinkedList<ICFBamBlobDef> matchSet = new LinkedList<ICFBamBlobDef>();
-		Iterator<ICFBamBlobDef> values = dictByPKey.values().iterator();
+		LinkedList<CFBamBuffBlobDef> matchSet = new LinkedList<CFBamBuffBlobDef>();
+		Iterator<CFBamBuffBlobDef> values = dictByPKey.values().iterator();
 		while( values.hasNext() ) {
 			cur = values.next();
 			if( argKey.equals( cur ) ) {
 				matchSet.add( cur );
 			}
 		}
-		Iterator<ICFBamBlobDef> iterMatch = matchSet.iterator();
+		Iterator<CFBamBuffBlobDef> iterMatch = matchSet.iterator();
 		while( iterMatch.hasNext() ) {
 			cur = iterMatch.next();
-			cur = schema.getTableBlobDef().readDerivedByIdIdx( Authorization,
-				cur.getRequiredId() );
-			String subClassCode = cur.getClassCode();
-			if( "a80b".equals( subClassCode ) ) {
+			cur = (CFBamBuffBlobDef)(schema.getTableBlobDef().readDerivedByIdIdx( Authorization,
+				cur.getRequiredId() ));
+			int subClassCode = cur.getClassCode();
+			if( CFBamBlobDef.CLASS_CODE == subClassCode ) {
 				schema.getTableBlobDef().deleteBlobDef( Authorization, cur );
 			}
-			else if( "a80c".equals( subClassCode ) ) {
+			else if( CFBamBlobType.CLASS_CODE == subClassCode ) {
 				schema.getTableBlobType().deleteBlobType( Authorization, (ICFBamBlobType)cur );
 			}
-			else if( "a86b".equals( subClassCode ) ) {
+			else if( CFBamBlobCol.CLASS_CODE == subClassCode ) {
 				schema.getTableBlobCol().deleteBlobCol( Authorization, (ICFBamBlobCol)cur );
 			}
 			else {
@@ -7482,7 +7482,7 @@ public class CFBamRamBlobDefTable
 		ICFBamValueByDefSchemaIdxKey argKey )
 	{
 		final String S_ProcName = "deleteBlobDefByDefSchemaIdx";
-		ICFBamBlobDef cur;
+		CFBamBuffBlobDef cur;
 		boolean anyNotNull = false;
 		if( argKey.getOptionalDefSchemaId() != null ) {
 			anyNotNull = true;
@@ -7490,27 +7490,27 @@ public class CFBamRamBlobDefTable
 		if( ! anyNotNull ) {
 			return;
 		}
-		LinkedList<ICFBamBlobDef> matchSet = new LinkedList<ICFBamBlobDef>();
-		Iterator<ICFBamBlobDef> values = dictByPKey.values().iterator();
+		LinkedList<CFBamBuffBlobDef> matchSet = new LinkedList<CFBamBuffBlobDef>();
+		Iterator<CFBamBuffBlobDef> values = dictByPKey.values().iterator();
 		while( values.hasNext() ) {
 			cur = values.next();
 			if( argKey.equals( cur ) ) {
 				matchSet.add( cur );
 			}
 		}
-		Iterator<ICFBamBlobDef> iterMatch = matchSet.iterator();
+		Iterator<CFBamBuffBlobDef> iterMatch = matchSet.iterator();
 		while( iterMatch.hasNext() ) {
 			cur = iterMatch.next();
-			cur = schema.getTableBlobDef().readDerivedByIdIdx( Authorization,
-				cur.getRequiredId() );
-			String subClassCode = cur.getClassCode();
-			if( "a80b".equals( subClassCode ) ) {
+			cur = (CFBamBuffBlobDef)(schema.getTableBlobDef().readDerivedByIdIdx( Authorization,
+				cur.getRequiredId() ));
+			int subClassCode = cur.getClassCode();
+			if( CFBamBlobDef.CLASS_CODE == subClassCode ) {
 				schema.getTableBlobDef().deleteBlobDef( Authorization, cur );
 			}
-			else if( "a80c".equals( subClassCode ) ) {
+			else if( CFBamBlobType.CLASS_CODE == subClassCode ) {
 				schema.getTableBlobType().deleteBlobType( Authorization, (ICFBamBlobType)cur );
 			}
-			else if( "a86b".equals( subClassCode ) ) {
+			else if( CFBamBlobCol.CLASS_CODE == subClassCode ) {
 				schema.getTableBlobCol().deleteBlobCol( Authorization, (ICFBamBlobCol)cur );
 			}
 			else {
@@ -7531,7 +7531,7 @@ public class CFBamRamBlobDefTable
 		ICFBamValueByPrevIdxKey argKey )
 	{
 		final String S_ProcName = "deleteBlobDefByPrevIdx";
-		ICFBamBlobDef cur;
+		CFBamBuffBlobDef cur;
 		boolean anyNotNull = false;
 		if( argKey.getOptionalPrevId() != null ) {
 			anyNotNull = true;
@@ -7539,27 +7539,27 @@ public class CFBamRamBlobDefTable
 		if( ! anyNotNull ) {
 			return;
 		}
-		LinkedList<ICFBamBlobDef> matchSet = new LinkedList<ICFBamBlobDef>();
-		Iterator<ICFBamBlobDef> values = dictByPKey.values().iterator();
+		LinkedList<CFBamBuffBlobDef> matchSet = new LinkedList<CFBamBuffBlobDef>();
+		Iterator<CFBamBuffBlobDef> values = dictByPKey.values().iterator();
 		while( values.hasNext() ) {
 			cur = values.next();
 			if( argKey.equals( cur ) ) {
 				matchSet.add( cur );
 			}
 		}
-		Iterator<ICFBamBlobDef> iterMatch = matchSet.iterator();
+		Iterator<CFBamBuffBlobDef> iterMatch = matchSet.iterator();
 		while( iterMatch.hasNext() ) {
 			cur = iterMatch.next();
-			cur = schema.getTableBlobDef().readDerivedByIdIdx( Authorization,
-				cur.getRequiredId() );
-			String subClassCode = cur.getClassCode();
-			if( "a80b".equals( subClassCode ) ) {
+			cur = (CFBamBuffBlobDef)(schema.getTableBlobDef().readDerivedByIdIdx( Authorization,
+				cur.getRequiredId() ));
+			int subClassCode = cur.getClassCode();
+			if( CFBamBlobDef.CLASS_CODE == subClassCode ) {
 				schema.getTableBlobDef().deleteBlobDef( Authorization, cur );
 			}
-			else if( "a80c".equals( subClassCode ) ) {
+			else if( CFBamBlobType.CLASS_CODE == subClassCode ) {
 				schema.getTableBlobType().deleteBlobType( Authorization, (ICFBamBlobType)cur );
 			}
-			else if( "a86b".equals( subClassCode ) ) {
+			else if( CFBamBlobCol.CLASS_CODE == subClassCode ) {
 				schema.getTableBlobCol().deleteBlobCol( Authorization, (ICFBamBlobCol)cur );
 			}
 			else {
@@ -7580,7 +7580,7 @@ public class CFBamRamBlobDefTable
 		ICFBamValueByNextIdxKey argKey )
 	{
 		final String S_ProcName = "deleteBlobDefByNextIdx";
-		ICFBamBlobDef cur;
+		CFBamBuffBlobDef cur;
 		boolean anyNotNull = false;
 		if( argKey.getOptionalNextId() != null ) {
 			anyNotNull = true;
@@ -7588,27 +7588,27 @@ public class CFBamRamBlobDefTable
 		if( ! anyNotNull ) {
 			return;
 		}
-		LinkedList<ICFBamBlobDef> matchSet = new LinkedList<ICFBamBlobDef>();
-		Iterator<ICFBamBlobDef> values = dictByPKey.values().iterator();
+		LinkedList<CFBamBuffBlobDef> matchSet = new LinkedList<CFBamBuffBlobDef>();
+		Iterator<CFBamBuffBlobDef> values = dictByPKey.values().iterator();
 		while( values.hasNext() ) {
 			cur = values.next();
 			if( argKey.equals( cur ) ) {
 				matchSet.add( cur );
 			}
 		}
-		Iterator<ICFBamBlobDef> iterMatch = matchSet.iterator();
+		Iterator<CFBamBuffBlobDef> iterMatch = matchSet.iterator();
 		while( iterMatch.hasNext() ) {
 			cur = iterMatch.next();
-			cur = schema.getTableBlobDef().readDerivedByIdIdx( Authorization,
-				cur.getRequiredId() );
-			String subClassCode = cur.getClassCode();
-			if( "a80b".equals( subClassCode ) ) {
+			cur = (CFBamBuffBlobDef)(schema.getTableBlobDef().readDerivedByIdIdx( Authorization,
+				cur.getRequiredId() ));
+			int subClassCode = cur.getClassCode();
+			if( CFBamBlobDef.CLASS_CODE == subClassCode ) {
 				schema.getTableBlobDef().deleteBlobDef( Authorization, cur );
 			}
-			else if( "a80c".equals( subClassCode ) ) {
+			else if( CFBamBlobType.CLASS_CODE == subClassCode ) {
 				schema.getTableBlobType().deleteBlobType( Authorization, (ICFBamBlobType)cur );
 			}
-			else if( "a86b".equals( subClassCode ) ) {
+			else if( CFBamBlobCol.CLASS_CODE == subClassCode ) {
 				schema.getTableBlobCol().deleteBlobCol( Authorization, (ICFBamBlobCol)cur );
 			}
 			else {
@@ -7631,7 +7631,7 @@ public class CFBamRamBlobDefTable
 		ICFBamValueByContPrevIdxKey argKey )
 	{
 		final String S_ProcName = "deleteBlobDefByContPrevIdx";
-		ICFBamBlobDef cur;
+		CFBamBuffBlobDef cur;
 		boolean anyNotNull = false;
 		anyNotNull = true;
 		if( argKey.getOptionalPrevId() != null ) {
@@ -7640,27 +7640,27 @@ public class CFBamRamBlobDefTable
 		if( ! anyNotNull ) {
 			return;
 		}
-		LinkedList<ICFBamBlobDef> matchSet = new LinkedList<ICFBamBlobDef>();
-		Iterator<ICFBamBlobDef> values = dictByPKey.values().iterator();
+		LinkedList<CFBamBuffBlobDef> matchSet = new LinkedList<CFBamBuffBlobDef>();
+		Iterator<CFBamBuffBlobDef> values = dictByPKey.values().iterator();
 		while( values.hasNext() ) {
 			cur = values.next();
 			if( argKey.equals( cur ) ) {
 				matchSet.add( cur );
 			}
 		}
-		Iterator<ICFBamBlobDef> iterMatch = matchSet.iterator();
+		Iterator<CFBamBuffBlobDef> iterMatch = matchSet.iterator();
 		while( iterMatch.hasNext() ) {
 			cur = iterMatch.next();
-			cur = schema.getTableBlobDef().readDerivedByIdIdx( Authorization,
-				cur.getRequiredId() );
-			String subClassCode = cur.getClassCode();
-			if( "a80b".equals( subClassCode ) ) {
+			cur = (CFBamBuffBlobDef)(schema.getTableBlobDef().readDerivedByIdIdx( Authorization,
+				cur.getRequiredId() ));
+			int subClassCode = cur.getClassCode();
+			if( CFBamBlobDef.CLASS_CODE == subClassCode ) {
 				schema.getTableBlobDef().deleteBlobDef( Authorization, cur );
 			}
-			else if( "a80c".equals( subClassCode ) ) {
+			else if( CFBamBlobType.CLASS_CODE == subClassCode ) {
 				schema.getTableBlobType().deleteBlobType( Authorization, (ICFBamBlobType)cur );
 			}
-			else if( "a86b".equals( subClassCode ) ) {
+			else if( CFBamBlobCol.CLASS_CODE == subClassCode ) {
 				schema.getTableBlobCol().deleteBlobCol( Authorization, (ICFBamBlobCol)cur );
 			}
 			else {
@@ -7683,7 +7683,7 @@ public class CFBamRamBlobDefTable
 		ICFBamValueByContNextIdxKey argKey )
 	{
 		final String S_ProcName = "deleteBlobDefByContNextIdx";
-		ICFBamBlobDef cur;
+		CFBamBuffBlobDef cur;
 		boolean anyNotNull = false;
 		anyNotNull = true;
 		if( argKey.getOptionalNextId() != null ) {
@@ -7692,27 +7692,27 @@ public class CFBamRamBlobDefTable
 		if( ! anyNotNull ) {
 			return;
 		}
-		LinkedList<ICFBamBlobDef> matchSet = new LinkedList<ICFBamBlobDef>();
-		Iterator<ICFBamBlobDef> values = dictByPKey.values().iterator();
+		LinkedList<CFBamBuffBlobDef> matchSet = new LinkedList<CFBamBuffBlobDef>();
+		Iterator<CFBamBuffBlobDef> values = dictByPKey.values().iterator();
 		while( values.hasNext() ) {
 			cur = values.next();
 			if( argKey.equals( cur ) ) {
 				matchSet.add( cur );
 			}
 		}
-		Iterator<ICFBamBlobDef> iterMatch = matchSet.iterator();
+		Iterator<CFBamBuffBlobDef> iterMatch = matchSet.iterator();
 		while( iterMatch.hasNext() ) {
 			cur = iterMatch.next();
-			cur = schema.getTableBlobDef().readDerivedByIdIdx( Authorization,
-				cur.getRequiredId() );
-			String subClassCode = cur.getClassCode();
-			if( "a80b".equals( subClassCode ) ) {
+			cur = (CFBamBuffBlobDef)(schema.getTableBlobDef().readDerivedByIdIdx( Authorization,
+				cur.getRequiredId() ));
+			int subClassCode = cur.getClassCode();
+			if( CFBamBlobDef.CLASS_CODE == subClassCode ) {
 				schema.getTableBlobDef().deleteBlobDef( Authorization, cur );
 			}
-			else if( "a80c".equals( subClassCode ) ) {
+			else if( CFBamBlobType.CLASS_CODE == subClassCode ) {
 				schema.getTableBlobType().deleteBlobType( Authorization, (ICFBamBlobType)cur );
 			}
-			else if( "a86b".equals( subClassCode ) ) {
+			else if( CFBamBlobCol.CLASS_CODE == subClassCode ) {
 				schema.getTableBlobCol().deleteBlobCol( Authorization, (ICFBamBlobCol)cur );
 			}
 			else {

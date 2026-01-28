@@ -462,20 +462,20 @@ public class CFBamRamISOLangTable
 		if( ! anyNotNull ) {
 			return;
 		}
-		ICFSecISOLang cur;
-		LinkedList<ICFSecISOLang> matchSet = new LinkedList<ICFSecISOLang>();
-		Iterator<ICFSecISOLang> values = dictByPKey.values().iterator();
+		CFSecBuffISOLang cur;
+		LinkedList<CFSecBuffISOLang> matchSet = new LinkedList<CFSecBuffISOLang>();
+		Iterator<CFSecBuffISOLang> values = dictByPKey.values().iterator();
 		while( values.hasNext() ) {
 			cur = values.next();
 			if( argKey.equals( cur ) ) {
 				matchSet.add( cur );
 			}
 		}
-		Iterator<ICFSecISOLang> iterMatch = matchSet.iterator();
+		Iterator<CFSecBuffISOLang> iterMatch = matchSet.iterator();
 		while( iterMatch.hasNext() ) {
 			cur = iterMatch.next();
-			cur = schema.getTableISOLang().readDerivedByIdIdx( Authorization,
-				cur.getRequiredISOLangId() );
+			cur = (CFSecBuffISOLang)(schema.getTableISOLang().readDerivedByIdIdx( Authorization,
+				cur.getRequiredISOLangId() ));
 			deleteISOLang( Authorization, cur );
 		}
 	}
@@ -491,25 +491,25 @@ public class CFBamRamISOLangTable
 	public void deleteISOLangByCode3Idx( ICFSecAuthorization Authorization,
 		ICFSecISOLangByCode3IdxKey argKey )
 	{
-		ICFSecISOLang cur;
+		CFSecBuffISOLang cur;
 		boolean anyNotNull = false;
 		anyNotNull = true;
 		if( ! anyNotNull ) {
 			return;
 		}
-		LinkedList<ICFSecISOLang> matchSet = new LinkedList<ICFSecISOLang>();
-		Iterator<ICFSecISOLang> values = dictByPKey.values().iterator();
+		LinkedList<CFSecBuffISOLang> matchSet = new LinkedList<CFSecBuffISOLang>();
+		Iterator<CFSecBuffISOLang> values = dictByPKey.values().iterator();
 		while( values.hasNext() ) {
 			cur = values.next();
 			if( argKey.equals( cur ) ) {
 				matchSet.add( cur );
 			}
 		}
-		Iterator<ICFSecISOLang> iterMatch = matchSet.iterator();
+		Iterator<CFSecBuffISOLang> iterMatch = matchSet.iterator();
 		while( iterMatch.hasNext() ) {
 			cur = iterMatch.next();
-			cur = schema.getTableISOLang().readDerivedByIdIdx( Authorization,
-				cur.getRequiredISOLangId() );
+			cur = (CFSecBuffISOLang)(schema.getTableISOLang().readDerivedByIdIdx( Authorization,
+				cur.getRequiredISOLangId() ));
 			deleteISOLang( Authorization, cur );
 		}
 	}
@@ -525,7 +525,7 @@ public class CFBamRamISOLangTable
 	public void deleteISOLangByCode2Idx( ICFSecAuthorization Authorization,
 		ICFSecISOLangByCode2IdxKey argKey )
 	{
-		ICFSecISOLang cur;
+		CFSecBuffISOLang cur;
 		boolean anyNotNull = false;
 		if( argKey.getOptionalISO6391Code() != null ) {
 			anyNotNull = true;
@@ -533,19 +533,19 @@ public class CFBamRamISOLangTable
 		if( ! anyNotNull ) {
 			return;
 		}
-		LinkedList<ICFSecISOLang> matchSet = new LinkedList<ICFSecISOLang>();
-		Iterator<ICFSecISOLang> values = dictByPKey.values().iterator();
+		LinkedList<CFSecBuffISOLang> matchSet = new LinkedList<CFSecBuffISOLang>();
+		Iterator<CFSecBuffISOLang> values = dictByPKey.values().iterator();
 		while( values.hasNext() ) {
 			cur = values.next();
 			if( argKey.equals( cur ) ) {
 				matchSet.add( cur );
 			}
 		}
-		Iterator<ICFSecISOLang> iterMatch = matchSet.iterator();
+		Iterator<CFSecBuffISOLang> iterMatch = matchSet.iterator();
 		while( iterMatch.hasNext() ) {
 			cur = iterMatch.next();
-			cur = schema.getTableISOLang().readDerivedByIdIdx( Authorization,
-				cur.getRequiredISOLangId() );
+			cur = (CFSecBuffISOLang)(schema.getTableISOLang().readDerivedByIdIdx( Authorization,
+				cur.getRequiredISOLangId() ));
 			deleteISOLang( Authorization, cur );
 		}
 	}

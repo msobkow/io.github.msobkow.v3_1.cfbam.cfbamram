@@ -6744,8 +6744,8 @@ public class CFBamRamTextTypeTable
 				pkey );
 		}
 		CFLibDbKeyHash256 varSchemaDefId = existing.getRequiredSchemaDefId();
-		CFBamBuffSchemaDef container = schema.getTableSchemaDef().readDerivedByIdIdx( Authorization,
-			varSchemaDefId );
+		CFBamBuffSchemaDef container = (CFBamBuffSchemaDef)(schema.getTableSchemaDef().readDerivedByIdIdx( Authorization,
+			varSchemaDefId ));
 		if( container == null ) {
 			throw new CFLibNullArgumentException( getClass(),
 				S_ProcName,
@@ -8115,25 +8115,25 @@ public class CFBamRamTextTypeTable
 	public void deleteTextTypeBySchemaIdx( ICFSecAuthorization Authorization,
 		ICFBamTextTypeBySchemaIdxKey argKey )
 	{
-		ICFBamTextType cur;
+		CFBamBuffTextType cur;
 		boolean anyNotNull = false;
 		anyNotNull = true;
 		if( ! anyNotNull ) {
 			return;
 		}
-		LinkedList<ICFBamTextType> matchSet = new LinkedList<ICFBamTextType>();
-		Iterator<ICFBamTextType> values = dictByPKey.values().iterator();
+		LinkedList<CFBamBuffTextType> matchSet = new LinkedList<CFBamBuffTextType>();
+		Iterator<CFBamBuffTextType> values = dictByPKey.values().iterator();
 		while( values.hasNext() ) {
 			cur = values.next();
 			if( argKey.equals( cur ) ) {
 				matchSet.add( cur );
 			}
 		}
-		Iterator<ICFBamTextType> iterMatch = matchSet.iterator();
+		Iterator<CFBamBuffTextType> iterMatch = matchSet.iterator();
 		while( iterMatch.hasNext() ) {
 			cur = iterMatch.next();
-			cur = schema.getTableTextType().readDerivedByIdIdx( Authorization,
-				cur.getRequiredId() );
+			cur = (CFBamBuffTextType)(schema.getTableTextType().readDerivedByIdIdx( Authorization,
+				cur.getRequiredId() ));
 			deleteTextType( Authorization, cur );
 		}
 	}
@@ -8146,20 +8146,20 @@ public class CFBamRamTextTypeTable
 		if( ! anyNotNull ) {
 			return;
 		}
-		ICFBamTextType cur;
-		LinkedList<ICFBamTextType> matchSet = new LinkedList<ICFBamTextType>();
-		Iterator<ICFBamTextType> values = dictByPKey.values().iterator();
+		CFBamBuffTextType cur;
+		LinkedList<CFBamBuffTextType> matchSet = new LinkedList<CFBamBuffTextType>();
+		Iterator<CFBamBuffTextType> values = dictByPKey.values().iterator();
 		while( values.hasNext() ) {
 			cur = values.next();
 			if( argKey.equals( cur ) ) {
 				matchSet.add( cur );
 			}
 		}
-		Iterator<ICFBamTextType> iterMatch = matchSet.iterator();
+		Iterator<CFBamBuffTextType> iterMatch = matchSet.iterator();
 		while( iterMatch.hasNext() ) {
 			cur = iterMatch.next();
-			cur = schema.getTableTextType().readDerivedByIdIdx( Authorization,
-				cur.getRequiredId() );
+			cur = (CFBamBuffTextType)(schema.getTableTextType().readDerivedByIdIdx( Authorization,
+				cur.getRequiredId() ));
 			deleteTextType( Authorization, cur );
 		}
 	}
@@ -8177,26 +8177,26 @@ public class CFBamRamTextTypeTable
 	public void deleteTextTypeByUNameIdx( ICFSecAuthorization Authorization,
 		ICFBamValueByUNameIdxKey argKey )
 	{
-		ICFBamTextType cur;
+		CFBamBuffTextType cur;
 		boolean anyNotNull = false;
 		anyNotNull = true;
 		anyNotNull = true;
 		if( ! anyNotNull ) {
 			return;
 		}
-		LinkedList<ICFBamTextType> matchSet = new LinkedList<ICFBamTextType>();
-		Iterator<ICFBamTextType> values = dictByPKey.values().iterator();
+		LinkedList<CFBamBuffTextType> matchSet = new LinkedList<CFBamBuffTextType>();
+		Iterator<CFBamBuffTextType> values = dictByPKey.values().iterator();
 		while( values.hasNext() ) {
 			cur = values.next();
 			if( argKey.equals( cur ) ) {
 				matchSet.add( cur );
 			}
 		}
-		Iterator<ICFBamTextType> iterMatch = matchSet.iterator();
+		Iterator<CFBamBuffTextType> iterMatch = matchSet.iterator();
 		while( iterMatch.hasNext() ) {
 			cur = iterMatch.next();
-			cur = schema.getTableTextType().readDerivedByIdIdx( Authorization,
-				cur.getRequiredId() );
+			cur = (CFBamBuffTextType)(schema.getTableTextType().readDerivedByIdIdx( Authorization,
+				cur.getRequiredId() ));
 			deleteTextType( Authorization, cur );
 		}
 	}
@@ -8212,25 +8212,25 @@ public class CFBamRamTextTypeTable
 	public void deleteTextTypeByScopeIdx( ICFSecAuthorization Authorization,
 		ICFBamValueByScopeIdxKey argKey )
 	{
-		ICFBamTextType cur;
+		CFBamBuffTextType cur;
 		boolean anyNotNull = false;
 		anyNotNull = true;
 		if( ! anyNotNull ) {
 			return;
 		}
-		LinkedList<ICFBamTextType> matchSet = new LinkedList<ICFBamTextType>();
-		Iterator<ICFBamTextType> values = dictByPKey.values().iterator();
+		LinkedList<CFBamBuffTextType> matchSet = new LinkedList<CFBamBuffTextType>();
+		Iterator<CFBamBuffTextType> values = dictByPKey.values().iterator();
 		while( values.hasNext() ) {
 			cur = values.next();
 			if( argKey.equals( cur ) ) {
 				matchSet.add( cur );
 			}
 		}
-		Iterator<ICFBamTextType> iterMatch = matchSet.iterator();
+		Iterator<CFBamBuffTextType> iterMatch = matchSet.iterator();
 		while( iterMatch.hasNext() ) {
 			cur = iterMatch.next();
-			cur = schema.getTableTextType().readDerivedByIdIdx( Authorization,
-				cur.getRequiredId() );
+			cur = (CFBamBuffTextType)(schema.getTableTextType().readDerivedByIdIdx( Authorization,
+				cur.getRequiredId() ));
 			deleteTextType( Authorization, cur );
 		}
 	}
@@ -8246,7 +8246,7 @@ public class CFBamRamTextTypeTable
 	public void deleteTextTypeByDefSchemaIdx( ICFSecAuthorization Authorization,
 		ICFBamValueByDefSchemaIdxKey argKey )
 	{
-		ICFBamTextType cur;
+		CFBamBuffTextType cur;
 		boolean anyNotNull = false;
 		if( argKey.getOptionalDefSchemaId() != null ) {
 			anyNotNull = true;
@@ -8254,19 +8254,19 @@ public class CFBamRamTextTypeTable
 		if( ! anyNotNull ) {
 			return;
 		}
-		LinkedList<ICFBamTextType> matchSet = new LinkedList<ICFBamTextType>();
-		Iterator<ICFBamTextType> values = dictByPKey.values().iterator();
+		LinkedList<CFBamBuffTextType> matchSet = new LinkedList<CFBamBuffTextType>();
+		Iterator<CFBamBuffTextType> values = dictByPKey.values().iterator();
 		while( values.hasNext() ) {
 			cur = values.next();
 			if( argKey.equals( cur ) ) {
 				matchSet.add( cur );
 			}
 		}
-		Iterator<ICFBamTextType> iterMatch = matchSet.iterator();
+		Iterator<CFBamBuffTextType> iterMatch = matchSet.iterator();
 		while( iterMatch.hasNext() ) {
 			cur = iterMatch.next();
-			cur = schema.getTableTextType().readDerivedByIdIdx( Authorization,
-				cur.getRequiredId() );
+			cur = (CFBamBuffTextType)(schema.getTableTextType().readDerivedByIdIdx( Authorization,
+				cur.getRequiredId() ));
 			deleteTextType( Authorization, cur );
 		}
 	}
@@ -8282,7 +8282,7 @@ public class CFBamRamTextTypeTable
 	public void deleteTextTypeByPrevIdx( ICFSecAuthorization Authorization,
 		ICFBamValueByPrevIdxKey argKey )
 	{
-		ICFBamTextType cur;
+		CFBamBuffTextType cur;
 		boolean anyNotNull = false;
 		if( argKey.getOptionalPrevId() != null ) {
 			anyNotNull = true;
@@ -8290,19 +8290,19 @@ public class CFBamRamTextTypeTable
 		if( ! anyNotNull ) {
 			return;
 		}
-		LinkedList<ICFBamTextType> matchSet = new LinkedList<ICFBamTextType>();
-		Iterator<ICFBamTextType> values = dictByPKey.values().iterator();
+		LinkedList<CFBamBuffTextType> matchSet = new LinkedList<CFBamBuffTextType>();
+		Iterator<CFBamBuffTextType> values = dictByPKey.values().iterator();
 		while( values.hasNext() ) {
 			cur = values.next();
 			if( argKey.equals( cur ) ) {
 				matchSet.add( cur );
 			}
 		}
-		Iterator<ICFBamTextType> iterMatch = matchSet.iterator();
+		Iterator<CFBamBuffTextType> iterMatch = matchSet.iterator();
 		while( iterMatch.hasNext() ) {
 			cur = iterMatch.next();
-			cur = schema.getTableTextType().readDerivedByIdIdx( Authorization,
-				cur.getRequiredId() );
+			cur = (CFBamBuffTextType)(schema.getTableTextType().readDerivedByIdIdx( Authorization,
+				cur.getRequiredId() ));
 			deleteTextType( Authorization, cur );
 		}
 	}
@@ -8318,7 +8318,7 @@ public class CFBamRamTextTypeTable
 	public void deleteTextTypeByNextIdx( ICFSecAuthorization Authorization,
 		ICFBamValueByNextIdxKey argKey )
 	{
-		ICFBamTextType cur;
+		CFBamBuffTextType cur;
 		boolean anyNotNull = false;
 		if( argKey.getOptionalNextId() != null ) {
 			anyNotNull = true;
@@ -8326,19 +8326,19 @@ public class CFBamRamTextTypeTable
 		if( ! anyNotNull ) {
 			return;
 		}
-		LinkedList<ICFBamTextType> matchSet = new LinkedList<ICFBamTextType>();
-		Iterator<ICFBamTextType> values = dictByPKey.values().iterator();
+		LinkedList<CFBamBuffTextType> matchSet = new LinkedList<CFBamBuffTextType>();
+		Iterator<CFBamBuffTextType> values = dictByPKey.values().iterator();
 		while( values.hasNext() ) {
 			cur = values.next();
 			if( argKey.equals( cur ) ) {
 				matchSet.add( cur );
 			}
 		}
-		Iterator<ICFBamTextType> iterMatch = matchSet.iterator();
+		Iterator<CFBamBuffTextType> iterMatch = matchSet.iterator();
 		while( iterMatch.hasNext() ) {
 			cur = iterMatch.next();
-			cur = schema.getTableTextType().readDerivedByIdIdx( Authorization,
-				cur.getRequiredId() );
+			cur = (CFBamBuffTextType)(schema.getTableTextType().readDerivedByIdIdx( Authorization,
+				cur.getRequiredId() ));
 			deleteTextType( Authorization, cur );
 		}
 	}
@@ -8356,7 +8356,7 @@ public class CFBamRamTextTypeTable
 	public void deleteTextTypeByContPrevIdx( ICFSecAuthorization Authorization,
 		ICFBamValueByContPrevIdxKey argKey )
 	{
-		ICFBamTextType cur;
+		CFBamBuffTextType cur;
 		boolean anyNotNull = false;
 		anyNotNull = true;
 		if( argKey.getOptionalPrevId() != null ) {
@@ -8365,19 +8365,19 @@ public class CFBamRamTextTypeTable
 		if( ! anyNotNull ) {
 			return;
 		}
-		LinkedList<ICFBamTextType> matchSet = new LinkedList<ICFBamTextType>();
-		Iterator<ICFBamTextType> values = dictByPKey.values().iterator();
+		LinkedList<CFBamBuffTextType> matchSet = new LinkedList<CFBamBuffTextType>();
+		Iterator<CFBamBuffTextType> values = dictByPKey.values().iterator();
 		while( values.hasNext() ) {
 			cur = values.next();
 			if( argKey.equals( cur ) ) {
 				matchSet.add( cur );
 			}
 		}
-		Iterator<ICFBamTextType> iterMatch = matchSet.iterator();
+		Iterator<CFBamBuffTextType> iterMatch = matchSet.iterator();
 		while( iterMatch.hasNext() ) {
 			cur = iterMatch.next();
-			cur = schema.getTableTextType().readDerivedByIdIdx( Authorization,
-				cur.getRequiredId() );
+			cur = (CFBamBuffTextType)(schema.getTableTextType().readDerivedByIdIdx( Authorization,
+				cur.getRequiredId() ));
 			deleteTextType( Authorization, cur );
 		}
 	}
@@ -8395,7 +8395,7 @@ public class CFBamRamTextTypeTable
 	public void deleteTextTypeByContNextIdx( ICFSecAuthorization Authorization,
 		ICFBamValueByContNextIdxKey argKey )
 	{
-		ICFBamTextType cur;
+		CFBamBuffTextType cur;
 		boolean anyNotNull = false;
 		anyNotNull = true;
 		if( argKey.getOptionalNextId() != null ) {
@@ -8404,19 +8404,19 @@ public class CFBamRamTextTypeTable
 		if( ! anyNotNull ) {
 			return;
 		}
-		LinkedList<ICFBamTextType> matchSet = new LinkedList<ICFBamTextType>();
-		Iterator<ICFBamTextType> values = dictByPKey.values().iterator();
+		LinkedList<CFBamBuffTextType> matchSet = new LinkedList<CFBamBuffTextType>();
+		Iterator<CFBamBuffTextType> values = dictByPKey.values().iterator();
 		while( values.hasNext() ) {
 			cur = values.next();
 			if( argKey.equals( cur ) ) {
 				matchSet.add( cur );
 			}
 		}
-		Iterator<ICFBamTextType> iterMatch = matchSet.iterator();
+		Iterator<CFBamBuffTextType> iterMatch = matchSet.iterator();
 		while( iterMatch.hasNext() ) {
 			cur = iterMatch.next();
-			cur = schema.getTableTextType().readDerivedByIdIdx( Authorization,
-				cur.getRequiredId() );
+			cur = (CFBamBuffTextType)(schema.getTableTextType().readDerivedByIdIdx( Authorization,
+				cur.getRequiredId() ));
 			deleteTextType( Authorization, cur );
 		}
 	}

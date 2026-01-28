@@ -689,25 +689,25 @@ public class CFBamRamDelSubDep3Table
 	public void deleteDelSubDep3ByDelSubDep2Idx( ICFSecAuthorization Authorization,
 		ICFBamDelSubDep3ByDelSubDep2IdxKey argKey )
 	{
-		ICFBamDelSubDep3 cur;
+		CFBamBuffDelSubDep3 cur;
 		boolean anyNotNull = false;
 		anyNotNull = true;
 		if( ! anyNotNull ) {
 			return;
 		}
-		LinkedList<ICFBamDelSubDep3> matchSet = new LinkedList<ICFBamDelSubDep3>();
-		Iterator<ICFBamDelSubDep3> values = dictByPKey.values().iterator();
+		LinkedList<CFBamBuffDelSubDep3> matchSet = new LinkedList<CFBamBuffDelSubDep3>();
+		Iterator<CFBamBuffDelSubDep3> values = dictByPKey.values().iterator();
 		while( values.hasNext() ) {
 			cur = values.next();
 			if( argKey.equals( cur ) ) {
 				matchSet.add( cur );
 			}
 		}
-		Iterator<ICFBamDelSubDep3> iterMatch = matchSet.iterator();
+		Iterator<CFBamBuffDelSubDep3> iterMatch = matchSet.iterator();
 		while( iterMatch.hasNext() ) {
 			cur = iterMatch.next();
-			cur = schema.getTableDelSubDep3().readDerivedByIdIdx( Authorization,
-				cur.getRequiredId() );
+			cur = (CFBamBuffDelSubDep3)(schema.getTableDelSubDep3().readDerivedByIdIdx( Authorization,
+				cur.getRequiredId() ));
 			deleteDelSubDep3( Authorization, cur );
 		}
 	}
@@ -725,26 +725,26 @@ public class CFBamRamDelSubDep3Table
 	public void deleteDelSubDep3ByUNameIdx( ICFSecAuthorization Authorization,
 		ICFBamDelSubDep3ByUNameIdxKey argKey )
 	{
-		ICFBamDelSubDep3 cur;
+		CFBamBuffDelSubDep3 cur;
 		boolean anyNotNull = false;
 		anyNotNull = true;
 		anyNotNull = true;
 		if( ! anyNotNull ) {
 			return;
 		}
-		LinkedList<ICFBamDelSubDep3> matchSet = new LinkedList<ICFBamDelSubDep3>();
-		Iterator<ICFBamDelSubDep3> values = dictByPKey.values().iterator();
+		LinkedList<CFBamBuffDelSubDep3> matchSet = new LinkedList<CFBamBuffDelSubDep3>();
+		Iterator<CFBamBuffDelSubDep3> values = dictByPKey.values().iterator();
 		while( values.hasNext() ) {
 			cur = values.next();
 			if( argKey.equals( cur ) ) {
 				matchSet.add( cur );
 			}
 		}
-		Iterator<ICFBamDelSubDep3> iterMatch = matchSet.iterator();
+		Iterator<CFBamBuffDelSubDep3> iterMatch = matchSet.iterator();
 		while( iterMatch.hasNext() ) {
 			cur = iterMatch.next();
-			cur = schema.getTableDelSubDep3().readDerivedByIdIdx( Authorization,
-				cur.getRequiredId() );
+			cur = (CFBamBuffDelSubDep3)(schema.getTableDelSubDep3().readDerivedByIdIdx( Authorization,
+				cur.getRequiredId() ));
 			deleteDelSubDep3( Authorization, cur );
 		}
 	}
@@ -760,7 +760,7 @@ public class CFBamRamDelSubDep3Table
 	public void deleteDelSubDep3ByDefSchemaIdx( ICFSecAuthorization Authorization,
 		ICFBamDelDepByDefSchemaIdxKey argKey )
 	{
-		ICFBamDelSubDep3 cur;
+		CFBamBuffDelSubDep3 cur;
 		boolean anyNotNull = false;
 		if( argKey.getOptionalDefSchemaId() != null ) {
 			anyNotNull = true;
@@ -768,19 +768,19 @@ public class CFBamRamDelSubDep3Table
 		if( ! anyNotNull ) {
 			return;
 		}
-		LinkedList<ICFBamDelSubDep3> matchSet = new LinkedList<ICFBamDelSubDep3>();
-		Iterator<ICFBamDelSubDep3> values = dictByPKey.values().iterator();
+		LinkedList<CFBamBuffDelSubDep3> matchSet = new LinkedList<CFBamBuffDelSubDep3>();
+		Iterator<CFBamBuffDelSubDep3> values = dictByPKey.values().iterator();
 		while( values.hasNext() ) {
 			cur = values.next();
 			if( argKey.equals( cur ) ) {
 				matchSet.add( cur );
 			}
 		}
-		Iterator<ICFBamDelSubDep3> iterMatch = matchSet.iterator();
+		Iterator<CFBamBuffDelSubDep3> iterMatch = matchSet.iterator();
 		while( iterMatch.hasNext() ) {
 			cur = iterMatch.next();
-			cur = schema.getTableDelSubDep3().readDerivedByIdIdx( Authorization,
-				cur.getRequiredId() );
+			cur = (CFBamBuffDelSubDep3)(schema.getTableDelSubDep3().readDerivedByIdIdx( Authorization,
+				cur.getRequiredId() ));
 			deleteDelSubDep3( Authorization, cur );
 		}
 	}
@@ -796,25 +796,25 @@ public class CFBamRamDelSubDep3Table
 	public void deleteDelSubDep3ByDelDepIdx( ICFSecAuthorization Authorization,
 		ICFBamDelDepByDelDepIdxKey argKey )
 	{
-		ICFBamDelSubDep3 cur;
+		CFBamBuffDelSubDep3 cur;
 		boolean anyNotNull = false;
 		anyNotNull = true;
 		if( ! anyNotNull ) {
 			return;
 		}
-		LinkedList<ICFBamDelSubDep3> matchSet = new LinkedList<ICFBamDelSubDep3>();
-		Iterator<ICFBamDelSubDep3> values = dictByPKey.values().iterator();
+		LinkedList<CFBamBuffDelSubDep3> matchSet = new LinkedList<CFBamBuffDelSubDep3>();
+		Iterator<CFBamBuffDelSubDep3> values = dictByPKey.values().iterator();
 		while( values.hasNext() ) {
 			cur = values.next();
 			if( argKey.equals( cur ) ) {
 				matchSet.add( cur );
 			}
 		}
-		Iterator<ICFBamDelSubDep3> iterMatch = matchSet.iterator();
+		Iterator<CFBamBuffDelSubDep3> iterMatch = matchSet.iterator();
 		while( iterMatch.hasNext() ) {
 			cur = iterMatch.next();
-			cur = schema.getTableDelSubDep3().readDerivedByIdIdx( Authorization,
-				cur.getRequiredId() );
+			cur = (CFBamBuffDelSubDep3)(schema.getTableDelSubDep3().readDerivedByIdIdx( Authorization,
+				cur.getRequiredId() ));
 			deleteDelSubDep3( Authorization, cur );
 		}
 	}
@@ -827,20 +827,20 @@ public class CFBamRamDelSubDep3Table
 		if( ! anyNotNull ) {
 			return;
 		}
-		ICFBamDelSubDep3 cur;
-		LinkedList<ICFBamDelSubDep3> matchSet = new LinkedList<ICFBamDelSubDep3>();
-		Iterator<ICFBamDelSubDep3> values = dictByPKey.values().iterator();
+		CFBamBuffDelSubDep3 cur;
+		LinkedList<CFBamBuffDelSubDep3> matchSet = new LinkedList<CFBamBuffDelSubDep3>();
+		Iterator<CFBamBuffDelSubDep3> values = dictByPKey.values().iterator();
 		while( values.hasNext() ) {
 			cur = values.next();
 			if( argKey.equals( cur ) ) {
 				matchSet.add( cur );
 			}
 		}
-		Iterator<ICFBamDelSubDep3> iterMatch = matchSet.iterator();
+		Iterator<CFBamBuffDelSubDep3> iterMatch = matchSet.iterator();
 		while( iterMatch.hasNext() ) {
 			cur = iterMatch.next();
-			cur = schema.getTableDelSubDep3().readDerivedByIdIdx( Authorization,
-				cur.getRequiredId() );
+			cur = (CFBamBuffDelSubDep3)(schema.getTableDelSubDep3().readDerivedByIdIdx( Authorization,
+				cur.getRequiredId() ));
 			deleteDelSubDep3( Authorization, cur );
 		}
 	}
@@ -856,25 +856,25 @@ public class CFBamRamDelSubDep3Table
 	public void deleteDelSubDep3ByTenantIdx( ICFSecAuthorization Authorization,
 		ICFBamScopeByTenantIdxKey argKey )
 	{
-		ICFBamDelSubDep3 cur;
+		CFBamBuffDelSubDep3 cur;
 		boolean anyNotNull = false;
 		anyNotNull = true;
 		if( ! anyNotNull ) {
 			return;
 		}
-		LinkedList<ICFBamDelSubDep3> matchSet = new LinkedList<ICFBamDelSubDep3>();
-		Iterator<ICFBamDelSubDep3> values = dictByPKey.values().iterator();
+		LinkedList<CFBamBuffDelSubDep3> matchSet = new LinkedList<CFBamBuffDelSubDep3>();
+		Iterator<CFBamBuffDelSubDep3> values = dictByPKey.values().iterator();
 		while( values.hasNext() ) {
 			cur = values.next();
 			if( argKey.equals( cur ) ) {
 				matchSet.add( cur );
 			}
 		}
-		Iterator<ICFBamDelSubDep3> iterMatch = matchSet.iterator();
+		Iterator<CFBamBuffDelSubDep3> iterMatch = matchSet.iterator();
 		while( iterMatch.hasNext() ) {
 			cur = iterMatch.next();
-			cur = schema.getTableDelSubDep3().readDerivedByIdIdx( Authorization,
-				cur.getRequiredId() );
+			cur = (CFBamBuffDelSubDep3)(schema.getTableDelSubDep3().readDerivedByIdIdx( Authorization,
+				cur.getRequiredId() ));
 			deleteDelSubDep3( Authorization, cur );
 		}
 	}

@@ -696,25 +696,25 @@ public class CFBamRamClearSubDep2Table
 	public void deleteClearSubDep2ByClearSubDep1Idx( ICFSecAuthorization Authorization,
 		ICFBamClearSubDep2ByClearSubDep1IdxKey argKey )
 	{
-		ICFBamClearSubDep2 cur;
+		CFBamBuffClearSubDep2 cur;
 		boolean anyNotNull = false;
 		anyNotNull = true;
 		if( ! anyNotNull ) {
 			return;
 		}
-		LinkedList<ICFBamClearSubDep2> matchSet = new LinkedList<ICFBamClearSubDep2>();
-		Iterator<ICFBamClearSubDep2> values = dictByPKey.values().iterator();
+		LinkedList<CFBamBuffClearSubDep2> matchSet = new LinkedList<CFBamBuffClearSubDep2>();
+		Iterator<CFBamBuffClearSubDep2> values = dictByPKey.values().iterator();
 		while( values.hasNext() ) {
 			cur = values.next();
 			if( argKey.equals( cur ) ) {
 				matchSet.add( cur );
 			}
 		}
-		Iterator<ICFBamClearSubDep2> iterMatch = matchSet.iterator();
+		Iterator<CFBamBuffClearSubDep2> iterMatch = matchSet.iterator();
 		while( iterMatch.hasNext() ) {
 			cur = iterMatch.next();
-			cur = schema.getTableClearSubDep2().readDerivedByIdIdx( Authorization,
-				cur.getRequiredId() );
+			cur = (CFBamBuffClearSubDep2)(schema.getTableClearSubDep2().readDerivedByIdIdx( Authorization,
+				cur.getRequiredId() ));
 			deleteClearSubDep2( Authorization, cur );
 		}
 	}
@@ -732,26 +732,26 @@ public class CFBamRamClearSubDep2Table
 	public void deleteClearSubDep2ByUNameIdx( ICFSecAuthorization Authorization,
 		ICFBamClearSubDep2ByUNameIdxKey argKey )
 	{
-		ICFBamClearSubDep2 cur;
+		CFBamBuffClearSubDep2 cur;
 		boolean anyNotNull = false;
 		anyNotNull = true;
 		anyNotNull = true;
 		if( ! anyNotNull ) {
 			return;
 		}
-		LinkedList<ICFBamClearSubDep2> matchSet = new LinkedList<ICFBamClearSubDep2>();
-		Iterator<ICFBamClearSubDep2> values = dictByPKey.values().iterator();
+		LinkedList<CFBamBuffClearSubDep2> matchSet = new LinkedList<CFBamBuffClearSubDep2>();
+		Iterator<CFBamBuffClearSubDep2> values = dictByPKey.values().iterator();
 		while( values.hasNext() ) {
 			cur = values.next();
 			if( argKey.equals( cur ) ) {
 				matchSet.add( cur );
 			}
 		}
-		Iterator<ICFBamClearSubDep2> iterMatch = matchSet.iterator();
+		Iterator<CFBamBuffClearSubDep2> iterMatch = matchSet.iterator();
 		while( iterMatch.hasNext() ) {
 			cur = iterMatch.next();
-			cur = schema.getTableClearSubDep2().readDerivedByIdIdx( Authorization,
-				cur.getRequiredId() );
+			cur = (CFBamBuffClearSubDep2)(schema.getTableClearSubDep2().readDerivedByIdIdx( Authorization,
+				cur.getRequiredId() ));
 			deleteClearSubDep2( Authorization, cur );
 		}
 	}
@@ -767,25 +767,25 @@ public class CFBamRamClearSubDep2Table
 	public void deleteClearSubDep2ByClearDepIdx( ICFSecAuthorization Authorization,
 		ICFBamClearDepByClearDepIdxKey argKey )
 	{
-		ICFBamClearSubDep2 cur;
+		CFBamBuffClearSubDep2 cur;
 		boolean anyNotNull = false;
 		anyNotNull = true;
 		if( ! anyNotNull ) {
 			return;
 		}
-		LinkedList<ICFBamClearSubDep2> matchSet = new LinkedList<ICFBamClearSubDep2>();
-		Iterator<ICFBamClearSubDep2> values = dictByPKey.values().iterator();
+		LinkedList<CFBamBuffClearSubDep2> matchSet = new LinkedList<CFBamBuffClearSubDep2>();
+		Iterator<CFBamBuffClearSubDep2> values = dictByPKey.values().iterator();
 		while( values.hasNext() ) {
 			cur = values.next();
 			if( argKey.equals( cur ) ) {
 				matchSet.add( cur );
 			}
 		}
-		Iterator<ICFBamClearSubDep2> iterMatch = matchSet.iterator();
+		Iterator<CFBamBuffClearSubDep2> iterMatch = matchSet.iterator();
 		while( iterMatch.hasNext() ) {
 			cur = iterMatch.next();
-			cur = schema.getTableClearSubDep2().readDerivedByIdIdx( Authorization,
-				cur.getRequiredId() );
+			cur = (CFBamBuffClearSubDep2)(schema.getTableClearSubDep2().readDerivedByIdIdx( Authorization,
+				cur.getRequiredId() ));
 			deleteClearSubDep2( Authorization, cur );
 		}
 	}
@@ -801,7 +801,7 @@ public class CFBamRamClearSubDep2Table
 	public void deleteClearSubDep2ByDefSchemaIdx( ICFSecAuthorization Authorization,
 		ICFBamClearDepByDefSchemaIdxKey argKey )
 	{
-		ICFBamClearSubDep2 cur;
+		CFBamBuffClearSubDep2 cur;
 		boolean anyNotNull = false;
 		if( argKey.getOptionalDefSchemaId() != null ) {
 			anyNotNull = true;
@@ -809,19 +809,19 @@ public class CFBamRamClearSubDep2Table
 		if( ! anyNotNull ) {
 			return;
 		}
-		LinkedList<ICFBamClearSubDep2> matchSet = new LinkedList<ICFBamClearSubDep2>();
-		Iterator<ICFBamClearSubDep2> values = dictByPKey.values().iterator();
+		LinkedList<CFBamBuffClearSubDep2> matchSet = new LinkedList<CFBamBuffClearSubDep2>();
+		Iterator<CFBamBuffClearSubDep2> values = dictByPKey.values().iterator();
 		while( values.hasNext() ) {
 			cur = values.next();
 			if( argKey.equals( cur ) ) {
 				matchSet.add( cur );
 			}
 		}
-		Iterator<ICFBamClearSubDep2> iterMatch = matchSet.iterator();
+		Iterator<CFBamBuffClearSubDep2> iterMatch = matchSet.iterator();
 		while( iterMatch.hasNext() ) {
 			cur = iterMatch.next();
-			cur = schema.getTableClearSubDep2().readDerivedByIdIdx( Authorization,
-				cur.getRequiredId() );
+			cur = (CFBamBuffClearSubDep2)(schema.getTableClearSubDep2().readDerivedByIdIdx( Authorization,
+				cur.getRequiredId() ));
 			deleteClearSubDep2( Authorization, cur );
 		}
 	}
@@ -834,20 +834,20 @@ public class CFBamRamClearSubDep2Table
 		if( ! anyNotNull ) {
 			return;
 		}
-		ICFBamClearSubDep2 cur;
-		LinkedList<ICFBamClearSubDep2> matchSet = new LinkedList<ICFBamClearSubDep2>();
-		Iterator<ICFBamClearSubDep2> values = dictByPKey.values().iterator();
+		CFBamBuffClearSubDep2 cur;
+		LinkedList<CFBamBuffClearSubDep2> matchSet = new LinkedList<CFBamBuffClearSubDep2>();
+		Iterator<CFBamBuffClearSubDep2> values = dictByPKey.values().iterator();
 		while( values.hasNext() ) {
 			cur = values.next();
 			if( argKey.equals( cur ) ) {
 				matchSet.add( cur );
 			}
 		}
-		Iterator<ICFBamClearSubDep2> iterMatch = matchSet.iterator();
+		Iterator<CFBamBuffClearSubDep2> iterMatch = matchSet.iterator();
 		while( iterMatch.hasNext() ) {
 			cur = iterMatch.next();
-			cur = schema.getTableClearSubDep2().readDerivedByIdIdx( Authorization,
-				cur.getRequiredId() );
+			cur = (CFBamBuffClearSubDep2)(schema.getTableClearSubDep2().readDerivedByIdIdx( Authorization,
+				cur.getRequiredId() ));
 			deleteClearSubDep2( Authorization, cur );
 		}
 	}
@@ -863,25 +863,25 @@ public class CFBamRamClearSubDep2Table
 	public void deleteClearSubDep2ByTenantIdx( ICFSecAuthorization Authorization,
 		ICFBamScopeByTenantIdxKey argKey )
 	{
-		ICFBamClearSubDep2 cur;
+		CFBamBuffClearSubDep2 cur;
 		boolean anyNotNull = false;
 		anyNotNull = true;
 		if( ! anyNotNull ) {
 			return;
 		}
-		LinkedList<ICFBamClearSubDep2> matchSet = new LinkedList<ICFBamClearSubDep2>();
-		Iterator<ICFBamClearSubDep2> values = dictByPKey.values().iterator();
+		LinkedList<CFBamBuffClearSubDep2> matchSet = new LinkedList<CFBamBuffClearSubDep2>();
+		Iterator<CFBamBuffClearSubDep2> values = dictByPKey.values().iterator();
 		while( values.hasNext() ) {
 			cur = values.next();
 			if( argKey.equals( cur ) ) {
 				matchSet.add( cur );
 			}
 		}
-		Iterator<ICFBamClearSubDep2> iterMatch = matchSet.iterator();
+		Iterator<CFBamBuffClearSubDep2> iterMatch = matchSet.iterator();
 		while( iterMatch.hasNext() ) {
 			cur = iterMatch.next();
-			cur = schema.getTableClearSubDep2().readDerivedByIdIdx( Authorization,
-				cur.getRequiredId() );
+			cur = (CFBamBuffClearSubDep2)(schema.getTableClearSubDep2().readDerivedByIdIdx( Authorization,
+				cur.getRequiredId() ));
 			deleteClearSubDep2( Authorization, cur );
 		}
 	}

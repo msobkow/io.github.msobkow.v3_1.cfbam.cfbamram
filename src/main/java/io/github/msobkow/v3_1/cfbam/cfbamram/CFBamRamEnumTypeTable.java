@@ -6744,8 +6744,8 @@ public class CFBamRamEnumTypeTable
 				pkey );
 		}
 		CFLibDbKeyHash256 varSchemaDefId = existing.getRequiredSchemaDefId();
-		CFBamBuffSchemaDef container = schema.getTableSchemaDef().readDerivedByIdIdx( Authorization,
-			varSchemaDefId );
+		CFBamBuffSchemaDef container = (CFBamBuffSchemaDef)(schema.getTableSchemaDef().readDerivedByIdIdx( Authorization,
+			varSchemaDefId ));
 		if( container == null ) {
 			throw new CFLibNullArgumentException( getClass(),
 				S_ProcName,
@@ -8122,25 +8122,25 @@ public class CFBamRamEnumTypeTable
 	public void deleteEnumTypeBySchemaIdx( ICFSecAuthorization Authorization,
 		ICFBamEnumTypeBySchemaIdxKey argKey )
 	{
-		ICFBamEnumType cur;
+		CFBamBuffEnumType cur;
 		boolean anyNotNull = false;
 		anyNotNull = true;
 		if( ! anyNotNull ) {
 			return;
 		}
-		LinkedList<ICFBamEnumType> matchSet = new LinkedList<ICFBamEnumType>();
-		Iterator<ICFBamEnumType> values = dictByPKey.values().iterator();
+		LinkedList<CFBamBuffEnumType> matchSet = new LinkedList<CFBamBuffEnumType>();
+		Iterator<CFBamBuffEnumType> values = dictByPKey.values().iterator();
 		while( values.hasNext() ) {
 			cur = values.next();
 			if( argKey.equals( cur ) ) {
 				matchSet.add( cur );
 			}
 		}
-		Iterator<ICFBamEnumType> iterMatch = matchSet.iterator();
+		Iterator<CFBamBuffEnumType> iterMatch = matchSet.iterator();
 		while( iterMatch.hasNext() ) {
 			cur = iterMatch.next();
-			cur = schema.getTableEnumType().readDerivedByIdIdx( Authorization,
-				cur.getRequiredId() );
+			cur = (CFBamBuffEnumType)(schema.getTableEnumType().readDerivedByIdIdx( Authorization,
+				cur.getRequiredId() ));
 			deleteEnumType( Authorization, cur );
 		}
 	}
@@ -8153,20 +8153,20 @@ public class CFBamRamEnumTypeTable
 		if( ! anyNotNull ) {
 			return;
 		}
-		ICFBamEnumType cur;
-		LinkedList<ICFBamEnumType> matchSet = new LinkedList<ICFBamEnumType>();
-		Iterator<ICFBamEnumType> values = dictByPKey.values().iterator();
+		CFBamBuffEnumType cur;
+		LinkedList<CFBamBuffEnumType> matchSet = new LinkedList<CFBamBuffEnumType>();
+		Iterator<CFBamBuffEnumType> values = dictByPKey.values().iterator();
 		while( values.hasNext() ) {
 			cur = values.next();
 			if( argKey.equals( cur ) ) {
 				matchSet.add( cur );
 			}
 		}
-		Iterator<ICFBamEnumType> iterMatch = matchSet.iterator();
+		Iterator<CFBamBuffEnumType> iterMatch = matchSet.iterator();
 		while( iterMatch.hasNext() ) {
 			cur = iterMatch.next();
-			cur = schema.getTableEnumType().readDerivedByIdIdx( Authorization,
-				cur.getRequiredId() );
+			cur = (CFBamBuffEnumType)(schema.getTableEnumType().readDerivedByIdIdx( Authorization,
+				cur.getRequiredId() ));
 			deleteEnumType( Authorization, cur );
 		}
 	}
@@ -8184,26 +8184,26 @@ public class CFBamRamEnumTypeTable
 	public void deleteEnumTypeByUNameIdx( ICFSecAuthorization Authorization,
 		ICFBamValueByUNameIdxKey argKey )
 	{
-		ICFBamEnumType cur;
+		CFBamBuffEnumType cur;
 		boolean anyNotNull = false;
 		anyNotNull = true;
 		anyNotNull = true;
 		if( ! anyNotNull ) {
 			return;
 		}
-		LinkedList<ICFBamEnumType> matchSet = new LinkedList<ICFBamEnumType>();
-		Iterator<ICFBamEnumType> values = dictByPKey.values().iterator();
+		LinkedList<CFBamBuffEnumType> matchSet = new LinkedList<CFBamBuffEnumType>();
+		Iterator<CFBamBuffEnumType> values = dictByPKey.values().iterator();
 		while( values.hasNext() ) {
 			cur = values.next();
 			if( argKey.equals( cur ) ) {
 				matchSet.add( cur );
 			}
 		}
-		Iterator<ICFBamEnumType> iterMatch = matchSet.iterator();
+		Iterator<CFBamBuffEnumType> iterMatch = matchSet.iterator();
 		while( iterMatch.hasNext() ) {
 			cur = iterMatch.next();
-			cur = schema.getTableEnumType().readDerivedByIdIdx( Authorization,
-				cur.getRequiredId() );
+			cur = (CFBamBuffEnumType)(schema.getTableEnumType().readDerivedByIdIdx( Authorization,
+				cur.getRequiredId() ));
 			deleteEnumType( Authorization, cur );
 		}
 	}
@@ -8219,25 +8219,25 @@ public class CFBamRamEnumTypeTable
 	public void deleteEnumTypeByScopeIdx( ICFSecAuthorization Authorization,
 		ICFBamValueByScopeIdxKey argKey )
 	{
-		ICFBamEnumType cur;
+		CFBamBuffEnumType cur;
 		boolean anyNotNull = false;
 		anyNotNull = true;
 		if( ! anyNotNull ) {
 			return;
 		}
-		LinkedList<ICFBamEnumType> matchSet = new LinkedList<ICFBamEnumType>();
-		Iterator<ICFBamEnumType> values = dictByPKey.values().iterator();
+		LinkedList<CFBamBuffEnumType> matchSet = new LinkedList<CFBamBuffEnumType>();
+		Iterator<CFBamBuffEnumType> values = dictByPKey.values().iterator();
 		while( values.hasNext() ) {
 			cur = values.next();
 			if( argKey.equals( cur ) ) {
 				matchSet.add( cur );
 			}
 		}
-		Iterator<ICFBamEnumType> iterMatch = matchSet.iterator();
+		Iterator<CFBamBuffEnumType> iterMatch = matchSet.iterator();
 		while( iterMatch.hasNext() ) {
 			cur = iterMatch.next();
-			cur = schema.getTableEnumType().readDerivedByIdIdx( Authorization,
-				cur.getRequiredId() );
+			cur = (CFBamBuffEnumType)(schema.getTableEnumType().readDerivedByIdIdx( Authorization,
+				cur.getRequiredId() ));
 			deleteEnumType( Authorization, cur );
 		}
 	}
@@ -8253,7 +8253,7 @@ public class CFBamRamEnumTypeTable
 	public void deleteEnumTypeByDefSchemaIdx( ICFSecAuthorization Authorization,
 		ICFBamValueByDefSchemaIdxKey argKey )
 	{
-		ICFBamEnumType cur;
+		CFBamBuffEnumType cur;
 		boolean anyNotNull = false;
 		if( argKey.getOptionalDefSchemaId() != null ) {
 			anyNotNull = true;
@@ -8261,19 +8261,19 @@ public class CFBamRamEnumTypeTable
 		if( ! anyNotNull ) {
 			return;
 		}
-		LinkedList<ICFBamEnumType> matchSet = new LinkedList<ICFBamEnumType>();
-		Iterator<ICFBamEnumType> values = dictByPKey.values().iterator();
+		LinkedList<CFBamBuffEnumType> matchSet = new LinkedList<CFBamBuffEnumType>();
+		Iterator<CFBamBuffEnumType> values = dictByPKey.values().iterator();
 		while( values.hasNext() ) {
 			cur = values.next();
 			if( argKey.equals( cur ) ) {
 				matchSet.add( cur );
 			}
 		}
-		Iterator<ICFBamEnumType> iterMatch = matchSet.iterator();
+		Iterator<CFBamBuffEnumType> iterMatch = matchSet.iterator();
 		while( iterMatch.hasNext() ) {
 			cur = iterMatch.next();
-			cur = schema.getTableEnumType().readDerivedByIdIdx( Authorization,
-				cur.getRequiredId() );
+			cur = (CFBamBuffEnumType)(schema.getTableEnumType().readDerivedByIdIdx( Authorization,
+				cur.getRequiredId() ));
 			deleteEnumType( Authorization, cur );
 		}
 	}
@@ -8289,7 +8289,7 @@ public class CFBamRamEnumTypeTable
 	public void deleteEnumTypeByPrevIdx( ICFSecAuthorization Authorization,
 		ICFBamValueByPrevIdxKey argKey )
 	{
-		ICFBamEnumType cur;
+		CFBamBuffEnumType cur;
 		boolean anyNotNull = false;
 		if( argKey.getOptionalPrevId() != null ) {
 			anyNotNull = true;
@@ -8297,19 +8297,19 @@ public class CFBamRamEnumTypeTable
 		if( ! anyNotNull ) {
 			return;
 		}
-		LinkedList<ICFBamEnumType> matchSet = new LinkedList<ICFBamEnumType>();
-		Iterator<ICFBamEnumType> values = dictByPKey.values().iterator();
+		LinkedList<CFBamBuffEnumType> matchSet = new LinkedList<CFBamBuffEnumType>();
+		Iterator<CFBamBuffEnumType> values = dictByPKey.values().iterator();
 		while( values.hasNext() ) {
 			cur = values.next();
 			if( argKey.equals( cur ) ) {
 				matchSet.add( cur );
 			}
 		}
-		Iterator<ICFBamEnumType> iterMatch = matchSet.iterator();
+		Iterator<CFBamBuffEnumType> iterMatch = matchSet.iterator();
 		while( iterMatch.hasNext() ) {
 			cur = iterMatch.next();
-			cur = schema.getTableEnumType().readDerivedByIdIdx( Authorization,
-				cur.getRequiredId() );
+			cur = (CFBamBuffEnumType)(schema.getTableEnumType().readDerivedByIdIdx( Authorization,
+				cur.getRequiredId() ));
 			deleteEnumType( Authorization, cur );
 		}
 	}
@@ -8325,7 +8325,7 @@ public class CFBamRamEnumTypeTable
 	public void deleteEnumTypeByNextIdx( ICFSecAuthorization Authorization,
 		ICFBamValueByNextIdxKey argKey )
 	{
-		ICFBamEnumType cur;
+		CFBamBuffEnumType cur;
 		boolean anyNotNull = false;
 		if( argKey.getOptionalNextId() != null ) {
 			anyNotNull = true;
@@ -8333,19 +8333,19 @@ public class CFBamRamEnumTypeTable
 		if( ! anyNotNull ) {
 			return;
 		}
-		LinkedList<ICFBamEnumType> matchSet = new LinkedList<ICFBamEnumType>();
-		Iterator<ICFBamEnumType> values = dictByPKey.values().iterator();
+		LinkedList<CFBamBuffEnumType> matchSet = new LinkedList<CFBamBuffEnumType>();
+		Iterator<CFBamBuffEnumType> values = dictByPKey.values().iterator();
 		while( values.hasNext() ) {
 			cur = values.next();
 			if( argKey.equals( cur ) ) {
 				matchSet.add( cur );
 			}
 		}
-		Iterator<ICFBamEnumType> iterMatch = matchSet.iterator();
+		Iterator<CFBamBuffEnumType> iterMatch = matchSet.iterator();
 		while( iterMatch.hasNext() ) {
 			cur = iterMatch.next();
-			cur = schema.getTableEnumType().readDerivedByIdIdx( Authorization,
-				cur.getRequiredId() );
+			cur = (CFBamBuffEnumType)(schema.getTableEnumType().readDerivedByIdIdx( Authorization,
+				cur.getRequiredId() ));
 			deleteEnumType( Authorization, cur );
 		}
 	}
@@ -8363,7 +8363,7 @@ public class CFBamRamEnumTypeTable
 	public void deleteEnumTypeByContPrevIdx( ICFSecAuthorization Authorization,
 		ICFBamValueByContPrevIdxKey argKey )
 	{
-		ICFBamEnumType cur;
+		CFBamBuffEnumType cur;
 		boolean anyNotNull = false;
 		anyNotNull = true;
 		if( argKey.getOptionalPrevId() != null ) {
@@ -8372,19 +8372,19 @@ public class CFBamRamEnumTypeTable
 		if( ! anyNotNull ) {
 			return;
 		}
-		LinkedList<ICFBamEnumType> matchSet = new LinkedList<ICFBamEnumType>();
-		Iterator<ICFBamEnumType> values = dictByPKey.values().iterator();
+		LinkedList<CFBamBuffEnumType> matchSet = new LinkedList<CFBamBuffEnumType>();
+		Iterator<CFBamBuffEnumType> values = dictByPKey.values().iterator();
 		while( values.hasNext() ) {
 			cur = values.next();
 			if( argKey.equals( cur ) ) {
 				matchSet.add( cur );
 			}
 		}
-		Iterator<ICFBamEnumType> iterMatch = matchSet.iterator();
+		Iterator<CFBamBuffEnumType> iterMatch = matchSet.iterator();
 		while( iterMatch.hasNext() ) {
 			cur = iterMatch.next();
-			cur = schema.getTableEnumType().readDerivedByIdIdx( Authorization,
-				cur.getRequiredId() );
+			cur = (CFBamBuffEnumType)(schema.getTableEnumType().readDerivedByIdIdx( Authorization,
+				cur.getRequiredId() ));
 			deleteEnumType( Authorization, cur );
 		}
 	}
@@ -8402,7 +8402,7 @@ public class CFBamRamEnumTypeTable
 	public void deleteEnumTypeByContNextIdx( ICFSecAuthorization Authorization,
 		ICFBamValueByContNextIdxKey argKey )
 	{
-		ICFBamEnumType cur;
+		CFBamBuffEnumType cur;
 		boolean anyNotNull = false;
 		anyNotNull = true;
 		if( argKey.getOptionalNextId() != null ) {
@@ -8411,19 +8411,19 @@ public class CFBamRamEnumTypeTable
 		if( ! anyNotNull ) {
 			return;
 		}
-		LinkedList<ICFBamEnumType> matchSet = new LinkedList<ICFBamEnumType>();
-		Iterator<ICFBamEnumType> values = dictByPKey.values().iterator();
+		LinkedList<CFBamBuffEnumType> matchSet = new LinkedList<CFBamBuffEnumType>();
+		Iterator<CFBamBuffEnumType> values = dictByPKey.values().iterator();
 		while( values.hasNext() ) {
 			cur = values.next();
 			if( argKey.equals( cur ) ) {
 				matchSet.add( cur );
 			}
 		}
-		Iterator<ICFBamEnumType> iterMatch = matchSet.iterator();
+		Iterator<CFBamBuffEnumType> iterMatch = matchSet.iterator();
 		while( iterMatch.hasNext() ) {
 			cur = iterMatch.next();
-			cur = schema.getTableEnumType().readDerivedByIdIdx( Authorization,
-				cur.getRequiredId() );
+			cur = (CFBamBuffEnumType)(schema.getTableEnumType().readDerivedByIdIdx( Authorization,
+				cur.getRequiredId() ));
 			deleteEnumType( Authorization, cur );
 		}
 	}

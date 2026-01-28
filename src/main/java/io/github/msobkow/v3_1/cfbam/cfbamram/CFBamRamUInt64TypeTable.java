@@ -6744,8 +6744,8 @@ public class CFBamRamUInt64TypeTable
 				pkey );
 		}
 		CFLibDbKeyHash256 varSchemaDefId = existing.getRequiredSchemaDefId();
-		CFBamBuffSchemaDef container = schema.getTableSchemaDef().readDerivedByIdIdx( Authorization,
-			varSchemaDefId );
+		CFBamBuffSchemaDef container = (CFBamBuffSchemaDef)(schema.getTableSchemaDef().readDerivedByIdIdx( Authorization,
+			varSchemaDefId ));
 		if( container == null ) {
 			throw new CFLibNullArgumentException( getClass(),
 				S_ProcName,
@@ -8115,25 +8115,25 @@ public class CFBamRamUInt64TypeTable
 	public void deleteUInt64TypeBySchemaIdx( ICFSecAuthorization Authorization,
 		ICFBamUInt64TypeBySchemaIdxKey argKey )
 	{
-		ICFBamUInt64Type cur;
+		CFBamBuffUInt64Type cur;
 		boolean anyNotNull = false;
 		anyNotNull = true;
 		if( ! anyNotNull ) {
 			return;
 		}
-		LinkedList<ICFBamUInt64Type> matchSet = new LinkedList<ICFBamUInt64Type>();
-		Iterator<ICFBamUInt64Type> values = dictByPKey.values().iterator();
+		LinkedList<CFBamBuffUInt64Type> matchSet = new LinkedList<CFBamBuffUInt64Type>();
+		Iterator<CFBamBuffUInt64Type> values = dictByPKey.values().iterator();
 		while( values.hasNext() ) {
 			cur = values.next();
 			if( argKey.equals( cur ) ) {
 				matchSet.add( cur );
 			}
 		}
-		Iterator<ICFBamUInt64Type> iterMatch = matchSet.iterator();
+		Iterator<CFBamBuffUInt64Type> iterMatch = matchSet.iterator();
 		while( iterMatch.hasNext() ) {
 			cur = iterMatch.next();
-			cur = schema.getTableUInt64Type().readDerivedByIdIdx( Authorization,
-				cur.getRequiredId() );
+			cur = (CFBamBuffUInt64Type)(schema.getTableUInt64Type().readDerivedByIdIdx( Authorization,
+				cur.getRequiredId() ));
 			deleteUInt64Type( Authorization, cur );
 		}
 	}
@@ -8146,20 +8146,20 @@ public class CFBamRamUInt64TypeTable
 		if( ! anyNotNull ) {
 			return;
 		}
-		ICFBamUInt64Type cur;
-		LinkedList<ICFBamUInt64Type> matchSet = new LinkedList<ICFBamUInt64Type>();
-		Iterator<ICFBamUInt64Type> values = dictByPKey.values().iterator();
+		CFBamBuffUInt64Type cur;
+		LinkedList<CFBamBuffUInt64Type> matchSet = new LinkedList<CFBamBuffUInt64Type>();
+		Iterator<CFBamBuffUInt64Type> values = dictByPKey.values().iterator();
 		while( values.hasNext() ) {
 			cur = values.next();
 			if( argKey.equals( cur ) ) {
 				matchSet.add( cur );
 			}
 		}
-		Iterator<ICFBamUInt64Type> iterMatch = matchSet.iterator();
+		Iterator<CFBamBuffUInt64Type> iterMatch = matchSet.iterator();
 		while( iterMatch.hasNext() ) {
 			cur = iterMatch.next();
-			cur = schema.getTableUInt64Type().readDerivedByIdIdx( Authorization,
-				cur.getRequiredId() );
+			cur = (CFBamBuffUInt64Type)(schema.getTableUInt64Type().readDerivedByIdIdx( Authorization,
+				cur.getRequiredId() ));
 			deleteUInt64Type( Authorization, cur );
 		}
 	}
@@ -8177,26 +8177,26 @@ public class CFBamRamUInt64TypeTable
 	public void deleteUInt64TypeByUNameIdx( ICFSecAuthorization Authorization,
 		ICFBamValueByUNameIdxKey argKey )
 	{
-		ICFBamUInt64Type cur;
+		CFBamBuffUInt64Type cur;
 		boolean anyNotNull = false;
 		anyNotNull = true;
 		anyNotNull = true;
 		if( ! anyNotNull ) {
 			return;
 		}
-		LinkedList<ICFBamUInt64Type> matchSet = new LinkedList<ICFBamUInt64Type>();
-		Iterator<ICFBamUInt64Type> values = dictByPKey.values().iterator();
+		LinkedList<CFBamBuffUInt64Type> matchSet = new LinkedList<CFBamBuffUInt64Type>();
+		Iterator<CFBamBuffUInt64Type> values = dictByPKey.values().iterator();
 		while( values.hasNext() ) {
 			cur = values.next();
 			if( argKey.equals( cur ) ) {
 				matchSet.add( cur );
 			}
 		}
-		Iterator<ICFBamUInt64Type> iterMatch = matchSet.iterator();
+		Iterator<CFBamBuffUInt64Type> iterMatch = matchSet.iterator();
 		while( iterMatch.hasNext() ) {
 			cur = iterMatch.next();
-			cur = schema.getTableUInt64Type().readDerivedByIdIdx( Authorization,
-				cur.getRequiredId() );
+			cur = (CFBamBuffUInt64Type)(schema.getTableUInt64Type().readDerivedByIdIdx( Authorization,
+				cur.getRequiredId() ));
 			deleteUInt64Type( Authorization, cur );
 		}
 	}
@@ -8212,25 +8212,25 @@ public class CFBamRamUInt64TypeTable
 	public void deleteUInt64TypeByScopeIdx( ICFSecAuthorization Authorization,
 		ICFBamValueByScopeIdxKey argKey )
 	{
-		ICFBamUInt64Type cur;
+		CFBamBuffUInt64Type cur;
 		boolean anyNotNull = false;
 		anyNotNull = true;
 		if( ! anyNotNull ) {
 			return;
 		}
-		LinkedList<ICFBamUInt64Type> matchSet = new LinkedList<ICFBamUInt64Type>();
-		Iterator<ICFBamUInt64Type> values = dictByPKey.values().iterator();
+		LinkedList<CFBamBuffUInt64Type> matchSet = new LinkedList<CFBamBuffUInt64Type>();
+		Iterator<CFBamBuffUInt64Type> values = dictByPKey.values().iterator();
 		while( values.hasNext() ) {
 			cur = values.next();
 			if( argKey.equals( cur ) ) {
 				matchSet.add( cur );
 			}
 		}
-		Iterator<ICFBamUInt64Type> iterMatch = matchSet.iterator();
+		Iterator<CFBamBuffUInt64Type> iterMatch = matchSet.iterator();
 		while( iterMatch.hasNext() ) {
 			cur = iterMatch.next();
-			cur = schema.getTableUInt64Type().readDerivedByIdIdx( Authorization,
-				cur.getRequiredId() );
+			cur = (CFBamBuffUInt64Type)(schema.getTableUInt64Type().readDerivedByIdIdx( Authorization,
+				cur.getRequiredId() ));
 			deleteUInt64Type( Authorization, cur );
 		}
 	}
@@ -8246,7 +8246,7 @@ public class CFBamRamUInt64TypeTable
 	public void deleteUInt64TypeByDefSchemaIdx( ICFSecAuthorization Authorization,
 		ICFBamValueByDefSchemaIdxKey argKey )
 	{
-		ICFBamUInt64Type cur;
+		CFBamBuffUInt64Type cur;
 		boolean anyNotNull = false;
 		if( argKey.getOptionalDefSchemaId() != null ) {
 			anyNotNull = true;
@@ -8254,19 +8254,19 @@ public class CFBamRamUInt64TypeTable
 		if( ! anyNotNull ) {
 			return;
 		}
-		LinkedList<ICFBamUInt64Type> matchSet = new LinkedList<ICFBamUInt64Type>();
-		Iterator<ICFBamUInt64Type> values = dictByPKey.values().iterator();
+		LinkedList<CFBamBuffUInt64Type> matchSet = new LinkedList<CFBamBuffUInt64Type>();
+		Iterator<CFBamBuffUInt64Type> values = dictByPKey.values().iterator();
 		while( values.hasNext() ) {
 			cur = values.next();
 			if( argKey.equals( cur ) ) {
 				matchSet.add( cur );
 			}
 		}
-		Iterator<ICFBamUInt64Type> iterMatch = matchSet.iterator();
+		Iterator<CFBamBuffUInt64Type> iterMatch = matchSet.iterator();
 		while( iterMatch.hasNext() ) {
 			cur = iterMatch.next();
-			cur = schema.getTableUInt64Type().readDerivedByIdIdx( Authorization,
-				cur.getRequiredId() );
+			cur = (CFBamBuffUInt64Type)(schema.getTableUInt64Type().readDerivedByIdIdx( Authorization,
+				cur.getRequiredId() ));
 			deleteUInt64Type( Authorization, cur );
 		}
 	}
@@ -8282,7 +8282,7 @@ public class CFBamRamUInt64TypeTable
 	public void deleteUInt64TypeByPrevIdx( ICFSecAuthorization Authorization,
 		ICFBamValueByPrevIdxKey argKey )
 	{
-		ICFBamUInt64Type cur;
+		CFBamBuffUInt64Type cur;
 		boolean anyNotNull = false;
 		if( argKey.getOptionalPrevId() != null ) {
 			anyNotNull = true;
@@ -8290,19 +8290,19 @@ public class CFBamRamUInt64TypeTable
 		if( ! anyNotNull ) {
 			return;
 		}
-		LinkedList<ICFBamUInt64Type> matchSet = new LinkedList<ICFBamUInt64Type>();
-		Iterator<ICFBamUInt64Type> values = dictByPKey.values().iterator();
+		LinkedList<CFBamBuffUInt64Type> matchSet = new LinkedList<CFBamBuffUInt64Type>();
+		Iterator<CFBamBuffUInt64Type> values = dictByPKey.values().iterator();
 		while( values.hasNext() ) {
 			cur = values.next();
 			if( argKey.equals( cur ) ) {
 				matchSet.add( cur );
 			}
 		}
-		Iterator<ICFBamUInt64Type> iterMatch = matchSet.iterator();
+		Iterator<CFBamBuffUInt64Type> iterMatch = matchSet.iterator();
 		while( iterMatch.hasNext() ) {
 			cur = iterMatch.next();
-			cur = schema.getTableUInt64Type().readDerivedByIdIdx( Authorization,
-				cur.getRequiredId() );
+			cur = (CFBamBuffUInt64Type)(schema.getTableUInt64Type().readDerivedByIdIdx( Authorization,
+				cur.getRequiredId() ));
 			deleteUInt64Type( Authorization, cur );
 		}
 	}
@@ -8318,7 +8318,7 @@ public class CFBamRamUInt64TypeTable
 	public void deleteUInt64TypeByNextIdx( ICFSecAuthorization Authorization,
 		ICFBamValueByNextIdxKey argKey )
 	{
-		ICFBamUInt64Type cur;
+		CFBamBuffUInt64Type cur;
 		boolean anyNotNull = false;
 		if( argKey.getOptionalNextId() != null ) {
 			anyNotNull = true;
@@ -8326,19 +8326,19 @@ public class CFBamRamUInt64TypeTable
 		if( ! anyNotNull ) {
 			return;
 		}
-		LinkedList<ICFBamUInt64Type> matchSet = new LinkedList<ICFBamUInt64Type>();
-		Iterator<ICFBamUInt64Type> values = dictByPKey.values().iterator();
+		LinkedList<CFBamBuffUInt64Type> matchSet = new LinkedList<CFBamBuffUInt64Type>();
+		Iterator<CFBamBuffUInt64Type> values = dictByPKey.values().iterator();
 		while( values.hasNext() ) {
 			cur = values.next();
 			if( argKey.equals( cur ) ) {
 				matchSet.add( cur );
 			}
 		}
-		Iterator<ICFBamUInt64Type> iterMatch = matchSet.iterator();
+		Iterator<CFBamBuffUInt64Type> iterMatch = matchSet.iterator();
 		while( iterMatch.hasNext() ) {
 			cur = iterMatch.next();
-			cur = schema.getTableUInt64Type().readDerivedByIdIdx( Authorization,
-				cur.getRequiredId() );
+			cur = (CFBamBuffUInt64Type)(schema.getTableUInt64Type().readDerivedByIdIdx( Authorization,
+				cur.getRequiredId() ));
 			deleteUInt64Type( Authorization, cur );
 		}
 	}
@@ -8356,7 +8356,7 @@ public class CFBamRamUInt64TypeTable
 	public void deleteUInt64TypeByContPrevIdx( ICFSecAuthorization Authorization,
 		ICFBamValueByContPrevIdxKey argKey )
 	{
-		ICFBamUInt64Type cur;
+		CFBamBuffUInt64Type cur;
 		boolean anyNotNull = false;
 		anyNotNull = true;
 		if( argKey.getOptionalPrevId() != null ) {
@@ -8365,19 +8365,19 @@ public class CFBamRamUInt64TypeTable
 		if( ! anyNotNull ) {
 			return;
 		}
-		LinkedList<ICFBamUInt64Type> matchSet = new LinkedList<ICFBamUInt64Type>();
-		Iterator<ICFBamUInt64Type> values = dictByPKey.values().iterator();
+		LinkedList<CFBamBuffUInt64Type> matchSet = new LinkedList<CFBamBuffUInt64Type>();
+		Iterator<CFBamBuffUInt64Type> values = dictByPKey.values().iterator();
 		while( values.hasNext() ) {
 			cur = values.next();
 			if( argKey.equals( cur ) ) {
 				matchSet.add( cur );
 			}
 		}
-		Iterator<ICFBamUInt64Type> iterMatch = matchSet.iterator();
+		Iterator<CFBamBuffUInt64Type> iterMatch = matchSet.iterator();
 		while( iterMatch.hasNext() ) {
 			cur = iterMatch.next();
-			cur = schema.getTableUInt64Type().readDerivedByIdIdx( Authorization,
-				cur.getRequiredId() );
+			cur = (CFBamBuffUInt64Type)(schema.getTableUInt64Type().readDerivedByIdIdx( Authorization,
+				cur.getRequiredId() ));
 			deleteUInt64Type( Authorization, cur );
 		}
 	}
@@ -8395,7 +8395,7 @@ public class CFBamRamUInt64TypeTable
 	public void deleteUInt64TypeByContNextIdx( ICFSecAuthorization Authorization,
 		ICFBamValueByContNextIdxKey argKey )
 	{
-		ICFBamUInt64Type cur;
+		CFBamBuffUInt64Type cur;
 		boolean anyNotNull = false;
 		anyNotNull = true;
 		if( argKey.getOptionalNextId() != null ) {
@@ -8404,19 +8404,19 @@ public class CFBamRamUInt64TypeTable
 		if( ! anyNotNull ) {
 			return;
 		}
-		LinkedList<ICFBamUInt64Type> matchSet = new LinkedList<ICFBamUInt64Type>();
-		Iterator<ICFBamUInt64Type> values = dictByPKey.values().iterator();
+		LinkedList<CFBamBuffUInt64Type> matchSet = new LinkedList<CFBamBuffUInt64Type>();
+		Iterator<CFBamBuffUInt64Type> values = dictByPKey.values().iterator();
 		while( values.hasNext() ) {
 			cur = values.next();
 			if( argKey.equals( cur ) ) {
 				matchSet.add( cur );
 			}
 		}
-		Iterator<ICFBamUInt64Type> iterMatch = matchSet.iterator();
+		Iterator<CFBamBuffUInt64Type> iterMatch = matchSet.iterator();
 		while( iterMatch.hasNext() ) {
 			cur = iterMatch.next();
-			cur = schema.getTableUInt64Type().readDerivedByIdIdx( Authorization,
-				cur.getRequiredId() );
+			cur = (CFBamBuffUInt64Type)(schema.getTableUInt64Type().readDerivedByIdIdx( Authorization,
+				cur.getRequiredId() ));
 			deleteUInt64Type( Authorization, cur );
 		}
 	}

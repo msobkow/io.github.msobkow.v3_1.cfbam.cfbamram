@@ -5958,8 +5958,8 @@ public class CFBamRamTZDateDefTable
 				pkey );
 		}
 		CFLibDbKeyHash256 varScopeId = existing.getRequiredScopeId();
-		CFBamBuffScope container = schema.getTableScope().readDerivedByIdIdx( Authorization,
-			varScopeId );
+		CFBamBuffScope container = (CFBamBuffScope)(schema.getTableScope().readDerivedByIdIdx( Authorization,
+			varScopeId ));
 		if( container == null ) {
 			throw new CFLibNullArgumentException( getClass(),
 				S_ProcName,
@@ -7343,28 +7343,28 @@ public class CFBamRamTZDateDefTable
 		if( ! anyNotNull ) {
 			return;
 		}
-		ICFBamTZDateDef cur;
-		LinkedList<ICFBamTZDateDef> matchSet = new LinkedList<ICFBamTZDateDef>();
-		Iterator<ICFBamTZDateDef> values = dictByPKey.values().iterator();
+		CFBamBuffTZDateDef cur;
+		LinkedList<CFBamBuffTZDateDef> matchSet = new LinkedList<CFBamBuffTZDateDef>();
+		Iterator<CFBamBuffTZDateDef> values = dictByPKey.values().iterator();
 		while( values.hasNext() ) {
 			cur = values.next();
 			if( argKey.equals( cur ) ) {
 				matchSet.add( cur );
 			}
 		}
-		Iterator<ICFBamTZDateDef> iterMatch = matchSet.iterator();
+		Iterator<CFBamBuffTZDateDef> iterMatch = matchSet.iterator();
 		while( iterMatch.hasNext() ) {
 			cur = iterMatch.next();
-			cur = schema.getTableTZDateDef().readDerivedByIdIdx( Authorization,
-				cur.getRequiredId() );
-			String subClassCode = cur.getClassCode();
-			if( "a852".equals( subClassCode ) ) {
+			cur = (CFBamBuffTZDateDef)(schema.getTableTZDateDef().readDerivedByIdIdx( Authorization,
+				cur.getRequiredId() ));
+			int subClassCode = cur.getClassCode();
+			if( CFBamTZDateDef.CLASS_CODE == subClassCode ) {
 				schema.getTableTZDateDef().deleteTZDateDef( Authorization, cur );
 			}
-			else if( "a853".equals( subClassCode ) ) {
+			else if( CFBamTZDateType.CLASS_CODE == subClassCode ) {
 				schema.getTableTZDateType().deleteTZDateType( Authorization, (ICFBamTZDateType)cur );
 			}
-			else if( "a87c".equals( subClassCode ) ) {
+			else if( CFBamTZDateCol.CLASS_CODE == subClassCode ) {
 				schema.getTableTZDateCol().deleteTZDateCol( Authorization, (ICFBamTZDateCol)cur );
 			}
 			else {
@@ -7387,34 +7387,34 @@ public class CFBamRamTZDateDefTable
 		ICFBamValueByUNameIdxKey argKey )
 	{
 		final String S_ProcName = "deleteTZDateDefByUNameIdx";
-		ICFBamTZDateDef cur;
+		CFBamBuffTZDateDef cur;
 		boolean anyNotNull = false;
 		anyNotNull = true;
 		anyNotNull = true;
 		if( ! anyNotNull ) {
 			return;
 		}
-		LinkedList<ICFBamTZDateDef> matchSet = new LinkedList<ICFBamTZDateDef>();
-		Iterator<ICFBamTZDateDef> values = dictByPKey.values().iterator();
+		LinkedList<CFBamBuffTZDateDef> matchSet = new LinkedList<CFBamBuffTZDateDef>();
+		Iterator<CFBamBuffTZDateDef> values = dictByPKey.values().iterator();
 		while( values.hasNext() ) {
 			cur = values.next();
 			if( argKey.equals( cur ) ) {
 				matchSet.add( cur );
 			}
 		}
-		Iterator<ICFBamTZDateDef> iterMatch = matchSet.iterator();
+		Iterator<CFBamBuffTZDateDef> iterMatch = matchSet.iterator();
 		while( iterMatch.hasNext() ) {
 			cur = iterMatch.next();
-			cur = schema.getTableTZDateDef().readDerivedByIdIdx( Authorization,
-				cur.getRequiredId() );
-			String subClassCode = cur.getClassCode();
-			if( "a852".equals( subClassCode ) ) {
+			cur = (CFBamBuffTZDateDef)(schema.getTableTZDateDef().readDerivedByIdIdx( Authorization,
+				cur.getRequiredId() ));
+			int subClassCode = cur.getClassCode();
+			if( CFBamTZDateDef.CLASS_CODE == subClassCode ) {
 				schema.getTableTZDateDef().deleteTZDateDef( Authorization, cur );
 			}
-			else if( "a853".equals( subClassCode ) ) {
+			else if( CFBamTZDateType.CLASS_CODE == subClassCode ) {
 				schema.getTableTZDateType().deleteTZDateType( Authorization, (ICFBamTZDateType)cur );
 			}
-			else if( "a87c".equals( subClassCode ) ) {
+			else if( CFBamTZDateCol.CLASS_CODE == subClassCode ) {
 				schema.getTableTZDateCol().deleteTZDateCol( Authorization, (ICFBamTZDateCol)cur );
 			}
 			else {
@@ -7435,33 +7435,33 @@ public class CFBamRamTZDateDefTable
 		ICFBamValueByScopeIdxKey argKey )
 	{
 		final String S_ProcName = "deleteTZDateDefByScopeIdx";
-		ICFBamTZDateDef cur;
+		CFBamBuffTZDateDef cur;
 		boolean anyNotNull = false;
 		anyNotNull = true;
 		if( ! anyNotNull ) {
 			return;
 		}
-		LinkedList<ICFBamTZDateDef> matchSet = new LinkedList<ICFBamTZDateDef>();
-		Iterator<ICFBamTZDateDef> values = dictByPKey.values().iterator();
+		LinkedList<CFBamBuffTZDateDef> matchSet = new LinkedList<CFBamBuffTZDateDef>();
+		Iterator<CFBamBuffTZDateDef> values = dictByPKey.values().iterator();
 		while( values.hasNext() ) {
 			cur = values.next();
 			if( argKey.equals( cur ) ) {
 				matchSet.add( cur );
 			}
 		}
-		Iterator<ICFBamTZDateDef> iterMatch = matchSet.iterator();
+		Iterator<CFBamBuffTZDateDef> iterMatch = matchSet.iterator();
 		while( iterMatch.hasNext() ) {
 			cur = iterMatch.next();
-			cur = schema.getTableTZDateDef().readDerivedByIdIdx( Authorization,
-				cur.getRequiredId() );
-			String subClassCode = cur.getClassCode();
-			if( "a852".equals( subClassCode ) ) {
+			cur = (CFBamBuffTZDateDef)(schema.getTableTZDateDef().readDerivedByIdIdx( Authorization,
+				cur.getRequiredId() ));
+			int subClassCode = cur.getClassCode();
+			if( CFBamTZDateDef.CLASS_CODE == subClassCode ) {
 				schema.getTableTZDateDef().deleteTZDateDef( Authorization, cur );
 			}
-			else if( "a853".equals( subClassCode ) ) {
+			else if( CFBamTZDateType.CLASS_CODE == subClassCode ) {
 				schema.getTableTZDateType().deleteTZDateType( Authorization, (ICFBamTZDateType)cur );
 			}
-			else if( "a87c".equals( subClassCode ) ) {
+			else if( CFBamTZDateCol.CLASS_CODE == subClassCode ) {
 				schema.getTableTZDateCol().deleteTZDateCol( Authorization, (ICFBamTZDateCol)cur );
 			}
 			else {
@@ -7482,7 +7482,7 @@ public class CFBamRamTZDateDefTable
 		ICFBamValueByDefSchemaIdxKey argKey )
 	{
 		final String S_ProcName = "deleteTZDateDefByDefSchemaIdx";
-		ICFBamTZDateDef cur;
+		CFBamBuffTZDateDef cur;
 		boolean anyNotNull = false;
 		if( argKey.getOptionalDefSchemaId() != null ) {
 			anyNotNull = true;
@@ -7490,27 +7490,27 @@ public class CFBamRamTZDateDefTable
 		if( ! anyNotNull ) {
 			return;
 		}
-		LinkedList<ICFBamTZDateDef> matchSet = new LinkedList<ICFBamTZDateDef>();
-		Iterator<ICFBamTZDateDef> values = dictByPKey.values().iterator();
+		LinkedList<CFBamBuffTZDateDef> matchSet = new LinkedList<CFBamBuffTZDateDef>();
+		Iterator<CFBamBuffTZDateDef> values = dictByPKey.values().iterator();
 		while( values.hasNext() ) {
 			cur = values.next();
 			if( argKey.equals( cur ) ) {
 				matchSet.add( cur );
 			}
 		}
-		Iterator<ICFBamTZDateDef> iterMatch = matchSet.iterator();
+		Iterator<CFBamBuffTZDateDef> iterMatch = matchSet.iterator();
 		while( iterMatch.hasNext() ) {
 			cur = iterMatch.next();
-			cur = schema.getTableTZDateDef().readDerivedByIdIdx( Authorization,
-				cur.getRequiredId() );
-			String subClassCode = cur.getClassCode();
-			if( "a852".equals( subClassCode ) ) {
+			cur = (CFBamBuffTZDateDef)(schema.getTableTZDateDef().readDerivedByIdIdx( Authorization,
+				cur.getRequiredId() ));
+			int subClassCode = cur.getClassCode();
+			if( CFBamTZDateDef.CLASS_CODE == subClassCode ) {
 				schema.getTableTZDateDef().deleteTZDateDef( Authorization, cur );
 			}
-			else if( "a853".equals( subClassCode ) ) {
+			else if( CFBamTZDateType.CLASS_CODE == subClassCode ) {
 				schema.getTableTZDateType().deleteTZDateType( Authorization, (ICFBamTZDateType)cur );
 			}
-			else if( "a87c".equals( subClassCode ) ) {
+			else if( CFBamTZDateCol.CLASS_CODE == subClassCode ) {
 				schema.getTableTZDateCol().deleteTZDateCol( Authorization, (ICFBamTZDateCol)cur );
 			}
 			else {
@@ -7531,7 +7531,7 @@ public class CFBamRamTZDateDefTable
 		ICFBamValueByPrevIdxKey argKey )
 	{
 		final String S_ProcName = "deleteTZDateDefByPrevIdx";
-		ICFBamTZDateDef cur;
+		CFBamBuffTZDateDef cur;
 		boolean anyNotNull = false;
 		if( argKey.getOptionalPrevId() != null ) {
 			anyNotNull = true;
@@ -7539,27 +7539,27 @@ public class CFBamRamTZDateDefTable
 		if( ! anyNotNull ) {
 			return;
 		}
-		LinkedList<ICFBamTZDateDef> matchSet = new LinkedList<ICFBamTZDateDef>();
-		Iterator<ICFBamTZDateDef> values = dictByPKey.values().iterator();
+		LinkedList<CFBamBuffTZDateDef> matchSet = new LinkedList<CFBamBuffTZDateDef>();
+		Iterator<CFBamBuffTZDateDef> values = dictByPKey.values().iterator();
 		while( values.hasNext() ) {
 			cur = values.next();
 			if( argKey.equals( cur ) ) {
 				matchSet.add( cur );
 			}
 		}
-		Iterator<ICFBamTZDateDef> iterMatch = matchSet.iterator();
+		Iterator<CFBamBuffTZDateDef> iterMatch = matchSet.iterator();
 		while( iterMatch.hasNext() ) {
 			cur = iterMatch.next();
-			cur = schema.getTableTZDateDef().readDerivedByIdIdx( Authorization,
-				cur.getRequiredId() );
-			String subClassCode = cur.getClassCode();
-			if( "a852".equals( subClassCode ) ) {
+			cur = (CFBamBuffTZDateDef)(schema.getTableTZDateDef().readDerivedByIdIdx( Authorization,
+				cur.getRequiredId() ));
+			int subClassCode = cur.getClassCode();
+			if( CFBamTZDateDef.CLASS_CODE == subClassCode ) {
 				schema.getTableTZDateDef().deleteTZDateDef( Authorization, cur );
 			}
-			else if( "a853".equals( subClassCode ) ) {
+			else if( CFBamTZDateType.CLASS_CODE == subClassCode ) {
 				schema.getTableTZDateType().deleteTZDateType( Authorization, (ICFBamTZDateType)cur );
 			}
-			else if( "a87c".equals( subClassCode ) ) {
+			else if( CFBamTZDateCol.CLASS_CODE == subClassCode ) {
 				schema.getTableTZDateCol().deleteTZDateCol( Authorization, (ICFBamTZDateCol)cur );
 			}
 			else {
@@ -7580,7 +7580,7 @@ public class CFBamRamTZDateDefTable
 		ICFBamValueByNextIdxKey argKey )
 	{
 		final String S_ProcName = "deleteTZDateDefByNextIdx";
-		ICFBamTZDateDef cur;
+		CFBamBuffTZDateDef cur;
 		boolean anyNotNull = false;
 		if( argKey.getOptionalNextId() != null ) {
 			anyNotNull = true;
@@ -7588,27 +7588,27 @@ public class CFBamRamTZDateDefTable
 		if( ! anyNotNull ) {
 			return;
 		}
-		LinkedList<ICFBamTZDateDef> matchSet = new LinkedList<ICFBamTZDateDef>();
-		Iterator<ICFBamTZDateDef> values = dictByPKey.values().iterator();
+		LinkedList<CFBamBuffTZDateDef> matchSet = new LinkedList<CFBamBuffTZDateDef>();
+		Iterator<CFBamBuffTZDateDef> values = dictByPKey.values().iterator();
 		while( values.hasNext() ) {
 			cur = values.next();
 			if( argKey.equals( cur ) ) {
 				matchSet.add( cur );
 			}
 		}
-		Iterator<ICFBamTZDateDef> iterMatch = matchSet.iterator();
+		Iterator<CFBamBuffTZDateDef> iterMatch = matchSet.iterator();
 		while( iterMatch.hasNext() ) {
 			cur = iterMatch.next();
-			cur = schema.getTableTZDateDef().readDerivedByIdIdx( Authorization,
-				cur.getRequiredId() );
-			String subClassCode = cur.getClassCode();
-			if( "a852".equals( subClassCode ) ) {
+			cur = (CFBamBuffTZDateDef)(schema.getTableTZDateDef().readDerivedByIdIdx( Authorization,
+				cur.getRequiredId() ));
+			int subClassCode = cur.getClassCode();
+			if( CFBamTZDateDef.CLASS_CODE == subClassCode ) {
 				schema.getTableTZDateDef().deleteTZDateDef( Authorization, cur );
 			}
-			else if( "a853".equals( subClassCode ) ) {
+			else if( CFBamTZDateType.CLASS_CODE == subClassCode ) {
 				schema.getTableTZDateType().deleteTZDateType( Authorization, (ICFBamTZDateType)cur );
 			}
-			else if( "a87c".equals( subClassCode ) ) {
+			else if( CFBamTZDateCol.CLASS_CODE == subClassCode ) {
 				schema.getTableTZDateCol().deleteTZDateCol( Authorization, (ICFBamTZDateCol)cur );
 			}
 			else {
@@ -7631,7 +7631,7 @@ public class CFBamRamTZDateDefTable
 		ICFBamValueByContPrevIdxKey argKey )
 	{
 		final String S_ProcName = "deleteTZDateDefByContPrevIdx";
-		ICFBamTZDateDef cur;
+		CFBamBuffTZDateDef cur;
 		boolean anyNotNull = false;
 		anyNotNull = true;
 		if( argKey.getOptionalPrevId() != null ) {
@@ -7640,27 +7640,27 @@ public class CFBamRamTZDateDefTable
 		if( ! anyNotNull ) {
 			return;
 		}
-		LinkedList<ICFBamTZDateDef> matchSet = new LinkedList<ICFBamTZDateDef>();
-		Iterator<ICFBamTZDateDef> values = dictByPKey.values().iterator();
+		LinkedList<CFBamBuffTZDateDef> matchSet = new LinkedList<CFBamBuffTZDateDef>();
+		Iterator<CFBamBuffTZDateDef> values = dictByPKey.values().iterator();
 		while( values.hasNext() ) {
 			cur = values.next();
 			if( argKey.equals( cur ) ) {
 				matchSet.add( cur );
 			}
 		}
-		Iterator<ICFBamTZDateDef> iterMatch = matchSet.iterator();
+		Iterator<CFBamBuffTZDateDef> iterMatch = matchSet.iterator();
 		while( iterMatch.hasNext() ) {
 			cur = iterMatch.next();
-			cur = schema.getTableTZDateDef().readDerivedByIdIdx( Authorization,
-				cur.getRequiredId() );
-			String subClassCode = cur.getClassCode();
-			if( "a852".equals( subClassCode ) ) {
+			cur = (CFBamBuffTZDateDef)(schema.getTableTZDateDef().readDerivedByIdIdx( Authorization,
+				cur.getRequiredId() ));
+			int subClassCode = cur.getClassCode();
+			if( CFBamTZDateDef.CLASS_CODE == subClassCode ) {
 				schema.getTableTZDateDef().deleteTZDateDef( Authorization, cur );
 			}
-			else if( "a853".equals( subClassCode ) ) {
+			else if( CFBamTZDateType.CLASS_CODE == subClassCode ) {
 				schema.getTableTZDateType().deleteTZDateType( Authorization, (ICFBamTZDateType)cur );
 			}
-			else if( "a87c".equals( subClassCode ) ) {
+			else if( CFBamTZDateCol.CLASS_CODE == subClassCode ) {
 				schema.getTableTZDateCol().deleteTZDateCol( Authorization, (ICFBamTZDateCol)cur );
 			}
 			else {
@@ -7683,7 +7683,7 @@ public class CFBamRamTZDateDefTable
 		ICFBamValueByContNextIdxKey argKey )
 	{
 		final String S_ProcName = "deleteTZDateDefByContNextIdx";
-		ICFBamTZDateDef cur;
+		CFBamBuffTZDateDef cur;
 		boolean anyNotNull = false;
 		anyNotNull = true;
 		if( argKey.getOptionalNextId() != null ) {
@@ -7692,27 +7692,27 @@ public class CFBamRamTZDateDefTable
 		if( ! anyNotNull ) {
 			return;
 		}
-		LinkedList<ICFBamTZDateDef> matchSet = new LinkedList<ICFBamTZDateDef>();
-		Iterator<ICFBamTZDateDef> values = dictByPKey.values().iterator();
+		LinkedList<CFBamBuffTZDateDef> matchSet = new LinkedList<CFBamBuffTZDateDef>();
+		Iterator<CFBamBuffTZDateDef> values = dictByPKey.values().iterator();
 		while( values.hasNext() ) {
 			cur = values.next();
 			if( argKey.equals( cur ) ) {
 				matchSet.add( cur );
 			}
 		}
-		Iterator<ICFBamTZDateDef> iterMatch = matchSet.iterator();
+		Iterator<CFBamBuffTZDateDef> iterMatch = matchSet.iterator();
 		while( iterMatch.hasNext() ) {
 			cur = iterMatch.next();
-			cur = schema.getTableTZDateDef().readDerivedByIdIdx( Authorization,
-				cur.getRequiredId() );
-			String subClassCode = cur.getClassCode();
-			if( "a852".equals( subClassCode ) ) {
+			cur = (CFBamBuffTZDateDef)(schema.getTableTZDateDef().readDerivedByIdIdx( Authorization,
+				cur.getRequiredId() ));
+			int subClassCode = cur.getClassCode();
+			if( CFBamTZDateDef.CLASS_CODE == subClassCode ) {
 				schema.getTableTZDateDef().deleteTZDateDef( Authorization, cur );
 			}
-			else if( "a853".equals( subClassCode ) ) {
+			else if( CFBamTZDateType.CLASS_CODE == subClassCode ) {
 				schema.getTableTZDateType().deleteTZDateType( Authorization, (ICFBamTZDateType)cur );
 			}
-			else if( "a87c".equals( subClassCode ) ) {
+			else if( CFBamTZDateCol.CLASS_CODE == subClassCode ) {
 				schema.getTableTZDateCol().deleteTZDateCol( Authorization, (ICFBamTZDateCol)cur );
 			}
 			else {

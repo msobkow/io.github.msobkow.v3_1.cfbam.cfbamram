@@ -6744,8 +6744,8 @@ public class CFBamRamFloatTypeTable
 				pkey );
 		}
 		CFLibDbKeyHash256 varSchemaDefId = existing.getRequiredSchemaDefId();
-		CFBamBuffSchemaDef container = schema.getTableSchemaDef().readDerivedByIdIdx( Authorization,
-			varSchemaDefId );
+		CFBamBuffSchemaDef container = (CFBamBuffSchemaDef)(schema.getTableSchemaDef().readDerivedByIdIdx( Authorization,
+			varSchemaDefId ));
 		if( container == null ) {
 			throw new CFLibNullArgumentException( getClass(),
 				S_ProcName,
@@ -8115,25 +8115,25 @@ public class CFBamRamFloatTypeTable
 	public void deleteFloatTypeBySchemaIdx( ICFSecAuthorization Authorization,
 		ICFBamFloatTypeBySchemaIdxKey argKey )
 	{
-		ICFBamFloatType cur;
+		CFBamBuffFloatType cur;
 		boolean anyNotNull = false;
 		anyNotNull = true;
 		if( ! anyNotNull ) {
 			return;
 		}
-		LinkedList<ICFBamFloatType> matchSet = new LinkedList<ICFBamFloatType>();
-		Iterator<ICFBamFloatType> values = dictByPKey.values().iterator();
+		LinkedList<CFBamBuffFloatType> matchSet = new LinkedList<CFBamBuffFloatType>();
+		Iterator<CFBamBuffFloatType> values = dictByPKey.values().iterator();
 		while( values.hasNext() ) {
 			cur = values.next();
 			if( argKey.equals( cur ) ) {
 				matchSet.add( cur );
 			}
 		}
-		Iterator<ICFBamFloatType> iterMatch = matchSet.iterator();
+		Iterator<CFBamBuffFloatType> iterMatch = matchSet.iterator();
 		while( iterMatch.hasNext() ) {
 			cur = iterMatch.next();
-			cur = schema.getTableFloatType().readDerivedByIdIdx( Authorization,
-				cur.getRequiredId() );
+			cur = (CFBamBuffFloatType)(schema.getTableFloatType().readDerivedByIdIdx( Authorization,
+				cur.getRequiredId() ));
 			deleteFloatType( Authorization, cur );
 		}
 	}
@@ -8146,20 +8146,20 @@ public class CFBamRamFloatTypeTable
 		if( ! anyNotNull ) {
 			return;
 		}
-		ICFBamFloatType cur;
-		LinkedList<ICFBamFloatType> matchSet = new LinkedList<ICFBamFloatType>();
-		Iterator<ICFBamFloatType> values = dictByPKey.values().iterator();
+		CFBamBuffFloatType cur;
+		LinkedList<CFBamBuffFloatType> matchSet = new LinkedList<CFBamBuffFloatType>();
+		Iterator<CFBamBuffFloatType> values = dictByPKey.values().iterator();
 		while( values.hasNext() ) {
 			cur = values.next();
 			if( argKey.equals( cur ) ) {
 				matchSet.add( cur );
 			}
 		}
-		Iterator<ICFBamFloatType> iterMatch = matchSet.iterator();
+		Iterator<CFBamBuffFloatType> iterMatch = matchSet.iterator();
 		while( iterMatch.hasNext() ) {
 			cur = iterMatch.next();
-			cur = schema.getTableFloatType().readDerivedByIdIdx( Authorization,
-				cur.getRequiredId() );
+			cur = (CFBamBuffFloatType)(schema.getTableFloatType().readDerivedByIdIdx( Authorization,
+				cur.getRequiredId() ));
 			deleteFloatType( Authorization, cur );
 		}
 	}
@@ -8177,26 +8177,26 @@ public class CFBamRamFloatTypeTable
 	public void deleteFloatTypeByUNameIdx( ICFSecAuthorization Authorization,
 		ICFBamValueByUNameIdxKey argKey )
 	{
-		ICFBamFloatType cur;
+		CFBamBuffFloatType cur;
 		boolean anyNotNull = false;
 		anyNotNull = true;
 		anyNotNull = true;
 		if( ! anyNotNull ) {
 			return;
 		}
-		LinkedList<ICFBamFloatType> matchSet = new LinkedList<ICFBamFloatType>();
-		Iterator<ICFBamFloatType> values = dictByPKey.values().iterator();
+		LinkedList<CFBamBuffFloatType> matchSet = new LinkedList<CFBamBuffFloatType>();
+		Iterator<CFBamBuffFloatType> values = dictByPKey.values().iterator();
 		while( values.hasNext() ) {
 			cur = values.next();
 			if( argKey.equals( cur ) ) {
 				matchSet.add( cur );
 			}
 		}
-		Iterator<ICFBamFloatType> iterMatch = matchSet.iterator();
+		Iterator<CFBamBuffFloatType> iterMatch = matchSet.iterator();
 		while( iterMatch.hasNext() ) {
 			cur = iterMatch.next();
-			cur = schema.getTableFloatType().readDerivedByIdIdx( Authorization,
-				cur.getRequiredId() );
+			cur = (CFBamBuffFloatType)(schema.getTableFloatType().readDerivedByIdIdx( Authorization,
+				cur.getRequiredId() ));
 			deleteFloatType( Authorization, cur );
 		}
 	}
@@ -8212,25 +8212,25 @@ public class CFBamRamFloatTypeTable
 	public void deleteFloatTypeByScopeIdx( ICFSecAuthorization Authorization,
 		ICFBamValueByScopeIdxKey argKey )
 	{
-		ICFBamFloatType cur;
+		CFBamBuffFloatType cur;
 		boolean anyNotNull = false;
 		anyNotNull = true;
 		if( ! anyNotNull ) {
 			return;
 		}
-		LinkedList<ICFBamFloatType> matchSet = new LinkedList<ICFBamFloatType>();
-		Iterator<ICFBamFloatType> values = dictByPKey.values().iterator();
+		LinkedList<CFBamBuffFloatType> matchSet = new LinkedList<CFBamBuffFloatType>();
+		Iterator<CFBamBuffFloatType> values = dictByPKey.values().iterator();
 		while( values.hasNext() ) {
 			cur = values.next();
 			if( argKey.equals( cur ) ) {
 				matchSet.add( cur );
 			}
 		}
-		Iterator<ICFBamFloatType> iterMatch = matchSet.iterator();
+		Iterator<CFBamBuffFloatType> iterMatch = matchSet.iterator();
 		while( iterMatch.hasNext() ) {
 			cur = iterMatch.next();
-			cur = schema.getTableFloatType().readDerivedByIdIdx( Authorization,
-				cur.getRequiredId() );
+			cur = (CFBamBuffFloatType)(schema.getTableFloatType().readDerivedByIdIdx( Authorization,
+				cur.getRequiredId() ));
 			deleteFloatType( Authorization, cur );
 		}
 	}
@@ -8246,7 +8246,7 @@ public class CFBamRamFloatTypeTable
 	public void deleteFloatTypeByDefSchemaIdx( ICFSecAuthorization Authorization,
 		ICFBamValueByDefSchemaIdxKey argKey )
 	{
-		ICFBamFloatType cur;
+		CFBamBuffFloatType cur;
 		boolean anyNotNull = false;
 		if( argKey.getOptionalDefSchemaId() != null ) {
 			anyNotNull = true;
@@ -8254,19 +8254,19 @@ public class CFBamRamFloatTypeTable
 		if( ! anyNotNull ) {
 			return;
 		}
-		LinkedList<ICFBamFloatType> matchSet = new LinkedList<ICFBamFloatType>();
-		Iterator<ICFBamFloatType> values = dictByPKey.values().iterator();
+		LinkedList<CFBamBuffFloatType> matchSet = new LinkedList<CFBamBuffFloatType>();
+		Iterator<CFBamBuffFloatType> values = dictByPKey.values().iterator();
 		while( values.hasNext() ) {
 			cur = values.next();
 			if( argKey.equals( cur ) ) {
 				matchSet.add( cur );
 			}
 		}
-		Iterator<ICFBamFloatType> iterMatch = matchSet.iterator();
+		Iterator<CFBamBuffFloatType> iterMatch = matchSet.iterator();
 		while( iterMatch.hasNext() ) {
 			cur = iterMatch.next();
-			cur = schema.getTableFloatType().readDerivedByIdIdx( Authorization,
-				cur.getRequiredId() );
+			cur = (CFBamBuffFloatType)(schema.getTableFloatType().readDerivedByIdIdx( Authorization,
+				cur.getRequiredId() ));
 			deleteFloatType( Authorization, cur );
 		}
 	}
@@ -8282,7 +8282,7 @@ public class CFBamRamFloatTypeTable
 	public void deleteFloatTypeByPrevIdx( ICFSecAuthorization Authorization,
 		ICFBamValueByPrevIdxKey argKey )
 	{
-		ICFBamFloatType cur;
+		CFBamBuffFloatType cur;
 		boolean anyNotNull = false;
 		if( argKey.getOptionalPrevId() != null ) {
 			anyNotNull = true;
@@ -8290,19 +8290,19 @@ public class CFBamRamFloatTypeTable
 		if( ! anyNotNull ) {
 			return;
 		}
-		LinkedList<ICFBamFloatType> matchSet = new LinkedList<ICFBamFloatType>();
-		Iterator<ICFBamFloatType> values = dictByPKey.values().iterator();
+		LinkedList<CFBamBuffFloatType> matchSet = new LinkedList<CFBamBuffFloatType>();
+		Iterator<CFBamBuffFloatType> values = dictByPKey.values().iterator();
 		while( values.hasNext() ) {
 			cur = values.next();
 			if( argKey.equals( cur ) ) {
 				matchSet.add( cur );
 			}
 		}
-		Iterator<ICFBamFloatType> iterMatch = matchSet.iterator();
+		Iterator<CFBamBuffFloatType> iterMatch = matchSet.iterator();
 		while( iterMatch.hasNext() ) {
 			cur = iterMatch.next();
-			cur = schema.getTableFloatType().readDerivedByIdIdx( Authorization,
-				cur.getRequiredId() );
+			cur = (CFBamBuffFloatType)(schema.getTableFloatType().readDerivedByIdIdx( Authorization,
+				cur.getRequiredId() ));
 			deleteFloatType( Authorization, cur );
 		}
 	}
@@ -8318,7 +8318,7 @@ public class CFBamRamFloatTypeTable
 	public void deleteFloatTypeByNextIdx( ICFSecAuthorization Authorization,
 		ICFBamValueByNextIdxKey argKey )
 	{
-		ICFBamFloatType cur;
+		CFBamBuffFloatType cur;
 		boolean anyNotNull = false;
 		if( argKey.getOptionalNextId() != null ) {
 			anyNotNull = true;
@@ -8326,19 +8326,19 @@ public class CFBamRamFloatTypeTable
 		if( ! anyNotNull ) {
 			return;
 		}
-		LinkedList<ICFBamFloatType> matchSet = new LinkedList<ICFBamFloatType>();
-		Iterator<ICFBamFloatType> values = dictByPKey.values().iterator();
+		LinkedList<CFBamBuffFloatType> matchSet = new LinkedList<CFBamBuffFloatType>();
+		Iterator<CFBamBuffFloatType> values = dictByPKey.values().iterator();
 		while( values.hasNext() ) {
 			cur = values.next();
 			if( argKey.equals( cur ) ) {
 				matchSet.add( cur );
 			}
 		}
-		Iterator<ICFBamFloatType> iterMatch = matchSet.iterator();
+		Iterator<CFBamBuffFloatType> iterMatch = matchSet.iterator();
 		while( iterMatch.hasNext() ) {
 			cur = iterMatch.next();
-			cur = schema.getTableFloatType().readDerivedByIdIdx( Authorization,
-				cur.getRequiredId() );
+			cur = (CFBamBuffFloatType)(schema.getTableFloatType().readDerivedByIdIdx( Authorization,
+				cur.getRequiredId() ));
 			deleteFloatType( Authorization, cur );
 		}
 	}
@@ -8356,7 +8356,7 @@ public class CFBamRamFloatTypeTable
 	public void deleteFloatTypeByContPrevIdx( ICFSecAuthorization Authorization,
 		ICFBamValueByContPrevIdxKey argKey )
 	{
-		ICFBamFloatType cur;
+		CFBamBuffFloatType cur;
 		boolean anyNotNull = false;
 		anyNotNull = true;
 		if( argKey.getOptionalPrevId() != null ) {
@@ -8365,19 +8365,19 @@ public class CFBamRamFloatTypeTable
 		if( ! anyNotNull ) {
 			return;
 		}
-		LinkedList<ICFBamFloatType> matchSet = new LinkedList<ICFBamFloatType>();
-		Iterator<ICFBamFloatType> values = dictByPKey.values().iterator();
+		LinkedList<CFBamBuffFloatType> matchSet = new LinkedList<CFBamBuffFloatType>();
+		Iterator<CFBamBuffFloatType> values = dictByPKey.values().iterator();
 		while( values.hasNext() ) {
 			cur = values.next();
 			if( argKey.equals( cur ) ) {
 				matchSet.add( cur );
 			}
 		}
-		Iterator<ICFBamFloatType> iterMatch = matchSet.iterator();
+		Iterator<CFBamBuffFloatType> iterMatch = matchSet.iterator();
 		while( iterMatch.hasNext() ) {
 			cur = iterMatch.next();
-			cur = schema.getTableFloatType().readDerivedByIdIdx( Authorization,
-				cur.getRequiredId() );
+			cur = (CFBamBuffFloatType)(schema.getTableFloatType().readDerivedByIdIdx( Authorization,
+				cur.getRequiredId() ));
 			deleteFloatType( Authorization, cur );
 		}
 	}
@@ -8395,7 +8395,7 @@ public class CFBamRamFloatTypeTable
 	public void deleteFloatTypeByContNextIdx( ICFSecAuthorization Authorization,
 		ICFBamValueByContNextIdxKey argKey )
 	{
-		ICFBamFloatType cur;
+		CFBamBuffFloatType cur;
 		boolean anyNotNull = false;
 		anyNotNull = true;
 		if( argKey.getOptionalNextId() != null ) {
@@ -8404,19 +8404,19 @@ public class CFBamRamFloatTypeTable
 		if( ! anyNotNull ) {
 			return;
 		}
-		LinkedList<ICFBamFloatType> matchSet = new LinkedList<ICFBamFloatType>();
-		Iterator<ICFBamFloatType> values = dictByPKey.values().iterator();
+		LinkedList<CFBamBuffFloatType> matchSet = new LinkedList<CFBamBuffFloatType>();
+		Iterator<CFBamBuffFloatType> values = dictByPKey.values().iterator();
 		while( values.hasNext() ) {
 			cur = values.next();
 			if( argKey.equals( cur ) ) {
 				matchSet.add( cur );
 			}
 		}
-		Iterator<ICFBamFloatType> iterMatch = matchSet.iterator();
+		Iterator<CFBamBuffFloatType> iterMatch = matchSet.iterator();
 		while( iterMatch.hasNext() ) {
 			cur = iterMatch.next();
-			cur = schema.getTableFloatType().readDerivedByIdIdx( Authorization,
-				cur.getRequiredId() );
+			cur = (CFBamBuffFloatType)(schema.getTableFloatType().readDerivedByIdIdx( Authorization,
+				cur.getRequiredId() ));
 			deleteFloatType( Authorization, cur );
 		}
 	}

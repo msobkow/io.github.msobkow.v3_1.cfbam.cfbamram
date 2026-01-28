@@ -786,20 +786,20 @@ public class CFBamRamTSecGrpMembTable
 		if( ! anyNotNull ) {
 			return;
 		}
-		ICFSecTSecGrpMemb cur;
-		LinkedList<ICFSecTSecGrpMemb> matchSet = new LinkedList<ICFSecTSecGrpMemb>();
-		Iterator<ICFSecTSecGrpMemb> values = dictByPKey.values().iterator();
+		CFSecBuffTSecGrpMemb cur;
+		LinkedList<CFSecBuffTSecGrpMemb> matchSet = new LinkedList<CFSecBuffTSecGrpMemb>();
+		Iterator<CFSecBuffTSecGrpMemb> values = dictByPKey.values().iterator();
 		while( values.hasNext() ) {
 			cur = values.next();
 			if( argKey.equals( cur ) ) {
 				matchSet.add( cur );
 			}
 		}
-		Iterator<ICFSecTSecGrpMemb> iterMatch = matchSet.iterator();
+		Iterator<CFSecBuffTSecGrpMemb> iterMatch = matchSet.iterator();
 		while( iterMatch.hasNext() ) {
 			cur = iterMatch.next();
-			cur = schema.getTableTSecGrpMemb().readDerivedByIdIdx( Authorization,
-				cur.getRequiredTSecGrpMembId() );
+			cur = (CFSecBuffTSecGrpMemb)(schema.getTableTSecGrpMemb().readDerivedByIdIdx( Authorization,
+				cur.getRequiredTSecGrpMembId() ));
 			deleteTSecGrpMemb( Authorization, cur );
 		}
 	}
@@ -815,25 +815,25 @@ public class CFBamRamTSecGrpMembTable
 	public void deleteTSecGrpMembByTenantIdx( ICFSecAuthorization Authorization,
 		ICFSecTSecGrpMembByTenantIdxKey argKey )
 	{
-		ICFSecTSecGrpMemb cur;
+		CFSecBuffTSecGrpMemb cur;
 		boolean anyNotNull = false;
 		anyNotNull = true;
 		if( ! anyNotNull ) {
 			return;
 		}
-		LinkedList<ICFSecTSecGrpMemb> matchSet = new LinkedList<ICFSecTSecGrpMemb>();
-		Iterator<ICFSecTSecGrpMemb> values = dictByPKey.values().iterator();
+		LinkedList<CFSecBuffTSecGrpMemb> matchSet = new LinkedList<CFSecBuffTSecGrpMemb>();
+		Iterator<CFSecBuffTSecGrpMemb> values = dictByPKey.values().iterator();
 		while( values.hasNext() ) {
 			cur = values.next();
 			if( argKey.equals( cur ) ) {
 				matchSet.add( cur );
 			}
 		}
-		Iterator<ICFSecTSecGrpMemb> iterMatch = matchSet.iterator();
+		Iterator<CFSecBuffTSecGrpMemb> iterMatch = matchSet.iterator();
 		while( iterMatch.hasNext() ) {
 			cur = iterMatch.next();
-			cur = schema.getTableTSecGrpMemb().readDerivedByIdIdx( Authorization,
-				cur.getRequiredTSecGrpMembId() );
+			cur = (CFSecBuffTSecGrpMemb)(schema.getTableTSecGrpMemb().readDerivedByIdIdx( Authorization,
+				cur.getRequiredTSecGrpMembId() ));
 			deleteTSecGrpMemb( Authorization, cur );
 		}
 	}
@@ -849,25 +849,25 @@ public class CFBamRamTSecGrpMembTable
 	public void deleteTSecGrpMembByGroupIdx( ICFSecAuthorization Authorization,
 		ICFSecTSecGrpMembByGroupIdxKey argKey )
 	{
-		ICFSecTSecGrpMemb cur;
+		CFSecBuffTSecGrpMemb cur;
 		boolean anyNotNull = false;
 		anyNotNull = true;
 		if( ! anyNotNull ) {
 			return;
 		}
-		LinkedList<ICFSecTSecGrpMemb> matchSet = new LinkedList<ICFSecTSecGrpMemb>();
-		Iterator<ICFSecTSecGrpMemb> values = dictByPKey.values().iterator();
+		LinkedList<CFSecBuffTSecGrpMemb> matchSet = new LinkedList<CFSecBuffTSecGrpMemb>();
+		Iterator<CFSecBuffTSecGrpMemb> values = dictByPKey.values().iterator();
 		while( values.hasNext() ) {
 			cur = values.next();
 			if( argKey.equals( cur ) ) {
 				matchSet.add( cur );
 			}
 		}
-		Iterator<ICFSecTSecGrpMemb> iterMatch = matchSet.iterator();
+		Iterator<CFSecBuffTSecGrpMemb> iterMatch = matchSet.iterator();
 		while( iterMatch.hasNext() ) {
 			cur = iterMatch.next();
-			cur = schema.getTableTSecGrpMemb().readDerivedByIdIdx( Authorization,
-				cur.getRequiredTSecGrpMembId() );
+			cur = (CFSecBuffTSecGrpMemb)(schema.getTableTSecGrpMemb().readDerivedByIdIdx( Authorization,
+				cur.getRequiredTSecGrpMembId() ));
 			deleteTSecGrpMemb( Authorization, cur );
 		}
 	}
@@ -883,25 +883,25 @@ public class CFBamRamTSecGrpMembTable
 	public void deleteTSecGrpMembByUserIdx( ICFSecAuthorization Authorization,
 		ICFSecTSecGrpMembByUserIdxKey argKey )
 	{
-		ICFSecTSecGrpMemb cur;
+		CFSecBuffTSecGrpMemb cur;
 		boolean anyNotNull = false;
 		anyNotNull = true;
 		if( ! anyNotNull ) {
 			return;
 		}
-		LinkedList<ICFSecTSecGrpMemb> matchSet = new LinkedList<ICFSecTSecGrpMemb>();
-		Iterator<ICFSecTSecGrpMemb> values = dictByPKey.values().iterator();
+		LinkedList<CFSecBuffTSecGrpMemb> matchSet = new LinkedList<CFSecBuffTSecGrpMemb>();
+		Iterator<CFSecBuffTSecGrpMemb> values = dictByPKey.values().iterator();
 		while( values.hasNext() ) {
 			cur = values.next();
 			if( argKey.equals( cur ) ) {
 				matchSet.add( cur );
 			}
 		}
-		Iterator<ICFSecTSecGrpMemb> iterMatch = matchSet.iterator();
+		Iterator<CFSecBuffTSecGrpMemb> iterMatch = matchSet.iterator();
 		while( iterMatch.hasNext() ) {
 			cur = iterMatch.next();
-			cur = schema.getTableTSecGrpMemb().readDerivedByIdIdx( Authorization,
-				cur.getRequiredTSecGrpMembId() );
+			cur = (CFSecBuffTSecGrpMemb)(schema.getTableTSecGrpMemb().readDerivedByIdIdx( Authorization,
+				cur.getRequiredTSecGrpMembId() ));
 			deleteTSecGrpMemb( Authorization, cur );
 		}
 	}
@@ -921,7 +921,7 @@ public class CFBamRamTSecGrpMembTable
 	public void deleteTSecGrpMembByUUserIdx( ICFSecAuthorization Authorization,
 		ICFSecTSecGrpMembByUUserIdxKey argKey )
 	{
-		ICFSecTSecGrpMemb cur;
+		CFSecBuffTSecGrpMemb cur;
 		boolean anyNotNull = false;
 		anyNotNull = true;
 		anyNotNull = true;
@@ -929,19 +929,19 @@ public class CFBamRamTSecGrpMembTable
 		if( ! anyNotNull ) {
 			return;
 		}
-		LinkedList<ICFSecTSecGrpMemb> matchSet = new LinkedList<ICFSecTSecGrpMemb>();
-		Iterator<ICFSecTSecGrpMemb> values = dictByPKey.values().iterator();
+		LinkedList<CFSecBuffTSecGrpMemb> matchSet = new LinkedList<CFSecBuffTSecGrpMemb>();
+		Iterator<CFSecBuffTSecGrpMemb> values = dictByPKey.values().iterator();
 		while( values.hasNext() ) {
 			cur = values.next();
 			if( argKey.equals( cur ) ) {
 				matchSet.add( cur );
 			}
 		}
-		Iterator<ICFSecTSecGrpMemb> iterMatch = matchSet.iterator();
+		Iterator<CFSecBuffTSecGrpMemb> iterMatch = matchSet.iterator();
 		while( iterMatch.hasNext() ) {
 			cur = iterMatch.next();
-			cur = schema.getTableTSecGrpMemb().readDerivedByIdIdx( Authorization,
-				cur.getRequiredTSecGrpMembId() );
+			cur = (CFSecBuffTSecGrpMemb)(schema.getTableTSecGrpMemb().readDerivedByIdIdx( Authorization,
+				cur.getRequiredTSecGrpMembId() ));
 			deleteTSecGrpMemb( Authorization, cur );
 		}
 	}

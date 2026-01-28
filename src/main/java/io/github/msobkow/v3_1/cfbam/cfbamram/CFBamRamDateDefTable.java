@@ -5958,8 +5958,8 @@ public class CFBamRamDateDefTable
 				pkey );
 		}
 		CFLibDbKeyHash256 varScopeId = existing.getRequiredScopeId();
-		CFBamBuffScope container = schema.getTableScope().readDerivedByIdIdx( Authorization,
-			varScopeId );
+		CFBamBuffScope container = (CFBamBuffScope)(schema.getTableScope().readDerivedByIdIdx( Authorization,
+			varScopeId ));
 		if( container == null ) {
 			throw new CFLibNullArgumentException( getClass(),
 				S_ProcName,
@@ -7343,28 +7343,28 @@ public class CFBamRamDateDefTable
 		if( ! anyNotNull ) {
 			return;
 		}
-		ICFBamDateDef cur;
-		LinkedList<ICFBamDateDef> matchSet = new LinkedList<ICFBamDateDef>();
-		Iterator<ICFBamDateDef> values = dictByPKey.values().iterator();
+		CFBamBuffDateDef cur;
+		LinkedList<CFBamBuffDateDef> matchSet = new LinkedList<CFBamBuffDateDef>();
+		Iterator<CFBamBuffDateDef> values = dictByPKey.values().iterator();
 		while( values.hasNext() ) {
 			cur = values.next();
 			if( argKey.equals( cur ) ) {
 				matchSet.add( cur );
 			}
 		}
-		Iterator<ICFBamDateDef> iterMatch = matchSet.iterator();
+		Iterator<CFBamBuffDateDef> iterMatch = matchSet.iterator();
 		while( iterMatch.hasNext() ) {
 			cur = iterMatch.next();
-			cur = schema.getTableDateDef().readDerivedByIdIdx( Authorization,
-				cur.getRequiredId() );
-			String subClassCode = cur.getClassCode();
-			if( "a815".equals( subClassCode ) ) {
+			cur = (CFBamBuffDateDef)(schema.getTableDateDef().readDerivedByIdIdx( Authorization,
+				cur.getRequiredId() ));
+			int subClassCode = cur.getClassCode();
+			if( CFBamDateDef.CLASS_CODE == subClassCode ) {
 				schema.getTableDateDef().deleteDateDef( Authorization, cur );
 			}
-			else if( "a816".equals( subClassCode ) ) {
+			else if( CFBamDateType.CLASS_CODE == subClassCode ) {
 				schema.getTableDateType().deleteDateType( Authorization, (ICFBamDateType)cur );
 			}
-			else if( "a86d".equals( subClassCode ) ) {
+			else if( CFBamDateCol.CLASS_CODE == subClassCode ) {
 				schema.getTableDateCol().deleteDateCol( Authorization, (ICFBamDateCol)cur );
 			}
 			else {
@@ -7387,34 +7387,34 @@ public class CFBamRamDateDefTable
 		ICFBamValueByUNameIdxKey argKey )
 	{
 		final String S_ProcName = "deleteDateDefByUNameIdx";
-		ICFBamDateDef cur;
+		CFBamBuffDateDef cur;
 		boolean anyNotNull = false;
 		anyNotNull = true;
 		anyNotNull = true;
 		if( ! anyNotNull ) {
 			return;
 		}
-		LinkedList<ICFBamDateDef> matchSet = new LinkedList<ICFBamDateDef>();
-		Iterator<ICFBamDateDef> values = dictByPKey.values().iterator();
+		LinkedList<CFBamBuffDateDef> matchSet = new LinkedList<CFBamBuffDateDef>();
+		Iterator<CFBamBuffDateDef> values = dictByPKey.values().iterator();
 		while( values.hasNext() ) {
 			cur = values.next();
 			if( argKey.equals( cur ) ) {
 				matchSet.add( cur );
 			}
 		}
-		Iterator<ICFBamDateDef> iterMatch = matchSet.iterator();
+		Iterator<CFBamBuffDateDef> iterMatch = matchSet.iterator();
 		while( iterMatch.hasNext() ) {
 			cur = iterMatch.next();
-			cur = schema.getTableDateDef().readDerivedByIdIdx( Authorization,
-				cur.getRequiredId() );
-			String subClassCode = cur.getClassCode();
-			if( "a815".equals( subClassCode ) ) {
+			cur = (CFBamBuffDateDef)(schema.getTableDateDef().readDerivedByIdIdx( Authorization,
+				cur.getRequiredId() ));
+			int subClassCode = cur.getClassCode();
+			if( CFBamDateDef.CLASS_CODE == subClassCode ) {
 				schema.getTableDateDef().deleteDateDef( Authorization, cur );
 			}
-			else if( "a816".equals( subClassCode ) ) {
+			else if( CFBamDateType.CLASS_CODE == subClassCode ) {
 				schema.getTableDateType().deleteDateType( Authorization, (ICFBamDateType)cur );
 			}
-			else if( "a86d".equals( subClassCode ) ) {
+			else if( CFBamDateCol.CLASS_CODE == subClassCode ) {
 				schema.getTableDateCol().deleteDateCol( Authorization, (ICFBamDateCol)cur );
 			}
 			else {
@@ -7435,33 +7435,33 @@ public class CFBamRamDateDefTable
 		ICFBamValueByScopeIdxKey argKey )
 	{
 		final String S_ProcName = "deleteDateDefByScopeIdx";
-		ICFBamDateDef cur;
+		CFBamBuffDateDef cur;
 		boolean anyNotNull = false;
 		anyNotNull = true;
 		if( ! anyNotNull ) {
 			return;
 		}
-		LinkedList<ICFBamDateDef> matchSet = new LinkedList<ICFBamDateDef>();
-		Iterator<ICFBamDateDef> values = dictByPKey.values().iterator();
+		LinkedList<CFBamBuffDateDef> matchSet = new LinkedList<CFBamBuffDateDef>();
+		Iterator<CFBamBuffDateDef> values = dictByPKey.values().iterator();
 		while( values.hasNext() ) {
 			cur = values.next();
 			if( argKey.equals( cur ) ) {
 				matchSet.add( cur );
 			}
 		}
-		Iterator<ICFBamDateDef> iterMatch = matchSet.iterator();
+		Iterator<CFBamBuffDateDef> iterMatch = matchSet.iterator();
 		while( iterMatch.hasNext() ) {
 			cur = iterMatch.next();
-			cur = schema.getTableDateDef().readDerivedByIdIdx( Authorization,
-				cur.getRequiredId() );
-			String subClassCode = cur.getClassCode();
-			if( "a815".equals( subClassCode ) ) {
+			cur = (CFBamBuffDateDef)(schema.getTableDateDef().readDerivedByIdIdx( Authorization,
+				cur.getRequiredId() ));
+			int subClassCode = cur.getClassCode();
+			if( CFBamDateDef.CLASS_CODE == subClassCode ) {
 				schema.getTableDateDef().deleteDateDef( Authorization, cur );
 			}
-			else if( "a816".equals( subClassCode ) ) {
+			else if( CFBamDateType.CLASS_CODE == subClassCode ) {
 				schema.getTableDateType().deleteDateType( Authorization, (ICFBamDateType)cur );
 			}
-			else if( "a86d".equals( subClassCode ) ) {
+			else if( CFBamDateCol.CLASS_CODE == subClassCode ) {
 				schema.getTableDateCol().deleteDateCol( Authorization, (ICFBamDateCol)cur );
 			}
 			else {
@@ -7482,7 +7482,7 @@ public class CFBamRamDateDefTable
 		ICFBamValueByDefSchemaIdxKey argKey )
 	{
 		final String S_ProcName = "deleteDateDefByDefSchemaIdx";
-		ICFBamDateDef cur;
+		CFBamBuffDateDef cur;
 		boolean anyNotNull = false;
 		if( argKey.getOptionalDefSchemaId() != null ) {
 			anyNotNull = true;
@@ -7490,27 +7490,27 @@ public class CFBamRamDateDefTable
 		if( ! anyNotNull ) {
 			return;
 		}
-		LinkedList<ICFBamDateDef> matchSet = new LinkedList<ICFBamDateDef>();
-		Iterator<ICFBamDateDef> values = dictByPKey.values().iterator();
+		LinkedList<CFBamBuffDateDef> matchSet = new LinkedList<CFBamBuffDateDef>();
+		Iterator<CFBamBuffDateDef> values = dictByPKey.values().iterator();
 		while( values.hasNext() ) {
 			cur = values.next();
 			if( argKey.equals( cur ) ) {
 				matchSet.add( cur );
 			}
 		}
-		Iterator<ICFBamDateDef> iterMatch = matchSet.iterator();
+		Iterator<CFBamBuffDateDef> iterMatch = matchSet.iterator();
 		while( iterMatch.hasNext() ) {
 			cur = iterMatch.next();
-			cur = schema.getTableDateDef().readDerivedByIdIdx( Authorization,
-				cur.getRequiredId() );
-			String subClassCode = cur.getClassCode();
-			if( "a815".equals( subClassCode ) ) {
+			cur = (CFBamBuffDateDef)(schema.getTableDateDef().readDerivedByIdIdx( Authorization,
+				cur.getRequiredId() ));
+			int subClassCode = cur.getClassCode();
+			if( CFBamDateDef.CLASS_CODE == subClassCode ) {
 				schema.getTableDateDef().deleteDateDef( Authorization, cur );
 			}
-			else if( "a816".equals( subClassCode ) ) {
+			else if( CFBamDateType.CLASS_CODE == subClassCode ) {
 				schema.getTableDateType().deleteDateType( Authorization, (ICFBamDateType)cur );
 			}
-			else if( "a86d".equals( subClassCode ) ) {
+			else if( CFBamDateCol.CLASS_CODE == subClassCode ) {
 				schema.getTableDateCol().deleteDateCol( Authorization, (ICFBamDateCol)cur );
 			}
 			else {
@@ -7531,7 +7531,7 @@ public class CFBamRamDateDefTable
 		ICFBamValueByPrevIdxKey argKey )
 	{
 		final String S_ProcName = "deleteDateDefByPrevIdx";
-		ICFBamDateDef cur;
+		CFBamBuffDateDef cur;
 		boolean anyNotNull = false;
 		if( argKey.getOptionalPrevId() != null ) {
 			anyNotNull = true;
@@ -7539,27 +7539,27 @@ public class CFBamRamDateDefTable
 		if( ! anyNotNull ) {
 			return;
 		}
-		LinkedList<ICFBamDateDef> matchSet = new LinkedList<ICFBamDateDef>();
-		Iterator<ICFBamDateDef> values = dictByPKey.values().iterator();
+		LinkedList<CFBamBuffDateDef> matchSet = new LinkedList<CFBamBuffDateDef>();
+		Iterator<CFBamBuffDateDef> values = dictByPKey.values().iterator();
 		while( values.hasNext() ) {
 			cur = values.next();
 			if( argKey.equals( cur ) ) {
 				matchSet.add( cur );
 			}
 		}
-		Iterator<ICFBamDateDef> iterMatch = matchSet.iterator();
+		Iterator<CFBamBuffDateDef> iterMatch = matchSet.iterator();
 		while( iterMatch.hasNext() ) {
 			cur = iterMatch.next();
-			cur = schema.getTableDateDef().readDerivedByIdIdx( Authorization,
-				cur.getRequiredId() );
-			String subClassCode = cur.getClassCode();
-			if( "a815".equals( subClassCode ) ) {
+			cur = (CFBamBuffDateDef)(schema.getTableDateDef().readDerivedByIdIdx( Authorization,
+				cur.getRequiredId() ));
+			int subClassCode = cur.getClassCode();
+			if( CFBamDateDef.CLASS_CODE == subClassCode ) {
 				schema.getTableDateDef().deleteDateDef( Authorization, cur );
 			}
-			else if( "a816".equals( subClassCode ) ) {
+			else if( CFBamDateType.CLASS_CODE == subClassCode ) {
 				schema.getTableDateType().deleteDateType( Authorization, (ICFBamDateType)cur );
 			}
-			else if( "a86d".equals( subClassCode ) ) {
+			else if( CFBamDateCol.CLASS_CODE == subClassCode ) {
 				schema.getTableDateCol().deleteDateCol( Authorization, (ICFBamDateCol)cur );
 			}
 			else {
@@ -7580,7 +7580,7 @@ public class CFBamRamDateDefTable
 		ICFBamValueByNextIdxKey argKey )
 	{
 		final String S_ProcName = "deleteDateDefByNextIdx";
-		ICFBamDateDef cur;
+		CFBamBuffDateDef cur;
 		boolean anyNotNull = false;
 		if( argKey.getOptionalNextId() != null ) {
 			anyNotNull = true;
@@ -7588,27 +7588,27 @@ public class CFBamRamDateDefTable
 		if( ! anyNotNull ) {
 			return;
 		}
-		LinkedList<ICFBamDateDef> matchSet = new LinkedList<ICFBamDateDef>();
-		Iterator<ICFBamDateDef> values = dictByPKey.values().iterator();
+		LinkedList<CFBamBuffDateDef> matchSet = new LinkedList<CFBamBuffDateDef>();
+		Iterator<CFBamBuffDateDef> values = dictByPKey.values().iterator();
 		while( values.hasNext() ) {
 			cur = values.next();
 			if( argKey.equals( cur ) ) {
 				matchSet.add( cur );
 			}
 		}
-		Iterator<ICFBamDateDef> iterMatch = matchSet.iterator();
+		Iterator<CFBamBuffDateDef> iterMatch = matchSet.iterator();
 		while( iterMatch.hasNext() ) {
 			cur = iterMatch.next();
-			cur = schema.getTableDateDef().readDerivedByIdIdx( Authorization,
-				cur.getRequiredId() );
-			String subClassCode = cur.getClassCode();
-			if( "a815".equals( subClassCode ) ) {
+			cur = (CFBamBuffDateDef)(schema.getTableDateDef().readDerivedByIdIdx( Authorization,
+				cur.getRequiredId() ));
+			int subClassCode = cur.getClassCode();
+			if( CFBamDateDef.CLASS_CODE == subClassCode ) {
 				schema.getTableDateDef().deleteDateDef( Authorization, cur );
 			}
-			else if( "a816".equals( subClassCode ) ) {
+			else if( CFBamDateType.CLASS_CODE == subClassCode ) {
 				schema.getTableDateType().deleteDateType( Authorization, (ICFBamDateType)cur );
 			}
-			else if( "a86d".equals( subClassCode ) ) {
+			else if( CFBamDateCol.CLASS_CODE == subClassCode ) {
 				schema.getTableDateCol().deleteDateCol( Authorization, (ICFBamDateCol)cur );
 			}
 			else {
@@ -7631,7 +7631,7 @@ public class CFBamRamDateDefTable
 		ICFBamValueByContPrevIdxKey argKey )
 	{
 		final String S_ProcName = "deleteDateDefByContPrevIdx";
-		ICFBamDateDef cur;
+		CFBamBuffDateDef cur;
 		boolean anyNotNull = false;
 		anyNotNull = true;
 		if( argKey.getOptionalPrevId() != null ) {
@@ -7640,27 +7640,27 @@ public class CFBamRamDateDefTable
 		if( ! anyNotNull ) {
 			return;
 		}
-		LinkedList<ICFBamDateDef> matchSet = new LinkedList<ICFBamDateDef>();
-		Iterator<ICFBamDateDef> values = dictByPKey.values().iterator();
+		LinkedList<CFBamBuffDateDef> matchSet = new LinkedList<CFBamBuffDateDef>();
+		Iterator<CFBamBuffDateDef> values = dictByPKey.values().iterator();
 		while( values.hasNext() ) {
 			cur = values.next();
 			if( argKey.equals( cur ) ) {
 				matchSet.add( cur );
 			}
 		}
-		Iterator<ICFBamDateDef> iterMatch = matchSet.iterator();
+		Iterator<CFBamBuffDateDef> iterMatch = matchSet.iterator();
 		while( iterMatch.hasNext() ) {
 			cur = iterMatch.next();
-			cur = schema.getTableDateDef().readDerivedByIdIdx( Authorization,
-				cur.getRequiredId() );
-			String subClassCode = cur.getClassCode();
-			if( "a815".equals( subClassCode ) ) {
+			cur = (CFBamBuffDateDef)(schema.getTableDateDef().readDerivedByIdIdx( Authorization,
+				cur.getRequiredId() ));
+			int subClassCode = cur.getClassCode();
+			if( CFBamDateDef.CLASS_CODE == subClassCode ) {
 				schema.getTableDateDef().deleteDateDef( Authorization, cur );
 			}
-			else if( "a816".equals( subClassCode ) ) {
+			else if( CFBamDateType.CLASS_CODE == subClassCode ) {
 				schema.getTableDateType().deleteDateType( Authorization, (ICFBamDateType)cur );
 			}
-			else if( "a86d".equals( subClassCode ) ) {
+			else if( CFBamDateCol.CLASS_CODE == subClassCode ) {
 				schema.getTableDateCol().deleteDateCol( Authorization, (ICFBamDateCol)cur );
 			}
 			else {
@@ -7683,7 +7683,7 @@ public class CFBamRamDateDefTable
 		ICFBamValueByContNextIdxKey argKey )
 	{
 		final String S_ProcName = "deleteDateDefByContNextIdx";
-		ICFBamDateDef cur;
+		CFBamBuffDateDef cur;
 		boolean anyNotNull = false;
 		anyNotNull = true;
 		if( argKey.getOptionalNextId() != null ) {
@@ -7692,27 +7692,27 @@ public class CFBamRamDateDefTable
 		if( ! anyNotNull ) {
 			return;
 		}
-		LinkedList<ICFBamDateDef> matchSet = new LinkedList<ICFBamDateDef>();
-		Iterator<ICFBamDateDef> values = dictByPKey.values().iterator();
+		LinkedList<CFBamBuffDateDef> matchSet = new LinkedList<CFBamBuffDateDef>();
+		Iterator<CFBamBuffDateDef> values = dictByPKey.values().iterator();
 		while( values.hasNext() ) {
 			cur = values.next();
 			if( argKey.equals( cur ) ) {
 				matchSet.add( cur );
 			}
 		}
-		Iterator<ICFBamDateDef> iterMatch = matchSet.iterator();
+		Iterator<CFBamBuffDateDef> iterMatch = matchSet.iterator();
 		while( iterMatch.hasNext() ) {
 			cur = iterMatch.next();
-			cur = schema.getTableDateDef().readDerivedByIdIdx( Authorization,
-				cur.getRequiredId() );
-			String subClassCode = cur.getClassCode();
-			if( "a815".equals( subClassCode ) ) {
+			cur = (CFBamBuffDateDef)(schema.getTableDateDef().readDerivedByIdIdx( Authorization,
+				cur.getRequiredId() ));
+			int subClassCode = cur.getClassCode();
+			if( CFBamDateDef.CLASS_CODE == subClassCode ) {
 				schema.getTableDateDef().deleteDateDef( Authorization, cur );
 			}
-			else if( "a816".equals( subClassCode ) ) {
+			else if( CFBamDateType.CLASS_CODE == subClassCode ) {
 				schema.getTableDateType().deleteDateType( Authorization, (ICFBamDateType)cur );
 			}
-			else if( "a86d".equals( subClassCode ) ) {
+			else if( CFBamDateCol.CLASS_CODE == subClassCode ) {
 				schema.getTableDateCol().deleteDateCol( Authorization, (ICFBamDateCol)cur );
 			}
 			else {
