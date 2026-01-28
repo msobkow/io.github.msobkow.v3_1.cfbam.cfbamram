@@ -242,10 +242,10 @@ public class CFBamRamSysClusterTable
 		return( buff );
 	}
 
-	public ICFSecSysCluster readBuff( ICFSecAuthorization Authorization,
+	public ICFSecSysCluster readRec( ICFSecAuthorization Authorization,
 		Integer PKey )
 	{
-		final String S_ProcName = "CFBamRamSysCluster.readBuff";
+		final String S_ProcName = "CFBamRamSysCluster.readRec";
 		ICFSecSysCluster buff = readDerived( Authorization, PKey );
 		if( ( buff != null ) && ( buff.getClassCode() != ICFSecSysCluster.CLASS_CODE ) ) {
 			buff = null;
@@ -253,10 +253,10 @@ public class CFBamRamSysClusterTable
 		return( buff );
 	}
 
-	public ICFSecSysCluster lockBuff( ICFSecAuthorization Authorization,
+	public ICFSecSysCluster lockRec( ICFSecAuthorization Authorization,
 		Integer PKey )
 	{
-		final String S_ProcName = "lockBuff";
+		final String S_ProcName = "lockRec";
 		ICFSecSysCluster buff = readDerived( Authorization, PKey );
 		if( ( buff != null ) && ( buff.getClassCode() != ICFSecSysCluster.CLASS_CODE ) ) {
 			buff = null;
@@ -264,9 +264,9 @@ public class CFBamRamSysClusterTable
 		return( buff );
 	}
 
-	public ICFSecSysCluster[] readAllBuff( ICFSecAuthorization Authorization )
+	public ICFSecSysCluster[] readAllRec( ICFSecAuthorization Authorization )
 	{
-		final String S_ProcName = "CFBamRamSysCluster.readAllBuff";
+		final String S_ProcName = "CFBamRamSysCluster.readAllRec";
 		ICFSecSysCluster buff;
 		ArrayList<ICFSecSysCluster> filteredList = new ArrayList<ICFSecSysCluster>();
 		ICFSecSysCluster[] buffList = readAllDerived( Authorization );
@@ -279,10 +279,10 @@ public class CFBamRamSysClusterTable
 		return( filteredList.toArray( new ICFSecSysCluster[0] ) );
 	}
 
-	public ICFSecSysCluster readBuffByIdIdx( ICFSecAuthorization Authorization,
+	public ICFSecSysCluster readRecByIdIdx( ICFSecAuthorization Authorization,
 		int SingletonId )
 	{
-		final String S_ProcName = "CFBamRamSysCluster.readBuffByIdIdx() ";
+		final String S_ProcName = "CFBamRamSysCluster.readRecByIdIdx() ";
 		ICFSecSysCluster buff = readDerivedByIdIdx( Authorization,
 			SingletonId );
 		if( ( buff != null ) && ( buff.getClassCode() == ICFSecSysCluster.CLASS_CODE ) ) {
@@ -293,10 +293,10 @@ public class CFBamRamSysClusterTable
 		}
 	}
 
-	public ICFSecSysCluster[] readBuffByClusterIdx( ICFSecAuthorization Authorization,
+	public ICFSecSysCluster[] readRecByClusterIdx( ICFSecAuthorization Authorization,
 		long ClusterId )
 	{
-		final String S_ProcName = "CFBamRamSysCluster.readBuffByClusterIdx() ";
+		final String S_ProcName = "CFBamRamSysCluster.readRecByClusterIdx() ";
 		ICFSecSysCluster buff;
 		ArrayList<ICFSecSysCluster> filteredList = new ArrayList<ICFSecSysCluster>();
 		ICFSecSysCluster[] buffList = readDerivedByClusterIdx( Authorization,

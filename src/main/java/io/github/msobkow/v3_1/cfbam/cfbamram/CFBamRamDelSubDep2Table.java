@@ -350,10 +350,10 @@ public class CFBamRamDelSubDep2Table
 		return( buff );
 	}
 
-	public ICFBamDelSubDep2 readBuff( ICFSecAuthorization Authorization,
+	public ICFBamDelSubDep2 readRec( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 PKey )
 	{
-		final String S_ProcName = "CFBamRamDelSubDep2.readBuff";
+		final String S_ProcName = "CFBamRamDelSubDep2.readRec";
 		ICFBamDelSubDep2 buff = readDerived( Authorization, PKey );
 		if( ( buff != null ) && ( buff.getClassCode() != ICFBamDelSubDep2.CLASS_CODE ) ) {
 			buff = null;
@@ -361,10 +361,10 @@ public class CFBamRamDelSubDep2Table
 		return( buff );
 	}
 
-	public ICFBamDelSubDep2 lockBuff( ICFSecAuthorization Authorization,
+	public ICFBamDelSubDep2 lockRec( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 PKey )
 	{
-		final String S_ProcName = "lockBuff";
+		final String S_ProcName = "lockRec";
 		ICFBamDelSubDep2 buff = readDerived( Authorization, PKey );
 		if( ( buff != null ) && ( buff.getClassCode() != ICFBamDelSubDep2.CLASS_CODE ) ) {
 			buff = null;
@@ -372,9 +372,9 @@ public class CFBamRamDelSubDep2Table
 		return( buff );
 	}
 
-	public ICFBamDelSubDep2[] readAllBuff( ICFSecAuthorization Authorization )
+	public ICFBamDelSubDep2[] readAllRec( ICFSecAuthorization Authorization )
 	{
-		final String S_ProcName = "CFBamRamDelSubDep2.readAllBuff";
+		final String S_ProcName = "CFBamRamDelSubDep2.readAllRec";
 		ICFBamDelSubDep2 buff;
 		ArrayList<ICFBamDelSubDep2> filteredList = new ArrayList<ICFBamDelSubDep2>();
 		ICFBamDelSubDep2[] buffList = readAllDerived( Authorization );
@@ -387,10 +387,10 @@ public class CFBamRamDelSubDep2Table
 		return( filteredList.toArray( new ICFBamDelSubDep2[0] ) );
 	}
 
-	public ICFBamDelSubDep2 readBuffByIdIdx( ICFSecAuthorization Authorization,
+	public ICFBamDelSubDep2 readRecByIdIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 Id )
 	{
-		final String S_ProcName = "CFBamRamScope.readBuffByIdIdx() ";
+		final String S_ProcName = "CFBamRamScope.readRecByIdIdx() ";
 		ICFBamDelSubDep2 buff = readDerivedByIdIdx( Authorization,
 			Id );
 		if( ( buff != null ) && ( buff.getClassCode() == ICFBamScope.CLASS_CODE ) ) {
@@ -401,10 +401,10 @@ public class CFBamRamDelSubDep2Table
 		}
 	}
 
-	public ICFBamDelSubDep2[] readBuffByTenantIdx( ICFSecAuthorization Authorization,
+	public ICFBamDelSubDep2[] readRecByTenantIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 TenantId )
 	{
-		final String S_ProcName = "CFBamRamScope.readBuffByTenantIdx() ";
+		final String S_ProcName = "CFBamRamScope.readRecByTenantIdx() ";
 		ICFBamDelSubDep2 buff;
 		ArrayList<ICFBamDelSubDep2> filteredList = new ArrayList<ICFBamDelSubDep2>();
 		ICFBamDelSubDep2[] buffList = readDerivedByTenantIdx( Authorization,
@@ -418,10 +418,10 @@ public class CFBamRamDelSubDep2Table
 		return( filteredList.toArray( new ICFBamDelSubDep2[0] ) );
 	}
 
-	public ICFBamDelSubDep2[] readBuffByDefSchemaIdx( ICFSecAuthorization Authorization,
+	public ICFBamDelSubDep2[] readRecByDefSchemaIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 DefSchemaId )
 	{
-		final String S_ProcName = "CFBamRamDelDep.readBuffByDefSchemaIdx() ";
+		final String S_ProcName = "CFBamRamDelDep.readRecByDefSchemaIdx() ";
 		ICFBamDelSubDep2 buff;
 		ArrayList<ICFBamDelSubDep2> filteredList = new ArrayList<ICFBamDelSubDep2>();
 		ICFBamDelSubDep2[] buffList = readDerivedByDefSchemaIdx( Authorization,
@@ -435,10 +435,10 @@ public class CFBamRamDelSubDep2Table
 		return( filteredList.toArray( new ICFBamDelSubDep2[0] ) );
 	}
 
-	public ICFBamDelSubDep2[] readBuffByDelDepIdx( ICFSecAuthorization Authorization,
+	public ICFBamDelSubDep2[] readRecByDelDepIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 RelationId )
 	{
-		final String S_ProcName = "CFBamRamDelDep.readBuffByDelDepIdx() ";
+		final String S_ProcName = "CFBamRamDelDep.readRecByDelDepIdx() ";
 		ICFBamDelSubDep2 buff;
 		ArrayList<ICFBamDelSubDep2> filteredList = new ArrayList<ICFBamDelSubDep2>();
 		ICFBamDelSubDep2[] buffList = readDerivedByDelDepIdx( Authorization,
@@ -452,10 +452,10 @@ public class CFBamRamDelSubDep2Table
 		return( filteredList.toArray( new ICFBamDelSubDep2[0] ) );
 	}
 
-	public ICFBamDelSubDep2[] readBuffByContDelDep1Idx( ICFSecAuthorization Authorization,
+	public ICFBamDelSubDep2[] readRecByContDelDep1Idx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 DelSubDep1Id )
 	{
-		final String S_ProcName = "CFBamRamDelSubDep2.readBuffByContDelDep1Idx() ";
+		final String S_ProcName = "CFBamRamDelSubDep2.readRecByContDelDep1Idx() ";
 		ICFBamDelSubDep2 buff;
 		ArrayList<ICFBamDelSubDep2> filteredList = new ArrayList<ICFBamDelSubDep2>();
 		ICFBamDelSubDep2[] buffList = readDerivedByContDelDep1Idx( Authorization,
@@ -469,11 +469,11 @@ public class CFBamRamDelSubDep2Table
 		return( filteredList.toArray( new ICFBamDelSubDep2[0] ) );
 	}
 
-	public ICFBamDelSubDep2 readBuffByUNameIdx( ICFSecAuthorization Authorization,
+	public ICFBamDelSubDep2 readRecByUNameIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 DelSubDep1Id,
 		String Name )
 	{
-		final String S_ProcName = "CFBamRamDelSubDep2.readBuffByUNameIdx() ";
+		final String S_ProcName = "CFBamRamDelSubDep2.readRecByUNameIdx() ";
 		ICFBamDelSubDep2 buff = readDerivedByUNameIdx( Authorization,
 			DelSubDep1Id,
 			Name );
@@ -496,11 +496,11 @@ public class CFBamRamDelSubDep2Table
 	 *
 	 *	@throws	CFLibNotSupportedException thrown by client-side implementations.
 	 */
-	public ICFBamDelSubDep2[] pageBuffByDefSchemaIdx( ICFSecAuthorization Authorization,
+	public ICFBamDelSubDep2[] pageRecByDefSchemaIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 DefSchemaId,
 		CFLibDbKeyHash256 priorId )
 	{
-		final String S_ProcName = "pageBuffByDefSchemaIdx";
+		final String S_ProcName = "pageRecByDefSchemaIdx";
 		throw new CFLibNotImplementedYetException( getClass(), S_ProcName );
 	}
 
@@ -515,11 +515,11 @@ public class CFBamRamDelSubDep2Table
 	 *
 	 *	@throws	CFLibNotSupportedException thrown by client-side implementations.
 	 */
-	public ICFBamDelSubDep2[] pageBuffByDelDepIdx( ICFSecAuthorization Authorization,
+	public ICFBamDelSubDep2[] pageRecByDelDepIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 RelationId,
 		CFLibDbKeyHash256 priorId )
 	{
-		final String S_ProcName = "pageBuffByDelDepIdx";
+		final String S_ProcName = "pageRecByDelDepIdx";
 		throw new CFLibNotImplementedYetException( getClass(), S_ProcName );
 	}
 
@@ -534,11 +534,11 @@ public class CFBamRamDelSubDep2Table
 	 *
 	 *	@throws	CFLibNotSupportedException thrown by client-side implementations.
 	 */
-	public ICFBamDelSubDep2[] pageBuffByContDelDep1Idx( ICFSecAuthorization Authorization,
+	public ICFBamDelSubDep2[] pageRecByContDelDep1Idx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 DelSubDep1Id,
 		CFLibDbKeyHash256 priorId )
 	{
-		final String S_ProcName = "pageBuffByContDelDep1Idx";
+		final String S_ProcName = "pageRecByContDelDep1Idx";
 		throw new CFLibNotImplementedYetException( getClass(), S_ProcName );
 	}
 

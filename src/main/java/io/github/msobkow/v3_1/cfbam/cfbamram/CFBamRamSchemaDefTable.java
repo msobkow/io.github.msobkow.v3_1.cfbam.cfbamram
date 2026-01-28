@@ -507,10 +507,10 @@ public class CFBamRamSchemaDefTable
 		return( buff );
 	}
 
-	public ICFBamSchemaDef readBuff( ICFSecAuthorization Authorization,
+	public ICFBamSchemaDef readRec( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 PKey )
 	{
-		final String S_ProcName = "CFBamRamSchemaDef.readBuff";
+		final String S_ProcName = "CFBamRamSchemaDef.readRec";
 		ICFBamSchemaDef buff = readDerived( Authorization, PKey );
 		if( ( buff != null ) && ( buff.getClassCode() != ICFBamSchemaDef.CLASS_CODE ) ) {
 			buff = null;
@@ -518,10 +518,10 @@ public class CFBamRamSchemaDefTable
 		return( buff );
 	}
 
-	public ICFBamSchemaDef lockBuff( ICFSecAuthorization Authorization,
+	public ICFBamSchemaDef lockRec( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 PKey )
 	{
-		final String S_ProcName = "lockBuff";
+		final String S_ProcName = "lockRec";
 		ICFBamSchemaDef buff = readDerived( Authorization, PKey );
 		if( ( buff != null ) && ( buff.getClassCode() != ICFBamSchemaDef.CLASS_CODE ) ) {
 			buff = null;
@@ -529,9 +529,9 @@ public class CFBamRamSchemaDefTable
 		return( buff );
 	}
 
-	public ICFBamSchemaDef[] readAllBuff( ICFSecAuthorization Authorization )
+	public ICFBamSchemaDef[] readAllRec( ICFSecAuthorization Authorization )
 	{
-		final String S_ProcName = "CFBamRamSchemaDef.readAllBuff";
+		final String S_ProcName = "CFBamRamSchemaDef.readAllRec";
 		ICFBamSchemaDef buff;
 		ArrayList<ICFBamSchemaDef> filteredList = new ArrayList<ICFBamSchemaDef>();
 		ICFBamSchemaDef[] buffList = readAllDerived( Authorization );
@@ -544,10 +544,10 @@ public class CFBamRamSchemaDefTable
 		return( filteredList.toArray( new ICFBamSchemaDef[0] ) );
 	}
 
-	public ICFBamSchemaDef readBuffByIdIdx( ICFSecAuthorization Authorization,
+	public ICFBamSchemaDef readRecByIdIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 Id )
 	{
-		final String S_ProcName = "CFBamRamScope.readBuffByIdIdx() ";
+		final String S_ProcName = "CFBamRamScope.readRecByIdIdx() ";
 		ICFBamSchemaDef buff = readDerivedByIdIdx( Authorization,
 			Id );
 		if( ( buff != null ) && ( buff.getClassCode() == ICFBamScope.CLASS_CODE ) ) {
@@ -558,10 +558,10 @@ public class CFBamRamSchemaDefTable
 		}
 	}
 
-	public ICFBamSchemaDef[] readBuffByTenantIdx( ICFSecAuthorization Authorization,
+	public ICFBamSchemaDef[] readRecByTenantIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 TenantId )
 	{
-		final String S_ProcName = "CFBamRamScope.readBuffByTenantIdx() ";
+		final String S_ProcName = "CFBamRamScope.readRecByTenantIdx() ";
 		ICFBamSchemaDef buff;
 		ArrayList<ICFBamSchemaDef> filteredList = new ArrayList<ICFBamSchemaDef>();
 		ICFBamSchemaDef[] buffList = readDerivedByTenantIdx( Authorization,
@@ -575,10 +575,10 @@ public class CFBamRamSchemaDefTable
 		return( filteredList.toArray( new ICFBamSchemaDef[0] ) );
 	}
 
-	public ICFBamSchemaDef[] readBuffByCTenantIdx( ICFSecAuthorization Authorization,
+	public ICFBamSchemaDef[] readRecByCTenantIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 CTenantId )
 	{
-		final String S_ProcName = "CFBamRamSchemaDef.readBuffByCTenantIdx() ";
+		final String S_ProcName = "CFBamRamSchemaDef.readRecByCTenantIdx() ";
 		ICFBamSchemaDef buff;
 		ArrayList<ICFBamSchemaDef> filteredList = new ArrayList<ICFBamSchemaDef>();
 		ICFBamSchemaDef[] buffList = readDerivedByCTenantIdx( Authorization,
@@ -592,10 +592,10 @@ public class CFBamRamSchemaDefTable
 		return( filteredList.toArray( new ICFBamSchemaDef[0] ) );
 	}
 
-	public ICFBamSchemaDef[] readBuffByMinorVersionIdx( ICFSecAuthorization Authorization,
+	public ICFBamSchemaDef[] readRecByMinorVersionIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 MinorVersionId )
 	{
-		final String S_ProcName = "CFBamRamSchemaDef.readBuffByMinorVersionIdx() ";
+		final String S_ProcName = "CFBamRamSchemaDef.readRecByMinorVersionIdx() ";
 		ICFBamSchemaDef buff;
 		ArrayList<ICFBamSchemaDef> filteredList = new ArrayList<ICFBamSchemaDef>();
 		ICFBamSchemaDef[] buffList = readDerivedByMinorVersionIdx( Authorization,
@@ -609,11 +609,11 @@ public class CFBamRamSchemaDefTable
 		return( filteredList.toArray( new ICFBamSchemaDef[0] ) );
 	}
 
-	public ICFBamSchemaDef readBuffByUNameIdx( ICFSecAuthorization Authorization,
+	public ICFBamSchemaDef readRecByUNameIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 MinorVersionId,
 		String Name )
 	{
-		final String S_ProcName = "CFBamRamSchemaDef.readBuffByUNameIdx() ";
+		final String S_ProcName = "CFBamRamSchemaDef.readRecByUNameIdx() ";
 		ICFBamSchemaDef buff = readDerivedByUNameIdx( Authorization,
 			MinorVersionId,
 			Name );
@@ -625,11 +625,11 @@ public class CFBamRamSchemaDefTable
 		}
 	}
 
-	public ICFBamSchemaDef[] readBuffByAuthEMailIdx( ICFSecAuthorization Authorization,
+	public ICFBamSchemaDef[] readRecByAuthEMailIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 CTenantId,
 		String AuthorEMail )
 	{
-		final String S_ProcName = "CFBamRamSchemaDef.readBuffByAuthEMailIdx() ";
+		final String S_ProcName = "CFBamRamSchemaDef.readRecByAuthEMailIdx() ";
 		ICFBamSchemaDef buff;
 		ArrayList<ICFBamSchemaDef> filteredList = new ArrayList<ICFBamSchemaDef>();
 		ICFBamSchemaDef[] buffList = readDerivedByAuthEMailIdx( Authorization,
@@ -644,11 +644,11 @@ public class CFBamRamSchemaDefTable
 		return( filteredList.toArray( new ICFBamSchemaDef[0] ) );
 	}
 
-	public ICFBamSchemaDef[] readBuffByProjectURLIdx( ICFSecAuthorization Authorization,
+	public ICFBamSchemaDef[] readRecByProjectURLIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 CTenantId,
 		String ProjectURL )
 	{
-		final String S_ProcName = "CFBamRamSchemaDef.readBuffByProjectURLIdx() ";
+		final String S_ProcName = "CFBamRamSchemaDef.readRecByProjectURLIdx() ";
 		ICFBamSchemaDef buff;
 		ArrayList<ICFBamSchemaDef> filteredList = new ArrayList<ICFBamSchemaDef>();
 		ICFBamSchemaDef[] buffList = readDerivedByProjectURLIdx( Authorization,
@@ -663,11 +663,11 @@ public class CFBamRamSchemaDefTable
 		return( filteredList.toArray( new ICFBamSchemaDef[0] ) );
 	}
 
-	public ICFBamSchemaDef readBuffByPubURIIdx( ICFSecAuthorization Authorization,
+	public ICFBamSchemaDef readRecByPubURIIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 CTenantId,
 		String PublishURI )
 	{
-		final String S_ProcName = "CFBamRamSchemaDef.readBuffByPubURIIdx() ";
+		final String S_ProcName = "CFBamRamSchemaDef.readRecByPubURIIdx() ";
 		ICFBamSchemaDef buff = readDerivedByPubURIIdx( Authorization,
 			CTenantId,
 			PublishURI );
@@ -690,11 +690,11 @@ public class CFBamRamSchemaDefTable
 	 *
 	 *	@throws	CFLibNotSupportedException thrown by client-side implementations.
 	 */
-	public ICFBamSchemaDef[] pageBuffByCTenantIdx( ICFSecAuthorization Authorization,
+	public ICFBamSchemaDef[] pageRecByCTenantIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 CTenantId,
 		CFLibDbKeyHash256 priorId )
 	{
-		final String S_ProcName = "pageBuffByCTenantIdx";
+		final String S_ProcName = "pageRecByCTenantIdx";
 		throw new CFLibNotImplementedYetException( getClass(), S_ProcName );
 	}
 
@@ -709,11 +709,11 @@ public class CFBamRamSchemaDefTable
 	 *
 	 *	@throws	CFLibNotSupportedException thrown by client-side implementations.
 	 */
-	public ICFBamSchemaDef[] pageBuffByMinorVersionIdx( ICFSecAuthorization Authorization,
+	public ICFBamSchemaDef[] pageRecByMinorVersionIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 MinorVersionId,
 		CFLibDbKeyHash256 priorId )
 	{
-		final String S_ProcName = "pageBuffByMinorVersionIdx";
+		final String S_ProcName = "pageRecByMinorVersionIdx";
 		throw new CFLibNotImplementedYetException( getClass(), S_ProcName );
 	}
 
@@ -730,12 +730,12 @@ public class CFBamRamSchemaDefTable
 	 *
 	 *	@throws	CFLibNotSupportedException thrown by client-side implementations.
 	 */
-	public ICFBamSchemaDef[] pageBuffByAuthEMailIdx( ICFSecAuthorization Authorization,
+	public ICFBamSchemaDef[] pageRecByAuthEMailIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 CTenantId,
 		String AuthorEMail,
 		CFLibDbKeyHash256 priorId )
 	{
-		final String S_ProcName = "pageBuffByAuthEMailIdx";
+		final String S_ProcName = "pageRecByAuthEMailIdx";
 		throw new CFLibNotImplementedYetException( getClass(), S_ProcName );
 	}
 
@@ -752,12 +752,12 @@ public class CFBamRamSchemaDefTable
 	 *
 	 *	@throws	CFLibNotSupportedException thrown by client-side implementations.
 	 */
-	public ICFBamSchemaDef[] pageBuffByProjectURLIdx( ICFSecAuthorization Authorization,
+	public ICFBamSchemaDef[] pageRecByProjectURLIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 CTenantId,
 		String ProjectURL,
 		CFLibDbKeyHash256 priorId )
 	{
-		final String S_ProcName = "pageBuffByProjectURLIdx";
+		final String S_ProcName = "pageRecByProjectURLIdx";
 		throw new CFLibNotImplementedYetException( getClass(), S_ProcName );
 	}
 

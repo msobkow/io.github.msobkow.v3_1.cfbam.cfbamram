@@ -210,10 +210,10 @@ public class CFBamRamMimeTypeTable
 		return( buff );
 	}
 
-	public ICFIntMimeType readBuff( ICFSecAuthorization Authorization,
+	public ICFIntMimeType readRec( ICFSecAuthorization Authorization,
 		Integer PKey )
 	{
-		final String S_ProcName = "CFBamRamMimeType.readBuff";
+		final String S_ProcName = "CFBamRamMimeType.readRec";
 		ICFIntMimeType buff = readDerived( Authorization, PKey );
 		if( ( buff != null ) && ( buff.getClassCode() != ICFIntMimeType.CLASS_CODE ) ) {
 			buff = null;
@@ -221,10 +221,10 @@ public class CFBamRamMimeTypeTable
 		return( buff );
 	}
 
-	public ICFIntMimeType lockBuff( ICFSecAuthorization Authorization,
+	public ICFIntMimeType lockRec( ICFSecAuthorization Authorization,
 		Integer PKey )
 	{
-		final String S_ProcName = "lockBuff";
+		final String S_ProcName = "lockRec";
 		ICFIntMimeType buff = readDerived( Authorization, PKey );
 		if( ( buff != null ) && ( buff.getClassCode() != ICFIntMimeType.CLASS_CODE ) ) {
 			buff = null;
@@ -232,9 +232,9 @@ public class CFBamRamMimeTypeTable
 		return( buff );
 	}
 
-	public ICFIntMimeType[] readAllBuff( ICFSecAuthorization Authorization )
+	public ICFIntMimeType[] readAllRec( ICFSecAuthorization Authorization )
 	{
-		final String S_ProcName = "CFBamRamMimeType.readAllBuff";
+		final String S_ProcName = "CFBamRamMimeType.readAllRec";
 		ICFIntMimeType buff;
 		ArrayList<ICFIntMimeType> filteredList = new ArrayList<ICFIntMimeType>();
 		ICFIntMimeType[] buffList = readAllDerived( Authorization );
@@ -247,10 +247,10 @@ public class CFBamRamMimeTypeTable
 		return( filteredList.toArray( new ICFIntMimeType[0] ) );
 	}
 
-	public ICFIntMimeType readBuffByIdIdx( ICFSecAuthorization Authorization,
+	public ICFIntMimeType readRecByIdIdx( ICFSecAuthorization Authorization,
 		int MimeTypeId )
 	{
-		final String S_ProcName = "CFBamRamMimeType.readBuffByIdIdx() ";
+		final String S_ProcName = "CFBamRamMimeType.readRecByIdIdx() ";
 		ICFIntMimeType buff = readDerivedByIdIdx( Authorization,
 			MimeTypeId );
 		if( ( buff != null ) && ( buff.getClassCode() == ICFIntMimeType.CLASS_CODE ) ) {
@@ -261,10 +261,10 @@ public class CFBamRamMimeTypeTable
 		}
 	}
 
-	public ICFIntMimeType readBuffByUNameIdx( ICFSecAuthorization Authorization,
+	public ICFIntMimeType readRecByUNameIdx( ICFSecAuthorization Authorization,
 		String Name )
 	{
-		final String S_ProcName = "CFBamRamMimeType.readBuffByUNameIdx() ";
+		final String S_ProcName = "CFBamRamMimeType.readRecByUNameIdx() ";
 		ICFIntMimeType buff = readDerivedByUNameIdx( Authorization,
 			Name );
 		if( ( buff != null ) && ( buff.getClassCode() == ICFIntMimeType.CLASS_CODE ) ) {

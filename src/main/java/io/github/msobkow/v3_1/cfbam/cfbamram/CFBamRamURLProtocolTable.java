@@ -256,10 +256,10 @@ public class CFBamRamURLProtocolTable
 		return( buff );
 	}
 
-	public ICFIntURLProtocol readBuff( ICFSecAuthorization Authorization,
+	public ICFIntURLProtocol readRec( ICFSecAuthorization Authorization,
 		Integer PKey )
 	{
-		final String S_ProcName = "CFBamRamURLProtocol.readBuff";
+		final String S_ProcName = "CFBamRamURLProtocol.readRec";
 		ICFIntURLProtocol buff = readDerived( Authorization, PKey );
 		if( ( buff != null ) && ( buff.getClassCode() != ICFIntURLProtocol.CLASS_CODE ) ) {
 			buff = null;
@@ -267,10 +267,10 @@ public class CFBamRamURLProtocolTable
 		return( buff );
 	}
 
-	public ICFIntURLProtocol lockBuff( ICFSecAuthorization Authorization,
+	public ICFIntURLProtocol lockRec( ICFSecAuthorization Authorization,
 		Integer PKey )
 	{
-		final String S_ProcName = "lockBuff";
+		final String S_ProcName = "lockRec";
 		ICFIntURLProtocol buff = readDerived( Authorization, PKey );
 		if( ( buff != null ) && ( buff.getClassCode() != ICFIntURLProtocol.CLASS_CODE ) ) {
 			buff = null;
@@ -278,9 +278,9 @@ public class CFBamRamURLProtocolTable
 		return( buff );
 	}
 
-	public ICFIntURLProtocol[] readAllBuff( ICFSecAuthorization Authorization )
+	public ICFIntURLProtocol[] readAllRec( ICFSecAuthorization Authorization )
 	{
-		final String S_ProcName = "CFBamRamURLProtocol.readAllBuff";
+		final String S_ProcName = "CFBamRamURLProtocol.readAllRec";
 		ICFIntURLProtocol buff;
 		ArrayList<ICFIntURLProtocol> filteredList = new ArrayList<ICFIntURLProtocol>();
 		ICFIntURLProtocol[] buffList = readAllDerived( Authorization );
@@ -293,10 +293,10 @@ public class CFBamRamURLProtocolTable
 		return( filteredList.toArray( new ICFIntURLProtocol[0] ) );
 	}
 
-	public ICFIntURLProtocol readBuffByIdIdx( ICFSecAuthorization Authorization,
+	public ICFIntURLProtocol readRecByIdIdx( ICFSecAuthorization Authorization,
 		int URLProtocolId )
 	{
-		final String S_ProcName = "CFBamRamURLProtocol.readBuffByIdIdx() ";
+		final String S_ProcName = "CFBamRamURLProtocol.readRecByIdIdx() ";
 		ICFIntURLProtocol buff = readDerivedByIdIdx( Authorization,
 			URLProtocolId );
 		if( ( buff != null ) && ( buff.getClassCode() == ICFIntURLProtocol.CLASS_CODE ) ) {
@@ -307,10 +307,10 @@ public class CFBamRamURLProtocolTable
 		}
 	}
 
-	public ICFIntURLProtocol readBuffByUNameIdx( ICFSecAuthorization Authorization,
+	public ICFIntURLProtocol readRecByUNameIdx( ICFSecAuthorization Authorization,
 		String Name )
 	{
-		final String S_ProcName = "CFBamRamURLProtocol.readBuffByUNameIdx() ";
+		final String S_ProcName = "CFBamRamURLProtocol.readRecByUNameIdx() ";
 		ICFIntURLProtocol buff = readDerivedByUNameIdx( Authorization,
 			Name );
 		if( ( buff != null ) && ( buff.getClassCode() == ICFIntURLProtocol.CLASS_CODE ) ) {
@@ -321,10 +321,10 @@ public class CFBamRamURLProtocolTable
 		}
 	}
 
-	public ICFIntURLProtocol[] readBuffByIsSecureIdx( ICFSecAuthorization Authorization,
+	public ICFIntURLProtocol[] readRecByIsSecureIdx( ICFSecAuthorization Authorization,
 		boolean IsSecure )
 	{
-		final String S_ProcName = "CFBamRamURLProtocol.readBuffByIsSecureIdx() ";
+		final String S_ProcName = "CFBamRamURLProtocol.readRecByIsSecureIdx() ";
 		ICFIntURLProtocol buff;
 		ArrayList<ICFIntURLProtocol> filteredList = new ArrayList<ICFIntURLProtocol>();
 		ICFIntURLProtocol[] buffList = readDerivedByIsSecureIdx( Authorization,

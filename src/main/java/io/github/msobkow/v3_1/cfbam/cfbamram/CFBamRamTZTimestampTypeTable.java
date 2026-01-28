@@ -1063,10 +1063,10 @@ public class CFBamRamTZTimestampTypeTable
 		return( buff );
 	}
 
-	public ICFBamTZTimestampType readBuff( ICFSecAuthorization Authorization,
+	public ICFBamTZTimestampType readRec( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 PKey )
 	{
-		final String S_ProcName = "CFBamRamTZTimestampType.readBuff";
+		final String S_ProcName = "CFBamRamTZTimestampType.readRec";
 		ICFBamTZTimestampType buff = readDerived( Authorization, PKey );
 		if( ( buff != null ) && ( buff.getClassCode() != ICFBamTZTimestampType.CLASS_CODE ) ) {
 			buff = null;
@@ -1074,10 +1074,10 @@ public class CFBamRamTZTimestampTypeTable
 		return( buff );
 	}
 
-	public ICFBamTZTimestampType lockBuff( ICFSecAuthorization Authorization,
+	public ICFBamTZTimestampType lockRec( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 PKey )
 	{
-		final String S_ProcName = "lockBuff";
+		final String S_ProcName = "lockRec";
 		ICFBamTZTimestampType buff = readDerived( Authorization, PKey );
 		if( ( buff != null ) && ( buff.getClassCode() != ICFBamTZTimestampType.CLASS_CODE ) ) {
 			buff = null;
@@ -1085,9 +1085,9 @@ public class CFBamRamTZTimestampTypeTable
 		return( buff );
 	}
 
-	public ICFBamTZTimestampType[] readAllBuff( ICFSecAuthorization Authorization )
+	public ICFBamTZTimestampType[] readAllRec( ICFSecAuthorization Authorization )
 	{
-		final String S_ProcName = "CFBamRamTZTimestampType.readAllBuff";
+		final String S_ProcName = "CFBamRamTZTimestampType.readAllRec";
 		ICFBamTZTimestampType buff;
 		ArrayList<ICFBamTZTimestampType> filteredList = new ArrayList<ICFBamTZTimestampType>();
 		ICFBamTZTimestampType[] buffList = readAllDerived( Authorization );
@@ -1100,10 +1100,10 @@ public class CFBamRamTZTimestampTypeTable
 		return( filteredList.toArray( new ICFBamTZTimestampType[0] ) );
 	}
 
-	public ICFBamTZTimestampType readBuffByIdIdx( ICFSecAuthorization Authorization,
+	public ICFBamTZTimestampType readRecByIdIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 Id )
 	{
-		final String S_ProcName = "CFBamRamValue.readBuffByIdIdx() ";
+		final String S_ProcName = "CFBamRamValue.readRecByIdIdx() ";
 		ICFBamTZTimestampType buff = readDerivedByIdIdx( Authorization,
 			Id );
 		if( ( buff != null ) && ( buff.getClassCode() == ICFBamValue.CLASS_CODE ) ) {
@@ -1114,11 +1114,11 @@ public class CFBamRamTZTimestampTypeTable
 		}
 	}
 
-	public ICFBamTZTimestampType readBuffByUNameIdx( ICFSecAuthorization Authorization,
+	public ICFBamTZTimestampType readRecByUNameIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 ScopeId,
 		String Name )
 	{
-		final String S_ProcName = "CFBamRamValue.readBuffByUNameIdx() ";
+		final String S_ProcName = "CFBamRamValue.readRecByUNameIdx() ";
 		ICFBamTZTimestampType buff = readDerivedByUNameIdx( Authorization,
 			ScopeId,
 			Name );
@@ -1130,10 +1130,10 @@ public class CFBamRamTZTimestampTypeTable
 		}
 	}
 
-	public ICFBamTZTimestampType[] readBuffByScopeIdx( ICFSecAuthorization Authorization,
+	public ICFBamTZTimestampType[] readRecByScopeIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 ScopeId )
 	{
-		final String S_ProcName = "CFBamRamValue.readBuffByScopeIdx() ";
+		final String S_ProcName = "CFBamRamValue.readRecByScopeIdx() ";
 		ICFBamTZTimestampType buff;
 		ArrayList<ICFBamTZTimestampType> filteredList = new ArrayList<ICFBamTZTimestampType>();
 		ICFBamTZTimestampType[] buffList = readDerivedByScopeIdx( Authorization,
@@ -1147,10 +1147,10 @@ public class CFBamRamTZTimestampTypeTable
 		return( filteredList.toArray( new ICFBamTZTimestampType[0] ) );
 	}
 
-	public ICFBamTZTimestampType[] readBuffByDefSchemaIdx( ICFSecAuthorization Authorization,
+	public ICFBamTZTimestampType[] readRecByDefSchemaIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 DefSchemaId )
 	{
-		final String S_ProcName = "CFBamRamValue.readBuffByDefSchemaIdx() ";
+		final String S_ProcName = "CFBamRamValue.readRecByDefSchemaIdx() ";
 		ICFBamTZTimestampType buff;
 		ArrayList<ICFBamTZTimestampType> filteredList = new ArrayList<ICFBamTZTimestampType>();
 		ICFBamTZTimestampType[] buffList = readDerivedByDefSchemaIdx( Authorization,
@@ -1164,10 +1164,10 @@ public class CFBamRamTZTimestampTypeTable
 		return( filteredList.toArray( new ICFBamTZTimestampType[0] ) );
 	}
 
-	public ICFBamTZTimestampType[] readBuffByPrevIdx( ICFSecAuthorization Authorization,
+	public ICFBamTZTimestampType[] readRecByPrevIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 PrevId )
 	{
-		final String S_ProcName = "CFBamRamValue.readBuffByPrevIdx() ";
+		final String S_ProcName = "CFBamRamValue.readRecByPrevIdx() ";
 		ICFBamTZTimestampType buff;
 		ArrayList<ICFBamTZTimestampType> filteredList = new ArrayList<ICFBamTZTimestampType>();
 		ICFBamTZTimestampType[] buffList = readDerivedByPrevIdx( Authorization,
@@ -1181,10 +1181,10 @@ public class CFBamRamTZTimestampTypeTable
 		return( filteredList.toArray( new ICFBamTZTimestampType[0] ) );
 	}
 
-	public ICFBamTZTimestampType[] readBuffByNextIdx( ICFSecAuthorization Authorization,
+	public ICFBamTZTimestampType[] readRecByNextIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 NextId )
 	{
-		final String S_ProcName = "CFBamRamValue.readBuffByNextIdx() ";
+		final String S_ProcName = "CFBamRamValue.readRecByNextIdx() ";
 		ICFBamTZTimestampType buff;
 		ArrayList<ICFBamTZTimestampType> filteredList = new ArrayList<ICFBamTZTimestampType>();
 		ICFBamTZTimestampType[] buffList = readDerivedByNextIdx( Authorization,
@@ -1198,11 +1198,11 @@ public class CFBamRamTZTimestampTypeTable
 		return( filteredList.toArray( new ICFBamTZTimestampType[0] ) );
 	}
 
-	public ICFBamTZTimestampType[] readBuffByContPrevIdx( ICFSecAuthorization Authorization,
+	public ICFBamTZTimestampType[] readRecByContPrevIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 ScopeId,
 		CFLibDbKeyHash256 PrevId )
 	{
-		final String S_ProcName = "CFBamRamValue.readBuffByContPrevIdx() ";
+		final String S_ProcName = "CFBamRamValue.readRecByContPrevIdx() ";
 		ICFBamTZTimestampType buff;
 		ArrayList<ICFBamTZTimestampType> filteredList = new ArrayList<ICFBamTZTimestampType>();
 		ICFBamTZTimestampType[] buffList = readDerivedByContPrevIdx( Authorization,
@@ -1217,11 +1217,11 @@ public class CFBamRamTZTimestampTypeTable
 		return( filteredList.toArray( new ICFBamTZTimestampType[0] ) );
 	}
 
-	public ICFBamTZTimestampType[] readBuffByContNextIdx( ICFSecAuthorization Authorization,
+	public ICFBamTZTimestampType[] readRecByContNextIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 ScopeId,
 		CFLibDbKeyHash256 NextId )
 	{
-		final String S_ProcName = "CFBamRamValue.readBuffByContNextIdx() ";
+		final String S_ProcName = "CFBamRamValue.readRecByContNextIdx() ";
 		ICFBamTZTimestampType buff;
 		ArrayList<ICFBamTZTimestampType> filteredList = new ArrayList<ICFBamTZTimestampType>();
 		ICFBamTZTimestampType[] buffList = readDerivedByContNextIdx( Authorization,
@@ -1236,10 +1236,10 @@ public class CFBamRamTZTimestampTypeTable
 		return( filteredList.toArray( new ICFBamTZTimestampType[0] ) );
 	}
 
-	public ICFBamTZTimestampType[] readBuffBySchemaIdx( ICFSecAuthorization Authorization,
+	public ICFBamTZTimestampType[] readRecBySchemaIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 SchemaDefId )
 	{
-		final String S_ProcName = "CFBamRamTZTimestampType.readBuffBySchemaIdx() ";
+		final String S_ProcName = "CFBamRamTZTimestampType.readRecBySchemaIdx() ";
 		ICFBamTZTimestampType buff;
 		ArrayList<ICFBamTZTimestampType> filteredList = new ArrayList<ICFBamTZTimestampType>();
 		ICFBamTZTimestampType[] buffList = readDerivedBySchemaIdx( Authorization,
@@ -1264,11 +1264,11 @@ public class CFBamRamTZTimestampTypeTable
 	 *
 	 *	@throws	CFLibNotSupportedException thrown by client-side implementations.
 	 */
-	public ICFBamTZTimestampType[] pageBuffBySchemaIdx( ICFSecAuthorization Authorization,
+	public ICFBamTZTimestampType[] pageRecBySchemaIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 SchemaDefId,
 		CFLibDbKeyHash256 priorId )
 	{
-		final String S_ProcName = "pageBuffBySchemaIdx";
+		final String S_ProcName = "pageRecBySchemaIdx";
 		throw new CFLibNotImplementedYetException( getClass(), S_ProcName );
 	}
 

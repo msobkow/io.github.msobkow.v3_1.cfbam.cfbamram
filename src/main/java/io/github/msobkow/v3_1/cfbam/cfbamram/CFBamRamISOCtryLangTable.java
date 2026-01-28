@@ -301,10 +301,10 @@ public class CFBamRamISOCtryLangTable
 		return( buff );
 	}
 
-	public ICFSecISOCtryLang readBuff( ICFSecAuthorization Authorization,
+	public ICFSecISOCtryLang readRec( ICFSecAuthorization Authorization,
 		ICFSecISOCtryLangPKey PKey )
 	{
-		final String S_ProcName = "CFBamRamISOCtryLang.readBuff";
+		final String S_ProcName = "CFBamRamISOCtryLang.readRec";
 		ICFSecISOCtryLang buff = readDerived( Authorization, PKey );
 		if( ( buff != null ) && ( buff.getClassCode() != ICFSecISOCtryLang.CLASS_CODE ) ) {
 			buff = null;
@@ -312,10 +312,10 @@ public class CFBamRamISOCtryLangTable
 		return( buff );
 	}
 
-	public ICFSecISOCtryLang lockBuff( ICFSecAuthorization Authorization,
+	public ICFSecISOCtryLang lockRec( ICFSecAuthorization Authorization,
 		ICFSecISOCtryLangPKey PKey )
 	{
-		final String S_ProcName = "lockBuff";
+		final String S_ProcName = "lockRec";
 		ICFSecISOCtryLang buff = readDerived( Authorization, PKey );
 		if( ( buff != null ) && ( buff.getClassCode() != ICFSecISOCtryLang.CLASS_CODE ) ) {
 			buff = null;
@@ -323,9 +323,9 @@ public class CFBamRamISOCtryLangTable
 		return( buff );
 	}
 
-	public ICFSecISOCtryLang[] readAllBuff( ICFSecAuthorization Authorization )
+	public ICFSecISOCtryLang[] readAllRec( ICFSecAuthorization Authorization )
 	{
-		final String S_ProcName = "CFBamRamISOCtryLang.readAllBuff";
+		final String S_ProcName = "CFBamRamISOCtryLang.readAllRec";
 		ICFSecISOCtryLang buff;
 		ArrayList<ICFSecISOCtryLang> filteredList = new ArrayList<ICFSecISOCtryLang>();
 		ICFSecISOCtryLang[] buffList = readAllDerived( Authorization );
@@ -338,11 +338,11 @@ public class CFBamRamISOCtryLangTable
 		return( filteredList.toArray( new ICFSecISOCtryLang[0] ) );
 	}
 
-	public ICFSecISOCtryLang readBuffByIdIdx( ICFSecAuthorization Authorization,
+	public ICFSecISOCtryLang readRecByIdIdx( ICFSecAuthorization Authorization,
 		short ISOCtryId,
 		short ISOLangId )
 	{
-		final String S_ProcName = "CFBamRamISOCtryLang.readBuffByIdIdx() ";
+		final String S_ProcName = "CFBamRamISOCtryLang.readRecByIdIdx() ";
 		ICFSecISOCtryLang buff = readDerivedByIdIdx( Authorization,
 			ISOCtryId,
 			ISOLangId );
@@ -354,10 +354,10 @@ public class CFBamRamISOCtryLangTable
 		}
 	}
 
-	public ICFSecISOCtryLang[] readBuffByCtryIdx( ICFSecAuthorization Authorization,
+	public ICFSecISOCtryLang[] readRecByCtryIdx( ICFSecAuthorization Authorization,
 		short ISOCtryId )
 	{
-		final String S_ProcName = "CFBamRamISOCtryLang.readBuffByCtryIdx() ";
+		final String S_ProcName = "CFBamRamISOCtryLang.readRecByCtryIdx() ";
 		ICFSecISOCtryLang buff;
 		ArrayList<ICFSecISOCtryLang> filteredList = new ArrayList<ICFSecISOCtryLang>();
 		ICFSecISOCtryLang[] buffList = readDerivedByCtryIdx( Authorization,
@@ -371,10 +371,10 @@ public class CFBamRamISOCtryLangTable
 		return( filteredList.toArray( new ICFSecISOCtryLang[0] ) );
 	}
 
-	public ICFSecISOCtryLang[] readBuffByLangIdx( ICFSecAuthorization Authorization,
+	public ICFSecISOCtryLang[] readRecByLangIdx( ICFSecAuthorization Authorization,
 		short ISOLangId )
 	{
-		final String S_ProcName = "CFBamRamISOCtryLang.readBuffByLangIdx() ";
+		final String S_ProcName = "CFBamRamISOCtryLang.readRecByLangIdx() ";
 		ICFSecISOCtryLang buff;
 		ArrayList<ICFSecISOCtryLang> filteredList = new ArrayList<ICFSecISOCtryLang>();
 		ICFSecISOCtryLang[] buffList = readDerivedByLangIdx( Authorization,

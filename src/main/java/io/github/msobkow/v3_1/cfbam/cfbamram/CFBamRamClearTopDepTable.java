@@ -473,10 +473,10 @@ public class CFBamRamClearTopDepTable
 		return( buff );
 	}
 
-	public ICFBamClearTopDep readBuff( ICFSecAuthorization Authorization,
+	public ICFBamClearTopDep readRec( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 PKey )
 	{
-		final String S_ProcName = "CFBamRamClearTopDep.readBuff";
+		final String S_ProcName = "CFBamRamClearTopDep.readRec";
 		ICFBamClearTopDep buff = readDerived( Authorization, PKey );
 		if( ( buff != null ) && ( buff.getClassCode() != ICFBamClearTopDep.CLASS_CODE ) ) {
 			buff = null;
@@ -484,10 +484,10 @@ public class CFBamRamClearTopDepTable
 		return( buff );
 	}
 
-	public ICFBamClearTopDep lockBuff( ICFSecAuthorization Authorization,
+	public ICFBamClearTopDep lockRec( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 PKey )
 	{
-		final String S_ProcName = "lockBuff";
+		final String S_ProcName = "lockRec";
 		ICFBamClearTopDep buff = readDerived( Authorization, PKey );
 		if( ( buff != null ) && ( buff.getClassCode() != ICFBamClearTopDep.CLASS_CODE ) ) {
 			buff = null;
@@ -495,9 +495,9 @@ public class CFBamRamClearTopDepTable
 		return( buff );
 	}
 
-	public ICFBamClearTopDep[] readAllBuff( ICFSecAuthorization Authorization )
+	public ICFBamClearTopDep[] readAllRec( ICFSecAuthorization Authorization )
 	{
-		final String S_ProcName = "CFBamRamClearTopDep.readAllBuff";
+		final String S_ProcName = "CFBamRamClearTopDep.readAllRec";
 		ICFBamClearTopDep buff;
 		ArrayList<ICFBamClearTopDep> filteredList = new ArrayList<ICFBamClearTopDep>();
 		ICFBamClearTopDep[] buffList = readAllDerived( Authorization );
@@ -510,10 +510,10 @@ public class CFBamRamClearTopDepTable
 		return( filteredList.toArray( new ICFBamClearTopDep[0] ) );
 	}
 
-	public ICFBamClearTopDep readBuffByIdIdx( ICFSecAuthorization Authorization,
+	public ICFBamClearTopDep readRecByIdIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 Id )
 	{
-		final String S_ProcName = "CFBamRamScope.readBuffByIdIdx() ";
+		final String S_ProcName = "CFBamRamScope.readRecByIdIdx() ";
 		ICFBamClearTopDep buff = readDerivedByIdIdx( Authorization,
 			Id );
 		if( ( buff != null ) && ( buff.getClassCode() == ICFBamScope.CLASS_CODE ) ) {
@@ -524,10 +524,10 @@ public class CFBamRamClearTopDepTable
 		}
 	}
 
-	public ICFBamClearTopDep[] readBuffByTenantIdx( ICFSecAuthorization Authorization,
+	public ICFBamClearTopDep[] readRecByTenantIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 TenantId )
 	{
-		final String S_ProcName = "CFBamRamScope.readBuffByTenantIdx() ";
+		final String S_ProcName = "CFBamRamScope.readRecByTenantIdx() ";
 		ICFBamClearTopDep buff;
 		ArrayList<ICFBamClearTopDep> filteredList = new ArrayList<ICFBamClearTopDep>();
 		ICFBamClearTopDep[] buffList = readDerivedByTenantIdx( Authorization,
@@ -541,10 +541,10 @@ public class CFBamRamClearTopDepTable
 		return( filteredList.toArray( new ICFBamClearTopDep[0] ) );
 	}
 
-	public ICFBamClearTopDep[] readBuffByClearDepIdx( ICFSecAuthorization Authorization,
+	public ICFBamClearTopDep[] readRecByClearDepIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 RelationId )
 	{
-		final String S_ProcName = "CFBamRamClearDep.readBuffByClearDepIdx() ";
+		final String S_ProcName = "CFBamRamClearDep.readRecByClearDepIdx() ";
 		ICFBamClearTopDep buff;
 		ArrayList<ICFBamClearTopDep> filteredList = new ArrayList<ICFBamClearTopDep>();
 		ICFBamClearTopDep[] buffList = readDerivedByClearDepIdx( Authorization,
@@ -558,10 +558,10 @@ public class CFBamRamClearTopDepTable
 		return( filteredList.toArray( new ICFBamClearTopDep[0] ) );
 	}
 
-	public ICFBamClearTopDep[] readBuffByDefSchemaIdx( ICFSecAuthorization Authorization,
+	public ICFBamClearTopDep[] readRecByDefSchemaIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 DefSchemaId )
 	{
-		final String S_ProcName = "CFBamRamClearDep.readBuffByDefSchemaIdx() ";
+		final String S_ProcName = "CFBamRamClearDep.readRecByDefSchemaIdx() ";
 		ICFBamClearTopDep buff;
 		ArrayList<ICFBamClearTopDep> filteredList = new ArrayList<ICFBamClearTopDep>();
 		ICFBamClearTopDep[] buffList = readDerivedByDefSchemaIdx( Authorization,
@@ -575,10 +575,10 @@ public class CFBamRamClearTopDepTable
 		return( filteredList.toArray( new ICFBamClearTopDep[0] ) );
 	}
 
-	public ICFBamClearTopDep[] readBuffByClrTopDepTblIdx( ICFSecAuthorization Authorization,
+	public ICFBamClearTopDep[] readRecByClrTopDepTblIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 TableId )
 	{
-		final String S_ProcName = "CFBamRamClearTopDep.readBuffByClrTopDepTblIdx() ";
+		final String S_ProcName = "CFBamRamClearTopDep.readRecByClrTopDepTblIdx() ";
 		ICFBamClearTopDep buff;
 		ArrayList<ICFBamClearTopDep> filteredList = new ArrayList<ICFBamClearTopDep>();
 		ICFBamClearTopDep[] buffList = readDerivedByClrTopDepTblIdx( Authorization,
@@ -592,11 +592,11 @@ public class CFBamRamClearTopDepTable
 		return( filteredList.toArray( new ICFBamClearTopDep[0] ) );
 	}
 
-	public ICFBamClearTopDep readBuffByUNameIdx( ICFSecAuthorization Authorization,
+	public ICFBamClearTopDep readRecByUNameIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 TableId,
 		String Name )
 	{
-		final String S_ProcName = "CFBamRamClearTopDep.readBuffByUNameIdx() ";
+		final String S_ProcName = "CFBamRamClearTopDep.readRecByUNameIdx() ";
 		ICFBamClearTopDep buff = readDerivedByUNameIdx( Authorization,
 			TableId,
 			Name );
@@ -608,10 +608,10 @@ public class CFBamRamClearTopDepTable
 		}
 	}
 
-	public ICFBamClearTopDep[] readBuffByPrevIdx( ICFSecAuthorization Authorization,
+	public ICFBamClearTopDep[] readRecByPrevIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 PrevId )
 	{
-		final String S_ProcName = "CFBamRamClearTopDep.readBuffByPrevIdx() ";
+		final String S_ProcName = "CFBamRamClearTopDep.readRecByPrevIdx() ";
 		ICFBamClearTopDep buff;
 		ArrayList<ICFBamClearTopDep> filteredList = new ArrayList<ICFBamClearTopDep>();
 		ICFBamClearTopDep[] buffList = readDerivedByPrevIdx( Authorization,
@@ -625,10 +625,10 @@ public class CFBamRamClearTopDepTable
 		return( filteredList.toArray( new ICFBamClearTopDep[0] ) );
 	}
 
-	public ICFBamClearTopDep[] readBuffByNextIdx( ICFSecAuthorization Authorization,
+	public ICFBamClearTopDep[] readRecByNextIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 NextId )
 	{
-		final String S_ProcName = "CFBamRamClearTopDep.readBuffByNextIdx() ";
+		final String S_ProcName = "CFBamRamClearTopDep.readRecByNextIdx() ";
 		ICFBamClearTopDep buff;
 		ArrayList<ICFBamClearTopDep> filteredList = new ArrayList<ICFBamClearTopDep>();
 		ICFBamClearTopDep[] buffList = readDerivedByNextIdx( Authorization,
@@ -653,11 +653,11 @@ public class CFBamRamClearTopDepTable
 	 *
 	 *	@throws	CFLibNotSupportedException thrown by client-side implementations.
 	 */
-	public ICFBamClearTopDep[] pageBuffByClearDepIdx( ICFSecAuthorization Authorization,
+	public ICFBamClearTopDep[] pageRecByClearDepIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 RelationId,
 		CFLibDbKeyHash256 priorId )
 	{
-		final String S_ProcName = "pageBuffByClearDepIdx";
+		final String S_ProcName = "pageRecByClearDepIdx";
 		throw new CFLibNotImplementedYetException( getClass(), S_ProcName );
 	}
 
@@ -672,11 +672,11 @@ public class CFBamRamClearTopDepTable
 	 *
 	 *	@throws	CFLibNotSupportedException thrown by client-side implementations.
 	 */
-	public ICFBamClearTopDep[] pageBuffByDefSchemaIdx( ICFSecAuthorization Authorization,
+	public ICFBamClearTopDep[] pageRecByDefSchemaIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 DefSchemaId,
 		CFLibDbKeyHash256 priorId )
 	{
-		final String S_ProcName = "pageBuffByDefSchemaIdx";
+		final String S_ProcName = "pageRecByDefSchemaIdx";
 		throw new CFLibNotImplementedYetException( getClass(), S_ProcName );
 	}
 
@@ -691,11 +691,11 @@ public class CFBamRamClearTopDepTable
 	 *
 	 *	@throws	CFLibNotSupportedException thrown by client-side implementations.
 	 */
-	public ICFBamClearTopDep[] pageBuffByClrTopDepTblIdx( ICFSecAuthorization Authorization,
+	public ICFBamClearTopDep[] pageRecByClrTopDepTblIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 TableId,
 		CFLibDbKeyHash256 priorId )
 	{
-		final String S_ProcName = "pageBuffByClrTopDepTblIdx";
+		final String S_ProcName = "pageRecByClrTopDepTblIdx";
 		throw new CFLibNotImplementedYetException( getClass(), S_ProcName );
 	}
 
@@ -710,11 +710,11 @@ public class CFBamRamClearTopDepTable
 	 *
 	 *	@throws	CFLibNotSupportedException thrown by client-side implementations.
 	 */
-	public ICFBamClearTopDep[] pageBuffByPrevIdx( ICFSecAuthorization Authorization,
+	public ICFBamClearTopDep[] pageRecByPrevIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 PrevId,
 		CFLibDbKeyHash256 priorId )
 	{
-		final String S_ProcName = "pageBuffByPrevIdx";
+		final String S_ProcName = "pageRecByPrevIdx";
 		throw new CFLibNotImplementedYetException( getClass(), S_ProcName );
 	}
 
@@ -729,11 +729,11 @@ public class CFBamRamClearTopDepTable
 	 *
 	 *	@throws	CFLibNotSupportedException thrown by client-side implementations.
 	 */
-	public ICFBamClearTopDep[] pageBuffByNextIdx( ICFSecAuthorization Authorization,
+	public ICFBamClearTopDep[] pageRecByNextIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 NextId,
 		CFLibDbKeyHash256 priorId )
 	{
-		final String S_ProcName = "pageBuffByNextIdx";
+		final String S_ProcName = "pageRecByNextIdx";
 		throw new CFLibNotImplementedYetException( getClass(), S_ProcName );
 	}
 

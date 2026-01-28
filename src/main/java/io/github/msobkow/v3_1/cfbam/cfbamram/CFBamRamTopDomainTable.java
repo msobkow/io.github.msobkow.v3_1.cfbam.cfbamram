@@ -345,10 +345,10 @@ public class CFBamRamTopDomainTable
 		return( buff );
 	}
 
-	public ICFIntTopDomain readBuff( ICFSecAuthorization Authorization,
+	public ICFIntTopDomain readRec( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 PKey )
 	{
-		final String S_ProcName = "CFBamRamTopDomain.readBuff";
+		final String S_ProcName = "CFBamRamTopDomain.readRec";
 		ICFIntTopDomain buff = readDerived( Authorization, PKey );
 		if( ( buff != null ) && ( buff.getClassCode() != ICFIntTopDomain.CLASS_CODE ) ) {
 			buff = null;
@@ -356,10 +356,10 @@ public class CFBamRamTopDomainTable
 		return( buff );
 	}
 
-	public ICFIntTopDomain lockBuff( ICFSecAuthorization Authorization,
+	public ICFIntTopDomain lockRec( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 PKey )
 	{
-		final String S_ProcName = "lockBuff";
+		final String S_ProcName = "lockRec";
 		ICFIntTopDomain buff = readDerived( Authorization, PKey );
 		if( ( buff != null ) && ( buff.getClassCode() != ICFIntTopDomain.CLASS_CODE ) ) {
 			buff = null;
@@ -367,9 +367,9 @@ public class CFBamRamTopDomainTable
 		return( buff );
 	}
 
-	public ICFIntTopDomain[] readAllBuff( ICFSecAuthorization Authorization )
+	public ICFIntTopDomain[] readAllRec( ICFSecAuthorization Authorization )
 	{
-		final String S_ProcName = "CFBamRamTopDomain.readAllBuff";
+		final String S_ProcName = "CFBamRamTopDomain.readAllRec";
 		ICFIntTopDomain buff;
 		ArrayList<ICFIntTopDomain> filteredList = new ArrayList<ICFIntTopDomain>();
 		ICFIntTopDomain[] buffList = readAllDerived( Authorization );
@@ -382,10 +382,10 @@ public class CFBamRamTopDomainTable
 		return( filteredList.toArray( new ICFIntTopDomain[0] ) );
 	}
 
-	public ICFIntTopDomain readBuffByIdIdx( ICFSecAuthorization Authorization,
+	public ICFIntTopDomain readRecByIdIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 Id )
 	{
-		final String S_ProcName = "CFBamRamTopDomain.readBuffByIdIdx() ";
+		final String S_ProcName = "CFBamRamTopDomain.readRecByIdIdx() ";
 		ICFIntTopDomain buff = readDerivedByIdIdx( Authorization,
 			Id );
 		if( ( buff != null ) && ( buff.getClassCode() == ICFIntTopDomain.CLASS_CODE ) ) {
@@ -396,10 +396,10 @@ public class CFBamRamTopDomainTable
 		}
 	}
 
-	public ICFIntTopDomain[] readBuffByTenantIdx( ICFSecAuthorization Authorization,
+	public ICFIntTopDomain[] readRecByTenantIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 TenantId )
 	{
-		final String S_ProcName = "CFBamRamTopDomain.readBuffByTenantIdx() ";
+		final String S_ProcName = "CFBamRamTopDomain.readRecByTenantIdx() ";
 		ICFIntTopDomain buff;
 		ArrayList<ICFIntTopDomain> filteredList = new ArrayList<ICFIntTopDomain>();
 		ICFIntTopDomain[] buffList = readDerivedByTenantIdx( Authorization,
@@ -413,10 +413,10 @@ public class CFBamRamTopDomainTable
 		return( filteredList.toArray( new ICFIntTopDomain[0] ) );
 	}
 
-	public ICFIntTopDomain[] readBuffByTldIdx( ICFSecAuthorization Authorization,
+	public ICFIntTopDomain[] readRecByTldIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 TldId )
 	{
-		final String S_ProcName = "CFBamRamTopDomain.readBuffByTldIdx() ";
+		final String S_ProcName = "CFBamRamTopDomain.readRecByTldIdx() ";
 		ICFIntTopDomain buff;
 		ArrayList<ICFIntTopDomain> filteredList = new ArrayList<ICFIntTopDomain>();
 		ICFIntTopDomain[] buffList = readDerivedByTldIdx( Authorization,
@@ -430,11 +430,11 @@ public class CFBamRamTopDomainTable
 		return( filteredList.toArray( new ICFIntTopDomain[0] ) );
 	}
 
-	public ICFIntTopDomain readBuffByNameIdx( ICFSecAuthorization Authorization,
+	public ICFIntTopDomain readRecByNameIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 TldId,
 		String Name )
 	{
-		final String S_ProcName = "CFBamRamTopDomain.readBuffByNameIdx() ";
+		final String S_ProcName = "CFBamRamTopDomain.readRecByNameIdx() ";
 		ICFIntTopDomain buff = readDerivedByNameIdx( Authorization,
 			TldId,
 			Name );

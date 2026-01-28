@@ -345,10 +345,10 @@ public class CFBamRamMinorVersionTable
 		return( buff );
 	}
 
-	public ICFIntMinorVersion readBuff( ICFSecAuthorization Authorization,
+	public ICFIntMinorVersion readRec( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 PKey )
 	{
-		final String S_ProcName = "CFBamRamMinorVersion.readBuff";
+		final String S_ProcName = "CFBamRamMinorVersion.readRec";
 		ICFIntMinorVersion buff = readDerived( Authorization, PKey );
 		if( ( buff != null ) && ( buff.getClassCode() != ICFIntMinorVersion.CLASS_CODE ) ) {
 			buff = null;
@@ -356,10 +356,10 @@ public class CFBamRamMinorVersionTable
 		return( buff );
 	}
 
-	public ICFIntMinorVersion lockBuff( ICFSecAuthorization Authorization,
+	public ICFIntMinorVersion lockRec( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 PKey )
 	{
-		final String S_ProcName = "lockBuff";
+		final String S_ProcName = "lockRec";
 		ICFIntMinorVersion buff = readDerived( Authorization, PKey );
 		if( ( buff != null ) && ( buff.getClassCode() != ICFIntMinorVersion.CLASS_CODE ) ) {
 			buff = null;
@@ -367,9 +367,9 @@ public class CFBamRamMinorVersionTable
 		return( buff );
 	}
 
-	public ICFIntMinorVersion[] readAllBuff( ICFSecAuthorization Authorization )
+	public ICFIntMinorVersion[] readAllRec( ICFSecAuthorization Authorization )
 	{
-		final String S_ProcName = "CFBamRamMinorVersion.readAllBuff";
+		final String S_ProcName = "CFBamRamMinorVersion.readAllRec";
 		ICFIntMinorVersion buff;
 		ArrayList<ICFIntMinorVersion> filteredList = new ArrayList<ICFIntMinorVersion>();
 		ICFIntMinorVersion[] buffList = readAllDerived( Authorization );
@@ -382,10 +382,10 @@ public class CFBamRamMinorVersionTable
 		return( filteredList.toArray( new ICFIntMinorVersion[0] ) );
 	}
 
-	public ICFIntMinorVersion readBuffByIdIdx( ICFSecAuthorization Authorization,
+	public ICFIntMinorVersion readRecByIdIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 Id )
 	{
-		final String S_ProcName = "CFBamRamMinorVersion.readBuffByIdIdx() ";
+		final String S_ProcName = "CFBamRamMinorVersion.readRecByIdIdx() ";
 		ICFIntMinorVersion buff = readDerivedByIdIdx( Authorization,
 			Id );
 		if( ( buff != null ) && ( buff.getClassCode() == ICFIntMinorVersion.CLASS_CODE ) ) {
@@ -396,10 +396,10 @@ public class CFBamRamMinorVersionTable
 		}
 	}
 
-	public ICFIntMinorVersion[] readBuffByTenantIdx( ICFSecAuthorization Authorization,
+	public ICFIntMinorVersion[] readRecByTenantIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 TenantId )
 	{
-		final String S_ProcName = "CFBamRamMinorVersion.readBuffByTenantIdx() ";
+		final String S_ProcName = "CFBamRamMinorVersion.readRecByTenantIdx() ";
 		ICFIntMinorVersion buff;
 		ArrayList<ICFIntMinorVersion> filteredList = new ArrayList<ICFIntMinorVersion>();
 		ICFIntMinorVersion[] buffList = readDerivedByTenantIdx( Authorization,
@@ -413,10 +413,10 @@ public class CFBamRamMinorVersionTable
 		return( filteredList.toArray( new ICFIntMinorVersion[0] ) );
 	}
 
-	public ICFIntMinorVersion[] readBuffByMajorVerIdx( ICFSecAuthorization Authorization,
+	public ICFIntMinorVersion[] readRecByMajorVerIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 MajorVersionId )
 	{
-		final String S_ProcName = "CFBamRamMinorVersion.readBuffByMajorVerIdx() ";
+		final String S_ProcName = "CFBamRamMinorVersion.readRecByMajorVerIdx() ";
 		ICFIntMinorVersion buff;
 		ArrayList<ICFIntMinorVersion> filteredList = new ArrayList<ICFIntMinorVersion>();
 		ICFIntMinorVersion[] buffList = readDerivedByMajorVerIdx( Authorization,
@@ -430,11 +430,11 @@ public class CFBamRamMinorVersionTable
 		return( filteredList.toArray( new ICFIntMinorVersion[0] ) );
 	}
 
-	public ICFIntMinorVersion readBuffByNameIdx( ICFSecAuthorization Authorization,
+	public ICFIntMinorVersion readRecByNameIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 MajorVersionId,
 		String Name )
 	{
-		final String S_ProcName = "CFBamRamMinorVersion.readBuffByNameIdx() ";
+		final String S_ProcName = "CFBamRamMinorVersion.readRecByNameIdx() ";
 		ICFIntMinorVersion buff = readDerivedByNameIdx( Authorization,
 			MajorVersionId,
 			Name );

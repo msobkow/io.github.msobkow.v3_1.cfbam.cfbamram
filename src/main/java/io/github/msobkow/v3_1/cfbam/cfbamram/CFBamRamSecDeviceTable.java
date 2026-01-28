@@ -292,10 +292,10 @@ public class CFBamRamSecDeviceTable
 		return( buff );
 	}
 
-	public ICFSecSecDevice readBuff( ICFSecAuthorization Authorization,
+	public ICFSecSecDevice readRec( ICFSecAuthorization Authorization,
 		ICFSecSecDevicePKey PKey )
 	{
-		final String S_ProcName = "CFBamRamSecDevice.readBuff";
+		final String S_ProcName = "CFBamRamSecDevice.readRec";
 		ICFSecSecDevice buff = readDerived( Authorization, PKey );
 		if( ( buff != null ) && ( buff.getClassCode() != ICFSecSecDevice.CLASS_CODE ) ) {
 			buff = null;
@@ -303,10 +303,10 @@ public class CFBamRamSecDeviceTable
 		return( buff );
 	}
 
-	public ICFSecSecDevice lockBuff( ICFSecAuthorization Authorization,
+	public ICFSecSecDevice lockRec( ICFSecAuthorization Authorization,
 		ICFSecSecDevicePKey PKey )
 	{
-		final String S_ProcName = "lockBuff";
+		final String S_ProcName = "lockRec";
 		ICFSecSecDevice buff = readDerived( Authorization, PKey );
 		if( ( buff != null ) && ( buff.getClassCode() != ICFSecSecDevice.CLASS_CODE ) ) {
 			buff = null;
@@ -314,9 +314,9 @@ public class CFBamRamSecDeviceTable
 		return( buff );
 	}
 
-	public ICFSecSecDevice[] readAllBuff( ICFSecAuthorization Authorization )
+	public ICFSecSecDevice[] readAllRec( ICFSecAuthorization Authorization )
 	{
-		final String S_ProcName = "CFBamRamSecDevice.readAllBuff";
+		final String S_ProcName = "CFBamRamSecDevice.readAllRec";
 		ICFSecSecDevice buff;
 		ArrayList<ICFSecSecDevice> filteredList = new ArrayList<ICFSecSecDevice>();
 		ICFSecSecDevice[] buffList = readAllDerived( Authorization );
@@ -336,19 +336,19 @@ public class CFBamRamSecDeviceTable
 	 *
 	 *	@return All the specific SecDevice instances in the database accessible for the Authorization.
 	 */
-	public ICFSecSecDevice[] pageAllBuff( ICFSecAuthorization Authorization,
+	public ICFSecSecDevice[] pageAllRec( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 priorSecUserId,
 		String priorDevName )
 	{
-		final String S_ProcName = "pageAllBuff";
+		final String S_ProcName = "pageAllRec";
 		throw new CFLibNotImplementedYetException( getClass(), S_ProcName );
 	}
 
-	public ICFSecSecDevice readBuffByIdIdx( ICFSecAuthorization Authorization,
+	public ICFSecSecDevice readRecByIdIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 SecUserId,
 		String DevName )
 	{
-		final String S_ProcName = "CFBamRamSecDevice.readBuffByIdIdx() ";
+		final String S_ProcName = "CFBamRamSecDevice.readRecByIdIdx() ";
 		ICFSecSecDevice buff = readDerivedByIdIdx( Authorization,
 			SecUserId,
 			DevName );
@@ -360,11 +360,11 @@ public class CFBamRamSecDeviceTable
 		}
 	}
 
-	public ICFSecSecDevice readBuffByNameIdx( ICFSecAuthorization Authorization,
+	public ICFSecSecDevice readRecByNameIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 SecUserId,
 		String DevName )
 	{
-		final String S_ProcName = "CFBamRamSecDevice.readBuffByNameIdx() ";
+		final String S_ProcName = "CFBamRamSecDevice.readRecByNameIdx() ";
 		ICFSecSecDevice buff = readDerivedByNameIdx( Authorization,
 			SecUserId,
 			DevName );
@@ -376,10 +376,10 @@ public class CFBamRamSecDeviceTable
 		}
 	}
 
-	public ICFSecSecDevice[] readBuffByUserIdx( ICFSecAuthorization Authorization,
+	public ICFSecSecDevice[] readRecByUserIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 SecUserId )
 	{
-		final String S_ProcName = "CFBamRamSecDevice.readBuffByUserIdx() ";
+		final String S_ProcName = "CFBamRamSecDevice.readRecByUserIdx() ";
 		ICFSecSecDevice buff;
 		ArrayList<ICFSecSecDevice> filteredList = new ArrayList<ICFSecSecDevice>();
 		ICFSecSecDevice[] buffList = readDerivedByUserIdx( Authorization,
@@ -404,12 +404,12 @@ public class CFBamRamSecDeviceTable
 	 *
 	 *	@throws	CFLibNotSupportedException thrown by client-side implementations.
 	 */
-	public ICFSecSecDevice[] pageBuffByUserIdx( ICFSecAuthorization Authorization,
+	public ICFSecSecDevice[] pageRecByUserIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 SecUserId,
 		CFLibDbKeyHash256 priorSecUserId,
 		String priorDevName )
 	{
-		final String S_ProcName = "pageBuffByUserIdx";
+		final String S_ProcName = "pageRecByUserIdx";
 		throw new CFLibNotImplementedYetException( getClass(), S_ProcName );
 	}
 

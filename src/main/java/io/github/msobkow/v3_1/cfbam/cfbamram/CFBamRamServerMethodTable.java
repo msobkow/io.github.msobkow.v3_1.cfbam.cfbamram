@@ -367,10 +367,10 @@ public class CFBamRamServerMethodTable
 		return( buff );
 	}
 
-	public ICFBamServerMethod readBuff( ICFSecAuthorization Authorization,
+	public ICFBamServerMethod readRec( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 PKey )
 	{
-		final String S_ProcName = "CFBamRamServerMethod.readBuff";
+		final String S_ProcName = "CFBamRamServerMethod.readRec";
 		ICFBamServerMethod buff = readDerived( Authorization, PKey );
 		if( ( buff != null ) && ( buff.getClassCode() != ICFBamServerMethod.CLASS_CODE ) ) {
 			buff = null;
@@ -378,10 +378,10 @@ public class CFBamRamServerMethodTable
 		return( buff );
 	}
 
-	public ICFBamServerMethod lockBuff( ICFSecAuthorization Authorization,
+	public ICFBamServerMethod lockRec( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 PKey )
 	{
-		final String S_ProcName = "lockBuff";
+		final String S_ProcName = "lockRec";
 		ICFBamServerMethod buff = readDerived( Authorization, PKey );
 		if( ( buff != null ) && ( buff.getClassCode() != ICFBamServerMethod.CLASS_CODE ) ) {
 			buff = null;
@@ -389,9 +389,9 @@ public class CFBamRamServerMethodTable
 		return( buff );
 	}
 
-	public ICFBamServerMethod[] readAllBuff( ICFSecAuthorization Authorization )
+	public ICFBamServerMethod[] readAllRec( ICFSecAuthorization Authorization )
 	{
-		final String S_ProcName = "CFBamRamServerMethod.readAllBuff";
+		final String S_ProcName = "CFBamRamServerMethod.readAllRec";
 		ICFBamServerMethod buff;
 		ArrayList<ICFBamServerMethod> filteredList = new ArrayList<ICFBamServerMethod>();
 		ICFBamServerMethod[] buffList = readAllDerived( Authorization );
@@ -404,10 +404,10 @@ public class CFBamRamServerMethodTable
 		return( filteredList.toArray( new ICFBamServerMethod[0] ) );
 	}
 
-	public ICFBamServerMethod readBuffByIdIdx( ICFSecAuthorization Authorization,
+	public ICFBamServerMethod readRecByIdIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 Id )
 	{
-		final String S_ProcName = "CFBamRamScope.readBuffByIdIdx() ";
+		final String S_ProcName = "CFBamRamScope.readRecByIdIdx() ";
 		ICFBamServerMethod buff = readDerivedByIdIdx( Authorization,
 			Id );
 		if( ( buff != null ) && ( buff.getClassCode() == ICFBamScope.CLASS_CODE ) ) {
@@ -418,10 +418,10 @@ public class CFBamRamServerMethodTable
 		}
 	}
 
-	public ICFBamServerMethod[] readBuffByTenantIdx( ICFSecAuthorization Authorization,
+	public ICFBamServerMethod[] readRecByTenantIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 TenantId )
 	{
-		final String S_ProcName = "CFBamRamScope.readBuffByTenantIdx() ";
+		final String S_ProcName = "CFBamRamScope.readRecByTenantIdx() ";
 		ICFBamServerMethod buff;
 		ArrayList<ICFBamServerMethod> filteredList = new ArrayList<ICFBamServerMethod>();
 		ICFBamServerMethod[] buffList = readDerivedByTenantIdx( Authorization,
@@ -435,11 +435,11 @@ public class CFBamRamServerMethodTable
 		return( filteredList.toArray( new ICFBamServerMethod[0] ) );
 	}
 
-	public ICFBamServerMethod readBuffByUNameIdx( ICFSecAuthorization Authorization,
+	public ICFBamServerMethod readRecByUNameIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 TableId,
 		String Name )
 	{
-		final String S_ProcName = "CFBamRamServerMethod.readBuffByUNameIdx() ";
+		final String S_ProcName = "CFBamRamServerMethod.readRecByUNameIdx() ";
 		ICFBamServerMethod buff = readDerivedByUNameIdx( Authorization,
 			TableId,
 			Name );
@@ -451,10 +451,10 @@ public class CFBamRamServerMethodTable
 		}
 	}
 
-	public ICFBamServerMethod[] readBuffByMethTableIdx( ICFSecAuthorization Authorization,
+	public ICFBamServerMethod[] readRecByMethTableIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 TableId )
 	{
-		final String S_ProcName = "CFBamRamServerMethod.readBuffByMethTableIdx() ";
+		final String S_ProcName = "CFBamRamServerMethod.readRecByMethTableIdx() ";
 		ICFBamServerMethod buff;
 		ArrayList<ICFBamServerMethod> filteredList = new ArrayList<ICFBamServerMethod>();
 		ICFBamServerMethod[] buffList = readDerivedByMethTableIdx( Authorization,
@@ -468,10 +468,10 @@ public class CFBamRamServerMethodTable
 		return( filteredList.toArray( new ICFBamServerMethod[0] ) );
 	}
 
-	public ICFBamServerMethod[] readBuffByDefSchemaIdx( ICFSecAuthorization Authorization,
+	public ICFBamServerMethod[] readRecByDefSchemaIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 DefSchemaId )
 	{
-		final String S_ProcName = "CFBamRamServerMethod.readBuffByDefSchemaIdx() ";
+		final String S_ProcName = "CFBamRamServerMethod.readRecByDefSchemaIdx() ";
 		ICFBamServerMethod buff;
 		ArrayList<ICFBamServerMethod> filteredList = new ArrayList<ICFBamServerMethod>();
 		ICFBamServerMethod[] buffList = readDerivedByDefSchemaIdx( Authorization,
@@ -496,11 +496,11 @@ public class CFBamRamServerMethodTable
 	 *
 	 *	@throws	CFLibNotSupportedException thrown by client-side implementations.
 	 */
-	public ICFBamServerMethod[] pageBuffByMethTableIdx( ICFSecAuthorization Authorization,
+	public ICFBamServerMethod[] pageRecByMethTableIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 TableId,
 		CFLibDbKeyHash256 priorId )
 	{
-		final String S_ProcName = "pageBuffByMethTableIdx";
+		final String S_ProcName = "pageRecByMethTableIdx";
 		throw new CFLibNotImplementedYetException( getClass(), S_ProcName );
 	}
 
@@ -515,11 +515,11 @@ public class CFBamRamServerMethodTable
 	 *
 	 *	@throws	CFLibNotSupportedException thrown by client-side implementations.
 	 */
-	public ICFBamServerMethod[] pageBuffByDefSchemaIdx( ICFSecAuthorization Authorization,
+	public ICFBamServerMethod[] pageRecByDefSchemaIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 DefSchemaId,
 		CFLibDbKeyHash256 priorId )
 	{
-		final String S_ProcName = "pageBuffByDefSchemaIdx";
+		final String S_ProcName = "pageRecByDefSchemaIdx";
 		throw new CFLibNotImplementedYetException( getClass(), S_ProcName );
 	}
 

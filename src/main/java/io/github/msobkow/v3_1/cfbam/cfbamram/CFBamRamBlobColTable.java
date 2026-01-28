@@ -1063,10 +1063,10 @@ public class CFBamRamBlobColTable
 		return( buff );
 	}
 
-	public ICFBamBlobCol readBuff( ICFSecAuthorization Authorization,
+	public ICFBamBlobCol readRec( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 PKey )
 	{
-		final String S_ProcName = "CFBamRamBlobCol.readBuff";
+		final String S_ProcName = "CFBamRamBlobCol.readRec";
 		ICFBamBlobCol buff = readDerived( Authorization, PKey );
 		if( ( buff != null ) && ( buff.getClassCode() != ICFBamBlobCol.CLASS_CODE ) ) {
 			buff = null;
@@ -1074,10 +1074,10 @@ public class CFBamRamBlobColTable
 		return( buff );
 	}
 
-	public ICFBamBlobCol lockBuff( ICFSecAuthorization Authorization,
+	public ICFBamBlobCol lockRec( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 PKey )
 	{
-		final String S_ProcName = "lockBuff";
+		final String S_ProcName = "lockRec";
 		ICFBamBlobCol buff = readDerived( Authorization, PKey );
 		if( ( buff != null ) && ( buff.getClassCode() != ICFBamBlobCol.CLASS_CODE ) ) {
 			buff = null;
@@ -1085,9 +1085,9 @@ public class CFBamRamBlobColTable
 		return( buff );
 	}
 
-	public ICFBamBlobCol[] readAllBuff( ICFSecAuthorization Authorization )
+	public ICFBamBlobCol[] readAllRec( ICFSecAuthorization Authorization )
 	{
-		final String S_ProcName = "CFBamRamBlobCol.readAllBuff";
+		final String S_ProcName = "CFBamRamBlobCol.readAllRec";
 		ICFBamBlobCol buff;
 		ArrayList<ICFBamBlobCol> filteredList = new ArrayList<ICFBamBlobCol>();
 		ICFBamBlobCol[] buffList = readAllDerived( Authorization );
@@ -1100,10 +1100,10 @@ public class CFBamRamBlobColTable
 		return( filteredList.toArray( new ICFBamBlobCol[0] ) );
 	}
 
-	public ICFBamBlobCol readBuffByIdIdx( ICFSecAuthorization Authorization,
+	public ICFBamBlobCol readRecByIdIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 Id )
 	{
-		final String S_ProcName = "CFBamRamValue.readBuffByIdIdx() ";
+		final String S_ProcName = "CFBamRamValue.readRecByIdIdx() ";
 		ICFBamBlobCol buff = readDerivedByIdIdx( Authorization,
 			Id );
 		if( ( buff != null ) && ( buff.getClassCode() == ICFBamValue.CLASS_CODE ) ) {
@@ -1114,11 +1114,11 @@ public class CFBamRamBlobColTable
 		}
 	}
 
-	public ICFBamBlobCol readBuffByUNameIdx( ICFSecAuthorization Authorization,
+	public ICFBamBlobCol readRecByUNameIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 ScopeId,
 		String Name )
 	{
-		final String S_ProcName = "CFBamRamValue.readBuffByUNameIdx() ";
+		final String S_ProcName = "CFBamRamValue.readRecByUNameIdx() ";
 		ICFBamBlobCol buff = readDerivedByUNameIdx( Authorization,
 			ScopeId,
 			Name );
@@ -1130,10 +1130,10 @@ public class CFBamRamBlobColTable
 		}
 	}
 
-	public ICFBamBlobCol[] readBuffByScopeIdx( ICFSecAuthorization Authorization,
+	public ICFBamBlobCol[] readRecByScopeIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 ScopeId )
 	{
-		final String S_ProcName = "CFBamRamValue.readBuffByScopeIdx() ";
+		final String S_ProcName = "CFBamRamValue.readRecByScopeIdx() ";
 		ICFBamBlobCol buff;
 		ArrayList<ICFBamBlobCol> filteredList = new ArrayList<ICFBamBlobCol>();
 		ICFBamBlobCol[] buffList = readDerivedByScopeIdx( Authorization,
@@ -1147,10 +1147,10 @@ public class CFBamRamBlobColTable
 		return( filteredList.toArray( new ICFBamBlobCol[0] ) );
 	}
 
-	public ICFBamBlobCol[] readBuffByDefSchemaIdx( ICFSecAuthorization Authorization,
+	public ICFBamBlobCol[] readRecByDefSchemaIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 DefSchemaId )
 	{
-		final String S_ProcName = "CFBamRamValue.readBuffByDefSchemaIdx() ";
+		final String S_ProcName = "CFBamRamValue.readRecByDefSchemaIdx() ";
 		ICFBamBlobCol buff;
 		ArrayList<ICFBamBlobCol> filteredList = new ArrayList<ICFBamBlobCol>();
 		ICFBamBlobCol[] buffList = readDerivedByDefSchemaIdx( Authorization,
@@ -1164,10 +1164,10 @@ public class CFBamRamBlobColTable
 		return( filteredList.toArray( new ICFBamBlobCol[0] ) );
 	}
 
-	public ICFBamBlobCol[] readBuffByPrevIdx( ICFSecAuthorization Authorization,
+	public ICFBamBlobCol[] readRecByPrevIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 PrevId )
 	{
-		final String S_ProcName = "CFBamRamValue.readBuffByPrevIdx() ";
+		final String S_ProcName = "CFBamRamValue.readRecByPrevIdx() ";
 		ICFBamBlobCol buff;
 		ArrayList<ICFBamBlobCol> filteredList = new ArrayList<ICFBamBlobCol>();
 		ICFBamBlobCol[] buffList = readDerivedByPrevIdx( Authorization,
@@ -1181,10 +1181,10 @@ public class CFBamRamBlobColTable
 		return( filteredList.toArray( new ICFBamBlobCol[0] ) );
 	}
 
-	public ICFBamBlobCol[] readBuffByNextIdx( ICFSecAuthorization Authorization,
+	public ICFBamBlobCol[] readRecByNextIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 NextId )
 	{
-		final String S_ProcName = "CFBamRamValue.readBuffByNextIdx() ";
+		final String S_ProcName = "CFBamRamValue.readRecByNextIdx() ";
 		ICFBamBlobCol buff;
 		ArrayList<ICFBamBlobCol> filteredList = new ArrayList<ICFBamBlobCol>();
 		ICFBamBlobCol[] buffList = readDerivedByNextIdx( Authorization,
@@ -1198,11 +1198,11 @@ public class CFBamRamBlobColTable
 		return( filteredList.toArray( new ICFBamBlobCol[0] ) );
 	}
 
-	public ICFBamBlobCol[] readBuffByContPrevIdx( ICFSecAuthorization Authorization,
+	public ICFBamBlobCol[] readRecByContPrevIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 ScopeId,
 		CFLibDbKeyHash256 PrevId )
 	{
-		final String S_ProcName = "CFBamRamValue.readBuffByContPrevIdx() ";
+		final String S_ProcName = "CFBamRamValue.readRecByContPrevIdx() ";
 		ICFBamBlobCol buff;
 		ArrayList<ICFBamBlobCol> filteredList = new ArrayList<ICFBamBlobCol>();
 		ICFBamBlobCol[] buffList = readDerivedByContPrevIdx( Authorization,
@@ -1217,11 +1217,11 @@ public class CFBamRamBlobColTable
 		return( filteredList.toArray( new ICFBamBlobCol[0] ) );
 	}
 
-	public ICFBamBlobCol[] readBuffByContNextIdx( ICFSecAuthorization Authorization,
+	public ICFBamBlobCol[] readRecByContNextIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 ScopeId,
 		CFLibDbKeyHash256 NextId )
 	{
-		final String S_ProcName = "CFBamRamValue.readBuffByContNextIdx() ";
+		final String S_ProcName = "CFBamRamValue.readRecByContNextIdx() ";
 		ICFBamBlobCol buff;
 		ArrayList<ICFBamBlobCol> filteredList = new ArrayList<ICFBamBlobCol>();
 		ICFBamBlobCol[] buffList = readDerivedByContNextIdx( Authorization,
@@ -1236,10 +1236,10 @@ public class CFBamRamBlobColTable
 		return( filteredList.toArray( new ICFBamBlobCol[0] ) );
 	}
 
-	public ICFBamBlobCol[] readBuffByTableIdx( ICFSecAuthorization Authorization,
+	public ICFBamBlobCol[] readRecByTableIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 TableId )
 	{
-		final String S_ProcName = "CFBamRamBlobCol.readBuffByTableIdx() ";
+		final String S_ProcName = "CFBamRamBlobCol.readRecByTableIdx() ";
 		ICFBamBlobCol buff;
 		ArrayList<ICFBamBlobCol> filteredList = new ArrayList<ICFBamBlobCol>();
 		ICFBamBlobCol[] buffList = readDerivedByTableIdx( Authorization,
@@ -1264,11 +1264,11 @@ public class CFBamRamBlobColTable
 	 *
 	 *	@throws	CFLibNotSupportedException thrown by client-side implementations.
 	 */
-	public ICFBamBlobCol[] pageBuffByTableIdx( ICFSecAuthorization Authorization,
+	public ICFBamBlobCol[] pageRecByTableIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 TableId,
 		CFLibDbKeyHash256 priorId )
 	{
-		final String S_ProcName = "pageBuffByTableIdx";
+		final String S_ProcName = "pageRecByTableIdx";
 		throw new CFLibNotImplementedYetException( getClass(), S_ProcName );
 	}
 

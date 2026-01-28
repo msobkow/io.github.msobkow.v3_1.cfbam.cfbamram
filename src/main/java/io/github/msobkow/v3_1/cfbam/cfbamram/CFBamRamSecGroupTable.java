@@ -328,10 +328,10 @@ public class CFBamRamSecGroupTable
 		return( buff );
 	}
 
-	public ICFSecSecGroup readBuff( ICFSecAuthorization Authorization,
+	public ICFSecSecGroup readRec( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 PKey )
 	{
-		final String S_ProcName = "CFBamRamSecGroup.readBuff";
+		final String S_ProcName = "CFBamRamSecGroup.readRec";
 		ICFSecSecGroup buff = readDerived( Authorization, PKey );
 		if( ( buff != null ) && ( buff.getClassCode() != ICFSecSecGroup.CLASS_CODE ) ) {
 			buff = null;
@@ -339,10 +339,10 @@ public class CFBamRamSecGroupTable
 		return( buff );
 	}
 
-	public ICFSecSecGroup lockBuff( ICFSecAuthorization Authorization,
+	public ICFSecSecGroup lockRec( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 PKey )
 	{
-		final String S_ProcName = "lockBuff";
+		final String S_ProcName = "lockRec";
 		ICFSecSecGroup buff = readDerived( Authorization, PKey );
 		if( ( buff != null ) && ( buff.getClassCode() != ICFSecSecGroup.CLASS_CODE ) ) {
 			buff = null;
@@ -350,9 +350,9 @@ public class CFBamRamSecGroupTable
 		return( buff );
 	}
 
-	public ICFSecSecGroup[] readAllBuff( ICFSecAuthorization Authorization )
+	public ICFSecSecGroup[] readAllRec( ICFSecAuthorization Authorization )
 	{
-		final String S_ProcName = "CFBamRamSecGroup.readAllBuff";
+		final String S_ProcName = "CFBamRamSecGroup.readAllRec";
 		ICFSecSecGroup buff;
 		ArrayList<ICFSecSecGroup> filteredList = new ArrayList<ICFSecSecGroup>();
 		ICFSecSecGroup[] buffList = readAllDerived( Authorization );
@@ -365,10 +365,10 @@ public class CFBamRamSecGroupTable
 		return( filteredList.toArray( new ICFSecSecGroup[0] ) );
 	}
 
-	public ICFSecSecGroup readBuffByIdIdx( ICFSecAuthorization Authorization,
+	public ICFSecSecGroup readRecByIdIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 SecGroupId )
 	{
-		final String S_ProcName = "CFBamRamSecGroup.readBuffByIdIdx() ";
+		final String S_ProcName = "CFBamRamSecGroup.readRecByIdIdx() ";
 		ICFSecSecGroup buff = readDerivedByIdIdx( Authorization,
 			SecGroupId );
 		if( ( buff != null ) && ( buff.getClassCode() == ICFSecSecGroup.CLASS_CODE ) ) {
@@ -379,10 +379,10 @@ public class CFBamRamSecGroupTable
 		}
 	}
 
-	public ICFSecSecGroup[] readBuffByClusterIdx( ICFSecAuthorization Authorization,
+	public ICFSecSecGroup[] readRecByClusterIdx( ICFSecAuthorization Authorization,
 		long ClusterId )
 	{
-		final String S_ProcName = "CFBamRamSecGroup.readBuffByClusterIdx() ";
+		final String S_ProcName = "CFBamRamSecGroup.readRecByClusterIdx() ";
 		ICFSecSecGroup buff;
 		ArrayList<ICFSecSecGroup> filteredList = new ArrayList<ICFSecSecGroup>();
 		ICFSecSecGroup[] buffList = readDerivedByClusterIdx( Authorization,
@@ -396,11 +396,11 @@ public class CFBamRamSecGroupTable
 		return( filteredList.toArray( new ICFSecSecGroup[0] ) );
 	}
 
-	public ICFSecSecGroup[] readBuffByClusterVisIdx( ICFSecAuthorization Authorization,
+	public ICFSecSecGroup[] readRecByClusterVisIdx( ICFSecAuthorization Authorization,
 		long ClusterId,
 		boolean IsVisible )
 	{
-		final String S_ProcName = "CFBamRamSecGroup.readBuffByClusterVisIdx() ";
+		final String S_ProcName = "CFBamRamSecGroup.readRecByClusterVisIdx() ";
 		ICFSecSecGroup buff;
 		ArrayList<ICFSecSecGroup> filteredList = new ArrayList<ICFSecSecGroup>();
 		ICFSecSecGroup[] buffList = readDerivedByClusterVisIdx( Authorization,
@@ -415,11 +415,11 @@ public class CFBamRamSecGroupTable
 		return( filteredList.toArray( new ICFSecSecGroup[0] ) );
 	}
 
-	public ICFSecSecGroup readBuffByUNameIdx( ICFSecAuthorization Authorization,
+	public ICFSecSecGroup readRecByUNameIdx( ICFSecAuthorization Authorization,
 		long ClusterId,
 		String Name )
 	{
-		final String S_ProcName = "CFBamRamSecGroup.readBuffByUNameIdx() ";
+		final String S_ProcName = "CFBamRamSecGroup.readRecByUNameIdx() ";
 		ICFSecSecGroup buff = readDerivedByUNameIdx( Authorization,
 			ClusterId,
 			Name );

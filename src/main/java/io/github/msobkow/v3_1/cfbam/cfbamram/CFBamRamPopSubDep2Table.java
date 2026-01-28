@@ -350,10 +350,10 @@ public class CFBamRamPopSubDep2Table
 		return( buff );
 	}
 
-	public ICFBamPopSubDep2 readBuff( ICFSecAuthorization Authorization,
+	public ICFBamPopSubDep2 readRec( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 PKey )
 	{
-		final String S_ProcName = "CFBamRamPopSubDep2.readBuff";
+		final String S_ProcName = "CFBamRamPopSubDep2.readRec";
 		ICFBamPopSubDep2 buff = readDerived( Authorization, PKey );
 		if( ( buff != null ) && ( buff.getClassCode() != ICFBamPopSubDep2.CLASS_CODE ) ) {
 			buff = null;
@@ -361,10 +361,10 @@ public class CFBamRamPopSubDep2Table
 		return( buff );
 	}
 
-	public ICFBamPopSubDep2 lockBuff( ICFSecAuthorization Authorization,
+	public ICFBamPopSubDep2 lockRec( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 PKey )
 	{
-		final String S_ProcName = "lockBuff";
+		final String S_ProcName = "lockRec";
 		ICFBamPopSubDep2 buff = readDerived( Authorization, PKey );
 		if( ( buff != null ) && ( buff.getClassCode() != ICFBamPopSubDep2.CLASS_CODE ) ) {
 			buff = null;
@@ -372,9 +372,9 @@ public class CFBamRamPopSubDep2Table
 		return( buff );
 	}
 
-	public ICFBamPopSubDep2[] readAllBuff( ICFSecAuthorization Authorization )
+	public ICFBamPopSubDep2[] readAllRec( ICFSecAuthorization Authorization )
 	{
-		final String S_ProcName = "CFBamRamPopSubDep2.readAllBuff";
+		final String S_ProcName = "CFBamRamPopSubDep2.readAllRec";
 		ICFBamPopSubDep2 buff;
 		ArrayList<ICFBamPopSubDep2> filteredList = new ArrayList<ICFBamPopSubDep2>();
 		ICFBamPopSubDep2[] buffList = readAllDerived( Authorization );
@@ -387,10 +387,10 @@ public class CFBamRamPopSubDep2Table
 		return( filteredList.toArray( new ICFBamPopSubDep2[0] ) );
 	}
 
-	public ICFBamPopSubDep2 readBuffByIdIdx( ICFSecAuthorization Authorization,
+	public ICFBamPopSubDep2 readRecByIdIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 Id )
 	{
-		final String S_ProcName = "CFBamRamScope.readBuffByIdIdx() ";
+		final String S_ProcName = "CFBamRamScope.readRecByIdIdx() ";
 		ICFBamPopSubDep2 buff = readDerivedByIdIdx( Authorization,
 			Id );
 		if( ( buff != null ) && ( buff.getClassCode() == ICFBamScope.CLASS_CODE ) ) {
@@ -401,10 +401,10 @@ public class CFBamRamPopSubDep2Table
 		}
 	}
 
-	public ICFBamPopSubDep2[] readBuffByTenantIdx( ICFSecAuthorization Authorization,
+	public ICFBamPopSubDep2[] readRecByTenantIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 TenantId )
 	{
-		final String S_ProcName = "CFBamRamScope.readBuffByTenantIdx() ";
+		final String S_ProcName = "CFBamRamScope.readRecByTenantIdx() ";
 		ICFBamPopSubDep2 buff;
 		ArrayList<ICFBamPopSubDep2> filteredList = new ArrayList<ICFBamPopSubDep2>();
 		ICFBamPopSubDep2[] buffList = readDerivedByTenantIdx( Authorization,
@@ -418,10 +418,10 @@ public class CFBamRamPopSubDep2Table
 		return( filteredList.toArray( new ICFBamPopSubDep2[0] ) );
 	}
 
-	public ICFBamPopSubDep2[] readBuffByRelationIdx( ICFSecAuthorization Authorization,
+	public ICFBamPopSubDep2[] readRecByRelationIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 RelationId )
 	{
-		final String S_ProcName = "CFBamRamPopDep.readBuffByRelationIdx() ";
+		final String S_ProcName = "CFBamRamPopDep.readRecByRelationIdx() ";
 		ICFBamPopSubDep2 buff;
 		ArrayList<ICFBamPopSubDep2> filteredList = new ArrayList<ICFBamPopSubDep2>();
 		ICFBamPopSubDep2[] buffList = readDerivedByRelationIdx( Authorization,
@@ -435,10 +435,10 @@ public class CFBamRamPopSubDep2Table
 		return( filteredList.toArray( new ICFBamPopSubDep2[0] ) );
 	}
 
-	public ICFBamPopSubDep2[] readBuffByDefSchemaIdx( ICFSecAuthorization Authorization,
+	public ICFBamPopSubDep2[] readRecByDefSchemaIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 DefSchemaId )
 	{
-		final String S_ProcName = "CFBamRamPopDep.readBuffByDefSchemaIdx() ";
+		final String S_ProcName = "CFBamRamPopDep.readRecByDefSchemaIdx() ";
 		ICFBamPopSubDep2 buff;
 		ArrayList<ICFBamPopSubDep2> filteredList = new ArrayList<ICFBamPopSubDep2>();
 		ICFBamPopSubDep2[] buffList = readDerivedByDefSchemaIdx( Authorization,
@@ -452,10 +452,10 @@ public class CFBamRamPopSubDep2Table
 		return( filteredList.toArray( new ICFBamPopSubDep2[0] ) );
 	}
 
-	public ICFBamPopSubDep2[] readBuffByPopSubDep1Idx( ICFSecAuthorization Authorization,
+	public ICFBamPopSubDep2[] readRecByPopSubDep1Idx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 PopSubDep1Id )
 	{
-		final String S_ProcName = "CFBamRamPopSubDep2.readBuffByPopSubDep1Idx() ";
+		final String S_ProcName = "CFBamRamPopSubDep2.readRecByPopSubDep1Idx() ";
 		ICFBamPopSubDep2 buff;
 		ArrayList<ICFBamPopSubDep2> filteredList = new ArrayList<ICFBamPopSubDep2>();
 		ICFBamPopSubDep2[] buffList = readDerivedByPopSubDep1Idx( Authorization,
@@ -469,11 +469,11 @@ public class CFBamRamPopSubDep2Table
 		return( filteredList.toArray( new ICFBamPopSubDep2[0] ) );
 	}
 
-	public ICFBamPopSubDep2 readBuffByUNameIdx( ICFSecAuthorization Authorization,
+	public ICFBamPopSubDep2 readRecByUNameIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 PopSubDep1Id,
 		String Name )
 	{
-		final String S_ProcName = "CFBamRamPopSubDep2.readBuffByUNameIdx() ";
+		final String S_ProcName = "CFBamRamPopSubDep2.readRecByUNameIdx() ";
 		ICFBamPopSubDep2 buff = readDerivedByUNameIdx( Authorization,
 			PopSubDep1Id,
 			Name );
@@ -496,11 +496,11 @@ public class CFBamRamPopSubDep2Table
 	 *
 	 *	@throws	CFLibNotSupportedException thrown by client-side implementations.
 	 */
-	public ICFBamPopSubDep2[] pageBuffByRelationIdx( ICFSecAuthorization Authorization,
+	public ICFBamPopSubDep2[] pageRecByRelationIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 RelationId,
 		CFLibDbKeyHash256 priorId )
 	{
-		final String S_ProcName = "pageBuffByRelationIdx";
+		final String S_ProcName = "pageRecByRelationIdx";
 		throw new CFLibNotImplementedYetException( getClass(), S_ProcName );
 	}
 
@@ -515,11 +515,11 @@ public class CFBamRamPopSubDep2Table
 	 *
 	 *	@throws	CFLibNotSupportedException thrown by client-side implementations.
 	 */
-	public ICFBamPopSubDep2[] pageBuffByDefSchemaIdx( ICFSecAuthorization Authorization,
+	public ICFBamPopSubDep2[] pageRecByDefSchemaIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 DefSchemaId,
 		CFLibDbKeyHash256 priorId )
 	{
-		final String S_ProcName = "pageBuffByDefSchemaIdx";
+		final String S_ProcName = "pageRecByDefSchemaIdx";
 		throw new CFLibNotImplementedYetException( getClass(), S_ProcName );
 	}
 
@@ -534,11 +534,11 @@ public class CFBamRamPopSubDep2Table
 	 *
 	 *	@throws	CFLibNotSupportedException thrown by client-side implementations.
 	 */
-	public ICFBamPopSubDep2[] pageBuffByPopSubDep1Idx( ICFSecAuthorization Authorization,
+	public ICFBamPopSubDep2[] pageRecByPopSubDep1Idx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 PopSubDep1Id,
 		CFLibDbKeyHash256 priorId )
 	{
-		final String S_ProcName = "pageBuffByPopSubDep1Idx";
+		final String S_ProcName = "pageRecByPopSubDep1Idx";
 		throw new CFLibNotImplementedYetException( getClass(), S_ProcName );
 	}
 

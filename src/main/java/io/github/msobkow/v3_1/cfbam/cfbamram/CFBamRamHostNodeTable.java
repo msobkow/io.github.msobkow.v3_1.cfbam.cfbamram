@@ -316,10 +316,10 @@ public class CFBamRamHostNodeTable
 		return( buff );
 	}
 
-	public ICFSecHostNode readBuff( ICFSecAuthorization Authorization,
+	public ICFSecHostNode readRec( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 PKey )
 	{
-		final String S_ProcName = "CFBamRamHostNode.readBuff";
+		final String S_ProcName = "CFBamRamHostNode.readRec";
 		ICFSecHostNode buff = readDerived( Authorization, PKey );
 		if( ( buff != null ) && ( buff.getClassCode() != ICFSecHostNode.CLASS_CODE ) ) {
 			buff = null;
@@ -327,10 +327,10 @@ public class CFBamRamHostNodeTable
 		return( buff );
 	}
 
-	public ICFSecHostNode lockBuff( ICFSecAuthorization Authorization,
+	public ICFSecHostNode lockRec( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 PKey )
 	{
-		final String S_ProcName = "lockBuff";
+		final String S_ProcName = "lockRec";
 		ICFSecHostNode buff = readDerived( Authorization, PKey );
 		if( ( buff != null ) && ( buff.getClassCode() != ICFSecHostNode.CLASS_CODE ) ) {
 			buff = null;
@@ -338,9 +338,9 @@ public class CFBamRamHostNodeTable
 		return( buff );
 	}
 
-	public ICFSecHostNode[] readAllBuff( ICFSecAuthorization Authorization )
+	public ICFSecHostNode[] readAllRec( ICFSecAuthorization Authorization )
 	{
-		final String S_ProcName = "CFBamRamHostNode.readAllBuff";
+		final String S_ProcName = "CFBamRamHostNode.readAllRec";
 		ICFSecHostNode buff;
 		ArrayList<ICFSecHostNode> filteredList = new ArrayList<ICFSecHostNode>();
 		ICFSecHostNode[] buffList = readAllDerived( Authorization );
@@ -360,17 +360,17 @@ public class CFBamRamHostNodeTable
 	 *
 	 *	@return All the specific HostNode instances in the database accessible for the Authorization.
 	 */
-	public ICFSecHostNode[] pageAllBuff( ICFSecAuthorization Authorization,
+	public ICFSecHostNode[] pageAllRec( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 priorHostNodeId )
 	{
-		final String S_ProcName = "pageAllBuff";
+		final String S_ProcName = "pageAllRec";
 		throw new CFLibNotImplementedYetException( getClass(), S_ProcName );
 	}
 
-	public ICFSecHostNode readBuffByIdIdx( ICFSecAuthorization Authorization,
+	public ICFSecHostNode readRecByIdIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 HostNodeId )
 	{
-		final String S_ProcName = "CFBamRamHostNode.readBuffByIdIdx() ";
+		final String S_ProcName = "CFBamRamHostNode.readRecByIdIdx() ";
 		ICFSecHostNode buff = readDerivedByIdIdx( Authorization,
 			HostNodeId );
 		if( ( buff != null ) && ( buff.getClassCode() == ICFSecHostNode.CLASS_CODE ) ) {
@@ -381,10 +381,10 @@ public class CFBamRamHostNodeTable
 		}
 	}
 
-	public ICFSecHostNode[] readBuffByClusterIdx( ICFSecAuthorization Authorization,
+	public ICFSecHostNode[] readRecByClusterIdx( ICFSecAuthorization Authorization,
 		long ClusterId )
 	{
-		final String S_ProcName = "CFBamRamHostNode.readBuffByClusterIdx() ";
+		final String S_ProcName = "CFBamRamHostNode.readRecByClusterIdx() ";
 		ICFSecHostNode buff;
 		ArrayList<ICFSecHostNode> filteredList = new ArrayList<ICFSecHostNode>();
 		ICFSecHostNode[] buffList = readDerivedByClusterIdx( Authorization,
@@ -398,11 +398,11 @@ public class CFBamRamHostNodeTable
 		return( filteredList.toArray( new ICFSecHostNode[0] ) );
 	}
 
-	public ICFSecHostNode readBuffByUDescrIdx( ICFSecAuthorization Authorization,
+	public ICFSecHostNode readRecByUDescrIdx( ICFSecAuthorization Authorization,
 		long ClusterId,
 		String Description )
 	{
-		final String S_ProcName = "CFBamRamHostNode.readBuffByUDescrIdx() ";
+		final String S_ProcName = "CFBamRamHostNode.readRecByUDescrIdx() ";
 		ICFSecHostNode buff = readDerivedByUDescrIdx( Authorization,
 			ClusterId,
 			Description );
@@ -414,11 +414,11 @@ public class CFBamRamHostNodeTable
 		}
 	}
 
-	public ICFSecHostNode readBuffByHostNameIdx( ICFSecAuthorization Authorization,
+	public ICFSecHostNode readRecByHostNameIdx( ICFSecAuthorization Authorization,
 		long ClusterId,
 		String HostName )
 	{
-		final String S_ProcName = "CFBamRamHostNode.readBuffByHostNameIdx() ";
+		final String S_ProcName = "CFBamRamHostNode.readRecByHostNameIdx() ";
 		ICFSecHostNode buff = readDerivedByHostNameIdx( Authorization,
 			ClusterId,
 			HostName );
@@ -441,11 +441,11 @@ public class CFBamRamHostNodeTable
 	 *
 	 *	@throws	CFLibNotSupportedException thrown by client-side implementations.
 	 */
-	public ICFSecHostNode[] pageBuffByClusterIdx( ICFSecAuthorization Authorization,
+	public ICFSecHostNode[] pageRecByClusterIdx( ICFSecAuthorization Authorization,
 		long ClusterId,
 		CFLibDbKeyHash256 priorHostNodeId )
 	{
-		final String S_ProcName = "pageBuffByClusterIdx";
+		final String S_ProcName = "pageRecByClusterIdx";
 		throw new CFLibNotImplementedYetException( getClass(), S_ProcName );
 	}
 

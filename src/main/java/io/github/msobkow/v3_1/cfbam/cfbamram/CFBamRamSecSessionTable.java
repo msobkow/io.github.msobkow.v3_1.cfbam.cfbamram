@@ -423,10 +423,10 @@ public class CFBamRamSecSessionTable
 		return( buff );
 	}
 
-	public ICFSecSecSession readBuff( ICFSecAuthorization Authorization,
+	public ICFSecSecSession readRec( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 PKey )
 	{
-		final String S_ProcName = "CFBamRamSecSession.readBuff";
+		final String S_ProcName = "CFBamRamSecSession.readRec";
 		ICFSecSecSession buff = readDerived( Authorization, PKey );
 		if( ( buff != null ) && ( buff.getClassCode() != ICFSecSecSession.CLASS_CODE ) ) {
 			buff = null;
@@ -434,10 +434,10 @@ public class CFBamRamSecSessionTable
 		return( buff );
 	}
 
-	public ICFSecSecSession lockBuff( ICFSecAuthorization Authorization,
+	public ICFSecSecSession lockRec( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 PKey )
 	{
-		final String S_ProcName = "lockBuff";
+		final String S_ProcName = "lockRec";
 		ICFSecSecSession buff = readDerived( Authorization, PKey );
 		if( ( buff != null ) && ( buff.getClassCode() != ICFSecSecSession.CLASS_CODE ) ) {
 			buff = null;
@@ -445,9 +445,9 @@ public class CFBamRamSecSessionTable
 		return( buff );
 	}
 
-	public ICFSecSecSession[] readAllBuff( ICFSecAuthorization Authorization )
+	public ICFSecSecSession[] readAllRec( ICFSecAuthorization Authorization )
 	{
-		final String S_ProcName = "CFBamRamSecSession.readAllBuff";
+		final String S_ProcName = "CFBamRamSecSession.readAllRec";
 		ICFSecSecSession buff;
 		ArrayList<ICFSecSecSession> filteredList = new ArrayList<ICFSecSecSession>();
 		ICFSecSecSession[] buffList = readAllDerived( Authorization );
@@ -467,17 +467,17 @@ public class CFBamRamSecSessionTable
 	 *
 	 *	@return All the specific SecSession instances in the database accessible for the Authorization.
 	 */
-	public ICFSecSecSession[] pageAllBuff( ICFSecAuthorization Authorization,
+	public ICFSecSecSession[] pageAllRec( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 priorSecSessionId )
 	{
-		final String S_ProcName = "pageAllBuff";
+		final String S_ProcName = "pageAllRec";
 		throw new CFLibNotImplementedYetException( getClass(), S_ProcName );
 	}
 
-	public ICFSecSecSession readBuffByIdIdx( ICFSecAuthorization Authorization,
+	public ICFSecSecSession readRecByIdIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 SecSessionId )
 	{
-		final String S_ProcName = "CFBamRamSecSession.readBuffByIdIdx() ";
+		final String S_ProcName = "CFBamRamSecSession.readRecByIdIdx() ";
 		ICFSecSecSession buff = readDerivedByIdIdx( Authorization,
 			SecSessionId );
 		if( ( buff != null ) && ( buff.getClassCode() == ICFSecSecSession.CLASS_CODE ) ) {
@@ -488,10 +488,10 @@ public class CFBamRamSecSessionTable
 		}
 	}
 
-	public ICFSecSecSession[] readBuffBySecUserIdx( ICFSecAuthorization Authorization,
+	public ICFSecSecSession[] readRecBySecUserIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 SecUserId )
 	{
-		final String S_ProcName = "CFBamRamSecSession.readBuffBySecUserIdx() ";
+		final String S_ProcName = "CFBamRamSecSession.readRecBySecUserIdx() ";
 		ICFSecSecSession buff;
 		ArrayList<ICFSecSecSession> filteredList = new ArrayList<ICFSecSecSession>();
 		ICFSecSecSession[] buffList = readDerivedBySecUserIdx( Authorization,
@@ -505,11 +505,11 @@ public class CFBamRamSecSessionTable
 		return( filteredList.toArray( new ICFSecSecSession[0] ) );
 	}
 
-	public ICFSecSecSession[] readBuffBySecDevIdx( ICFSecAuthorization Authorization,
+	public ICFSecSecSession[] readRecBySecDevIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 SecUserId,
 		String SecDevName )
 	{
-		final String S_ProcName = "CFBamRamSecSession.readBuffBySecDevIdx() ";
+		final String S_ProcName = "CFBamRamSecSession.readRecBySecDevIdx() ";
 		ICFSecSecSession buff;
 		ArrayList<ICFSecSecSession> filteredList = new ArrayList<ICFSecSecSession>();
 		ICFSecSecSession[] buffList = readDerivedBySecDevIdx( Authorization,
@@ -524,11 +524,11 @@ public class CFBamRamSecSessionTable
 		return( filteredList.toArray( new ICFSecSecSession[0] ) );
 	}
 
-	public ICFSecSecSession readBuffByStartIdx( ICFSecAuthorization Authorization,
+	public ICFSecSecSession readRecByStartIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 SecUserId,
 		LocalDateTime Start )
 	{
-		final String S_ProcName = "CFBamRamSecSession.readBuffByStartIdx() ";
+		final String S_ProcName = "CFBamRamSecSession.readRecByStartIdx() ";
 		ICFSecSecSession buff = readDerivedByStartIdx( Authorization,
 			SecUserId,
 			Start );
@@ -540,11 +540,11 @@ public class CFBamRamSecSessionTable
 		}
 	}
 
-	public ICFSecSecSession[] readBuffByFinishIdx( ICFSecAuthorization Authorization,
+	public ICFSecSecSession[] readRecByFinishIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 SecUserId,
 		LocalDateTime Finish )
 	{
-		final String S_ProcName = "CFBamRamSecSession.readBuffByFinishIdx() ";
+		final String S_ProcName = "CFBamRamSecSession.readRecByFinishIdx() ";
 		ICFSecSecSession buff;
 		ArrayList<ICFSecSecSession> filteredList = new ArrayList<ICFSecSecSession>();
 		ICFSecSecSession[] buffList = readDerivedByFinishIdx( Authorization,
@@ -559,10 +559,10 @@ public class CFBamRamSecSessionTable
 		return( filteredList.toArray( new ICFSecSecSession[0] ) );
 	}
 
-	public ICFSecSecSession[] readBuffBySecProxyIdx( ICFSecAuthorization Authorization,
+	public ICFSecSecSession[] readRecBySecProxyIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 SecProxyId )
 	{
-		final String S_ProcName = "CFBamRamSecSession.readBuffBySecProxyIdx() ";
+		final String S_ProcName = "CFBamRamSecSession.readRecBySecProxyIdx() ";
 		ICFSecSecSession buff;
 		ArrayList<ICFSecSecSession> filteredList = new ArrayList<ICFSecSecSession>();
 		ICFSecSecSession[] buffList = readDerivedBySecProxyIdx( Authorization,
@@ -587,11 +587,11 @@ public class CFBamRamSecSessionTable
 	 *
 	 *	@throws	CFLibNotSupportedException thrown by client-side implementations.
 	 */
-	public ICFSecSecSession[] pageBuffBySecUserIdx( ICFSecAuthorization Authorization,
+	public ICFSecSecSession[] pageRecBySecUserIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 SecUserId,
 		CFLibDbKeyHash256 priorSecSessionId )
 	{
-		final String S_ProcName = "pageBuffBySecUserIdx";
+		final String S_ProcName = "pageRecBySecUserIdx";
 		throw new CFLibNotImplementedYetException( getClass(), S_ProcName );
 	}
 
@@ -608,12 +608,12 @@ public class CFBamRamSecSessionTable
 	 *
 	 *	@throws	CFLibNotSupportedException thrown by client-side implementations.
 	 */
-	public ICFSecSecSession[] pageBuffBySecDevIdx( ICFSecAuthorization Authorization,
+	public ICFSecSecSession[] pageRecBySecDevIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 SecUserId,
 		String SecDevName,
 		CFLibDbKeyHash256 priorSecSessionId )
 	{
-		final String S_ProcName = "pageBuffBySecDevIdx";
+		final String S_ProcName = "pageRecBySecDevIdx";
 		throw new CFLibNotImplementedYetException( getClass(), S_ProcName );
 	}
 
@@ -630,12 +630,12 @@ public class CFBamRamSecSessionTable
 	 *
 	 *	@throws	CFLibNotSupportedException thrown by client-side implementations.
 	 */
-	public ICFSecSecSession[] pageBuffByFinishIdx( ICFSecAuthorization Authorization,
+	public ICFSecSecSession[] pageRecByFinishIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 SecUserId,
 		LocalDateTime Finish,
 		CFLibDbKeyHash256 priorSecSessionId )
 	{
-		final String S_ProcName = "pageBuffByFinishIdx";
+		final String S_ProcName = "pageRecByFinishIdx";
 		throw new CFLibNotImplementedYetException( getClass(), S_ProcName );
 	}
 
@@ -650,11 +650,11 @@ public class CFBamRamSecSessionTable
 	 *
 	 *	@throws	CFLibNotSupportedException thrown by client-side implementations.
 	 */
-	public ICFSecSecSession[] pageBuffBySecProxyIdx( ICFSecAuthorization Authorization,
+	public ICFSecSecSession[] pageRecBySecProxyIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 SecProxyId,
 		CFLibDbKeyHash256 priorSecSessionId )
 	{
-		final String S_ProcName = "pageBuffBySecProxyIdx";
+		final String S_ProcName = "pageRecBySecProxyIdx";
 		throw new CFLibNotImplementedYetException( getClass(), S_ProcName );
 	}
 

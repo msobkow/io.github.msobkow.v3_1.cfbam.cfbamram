@@ -434,10 +434,10 @@ public class CFBamRamScopeTable
 		return( buff );
 	}
 
-	public ICFBamScope readBuff( ICFSecAuthorization Authorization,
+	public ICFBamScope readRec( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 PKey )
 	{
-		final String S_ProcName = "CFBamRamScope.readBuff";
+		final String S_ProcName = "CFBamRamScope.readRec";
 		ICFBamScope buff = readDerived( Authorization, PKey );
 		if( ( buff != null ) && ( buff.getClassCode() != ICFBamScope.CLASS_CODE ) ) {
 			buff = null;
@@ -445,10 +445,10 @@ public class CFBamRamScopeTable
 		return( buff );
 	}
 
-	public ICFBamScope lockBuff( ICFSecAuthorization Authorization,
+	public ICFBamScope lockRec( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 PKey )
 	{
-		final String S_ProcName = "lockBuff";
+		final String S_ProcName = "lockRec";
 		ICFBamScope buff = readDerived( Authorization, PKey );
 		if( ( buff != null ) && ( buff.getClassCode() != ICFBamScope.CLASS_CODE ) ) {
 			buff = null;
@@ -456,9 +456,9 @@ public class CFBamRamScopeTable
 		return( buff );
 	}
 
-	public ICFBamScope[] readAllBuff( ICFSecAuthorization Authorization )
+	public ICFBamScope[] readAllRec( ICFSecAuthorization Authorization )
 	{
-		final String S_ProcName = "CFBamRamScope.readAllBuff";
+		final String S_ProcName = "CFBamRamScope.readAllRec";
 		ICFBamScope buff;
 		ArrayList<ICFBamScope> filteredList = new ArrayList<ICFBamScope>();
 		ICFBamScope[] buffList = readAllDerived( Authorization );
@@ -471,10 +471,10 @@ public class CFBamRamScopeTable
 		return( filteredList.toArray( new ICFBamScope[0] ) );
 	}
 
-	public ICFBamScope readBuffByIdIdx( ICFSecAuthorization Authorization,
+	public ICFBamScope readRecByIdIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 Id )
 	{
-		final String S_ProcName = "CFBamRamScope.readBuffByIdIdx() ";
+		final String S_ProcName = "CFBamRamScope.readRecByIdIdx() ";
 		ICFBamScope buff = readDerivedByIdIdx( Authorization,
 			Id );
 		if( ( buff != null ) && ( buff.getClassCode() == ICFBamScope.CLASS_CODE ) ) {
@@ -485,10 +485,10 @@ public class CFBamRamScopeTable
 		}
 	}
 
-	public ICFBamScope[] readBuffByTenantIdx( ICFSecAuthorization Authorization,
+	public ICFBamScope[] readRecByTenantIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 TenantId )
 	{
-		final String S_ProcName = "CFBamRamScope.readBuffByTenantIdx() ";
+		final String S_ProcName = "CFBamRamScope.readRecByTenantIdx() ";
 		ICFBamScope buff;
 		ArrayList<ICFBamScope> filteredList = new ArrayList<ICFBamScope>();
 		ICFBamScope[] buffList = readDerivedByTenantIdx( Authorization,
