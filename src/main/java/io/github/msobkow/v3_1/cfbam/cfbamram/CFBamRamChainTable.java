@@ -294,7 +294,7 @@ public class CFBamRamChainTable
 	public ICFBamChain lockDerived( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 PKey )
 	{
-		final String S_ProcName = "CFBamRamChain.readDerived";
+		final String S_ProcName = "CFBamRamChain.lockDerived";
 		ICFBamChain buff;
 		if( dictByPKey.containsKey( PKey ) ) {
 			buff = dictByPKey.get( PKey );
@@ -321,8 +321,8 @@ public class CFBamRamChainTable
 	{
 		final String S_ProcName = "CFBamRamChain.readDerivedByChainTableIdx";
 		CFBamBuffChainByChainTableIdxKey key = (CFBamBuffChainByChainTableIdxKey)schema.getFactoryChain().newByChainTableIdxKey();
-		key.setRequiredTableId( TableId );
 
+		key.setRequiredTableId( TableId );
 		ICFBamChain[] recArray;
 		if( dictByChainTableIdx.containsKey( key ) ) {
 			Map< CFLibDbKeyHash256, CFBamBuffChain > subdictChainTableIdx
@@ -348,8 +348,8 @@ public class CFBamRamChainTable
 	{
 		final String S_ProcName = "CFBamRamChain.readDerivedByDefSchemaIdx";
 		CFBamBuffChainByDefSchemaIdxKey key = (CFBamBuffChainByDefSchemaIdxKey)schema.getFactoryChain().newByDefSchemaIdxKey();
-		key.setOptionalDefSchemaId( DefSchemaId );
 
+		key.setOptionalDefSchemaId( DefSchemaId );
 		ICFBamChain[] recArray;
 		if( dictByDefSchemaIdx.containsKey( key ) ) {
 			Map< CFLibDbKeyHash256, CFBamBuffChain > subdictDefSchemaIdx
@@ -376,9 +376,9 @@ public class CFBamRamChainTable
 	{
 		final String S_ProcName = "CFBamRamChain.readDerivedByUNameIdx";
 		CFBamBuffChainByUNameIdxKey key = (CFBamBuffChainByUNameIdxKey)schema.getFactoryChain().newByUNameIdxKey();
+
 		key.setRequiredTableId( TableId );
 		key.setRequiredName( Name );
-
 		ICFBamChain buff;
 		if( dictByUNameIdx.containsKey( key ) ) {
 			buff = dictByUNameIdx.get( key );
@@ -394,8 +394,8 @@ public class CFBamRamChainTable
 	{
 		final String S_ProcName = "CFBamRamChain.readDerivedByPrevRelIdx";
 		CFBamBuffChainByPrevRelIdxKey key = (CFBamBuffChainByPrevRelIdxKey)schema.getFactoryChain().newByPrevRelIdxKey();
-		key.setRequiredPrevRelationId( PrevRelationId );
 
+		key.setRequiredPrevRelationId( PrevRelationId );
 		ICFBamChain[] recArray;
 		if( dictByPrevRelIdx.containsKey( key ) ) {
 			Map< CFLibDbKeyHash256, CFBamBuffChain > subdictPrevRelIdx
@@ -421,8 +421,8 @@ public class CFBamRamChainTable
 	{
 		final String S_ProcName = "CFBamRamChain.readDerivedByNextRelIdx";
 		CFBamBuffChainByNextRelIdxKey key = (CFBamBuffChainByNextRelIdxKey)schema.getFactoryChain().newByNextRelIdxKey();
-		key.setRequiredNextRelationId( NextRelationId );
 
+		key.setRequiredNextRelationId( NextRelationId );
 		ICFBamChain[] recArray;
 		if( dictByNextRelIdx.containsKey( key ) ) {
 			Map< CFLibDbKeyHash256, CFBamBuffChain > subdictNextRelIdx

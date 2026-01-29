@@ -236,7 +236,7 @@ public class CFBamRamMajorVersionTable
 	public ICFIntMajorVersion lockDerived( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 PKey )
 	{
-		final String S_ProcName = "CFBamRamMajorVersion.readDerived";
+		final String S_ProcName = "CFBamRamMajorVersion.lockDerived";
 		ICFIntMajorVersion buff;
 		if( dictByPKey.containsKey( PKey ) ) {
 			buff = dictByPKey.get( PKey );
@@ -263,8 +263,8 @@ public class CFBamRamMajorVersionTable
 	{
 		final String S_ProcName = "CFBamRamMajorVersion.readDerivedByTenantIdx";
 		CFIntBuffMajorVersionByTenantIdxKey key = (CFIntBuffMajorVersionByTenantIdxKey)schema.getFactoryMajorVersion().newByTenantIdxKey();
-		key.setRequiredTenantId( TenantId );
 
+		key.setRequiredTenantId( TenantId );
 		ICFIntMajorVersion[] recArray;
 		if( dictByTenantIdx.containsKey( key ) ) {
 			Map< CFLibDbKeyHash256, CFIntBuffMajorVersion > subdictTenantIdx
@@ -290,8 +290,8 @@ public class CFBamRamMajorVersionTable
 	{
 		final String S_ProcName = "CFBamRamMajorVersion.readDerivedBySubProjectIdx";
 		CFIntBuffMajorVersionBySubProjectIdxKey key = (CFIntBuffMajorVersionBySubProjectIdxKey)schema.getFactoryMajorVersion().newBySubProjectIdxKey();
-		key.setRequiredSubProjectId( SubProjectId );
 
+		key.setRequiredSubProjectId( SubProjectId );
 		ICFIntMajorVersion[] recArray;
 		if( dictBySubProjectIdx.containsKey( key ) ) {
 			Map< CFLibDbKeyHash256, CFIntBuffMajorVersion > subdictSubProjectIdx
@@ -318,9 +318,9 @@ public class CFBamRamMajorVersionTable
 	{
 		final String S_ProcName = "CFBamRamMajorVersion.readDerivedByNameIdx";
 		CFIntBuffMajorVersionByNameIdxKey key = (CFIntBuffMajorVersionByNameIdxKey)schema.getFactoryMajorVersion().newByNameIdxKey();
+
 		key.setRequiredSubProjectId( SubProjectId );
 		key.setRequiredName( Name );
-
 		ICFIntMajorVersion buff;
 		if( dictByNameIdx.containsKey( key ) ) {
 			buff = dictByNameIdx.get( key );

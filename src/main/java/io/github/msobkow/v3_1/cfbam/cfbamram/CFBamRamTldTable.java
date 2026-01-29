@@ -196,7 +196,7 @@ public class CFBamRamTldTable
 	public ICFIntTld lockDerived( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 PKey )
 	{
-		final String S_ProcName = "CFBamRamTld.readDerived";
+		final String S_ProcName = "CFBamRamTld.lockDerived";
 		ICFIntTld buff;
 		if( dictByPKey.containsKey( PKey ) ) {
 			buff = dictByPKey.get( PKey );
@@ -223,8 +223,8 @@ public class CFBamRamTldTable
 	{
 		final String S_ProcName = "CFBamRamTld.readDerivedByTenantIdx";
 		CFIntBuffTldByTenantIdxKey key = (CFIntBuffTldByTenantIdxKey)schema.getFactoryTld().newByTenantIdxKey();
-		key.setRequiredTenantId( TenantId );
 
+		key.setRequiredTenantId( TenantId );
 		ICFIntTld[] recArray;
 		if( dictByTenantIdx.containsKey( key ) ) {
 			Map< CFLibDbKeyHash256, CFIntBuffTld > subdictTenantIdx
@@ -250,8 +250,8 @@ public class CFBamRamTldTable
 	{
 		final String S_ProcName = "CFBamRamTld.readDerivedByNameIdx";
 		CFIntBuffTldByNameIdxKey key = (CFIntBuffTldByNameIdxKey)schema.getFactoryTld().newByNameIdxKey();
-		key.setRequiredName( Name );
 
+		key.setRequiredName( Name );
 		ICFIntTld buff;
 		if( dictByNameIdx.containsKey( key ) ) {
 			buff = dictByNameIdx.get( key );

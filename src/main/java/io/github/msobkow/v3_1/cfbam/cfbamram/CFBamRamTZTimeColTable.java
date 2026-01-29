@@ -845,7 +845,7 @@ public class CFBamRamTZTimeColTable
 	public ICFBamTZTimeCol lockDerived( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 PKey )
 	{
-		final String S_ProcName = "CFBamRamTZTimeCol.readDerived";
+		final String S_ProcName = "CFBamRamTZTimeCol.lockDerived";
 		ICFBamTZTimeCol buff;
 		if( dictByPKey.containsKey( PKey ) ) {
 			buff = dictByPKey.get( PKey );
@@ -1027,8 +1027,8 @@ public class CFBamRamTZTimeColTable
 	{
 		final String S_ProcName = "CFBamRamTZTimeCol.readDerivedByTableIdx";
 		CFBamBuffTZTimeColByTableIdxKey key = (CFBamBuffTZTimeColByTableIdxKey)schema.getFactoryTZTimeCol().newByTableIdxKey();
-		key.setRequiredTableId( TableId );
 
+		key.setRequiredTableId( TableId );
 		ICFBamTZTimeCol[] recArray;
 		if( dictByTableIdx.containsKey( key ) ) {
 			Map< CFLibDbKeyHash256, CFBamBuffTZTimeCol > subdictTableIdx
@@ -6781,7 +6781,7 @@ public class CFBamRamTZTimeColTable
 			}
 			CFBamBuffValue editPrev;
 			classCode = prev.getClassCode();
-			if( classCode.equals( "a809" ) ) {
+			if( classCode == ICFBamValue.CLASS_CODE ) {
 				editPrev = schema.getFactoryValue().newBuff();
 			}
 			else if( classCode == ICFBamAtom.CLASS_CODE ) {
@@ -7440,7 +7440,7 @@ public class CFBamRamTZTimeColTable
 			}
 			CFBamBuffValue editNext;
 			classCode = next.getClassCode();
-			if( classCode.equals( "a809" ) ) {
+			if( classCode == ICFBamValue.CLASS_CODE ) {
 				editNext = schema.getFactoryValue().newBuff();
 			}
 			else if( classCode == ICFBamAtom.CLASS_CODE ) {
@@ -7763,7 +7763,7 @@ public class CFBamRamTZTimeColTable
 			}
 			editNext.set( next );
 			editNext.setOptionalPrevId( prevId );
-			if( classCode.equals( "a809" ) ) {
+			if( classCode == ICFBamValue.CLASS_CODE ) {
 				schema.getTableValue().updateValue( Authorization, editNext );
 			}
 			else if( classCode == ICFBamAtom.CLASS_CODE ) {

@@ -145,7 +145,7 @@ public class CFBamRamServerProcTable
 	public ICFBamServerProc lockDerived( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 PKey )
 	{
-		final String S_ProcName = "CFBamRamServerProc.readDerived";
+		final String S_ProcName = "CFBamRamServerProc.lockDerived";
 		ICFBamServerProc buff;
 		if( dictByPKey.containsKey( PKey ) ) {
 			buff = dictByPKey.get( PKey );

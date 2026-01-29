@@ -221,7 +221,7 @@ public class CFBamRamIndexTable
 	public ICFBamIndex lockDerived( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 PKey )
 	{
-		final String S_ProcName = "CFBamRamIndex.readDerived";
+		final String S_ProcName = "CFBamRamIndex.lockDerived";
 		ICFBamIndex buff;
 		if( dictByPKey.containsKey( PKey ) ) {
 			buff = dictByPKey.get( PKey );
@@ -271,9 +271,9 @@ public class CFBamRamIndexTable
 	{
 		final String S_ProcName = "CFBamRamIndex.readDerivedByUNameIdx";
 		CFBamBuffIndexByUNameIdxKey key = (CFBamBuffIndexByUNameIdxKey)schema.getFactoryIndex().newByUNameIdxKey();
+
 		key.setRequiredTableId( TableId );
 		key.setRequiredName( Name );
-
 		ICFBamIndex buff;
 		if( dictByUNameIdx.containsKey( key ) ) {
 			buff = dictByUNameIdx.get( key );
@@ -289,8 +289,8 @@ public class CFBamRamIndexTable
 	{
 		final String S_ProcName = "CFBamRamIndex.readDerivedByIdxTableIdx";
 		CFBamBuffIndexByIdxTableIdxKey key = (CFBamBuffIndexByIdxTableIdxKey)schema.getFactoryIndex().newByIdxTableIdxKey();
-		key.setRequiredTableId( TableId );
 
+		key.setRequiredTableId( TableId );
 		ICFBamIndex[] recArray;
 		if( dictByIdxTableIdx.containsKey( key ) ) {
 			Map< CFLibDbKeyHash256, CFBamBuffIndex > subdictIdxTableIdx
@@ -316,8 +316,8 @@ public class CFBamRamIndexTable
 	{
 		final String S_ProcName = "CFBamRamIndex.readDerivedByDefSchemaIdx";
 		CFBamBuffIndexByDefSchemaIdxKey key = (CFBamBuffIndexByDefSchemaIdxKey)schema.getFactoryIndex().newByDefSchemaIdxKey();
-		key.setOptionalDefSchemaId( DefSchemaId );
 
+		key.setOptionalDefSchemaId( DefSchemaId );
 		ICFBamIndex[] recArray;
 		if( dictByDefSchemaIdx.containsKey( key ) ) {
 			Map< CFLibDbKeyHash256, CFBamBuffIndex > subdictDefSchemaIdx

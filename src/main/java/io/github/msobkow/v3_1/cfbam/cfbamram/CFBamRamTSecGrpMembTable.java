@@ -256,7 +256,7 @@ public class CFBamRamTSecGrpMembTable
 	public ICFSecTSecGrpMemb lockDerived( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 PKey )
 	{
-		final String S_ProcName = "CFBamRamTSecGrpMemb.readDerived";
+		final String S_ProcName = "CFBamRamTSecGrpMemb.lockDerived";
 		ICFSecTSecGrpMemb buff;
 		if( dictByPKey.containsKey( PKey ) ) {
 			buff = dictByPKey.get( PKey );
@@ -283,8 +283,8 @@ public class CFBamRamTSecGrpMembTable
 	{
 		final String S_ProcName = "CFBamRamTSecGrpMemb.readDerivedByTenantIdx";
 		CFSecBuffTSecGrpMembByTenantIdxKey key = (CFSecBuffTSecGrpMembByTenantIdxKey)schema.getFactoryTSecGrpMemb().newByTenantIdxKey();
-		key.setRequiredTenantId( TenantId );
 
+		key.setRequiredTenantId( TenantId );
 		ICFSecTSecGrpMemb[] recArray;
 		if( dictByTenantIdx.containsKey( key ) ) {
 			Map< CFLibDbKeyHash256, CFSecBuffTSecGrpMemb > subdictTenantIdx
@@ -310,8 +310,8 @@ public class CFBamRamTSecGrpMembTable
 	{
 		final String S_ProcName = "CFBamRamTSecGrpMemb.readDerivedByGroupIdx";
 		CFSecBuffTSecGrpMembByGroupIdxKey key = (CFSecBuffTSecGrpMembByGroupIdxKey)schema.getFactoryTSecGrpMemb().newByGroupIdxKey();
-		key.setRequiredTSecGroupId( TSecGroupId );
 
+		key.setRequiredTSecGroupId( TSecGroupId );
 		ICFSecTSecGrpMemb[] recArray;
 		if( dictByGroupIdx.containsKey( key ) ) {
 			Map< CFLibDbKeyHash256, CFSecBuffTSecGrpMemb > subdictGroupIdx
@@ -337,8 +337,8 @@ public class CFBamRamTSecGrpMembTable
 	{
 		final String S_ProcName = "CFBamRamTSecGrpMemb.readDerivedByUserIdx";
 		CFSecBuffTSecGrpMembByUserIdxKey key = (CFSecBuffTSecGrpMembByUserIdxKey)schema.getFactoryTSecGrpMemb().newByUserIdxKey();
-		key.setRequiredSecUserId( SecUserId );
 
+		key.setRequiredSecUserId( SecUserId );
 		ICFSecTSecGrpMemb[] recArray;
 		if( dictByUserIdx.containsKey( key ) ) {
 			Map< CFLibDbKeyHash256, CFSecBuffTSecGrpMemb > subdictUserIdx
@@ -366,10 +366,10 @@ public class CFBamRamTSecGrpMembTable
 	{
 		final String S_ProcName = "CFBamRamTSecGrpMemb.readDerivedByUUserIdx";
 		CFSecBuffTSecGrpMembByUUserIdxKey key = (CFSecBuffTSecGrpMembByUUserIdxKey)schema.getFactoryTSecGrpMemb().newByUUserIdxKey();
+
 		key.setRequiredTenantId( TenantId );
 		key.setRequiredTSecGroupId( TSecGroupId );
 		key.setRequiredSecUserId( SecUserId );
-
 		ICFSecTSecGrpMemb buff;
 		if( dictByUUserIdx.containsKey( key ) ) {
 			buff = dictByUUserIdx.get( key );

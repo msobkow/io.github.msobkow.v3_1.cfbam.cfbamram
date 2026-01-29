@@ -155,7 +155,7 @@ public class CFBamRamBoolDefTable
 	public ICFBamBoolDef lockDerived( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 PKey )
 	{
-		final String S_ProcName = "CFBamRamBoolDef.readDerived";
+		final String S_ProcName = "CFBamRamBoolDef.lockDerived";
 		ICFBamBoolDef buff;
 		if( dictByPKey.containsKey( PKey ) ) {
 			buff = dictByPKey.get( PKey );
@@ -5989,7 +5989,7 @@ public class CFBamRamBoolDefTable
 			}
 			CFBamBuffValue editPrev;
 			classCode = prev.getClassCode();
-			if( classCode.equals( "a809" ) ) {
+			if( classCode == ICFBamValue.CLASS_CODE ) {
 				editPrev = schema.getFactoryValue().newBuff();
 			}
 			else if( classCode == ICFBamAtom.CLASS_CODE ) {
@@ -6648,7 +6648,7 @@ public class CFBamRamBoolDefTable
 			}
 			CFBamBuffValue editNext;
 			classCode = next.getClassCode();
-			if( classCode.equals( "a809" ) ) {
+			if( classCode == ICFBamValue.CLASS_CODE ) {
 				editNext = schema.getFactoryValue().newBuff();
 			}
 			else if( classCode == ICFBamAtom.CLASS_CODE ) {
@@ -6971,7 +6971,7 @@ public class CFBamRamBoolDefTable
 			}
 			editNext.set( next );
 			editNext.setOptionalPrevId( prevId );
-			if( classCode.equals( "a809" ) ) {
+			if( classCode == ICFBamValue.CLASS_CODE ) {
 				schema.getTableValue().updateValue( Authorization, editNext );
 			}
 			else if( classCode == ICFBamAtom.CLASS_CODE ) {
@@ -7364,13 +7364,13 @@ public class CFBamRamBoolDefTable
 			cur = (CFBamBuffBoolDef)(schema.getTableBoolDef().readDerivedByIdIdx( Authorization,
 				cur.getRequiredId() ));
 			int subClassCode = cur.getClassCode();
-			if( CFBamBoolDef.CLASS_CODE == subClassCode ) {
+			if( ICFBamBoolDef.CLASS_CODE == subClassCode ) {
 				schema.getTableBoolDef().deleteBoolDef( Authorization, cur );
 			}
-			else if( CFBamBoolType.CLASS_CODE == subClassCode ) {
+			else if( ICFBamBoolType.CLASS_CODE == subClassCode ) {
 				schema.getTableBoolType().deleteBoolType( Authorization, (ICFBamBoolType)cur );
 			}
-			else if( CFBamBoolCol.CLASS_CODE == subClassCode ) {
+			else if( ICFBamBoolCol.CLASS_CODE == subClassCode ) {
 				schema.getTableBoolCol().deleteBoolCol( Authorization, (ICFBamBoolCol)cur );
 			}
 			else {
@@ -7414,13 +7414,13 @@ public class CFBamRamBoolDefTable
 			cur = (CFBamBuffBoolDef)(schema.getTableBoolDef().readDerivedByIdIdx( Authorization,
 				cur.getRequiredId() ));
 			int subClassCode = cur.getClassCode();
-			if( CFBamBoolDef.CLASS_CODE == subClassCode ) {
+			if( ICFBamBoolDef.CLASS_CODE == subClassCode ) {
 				schema.getTableBoolDef().deleteBoolDef( Authorization, cur );
 			}
-			else if( CFBamBoolType.CLASS_CODE == subClassCode ) {
+			else if( ICFBamBoolType.CLASS_CODE == subClassCode ) {
 				schema.getTableBoolType().deleteBoolType( Authorization, (ICFBamBoolType)cur );
 			}
-			else if( CFBamBoolCol.CLASS_CODE == subClassCode ) {
+			else if( ICFBamBoolCol.CLASS_CODE == subClassCode ) {
 				schema.getTableBoolCol().deleteBoolCol( Authorization, (ICFBamBoolCol)cur );
 			}
 			else {
@@ -7461,13 +7461,13 @@ public class CFBamRamBoolDefTable
 			cur = (CFBamBuffBoolDef)(schema.getTableBoolDef().readDerivedByIdIdx( Authorization,
 				cur.getRequiredId() ));
 			int subClassCode = cur.getClassCode();
-			if( CFBamBoolDef.CLASS_CODE == subClassCode ) {
+			if( ICFBamBoolDef.CLASS_CODE == subClassCode ) {
 				schema.getTableBoolDef().deleteBoolDef( Authorization, cur );
 			}
-			else if( CFBamBoolType.CLASS_CODE == subClassCode ) {
+			else if( ICFBamBoolType.CLASS_CODE == subClassCode ) {
 				schema.getTableBoolType().deleteBoolType( Authorization, (ICFBamBoolType)cur );
 			}
-			else if( CFBamBoolCol.CLASS_CODE == subClassCode ) {
+			else if( ICFBamBoolCol.CLASS_CODE == subClassCode ) {
 				schema.getTableBoolCol().deleteBoolCol( Authorization, (ICFBamBoolCol)cur );
 			}
 			else {
@@ -7510,13 +7510,13 @@ public class CFBamRamBoolDefTable
 			cur = (CFBamBuffBoolDef)(schema.getTableBoolDef().readDerivedByIdIdx( Authorization,
 				cur.getRequiredId() ));
 			int subClassCode = cur.getClassCode();
-			if( CFBamBoolDef.CLASS_CODE == subClassCode ) {
+			if( ICFBamBoolDef.CLASS_CODE == subClassCode ) {
 				schema.getTableBoolDef().deleteBoolDef( Authorization, cur );
 			}
-			else if( CFBamBoolType.CLASS_CODE == subClassCode ) {
+			else if( ICFBamBoolType.CLASS_CODE == subClassCode ) {
 				schema.getTableBoolType().deleteBoolType( Authorization, (ICFBamBoolType)cur );
 			}
-			else if( CFBamBoolCol.CLASS_CODE == subClassCode ) {
+			else if( ICFBamBoolCol.CLASS_CODE == subClassCode ) {
 				schema.getTableBoolCol().deleteBoolCol( Authorization, (ICFBamBoolCol)cur );
 			}
 			else {
@@ -7559,13 +7559,13 @@ public class CFBamRamBoolDefTable
 			cur = (CFBamBuffBoolDef)(schema.getTableBoolDef().readDerivedByIdIdx( Authorization,
 				cur.getRequiredId() ));
 			int subClassCode = cur.getClassCode();
-			if( CFBamBoolDef.CLASS_CODE == subClassCode ) {
+			if( ICFBamBoolDef.CLASS_CODE == subClassCode ) {
 				schema.getTableBoolDef().deleteBoolDef( Authorization, cur );
 			}
-			else if( CFBamBoolType.CLASS_CODE == subClassCode ) {
+			else if( ICFBamBoolType.CLASS_CODE == subClassCode ) {
 				schema.getTableBoolType().deleteBoolType( Authorization, (ICFBamBoolType)cur );
 			}
-			else if( CFBamBoolCol.CLASS_CODE == subClassCode ) {
+			else if( ICFBamBoolCol.CLASS_CODE == subClassCode ) {
 				schema.getTableBoolCol().deleteBoolCol( Authorization, (ICFBamBoolCol)cur );
 			}
 			else {
@@ -7608,13 +7608,13 @@ public class CFBamRamBoolDefTable
 			cur = (CFBamBuffBoolDef)(schema.getTableBoolDef().readDerivedByIdIdx( Authorization,
 				cur.getRequiredId() ));
 			int subClassCode = cur.getClassCode();
-			if( CFBamBoolDef.CLASS_CODE == subClassCode ) {
+			if( ICFBamBoolDef.CLASS_CODE == subClassCode ) {
 				schema.getTableBoolDef().deleteBoolDef( Authorization, cur );
 			}
-			else if( CFBamBoolType.CLASS_CODE == subClassCode ) {
+			else if( ICFBamBoolType.CLASS_CODE == subClassCode ) {
 				schema.getTableBoolType().deleteBoolType( Authorization, (ICFBamBoolType)cur );
 			}
-			else if( CFBamBoolCol.CLASS_CODE == subClassCode ) {
+			else if( ICFBamBoolCol.CLASS_CODE == subClassCode ) {
 				schema.getTableBoolCol().deleteBoolCol( Authorization, (ICFBamBoolCol)cur );
 			}
 			else {
@@ -7660,13 +7660,13 @@ public class CFBamRamBoolDefTable
 			cur = (CFBamBuffBoolDef)(schema.getTableBoolDef().readDerivedByIdIdx( Authorization,
 				cur.getRequiredId() ));
 			int subClassCode = cur.getClassCode();
-			if( CFBamBoolDef.CLASS_CODE == subClassCode ) {
+			if( ICFBamBoolDef.CLASS_CODE == subClassCode ) {
 				schema.getTableBoolDef().deleteBoolDef( Authorization, cur );
 			}
-			else if( CFBamBoolType.CLASS_CODE == subClassCode ) {
+			else if( ICFBamBoolType.CLASS_CODE == subClassCode ) {
 				schema.getTableBoolType().deleteBoolType( Authorization, (ICFBamBoolType)cur );
 			}
-			else if( CFBamBoolCol.CLASS_CODE == subClassCode ) {
+			else if( ICFBamBoolCol.CLASS_CODE == subClassCode ) {
 				schema.getTableBoolCol().deleteBoolCol( Authorization, (ICFBamBoolCol)cur );
 			}
 			else {
@@ -7712,13 +7712,13 @@ public class CFBamRamBoolDefTable
 			cur = (CFBamBuffBoolDef)(schema.getTableBoolDef().readDerivedByIdIdx( Authorization,
 				cur.getRequiredId() ));
 			int subClassCode = cur.getClassCode();
-			if( CFBamBoolDef.CLASS_CODE == subClassCode ) {
+			if( ICFBamBoolDef.CLASS_CODE == subClassCode ) {
 				schema.getTableBoolDef().deleteBoolDef( Authorization, cur );
 			}
-			else if( CFBamBoolType.CLASS_CODE == subClassCode ) {
+			else if( ICFBamBoolType.CLASS_CODE == subClassCode ) {
 				schema.getTableBoolType().deleteBoolType( Authorization, (ICFBamBoolType)cur );
 			}
-			else if( CFBamBoolCol.CLASS_CODE == subClassCode ) {
+			else if( ICFBamBoolCol.CLASS_CODE == subClassCode ) {
 				schema.getTableBoolCol().deleteBoolCol( Authorization, (ICFBamBoolCol)cur );
 			}
 			else {

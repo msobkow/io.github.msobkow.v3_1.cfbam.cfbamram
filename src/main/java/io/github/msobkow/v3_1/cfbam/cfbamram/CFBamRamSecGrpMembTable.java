@@ -256,7 +256,7 @@ public class CFBamRamSecGrpMembTable
 	public ICFSecSecGrpMemb lockDerived( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 PKey )
 	{
-		final String S_ProcName = "CFBamRamSecGrpMemb.readDerived";
+		final String S_ProcName = "CFBamRamSecGrpMemb.lockDerived";
 		ICFSecSecGrpMemb buff;
 		if( dictByPKey.containsKey( PKey ) ) {
 			buff = dictByPKey.get( PKey );
@@ -283,8 +283,8 @@ public class CFBamRamSecGrpMembTable
 	{
 		final String S_ProcName = "CFBamRamSecGrpMemb.readDerivedByClusterIdx";
 		CFSecBuffSecGrpMembByClusterIdxKey key = (CFSecBuffSecGrpMembByClusterIdxKey)schema.getFactorySecGrpMemb().newByClusterIdxKey();
-		key.setRequiredClusterId( ClusterId );
 
+		key.setRequiredClusterId( ClusterId );
 		ICFSecSecGrpMemb[] recArray;
 		if( dictByClusterIdx.containsKey( key ) ) {
 			Map< CFLibDbKeyHash256, CFSecBuffSecGrpMemb > subdictClusterIdx
@@ -310,8 +310,8 @@ public class CFBamRamSecGrpMembTable
 	{
 		final String S_ProcName = "CFBamRamSecGrpMemb.readDerivedByGroupIdx";
 		CFSecBuffSecGrpMembByGroupIdxKey key = (CFSecBuffSecGrpMembByGroupIdxKey)schema.getFactorySecGrpMemb().newByGroupIdxKey();
-		key.setRequiredSecGroupId( SecGroupId );
 
+		key.setRequiredSecGroupId( SecGroupId );
 		ICFSecSecGrpMemb[] recArray;
 		if( dictByGroupIdx.containsKey( key ) ) {
 			Map< CFLibDbKeyHash256, CFSecBuffSecGrpMemb > subdictGroupIdx
@@ -337,8 +337,8 @@ public class CFBamRamSecGrpMembTable
 	{
 		final String S_ProcName = "CFBamRamSecGrpMemb.readDerivedByUserIdx";
 		CFSecBuffSecGrpMembByUserIdxKey key = (CFSecBuffSecGrpMembByUserIdxKey)schema.getFactorySecGrpMemb().newByUserIdxKey();
-		key.setRequiredSecUserId( SecUserId );
 
+		key.setRequiredSecUserId( SecUserId );
 		ICFSecSecGrpMemb[] recArray;
 		if( dictByUserIdx.containsKey( key ) ) {
 			Map< CFLibDbKeyHash256, CFSecBuffSecGrpMemb > subdictUserIdx
@@ -366,10 +366,10 @@ public class CFBamRamSecGrpMembTable
 	{
 		final String S_ProcName = "CFBamRamSecGrpMemb.readDerivedByUUserIdx";
 		CFSecBuffSecGrpMembByUUserIdxKey key = (CFSecBuffSecGrpMembByUUserIdxKey)schema.getFactorySecGrpMemb().newByUUserIdxKey();
+
 		key.setRequiredClusterId( ClusterId );
 		key.setRequiredSecGroupId( SecGroupId );
 		key.setRequiredSecUserId( SecUserId );
-
 		ICFSecSecGrpMemb buff;
 		if( dictByUUserIdx.containsKey( key ) ) {
 			buff = dictByUUserIdx.get( key );

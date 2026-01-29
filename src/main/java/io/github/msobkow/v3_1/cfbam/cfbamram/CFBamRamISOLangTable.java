@@ -176,7 +176,7 @@ public class CFBamRamISOLangTable
 	public ICFSecISOLang lockDerived( ICFSecAuthorization Authorization,
 		Short PKey )
 	{
-		final String S_ProcName = "CFBamRamISOLang.readDerived";
+		final String S_ProcName = "CFBamRamISOLang.lockDerived";
 		ICFSecISOLang buff;
 		if( dictByPKey.containsKey( PKey ) ) {
 			buff = dictByPKey.get( PKey );
@@ -203,8 +203,8 @@ public class CFBamRamISOLangTable
 	{
 		final String S_ProcName = "CFBamRamISOLang.readDerivedByCode3Idx";
 		CFSecBuffISOLangByCode3IdxKey key = (CFSecBuffISOLangByCode3IdxKey)schema.getFactoryISOLang().newByCode3IdxKey();
-		key.setRequiredISO6392Code( ISO6392Code );
 
+		key.setRequiredISO6392Code( ISO6392Code );
 		ICFSecISOLang buff;
 		if( dictByCode3Idx.containsKey( key ) ) {
 			buff = dictByCode3Idx.get( key );
@@ -220,8 +220,8 @@ public class CFBamRamISOLangTable
 	{
 		final String S_ProcName = "CFBamRamISOLang.readDerivedByCode2Idx";
 		CFSecBuffISOLangByCode2IdxKey key = (CFSecBuffISOLangByCode2IdxKey)schema.getFactoryISOLang().newByCode2IdxKey();
-		key.setOptionalISO6391Code( ISO6391Code );
 
+		key.setOptionalISO6391Code( ISO6391Code );
 		ICFSecISOLang[] recArray;
 		if( dictByCode2Idx.containsKey( key ) ) {
 			Map< Short, CFSecBuffISOLang > subdictCode2Idx

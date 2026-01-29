@@ -223,7 +223,7 @@ public class CFBamRamPopDepTable
 	public ICFBamPopDep lockDerived( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 PKey )
 	{
-		final String S_ProcName = "CFBamRamPopDep.readDerived";
+		final String S_ProcName = "CFBamRamPopDep.lockDerived";
 		ICFBamPopDep buff;
 		if( dictByPKey.containsKey( PKey ) ) {
 			buff = dictByPKey.get( PKey );
@@ -272,8 +272,8 @@ public class CFBamRamPopDepTable
 	{
 		final String S_ProcName = "CFBamRamPopDep.readDerivedByRelationIdx";
 		CFBamBuffPopDepByRelationIdxKey key = (CFBamBuffPopDepByRelationIdxKey)schema.getFactoryPopDep().newByRelationIdxKey();
-		key.setRequiredRelationId( RelationId );
 
+		key.setRequiredRelationId( RelationId );
 		ICFBamPopDep[] recArray;
 		if( dictByRelationIdx.containsKey( key ) ) {
 			Map< CFLibDbKeyHash256, CFBamBuffPopDep > subdictRelationIdx
@@ -299,8 +299,8 @@ public class CFBamRamPopDepTable
 	{
 		final String S_ProcName = "CFBamRamPopDep.readDerivedByDefSchemaIdx";
 		CFBamBuffPopDepByDefSchemaIdxKey key = (CFBamBuffPopDepByDefSchemaIdxKey)schema.getFactoryPopDep().newByDefSchemaIdxKey();
-		key.setOptionalDefSchemaId( DefSchemaId );
 
+		key.setOptionalDefSchemaId( DefSchemaId );
 		ICFBamPopDep[] recArray;
 		if( dictByDefSchemaIdx.containsKey( key ) ) {
 			Map< CFLibDbKeyHash256, CFBamBuffPopDep > subdictDefSchemaIdx
@@ -697,19 +697,19 @@ public class CFBamRamPopDepTable
 			cur = (CFBamBuffPopDep)(schema.getTablePopDep().readDerivedByIdIdx( Authorization,
 				cur.getRequiredId() ));
 			int subClassCode = cur.getClassCode();
-			if( CFBamPopDep.CLASS_CODE == subClassCode ) {
+			if( ICFBamPopDep.CLASS_CODE == subClassCode ) {
 				schema.getTablePopDep().deletePopDep( Authorization, cur );
 			}
-			else if( CFBamPopSubDep1.CLASS_CODE == subClassCode ) {
+			else if( ICFBamPopSubDep1.CLASS_CODE == subClassCode ) {
 				schema.getTablePopSubDep1().deletePopSubDep1( Authorization, (ICFBamPopSubDep1)cur );
 			}
-			else if( CFBamPopSubDep2.CLASS_CODE == subClassCode ) {
+			else if( ICFBamPopSubDep2.CLASS_CODE == subClassCode ) {
 				schema.getTablePopSubDep2().deletePopSubDep2( Authorization, (ICFBamPopSubDep2)cur );
 			}
-			else if( CFBamPopSubDep3.CLASS_CODE == subClassCode ) {
+			else if( ICFBamPopSubDep3.CLASS_CODE == subClassCode ) {
 				schema.getTablePopSubDep3().deletePopSubDep3( Authorization, (ICFBamPopSubDep3)cur );
 			}
-			else if( CFBamPopTopDep.CLASS_CODE == subClassCode ) {
+			else if( ICFBamPopTopDep.CLASS_CODE == subClassCode ) {
 				schema.getTablePopTopDep().deletePopTopDep( Authorization, (ICFBamPopTopDep)cur );
 			}
 			else {
@@ -752,19 +752,19 @@ public class CFBamRamPopDepTable
 			cur = (CFBamBuffPopDep)(schema.getTablePopDep().readDerivedByIdIdx( Authorization,
 				cur.getRequiredId() ));
 			int subClassCode = cur.getClassCode();
-			if( CFBamPopDep.CLASS_CODE == subClassCode ) {
+			if( ICFBamPopDep.CLASS_CODE == subClassCode ) {
 				schema.getTablePopDep().deletePopDep( Authorization, cur );
 			}
-			else if( CFBamPopSubDep1.CLASS_CODE == subClassCode ) {
+			else if( ICFBamPopSubDep1.CLASS_CODE == subClassCode ) {
 				schema.getTablePopSubDep1().deletePopSubDep1( Authorization, (ICFBamPopSubDep1)cur );
 			}
-			else if( CFBamPopSubDep2.CLASS_CODE == subClassCode ) {
+			else if( ICFBamPopSubDep2.CLASS_CODE == subClassCode ) {
 				schema.getTablePopSubDep2().deletePopSubDep2( Authorization, (ICFBamPopSubDep2)cur );
 			}
-			else if( CFBamPopSubDep3.CLASS_CODE == subClassCode ) {
+			else if( ICFBamPopSubDep3.CLASS_CODE == subClassCode ) {
 				schema.getTablePopSubDep3().deletePopSubDep3( Authorization, (ICFBamPopSubDep3)cur );
 			}
-			else if( CFBamPopTopDep.CLASS_CODE == subClassCode ) {
+			else if( ICFBamPopTopDep.CLASS_CODE == subClassCode ) {
 				schema.getTablePopTopDep().deletePopTopDep( Authorization, (ICFBamPopTopDep)cur );
 			}
 			else {
@@ -797,19 +797,19 @@ public class CFBamRamPopDepTable
 			cur = (CFBamBuffPopDep)(schema.getTablePopDep().readDerivedByIdIdx( Authorization,
 				cur.getRequiredId() ));
 			int subClassCode = cur.getClassCode();
-			if( CFBamPopDep.CLASS_CODE == subClassCode ) {
+			if( ICFBamPopDep.CLASS_CODE == subClassCode ) {
 				schema.getTablePopDep().deletePopDep( Authorization, cur );
 			}
-			else if( CFBamPopSubDep1.CLASS_CODE == subClassCode ) {
+			else if( ICFBamPopSubDep1.CLASS_CODE == subClassCode ) {
 				schema.getTablePopSubDep1().deletePopSubDep1( Authorization, (ICFBamPopSubDep1)cur );
 			}
-			else if( CFBamPopSubDep2.CLASS_CODE == subClassCode ) {
+			else if( ICFBamPopSubDep2.CLASS_CODE == subClassCode ) {
 				schema.getTablePopSubDep2().deletePopSubDep2( Authorization, (ICFBamPopSubDep2)cur );
 			}
-			else if( CFBamPopSubDep3.CLASS_CODE == subClassCode ) {
+			else if( ICFBamPopSubDep3.CLASS_CODE == subClassCode ) {
 				schema.getTablePopSubDep3().deletePopSubDep3( Authorization, (ICFBamPopSubDep3)cur );
 			}
-			else if( CFBamPopTopDep.CLASS_CODE == subClassCode ) {
+			else if( ICFBamPopTopDep.CLASS_CODE == subClassCode ) {
 				schema.getTablePopTopDep().deletePopTopDep( Authorization, (ICFBamPopTopDep)cur );
 			}
 			else {
@@ -850,19 +850,19 @@ public class CFBamRamPopDepTable
 			cur = (CFBamBuffPopDep)(schema.getTablePopDep().readDerivedByIdIdx( Authorization,
 				cur.getRequiredId() ));
 			int subClassCode = cur.getClassCode();
-			if( CFBamPopDep.CLASS_CODE == subClassCode ) {
+			if( ICFBamPopDep.CLASS_CODE == subClassCode ) {
 				schema.getTablePopDep().deletePopDep( Authorization, cur );
 			}
-			else if( CFBamPopSubDep1.CLASS_CODE == subClassCode ) {
+			else if( ICFBamPopSubDep1.CLASS_CODE == subClassCode ) {
 				schema.getTablePopSubDep1().deletePopSubDep1( Authorization, (ICFBamPopSubDep1)cur );
 			}
-			else if( CFBamPopSubDep2.CLASS_CODE == subClassCode ) {
+			else if( ICFBamPopSubDep2.CLASS_CODE == subClassCode ) {
 				schema.getTablePopSubDep2().deletePopSubDep2( Authorization, (ICFBamPopSubDep2)cur );
 			}
-			else if( CFBamPopSubDep3.CLASS_CODE == subClassCode ) {
+			else if( ICFBamPopSubDep3.CLASS_CODE == subClassCode ) {
 				schema.getTablePopSubDep3().deletePopSubDep3( Authorization, (ICFBamPopSubDep3)cur );
 			}
-			else if( CFBamPopTopDep.CLASS_CODE == subClassCode ) {
+			else if( ICFBamPopTopDep.CLASS_CODE == subClassCode ) {
 				schema.getTablePopTopDep().deletePopTopDep( Authorization, (ICFBamPopTopDep)cur );
 			}
 			else {

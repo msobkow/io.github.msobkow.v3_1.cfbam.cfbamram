@@ -299,7 +299,7 @@ public class CFBamRamSchemaDefTable
 	public ICFBamSchemaDef lockDerived( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 PKey )
 	{
-		final String S_ProcName = "CFBamRamSchemaDef.readDerived";
+		final String S_ProcName = "CFBamRamSchemaDef.lockDerived";
 		ICFBamSchemaDef buff;
 		if( dictByPKey.containsKey( PKey ) ) {
 			buff = dictByPKey.get( PKey );
@@ -348,8 +348,8 @@ public class CFBamRamSchemaDefTable
 	{
 		final String S_ProcName = "CFBamRamSchemaDef.readDerivedByCTenantIdx";
 		CFBamBuffSchemaDefByCTenantIdxKey key = (CFBamBuffSchemaDefByCTenantIdxKey)schema.getFactorySchemaDef().newByCTenantIdxKey();
-		key.setRequiredCTenantId( CTenantId );
 
+		key.setRequiredCTenantId( CTenantId );
 		ICFBamSchemaDef[] recArray;
 		if( dictByCTenantIdx.containsKey( key ) ) {
 			Map< CFLibDbKeyHash256, CFBamBuffSchemaDef > subdictCTenantIdx
@@ -375,8 +375,8 @@ public class CFBamRamSchemaDefTable
 	{
 		final String S_ProcName = "CFBamRamSchemaDef.readDerivedByMinorVersionIdx";
 		CFBamBuffSchemaDefByMinorVersionIdxKey key = (CFBamBuffSchemaDefByMinorVersionIdxKey)schema.getFactorySchemaDef().newByMinorVersionIdxKey();
-		key.setRequiredMinorVersionId( MinorVersionId );
 
+		key.setRequiredMinorVersionId( MinorVersionId );
 		ICFBamSchemaDef[] recArray;
 		if( dictByMinorVersionIdx.containsKey( key ) ) {
 			Map< CFLibDbKeyHash256, CFBamBuffSchemaDef > subdictMinorVersionIdx
@@ -403,9 +403,9 @@ public class CFBamRamSchemaDefTable
 	{
 		final String S_ProcName = "CFBamRamSchemaDef.readDerivedByUNameIdx";
 		CFBamBuffSchemaDefByUNameIdxKey key = (CFBamBuffSchemaDefByUNameIdxKey)schema.getFactorySchemaDef().newByUNameIdxKey();
+
 		key.setRequiredMinorVersionId( MinorVersionId );
 		key.setRequiredName( Name );
-
 		ICFBamSchemaDef buff;
 		if( dictByUNameIdx.containsKey( key ) ) {
 			buff = dictByUNameIdx.get( key );
@@ -422,9 +422,9 @@ public class CFBamRamSchemaDefTable
 	{
 		final String S_ProcName = "CFBamRamSchemaDef.readDerivedByAuthEMailIdx";
 		CFBamBuffSchemaDefByAuthEMailIdxKey key = (CFBamBuffSchemaDefByAuthEMailIdxKey)schema.getFactorySchemaDef().newByAuthEMailIdxKey();
+
 		key.setRequiredCTenantId( CTenantId );
 		key.setRequiredAuthorEMail( AuthorEMail );
-
 		ICFBamSchemaDef[] recArray;
 		if( dictByAuthEMailIdx.containsKey( key ) ) {
 			Map< CFLibDbKeyHash256, CFBamBuffSchemaDef > subdictAuthEMailIdx
@@ -451,9 +451,9 @@ public class CFBamRamSchemaDefTable
 	{
 		final String S_ProcName = "CFBamRamSchemaDef.readDerivedByProjectURLIdx";
 		CFBamBuffSchemaDefByProjectURLIdxKey key = (CFBamBuffSchemaDefByProjectURLIdxKey)schema.getFactorySchemaDef().newByProjectURLIdxKey();
+
 		key.setRequiredCTenantId( CTenantId );
 		key.setRequiredProjectURL( ProjectURL );
-
 		ICFBamSchemaDef[] recArray;
 		if( dictByProjectURLIdx.containsKey( key ) ) {
 			Map< CFLibDbKeyHash256, CFBamBuffSchemaDef > subdictProjectURLIdx
@@ -480,9 +480,9 @@ public class CFBamRamSchemaDefTable
 	{
 		final String S_ProcName = "CFBamRamSchemaDef.readDerivedByPubURIIdx";
 		CFBamBuffSchemaDefByPubURIIdxKey key = (CFBamBuffSchemaDefByPubURIIdxKey)schema.getFactorySchemaDef().newByPubURIIdxKey();
+
 		key.setRequiredCTenantId( CTenantId );
 		key.setRequiredPublishURI( PublishURI );
-
 		ICFBamSchemaDef buff;
 		if( dictByPubURIIdx.containsKey( key ) ) {
 			buff = dictByPubURIIdx.get( key );
@@ -1004,7 +1004,7 @@ public class CFBamRamSchemaDefTable
 							buffReferencingTableCols.getRequiredId() ));
 						editBuff.setOptionalDataId( null );
 						classCode = editBuff.getClassCode();
-						if( classCode == CFBamTableCol.CLASS_CODE ) {
+						if( classCode == ICFBamTableCol.CLASS_CODE ) {
 							schema.getTableTableCol().updateTableCol( Authorization, editBuff );
 						}
 						else {
@@ -1028,7 +1028,7 @@ public class CFBamRamSchemaDefTable
 							buffTableRelation.getRequiredId() ));
 						editBuff.setOptionalNarrowedId( null );
 						classCode = editBuff.getClassCode();
-						if( classCode == CFBamRelation.CLASS_CODE ) {
+						if( classCode == ICFBamRelation.CLASS_CODE ) {
 							schema.getTableRelation().updateRelation( Authorization, editBuff );
 						}
 						else {

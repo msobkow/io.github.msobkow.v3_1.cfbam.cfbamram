@@ -845,7 +845,7 @@ public class CFBamRamUuid6ColTable
 	public ICFBamUuid6Col lockDerived( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 PKey )
 	{
-		final String S_ProcName = "CFBamRamUuid6Col.readDerived";
+		final String S_ProcName = "CFBamRamUuid6Col.lockDerived";
 		ICFBamUuid6Col buff;
 		if( dictByPKey.containsKey( PKey ) ) {
 			buff = dictByPKey.get( PKey );
@@ -1027,8 +1027,8 @@ public class CFBamRamUuid6ColTable
 	{
 		final String S_ProcName = "CFBamRamUuid6Col.readDerivedByTableIdx";
 		CFBamBuffUuid6ColByTableIdxKey key = (CFBamBuffUuid6ColByTableIdxKey)schema.getFactoryUuid6Col().newByTableIdxKey();
-		key.setRequiredTableId( TableId );
 
+		key.setRequiredTableId( TableId );
 		ICFBamUuid6Col[] recArray;
 		if( dictByTableIdx.containsKey( key ) ) {
 			Map< CFLibDbKeyHash256, CFBamBuffUuid6Col > subdictTableIdx
@@ -6781,7 +6781,7 @@ public class CFBamRamUuid6ColTable
 			}
 			CFBamBuffValue editPrev;
 			classCode = prev.getClassCode();
-			if( classCode.equals( "a809" ) ) {
+			if( classCode == ICFBamValue.CLASS_CODE ) {
 				editPrev = schema.getFactoryValue().newBuff();
 			}
 			else if( classCode == ICFBamAtom.CLASS_CODE ) {
@@ -7440,7 +7440,7 @@ public class CFBamRamUuid6ColTable
 			}
 			CFBamBuffValue editNext;
 			classCode = next.getClassCode();
-			if( classCode.equals( "a809" ) ) {
+			if( classCode == ICFBamValue.CLASS_CODE ) {
 				editNext = schema.getFactoryValue().newBuff();
 			}
 			else if( classCode == ICFBamAtom.CLASS_CODE ) {
@@ -7763,7 +7763,7 @@ public class CFBamRamUuid6ColTable
 			}
 			editNext.set( next );
 			editNext.setOptionalPrevId( prevId );
-			if( classCode.equals( "a809" ) ) {
+			if( classCode == ICFBamValue.CLASS_CODE ) {
 				schema.getTableValue().updateValue( Authorization, editNext );
 			}
 			else if( classCode == ICFBamAtom.CLASS_CODE ) {

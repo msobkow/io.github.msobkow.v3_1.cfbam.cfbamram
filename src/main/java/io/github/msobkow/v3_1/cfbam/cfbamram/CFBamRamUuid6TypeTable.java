@@ -850,7 +850,7 @@ public class CFBamRamUuid6TypeTable
 	public ICFBamUuid6Type lockDerived( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 PKey )
 	{
-		final String S_ProcName = "CFBamRamUuid6Type.readDerived";
+		final String S_ProcName = "CFBamRamUuid6Type.lockDerived";
 		ICFBamUuid6Type buff;
 		if( dictByPKey.containsKey( PKey ) ) {
 			buff = dictByPKey.get( PKey );
@@ -1032,8 +1032,8 @@ public class CFBamRamUuid6TypeTable
 	{
 		final String S_ProcName = "CFBamRamUuid6Type.readDerivedBySchemaIdx";
 		CFBamBuffUuid6TypeBySchemaIdxKey key = (CFBamBuffUuid6TypeBySchemaIdxKey)schema.getFactoryUuid6Type().newBySchemaIdxKey();
-		key.setRequiredSchemaDefId( SchemaDefId );
 
+		key.setRequiredSchemaDefId( SchemaDefId );
 		ICFBamUuid6Type[] recArray;
 		if( dictBySchemaIdx.containsKey( key ) ) {
 			Map< CFLibDbKeyHash256, CFBamBuffUuid6Type > subdictSchemaIdx
@@ -6786,7 +6786,7 @@ public class CFBamRamUuid6TypeTable
 			}
 			CFBamBuffValue editPrev;
 			classCode = prev.getClassCode();
-			if( classCode.equals( "a809" ) ) {
+			if( classCode == ICFBamValue.CLASS_CODE ) {
 				editPrev = schema.getFactoryValue().newBuff();
 			}
 			else if( classCode == ICFBamAtom.CLASS_CODE ) {
@@ -7445,7 +7445,7 @@ public class CFBamRamUuid6TypeTable
 			}
 			CFBamBuffValue editNext;
 			classCode = next.getClassCode();
-			if( classCode.equals( "a809" ) ) {
+			if( classCode == ICFBamValue.CLASS_CODE ) {
 				editNext = schema.getFactoryValue().newBuff();
 			}
 			else if( classCode == ICFBamAtom.CLASS_CODE ) {
@@ -7768,7 +7768,7 @@ public class CFBamRamUuid6TypeTable
 			}
 			editNext.set( next );
 			editNext.setOptionalPrevId( prevId );
-			if( classCode.equals( "a809" ) ) {
+			if( classCode == ICFBamValue.CLASS_CODE ) {
 				schema.getTableValue().updateValue( Authorization, editNext );
 			}
 			else if( classCode == ICFBamAtom.CLASS_CODE ) {
@@ -8164,10 +8164,10 @@ public class CFBamRamUuid6TypeTable
 			cur = (CFBamBuffUuid6Type)(schema.getTableUuid6Type().readDerivedByIdIdx( Authorization,
 				cur.getRequiredId() ));
 			int subClassCode = cur.getClassCode();
-			if( CFBamUuid6Type.CLASS_CODE == subClassCode ) {
+			if( ICFBamUuid6Type.CLASS_CODE == subClassCode ) {
 				schema.getTableUuid6Type().deleteUuid6Type( Authorization, cur );
 			}
-			else if( CFBamUuid6Gen.CLASS_CODE == subClassCode ) {
+			else if( ICFBamUuid6Gen.CLASS_CODE == subClassCode ) {
 				schema.getTableUuid6Gen().deleteUuid6Gen( Authorization, (ICFBamUuid6Gen)cur );
 			}
 			else {
@@ -8200,10 +8200,10 @@ public class CFBamRamUuid6TypeTable
 			cur = (CFBamBuffUuid6Type)(schema.getTableUuid6Type().readDerivedByIdIdx( Authorization,
 				cur.getRequiredId() ));
 			int subClassCode = cur.getClassCode();
-			if( CFBamUuid6Type.CLASS_CODE == subClassCode ) {
+			if( ICFBamUuid6Type.CLASS_CODE == subClassCode ) {
 				schema.getTableUuid6Type().deleteUuid6Type( Authorization, cur );
 			}
-			else if( CFBamUuid6Gen.CLASS_CODE == subClassCode ) {
+			else if( ICFBamUuid6Gen.CLASS_CODE == subClassCode ) {
 				schema.getTableUuid6Gen().deleteUuid6Gen( Authorization, (ICFBamUuid6Gen)cur );
 			}
 			else {
@@ -8247,10 +8247,10 @@ public class CFBamRamUuid6TypeTable
 			cur = (CFBamBuffUuid6Type)(schema.getTableUuid6Type().readDerivedByIdIdx( Authorization,
 				cur.getRequiredId() ));
 			int subClassCode = cur.getClassCode();
-			if( CFBamUuid6Type.CLASS_CODE == subClassCode ) {
+			if( ICFBamUuid6Type.CLASS_CODE == subClassCode ) {
 				schema.getTableUuid6Type().deleteUuid6Type( Authorization, cur );
 			}
-			else if( CFBamUuid6Gen.CLASS_CODE == subClassCode ) {
+			else if( ICFBamUuid6Gen.CLASS_CODE == subClassCode ) {
 				schema.getTableUuid6Gen().deleteUuid6Gen( Authorization, (ICFBamUuid6Gen)cur );
 			}
 			else {
@@ -8291,10 +8291,10 @@ public class CFBamRamUuid6TypeTable
 			cur = (CFBamBuffUuid6Type)(schema.getTableUuid6Type().readDerivedByIdIdx( Authorization,
 				cur.getRequiredId() ));
 			int subClassCode = cur.getClassCode();
-			if( CFBamUuid6Type.CLASS_CODE == subClassCode ) {
+			if( ICFBamUuid6Type.CLASS_CODE == subClassCode ) {
 				schema.getTableUuid6Type().deleteUuid6Type( Authorization, cur );
 			}
-			else if( CFBamUuid6Gen.CLASS_CODE == subClassCode ) {
+			else if( ICFBamUuid6Gen.CLASS_CODE == subClassCode ) {
 				schema.getTableUuid6Gen().deleteUuid6Gen( Authorization, (ICFBamUuid6Gen)cur );
 			}
 			else {
@@ -8337,10 +8337,10 @@ public class CFBamRamUuid6TypeTable
 			cur = (CFBamBuffUuid6Type)(schema.getTableUuid6Type().readDerivedByIdIdx( Authorization,
 				cur.getRequiredId() ));
 			int subClassCode = cur.getClassCode();
-			if( CFBamUuid6Type.CLASS_CODE == subClassCode ) {
+			if( ICFBamUuid6Type.CLASS_CODE == subClassCode ) {
 				schema.getTableUuid6Type().deleteUuid6Type( Authorization, cur );
 			}
-			else if( CFBamUuid6Gen.CLASS_CODE == subClassCode ) {
+			else if( ICFBamUuid6Gen.CLASS_CODE == subClassCode ) {
 				schema.getTableUuid6Gen().deleteUuid6Gen( Authorization, (ICFBamUuid6Gen)cur );
 			}
 			else {
@@ -8383,10 +8383,10 @@ public class CFBamRamUuid6TypeTable
 			cur = (CFBamBuffUuid6Type)(schema.getTableUuid6Type().readDerivedByIdIdx( Authorization,
 				cur.getRequiredId() ));
 			int subClassCode = cur.getClassCode();
-			if( CFBamUuid6Type.CLASS_CODE == subClassCode ) {
+			if( ICFBamUuid6Type.CLASS_CODE == subClassCode ) {
 				schema.getTableUuid6Type().deleteUuid6Type( Authorization, cur );
 			}
-			else if( CFBamUuid6Gen.CLASS_CODE == subClassCode ) {
+			else if( ICFBamUuid6Gen.CLASS_CODE == subClassCode ) {
 				schema.getTableUuid6Gen().deleteUuid6Gen( Authorization, (ICFBamUuid6Gen)cur );
 			}
 			else {
@@ -8429,10 +8429,10 @@ public class CFBamRamUuid6TypeTable
 			cur = (CFBamBuffUuid6Type)(schema.getTableUuid6Type().readDerivedByIdIdx( Authorization,
 				cur.getRequiredId() ));
 			int subClassCode = cur.getClassCode();
-			if( CFBamUuid6Type.CLASS_CODE == subClassCode ) {
+			if( ICFBamUuid6Type.CLASS_CODE == subClassCode ) {
 				schema.getTableUuid6Type().deleteUuid6Type( Authorization, cur );
 			}
-			else if( CFBamUuid6Gen.CLASS_CODE == subClassCode ) {
+			else if( ICFBamUuid6Gen.CLASS_CODE == subClassCode ) {
 				schema.getTableUuid6Gen().deleteUuid6Gen( Authorization, (ICFBamUuid6Gen)cur );
 			}
 			else {
@@ -8478,10 +8478,10 @@ public class CFBamRamUuid6TypeTable
 			cur = (CFBamBuffUuid6Type)(schema.getTableUuid6Type().readDerivedByIdIdx( Authorization,
 				cur.getRequiredId() ));
 			int subClassCode = cur.getClassCode();
-			if( CFBamUuid6Type.CLASS_CODE == subClassCode ) {
+			if( ICFBamUuid6Type.CLASS_CODE == subClassCode ) {
 				schema.getTableUuid6Type().deleteUuid6Type( Authorization, cur );
 			}
-			else if( CFBamUuid6Gen.CLASS_CODE == subClassCode ) {
+			else if( ICFBamUuid6Gen.CLASS_CODE == subClassCode ) {
 				schema.getTableUuid6Gen().deleteUuid6Gen( Authorization, (ICFBamUuid6Gen)cur );
 			}
 			else {
@@ -8527,10 +8527,10 @@ public class CFBamRamUuid6TypeTable
 			cur = (CFBamBuffUuid6Type)(schema.getTableUuid6Type().readDerivedByIdIdx( Authorization,
 				cur.getRequiredId() ));
 			int subClassCode = cur.getClassCode();
-			if( CFBamUuid6Type.CLASS_CODE == subClassCode ) {
+			if( ICFBamUuid6Type.CLASS_CODE == subClassCode ) {
 				schema.getTableUuid6Type().deleteUuid6Type( Authorization, cur );
 			}
-			else if( CFBamUuid6Gen.CLASS_CODE == subClassCode ) {
+			else if( ICFBamUuid6Gen.CLASS_CODE == subClassCode ) {
 				schema.getTableUuid6Gen().deleteUuid6Gen( Authorization, (ICFBamUuid6Gen)cur );
 			}
 			else {

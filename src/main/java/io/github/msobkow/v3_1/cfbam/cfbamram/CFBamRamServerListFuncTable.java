@@ -164,7 +164,7 @@ public class CFBamRamServerListFuncTable
 	public ICFBamServerListFunc lockDerived( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 PKey )
 	{
-		final String S_ProcName = "CFBamRamServerListFunc.readDerived";
+		final String S_ProcName = "CFBamRamServerListFunc.lockDerived";
 		ICFBamServerListFunc buff;
 		if( dictByPKey.containsKey( PKey ) ) {
 			buff = dictByPKey.get( PKey );
@@ -276,8 +276,8 @@ public class CFBamRamServerListFuncTable
 	{
 		final String S_ProcName = "CFBamRamServerListFunc.readDerivedByRetTblIdx";
 		CFBamBuffServerListFuncByRetTblIdxKey key = (CFBamBuffServerListFuncByRetTblIdxKey)schema.getFactoryServerListFunc().newByRetTblIdxKey();
-		key.setOptionalRetTableId( RetTableId );
 
+		key.setOptionalRetTableId( RetTableId );
 		ICFBamServerListFunc[] recArray;
 		if( dictByRetTblIdx.containsKey( key ) ) {
 			Map< CFLibDbKeyHash256, CFBamBuffServerListFunc > subdictRetTblIdx

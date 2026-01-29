@@ -255,7 +255,7 @@ public class CFBamRamServiceTable
 	public ICFSecService lockDerived( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 PKey )
 	{
-		final String S_ProcName = "CFBamRamService.readDerived";
+		final String S_ProcName = "CFBamRamService.lockDerived";
 		ICFSecService buff;
 		if( dictByPKey.containsKey( PKey ) ) {
 			buff = dictByPKey.get( PKey );
@@ -282,8 +282,8 @@ public class CFBamRamServiceTable
 	{
 		final String S_ProcName = "CFBamRamService.readDerivedByClusterIdx";
 		CFSecBuffServiceByClusterIdxKey key = (CFSecBuffServiceByClusterIdxKey)schema.getFactoryService().newByClusterIdxKey();
-		key.setRequiredClusterId( ClusterId );
 
+		key.setRequiredClusterId( ClusterId );
 		ICFSecService[] recArray;
 		if( dictByClusterIdx.containsKey( key ) ) {
 			Map< CFLibDbKeyHash256, CFSecBuffService > subdictClusterIdx
@@ -309,8 +309,8 @@ public class CFBamRamServiceTable
 	{
 		final String S_ProcName = "CFBamRamService.readDerivedByHostIdx";
 		CFSecBuffServiceByHostIdxKey key = (CFSecBuffServiceByHostIdxKey)schema.getFactoryService().newByHostIdxKey();
-		key.setRequiredHostNodeId( HostNodeId );
 
+		key.setRequiredHostNodeId( HostNodeId );
 		ICFSecService[] recArray;
 		if( dictByHostIdx.containsKey( key ) ) {
 			Map< CFLibDbKeyHash256, CFSecBuffService > subdictHostIdx
@@ -336,8 +336,8 @@ public class CFBamRamServiceTable
 	{
 		final String S_ProcName = "CFBamRamService.readDerivedByTypeIdx";
 		CFSecBuffServiceByTypeIdxKey key = (CFSecBuffServiceByTypeIdxKey)schema.getFactoryService().newByTypeIdxKey();
-		key.setRequiredServiceTypeId( ServiceTypeId );
 
+		key.setRequiredServiceTypeId( ServiceTypeId );
 		ICFSecService[] recArray;
 		if( dictByTypeIdx.containsKey( key ) ) {
 			Map< CFLibDbKeyHash256, CFSecBuffService > subdictTypeIdx
@@ -365,10 +365,10 @@ public class CFBamRamServiceTable
 	{
 		final String S_ProcName = "CFBamRamService.readDerivedByUTypeIdx";
 		CFSecBuffServiceByUTypeIdxKey key = (CFSecBuffServiceByUTypeIdxKey)schema.getFactoryService().newByUTypeIdxKey();
+
 		key.setRequiredClusterId( ClusterId );
 		key.setRequiredHostNodeId( HostNodeId );
 		key.setRequiredServiceTypeId( ServiceTypeId );
-
 		ICFSecService buff;
 		if( dictByUTypeIdx.containsKey( key ) ) {
 			buff = dictByUTypeIdx.get( key );
@@ -386,10 +386,10 @@ public class CFBamRamServiceTable
 	{
 		final String S_ProcName = "CFBamRamService.readDerivedByUHostPortIdx";
 		CFSecBuffServiceByUHostPortIdxKey key = (CFSecBuffServiceByUHostPortIdxKey)schema.getFactoryService().newByUHostPortIdxKey();
+
 		key.setRequiredClusterId( ClusterId );
 		key.setRequiredHostNodeId( HostNodeId );
 		key.setRequiredHostPort( HostPort );
-
 		ICFSecService buff;
 		if( dictByUHostPortIdx.containsKey( key ) ) {
 			buff = dictByUHostPortIdx.get( key );

@@ -271,7 +271,7 @@ public class CFBamRamDelTopDepTable
 	public ICFBamDelTopDep lockDerived( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 PKey )
 	{
-		final String S_ProcName = "CFBamRamDelTopDep.readDerived";
+		final String S_ProcName = "CFBamRamDelTopDep.lockDerived";
 		ICFBamDelTopDep buff;
 		if( dictByPKey.containsKey( PKey ) ) {
 			buff = dictByPKey.get( PKey );
@@ -364,8 +364,8 @@ public class CFBamRamDelTopDepTable
 	{
 		final String S_ProcName = "CFBamRamDelTopDep.readDerivedByDelTopDepTblIdx";
 		CFBamBuffDelTopDepByDelTopDepTblIdxKey key = (CFBamBuffDelTopDepByDelTopDepTblIdxKey)schema.getFactoryDelTopDep().newByDelTopDepTblIdxKey();
-		key.setRequiredTableId( TableId );
 
+		key.setRequiredTableId( TableId );
 		ICFBamDelTopDep[] recArray;
 		if( dictByDelTopDepTblIdx.containsKey( key ) ) {
 			Map< CFLibDbKeyHash256, CFBamBuffDelTopDep > subdictDelTopDepTblIdx
@@ -392,9 +392,9 @@ public class CFBamRamDelTopDepTable
 	{
 		final String S_ProcName = "CFBamRamDelTopDep.readDerivedByUNameIdx";
 		CFBamBuffDelTopDepByUNameIdxKey key = (CFBamBuffDelTopDepByUNameIdxKey)schema.getFactoryDelTopDep().newByUNameIdxKey();
+
 		key.setRequiredTableId( TableId );
 		key.setRequiredName( Name );
-
 		ICFBamDelTopDep buff;
 		if( dictByUNameIdx.containsKey( key ) ) {
 			buff = dictByUNameIdx.get( key );
@@ -410,8 +410,8 @@ public class CFBamRamDelTopDepTable
 	{
 		final String S_ProcName = "CFBamRamDelTopDep.readDerivedByPrevIdx";
 		CFBamBuffDelTopDepByPrevIdxKey key = (CFBamBuffDelTopDepByPrevIdxKey)schema.getFactoryDelTopDep().newByPrevIdxKey();
-		key.setOptionalPrevId( PrevId );
 
+		key.setOptionalPrevId( PrevId );
 		ICFBamDelTopDep[] recArray;
 		if( dictByPrevIdx.containsKey( key ) ) {
 			Map< CFLibDbKeyHash256, CFBamBuffDelTopDep > subdictPrevIdx
@@ -437,8 +437,8 @@ public class CFBamRamDelTopDepTable
 	{
 		final String S_ProcName = "CFBamRamDelTopDep.readDerivedByNextIdx";
 		CFBamBuffDelTopDepByNextIdxKey key = (CFBamBuffDelTopDepByNextIdxKey)schema.getFactoryDelTopDep().newByNextIdxKey();
-		key.setOptionalNextId( NextId );
 
+		key.setOptionalNextId( NextId );
 		ICFBamDelTopDep[] recArray;
 		if( dictByNextIdx.containsKey( key ) ) {
 			Map< CFLibDbKeyHash256, CFBamBuffDelTopDep > subdictNextIdx
@@ -1265,7 +1265,7 @@ public class CFBamRamDelTopDepTable
 			}
 			CFBamBuffDelTopDep editPrev;
 			classCode = prev.getClassCode();
-			if( classCode.equals( "a81b" ) ) {
+			if( classCode == ICFBamDelTopDep.CLASS_CODE ) {
 				editPrev = schema.getFactoryDelTopDep().newBuff();
 			}
 			else {
@@ -1294,7 +1294,7 @@ public class CFBamRamDelTopDepTable
 			}
 			CFBamBuffDelTopDep editNext;
 			classCode = next.getClassCode();
-			if( classCode.equals( "a81b" ) ) {
+			if( classCode == ICFBamDelTopDep.CLASS_CODE ) {
 				editNext = schema.getFactoryDelTopDep().newBuff();
 			}
 			else {
@@ -1302,7 +1302,7 @@ public class CFBamRamDelTopDepTable
 			}
 			editNext.set( next );
 			editNext.setOptionalPrevId( prevId );
-			if( classCode.equals( "a81b" ) ) {
+			if( classCode == ICFBamDelTopDep.CLASS_CODE ) {
 				schema.getTableDelTopDep().updateDelTopDep( Authorization, editNext );
 			}
 			else {

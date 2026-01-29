@@ -290,7 +290,7 @@ public class CFBamRamSchemaRefTable
 	public ICFBamSchemaRef lockDerived( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 PKey )
 	{
-		final String S_ProcName = "CFBamRamSchemaRef.readDerived";
+		final String S_ProcName = "CFBamRamSchemaRef.lockDerived";
 		ICFBamSchemaRef buff;
 		if( dictByPKey.containsKey( PKey ) ) {
 			buff = dictByPKey.get( PKey );
@@ -339,8 +339,8 @@ public class CFBamRamSchemaRefTable
 	{
 		final String S_ProcName = "CFBamRamSchemaRef.readDerivedBySchemaIdx";
 		CFBamBuffSchemaRefBySchemaIdxKey key = (CFBamBuffSchemaRefBySchemaIdxKey)schema.getFactorySchemaRef().newBySchemaIdxKey();
-		key.setRequiredSchemaId( SchemaId );
 
+		key.setRequiredSchemaId( SchemaId );
 		ICFBamSchemaRef[] recArray;
 		if( dictBySchemaIdx.containsKey( key ) ) {
 			Map< CFLibDbKeyHash256, CFBamBuffSchemaRef > subdictSchemaIdx
@@ -367,9 +367,9 @@ public class CFBamRamSchemaRefTable
 	{
 		final String S_ProcName = "CFBamRamSchemaRef.readDerivedByUNameIdx";
 		CFBamBuffSchemaRefByUNameIdxKey key = (CFBamBuffSchemaRefByUNameIdxKey)schema.getFactorySchemaRef().newByUNameIdxKey();
+
 		key.setRequiredSchemaId( SchemaId );
 		key.setRequiredName( Name );
-
 		ICFBamSchemaRef buff;
 		if( dictByUNameIdx.containsKey( key ) ) {
 			buff = dictByUNameIdx.get( key );
@@ -385,8 +385,8 @@ public class CFBamRamSchemaRefTable
 	{
 		final String S_ProcName = "CFBamRamSchemaRef.readDerivedByRefSchemaIdx";
 		CFBamBuffSchemaRefByRefSchemaIdxKey key = (CFBamBuffSchemaRefByRefSchemaIdxKey)schema.getFactorySchemaRef().newByRefSchemaIdxKey();
-		key.setOptionalRefSchemaId( RefSchemaId );
 
+		key.setOptionalRefSchemaId( RefSchemaId );
 		ICFBamSchemaRef[] recArray;
 		if( dictByRefSchemaIdx.containsKey( key ) ) {
 			Map< CFLibDbKeyHash256, CFBamBuffSchemaRef > subdictRefSchemaIdx
@@ -412,8 +412,8 @@ public class CFBamRamSchemaRefTable
 	{
 		final String S_ProcName = "CFBamRamSchemaRef.readDerivedByPrevIdx";
 		CFBamBuffSchemaRefByPrevIdxKey key = (CFBamBuffSchemaRefByPrevIdxKey)schema.getFactorySchemaRef().newByPrevIdxKey();
-		key.setOptionalPrevId( PrevId );
 
+		key.setOptionalPrevId( PrevId );
 		ICFBamSchemaRef[] recArray;
 		if( dictByPrevIdx.containsKey( key ) ) {
 			Map< CFLibDbKeyHash256, CFBamBuffSchemaRef > subdictPrevIdx
@@ -439,8 +439,8 @@ public class CFBamRamSchemaRefTable
 	{
 		final String S_ProcName = "CFBamRamSchemaRef.readDerivedByNextIdx";
 		CFBamBuffSchemaRefByNextIdxKey key = (CFBamBuffSchemaRefByNextIdxKey)schema.getFactorySchemaRef().newByNextIdxKey();
-		key.setOptionalNextId( NextId );
 
+		key.setOptionalNextId( NextId );
 		ICFBamSchemaRef[] recArray;
 		if( dictByNextIdx.containsKey( key ) ) {
 			Map< CFLibDbKeyHash256, CFBamBuffSchemaRef > subdictNextIdx
@@ -1250,7 +1250,7 @@ public class CFBamRamSchemaRefTable
 			}
 			CFBamBuffSchemaRef editPrev;
 			classCode = prev.getClassCode();
-			if( classCode.equals( "a804" ) ) {
+			if( classCode == ICFBamSchemaRef.CLASS_CODE ) {
 				editPrev = schema.getFactorySchemaRef().newBuff();
 			}
 			else {
@@ -1279,7 +1279,7 @@ public class CFBamRamSchemaRefTable
 			}
 			CFBamBuffSchemaRef editNext;
 			classCode = next.getClassCode();
-			if( classCode.equals( "a804" ) ) {
+			if( classCode == ICFBamSchemaRef.CLASS_CODE ) {
 				editNext = schema.getFactorySchemaRef().newBuff();
 			}
 			else {
@@ -1287,7 +1287,7 @@ public class CFBamRamSchemaRefTable
 			}
 			editNext.set( next );
 			editNext.setOptionalPrevId( prevId );
-			if( classCode.equals( "a804" ) ) {
+			if( classCode == ICFBamSchemaRef.CLASS_CODE ) {
 				schema.getTableSchemaRef().updateSchemaRef( Authorization, editNext );
 			}
 			else {

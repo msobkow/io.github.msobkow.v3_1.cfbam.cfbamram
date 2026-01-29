@@ -271,7 +271,7 @@ public class CFBamRamClearTopDepTable
 	public ICFBamClearTopDep lockDerived( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 PKey )
 	{
-		final String S_ProcName = "CFBamRamClearTopDep.readDerived";
+		final String S_ProcName = "CFBamRamClearTopDep.lockDerived";
 		ICFBamClearTopDep buff;
 		if( dictByPKey.containsKey( PKey ) ) {
 			buff = dictByPKey.get( PKey );
@@ -364,8 +364,8 @@ public class CFBamRamClearTopDepTable
 	{
 		final String S_ProcName = "CFBamRamClearTopDep.readDerivedByClrTopDepTblIdx";
 		CFBamBuffClearTopDepByClrTopDepTblIdxKey key = (CFBamBuffClearTopDepByClrTopDepTblIdxKey)schema.getFactoryClearTopDep().newByClrTopDepTblIdxKey();
-		key.setRequiredTableId( TableId );
 
+		key.setRequiredTableId( TableId );
 		ICFBamClearTopDep[] recArray;
 		if( dictByClrTopDepTblIdx.containsKey( key ) ) {
 			Map< CFLibDbKeyHash256, CFBamBuffClearTopDep > subdictClrTopDepTblIdx
@@ -392,9 +392,9 @@ public class CFBamRamClearTopDepTable
 	{
 		final String S_ProcName = "CFBamRamClearTopDep.readDerivedByUNameIdx";
 		CFBamBuffClearTopDepByUNameIdxKey key = (CFBamBuffClearTopDepByUNameIdxKey)schema.getFactoryClearTopDep().newByUNameIdxKey();
+
 		key.setRequiredTableId( TableId );
 		key.setRequiredName( Name );
-
 		ICFBamClearTopDep buff;
 		if( dictByUNameIdx.containsKey( key ) ) {
 			buff = dictByUNameIdx.get( key );
@@ -410,8 +410,8 @@ public class CFBamRamClearTopDepTable
 	{
 		final String S_ProcName = "CFBamRamClearTopDep.readDerivedByPrevIdx";
 		CFBamBuffClearTopDepByPrevIdxKey key = (CFBamBuffClearTopDepByPrevIdxKey)schema.getFactoryClearTopDep().newByPrevIdxKey();
-		key.setOptionalPrevId( PrevId );
 
+		key.setOptionalPrevId( PrevId );
 		ICFBamClearTopDep[] recArray;
 		if( dictByPrevIdx.containsKey( key ) ) {
 			Map< CFLibDbKeyHash256, CFBamBuffClearTopDep > subdictPrevIdx
@@ -437,8 +437,8 @@ public class CFBamRamClearTopDepTable
 	{
 		final String S_ProcName = "CFBamRamClearTopDep.readDerivedByNextIdx";
 		CFBamBuffClearTopDepByNextIdxKey key = (CFBamBuffClearTopDepByNextIdxKey)schema.getFactoryClearTopDep().newByNextIdxKey();
-		key.setOptionalNextId( NextId );
 
+		key.setOptionalNextId( NextId );
 		ICFBamClearTopDep[] recArray;
 		if( dictByNextIdx.containsKey( key ) ) {
 			Map< CFLibDbKeyHash256, CFBamBuffClearTopDep > subdictNextIdx
@@ -1265,7 +1265,7 @@ public class CFBamRamClearTopDepTable
 			}
 			CFBamBuffClearTopDep editPrev;
 			classCode = prev.getClassCode();
-			if( classCode.equals( "a814" ) ) {
+			if( classCode == ICFBamClearTopDep.CLASS_CODE ) {
 				editPrev = schema.getFactoryClearTopDep().newBuff();
 			}
 			else {
@@ -1294,7 +1294,7 @@ public class CFBamRamClearTopDepTable
 			}
 			CFBamBuffClearTopDep editNext;
 			classCode = next.getClassCode();
-			if( classCode.equals( "a814" ) ) {
+			if( classCode == ICFBamClearTopDep.CLASS_CODE ) {
 				editNext = schema.getFactoryClearTopDep().newBuff();
 			}
 			else {
@@ -1302,7 +1302,7 @@ public class CFBamRamClearTopDepTable
 			}
 			editNext.set( next );
 			editNext.setOptionalPrevId( prevId );
-			if( classCode.equals( "a814" ) ) {
+			if( classCode == ICFBamClearTopDep.CLASS_CODE ) {
 				schema.getTableClearTopDep().updateClearTopDep( Authorization, editNext );
 			}
 			else {

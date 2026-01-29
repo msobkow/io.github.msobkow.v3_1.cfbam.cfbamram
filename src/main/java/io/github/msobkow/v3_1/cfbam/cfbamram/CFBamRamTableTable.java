@@ -315,7 +315,7 @@ public class CFBamRamTableTable
 	public ICFBamTable lockDerived( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 PKey )
 	{
-		final String S_ProcName = "CFBamRamTable.readDerived";
+		final String S_ProcName = "CFBamRamTable.lockDerived";
 		ICFBamTable buff;
 		if( dictByPKey.containsKey( PKey ) ) {
 			buff = dictByPKey.get( PKey );
@@ -364,8 +364,8 @@ public class CFBamRamTableTable
 	{
 		final String S_ProcName = "CFBamRamTable.readDerivedBySchemaDefIdx";
 		CFBamBuffTableBySchemaDefIdxKey key = (CFBamBuffTableBySchemaDefIdxKey)schema.getFactoryTable().newBySchemaDefIdxKey();
-		key.setRequiredSchemaDefId( SchemaDefId );
 
+		key.setRequiredSchemaDefId( SchemaDefId );
 		ICFBamTable[] recArray;
 		if( dictBySchemaDefIdx.containsKey( key ) ) {
 			Map< CFLibDbKeyHash256, CFBamBuffTable > subdictSchemaDefIdx
@@ -391,8 +391,8 @@ public class CFBamRamTableTable
 	{
 		final String S_ProcName = "CFBamRamTable.readDerivedByDefSchemaIdx";
 		CFBamBuffTableByDefSchemaIdxKey key = (CFBamBuffTableByDefSchemaIdxKey)schema.getFactoryTable().newByDefSchemaIdxKey();
-		key.setOptionalDefSchemaId( DefSchemaId );
 
+		key.setOptionalDefSchemaId( DefSchemaId );
 		ICFBamTable[] recArray;
 		if( dictByDefSchemaIdx.containsKey( key ) ) {
 			Map< CFLibDbKeyHash256, CFBamBuffTable > subdictDefSchemaIdx
@@ -419,9 +419,9 @@ public class CFBamRamTableTable
 	{
 		final String S_ProcName = "CFBamRamTable.readDerivedByUNameIdx";
 		CFBamBuffTableByUNameIdxKey key = (CFBamBuffTableByUNameIdxKey)schema.getFactoryTable().newByUNameIdxKey();
+
 		key.setRequiredSchemaDefId( SchemaDefId );
 		key.setRequiredName( Name );
-
 		ICFBamTable buff;
 		if( dictByUNameIdx.containsKey( key ) ) {
 			buff = dictByUNameIdx.get( key );
@@ -438,9 +438,9 @@ public class CFBamRamTableTable
 	{
 		final String S_ProcName = "CFBamRamTable.readDerivedBySchemaCdIdx";
 		CFBamBuffTableBySchemaCdIdxKey key = (CFBamBuffTableBySchemaCdIdxKey)schema.getFactoryTable().newBySchemaCdIdxKey();
+
 		key.setRequiredSchemaDefId( SchemaDefId );
 		key.setRequiredTableClassCode( TableClassCode );
-
 		ICFBamTable buff;
 		if( dictBySchemaCdIdx.containsKey( key ) ) {
 			buff = dictBySchemaCdIdx.get( key );
@@ -456,8 +456,8 @@ public class CFBamRamTableTable
 	{
 		final String S_ProcName = "CFBamRamTable.readDerivedByPrimaryIndexIdx";
 		CFBamBuffTableByPrimaryIndexIdxKey key = (CFBamBuffTableByPrimaryIndexIdxKey)schema.getFactoryTable().newByPrimaryIndexIdxKey();
-		key.setOptionalPrimaryIndexId( PrimaryIndexId );
 
+		key.setOptionalPrimaryIndexId( PrimaryIndexId );
 		ICFBamTable[] recArray;
 		if( dictByPrimaryIndexIdx.containsKey( key ) ) {
 			Map< CFLibDbKeyHash256, CFBamBuffTable > subdictPrimaryIndexIdx
@@ -483,8 +483,8 @@ public class CFBamRamTableTable
 	{
 		final String S_ProcName = "CFBamRamTable.readDerivedByLookupIndexIdx";
 		CFBamBuffTableByLookupIndexIdxKey key = (CFBamBuffTableByLookupIndexIdxKey)schema.getFactoryTable().newByLookupIndexIdxKey();
-		key.setOptionalLookupIndexId( LookupIndexId );
 
+		key.setOptionalLookupIndexId( LookupIndexId );
 		ICFBamTable[] recArray;
 		if( dictByLookupIndexIdx.containsKey( key ) ) {
 			Map< CFLibDbKeyHash256, CFBamBuffTable > subdictLookupIndexIdx
@@ -510,8 +510,8 @@ public class CFBamRamTableTable
 	{
 		final String S_ProcName = "CFBamRamTable.readDerivedByAltIndexIdx";
 		CFBamBuffTableByAltIndexIdxKey key = (CFBamBuffTableByAltIndexIdxKey)schema.getFactoryTable().newByAltIndexIdxKey();
-		key.setOptionalAltIndexId( AltIndexId );
 
+		key.setOptionalAltIndexId( AltIndexId );
 		ICFBamTable[] recArray;
 		if( dictByAltIndexIdx.containsKey( key ) ) {
 			Map< CFLibDbKeyHash256, CFBamBuffTable > subdictAltIndexIdx
@@ -537,8 +537,8 @@ public class CFBamRamTableTable
 	{
 		final String S_ProcName = "CFBamRamTable.readDerivedByQualTableIdx";
 		CFBamBuffTableByQualTableIdxKey key = (CFBamBuffTableByQualTableIdxKey)schema.getFactoryTable().newByQualTableIdxKey();
-		key.setOptionalQualifyingTableId( QualifyingTableId );
 
+		key.setOptionalQualifyingTableId( QualifyingTableId );
 		ICFBamTable[] recArray;
 		if( dictByQualTableIdx.containsKey( key ) ) {
 			Map< CFLibDbKeyHash256, CFBamBuffTable > subdictQualTableIdx
@@ -1132,11 +1132,11 @@ public class CFBamRamTableTable
 				pkey );
 		}
 					{
-						CFBamTableBuff editBuff = (CFBamTableBuff)(schema.getTableTable().readDerivedByIdIdx( Authorization,
+						CFBamBuffTable editBuff = (CFBamBuffTable)(schema.getTableTable().readDerivedByIdIdx( Authorization,
 						existing.getRequiredId() ));
-						editBuff.setOptionalPrimaryIndexId( null );
+						editBuff.setOptionalLookupPrimaryIndex(null);
 						classCode = editBuff.getClassCode();
-						if( classCode.equals( "a808" ) ) {
+						if( classCode == ICFBamTable.CLASS_CODE ) {
 							schema.getTableTable().updateTable( Authorization, editBuff );
 						}
 						else {
@@ -1144,10 +1144,7 @@ public class CFBamRamTableTable
 						}
 					}
 		CFBamBuffTable editSubobj = (CFBamBuffTable)(schema.getTableTable().readDerivedByIdIdx( Authorization,
-			existing.getRequiredId() ));
-			editSubobj.setOptionalLookupIndexId( null );
-			editSubobj.setOptionalAltIndexId( null );
-			editSubobj.setOptionalPrimaryIndexId( null );
+			existing.getRequiredId() ));editSubobj.setOptionalLookupLookupIndex(null);editSubobj.setOptionalLookupAltIndex(null);editSubobj.setOptionalLookupPrimaryIndex(null);
 		classCode = editSubobj.getClassCode();
 		if( classCode == ICFBamTable.CLASS_CODE ) {
 			schema.getTableTable().updateTable( Authorization, editSubobj );

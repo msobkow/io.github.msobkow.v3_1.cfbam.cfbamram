@@ -155,7 +155,7 @@ public class CFBamRamUInt32DefTable
 	public ICFBamUInt32Def lockDerived( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 PKey )
 	{
-		final String S_ProcName = "CFBamRamUInt32Def.readDerived";
+		final String S_ProcName = "CFBamRamUInt32Def.lockDerived";
 		ICFBamUInt32Def buff;
 		if( dictByPKey.containsKey( PKey ) ) {
 			buff = dictByPKey.get( PKey );
@@ -5989,7 +5989,7 @@ public class CFBamRamUInt32DefTable
 			}
 			CFBamBuffValue editPrev;
 			classCode = prev.getClassCode();
-			if( classCode.equals( "a809" ) ) {
+			if( classCode == ICFBamValue.CLASS_CODE ) {
 				editPrev = schema.getFactoryValue().newBuff();
 			}
 			else if( classCode == ICFBamAtom.CLASS_CODE ) {
@@ -6648,7 +6648,7 @@ public class CFBamRamUInt32DefTable
 			}
 			CFBamBuffValue editNext;
 			classCode = next.getClassCode();
-			if( classCode.equals( "a809" ) ) {
+			if( classCode == ICFBamValue.CLASS_CODE ) {
 				editNext = schema.getFactoryValue().newBuff();
 			}
 			else if( classCode == ICFBamAtom.CLASS_CODE ) {
@@ -6971,7 +6971,7 @@ public class CFBamRamUInt32DefTable
 			}
 			editNext.set( next );
 			editNext.setOptionalPrevId( prevId );
-			if( classCode.equals( "a809" ) ) {
+			if( classCode == ICFBamValue.CLASS_CODE ) {
 				schema.getTableValue().updateValue( Authorization, editNext );
 			}
 			else if( classCode == ICFBamAtom.CLASS_CODE ) {
@@ -7364,13 +7364,13 @@ public class CFBamRamUInt32DefTable
 			cur = (CFBamBuffUInt32Def)(schema.getTableUInt32Def().readDerivedByIdIdx( Authorization,
 				cur.getRequiredId() ));
 			int subClassCode = cur.getClassCode();
-			if( CFBamUInt32Def.CLASS_CODE == subClassCode ) {
+			if( ICFBamUInt32Def.CLASS_CODE == subClassCode ) {
 				schema.getTableUInt32Def().deleteUInt32Def( Authorization, cur );
 			}
-			else if( CFBamUInt32Type.CLASS_CODE == subClassCode ) {
+			else if( ICFBamUInt32Type.CLASS_CODE == subClassCode ) {
 				schema.getTableUInt32Type().deleteUInt32Type( Authorization, (ICFBamUInt32Type)cur );
 			}
-			else if( CFBamUInt32Col.CLASS_CODE == subClassCode ) {
+			else if( ICFBamUInt32Col.CLASS_CODE == subClassCode ) {
 				schema.getTableUInt32Col().deleteUInt32Col( Authorization, (ICFBamUInt32Col)cur );
 			}
 			else {
@@ -7414,13 +7414,13 @@ public class CFBamRamUInt32DefTable
 			cur = (CFBamBuffUInt32Def)(schema.getTableUInt32Def().readDerivedByIdIdx( Authorization,
 				cur.getRequiredId() ));
 			int subClassCode = cur.getClassCode();
-			if( CFBamUInt32Def.CLASS_CODE == subClassCode ) {
+			if( ICFBamUInt32Def.CLASS_CODE == subClassCode ) {
 				schema.getTableUInt32Def().deleteUInt32Def( Authorization, cur );
 			}
-			else if( CFBamUInt32Type.CLASS_CODE == subClassCode ) {
+			else if( ICFBamUInt32Type.CLASS_CODE == subClassCode ) {
 				schema.getTableUInt32Type().deleteUInt32Type( Authorization, (ICFBamUInt32Type)cur );
 			}
-			else if( CFBamUInt32Col.CLASS_CODE == subClassCode ) {
+			else if( ICFBamUInt32Col.CLASS_CODE == subClassCode ) {
 				schema.getTableUInt32Col().deleteUInt32Col( Authorization, (ICFBamUInt32Col)cur );
 			}
 			else {
@@ -7461,13 +7461,13 @@ public class CFBamRamUInt32DefTable
 			cur = (CFBamBuffUInt32Def)(schema.getTableUInt32Def().readDerivedByIdIdx( Authorization,
 				cur.getRequiredId() ));
 			int subClassCode = cur.getClassCode();
-			if( CFBamUInt32Def.CLASS_CODE == subClassCode ) {
+			if( ICFBamUInt32Def.CLASS_CODE == subClassCode ) {
 				schema.getTableUInt32Def().deleteUInt32Def( Authorization, cur );
 			}
-			else if( CFBamUInt32Type.CLASS_CODE == subClassCode ) {
+			else if( ICFBamUInt32Type.CLASS_CODE == subClassCode ) {
 				schema.getTableUInt32Type().deleteUInt32Type( Authorization, (ICFBamUInt32Type)cur );
 			}
-			else if( CFBamUInt32Col.CLASS_CODE == subClassCode ) {
+			else if( ICFBamUInt32Col.CLASS_CODE == subClassCode ) {
 				schema.getTableUInt32Col().deleteUInt32Col( Authorization, (ICFBamUInt32Col)cur );
 			}
 			else {
@@ -7510,13 +7510,13 @@ public class CFBamRamUInt32DefTable
 			cur = (CFBamBuffUInt32Def)(schema.getTableUInt32Def().readDerivedByIdIdx( Authorization,
 				cur.getRequiredId() ));
 			int subClassCode = cur.getClassCode();
-			if( CFBamUInt32Def.CLASS_CODE == subClassCode ) {
+			if( ICFBamUInt32Def.CLASS_CODE == subClassCode ) {
 				schema.getTableUInt32Def().deleteUInt32Def( Authorization, cur );
 			}
-			else if( CFBamUInt32Type.CLASS_CODE == subClassCode ) {
+			else if( ICFBamUInt32Type.CLASS_CODE == subClassCode ) {
 				schema.getTableUInt32Type().deleteUInt32Type( Authorization, (ICFBamUInt32Type)cur );
 			}
-			else if( CFBamUInt32Col.CLASS_CODE == subClassCode ) {
+			else if( ICFBamUInt32Col.CLASS_CODE == subClassCode ) {
 				schema.getTableUInt32Col().deleteUInt32Col( Authorization, (ICFBamUInt32Col)cur );
 			}
 			else {
@@ -7559,13 +7559,13 @@ public class CFBamRamUInt32DefTable
 			cur = (CFBamBuffUInt32Def)(schema.getTableUInt32Def().readDerivedByIdIdx( Authorization,
 				cur.getRequiredId() ));
 			int subClassCode = cur.getClassCode();
-			if( CFBamUInt32Def.CLASS_CODE == subClassCode ) {
+			if( ICFBamUInt32Def.CLASS_CODE == subClassCode ) {
 				schema.getTableUInt32Def().deleteUInt32Def( Authorization, cur );
 			}
-			else if( CFBamUInt32Type.CLASS_CODE == subClassCode ) {
+			else if( ICFBamUInt32Type.CLASS_CODE == subClassCode ) {
 				schema.getTableUInt32Type().deleteUInt32Type( Authorization, (ICFBamUInt32Type)cur );
 			}
-			else if( CFBamUInt32Col.CLASS_CODE == subClassCode ) {
+			else if( ICFBamUInt32Col.CLASS_CODE == subClassCode ) {
 				schema.getTableUInt32Col().deleteUInt32Col( Authorization, (ICFBamUInt32Col)cur );
 			}
 			else {
@@ -7608,13 +7608,13 @@ public class CFBamRamUInt32DefTable
 			cur = (CFBamBuffUInt32Def)(schema.getTableUInt32Def().readDerivedByIdIdx( Authorization,
 				cur.getRequiredId() ));
 			int subClassCode = cur.getClassCode();
-			if( CFBamUInt32Def.CLASS_CODE == subClassCode ) {
+			if( ICFBamUInt32Def.CLASS_CODE == subClassCode ) {
 				schema.getTableUInt32Def().deleteUInt32Def( Authorization, cur );
 			}
-			else if( CFBamUInt32Type.CLASS_CODE == subClassCode ) {
+			else if( ICFBamUInt32Type.CLASS_CODE == subClassCode ) {
 				schema.getTableUInt32Type().deleteUInt32Type( Authorization, (ICFBamUInt32Type)cur );
 			}
-			else if( CFBamUInt32Col.CLASS_CODE == subClassCode ) {
+			else if( ICFBamUInt32Col.CLASS_CODE == subClassCode ) {
 				schema.getTableUInt32Col().deleteUInt32Col( Authorization, (ICFBamUInt32Col)cur );
 			}
 			else {
@@ -7660,13 +7660,13 @@ public class CFBamRamUInt32DefTable
 			cur = (CFBamBuffUInt32Def)(schema.getTableUInt32Def().readDerivedByIdIdx( Authorization,
 				cur.getRequiredId() ));
 			int subClassCode = cur.getClassCode();
-			if( CFBamUInt32Def.CLASS_CODE == subClassCode ) {
+			if( ICFBamUInt32Def.CLASS_CODE == subClassCode ) {
 				schema.getTableUInt32Def().deleteUInt32Def( Authorization, cur );
 			}
-			else if( CFBamUInt32Type.CLASS_CODE == subClassCode ) {
+			else if( ICFBamUInt32Type.CLASS_CODE == subClassCode ) {
 				schema.getTableUInt32Type().deleteUInt32Type( Authorization, (ICFBamUInt32Type)cur );
 			}
-			else if( CFBamUInt32Col.CLASS_CODE == subClassCode ) {
+			else if( ICFBamUInt32Col.CLASS_CODE == subClassCode ) {
 				schema.getTableUInt32Col().deleteUInt32Col( Authorization, (ICFBamUInt32Col)cur );
 			}
 			else {
@@ -7712,13 +7712,13 @@ public class CFBamRamUInt32DefTable
 			cur = (CFBamBuffUInt32Def)(schema.getTableUInt32Def().readDerivedByIdIdx( Authorization,
 				cur.getRequiredId() ));
 			int subClassCode = cur.getClassCode();
-			if( CFBamUInt32Def.CLASS_CODE == subClassCode ) {
+			if( ICFBamUInt32Def.CLASS_CODE == subClassCode ) {
 				schema.getTableUInt32Def().deleteUInt32Def( Authorization, cur );
 			}
-			else if( CFBamUInt32Type.CLASS_CODE == subClassCode ) {
+			else if( ICFBamUInt32Type.CLASS_CODE == subClassCode ) {
 				schema.getTableUInt32Type().deleteUInt32Type( Authorization, (ICFBamUInt32Type)cur );
 			}
-			else if( CFBamUInt32Col.CLASS_CODE == subClassCode ) {
+			else if( ICFBamUInt32Col.CLASS_CODE == subClassCode ) {
 				schema.getTableUInt32Col().deleteUInt32Col( Authorization, (ICFBamUInt32Col)cur );
 			}
 			else {

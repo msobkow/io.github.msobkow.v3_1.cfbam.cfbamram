@@ -256,7 +256,7 @@ public class CFBamRamSecSessionTable
 	public ICFSecSecSession lockDerived( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 PKey )
 	{
-		final String S_ProcName = "CFBamRamSecSession.readDerived";
+		final String S_ProcName = "CFBamRamSecSession.lockDerived";
 		ICFSecSecSession buff;
 		if( dictByPKey.containsKey( PKey ) ) {
 			buff = dictByPKey.get( PKey );
@@ -283,8 +283,8 @@ public class CFBamRamSecSessionTable
 	{
 		final String S_ProcName = "CFBamRamSecSession.readDerivedBySecUserIdx";
 		CFSecBuffSecSessionBySecUserIdxKey key = (CFSecBuffSecSessionBySecUserIdxKey)schema.getFactorySecSession().newBySecUserIdxKey();
-		key.setRequiredSecUserId( SecUserId );
 
+		key.setRequiredSecUserId( SecUserId );
 		ICFSecSecSession[] recArray;
 		if( dictBySecUserIdx.containsKey( key ) ) {
 			Map< CFLibDbKeyHash256, CFSecBuffSecSession > subdictSecUserIdx
@@ -311,9 +311,9 @@ public class CFBamRamSecSessionTable
 	{
 		final String S_ProcName = "CFBamRamSecSession.readDerivedBySecDevIdx";
 		CFSecBuffSecSessionBySecDevIdxKey key = (CFSecBuffSecSessionBySecDevIdxKey)schema.getFactorySecSession().newBySecDevIdxKey();
+
 		key.setRequiredSecUserId( SecUserId );
 		key.setOptionalSecDevName( SecDevName );
-
 		ICFSecSecSession[] recArray;
 		if( dictBySecDevIdx.containsKey( key ) ) {
 			Map< CFLibDbKeyHash256, CFSecBuffSecSession > subdictSecDevIdx
@@ -340,9 +340,9 @@ public class CFBamRamSecSessionTable
 	{
 		final String S_ProcName = "CFBamRamSecSession.readDerivedByStartIdx";
 		CFSecBuffSecSessionByStartIdxKey key = (CFSecBuffSecSessionByStartIdxKey)schema.getFactorySecSession().newByStartIdxKey();
+
 		key.setRequiredSecUserId( SecUserId );
 		key.setRequiredStart( Start );
-
 		ICFSecSecSession buff;
 		if( dictByStartIdx.containsKey( key ) ) {
 			buff = dictByStartIdx.get( key );
@@ -359,9 +359,9 @@ public class CFBamRamSecSessionTable
 	{
 		final String S_ProcName = "CFBamRamSecSession.readDerivedByFinishIdx";
 		CFSecBuffSecSessionByFinishIdxKey key = (CFSecBuffSecSessionByFinishIdxKey)schema.getFactorySecSession().newByFinishIdxKey();
+
 		key.setRequiredSecUserId( SecUserId );
 		key.setOptionalFinish( Finish );
-
 		ICFSecSecSession[] recArray;
 		if( dictByFinishIdx.containsKey( key ) ) {
 			Map< CFLibDbKeyHash256, CFSecBuffSecSession > subdictFinishIdx
@@ -387,8 +387,8 @@ public class CFBamRamSecSessionTable
 	{
 		final String S_ProcName = "CFBamRamSecSession.readDerivedBySecProxyIdx";
 		CFSecBuffSecSessionBySecProxyIdxKey key = (CFSecBuffSecSessionBySecProxyIdxKey)schema.getFactorySecSession().newBySecProxyIdxKey();
-		key.setOptionalSecProxyId( SecProxyId );
 
+		key.setOptionalSecProxyId( SecProxyId );
 		ICFSecSecSession[] recArray;
 		if( dictBySecProxyIdx.containsKey( key ) ) {
 			Map< CFLibDbKeyHash256, CFSecBuffSecSession > subdictSecProxyIdx

@@ -160,7 +160,7 @@ public class CFBamRamDbKeyHash384DefTable
 	public ICFBamDbKeyHash384Def lockDerived( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 PKey )
 	{
-		final String S_ProcName = "CFBamRamDbKeyHash384Def.readDerived";
+		final String S_ProcName = "CFBamRamDbKeyHash384Def.lockDerived";
 		ICFBamDbKeyHash384Def buff;
 		if( dictByPKey.containsKey( PKey ) ) {
 			buff = dictByPKey.get( PKey );
@@ -5994,7 +5994,7 @@ public class CFBamRamDbKeyHash384DefTable
 			}
 			CFBamBuffValue editPrev;
 			classCode = prev.getClassCode();
-			if( classCode.equals( "a809" ) ) {
+			if( classCode == ICFBamValue.CLASS_CODE ) {
 				editPrev = schema.getFactoryValue().newBuff();
 			}
 			else if( classCode == ICFBamAtom.CLASS_CODE ) {
@@ -6653,7 +6653,7 @@ public class CFBamRamDbKeyHash384DefTable
 			}
 			CFBamBuffValue editNext;
 			classCode = next.getClassCode();
-			if( classCode.equals( "a809" ) ) {
+			if( classCode == ICFBamValue.CLASS_CODE ) {
 				editNext = schema.getFactoryValue().newBuff();
 			}
 			else if( classCode == ICFBamAtom.CLASS_CODE ) {
@@ -6976,7 +6976,7 @@ public class CFBamRamDbKeyHash384DefTable
 			}
 			editNext.set( next );
 			editNext.setOptionalPrevId( prevId );
-			if( classCode.equals( "a809" ) ) {
+			if( classCode == ICFBamValue.CLASS_CODE ) {
 				schema.getTableValue().updateValue( Authorization, editNext );
 			}
 			else if( classCode == ICFBamAtom.CLASS_CODE ) {
@@ -7369,16 +7369,16 @@ public class CFBamRamDbKeyHash384DefTable
 			cur = (CFBamBuffDbKeyHash384Def)(schema.getTableDbKeyHash384Def().readDerivedByIdIdx( Authorization,
 				cur.getRequiredId() ));
 			int subClassCode = cur.getClassCode();
-			if( CFBamDbKeyHash384Def.CLASS_CODE == subClassCode ) {
+			if( ICFBamDbKeyHash384Def.CLASS_CODE == subClassCode ) {
 				schema.getTableDbKeyHash384Def().deleteDbKeyHash384Def( Authorization, cur );
 			}
-			else if( CFBamDbKeyHash384Col.CLASS_CODE == subClassCode ) {
+			else if( ICFBamDbKeyHash384Col.CLASS_CODE == subClassCode ) {
 				schema.getTableDbKeyHash384Col().deleteDbKeyHash384Col( Authorization, (ICFBamDbKeyHash384Col)cur );
 			}
-			else if( CFBamDbKeyHash384Type.CLASS_CODE == subClassCode ) {
+			else if( ICFBamDbKeyHash384Type.CLASS_CODE == subClassCode ) {
 				schema.getTableDbKeyHash384Type().deleteDbKeyHash384Type( Authorization, (ICFBamDbKeyHash384Type)cur );
 			}
-			else if( CFBamDbKeyHash384Gen.CLASS_CODE == subClassCode ) {
+			else if( ICFBamDbKeyHash384Gen.CLASS_CODE == subClassCode ) {
 				schema.getTableDbKeyHash384Gen().deleteDbKeyHash384Gen( Authorization, (ICFBamDbKeyHash384Gen)cur );
 			}
 			else {
@@ -7422,16 +7422,16 @@ public class CFBamRamDbKeyHash384DefTable
 			cur = (CFBamBuffDbKeyHash384Def)(schema.getTableDbKeyHash384Def().readDerivedByIdIdx( Authorization,
 				cur.getRequiredId() ));
 			int subClassCode = cur.getClassCode();
-			if( CFBamDbKeyHash384Def.CLASS_CODE == subClassCode ) {
+			if( ICFBamDbKeyHash384Def.CLASS_CODE == subClassCode ) {
 				schema.getTableDbKeyHash384Def().deleteDbKeyHash384Def( Authorization, cur );
 			}
-			else if( CFBamDbKeyHash384Col.CLASS_CODE == subClassCode ) {
+			else if( ICFBamDbKeyHash384Col.CLASS_CODE == subClassCode ) {
 				schema.getTableDbKeyHash384Col().deleteDbKeyHash384Col( Authorization, (ICFBamDbKeyHash384Col)cur );
 			}
-			else if( CFBamDbKeyHash384Type.CLASS_CODE == subClassCode ) {
+			else if( ICFBamDbKeyHash384Type.CLASS_CODE == subClassCode ) {
 				schema.getTableDbKeyHash384Type().deleteDbKeyHash384Type( Authorization, (ICFBamDbKeyHash384Type)cur );
 			}
-			else if( CFBamDbKeyHash384Gen.CLASS_CODE == subClassCode ) {
+			else if( ICFBamDbKeyHash384Gen.CLASS_CODE == subClassCode ) {
 				schema.getTableDbKeyHash384Gen().deleteDbKeyHash384Gen( Authorization, (ICFBamDbKeyHash384Gen)cur );
 			}
 			else {
@@ -7472,16 +7472,16 @@ public class CFBamRamDbKeyHash384DefTable
 			cur = (CFBamBuffDbKeyHash384Def)(schema.getTableDbKeyHash384Def().readDerivedByIdIdx( Authorization,
 				cur.getRequiredId() ));
 			int subClassCode = cur.getClassCode();
-			if( CFBamDbKeyHash384Def.CLASS_CODE == subClassCode ) {
+			if( ICFBamDbKeyHash384Def.CLASS_CODE == subClassCode ) {
 				schema.getTableDbKeyHash384Def().deleteDbKeyHash384Def( Authorization, cur );
 			}
-			else if( CFBamDbKeyHash384Col.CLASS_CODE == subClassCode ) {
+			else if( ICFBamDbKeyHash384Col.CLASS_CODE == subClassCode ) {
 				schema.getTableDbKeyHash384Col().deleteDbKeyHash384Col( Authorization, (ICFBamDbKeyHash384Col)cur );
 			}
-			else if( CFBamDbKeyHash384Type.CLASS_CODE == subClassCode ) {
+			else if( ICFBamDbKeyHash384Type.CLASS_CODE == subClassCode ) {
 				schema.getTableDbKeyHash384Type().deleteDbKeyHash384Type( Authorization, (ICFBamDbKeyHash384Type)cur );
 			}
-			else if( CFBamDbKeyHash384Gen.CLASS_CODE == subClassCode ) {
+			else if( ICFBamDbKeyHash384Gen.CLASS_CODE == subClassCode ) {
 				schema.getTableDbKeyHash384Gen().deleteDbKeyHash384Gen( Authorization, (ICFBamDbKeyHash384Gen)cur );
 			}
 			else {
@@ -7524,16 +7524,16 @@ public class CFBamRamDbKeyHash384DefTable
 			cur = (CFBamBuffDbKeyHash384Def)(schema.getTableDbKeyHash384Def().readDerivedByIdIdx( Authorization,
 				cur.getRequiredId() ));
 			int subClassCode = cur.getClassCode();
-			if( CFBamDbKeyHash384Def.CLASS_CODE == subClassCode ) {
+			if( ICFBamDbKeyHash384Def.CLASS_CODE == subClassCode ) {
 				schema.getTableDbKeyHash384Def().deleteDbKeyHash384Def( Authorization, cur );
 			}
-			else if( CFBamDbKeyHash384Col.CLASS_CODE == subClassCode ) {
+			else if( ICFBamDbKeyHash384Col.CLASS_CODE == subClassCode ) {
 				schema.getTableDbKeyHash384Col().deleteDbKeyHash384Col( Authorization, (ICFBamDbKeyHash384Col)cur );
 			}
-			else if( CFBamDbKeyHash384Type.CLASS_CODE == subClassCode ) {
+			else if( ICFBamDbKeyHash384Type.CLASS_CODE == subClassCode ) {
 				schema.getTableDbKeyHash384Type().deleteDbKeyHash384Type( Authorization, (ICFBamDbKeyHash384Type)cur );
 			}
-			else if( CFBamDbKeyHash384Gen.CLASS_CODE == subClassCode ) {
+			else if( ICFBamDbKeyHash384Gen.CLASS_CODE == subClassCode ) {
 				schema.getTableDbKeyHash384Gen().deleteDbKeyHash384Gen( Authorization, (ICFBamDbKeyHash384Gen)cur );
 			}
 			else {
@@ -7576,16 +7576,16 @@ public class CFBamRamDbKeyHash384DefTable
 			cur = (CFBamBuffDbKeyHash384Def)(schema.getTableDbKeyHash384Def().readDerivedByIdIdx( Authorization,
 				cur.getRequiredId() ));
 			int subClassCode = cur.getClassCode();
-			if( CFBamDbKeyHash384Def.CLASS_CODE == subClassCode ) {
+			if( ICFBamDbKeyHash384Def.CLASS_CODE == subClassCode ) {
 				schema.getTableDbKeyHash384Def().deleteDbKeyHash384Def( Authorization, cur );
 			}
-			else if( CFBamDbKeyHash384Col.CLASS_CODE == subClassCode ) {
+			else if( ICFBamDbKeyHash384Col.CLASS_CODE == subClassCode ) {
 				schema.getTableDbKeyHash384Col().deleteDbKeyHash384Col( Authorization, (ICFBamDbKeyHash384Col)cur );
 			}
-			else if( CFBamDbKeyHash384Type.CLASS_CODE == subClassCode ) {
+			else if( ICFBamDbKeyHash384Type.CLASS_CODE == subClassCode ) {
 				schema.getTableDbKeyHash384Type().deleteDbKeyHash384Type( Authorization, (ICFBamDbKeyHash384Type)cur );
 			}
-			else if( CFBamDbKeyHash384Gen.CLASS_CODE == subClassCode ) {
+			else if( ICFBamDbKeyHash384Gen.CLASS_CODE == subClassCode ) {
 				schema.getTableDbKeyHash384Gen().deleteDbKeyHash384Gen( Authorization, (ICFBamDbKeyHash384Gen)cur );
 			}
 			else {
@@ -7628,16 +7628,16 @@ public class CFBamRamDbKeyHash384DefTable
 			cur = (CFBamBuffDbKeyHash384Def)(schema.getTableDbKeyHash384Def().readDerivedByIdIdx( Authorization,
 				cur.getRequiredId() ));
 			int subClassCode = cur.getClassCode();
-			if( CFBamDbKeyHash384Def.CLASS_CODE == subClassCode ) {
+			if( ICFBamDbKeyHash384Def.CLASS_CODE == subClassCode ) {
 				schema.getTableDbKeyHash384Def().deleteDbKeyHash384Def( Authorization, cur );
 			}
-			else if( CFBamDbKeyHash384Col.CLASS_CODE == subClassCode ) {
+			else if( ICFBamDbKeyHash384Col.CLASS_CODE == subClassCode ) {
 				schema.getTableDbKeyHash384Col().deleteDbKeyHash384Col( Authorization, (ICFBamDbKeyHash384Col)cur );
 			}
-			else if( CFBamDbKeyHash384Type.CLASS_CODE == subClassCode ) {
+			else if( ICFBamDbKeyHash384Type.CLASS_CODE == subClassCode ) {
 				schema.getTableDbKeyHash384Type().deleteDbKeyHash384Type( Authorization, (ICFBamDbKeyHash384Type)cur );
 			}
-			else if( CFBamDbKeyHash384Gen.CLASS_CODE == subClassCode ) {
+			else if( ICFBamDbKeyHash384Gen.CLASS_CODE == subClassCode ) {
 				schema.getTableDbKeyHash384Gen().deleteDbKeyHash384Gen( Authorization, (ICFBamDbKeyHash384Gen)cur );
 			}
 			else {
@@ -7683,16 +7683,16 @@ public class CFBamRamDbKeyHash384DefTable
 			cur = (CFBamBuffDbKeyHash384Def)(schema.getTableDbKeyHash384Def().readDerivedByIdIdx( Authorization,
 				cur.getRequiredId() ));
 			int subClassCode = cur.getClassCode();
-			if( CFBamDbKeyHash384Def.CLASS_CODE == subClassCode ) {
+			if( ICFBamDbKeyHash384Def.CLASS_CODE == subClassCode ) {
 				schema.getTableDbKeyHash384Def().deleteDbKeyHash384Def( Authorization, cur );
 			}
-			else if( CFBamDbKeyHash384Col.CLASS_CODE == subClassCode ) {
+			else if( ICFBamDbKeyHash384Col.CLASS_CODE == subClassCode ) {
 				schema.getTableDbKeyHash384Col().deleteDbKeyHash384Col( Authorization, (ICFBamDbKeyHash384Col)cur );
 			}
-			else if( CFBamDbKeyHash384Type.CLASS_CODE == subClassCode ) {
+			else if( ICFBamDbKeyHash384Type.CLASS_CODE == subClassCode ) {
 				schema.getTableDbKeyHash384Type().deleteDbKeyHash384Type( Authorization, (ICFBamDbKeyHash384Type)cur );
 			}
-			else if( CFBamDbKeyHash384Gen.CLASS_CODE == subClassCode ) {
+			else if( ICFBamDbKeyHash384Gen.CLASS_CODE == subClassCode ) {
 				schema.getTableDbKeyHash384Gen().deleteDbKeyHash384Gen( Authorization, (ICFBamDbKeyHash384Gen)cur );
 			}
 			else {
@@ -7738,16 +7738,16 @@ public class CFBamRamDbKeyHash384DefTable
 			cur = (CFBamBuffDbKeyHash384Def)(schema.getTableDbKeyHash384Def().readDerivedByIdIdx( Authorization,
 				cur.getRequiredId() ));
 			int subClassCode = cur.getClassCode();
-			if( CFBamDbKeyHash384Def.CLASS_CODE == subClassCode ) {
+			if( ICFBamDbKeyHash384Def.CLASS_CODE == subClassCode ) {
 				schema.getTableDbKeyHash384Def().deleteDbKeyHash384Def( Authorization, cur );
 			}
-			else if( CFBamDbKeyHash384Col.CLASS_CODE == subClassCode ) {
+			else if( ICFBamDbKeyHash384Col.CLASS_CODE == subClassCode ) {
 				schema.getTableDbKeyHash384Col().deleteDbKeyHash384Col( Authorization, (ICFBamDbKeyHash384Col)cur );
 			}
-			else if( CFBamDbKeyHash384Type.CLASS_CODE == subClassCode ) {
+			else if( ICFBamDbKeyHash384Type.CLASS_CODE == subClassCode ) {
 				schema.getTableDbKeyHash384Type().deleteDbKeyHash384Type( Authorization, (ICFBamDbKeyHash384Type)cur );
 			}
-			else if( CFBamDbKeyHash384Gen.CLASS_CODE == subClassCode ) {
+			else if( ICFBamDbKeyHash384Gen.CLASS_CODE == subClassCode ) {
 				schema.getTableDbKeyHash384Gen().deleteDbKeyHash384Gen( Authorization, (ICFBamDbKeyHash384Gen)cur );
 			}
 			else {

@@ -155,7 +155,7 @@ public class CFBamRamTZTimeDefTable
 	public ICFBamTZTimeDef lockDerived( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 PKey )
 	{
-		final String S_ProcName = "CFBamRamTZTimeDef.readDerived";
+		final String S_ProcName = "CFBamRamTZTimeDef.lockDerived";
 		ICFBamTZTimeDef buff;
 		if( dictByPKey.containsKey( PKey ) ) {
 			buff = dictByPKey.get( PKey );
@@ -5989,7 +5989,7 @@ public class CFBamRamTZTimeDefTable
 			}
 			CFBamBuffValue editPrev;
 			classCode = prev.getClassCode();
-			if( classCode.equals( "a809" ) ) {
+			if( classCode == ICFBamValue.CLASS_CODE ) {
 				editPrev = schema.getFactoryValue().newBuff();
 			}
 			else if( classCode == ICFBamAtom.CLASS_CODE ) {
@@ -6648,7 +6648,7 @@ public class CFBamRamTZTimeDefTable
 			}
 			CFBamBuffValue editNext;
 			classCode = next.getClassCode();
-			if( classCode.equals( "a809" ) ) {
+			if( classCode == ICFBamValue.CLASS_CODE ) {
 				editNext = schema.getFactoryValue().newBuff();
 			}
 			else if( classCode == ICFBamAtom.CLASS_CODE ) {
@@ -6971,7 +6971,7 @@ public class CFBamRamTZTimeDefTable
 			}
 			editNext.set( next );
 			editNext.setOptionalPrevId( prevId );
-			if( classCode.equals( "a809" ) ) {
+			if( classCode == ICFBamValue.CLASS_CODE ) {
 				schema.getTableValue().updateValue( Authorization, editNext );
 			}
 			else if( classCode == ICFBamAtom.CLASS_CODE ) {
@@ -7364,13 +7364,13 @@ public class CFBamRamTZTimeDefTable
 			cur = (CFBamBuffTZTimeDef)(schema.getTableTZTimeDef().readDerivedByIdIdx( Authorization,
 				cur.getRequiredId() ));
 			int subClassCode = cur.getClassCode();
-			if( CFBamTZTimeDef.CLASS_CODE == subClassCode ) {
+			if( ICFBamTZTimeDef.CLASS_CODE == subClassCode ) {
 				schema.getTableTZTimeDef().deleteTZTimeDef( Authorization, cur );
 			}
-			else if( CFBamTZTimeType.CLASS_CODE == subClassCode ) {
+			else if( ICFBamTZTimeType.CLASS_CODE == subClassCode ) {
 				schema.getTableTZTimeType().deleteTZTimeType( Authorization, (ICFBamTZTimeType)cur );
 			}
-			else if( CFBamTZTimeCol.CLASS_CODE == subClassCode ) {
+			else if( ICFBamTZTimeCol.CLASS_CODE == subClassCode ) {
 				schema.getTableTZTimeCol().deleteTZTimeCol( Authorization, (ICFBamTZTimeCol)cur );
 			}
 			else {
@@ -7414,13 +7414,13 @@ public class CFBamRamTZTimeDefTable
 			cur = (CFBamBuffTZTimeDef)(schema.getTableTZTimeDef().readDerivedByIdIdx( Authorization,
 				cur.getRequiredId() ));
 			int subClassCode = cur.getClassCode();
-			if( CFBamTZTimeDef.CLASS_CODE == subClassCode ) {
+			if( ICFBamTZTimeDef.CLASS_CODE == subClassCode ) {
 				schema.getTableTZTimeDef().deleteTZTimeDef( Authorization, cur );
 			}
-			else if( CFBamTZTimeType.CLASS_CODE == subClassCode ) {
+			else if( ICFBamTZTimeType.CLASS_CODE == subClassCode ) {
 				schema.getTableTZTimeType().deleteTZTimeType( Authorization, (ICFBamTZTimeType)cur );
 			}
-			else if( CFBamTZTimeCol.CLASS_CODE == subClassCode ) {
+			else if( ICFBamTZTimeCol.CLASS_CODE == subClassCode ) {
 				schema.getTableTZTimeCol().deleteTZTimeCol( Authorization, (ICFBamTZTimeCol)cur );
 			}
 			else {
@@ -7461,13 +7461,13 @@ public class CFBamRamTZTimeDefTable
 			cur = (CFBamBuffTZTimeDef)(schema.getTableTZTimeDef().readDerivedByIdIdx( Authorization,
 				cur.getRequiredId() ));
 			int subClassCode = cur.getClassCode();
-			if( CFBamTZTimeDef.CLASS_CODE == subClassCode ) {
+			if( ICFBamTZTimeDef.CLASS_CODE == subClassCode ) {
 				schema.getTableTZTimeDef().deleteTZTimeDef( Authorization, cur );
 			}
-			else if( CFBamTZTimeType.CLASS_CODE == subClassCode ) {
+			else if( ICFBamTZTimeType.CLASS_CODE == subClassCode ) {
 				schema.getTableTZTimeType().deleteTZTimeType( Authorization, (ICFBamTZTimeType)cur );
 			}
-			else if( CFBamTZTimeCol.CLASS_CODE == subClassCode ) {
+			else if( ICFBamTZTimeCol.CLASS_CODE == subClassCode ) {
 				schema.getTableTZTimeCol().deleteTZTimeCol( Authorization, (ICFBamTZTimeCol)cur );
 			}
 			else {
@@ -7510,13 +7510,13 @@ public class CFBamRamTZTimeDefTable
 			cur = (CFBamBuffTZTimeDef)(schema.getTableTZTimeDef().readDerivedByIdIdx( Authorization,
 				cur.getRequiredId() ));
 			int subClassCode = cur.getClassCode();
-			if( CFBamTZTimeDef.CLASS_CODE == subClassCode ) {
+			if( ICFBamTZTimeDef.CLASS_CODE == subClassCode ) {
 				schema.getTableTZTimeDef().deleteTZTimeDef( Authorization, cur );
 			}
-			else if( CFBamTZTimeType.CLASS_CODE == subClassCode ) {
+			else if( ICFBamTZTimeType.CLASS_CODE == subClassCode ) {
 				schema.getTableTZTimeType().deleteTZTimeType( Authorization, (ICFBamTZTimeType)cur );
 			}
-			else if( CFBamTZTimeCol.CLASS_CODE == subClassCode ) {
+			else if( ICFBamTZTimeCol.CLASS_CODE == subClassCode ) {
 				schema.getTableTZTimeCol().deleteTZTimeCol( Authorization, (ICFBamTZTimeCol)cur );
 			}
 			else {
@@ -7559,13 +7559,13 @@ public class CFBamRamTZTimeDefTable
 			cur = (CFBamBuffTZTimeDef)(schema.getTableTZTimeDef().readDerivedByIdIdx( Authorization,
 				cur.getRequiredId() ));
 			int subClassCode = cur.getClassCode();
-			if( CFBamTZTimeDef.CLASS_CODE == subClassCode ) {
+			if( ICFBamTZTimeDef.CLASS_CODE == subClassCode ) {
 				schema.getTableTZTimeDef().deleteTZTimeDef( Authorization, cur );
 			}
-			else if( CFBamTZTimeType.CLASS_CODE == subClassCode ) {
+			else if( ICFBamTZTimeType.CLASS_CODE == subClassCode ) {
 				schema.getTableTZTimeType().deleteTZTimeType( Authorization, (ICFBamTZTimeType)cur );
 			}
-			else if( CFBamTZTimeCol.CLASS_CODE == subClassCode ) {
+			else if( ICFBamTZTimeCol.CLASS_CODE == subClassCode ) {
 				schema.getTableTZTimeCol().deleteTZTimeCol( Authorization, (ICFBamTZTimeCol)cur );
 			}
 			else {
@@ -7608,13 +7608,13 @@ public class CFBamRamTZTimeDefTable
 			cur = (CFBamBuffTZTimeDef)(schema.getTableTZTimeDef().readDerivedByIdIdx( Authorization,
 				cur.getRequiredId() ));
 			int subClassCode = cur.getClassCode();
-			if( CFBamTZTimeDef.CLASS_CODE == subClassCode ) {
+			if( ICFBamTZTimeDef.CLASS_CODE == subClassCode ) {
 				schema.getTableTZTimeDef().deleteTZTimeDef( Authorization, cur );
 			}
-			else if( CFBamTZTimeType.CLASS_CODE == subClassCode ) {
+			else if( ICFBamTZTimeType.CLASS_CODE == subClassCode ) {
 				schema.getTableTZTimeType().deleteTZTimeType( Authorization, (ICFBamTZTimeType)cur );
 			}
-			else if( CFBamTZTimeCol.CLASS_CODE == subClassCode ) {
+			else if( ICFBamTZTimeCol.CLASS_CODE == subClassCode ) {
 				schema.getTableTZTimeCol().deleteTZTimeCol( Authorization, (ICFBamTZTimeCol)cur );
 			}
 			else {
@@ -7660,13 +7660,13 @@ public class CFBamRamTZTimeDefTable
 			cur = (CFBamBuffTZTimeDef)(schema.getTableTZTimeDef().readDerivedByIdIdx( Authorization,
 				cur.getRequiredId() ));
 			int subClassCode = cur.getClassCode();
-			if( CFBamTZTimeDef.CLASS_CODE == subClassCode ) {
+			if( ICFBamTZTimeDef.CLASS_CODE == subClassCode ) {
 				schema.getTableTZTimeDef().deleteTZTimeDef( Authorization, cur );
 			}
-			else if( CFBamTZTimeType.CLASS_CODE == subClassCode ) {
+			else if( ICFBamTZTimeType.CLASS_CODE == subClassCode ) {
 				schema.getTableTZTimeType().deleteTZTimeType( Authorization, (ICFBamTZTimeType)cur );
 			}
-			else if( CFBamTZTimeCol.CLASS_CODE == subClassCode ) {
+			else if( ICFBamTZTimeCol.CLASS_CODE == subClassCode ) {
 				schema.getTableTZTimeCol().deleteTZTimeCol( Authorization, (ICFBamTZTimeCol)cur );
 			}
 			else {
@@ -7712,13 +7712,13 @@ public class CFBamRamTZTimeDefTable
 			cur = (CFBamBuffTZTimeDef)(schema.getTableTZTimeDef().readDerivedByIdIdx( Authorization,
 				cur.getRequiredId() ));
 			int subClassCode = cur.getClassCode();
-			if( CFBamTZTimeDef.CLASS_CODE == subClassCode ) {
+			if( ICFBamTZTimeDef.CLASS_CODE == subClassCode ) {
 				schema.getTableTZTimeDef().deleteTZTimeDef( Authorization, cur );
 			}
-			else if( CFBamTZTimeType.CLASS_CODE == subClassCode ) {
+			else if( ICFBamTZTimeType.CLASS_CODE == subClassCode ) {
 				schema.getTableTZTimeType().deleteTZTimeType( Authorization, (ICFBamTZTimeType)cur );
 			}
-			else if( CFBamTZTimeCol.CLASS_CODE == subClassCode ) {
+			else if( ICFBamTZTimeCol.CLASS_CODE == subClassCode ) {
 				schema.getTableTZTimeCol().deleteTZTimeCol( Authorization, (ICFBamTZTimeCol)cur );
 			}
 			else {

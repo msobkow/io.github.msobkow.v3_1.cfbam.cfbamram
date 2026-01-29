@@ -217,7 +217,7 @@ public class CFBamRamSecGroupTable
 	public ICFSecSecGroup lockDerived( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 PKey )
 	{
-		final String S_ProcName = "CFBamRamSecGroup.readDerived";
+		final String S_ProcName = "CFBamRamSecGroup.lockDerived";
 		ICFSecSecGroup buff;
 		if( dictByPKey.containsKey( PKey ) ) {
 			buff = dictByPKey.get( PKey );
@@ -244,8 +244,8 @@ public class CFBamRamSecGroupTable
 	{
 		final String S_ProcName = "CFBamRamSecGroup.readDerivedByClusterIdx";
 		CFSecBuffSecGroupByClusterIdxKey key = (CFSecBuffSecGroupByClusterIdxKey)schema.getFactorySecGroup().newByClusterIdxKey();
-		key.setRequiredClusterId( ClusterId );
 
+		key.setRequiredClusterId( ClusterId );
 		ICFSecSecGroup[] recArray;
 		if( dictByClusterIdx.containsKey( key ) ) {
 			Map< CFLibDbKeyHash256, CFSecBuffSecGroup > subdictClusterIdx
@@ -272,9 +272,9 @@ public class CFBamRamSecGroupTable
 	{
 		final String S_ProcName = "CFBamRamSecGroup.readDerivedByClusterVisIdx";
 		CFSecBuffSecGroupByClusterVisIdxKey key = (CFSecBuffSecGroupByClusterVisIdxKey)schema.getFactorySecGroup().newByClusterVisIdxKey();
+
 		key.setRequiredClusterId( ClusterId );
 		key.setRequiredIsVisible( IsVisible );
-
 		ICFSecSecGroup[] recArray;
 		if( dictByClusterVisIdx.containsKey( key ) ) {
 			Map< CFLibDbKeyHash256, CFSecBuffSecGroup > subdictClusterVisIdx
@@ -301,9 +301,9 @@ public class CFBamRamSecGroupTable
 	{
 		final String S_ProcName = "CFBamRamSecGroup.readDerivedByUNameIdx";
 		CFSecBuffSecGroupByUNameIdxKey key = (CFSecBuffSecGroupByUNameIdxKey)schema.getFactorySecGroup().newByUNameIdxKey();
+
 		key.setRequiredClusterId( ClusterId );
 		key.setRequiredName( Name );
-
 		ICFSecSecGroup buff;
 		if( dictByUNameIdx.containsKey( key ) ) {
 			buff = dictByUNameIdx.get( key );

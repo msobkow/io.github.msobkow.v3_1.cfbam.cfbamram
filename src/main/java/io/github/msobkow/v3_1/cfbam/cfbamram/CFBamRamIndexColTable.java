@@ -356,7 +356,7 @@ public class CFBamRamIndexColTable
 	public ICFBamIndexCol lockDerived( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 PKey )
 	{
-		final String S_ProcName = "CFBamRamIndexCol.readDerived";
+		final String S_ProcName = "CFBamRamIndexCol.lockDerived";
 		ICFBamIndexCol buff;
 		if( dictByPKey.containsKey( PKey ) ) {
 			buff = dictByPKey.get( PKey );
@@ -384,9 +384,9 @@ public class CFBamRamIndexColTable
 	{
 		final String S_ProcName = "CFBamRamIndexCol.readDerivedByUNameIdx";
 		CFBamBuffIndexColByUNameIdxKey key = (CFBamBuffIndexColByUNameIdxKey)schema.getFactoryIndexCol().newByUNameIdxKey();
+
 		key.setRequiredIndexId( IndexId );
 		key.setRequiredName( Name );
-
 		ICFBamIndexCol buff;
 		if( dictByUNameIdx.containsKey( key ) ) {
 			buff = dictByUNameIdx.get( key );
@@ -402,8 +402,8 @@ public class CFBamRamIndexColTable
 	{
 		final String S_ProcName = "CFBamRamIndexCol.readDerivedByIndexIdx";
 		CFBamBuffIndexColByIndexIdxKey key = (CFBamBuffIndexColByIndexIdxKey)schema.getFactoryIndexCol().newByIndexIdxKey();
-		key.setRequiredIndexId( IndexId );
 
+		key.setRequiredIndexId( IndexId );
 		ICFBamIndexCol[] recArray;
 		if( dictByIndexIdx.containsKey( key ) ) {
 			Map< CFLibDbKeyHash256, CFBamBuffIndexCol > subdictIndexIdx
@@ -429,8 +429,8 @@ public class CFBamRamIndexColTable
 	{
 		final String S_ProcName = "CFBamRamIndexCol.readDerivedByDefSchemaIdx";
 		CFBamBuffIndexColByDefSchemaIdxKey key = (CFBamBuffIndexColByDefSchemaIdxKey)schema.getFactoryIndexCol().newByDefSchemaIdxKey();
-		key.setOptionalDefSchemaId( DefSchemaId );
 
+		key.setOptionalDefSchemaId( DefSchemaId );
 		ICFBamIndexCol[] recArray;
 		if( dictByDefSchemaIdx.containsKey( key ) ) {
 			Map< CFLibDbKeyHash256, CFBamBuffIndexCol > subdictDefSchemaIdx
@@ -456,8 +456,8 @@ public class CFBamRamIndexColTable
 	{
 		final String S_ProcName = "CFBamRamIndexCol.readDerivedByColIdx";
 		CFBamBuffIndexColByColIdxKey key = (CFBamBuffIndexColByColIdxKey)schema.getFactoryIndexCol().newByColIdxKey();
-		key.setRequiredColumnId( ColumnId );
 
+		key.setRequiredColumnId( ColumnId );
 		ICFBamIndexCol[] recArray;
 		if( dictByColIdx.containsKey( key ) ) {
 			Map< CFLibDbKeyHash256, CFBamBuffIndexCol > subdictColIdx
@@ -483,8 +483,8 @@ public class CFBamRamIndexColTable
 	{
 		final String S_ProcName = "CFBamRamIndexCol.readDerivedByPrevIdx";
 		CFBamBuffIndexColByPrevIdxKey key = (CFBamBuffIndexColByPrevIdxKey)schema.getFactoryIndexCol().newByPrevIdxKey();
-		key.setOptionalPrevId( PrevId );
 
+		key.setOptionalPrevId( PrevId );
 		ICFBamIndexCol[] recArray;
 		if( dictByPrevIdx.containsKey( key ) ) {
 			Map< CFLibDbKeyHash256, CFBamBuffIndexCol > subdictPrevIdx
@@ -510,8 +510,8 @@ public class CFBamRamIndexColTable
 	{
 		final String S_ProcName = "CFBamRamIndexCol.readDerivedByNextIdx";
 		CFBamBuffIndexColByNextIdxKey key = (CFBamBuffIndexColByNextIdxKey)schema.getFactoryIndexCol().newByNextIdxKey();
-		key.setOptionalNextId( NextId );
 
+		key.setOptionalNextId( NextId );
 		ICFBamIndexCol[] recArray;
 		if( dictByNextIdx.containsKey( key ) ) {
 			Map< CFLibDbKeyHash256, CFBamBuffIndexCol > subdictNextIdx
@@ -538,9 +538,9 @@ public class CFBamRamIndexColTable
 	{
 		final String S_ProcName = "CFBamRamIndexCol.readDerivedByIdxPrevIdx";
 		CFBamBuffIndexColByIdxPrevIdxKey key = (CFBamBuffIndexColByIdxPrevIdxKey)schema.getFactoryIndexCol().newByIdxPrevIdxKey();
+
 		key.setRequiredIndexId( IndexId );
 		key.setOptionalPrevId( PrevId );
-
 		ICFBamIndexCol[] recArray;
 		if( dictByIdxPrevIdx.containsKey( key ) ) {
 			Map< CFLibDbKeyHash256, CFBamBuffIndexCol > subdictIdxPrevIdx
@@ -567,9 +567,9 @@ public class CFBamRamIndexColTable
 	{
 		final String S_ProcName = "CFBamRamIndexCol.readDerivedByIdxNextIdx";
 		CFBamBuffIndexColByIdxNextIdxKey key = (CFBamBuffIndexColByIdxNextIdxKey)schema.getFactoryIndexCol().newByIdxNextIdxKey();
+
 		key.setRequiredIndexId( IndexId );
 		key.setOptionalNextId( NextId );
-
 		ICFBamIndexCol[] recArray;
 		if( dictByIdxNextIdx.containsKey( key ) ) {
 			Map< CFLibDbKeyHash256, CFBamBuffIndexCol > subdictIdxNextIdx
@@ -1408,7 +1408,7 @@ public class CFBamRamIndexColTable
 			}
 			CFBamBuffIndexCol editPrev;
 			classCode = prev.getClassCode();
-			if( classCode.equals( "a822" ) ) {
+			if( classCode == ICFBamIndexCol.CLASS_CODE ) {
 				editPrev = schema.getFactoryIndexCol().newBuff();
 			}
 			else {
@@ -1437,7 +1437,7 @@ public class CFBamRamIndexColTable
 			}
 			CFBamBuffIndexCol editNext;
 			classCode = next.getClassCode();
-			if( classCode.equals( "a822" ) ) {
+			if( classCode == ICFBamIndexCol.CLASS_CODE ) {
 				editNext = schema.getFactoryIndexCol().newBuff();
 			}
 			else {
@@ -1445,7 +1445,7 @@ public class CFBamRamIndexColTable
 			}
 			editNext.set( next );
 			editNext.setOptionalPrevId( prevId );
-			if( classCode.equals( "a822" ) ) {
+			if( classCode == ICFBamIndexCol.CLASS_CODE ) {
 				schema.getTableIndexCol().updateIndexCol( Authorization, editNext );
 			}
 			else {

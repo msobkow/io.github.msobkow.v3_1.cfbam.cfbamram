@@ -202,7 +202,7 @@ public class CFBamRamClearSubDep1Table
 	public ICFBamClearSubDep1 lockDerived( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 PKey )
 	{
-		final String S_ProcName = "CFBamRamClearSubDep1.readDerived";
+		final String S_ProcName = "CFBamRamClearSubDep1.lockDerived";
 		ICFBamClearSubDep1 buff;
 		if( dictByPKey.containsKey( PKey ) ) {
 			buff = dictByPKey.get( PKey );
@@ -295,8 +295,8 @@ public class CFBamRamClearSubDep1Table
 	{
 		final String S_ProcName = "CFBamRamClearSubDep1.readDerivedByClearTopDepIdx";
 		CFBamBuffClearSubDep1ByClearTopDepIdxKey key = (CFBamBuffClearSubDep1ByClearTopDepIdxKey)schema.getFactoryClearSubDep1().newByClearTopDepIdxKey();
-		key.setRequiredClearTopDepId( ClearTopDepId );
 
+		key.setRequiredClearTopDepId( ClearTopDepId );
 		ICFBamClearSubDep1[] recArray;
 		if( dictByClearTopDepIdx.containsKey( key ) ) {
 			Map< CFLibDbKeyHash256, CFBamBuffClearSubDep1 > subdictClearTopDepIdx
@@ -323,9 +323,9 @@ public class CFBamRamClearSubDep1Table
 	{
 		final String S_ProcName = "CFBamRamClearSubDep1.readDerivedByUNameIdx";
 		CFBamBuffClearSubDep1ByUNameIdxKey key = (CFBamBuffClearSubDep1ByUNameIdxKey)schema.getFactoryClearSubDep1().newByUNameIdxKey();
+
 		key.setRequiredClearTopDepId( ClearTopDepId );
 		key.setRequiredName( Name );
-
 		ICFBamClearSubDep1 buff;
 		if( dictByUNameIdx.containsKey( key ) ) {
 			buff = dictByUNameIdx.get( key );

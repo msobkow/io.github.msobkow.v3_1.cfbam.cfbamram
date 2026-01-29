@@ -223,7 +223,7 @@ public class CFBamRamDelDepTable
 	public ICFBamDelDep lockDerived( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 PKey )
 	{
-		final String S_ProcName = "CFBamRamDelDep.readDerived";
+		final String S_ProcName = "CFBamRamDelDep.lockDerived";
 		ICFBamDelDep buff;
 		if( dictByPKey.containsKey( PKey ) ) {
 			buff = dictByPKey.get( PKey );
@@ -272,8 +272,8 @@ public class CFBamRamDelDepTable
 	{
 		final String S_ProcName = "CFBamRamDelDep.readDerivedByDefSchemaIdx";
 		CFBamBuffDelDepByDefSchemaIdxKey key = (CFBamBuffDelDepByDefSchemaIdxKey)schema.getFactoryDelDep().newByDefSchemaIdxKey();
-		key.setOptionalDefSchemaId( DefSchemaId );
 
+		key.setOptionalDefSchemaId( DefSchemaId );
 		ICFBamDelDep[] recArray;
 		if( dictByDefSchemaIdx.containsKey( key ) ) {
 			Map< CFLibDbKeyHash256, CFBamBuffDelDep > subdictDefSchemaIdx
@@ -299,8 +299,8 @@ public class CFBamRamDelDepTable
 	{
 		final String S_ProcName = "CFBamRamDelDep.readDerivedByDelDepIdx";
 		CFBamBuffDelDepByDelDepIdxKey key = (CFBamBuffDelDepByDelDepIdxKey)schema.getFactoryDelDep().newByDelDepIdxKey();
-		key.setRequiredRelationId( RelationId );
 
+		key.setRequiredRelationId( RelationId );
 		ICFBamDelDep[] recArray;
 		if( dictByDelDepIdx.containsKey( key ) ) {
 			Map< CFLibDbKeyHash256, CFBamBuffDelDep > subdictDelDepIdx
@@ -699,19 +699,19 @@ public class CFBamRamDelDepTable
 			cur = (CFBamBuffDelDep)(schema.getTableDelDep().readDerivedByIdIdx( Authorization,
 				cur.getRequiredId() ));
 			int subClassCode = cur.getClassCode();
-			if( CFBamDelDep.CLASS_CODE == subClassCode ) {
+			if( ICFBamDelDep.CLASS_CODE == subClassCode ) {
 				schema.getTableDelDep().deleteDelDep( Authorization, cur );
 			}
-			else if( CFBamDelSubDep1.CLASS_CODE == subClassCode ) {
+			else if( ICFBamDelSubDep1.CLASS_CODE == subClassCode ) {
 				schema.getTableDelSubDep1().deleteDelSubDep1( Authorization, (ICFBamDelSubDep1)cur );
 			}
-			else if( CFBamDelSubDep2.CLASS_CODE == subClassCode ) {
+			else if( ICFBamDelSubDep2.CLASS_CODE == subClassCode ) {
 				schema.getTableDelSubDep2().deleteDelSubDep2( Authorization, (ICFBamDelSubDep2)cur );
 			}
-			else if( CFBamDelSubDep3.CLASS_CODE == subClassCode ) {
+			else if( ICFBamDelSubDep3.CLASS_CODE == subClassCode ) {
 				schema.getTableDelSubDep3().deleteDelSubDep3( Authorization, (ICFBamDelSubDep3)cur );
 			}
-			else if( CFBamDelTopDep.CLASS_CODE == subClassCode ) {
+			else if( ICFBamDelTopDep.CLASS_CODE == subClassCode ) {
 				schema.getTableDelTopDep().deleteDelTopDep( Authorization, (ICFBamDelTopDep)cur );
 			}
 			else {
@@ -752,19 +752,19 @@ public class CFBamRamDelDepTable
 			cur = (CFBamBuffDelDep)(schema.getTableDelDep().readDerivedByIdIdx( Authorization,
 				cur.getRequiredId() ));
 			int subClassCode = cur.getClassCode();
-			if( CFBamDelDep.CLASS_CODE == subClassCode ) {
+			if( ICFBamDelDep.CLASS_CODE == subClassCode ) {
 				schema.getTableDelDep().deleteDelDep( Authorization, cur );
 			}
-			else if( CFBamDelSubDep1.CLASS_CODE == subClassCode ) {
+			else if( ICFBamDelSubDep1.CLASS_CODE == subClassCode ) {
 				schema.getTableDelSubDep1().deleteDelSubDep1( Authorization, (ICFBamDelSubDep1)cur );
 			}
-			else if( CFBamDelSubDep2.CLASS_CODE == subClassCode ) {
+			else if( ICFBamDelSubDep2.CLASS_CODE == subClassCode ) {
 				schema.getTableDelSubDep2().deleteDelSubDep2( Authorization, (ICFBamDelSubDep2)cur );
 			}
-			else if( CFBamDelSubDep3.CLASS_CODE == subClassCode ) {
+			else if( ICFBamDelSubDep3.CLASS_CODE == subClassCode ) {
 				schema.getTableDelSubDep3().deleteDelSubDep3( Authorization, (ICFBamDelSubDep3)cur );
 			}
-			else if( CFBamDelTopDep.CLASS_CODE == subClassCode ) {
+			else if( ICFBamDelTopDep.CLASS_CODE == subClassCode ) {
 				schema.getTableDelTopDep().deleteDelTopDep( Authorization, (ICFBamDelTopDep)cur );
 			}
 			else {
@@ -797,19 +797,19 @@ public class CFBamRamDelDepTable
 			cur = (CFBamBuffDelDep)(schema.getTableDelDep().readDerivedByIdIdx( Authorization,
 				cur.getRequiredId() ));
 			int subClassCode = cur.getClassCode();
-			if( CFBamDelDep.CLASS_CODE == subClassCode ) {
+			if( ICFBamDelDep.CLASS_CODE == subClassCode ) {
 				schema.getTableDelDep().deleteDelDep( Authorization, cur );
 			}
-			else if( CFBamDelSubDep1.CLASS_CODE == subClassCode ) {
+			else if( ICFBamDelSubDep1.CLASS_CODE == subClassCode ) {
 				schema.getTableDelSubDep1().deleteDelSubDep1( Authorization, (ICFBamDelSubDep1)cur );
 			}
-			else if( CFBamDelSubDep2.CLASS_CODE == subClassCode ) {
+			else if( ICFBamDelSubDep2.CLASS_CODE == subClassCode ) {
 				schema.getTableDelSubDep2().deleteDelSubDep2( Authorization, (ICFBamDelSubDep2)cur );
 			}
-			else if( CFBamDelSubDep3.CLASS_CODE == subClassCode ) {
+			else if( ICFBamDelSubDep3.CLASS_CODE == subClassCode ) {
 				schema.getTableDelSubDep3().deleteDelSubDep3( Authorization, (ICFBamDelSubDep3)cur );
 			}
-			else if( CFBamDelTopDep.CLASS_CODE == subClassCode ) {
+			else if( ICFBamDelTopDep.CLASS_CODE == subClassCode ) {
 				schema.getTableDelTopDep().deleteDelTopDep( Authorization, (ICFBamDelTopDep)cur );
 			}
 			else {
@@ -850,19 +850,19 @@ public class CFBamRamDelDepTable
 			cur = (CFBamBuffDelDep)(schema.getTableDelDep().readDerivedByIdIdx( Authorization,
 				cur.getRequiredId() ));
 			int subClassCode = cur.getClassCode();
-			if( CFBamDelDep.CLASS_CODE == subClassCode ) {
+			if( ICFBamDelDep.CLASS_CODE == subClassCode ) {
 				schema.getTableDelDep().deleteDelDep( Authorization, cur );
 			}
-			else if( CFBamDelSubDep1.CLASS_CODE == subClassCode ) {
+			else if( ICFBamDelSubDep1.CLASS_CODE == subClassCode ) {
 				schema.getTableDelSubDep1().deleteDelSubDep1( Authorization, (ICFBamDelSubDep1)cur );
 			}
-			else if( CFBamDelSubDep2.CLASS_CODE == subClassCode ) {
+			else if( ICFBamDelSubDep2.CLASS_CODE == subClassCode ) {
 				schema.getTableDelSubDep2().deleteDelSubDep2( Authorization, (ICFBamDelSubDep2)cur );
 			}
-			else if( CFBamDelSubDep3.CLASS_CODE == subClassCode ) {
+			else if( ICFBamDelSubDep3.CLASS_CODE == subClassCode ) {
 				schema.getTableDelSubDep3().deleteDelSubDep3( Authorization, (ICFBamDelSubDep3)cur );
 			}
-			else if( CFBamDelTopDep.CLASS_CODE == subClassCode ) {
+			else if( ICFBamDelTopDep.CLASS_CODE == subClassCode ) {
 				schema.getTableDelTopDep().deleteDelTopDep( Authorization, (ICFBamDelTopDep)cur );
 			}
 			else {

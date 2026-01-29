@@ -155,7 +155,7 @@ public class CFBamRamTimeDefTable
 	public ICFBamTimeDef lockDerived( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 PKey )
 	{
-		final String S_ProcName = "CFBamRamTimeDef.readDerived";
+		final String S_ProcName = "CFBamRamTimeDef.lockDerived";
 		ICFBamTimeDef buff;
 		if( dictByPKey.containsKey( PKey ) ) {
 			buff = dictByPKey.get( PKey );
@@ -5989,7 +5989,7 @@ public class CFBamRamTimeDefTable
 			}
 			CFBamBuffValue editPrev;
 			classCode = prev.getClassCode();
-			if( classCode.equals( "a809" ) ) {
+			if( classCode == ICFBamValue.CLASS_CODE ) {
 				editPrev = schema.getFactoryValue().newBuff();
 			}
 			else if( classCode == ICFBamAtom.CLASS_CODE ) {
@@ -6648,7 +6648,7 @@ public class CFBamRamTimeDefTable
 			}
 			CFBamBuffValue editNext;
 			classCode = next.getClassCode();
-			if( classCode.equals( "a809" ) ) {
+			if( classCode == ICFBamValue.CLASS_CODE ) {
 				editNext = schema.getFactoryValue().newBuff();
 			}
 			else if( classCode == ICFBamAtom.CLASS_CODE ) {
@@ -6971,7 +6971,7 @@ public class CFBamRamTimeDefTable
 			}
 			editNext.set( next );
 			editNext.setOptionalPrevId( prevId );
-			if( classCode.equals( "a809" ) ) {
+			if( classCode == ICFBamValue.CLASS_CODE ) {
 				schema.getTableValue().updateValue( Authorization, editNext );
 			}
 			else if( classCode == ICFBamAtom.CLASS_CODE ) {
@@ -7364,13 +7364,13 @@ public class CFBamRamTimeDefTable
 			cur = (CFBamBuffTimeDef)(schema.getTableTimeDef().readDerivedByIdIdx( Authorization,
 				cur.getRequiredId() ));
 			int subClassCode = cur.getClassCode();
-			if( CFBamTimeDef.CLASS_CODE == subClassCode ) {
+			if( ICFBamTimeDef.CLASS_CODE == subClassCode ) {
 				schema.getTableTimeDef().deleteTimeDef( Authorization, cur );
 			}
-			else if( CFBamTimeType.CLASS_CODE == subClassCode ) {
+			else if( ICFBamTimeType.CLASS_CODE == subClassCode ) {
 				schema.getTableTimeType().deleteTimeType( Authorization, (ICFBamTimeType)cur );
 			}
-			else if( CFBamTimeCol.CLASS_CODE == subClassCode ) {
+			else if( ICFBamTimeCol.CLASS_CODE == subClassCode ) {
 				schema.getTableTimeCol().deleteTimeCol( Authorization, (ICFBamTimeCol)cur );
 			}
 			else {
@@ -7414,13 +7414,13 @@ public class CFBamRamTimeDefTable
 			cur = (CFBamBuffTimeDef)(schema.getTableTimeDef().readDerivedByIdIdx( Authorization,
 				cur.getRequiredId() ));
 			int subClassCode = cur.getClassCode();
-			if( CFBamTimeDef.CLASS_CODE == subClassCode ) {
+			if( ICFBamTimeDef.CLASS_CODE == subClassCode ) {
 				schema.getTableTimeDef().deleteTimeDef( Authorization, cur );
 			}
-			else if( CFBamTimeType.CLASS_CODE == subClassCode ) {
+			else if( ICFBamTimeType.CLASS_CODE == subClassCode ) {
 				schema.getTableTimeType().deleteTimeType( Authorization, (ICFBamTimeType)cur );
 			}
-			else if( CFBamTimeCol.CLASS_CODE == subClassCode ) {
+			else if( ICFBamTimeCol.CLASS_CODE == subClassCode ) {
 				schema.getTableTimeCol().deleteTimeCol( Authorization, (ICFBamTimeCol)cur );
 			}
 			else {
@@ -7461,13 +7461,13 @@ public class CFBamRamTimeDefTable
 			cur = (CFBamBuffTimeDef)(schema.getTableTimeDef().readDerivedByIdIdx( Authorization,
 				cur.getRequiredId() ));
 			int subClassCode = cur.getClassCode();
-			if( CFBamTimeDef.CLASS_CODE == subClassCode ) {
+			if( ICFBamTimeDef.CLASS_CODE == subClassCode ) {
 				schema.getTableTimeDef().deleteTimeDef( Authorization, cur );
 			}
-			else if( CFBamTimeType.CLASS_CODE == subClassCode ) {
+			else if( ICFBamTimeType.CLASS_CODE == subClassCode ) {
 				schema.getTableTimeType().deleteTimeType( Authorization, (ICFBamTimeType)cur );
 			}
-			else if( CFBamTimeCol.CLASS_CODE == subClassCode ) {
+			else if( ICFBamTimeCol.CLASS_CODE == subClassCode ) {
 				schema.getTableTimeCol().deleteTimeCol( Authorization, (ICFBamTimeCol)cur );
 			}
 			else {
@@ -7510,13 +7510,13 @@ public class CFBamRamTimeDefTable
 			cur = (CFBamBuffTimeDef)(schema.getTableTimeDef().readDerivedByIdIdx( Authorization,
 				cur.getRequiredId() ));
 			int subClassCode = cur.getClassCode();
-			if( CFBamTimeDef.CLASS_CODE == subClassCode ) {
+			if( ICFBamTimeDef.CLASS_CODE == subClassCode ) {
 				schema.getTableTimeDef().deleteTimeDef( Authorization, cur );
 			}
-			else if( CFBamTimeType.CLASS_CODE == subClassCode ) {
+			else if( ICFBamTimeType.CLASS_CODE == subClassCode ) {
 				schema.getTableTimeType().deleteTimeType( Authorization, (ICFBamTimeType)cur );
 			}
-			else if( CFBamTimeCol.CLASS_CODE == subClassCode ) {
+			else if( ICFBamTimeCol.CLASS_CODE == subClassCode ) {
 				schema.getTableTimeCol().deleteTimeCol( Authorization, (ICFBamTimeCol)cur );
 			}
 			else {
@@ -7559,13 +7559,13 @@ public class CFBamRamTimeDefTable
 			cur = (CFBamBuffTimeDef)(schema.getTableTimeDef().readDerivedByIdIdx( Authorization,
 				cur.getRequiredId() ));
 			int subClassCode = cur.getClassCode();
-			if( CFBamTimeDef.CLASS_CODE == subClassCode ) {
+			if( ICFBamTimeDef.CLASS_CODE == subClassCode ) {
 				schema.getTableTimeDef().deleteTimeDef( Authorization, cur );
 			}
-			else if( CFBamTimeType.CLASS_CODE == subClassCode ) {
+			else if( ICFBamTimeType.CLASS_CODE == subClassCode ) {
 				schema.getTableTimeType().deleteTimeType( Authorization, (ICFBamTimeType)cur );
 			}
-			else if( CFBamTimeCol.CLASS_CODE == subClassCode ) {
+			else if( ICFBamTimeCol.CLASS_CODE == subClassCode ) {
 				schema.getTableTimeCol().deleteTimeCol( Authorization, (ICFBamTimeCol)cur );
 			}
 			else {
@@ -7608,13 +7608,13 @@ public class CFBamRamTimeDefTable
 			cur = (CFBamBuffTimeDef)(schema.getTableTimeDef().readDerivedByIdIdx( Authorization,
 				cur.getRequiredId() ));
 			int subClassCode = cur.getClassCode();
-			if( CFBamTimeDef.CLASS_CODE == subClassCode ) {
+			if( ICFBamTimeDef.CLASS_CODE == subClassCode ) {
 				schema.getTableTimeDef().deleteTimeDef( Authorization, cur );
 			}
-			else if( CFBamTimeType.CLASS_CODE == subClassCode ) {
+			else if( ICFBamTimeType.CLASS_CODE == subClassCode ) {
 				schema.getTableTimeType().deleteTimeType( Authorization, (ICFBamTimeType)cur );
 			}
-			else if( CFBamTimeCol.CLASS_CODE == subClassCode ) {
+			else if( ICFBamTimeCol.CLASS_CODE == subClassCode ) {
 				schema.getTableTimeCol().deleteTimeCol( Authorization, (ICFBamTimeCol)cur );
 			}
 			else {
@@ -7660,13 +7660,13 @@ public class CFBamRamTimeDefTable
 			cur = (CFBamBuffTimeDef)(schema.getTableTimeDef().readDerivedByIdIdx( Authorization,
 				cur.getRequiredId() ));
 			int subClassCode = cur.getClassCode();
-			if( CFBamTimeDef.CLASS_CODE == subClassCode ) {
+			if( ICFBamTimeDef.CLASS_CODE == subClassCode ) {
 				schema.getTableTimeDef().deleteTimeDef( Authorization, cur );
 			}
-			else if( CFBamTimeType.CLASS_CODE == subClassCode ) {
+			else if( ICFBamTimeType.CLASS_CODE == subClassCode ) {
 				schema.getTableTimeType().deleteTimeType( Authorization, (ICFBamTimeType)cur );
 			}
-			else if( CFBamTimeCol.CLASS_CODE == subClassCode ) {
+			else if( ICFBamTimeCol.CLASS_CODE == subClassCode ) {
 				schema.getTableTimeCol().deleteTimeCol( Authorization, (ICFBamTimeCol)cur );
 			}
 			else {
@@ -7712,13 +7712,13 @@ public class CFBamRamTimeDefTable
 			cur = (CFBamBuffTimeDef)(schema.getTableTimeDef().readDerivedByIdIdx( Authorization,
 				cur.getRequiredId() ));
 			int subClassCode = cur.getClassCode();
-			if( CFBamTimeDef.CLASS_CODE == subClassCode ) {
+			if( ICFBamTimeDef.CLASS_CODE == subClassCode ) {
 				schema.getTableTimeDef().deleteTimeDef( Authorization, cur );
 			}
-			else if( CFBamTimeType.CLASS_CODE == subClassCode ) {
+			else if( ICFBamTimeType.CLASS_CODE == subClassCode ) {
 				schema.getTableTimeType().deleteTimeType( Authorization, (ICFBamTimeType)cur );
 			}
-			else if( CFBamTimeCol.CLASS_CODE == subClassCode ) {
+			else if( ICFBamTimeCol.CLASS_CODE == subClassCode ) {
 				schema.getTableTimeCol().deleteTimeCol( Authorization, (ICFBamTimeCol)cur );
 			}
 			else {

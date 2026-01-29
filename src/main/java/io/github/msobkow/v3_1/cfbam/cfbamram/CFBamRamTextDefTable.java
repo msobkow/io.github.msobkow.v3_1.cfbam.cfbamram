@@ -155,7 +155,7 @@ public class CFBamRamTextDefTable
 	public ICFBamTextDef lockDerived( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 PKey )
 	{
-		final String S_ProcName = "CFBamRamTextDef.readDerived";
+		final String S_ProcName = "CFBamRamTextDef.lockDerived";
 		ICFBamTextDef buff;
 		if( dictByPKey.containsKey( PKey ) ) {
 			buff = dictByPKey.get( PKey );
@@ -5989,7 +5989,7 @@ public class CFBamRamTextDefTable
 			}
 			CFBamBuffValue editPrev;
 			classCode = prev.getClassCode();
-			if( classCode.equals( "a809" ) ) {
+			if( classCode == ICFBamValue.CLASS_CODE ) {
 				editPrev = schema.getFactoryValue().newBuff();
 			}
 			else if( classCode == ICFBamAtom.CLASS_CODE ) {
@@ -6648,7 +6648,7 @@ public class CFBamRamTextDefTable
 			}
 			CFBamBuffValue editNext;
 			classCode = next.getClassCode();
-			if( classCode.equals( "a809" ) ) {
+			if( classCode == ICFBamValue.CLASS_CODE ) {
 				editNext = schema.getFactoryValue().newBuff();
 			}
 			else if( classCode == ICFBamAtom.CLASS_CODE ) {
@@ -6971,7 +6971,7 @@ public class CFBamRamTextDefTable
 			}
 			editNext.set( next );
 			editNext.setOptionalPrevId( prevId );
-			if( classCode.equals( "a809" ) ) {
+			if( classCode == ICFBamValue.CLASS_CODE ) {
 				schema.getTableValue().updateValue( Authorization, editNext );
 			}
 			else if( classCode == ICFBamAtom.CLASS_CODE ) {
@@ -7364,13 +7364,13 @@ public class CFBamRamTextDefTable
 			cur = (CFBamBuffTextDef)(schema.getTableTextDef().readDerivedByIdIdx( Authorization,
 				cur.getRequiredId() ));
 			int subClassCode = cur.getClassCode();
-			if( CFBamTextDef.CLASS_CODE == subClassCode ) {
+			if( ICFBamTextDef.CLASS_CODE == subClassCode ) {
 				schema.getTableTextDef().deleteTextDef( Authorization, cur );
 			}
-			else if( CFBamTextType.CLASS_CODE == subClassCode ) {
+			else if( ICFBamTextType.CLASS_CODE == subClassCode ) {
 				schema.getTableTextType().deleteTextType( Authorization, (ICFBamTextType)cur );
 			}
-			else if( CFBamTextCol.CLASS_CODE == subClassCode ) {
+			else if( ICFBamTextCol.CLASS_CODE == subClassCode ) {
 				schema.getTableTextCol().deleteTextCol( Authorization, (ICFBamTextCol)cur );
 			}
 			else {
@@ -7414,13 +7414,13 @@ public class CFBamRamTextDefTable
 			cur = (CFBamBuffTextDef)(schema.getTableTextDef().readDerivedByIdIdx( Authorization,
 				cur.getRequiredId() ));
 			int subClassCode = cur.getClassCode();
-			if( CFBamTextDef.CLASS_CODE == subClassCode ) {
+			if( ICFBamTextDef.CLASS_CODE == subClassCode ) {
 				schema.getTableTextDef().deleteTextDef( Authorization, cur );
 			}
-			else if( CFBamTextType.CLASS_CODE == subClassCode ) {
+			else if( ICFBamTextType.CLASS_CODE == subClassCode ) {
 				schema.getTableTextType().deleteTextType( Authorization, (ICFBamTextType)cur );
 			}
-			else if( CFBamTextCol.CLASS_CODE == subClassCode ) {
+			else if( ICFBamTextCol.CLASS_CODE == subClassCode ) {
 				schema.getTableTextCol().deleteTextCol( Authorization, (ICFBamTextCol)cur );
 			}
 			else {
@@ -7461,13 +7461,13 @@ public class CFBamRamTextDefTable
 			cur = (CFBamBuffTextDef)(schema.getTableTextDef().readDerivedByIdIdx( Authorization,
 				cur.getRequiredId() ));
 			int subClassCode = cur.getClassCode();
-			if( CFBamTextDef.CLASS_CODE == subClassCode ) {
+			if( ICFBamTextDef.CLASS_CODE == subClassCode ) {
 				schema.getTableTextDef().deleteTextDef( Authorization, cur );
 			}
-			else if( CFBamTextType.CLASS_CODE == subClassCode ) {
+			else if( ICFBamTextType.CLASS_CODE == subClassCode ) {
 				schema.getTableTextType().deleteTextType( Authorization, (ICFBamTextType)cur );
 			}
-			else if( CFBamTextCol.CLASS_CODE == subClassCode ) {
+			else if( ICFBamTextCol.CLASS_CODE == subClassCode ) {
 				schema.getTableTextCol().deleteTextCol( Authorization, (ICFBamTextCol)cur );
 			}
 			else {
@@ -7510,13 +7510,13 @@ public class CFBamRamTextDefTable
 			cur = (CFBamBuffTextDef)(schema.getTableTextDef().readDerivedByIdIdx( Authorization,
 				cur.getRequiredId() ));
 			int subClassCode = cur.getClassCode();
-			if( CFBamTextDef.CLASS_CODE == subClassCode ) {
+			if( ICFBamTextDef.CLASS_CODE == subClassCode ) {
 				schema.getTableTextDef().deleteTextDef( Authorization, cur );
 			}
-			else if( CFBamTextType.CLASS_CODE == subClassCode ) {
+			else if( ICFBamTextType.CLASS_CODE == subClassCode ) {
 				schema.getTableTextType().deleteTextType( Authorization, (ICFBamTextType)cur );
 			}
-			else if( CFBamTextCol.CLASS_CODE == subClassCode ) {
+			else if( ICFBamTextCol.CLASS_CODE == subClassCode ) {
 				schema.getTableTextCol().deleteTextCol( Authorization, (ICFBamTextCol)cur );
 			}
 			else {
@@ -7559,13 +7559,13 @@ public class CFBamRamTextDefTable
 			cur = (CFBamBuffTextDef)(schema.getTableTextDef().readDerivedByIdIdx( Authorization,
 				cur.getRequiredId() ));
 			int subClassCode = cur.getClassCode();
-			if( CFBamTextDef.CLASS_CODE == subClassCode ) {
+			if( ICFBamTextDef.CLASS_CODE == subClassCode ) {
 				schema.getTableTextDef().deleteTextDef( Authorization, cur );
 			}
-			else if( CFBamTextType.CLASS_CODE == subClassCode ) {
+			else if( ICFBamTextType.CLASS_CODE == subClassCode ) {
 				schema.getTableTextType().deleteTextType( Authorization, (ICFBamTextType)cur );
 			}
-			else if( CFBamTextCol.CLASS_CODE == subClassCode ) {
+			else if( ICFBamTextCol.CLASS_CODE == subClassCode ) {
 				schema.getTableTextCol().deleteTextCol( Authorization, (ICFBamTextCol)cur );
 			}
 			else {
@@ -7608,13 +7608,13 @@ public class CFBamRamTextDefTable
 			cur = (CFBamBuffTextDef)(schema.getTableTextDef().readDerivedByIdIdx( Authorization,
 				cur.getRequiredId() ));
 			int subClassCode = cur.getClassCode();
-			if( CFBamTextDef.CLASS_CODE == subClassCode ) {
+			if( ICFBamTextDef.CLASS_CODE == subClassCode ) {
 				schema.getTableTextDef().deleteTextDef( Authorization, cur );
 			}
-			else if( CFBamTextType.CLASS_CODE == subClassCode ) {
+			else if( ICFBamTextType.CLASS_CODE == subClassCode ) {
 				schema.getTableTextType().deleteTextType( Authorization, (ICFBamTextType)cur );
 			}
-			else if( CFBamTextCol.CLASS_CODE == subClassCode ) {
+			else if( ICFBamTextCol.CLASS_CODE == subClassCode ) {
 				schema.getTableTextCol().deleteTextCol( Authorization, (ICFBamTextCol)cur );
 			}
 			else {
@@ -7660,13 +7660,13 @@ public class CFBamRamTextDefTable
 			cur = (CFBamBuffTextDef)(schema.getTableTextDef().readDerivedByIdIdx( Authorization,
 				cur.getRequiredId() ));
 			int subClassCode = cur.getClassCode();
-			if( CFBamTextDef.CLASS_CODE == subClassCode ) {
+			if( ICFBamTextDef.CLASS_CODE == subClassCode ) {
 				schema.getTableTextDef().deleteTextDef( Authorization, cur );
 			}
-			else if( CFBamTextType.CLASS_CODE == subClassCode ) {
+			else if( ICFBamTextType.CLASS_CODE == subClassCode ) {
 				schema.getTableTextType().deleteTextType( Authorization, (ICFBamTextType)cur );
 			}
-			else if( CFBamTextCol.CLASS_CODE == subClassCode ) {
+			else if( ICFBamTextCol.CLASS_CODE == subClassCode ) {
 				schema.getTableTextCol().deleteTextCol( Authorization, (ICFBamTextCol)cur );
 			}
 			else {
@@ -7712,13 +7712,13 @@ public class CFBamRamTextDefTable
 			cur = (CFBamBuffTextDef)(schema.getTableTextDef().readDerivedByIdIdx( Authorization,
 				cur.getRequiredId() ));
 			int subClassCode = cur.getClassCode();
-			if( CFBamTextDef.CLASS_CODE == subClassCode ) {
+			if( ICFBamTextDef.CLASS_CODE == subClassCode ) {
 				schema.getTableTextDef().deleteTextDef( Authorization, cur );
 			}
-			else if( CFBamTextType.CLASS_CODE == subClassCode ) {
+			else if( ICFBamTextType.CLASS_CODE == subClassCode ) {
 				schema.getTableTextType().deleteTextType( Authorization, (ICFBamTextType)cur );
 			}
-			else if( CFBamTextCol.CLASS_CODE == subClassCode ) {
+			else if( ICFBamTextCol.CLASS_CODE == subClassCode ) {
 				schema.getTableTextCol().deleteTextCol( Authorization, (ICFBamTextCol)cur );
 			}
 			else {

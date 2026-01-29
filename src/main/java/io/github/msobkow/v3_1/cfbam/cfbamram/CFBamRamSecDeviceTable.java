@@ -103,9 +103,9 @@ public class CFBamRamSecDeviceTable
 		
 		CFSecBuffSecDevice Buff = ensureRec(iBuff);
 		CFSecBuffSecDevicePKey pkey = (CFSecBuffSecDevicePKey)(schema.getFactorySecDevice().newPKey());
-		pkey.setRequiredSecUserId( Buff.getRequiredSecUserId() );
+		pkey.setRequiredContainerSecUser( Buff.getRequiredSecUserId() );
 		pkey.setRequiredDevName( Buff.getRequiredDevName() );
-		Buff.setRequiredSecUserId( pkey.getRequiredSecUserId() );
+		Buff.setRequiredContainerSecUser( pkey.getRequiredSecUserId() );
 		Buff.setRequiredDevName( pkey.getRequiredDevName() );
 		CFSecBuffSecDeviceByNameIdxKey keyNameIdx = (CFSecBuffSecDeviceByNameIdxKey)schema.getFactorySecDevice().newByNameIdxKey();
 		keyNameIdx.setRequiredSecUserId( Buff.getRequiredSecUserId() );
@@ -183,11 +183,21 @@ public class CFBamRamSecDeviceTable
 	}
 
 	public ICFSecSecDevice readDerived( ICFSecAuthorization Authorization,
+		CFLibDbKeyHash256 SecUserId,
+		String DevName )
+	{
+		CFSecBuffSecDevicePKey key = (CFSecBuffSecDevicePKey)(schema.getFactorySecDevice().newPKey());
+		key.setRequiredContainerSecUser( SecUserId );
+		key.setRequiredDevName( DevName );
+		return( readDerived( Authorization, key ) );
+	}
+
+	public ICFSecSecDevice readDerived( ICFSecAuthorization Authorization,
 		ICFSecSecDevicePKey PKey )
 	{
 		final String S_ProcName = "CFBamRamSecDevice.readDerived";
-		ICFSecSecDevicePKey key = schema.getFactorySecDevice().newPKey();
-		key.setRequiredSecUserId( PKey.getRequiredSecUserId() );
+		CFSecBuffSecDevicePKey key = (CFSecBuffSecDevicePKey)(schema.getFactorySecDevice().newPKey());
+		key.setRequiredContainerSecUser( PKey.getRequiredSecUserId() );
 		key.setRequiredDevName( PKey.getRequiredDevName() );
 		ICFSecSecDevice buff;
 		if( dictByPKey.containsKey( key ) ) {
@@ -202,9 +212,9 @@ public class CFBamRamSecDeviceTable
 	public ICFSecSecDevice lockDerived( ICFSecAuthorization Authorization,
 		ICFSecSecDevicePKey PKey )
 	{
-		final String S_ProcName = "CFBamRamSecDevice.readDerived";
-		CFSecBuffSecDevicePKey key = schema.getFactorySecDevice().newPKey();
-		key.setRequiredSecUserId( PKey.getRequiredSecUserId() );
+		final String S_ProcName = "CFBamRamSecDevice.lockDerived";
+		CFSecBuffSecDevicePKey key = (CFSecBuffSecDevicePKey)(schema.getFactorySecDevice().newPKey());
+		key.setRequiredContainerSecUser( PKey.getRequiredSecUserId() );
 		key.setRequiredDevName( PKey.getRequiredDevName() );
 		ICFSecSecDevice buff;
 		if( dictByPKey.containsKey( key ) ) {
@@ -233,9 +243,9 @@ public class CFBamRamSecDeviceTable
 	{
 		final String S_ProcName = "CFBamRamSecDevice.readDerivedByNameIdx";
 		CFSecBuffSecDeviceByNameIdxKey key = (CFSecBuffSecDeviceByNameIdxKey)schema.getFactorySecDevice().newByNameIdxKey();
+
 		key.setRequiredSecUserId( SecUserId );
 		key.setRequiredDevName( DevName );
-
 		ICFSecSecDevice buff;
 		if( dictByNameIdx.containsKey( key ) ) {
 			buff = dictByNameIdx.get( key );
@@ -251,8 +261,8 @@ public class CFBamRamSecDeviceTable
 	{
 		final String S_ProcName = "CFBamRamSecDevice.readDerivedByUserIdx";
 		CFSecBuffSecDeviceByUserIdxKey key = (CFSecBuffSecDeviceByUserIdxKey)schema.getFactorySecDevice().newByUserIdxKey();
-		key.setRequiredSecUserId( SecUserId );
 
+		key.setRequiredSecUserId( SecUserId );
 		ICFSecSecDevice[] recArray;
 		if( dictByUserIdx.containsKey( key ) ) {
 			Map< CFSecBuffSecDevicePKey, CFSecBuffSecDevice > subdictUserIdx
@@ -278,10 +288,9 @@ public class CFBamRamSecDeviceTable
 		String DevName )
 	{
 		final String S_ProcName = "CFBamRamSecDevice.readDerivedByIdIdx() ";
-		CFSecBuffSecDevicePKey key = schema.getFactorySecDevice().newPKey();
-		key.setRequiredSecUserId( SecUserId );
+		CFSecBuffSecDevicePKey key = (CFSecBuffSecDevicePKey)(schema.getFactorySecDevice().newPKey());
+		key.setRequiredContainerSecUser( SecUserId );
 		key.setRequiredDevName( DevName );
-
 		ICFSecSecDevice buff;
 		if( dictByPKey.containsKey( key ) ) {
 			buff = dictByPKey.get( key );
@@ -290,6 +299,16 @@ public class CFBamRamSecDeviceTable
 			buff = null;
 		}
 		return( buff );
+	}
+
+	public ICFSecSecDevice readRec( ICFSecAuthorization Authorization,
+		CFLibDbKeyHash256 SecUserId,
+		String DevName )
+	{
+		CFSecBuffSecDevicePKey key = (CFSecBuffSecDevicePKey)(schema.getFactorySecDevice().newPKey());
+		key.setRequiredContainerSecUser( SecUserId );
+		key.setRequiredDevName( DevName );
+		return( readRec( Authorization, key ) );
 	}
 
 	public ICFSecSecDevice readRec( ICFSecAuthorization Authorization,
@@ -417,8 +436,8 @@ public class CFBamRamSecDeviceTable
 		ICFSecSecDevice iBuff )
 	{
 		CFSecBuffSecDevice Buff = ensureRec(iBuff);
-		CFSecBuffSecDevicePKey pkey = (CFSecBuffSecDevicePKey)schema.getFactorySecDevice().newPKey();
-		pkey.setRequiredSecUserId( Buff.getRequiredSecUserId() );
+		CFSecBuffSecDevicePKey pkey = (CFSecBuffSecDevicePKey)(schema.getFactorySecDevice().newPKey());
+		pkey.setRequiredContainerSecUser( Buff.getRequiredSecUserId() );
 		pkey.setRequiredDevName( Buff.getRequiredDevName() );
 		CFSecBuffSecDevice existing = dictByPKey.get( pkey );
 		if( existing == null ) {
@@ -548,18 +567,22 @@ public class CFBamRamSecDeviceTable
 
 	}
 	public void deleteSecDeviceByIdIdx( ICFSecAuthorization Authorization,
-		CFLibDbKeyHash256 argSecUserId,
-		String argDevName )
+		CFLibDbKeyHash256 SecUserId,
+		String DevName )
 	{
-		CFSecBuffSecDevicePKey key = schema.getFactorySecDevice().newPKey();
-		key.setRequiredSecUserId( argSecUserId );
-		key.setRequiredDevName( argDevName );
+		CFSecBuffSecDevicePKey key = (CFSecBuffSecDevicePKey)(schema.getFactorySecDevice().newPKey());
+		key.setRequiredContainerSecUser( SecUserId );
+		key.setRequiredDevName( DevName );
 		deleteSecDeviceByIdIdx( Authorization, key );
 	}
 
 	public void deleteSecDeviceByIdIdx( ICFSecAuthorization Authorization,
-		ICFSecSecDevicePKey argKey )
+		ICFSecSecDevicePKey PKey )
 	{
+		CFSecBuffSecDevicePKey key = (CFSecBuffSecDevicePKey)(schema.getFactorySecDevice().newPKey());
+		key.setRequiredContainerSecUser( PKey.getRequiredSecUserId() );
+		key.setRequiredDevName( PKey.getRequiredDevName() );
+		CFSecBuffSecDevicePKey argKey = key;
 		boolean anyNotNull = false;
 		anyNotNull = true;
 		anyNotNull = true;

@@ -277,7 +277,7 @@ public class CFBamRamEnumTagTable
 	public ICFBamEnumTag lockDerived( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 PKey )
 	{
-		final String S_ProcName = "CFBamRamEnumTag.readDerived";
+		final String S_ProcName = "CFBamRamEnumTag.lockDerived";
 		ICFBamEnumTag buff;
 		if( dictByPKey.containsKey( PKey ) ) {
 			buff = dictByPKey.get( PKey );
@@ -304,8 +304,8 @@ public class CFBamRamEnumTagTable
 	{
 		final String S_ProcName = "CFBamRamEnumTag.readDerivedByEnumIdx";
 		CFBamBuffEnumTagByEnumIdxKey key = (CFBamBuffEnumTagByEnumIdxKey)schema.getFactoryEnumTag().newByEnumIdxKey();
-		key.setRequiredEnumId( EnumId );
 
+		key.setRequiredEnumId( EnumId );
 		ICFBamEnumTag[] recArray;
 		if( dictByEnumIdx.containsKey( key ) ) {
 			Map< CFLibDbKeyHash256, CFBamBuffEnumTag > subdictEnumIdx
@@ -331,8 +331,8 @@ public class CFBamRamEnumTagTable
 	{
 		final String S_ProcName = "CFBamRamEnumTag.readDerivedByDefSchemaIdx";
 		CFBamBuffEnumTagByDefSchemaIdxKey key = (CFBamBuffEnumTagByDefSchemaIdxKey)schema.getFactoryEnumTag().newByDefSchemaIdxKey();
-		key.setOptionalDefSchemaId( DefSchemaId );
 
+		key.setOptionalDefSchemaId( DefSchemaId );
 		ICFBamEnumTag[] recArray;
 		if( dictByDefSchemaIdx.containsKey( key ) ) {
 			Map< CFLibDbKeyHash256, CFBamBuffEnumTag > subdictDefSchemaIdx
@@ -359,9 +359,9 @@ public class CFBamRamEnumTagTable
 	{
 		final String S_ProcName = "CFBamRamEnumTag.readDerivedByEnumNameIdx";
 		CFBamBuffEnumTagByEnumNameIdxKey key = (CFBamBuffEnumTagByEnumNameIdxKey)schema.getFactoryEnumTag().newByEnumNameIdxKey();
+
 		key.setRequiredEnumId( EnumId );
 		key.setRequiredName( Name );
-
 		ICFBamEnumTag buff;
 		if( dictByEnumNameIdx.containsKey( key ) ) {
 			buff = dictByEnumNameIdx.get( key );
@@ -377,8 +377,8 @@ public class CFBamRamEnumTagTable
 	{
 		final String S_ProcName = "CFBamRamEnumTag.readDerivedByPrevIdx";
 		CFBamBuffEnumTagByPrevIdxKey key = (CFBamBuffEnumTagByPrevIdxKey)schema.getFactoryEnumTag().newByPrevIdxKey();
-		key.setOptionalPrevId( PrevId );
 
+		key.setOptionalPrevId( PrevId );
 		ICFBamEnumTag[] recArray;
 		if( dictByPrevIdx.containsKey( key ) ) {
 			Map< CFLibDbKeyHash256, CFBamBuffEnumTag > subdictPrevIdx
@@ -404,8 +404,8 @@ public class CFBamRamEnumTagTable
 	{
 		final String S_ProcName = "CFBamRamEnumTag.readDerivedByNextIdx";
 		CFBamBuffEnumTagByNextIdxKey key = (CFBamBuffEnumTagByNextIdxKey)schema.getFactoryEnumTag().newByNextIdxKey();
-		key.setOptionalNextId( NextId );
 
+		key.setOptionalNextId( NextId );
 		ICFBamEnumTag[] recArray;
 		if( dictByNextIdx.containsKey( key ) ) {
 			Map< CFLibDbKeyHash256, CFBamBuffEnumTag > subdictNextIdx
@@ -1108,7 +1108,7 @@ public class CFBamRamEnumTagTable
 			}
 			CFBamBuffEnumTag editPrev;
 			classCode = prev.getClassCode();
-			if( classCode.equals( "a81e" ) ) {
+			if( classCode == ICFBamEnumTag.CLASS_CODE ) {
 				editPrev = schema.getFactoryEnumTag().newBuff();
 			}
 			else {
@@ -1137,7 +1137,7 @@ public class CFBamRamEnumTagTable
 			}
 			CFBamBuffEnumTag editNext;
 			classCode = next.getClassCode();
-			if( classCode.equals( "a81e" ) ) {
+			if( classCode == ICFBamEnumTag.CLASS_CODE ) {
 				editNext = schema.getFactoryEnumTag().newBuff();
 			}
 			else {
@@ -1145,7 +1145,7 @@ public class CFBamRamEnumTagTable
 			}
 			editNext.set( next );
 			editNext.setOptionalPrevId( prevId );
-			if( classCode.equals( "a81e" ) ) {
+			if( classCode == ICFBamEnumTag.CLASS_CODE ) {
 				schema.getTableEnumTag().updateEnumTag( Authorization, editNext );
 			}
 			else {

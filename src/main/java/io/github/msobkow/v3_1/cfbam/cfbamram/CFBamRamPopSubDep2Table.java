@@ -202,7 +202,7 @@ public class CFBamRamPopSubDep2Table
 	public ICFBamPopSubDep2 lockDerived( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 PKey )
 	{
-		final String S_ProcName = "CFBamRamPopSubDep2.readDerived";
+		final String S_ProcName = "CFBamRamPopSubDep2.lockDerived";
 		ICFBamPopSubDep2 buff;
 		if( dictByPKey.containsKey( PKey ) ) {
 			buff = dictByPKey.get( PKey );
@@ -295,8 +295,8 @@ public class CFBamRamPopSubDep2Table
 	{
 		final String S_ProcName = "CFBamRamPopSubDep2.readDerivedByPopSubDep1Idx";
 		CFBamBuffPopSubDep2ByPopSubDep1IdxKey key = (CFBamBuffPopSubDep2ByPopSubDep1IdxKey)schema.getFactoryPopSubDep2().newByPopSubDep1IdxKey();
-		key.setRequiredPopSubDep1Id( PopSubDep1Id );
 
+		key.setRequiredPopSubDep1Id( PopSubDep1Id );
 		ICFBamPopSubDep2[] recArray;
 		if( dictByPopSubDep1Idx.containsKey( key ) ) {
 			Map< CFLibDbKeyHash256, CFBamBuffPopSubDep2 > subdictPopSubDep1Idx
@@ -323,9 +323,9 @@ public class CFBamRamPopSubDep2Table
 	{
 		final String S_ProcName = "CFBamRamPopSubDep2.readDerivedByUNameIdx";
 		CFBamBuffPopSubDep2ByUNameIdxKey key = (CFBamBuffPopSubDep2ByUNameIdxKey)schema.getFactoryPopSubDep2().newByUNameIdxKey();
+
 		key.setRequiredPopSubDep1Id( PopSubDep1Id );
 		key.setRequiredName( Name );
-
 		ICFBamPopSubDep2 buff;
 		if( dictByUNameIdx.containsKey( key ) ) {
 			buff = dictByUNameIdx.get( key );

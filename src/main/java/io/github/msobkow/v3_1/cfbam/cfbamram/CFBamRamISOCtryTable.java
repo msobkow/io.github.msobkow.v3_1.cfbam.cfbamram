@@ -174,7 +174,7 @@ public class CFBamRamISOCtryTable
 	public ICFSecISOCtry lockDerived( ICFSecAuthorization Authorization,
 		Short PKey )
 	{
-		final String S_ProcName = "CFBamRamISOCtry.readDerived";
+		final String S_ProcName = "CFBamRamISOCtry.lockDerived";
 		ICFSecISOCtry buff;
 		if( dictByPKey.containsKey( PKey ) ) {
 			buff = dictByPKey.get( PKey );
@@ -201,8 +201,8 @@ public class CFBamRamISOCtryTable
 	{
 		final String S_ProcName = "CFBamRamISOCtry.readDerivedByISOCodeIdx";
 		CFSecBuffISOCtryByISOCodeIdxKey key = (CFSecBuffISOCtryByISOCodeIdxKey)schema.getFactoryISOCtry().newByISOCodeIdxKey();
-		key.setRequiredISOCode( ISOCode );
 
+		key.setRequiredISOCode( ISOCode );
 		ICFSecISOCtry buff;
 		if( dictByISOCodeIdx.containsKey( key ) ) {
 			buff = dictByISOCodeIdx.get( key );
@@ -218,8 +218,8 @@ public class CFBamRamISOCtryTable
 	{
 		final String S_ProcName = "CFBamRamISOCtry.readDerivedByNameIdx";
 		CFSecBuffISOCtryByNameIdxKey key = (CFSecBuffISOCtryByNameIdxKey)schema.getFactoryISOCtry().newByNameIdxKey();
-		key.setRequiredName( Name );
 
+		key.setRequiredName( Name );
 		ICFSecISOCtry buff;
 		if( dictByNameIdx.containsKey( key ) ) {
 			buff = dictByNameIdx.get( key );

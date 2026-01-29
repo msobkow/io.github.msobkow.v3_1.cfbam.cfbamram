@@ -236,7 +236,7 @@ public class CFBamRamTopProjectTable
 	public ICFIntTopProject lockDerived( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 PKey )
 	{
-		final String S_ProcName = "CFBamRamTopProject.readDerived";
+		final String S_ProcName = "CFBamRamTopProject.lockDerived";
 		ICFIntTopProject buff;
 		if( dictByPKey.containsKey( PKey ) ) {
 			buff = dictByPKey.get( PKey );
@@ -263,8 +263,8 @@ public class CFBamRamTopProjectTable
 	{
 		final String S_ProcName = "CFBamRamTopProject.readDerivedByTenantIdx";
 		CFIntBuffTopProjectByTenantIdxKey key = (CFIntBuffTopProjectByTenantIdxKey)schema.getFactoryTopProject().newByTenantIdxKey();
-		key.setRequiredTenantId( TenantId );
 
+		key.setRequiredTenantId( TenantId );
 		ICFIntTopProject[] recArray;
 		if( dictByTenantIdx.containsKey( key ) ) {
 			Map< CFLibDbKeyHash256, CFIntBuffTopProject > subdictTenantIdx
@@ -290,8 +290,8 @@ public class CFBamRamTopProjectTable
 	{
 		final String S_ProcName = "CFBamRamTopProject.readDerivedByTopDomainIdx";
 		CFIntBuffTopProjectByTopDomainIdxKey key = (CFIntBuffTopProjectByTopDomainIdxKey)schema.getFactoryTopProject().newByTopDomainIdxKey();
-		key.setRequiredTopDomainId( TopDomainId );
 
+		key.setRequiredTopDomainId( TopDomainId );
 		ICFIntTopProject[] recArray;
 		if( dictByTopDomainIdx.containsKey( key ) ) {
 			Map< CFLibDbKeyHash256, CFIntBuffTopProject > subdictTopDomainIdx
@@ -318,9 +318,9 @@ public class CFBamRamTopProjectTable
 	{
 		final String S_ProcName = "CFBamRamTopProject.readDerivedByNameIdx";
 		CFIntBuffTopProjectByNameIdxKey key = (CFIntBuffTopProjectByNameIdxKey)schema.getFactoryTopProject().newByNameIdxKey();
+
 		key.setRequiredTopDomainId( TopDomainId );
 		key.setRequiredName( Name );
-
 		ICFIntTopProject buff;
 		if( dictByNameIdx.containsKey( key ) ) {
 			buff = dictByNameIdx.get( key );

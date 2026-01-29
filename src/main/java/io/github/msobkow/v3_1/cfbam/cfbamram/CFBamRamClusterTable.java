@@ -174,7 +174,7 @@ public class CFBamRamClusterTable
 	public ICFSecCluster lockDerived( ICFSecAuthorization Authorization,
 		Long PKey )
 	{
-		final String S_ProcName = "CFBamRamCluster.readDerived";
+		final String S_ProcName = "CFBamRamCluster.lockDerived";
 		ICFSecCluster buff;
 		if( dictByPKey.containsKey( PKey ) ) {
 			buff = dictByPKey.get( PKey );
@@ -201,8 +201,8 @@ public class CFBamRamClusterTable
 	{
 		final String S_ProcName = "CFBamRamCluster.readDerivedByUDomNameIdx";
 		CFSecBuffClusterByUDomNameIdxKey key = (CFSecBuffClusterByUDomNameIdxKey)schema.getFactoryCluster().newByUDomNameIdxKey();
-		key.setRequiredFullDomName( FullDomName );
 
+		key.setRequiredFullDomName( FullDomName );
 		ICFSecCluster buff;
 		if( dictByUDomNameIdx.containsKey( key ) ) {
 			buff = dictByUDomNameIdx.get( key );
@@ -218,8 +218,8 @@ public class CFBamRamClusterTable
 	{
 		final String S_ProcName = "CFBamRamCluster.readDerivedByUDescrIdx";
 		CFSecBuffClusterByUDescrIdxKey key = (CFSecBuffClusterByUDescrIdxKey)schema.getFactoryCluster().newByUDescrIdxKey();
-		key.setRequiredDescription( Description );
 
+		key.setRequiredDescription( Description );
 		ICFSecCluster buff;
 		if( dictByUDescrIdx.containsKey( key ) ) {
 			buff = dictByUDescrIdx.get( key );

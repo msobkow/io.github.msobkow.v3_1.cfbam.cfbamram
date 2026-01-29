@@ -155,7 +155,7 @@ public class CFBamRamTokenDefTable
 	public ICFBamTokenDef lockDerived( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 PKey )
 	{
-		final String S_ProcName = "CFBamRamTokenDef.readDerived";
+		final String S_ProcName = "CFBamRamTokenDef.lockDerived";
 		ICFBamTokenDef buff;
 		if( dictByPKey.containsKey( PKey ) ) {
 			buff = dictByPKey.get( PKey );
@@ -5989,7 +5989,7 @@ public class CFBamRamTokenDefTable
 			}
 			CFBamBuffValue editPrev;
 			classCode = prev.getClassCode();
-			if( classCode.equals( "a809" ) ) {
+			if( classCode == ICFBamValue.CLASS_CODE ) {
 				editPrev = schema.getFactoryValue().newBuff();
 			}
 			else if( classCode == ICFBamAtom.CLASS_CODE ) {
@@ -6648,7 +6648,7 @@ public class CFBamRamTokenDefTable
 			}
 			CFBamBuffValue editNext;
 			classCode = next.getClassCode();
-			if( classCode.equals( "a809" ) ) {
+			if( classCode == ICFBamValue.CLASS_CODE ) {
 				editNext = schema.getFactoryValue().newBuff();
 			}
 			else if( classCode == ICFBamAtom.CLASS_CODE ) {
@@ -6971,7 +6971,7 @@ public class CFBamRamTokenDefTable
 			}
 			editNext.set( next );
 			editNext.setOptionalPrevId( prevId );
-			if( classCode.equals( "a809" ) ) {
+			if( classCode == ICFBamValue.CLASS_CODE ) {
 				schema.getTableValue().updateValue( Authorization, editNext );
 			}
 			else if( classCode == ICFBamAtom.CLASS_CODE ) {
@@ -7364,13 +7364,13 @@ public class CFBamRamTokenDefTable
 			cur = (CFBamBuffTokenDef)(schema.getTableTokenDef().readDerivedByIdIdx( Authorization,
 				cur.getRequiredId() ));
 			int subClassCode = cur.getClassCode();
-			if( CFBamTokenDef.CLASS_CODE == subClassCode ) {
+			if( ICFBamTokenDef.CLASS_CODE == subClassCode ) {
 				schema.getTableTokenDef().deleteTokenDef( Authorization, cur );
 			}
-			else if( CFBamTokenType.CLASS_CODE == subClassCode ) {
+			else if( ICFBamTokenType.CLASS_CODE == subClassCode ) {
 				schema.getTableTokenType().deleteTokenType( Authorization, (ICFBamTokenType)cur );
 			}
-			else if( CFBamTokenCol.CLASS_CODE == subClassCode ) {
+			else if( ICFBamTokenCol.CLASS_CODE == subClassCode ) {
 				schema.getTableTokenCol().deleteTokenCol( Authorization, (ICFBamTokenCol)cur );
 			}
 			else {
@@ -7414,13 +7414,13 @@ public class CFBamRamTokenDefTable
 			cur = (CFBamBuffTokenDef)(schema.getTableTokenDef().readDerivedByIdIdx( Authorization,
 				cur.getRequiredId() ));
 			int subClassCode = cur.getClassCode();
-			if( CFBamTokenDef.CLASS_CODE == subClassCode ) {
+			if( ICFBamTokenDef.CLASS_CODE == subClassCode ) {
 				schema.getTableTokenDef().deleteTokenDef( Authorization, cur );
 			}
-			else if( CFBamTokenType.CLASS_CODE == subClassCode ) {
+			else if( ICFBamTokenType.CLASS_CODE == subClassCode ) {
 				schema.getTableTokenType().deleteTokenType( Authorization, (ICFBamTokenType)cur );
 			}
-			else if( CFBamTokenCol.CLASS_CODE == subClassCode ) {
+			else if( ICFBamTokenCol.CLASS_CODE == subClassCode ) {
 				schema.getTableTokenCol().deleteTokenCol( Authorization, (ICFBamTokenCol)cur );
 			}
 			else {
@@ -7461,13 +7461,13 @@ public class CFBamRamTokenDefTable
 			cur = (CFBamBuffTokenDef)(schema.getTableTokenDef().readDerivedByIdIdx( Authorization,
 				cur.getRequiredId() ));
 			int subClassCode = cur.getClassCode();
-			if( CFBamTokenDef.CLASS_CODE == subClassCode ) {
+			if( ICFBamTokenDef.CLASS_CODE == subClassCode ) {
 				schema.getTableTokenDef().deleteTokenDef( Authorization, cur );
 			}
-			else if( CFBamTokenType.CLASS_CODE == subClassCode ) {
+			else if( ICFBamTokenType.CLASS_CODE == subClassCode ) {
 				schema.getTableTokenType().deleteTokenType( Authorization, (ICFBamTokenType)cur );
 			}
-			else if( CFBamTokenCol.CLASS_CODE == subClassCode ) {
+			else if( ICFBamTokenCol.CLASS_CODE == subClassCode ) {
 				schema.getTableTokenCol().deleteTokenCol( Authorization, (ICFBamTokenCol)cur );
 			}
 			else {
@@ -7510,13 +7510,13 @@ public class CFBamRamTokenDefTable
 			cur = (CFBamBuffTokenDef)(schema.getTableTokenDef().readDerivedByIdIdx( Authorization,
 				cur.getRequiredId() ));
 			int subClassCode = cur.getClassCode();
-			if( CFBamTokenDef.CLASS_CODE == subClassCode ) {
+			if( ICFBamTokenDef.CLASS_CODE == subClassCode ) {
 				schema.getTableTokenDef().deleteTokenDef( Authorization, cur );
 			}
-			else if( CFBamTokenType.CLASS_CODE == subClassCode ) {
+			else if( ICFBamTokenType.CLASS_CODE == subClassCode ) {
 				schema.getTableTokenType().deleteTokenType( Authorization, (ICFBamTokenType)cur );
 			}
-			else if( CFBamTokenCol.CLASS_CODE == subClassCode ) {
+			else if( ICFBamTokenCol.CLASS_CODE == subClassCode ) {
 				schema.getTableTokenCol().deleteTokenCol( Authorization, (ICFBamTokenCol)cur );
 			}
 			else {
@@ -7559,13 +7559,13 @@ public class CFBamRamTokenDefTable
 			cur = (CFBamBuffTokenDef)(schema.getTableTokenDef().readDerivedByIdIdx( Authorization,
 				cur.getRequiredId() ));
 			int subClassCode = cur.getClassCode();
-			if( CFBamTokenDef.CLASS_CODE == subClassCode ) {
+			if( ICFBamTokenDef.CLASS_CODE == subClassCode ) {
 				schema.getTableTokenDef().deleteTokenDef( Authorization, cur );
 			}
-			else if( CFBamTokenType.CLASS_CODE == subClassCode ) {
+			else if( ICFBamTokenType.CLASS_CODE == subClassCode ) {
 				schema.getTableTokenType().deleteTokenType( Authorization, (ICFBamTokenType)cur );
 			}
-			else if( CFBamTokenCol.CLASS_CODE == subClassCode ) {
+			else if( ICFBamTokenCol.CLASS_CODE == subClassCode ) {
 				schema.getTableTokenCol().deleteTokenCol( Authorization, (ICFBamTokenCol)cur );
 			}
 			else {
@@ -7608,13 +7608,13 @@ public class CFBamRamTokenDefTable
 			cur = (CFBamBuffTokenDef)(schema.getTableTokenDef().readDerivedByIdIdx( Authorization,
 				cur.getRequiredId() ));
 			int subClassCode = cur.getClassCode();
-			if( CFBamTokenDef.CLASS_CODE == subClassCode ) {
+			if( ICFBamTokenDef.CLASS_CODE == subClassCode ) {
 				schema.getTableTokenDef().deleteTokenDef( Authorization, cur );
 			}
-			else if( CFBamTokenType.CLASS_CODE == subClassCode ) {
+			else if( ICFBamTokenType.CLASS_CODE == subClassCode ) {
 				schema.getTableTokenType().deleteTokenType( Authorization, (ICFBamTokenType)cur );
 			}
-			else if( CFBamTokenCol.CLASS_CODE == subClassCode ) {
+			else if( ICFBamTokenCol.CLASS_CODE == subClassCode ) {
 				schema.getTableTokenCol().deleteTokenCol( Authorization, (ICFBamTokenCol)cur );
 			}
 			else {
@@ -7660,13 +7660,13 @@ public class CFBamRamTokenDefTable
 			cur = (CFBamBuffTokenDef)(schema.getTableTokenDef().readDerivedByIdIdx( Authorization,
 				cur.getRequiredId() ));
 			int subClassCode = cur.getClassCode();
-			if( CFBamTokenDef.CLASS_CODE == subClassCode ) {
+			if( ICFBamTokenDef.CLASS_CODE == subClassCode ) {
 				schema.getTableTokenDef().deleteTokenDef( Authorization, cur );
 			}
-			else if( CFBamTokenType.CLASS_CODE == subClassCode ) {
+			else if( ICFBamTokenType.CLASS_CODE == subClassCode ) {
 				schema.getTableTokenType().deleteTokenType( Authorization, (ICFBamTokenType)cur );
 			}
-			else if( CFBamTokenCol.CLASS_CODE == subClassCode ) {
+			else if( ICFBamTokenCol.CLASS_CODE == subClassCode ) {
 				schema.getTableTokenCol().deleteTokenCol( Authorization, (ICFBamTokenCol)cur );
 			}
 			else {
@@ -7712,13 +7712,13 @@ public class CFBamRamTokenDefTable
 			cur = (CFBamBuffTokenDef)(schema.getTableTokenDef().readDerivedByIdIdx( Authorization,
 				cur.getRequiredId() ));
 			int subClassCode = cur.getClassCode();
-			if( CFBamTokenDef.CLASS_CODE == subClassCode ) {
+			if( ICFBamTokenDef.CLASS_CODE == subClassCode ) {
 				schema.getTableTokenDef().deleteTokenDef( Authorization, cur );
 			}
-			else if( CFBamTokenType.CLASS_CODE == subClassCode ) {
+			else if( ICFBamTokenType.CLASS_CODE == subClassCode ) {
 				schema.getTableTokenType().deleteTokenType( Authorization, (ICFBamTokenType)cur );
 			}
-			else if( CFBamTokenCol.CLASS_CODE == subClassCode ) {
+			else if( ICFBamTokenCol.CLASS_CODE == subClassCode ) {
 				schema.getTableTokenCol().deleteTokenCol( Authorization, (ICFBamTokenCol)cur );
 			}
 			else {

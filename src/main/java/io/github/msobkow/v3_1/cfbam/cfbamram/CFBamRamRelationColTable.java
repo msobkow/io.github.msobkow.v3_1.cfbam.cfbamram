@@ -395,7 +395,7 @@ public class CFBamRamRelationColTable
 	public ICFBamRelationCol lockDerived( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 PKey )
 	{
-		final String S_ProcName = "CFBamRamRelationCol.readDerived";
+		final String S_ProcName = "CFBamRamRelationCol.lockDerived";
 		ICFBamRelationCol buff;
 		if( dictByPKey.containsKey( PKey ) ) {
 			buff = dictByPKey.get( PKey );
@@ -423,9 +423,9 @@ public class CFBamRamRelationColTable
 	{
 		final String S_ProcName = "CFBamRamRelationCol.readDerivedByUNameIdx";
 		CFBamBuffRelationColByUNameIdxKey key = (CFBamBuffRelationColByUNameIdxKey)schema.getFactoryRelationCol().newByUNameIdxKey();
+
 		key.setRequiredRelationId( RelationId );
 		key.setRequiredName( Name );
-
 		ICFBamRelationCol buff;
 		if( dictByUNameIdx.containsKey( key ) ) {
 			buff = dictByUNameIdx.get( key );
@@ -441,8 +441,8 @@ public class CFBamRamRelationColTable
 	{
 		final String S_ProcName = "CFBamRamRelationCol.readDerivedByRelationIdx";
 		CFBamBuffRelationColByRelationIdxKey key = (CFBamBuffRelationColByRelationIdxKey)schema.getFactoryRelationCol().newByRelationIdxKey();
-		key.setRequiredRelationId( RelationId );
 
+		key.setRequiredRelationId( RelationId );
 		ICFBamRelationCol[] recArray;
 		if( dictByRelationIdx.containsKey( key ) ) {
 			Map< CFLibDbKeyHash256, CFBamBuffRelationCol > subdictRelationIdx
@@ -468,8 +468,8 @@ public class CFBamRamRelationColTable
 	{
 		final String S_ProcName = "CFBamRamRelationCol.readDerivedByDefSchemaIdx";
 		CFBamBuffRelationColByDefSchemaIdxKey key = (CFBamBuffRelationColByDefSchemaIdxKey)schema.getFactoryRelationCol().newByDefSchemaIdxKey();
-		key.setOptionalDefSchemaId( DefSchemaId );
 
+		key.setOptionalDefSchemaId( DefSchemaId );
 		ICFBamRelationCol[] recArray;
 		if( dictByDefSchemaIdx.containsKey( key ) ) {
 			Map< CFLibDbKeyHash256, CFBamBuffRelationCol > subdictDefSchemaIdx
@@ -495,8 +495,8 @@ public class CFBamRamRelationColTable
 	{
 		final String S_ProcName = "CFBamRamRelationCol.readDerivedByFromColIdx";
 		CFBamBuffRelationColByFromColIdxKey key = (CFBamBuffRelationColByFromColIdxKey)schema.getFactoryRelationCol().newByFromColIdxKey();
-		key.setRequiredFromColId( FromColId );
 
+		key.setRequiredFromColId( FromColId );
 		ICFBamRelationCol[] recArray;
 		if( dictByFromColIdx.containsKey( key ) ) {
 			Map< CFLibDbKeyHash256, CFBamBuffRelationCol > subdictFromColIdx
@@ -522,8 +522,8 @@ public class CFBamRamRelationColTable
 	{
 		final String S_ProcName = "CFBamRamRelationCol.readDerivedByToColIdx";
 		CFBamBuffRelationColByToColIdxKey key = (CFBamBuffRelationColByToColIdxKey)schema.getFactoryRelationCol().newByToColIdxKey();
-		key.setRequiredToColId( ToColId );
 
+		key.setRequiredToColId( ToColId );
 		ICFBamRelationCol[] recArray;
 		if( dictByToColIdx.containsKey( key ) ) {
 			Map< CFLibDbKeyHash256, CFBamBuffRelationCol > subdictToColIdx
@@ -549,8 +549,8 @@ public class CFBamRamRelationColTable
 	{
 		final String S_ProcName = "CFBamRamRelationCol.readDerivedByPrevIdx";
 		CFBamBuffRelationColByPrevIdxKey key = (CFBamBuffRelationColByPrevIdxKey)schema.getFactoryRelationCol().newByPrevIdxKey();
-		key.setOptionalPrevId( PrevId );
 
+		key.setOptionalPrevId( PrevId );
 		ICFBamRelationCol[] recArray;
 		if( dictByPrevIdx.containsKey( key ) ) {
 			Map< CFLibDbKeyHash256, CFBamBuffRelationCol > subdictPrevIdx
@@ -576,8 +576,8 @@ public class CFBamRamRelationColTable
 	{
 		final String S_ProcName = "CFBamRamRelationCol.readDerivedByNextIdx";
 		CFBamBuffRelationColByNextIdxKey key = (CFBamBuffRelationColByNextIdxKey)schema.getFactoryRelationCol().newByNextIdxKey();
-		key.setOptionalNextId( NextId );
 
+		key.setOptionalNextId( NextId );
 		ICFBamRelationCol[] recArray;
 		if( dictByNextIdx.containsKey( key ) ) {
 			Map< CFLibDbKeyHash256, CFBamBuffRelationCol > subdictNextIdx
@@ -604,9 +604,9 @@ public class CFBamRamRelationColTable
 	{
 		final String S_ProcName = "CFBamRamRelationCol.readDerivedByRelPrevIdx";
 		CFBamBuffRelationColByRelPrevIdxKey key = (CFBamBuffRelationColByRelPrevIdxKey)schema.getFactoryRelationCol().newByRelPrevIdxKey();
+
 		key.setRequiredRelationId( RelationId );
 		key.setOptionalPrevId( PrevId );
-
 		ICFBamRelationCol[] recArray;
 		if( dictByRelPrevIdx.containsKey( key ) ) {
 			Map< CFLibDbKeyHash256, CFBamBuffRelationCol > subdictRelPrevIdx
@@ -633,9 +633,9 @@ public class CFBamRamRelationColTable
 	{
 		final String S_ProcName = "CFBamRamRelationCol.readDerivedByRelNextIdx";
 		CFBamBuffRelationColByRelNextIdxKey key = (CFBamBuffRelationColByRelNextIdxKey)schema.getFactoryRelationCol().newByRelNextIdxKey();
+
 		key.setRequiredRelationId( RelationId );
 		key.setOptionalNextId( NextId );
-
 		ICFBamRelationCol[] recArray;
 		if( dictByRelNextIdx.containsKey( key ) ) {
 			Map< CFLibDbKeyHash256, CFBamBuffRelationCol > subdictRelNextIdx
@@ -1530,7 +1530,7 @@ public class CFBamRamRelationColTable
 			}
 			CFBamBuffRelationCol editPrev;
 			classCode = prev.getClassCode();
-			if( classCode.equals( "a836" ) ) {
+			if( classCode == ICFBamRelationCol.CLASS_CODE ) {
 				editPrev = schema.getFactoryRelationCol().newBuff();
 			}
 			else {
@@ -1559,7 +1559,7 @@ public class CFBamRamRelationColTable
 			}
 			CFBamBuffRelationCol editNext;
 			classCode = next.getClassCode();
-			if( classCode.equals( "a836" ) ) {
+			if( classCode == ICFBamRelationCol.CLASS_CODE ) {
 				editNext = schema.getFactoryRelationCol().newBuff();
 			}
 			else {
@@ -1567,7 +1567,7 @@ public class CFBamRamRelationColTable
 			}
 			editNext.set( next );
 			editNext.setOptionalPrevId( prevId );
-			if( classCode.equals( "a836" ) ) {
+			if( classCode == ICFBamRelationCol.CLASS_CODE ) {
 				schema.getTableRelationCol().updateRelationCol( Authorization, editNext );
 			}
 			else {

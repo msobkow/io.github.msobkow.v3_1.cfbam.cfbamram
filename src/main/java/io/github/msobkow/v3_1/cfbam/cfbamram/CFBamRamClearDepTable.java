@@ -223,7 +223,7 @@ public class CFBamRamClearDepTable
 	public ICFBamClearDep lockDerived( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 PKey )
 	{
-		final String S_ProcName = "CFBamRamClearDep.readDerived";
+		final String S_ProcName = "CFBamRamClearDep.lockDerived";
 		ICFBamClearDep buff;
 		if( dictByPKey.containsKey( PKey ) ) {
 			buff = dictByPKey.get( PKey );
@@ -272,8 +272,8 @@ public class CFBamRamClearDepTable
 	{
 		final String S_ProcName = "CFBamRamClearDep.readDerivedByClearDepIdx";
 		CFBamBuffClearDepByClearDepIdxKey key = (CFBamBuffClearDepByClearDepIdxKey)schema.getFactoryClearDep().newByClearDepIdxKey();
-		key.setRequiredRelationId( RelationId );
 
+		key.setRequiredRelationId( RelationId );
 		ICFBamClearDep[] recArray;
 		if( dictByClearDepIdx.containsKey( key ) ) {
 			Map< CFLibDbKeyHash256, CFBamBuffClearDep > subdictClearDepIdx
@@ -299,8 +299,8 @@ public class CFBamRamClearDepTable
 	{
 		final String S_ProcName = "CFBamRamClearDep.readDerivedByDefSchemaIdx";
 		CFBamBuffClearDepByDefSchemaIdxKey key = (CFBamBuffClearDepByDefSchemaIdxKey)schema.getFactoryClearDep().newByDefSchemaIdxKey();
-		key.setOptionalDefSchemaId( DefSchemaId );
 
+		key.setOptionalDefSchemaId( DefSchemaId );
 		ICFBamClearDep[] recArray;
 		if( dictByDefSchemaIdx.containsKey( key ) ) {
 			Map< CFLibDbKeyHash256, CFBamBuffClearDep > subdictDefSchemaIdx
@@ -697,19 +697,19 @@ public class CFBamRamClearDepTable
 			cur = (CFBamBuffClearDep)(schema.getTableClearDep().readDerivedByIdIdx( Authorization,
 				cur.getRequiredId() ));
 			int subClassCode = cur.getClassCode();
-			if( CFBamClearDep.CLASS_CODE == subClassCode ) {
+			if( ICFBamClearDep.CLASS_CODE == subClassCode ) {
 				schema.getTableClearDep().deleteClearDep( Authorization, cur );
 			}
-			else if( CFBamClearSubDep1.CLASS_CODE == subClassCode ) {
+			else if( ICFBamClearSubDep1.CLASS_CODE == subClassCode ) {
 				schema.getTableClearSubDep1().deleteClearSubDep1( Authorization, (ICFBamClearSubDep1)cur );
 			}
-			else if( CFBamClearSubDep2.CLASS_CODE == subClassCode ) {
+			else if( ICFBamClearSubDep2.CLASS_CODE == subClassCode ) {
 				schema.getTableClearSubDep2().deleteClearSubDep2( Authorization, (ICFBamClearSubDep2)cur );
 			}
-			else if( CFBamClearSubDep3.CLASS_CODE == subClassCode ) {
+			else if( ICFBamClearSubDep3.CLASS_CODE == subClassCode ) {
 				schema.getTableClearSubDep3().deleteClearSubDep3( Authorization, (ICFBamClearSubDep3)cur );
 			}
-			else if( CFBamClearTopDep.CLASS_CODE == subClassCode ) {
+			else if( ICFBamClearTopDep.CLASS_CODE == subClassCode ) {
 				schema.getTableClearTopDep().deleteClearTopDep( Authorization, (ICFBamClearTopDep)cur );
 			}
 			else {
@@ -752,19 +752,19 @@ public class CFBamRamClearDepTable
 			cur = (CFBamBuffClearDep)(schema.getTableClearDep().readDerivedByIdIdx( Authorization,
 				cur.getRequiredId() ));
 			int subClassCode = cur.getClassCode();
-			if( CFBamClearDep.CLASS_CODE == subClassCode ) {
+			if( ICFBamClearDep.CLASS_CODE == subClassCode ) {
 				schema.getTableClearDep().deleteClearDep( Authorization, cur );
 			}
-			else if( CFBamClearSubDep1.CLASS_CODE == subClassCode ) {
+			else if( ICFBamClearSubDep1.CLASS_CODE == subClassCode ) {
 				schema.getTableClearSubDep1().deleteClearSubDep1( Authorization, (ICFBamClearSubDep1)cur );
 			}
-			else if( CFBamClearSubDep2.CLASS_CODE == subClassCode ) {
+			else if( ICFBamClearSubDep2.CLASS_CODE == subClassCode ) {
 				schema.getTableClearSubDep2().deleteClearSubDep2( Authorization, (ICFBamClearSubDep2)cur );
 			}
-			else if( CFBamClearSubDep3.CLASS_CODE == subClassCode ) {
+			else if( ICFBamClearSubDep3.CLASS_CODE == subClassCode ) {
 				schema.getTableClearSubDep3().deleteClearSubDep3( Authorization, (ICFBamClearSubDep3)cur );
 			}
-			else if( CFBamClearTopDep.CLASS_CODE == subClassCode ) {
+			else if( ICFBamClearTopDep.CLASS_CODE == subClassCode ) {
 				schema.getTableClearTopDep().deleteClearTopDep( Authorization, (ICFBamClearTopDep)cur );
 			}
 			else {
@@ -797,19 +797,19 @@ public class CFBamRamClearDepTable
 			cur = (CFBamBuffClearDep)(schema.getTableClearDep().readDerivedByIdIdx( Authorization,
 				cur.getRequiredId() ));
 			int subClassCode = cur.getClassCode();
-			if( CFBamClearDep.CLASS_CODE == subClassCode ) {
+			if( ICFBamClearDep.CLASS_CODE == subClassCode ) {
 				schema.getTableClearDep().deleteClearDep( Authorization, cur );
 			}
-			else if( CFBamClearSubDep1.CLASS_CODE == subClassCode ) {
+			else if( ICFBamClearSubDep1.CLASS_CODE == subClassCode ) {
 				schema.getTableClearSubDep1().deleteClearSubDep1( Authorization, (ICFBamClearSubDep1)cur );
 			}
-			else if( CFBamClearSubDep2.CLASS_CODE == subClassCode ) {
+			else if( ICFBamClearSubDep2.CLASS_CODE == subClassCode ) {
 				schema.getTableClearSubDep2().deleteClearSubDep2( Authorization, (ICFBamClearSubDep2)cur );
 			}
-			else if( CFBamClearSubDep3.CLASS_CODE == subClassCode ) {
+			else if( ICFBamClearSubDep3.CLASS_CODE == subClassCode ) {
 				schema.getTableClearSubDep3().deleteClearSubDep3( Authorization, (ICFBamClearSubDep3)cur );
 			}
-			else if( CFBamClearTopDep.CLASS_CODE == subClassCode ) {
+			else if( ICFBamClearTopDep.CLASS_CODE == subClassCode ) {
 				schema.getTableClearTopDep().deleteClearTopDep( Authorization, (ICFBamClearTopDep)cur );
 			}
 			else {
@@ -850,19 +850,19 @@ public class CFBamRamClearDepTable
 			cur = (CFBamBuffClearDep)(schema.getTableClearDep().readDerivedByIdIdx( Authorization,
 				cur.getRequiredId() ));
 			int subClassCode = cur.getClassCode();
-			if( CFBamClearDep.CLASS_CODE == subClassCode ) {
+			if( ICFBamClearDep.CLASS_CODE == subClassCode ) {
 				schema.getTableClearDep().deleteClearDep( Authorization, cur );
 			}
-			else if( CFBamClearSubDep1.CLASS_CODE == subClassCode ) {
+			else if( ICFBamClearSubDep1.CLASS_CODE == subClassCode ) {
 				schema.getTableClearSubDep1().deleteClearSubDep1( Authorization, (ICFBamClearSubDep1)cur );
 			}
-			else if( CFBamClearSubDep2.CLASS_CODE == subClassCode ) {
+			else if( ICFBamClearSubDep2.CLASS_CODE == subClassCode ) {
 				schema.getTableClearSubDep2().deleteClearSubDep2( Authorization, (ICFBamClearSubDep2)cur );
 			}
-			else if( CFBamClearSubDep3.CLASS_CODE == subClassCode ) {
+			else if( ICFBamClearSubDep3.CLASS_CODE == subClassCode ) {
 				schema.getTableClearSubDep3().deleteClearSubDep3( Authorization, (ICFBamClearSubDep3)cur );
 			}
-			else if( CFBamClearTopDep.CLASS_CODE == subClassCode ) {
+			else if( ICFBamClearTopDep.CLASS_CODE == subClassCode ) {
 				schema.getTableClearTopDep().deleteClearTopDep( Authorization, (ICFBamClearTopDep)cur );
 			}
 			else {
