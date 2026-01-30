@@ -103,6 +103,15 @@ public class CFBamRamSchemaDefTable
 		schema = argSchema;
 	}
 
+	public CFBamBuffScope ensureRec(ICFBamScope rec) {
+		if (rec == null) {
+			return( null );
+		}
+		else {
+			return ((CFBamRamScopeTable)(schema.getTableScope())).ensureRec(rec);
+		}
+	}
+
 	public ICFBamSchemaDef createSchemaDef( ICFSecAuthorization Authorization,
 		ICFBamSchemaDef iBuff )
 	{
@@ -976,7 +985,7 @@ public class CFBamRamSchemaDefTable
 		ICFBamSchemaDef iBuff )
 	{
 		final String S_ProcName = "CFBamRamSchemaDefTable.deleteSchemaDef() ";
-		CFBamBuffSchemaDef Buff = ensureRec(iBuff);
+		CFBamBuffSchemaDef Buff = (CFBamBuffSchemaDef)ensureRec(iBuff);
 		int classCode;
 		CFLibDbKeyHash256 pkey = (CFLibDbKeyHash256)(Buff.getPKey());
 		CFBamBuffSchemaDef existing = dictByPKey.get( pkey );
@@ -990,7 +999,7 @@ public class CFBamRamSchemaDefTable
 				pkey );
 		}
 			CFBamBuffValue buffClearTypeReferences;
-			(CFBamValue arrClearTypeReferences[] = schema.getTableValue().readDerivedByScopeIdx( Authorization,
+			ICFBamValue arrClearTypeReferences[] = schema.getTableValue().readDerivedByScopeIdx( Authorization,
 			existing.getRequiredId() );
 			for( int idxClearTypeReferences = 0; idxClearTypeReferences < arrClearTypeReferences.length; idxClearTypeReferences++ ) {
 				buffClearTypeReferences = (CFBamBuffValue)(arrClearTypeReferences[idxClearTypeReferences]);
@@ -1014,7 +1023,7 @@ public class CFBamRamSchemaDefTable
 				}
 			}
 			CFBamBuffTable buffClearTableRelationNarrowed;
-			(CFBamTable arrClearTableRelationNarrowed[] = schema.getTableTable().readDerivedBySchemaDefIdx( Authorization,
+			ICFBamTable arrClearTableRelationNarrowed[] = schema.getTableTable().readDerivedBySchemaDefIdx( Authorization,
 			existing.getRequiredId() );
 			for( int idxClearTableRelationNarrowed = 0; idxClearTableRelationNarrowed < arrClearTableRelationNarrowed.length; idxClearTableRelationNarrowed++ ) {
 				buffClearTableRelationNarrowed = (CFBamBuffTable)(arrClearTableRelationNarrowed[idxClearTableRelationNarrowed]);

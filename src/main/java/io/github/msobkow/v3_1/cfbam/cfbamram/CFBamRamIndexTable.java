@@ -87,6 +87,15 @@ public class CFBamRamIndexTable
 		schema = argSchema;
 	}
 
+	public CFBamBuffScope ensureRec(ICFBamScope rec) {
+		if (rec == null) {
+			return( null );
+		}
+		else {
+			return ((CFBamRamScopeTable)(schema.getTableScope())).ensureRec(rec);
+		}
+	}
+
 	public ICFBamIndex createIndex( ICFSecAuthorization Authorization,
 		ICFBamIndex iBuff )
 	{
@@ -640,7 +649,7 @@ public class CFBamRamIndexTable
 		ICFBamIndex iBuff )
 	{
 		final String S_ProcName = "CFBamRamIndexTable.deleteIndex() ";
-		CFBamBuffIndex Buff = ensureRec(iBuff);
+		CFBamBuffIndex Buff = (CFBamBuffIndex)ensureRec(iBuff);
 		int classCode;
 		CFLibDbKeyHash256 pkey = (CFLibDbKeyHash256)(Buff.getPKey());
 		CFBamBuffIndex existing = dictByPKey.get( pkey );
@@ -689,7 +698,10 @@ public class CFBamRamIndexTable
 			throw new CFLibDependentsDetectedException( getClass(),
 				"deleteIndex",
 				"Lookup",
+				"Lookup",
 				"FromIndex",
+				"FromIndex",
+				"Relation",
 				"Relation",
 				pkey );
 		}
@@ -700,7 +712,10 @@ public class CFBamRamIndexTable
 			throw new CFLibDependentsDetectedException( getClass(),
 				"deleteIndex",
 				"Lookup",
+				"Lookup",
 				"ToIndex",
+				"ToIndex",
+				"Relation",
 				"Relation",
 				pkey );
 		}

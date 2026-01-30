@@ -83,6 +83,15 @@ public class CFBamRamClearDepTable
 		schema = argSchema;
 	}
 
+	public CFBamBuffScope ensureRec(ICFBamScope rec) {
+		if (rec == null) {
+			return( null );
+		}
+		else {
+			return ((CFBamRamScopeTable)(schema.getTableScope())).ensureRec(rec);
+		}
+	}
+
 	public ICFBamClearDep createClearDep( ICFSecAuthorization Authorization,
 		ICFBamClearDep iBuff )
 	{
@@ -586,7 +595,7 @@ public class CFBamRamClearDepTable
 		ICFBamClearDep iBuff )
 	{
 		final String S_ProcName = "CFBamRamClearDepTable.deleteClearDep() ";
-		CFBamBuffClearDep Buff = ensureRec(iBuff);
+		CFBamBuffClearDep Buff = (CFBamBuffClearDep)ensureRec(iBuff);
 		int classCode;
 		CFLibDbKeyHash256 pkey = (CFLibDbKeyHash256)(Buff.getPKey());
 		CFBamBuffClearDep existing = dictByPKey.get( pkey );
@@ -613,7 +622,10 @@ public class CFBamRamClearDepTable
 			throw new CFLibDependentsDetectedException( getClass(),
 				"deleteClearDep",
 				"Superclass",
+				"Superclass",
 				"SuperClass",
+				"SuperClass",
+				"ClearSubDep1",
 				"ClearSubDep1",
 				pkey );
 		}
@@ -624,7 +636,10 @@ public class CFBamRamClearDepTable
 			throw new CFLibDependentsDetectedException( getClass(),
 				"deleteClearDep",
 				"Superclass",
+				"Superclass",
 				"SuperClass",
+				"SuperClass",
+				"ClearSubDep2",
 				"ClearSubDep2",
 				pkey );
 		}
@@ -635,7 +650,10 @@ public class CFBamRamClearDepTable
 			throw new CFLibDependentsDetectedException( getClass(),
 				"deleteClearDep",
 				"Superclass",
+				"Superclass",
 				"SuperClass",
+				"SuperClass",
+				"ClearSubDep3",
 				"ClearSubDep3",
 				pkey );
 		}
@@ -646,7 +664,10 @@ public class CFBamRamClearDepTable
 			throw new CFLibDependentsDetectedException( getClass(),
 				"deleteClearDep",
 				"Superclass",
+				"Superclass",
 				"SuperClass",
+				"SuperClass",
+				"ClearTopDep",
 				"ClearTopDep",
 				pkey );
 		}
@@ -713,7 +734,7 @@ public class CFBamRamClearDepTable
 				schema.getTableClearTopDep().deleteClearTopDep( Authorization, (ICFBamClearTopDep)cur );
 			}
 			else {
-				throw new CFLibUnsupportedClassException(getClass(), S_ProcName, "-delete-by-suffix-class-walker-", (Integer)classCode, "Classcode not recognized: " + Integer.toString(classCode));
+				throw new CFLibUnsupportedClassException(getClass(), S_ProcName, "-delete-by-suffix-class-walker-", (Integer)subClassCode, "Classcode not recognized: " + Integer.toString(subClassCode));
 			}
 		}
 	}
@@ -768,7 +789,7 @@ public class CFBamRamClearDepTable
 				schema.getTableClearTopDep().deleteClearTopDep( Authorization, (ICFBamClearTopDep)cur );
 			}
 			else {
-				throw new CFLibUnsupportedClassException(getClass(), S_ProcName, "-delete-by-suffix-class-walker-", (Integer)classCode, "Classcode not recognized: " + Integer.toString(classCode));
+				throw new CFLibUnsupportedClassException(getClass(), S_ProcName, "-delete-by-suffix-class-walker-", (Integer)subClassCode, "Classcode not recognized: " + Integer.toString(subClassCode));
 			}
 		}
 	}
@@ -813,7 +834,7 @@ public class CFBamRamClearDepTable
 				schema.getTableClearTopDep().deleteClearTopDep( Authorization, (ICFBamClearTopDep)cur );
 			}
 			else {
-				throw new CFLibUnsupportedClassException(getClass(), S_ProcName, "-delete-by-suffix-class-walker-", (Integer)classCode, "Classcode not recognized: " + Integer.toString(classCode));
+				throw new CFLibUnsupportedClassException(getClass(), S_ProcName, "-delete-by-suffix-class-walker-", (Integer)subClassCode, "Classcode not recognized: " + Integer.toString(subClassCode));
 			}
 		}
 	}
@@ -866,7 +887,7 @@ public class CFBamRamClearDepTable
 				schema.getTableClearTopDep().deleteClearTopDep( Authorization, (ICFBamClearTopDep)cur );
 			}
 			else {
-				throw new CFLibUnsupportedClassException(getClass(), S_ProcName, "-delete-by-suffix-class-walker-", (Integer)classCode, "Classcode not recognized: " + Integer.toString(classCode));
+				throw new CFLibUnsupportedClassException(getClass(), S_ProcName, "-delete-by-suffix-class-walker-", (Integer)subClassCode, "Classcode not recognized: " + Integer.toString(subClassCode));
 			}
 		}
 	}

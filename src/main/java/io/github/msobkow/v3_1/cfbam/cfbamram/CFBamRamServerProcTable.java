@@ -71,6 +71,15 @@ public class CFBamRamServerProcTable
 		schema = argSchema;
 	}
 
+	public CFBamBuffScope ensureRec(ICFBamScope rec) {
+		if (rec == null) {
+			return( null );
+		}
+		else {
+			return ((CFBamRamScopeTable)(schema.getTableScope())).ensureRec(rec);
+		}
+	}
+
 	public ICFBamServerProc createServerProc( ICFSecAuthorization Authorization,
 		ICFBamServerProc iBuff )
 	{
@@ -475,7 +484,7 @@ public class CFBamRamServerProcTable
 		ICFBamServerProc iBuff )
 	{
 		final String S_ProcName = "CFBamRamServerProcTable.deleteServerProc() ";
-		CFBamBuffServerProc Buff = ensureRec(iBuff);
+		CFBamBuffServerProc Buff = (CFBamBuffServerProc)ensureRec(iBuff);
 		int classCode;
 		CFLibDbKeyHash256 pkey = (CFLibDbKeyHash256)(Buff.getPKey());
 		CFBamBuffServerProc existing = dictByPKey.get( pkey );

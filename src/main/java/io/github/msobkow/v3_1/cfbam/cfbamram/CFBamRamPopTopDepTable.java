@@ -81,6 +81,15 @@ public class CFBamRamPopTopDepTable
 		schema = argSchema;
 	}
 
+	public CFBamBuffScope ensureRec(ICFBamScope rec) {
+		if (rec == null) {
+			return( null );
+		}
+		else {
+			return ((CFBamRamScopeTable)(schema.getTableScope())).ensureRec(rec);
+		}
+	}
+
 	public ICFBamPopTopDep createPopTopDep( ICFSecAuthorization Authorization,
 		ICFBamPopTopDep iBuff )
 	{
@@ -655,7 +664,7 @@ public class CFBamRamPopTopDepTable
 		ICFBamPopTopDep iBuff )
 	{
 		final String S_ProcName = "CFBamRamPopTopDepTable.deletePopTopDep() ";
-		CFBamBuffPopTopDep Buff = ensureRec(iBuff);
+		CFBamBuffPopTopDep Buff = (CFBamBuffPopTopDep)ensureRec(iBuff);
 		int classCode;
 		CFLibDbKeyHash256 pkey = (CFLibDbKeyHash256)(Buff.getPKey());
 		CFBamBuffPopTopDep existing = dictByPKey.get( pkey );

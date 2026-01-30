@@ -119,7 +119,7 @@ public class CFBamRamChainTable
 	{
 		final String S_ProcName = "createChain";
 		
-		CFBamBuffChain Buff = ensureRec(iBuff);
+		CFBamBuffChain Buff = (CFBamBuffChain)ensureRec(iBuff);
 		CFLibDbKeyHash256 pkey;
 		pkey = schema.nextChainIdGen();
 		Buff.setRequiredId( pkey );
@@ -595,7 +595,7 @@ public class CFBamRamChainTable
 	public ICFBamChain updateChain( ICFSecAuthorization Authorization,
 		ICFBamChain iBuff )
 	{
-		CFBamBuffChain Buff = ensureRec(iBuff);
+		CFBamBuffChain Buff = (CFBamBuffChain)ensureRec(iBuff);
 		CFLibDbKeyHash256 pkey = Buff.getPKey();
 		CFBamBuffChain existing = dictByPKey.get( pkey );
 		if( existing == null ) {
@@ -788,7 +788,7 @@ public class CFBamRamChainTable
 		ICFBamChain iBuff )
 	{
 		final String S_ProcName = "CFBamRamChainTable.deleteChain() ";
-		CFBamBuffChain Buff = ensureRec(iBuff);
+		CFBamBuffChain Buff = (CFBamBuffChain)ensureRec(iBuff);
 		int classCode;
 		CFLibDbKeyHash256 pkey = (CFLibDbKeyHash256)(Buff.getPKey());
 		CFBamBuffChain existing = dictByPKey.get( pkey );

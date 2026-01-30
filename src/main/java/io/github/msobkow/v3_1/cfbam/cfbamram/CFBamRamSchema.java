@@ -57,13 +57,6 @@ public class CFBamRamSchema
 	extends CFBamBuffSchema
 	implements ICFBamSchema
 {
-	protected short nextISOCcyIdGenValue = 1;
-	protected short nextISOCtryIdGenValue = 1;
-	protected short nextISOLangIdGenValue = 1;
-	protected short nextISOTZoneIdGenValue = 1;
-	protected int nextMimeTypeIdGenValue = 1;
-	protected int nextURLProtocolIdGenValue = 1;
-	protected long nextClusterIdGenValue = 1;
 
 
 	public CFBamRamSchema() {
@@ -81,7 +74,6 @@ public class CFBamRamSchema
 		tableClearSubDep2 = new CFBamRamClearSubDep2Table( this );
 		tableClearSubDep3 = new CFBamRamClearSubDep3Table( this );
 		tableClearTopDep = new CFBamRamClearTopDepTable( this );
-		tableCluster = new CFBamRamClusterTable( this );
 		tableDateCol = new CFBamRamDateColTable( this );
 		tableDateDef = new CFBamRamDateDefTable( this );
 		tableDateType = new CFBamRamDateTypeTable( this );
@@ -123,13 +115,6 @@ public class CFBamRamSchema
 		tableFloatCol = new CFBamRamFloatColTable( this );
 		tableFloatDef = new CFBamRamFloatDefTable( this );
 		tableFloatType = new CFBamRamFloatTypeTable( this );
-		tableHostNode = new CFBamRamHostNodeTable( this );
-		tableISOCcy = new CFBamRamISOCcyTable( this );
-		tableISOCtry = new CFBamRamISOCtryTable( this );
-		tableISOCtryCcy = new CFBamRamISOCtryCcyTable( this );
-		tableISOCtryLang = new CFBamRamISOCtryLangTable( this );
-		tableISOLang = new CFBamRamISOLangTable( this );
-		tableISOTZone = new CFBamRamISOTZoneTable( this );
 		tableId16Gen = new CFBamRamId16GenTable( this );
 		tableId32Gen = new CFBamRamId32GenTable( this );
 		tableId64Gen = new CFBamRamId64GenTable( this );
@@ -144,10 +129,6 @@ public class CFBamRamSchema
 		tableInt64Col = new CFBamRamInt64ColTable( this );
 		tableInt64Def = new CFBamRamInt64DefTable( this );
 		tableInt64Type = new CFBamRamInt64TypeTable( this );
-		tableLicense = new CFBamRamLicenseTable( this );
-		tableMajorVersion = new CFBamRamMajorVersionTable( this );
-		tableMimeType = new CFBamRamMimeTypeTable( this );
-		tableMinorVersion = new CFBamRamMinorVersionTable( this );
 		tableNmTokenCol = new CFBamRamNmTokenColTable( this );
 		tableNmTokenDef = new CFBamRamNmTokenDefTable( this );
 		tableNmTokenType = new CFBamRamNmTokenTypeTable( this );
@@ -168,26 +149,13 @@ public class CFBamRamSchema
 		tableSchemaDef = new CFBamRamSchemaDefTable( this );
 		tableSchemaRef = new CFBamRamSchemaRefTable( this );
 		tableScope = new CFBamRamScopeTable( this );
-		tableSecDevice = new CFBamRamSecDeviceTable( this );
-		tableSecGroup = new CFBamRamSecGroupTable( this );
-		tableSecGrpInc = new CFBamRamSecGrpIncTable( this );
-		tableSecGrpMemb = new CFBamRamSecGrpMembTable( this );
-		tableSecSession = new CFBamRamSecSessionTable( this );
-		tableSecUser = new CFBamRamSecUserTable( this );
 		tableServerListFunc = new CFBamRamServerListFuncTable( this );
 		tableServerMethod = new CFBamRamServerMethodTable( this );
 		tableServerObjFunc = new CFBamRamServerObjFuncTable( this );
 		tableServerProc = new CFBamRamServerProcTable( this );
-		tableService = new CFBamRamServiceTable( this );
-		tableServiceType = new CFBamRamServiceTypeTable( this );
 		tableStringCol = new CFBamRamStringColTable( this );
 		tableStringDef = new CFBamRamStringDefTable( this );
 		tableStringType = new CFBamRamStringTypeTable( this );
-		tableSubProject = new CFBamRamSubProjectTable( this );
-		tableSysCluster = new CFBamRamSysClusterTable( this );
-		tableTSecGroup = new CFBamRamTSecGroupTable( this );
-		tableTSecGrpInc = new CFBamRamTSecGrpIncTable( this );
-		tableTSecGrpMemb = new CFBamRamTSecGrpMembTable( this );
 		tableTZDateCol = new CFBamRamTZDateColTable( this );
 		tableTZDateDef = new CFBamRamTZDateDefTable( this );
 		tableTZDateType = new CFBamRamTZDateTypeTable( this );
@@ -199,7 +167,6 @@ public class CFBamRamSchema
 		tableTZTimestampType = new CFBamRamTZTimestampTypeTable( this );
 		tableTable = new CFBamRamTableTable( this );
 		tableTableCol = new CFBamRamTableColTable( this );
-		tableTenant = new CFBamRamTenantTable( this );
 		tableTextCol = new CFBamRamTextColTable( this );
 		tableTextDef = new CFBamRamTextDefTable( this );
 		tableTextType = new CFBamRamTextTypeTable( this );
@@ -209,12 +176,9 @@ public class CFBamRamSchema
 		tableTimestampCol = new CFBamRamTimestampColTable( this );
 		tableTimestampDef = new CFBamRamTimestampDefTable( this );
 		tableTimestampType = new CFBamRamTimestampTypeTable( this );
-		tableTld = new CFBamRamTldTable( this );
 		tableTokenCol = new CFBamRamTokenColTable( this );
 		tableTokenDef = new CFBamRamTokenDefTable( this );
 		tableTokenType = new CFBamRamTokenTypeTable( this );
-		tableTopDomain = new CFBamRamTopDomainTable( this );
-		tableTopProject = new CFBamRamTopProjectTable( this );
 		tableUInt16Col = new CFBamRamUInt16ColTable( this );
 		tableUInt16Def = new CFBamRamUInt16DefTable( this );
 		tableUInt16Type = new CFBamRamUInt16TypeTable( this );
@@ -224,7 +188,6 @@ public class CFBamRamSchema
 		tableUInt64Col = new CFBamRamUInt64ColTable( this );
 		tableUInt64Def = new CFBamRamUInt64DefTable( this );
 		tableUInt64Type = new CFBamRamUInt64TypeTable( this );
-		tableURLProtocol = new CFBamRamURLProtocolTable( this );
 		tableUuid6Col = new CFBamRamUuid6ColTable( this );
 		tableUuid6Def = new CFBamRamUuid6DefTable( this );
 		tableUuid6Gen = new CFBamRamUuid6GenTable( this );
@@ -238,41 +201,6 @@ public class CFBamRamSchema
 
 	public ICFBamSchema newSchema() {
 		throw new CFLibMustOverrideException( getClass(), "newSchema" );
-	}
-
-	public short nextISOCcyIdGen() {
-		short next = nextISOCcyIdGenValue++;
-		return( next );
-	}
-
-	public short nextISOCtryIdGen() {
-		short next = nextISOCtryIdGenValue++;
-		return( next );
-	}
-
-	public short nextISOLangIdGen() {
-		short next = nextISOLangIdGenValue++;
-		return( next );
-	}
-
-	public short nextISOTZoneIdGen() {
-		short next = nextISOTZoneIdGenValue++;
-		return( next );
-	}
-
-	public int nextMimeTypeIdGen() {
-		int next = nextMimeTypeIdGenValue++;
-		return( next );
-	}
-
-	public int nextURLProtocolIdGen() {
-		int next = nextURLProtocolIdGenValue++;
-		return( next );
-	}
-
-	public long nextClusterIdGen() {
-		long next = nextClusterIdGenValue++;
-		return( next );
 	}
 
 	public String fileImport( CFSecAuthorization Authorization,

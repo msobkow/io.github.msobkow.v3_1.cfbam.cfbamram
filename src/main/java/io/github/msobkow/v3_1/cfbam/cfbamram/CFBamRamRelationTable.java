@@ -111,6 +111,15 @@ public class CFBamRamRelationTable
 		schema = argSchema;
 	}
 
+	public CFBamBuffScope ensureRec(ICFBamScope rec) {
+		if (rec == null) {
+			return( null );
+		}
+		else {
+			return ((CFBamRamScopeTable)(schema.getTableScope())).ensureRec(rec);
+		}
+	}
+
 	public ICFBamRelation createRelation( ICFSecAuthorization Authorization,
 		ICFBamRelation iBuff )
 	{
@@ -1164,7 +1173,7 @@ public class CFBamRamRelationTable
 		ICFBamRelation iBuff )
 	{
 		final String S_ProcName = "CFBamRamRelationTable.deleteRelation() ";
-		CFBamBuffRelation Buff = ensureRec(iBuff);
+		CFBamBuffRelation Buff = (CFBamBuffRelation)ensureRec(iBuff);
 		int classCode;
 		CFLibDbKeyHash256 pkey = (CFLibDbKeyHash256)(Buff.getPKey());
 		CFBamBuffRelation existing = dictByPKey.get( pkey );
@@ -1211,7 +1220,10 @@ public class CFBamRamRelationTable
 			throw new CFLibDependentsDetectedException( getClass(),
 				"deleteRelation",
 				"Lookup",
+				"Lookup",
 				"PrevRelation",
+				"PrevRelation",
+				"Chain",
 				"Chain",
 				pkey );
 		}
@@ -1222,7 +1234,10 @@ public class CFBamRamRelationTable
 			throw new CFLibDependentsDetectedException( getClass(),
 				"deleteRelation",
 				"Lookup",
+				"Lookup",
 				"NextRelation",
+				"NextRelation",
+				"Chain",
 				"Chain",
 				pkey );
 		}
@@ -1233,7 +1248,10 @@ public class CFBamRamRelationTable
 			throw new CFLibDependentsDetectedException( getClass(),
 				"deleteRelation",
 				"Lookup",
+				"Lookup",
 				"Relation",
+				"Relation",
+				"ClearDep",
 				"ClearDep",
 				pkey );
 		}
@@ -1244,7 +1262,10 @@ public class CFBamRamRelationTable
 			throw new CFLibDependentsDetectedException( getClass(),
 				"deleteRelation",
 				"Lookup",
+				"Lookup",
 				"Relation",
+				"Relation",
+				"DelDep",
 				"DelDep",
 				pkey );
 		}
@@ -1255,7 +1276,10 @@ public class CFBamRamRelationTable
 			throw new CFLibDependentsDetectedException( getClass(),
 				"deleteRelation",
 				"Lookup",
+				"Lookup",
 				"Relation",
+				"Relation",
+				"PopDep",
 				"PopDep",
 				pkey );
 		}

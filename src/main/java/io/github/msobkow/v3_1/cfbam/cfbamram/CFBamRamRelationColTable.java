@@ -143,7 +143,7 @@ public class CFBamRamRelationColTable
 	{
 		final String S_ProcName = "createRelationCol";
 		
-		CFBamBuffRelationCol Buff = ensureRec(iBuff);
+		CFBamBuffRelationCol Buff = (CFBamBuffRelationCol)ensureRec(iBuff);
 			ICFBamRelationCol tail = null;
 
 			ICFBamRelationCol[] siblings = schema.getTableRelationCol().readDerivedByRelationIdx( Authorization,
@@ -155,10 +155,10 @@ public class CFBamRamRelationColTable
 				}
 			}
 			if( tail != null ) {
-				Buff.setOptionalPrevId( tail.getRequiredId() );
+				Buff.setOptionalLookupPrev(tail.getRequiredId());
 			}
 			else {
-				Buff.setOptionalPrevId( null );
+				Buff.setOptionalLookupPrev((CFLibDbKeyHash256)null);
 			}
 		
 		CFLibDbKeyHash256 pkey;
@@ -357,9 +357,9 @@ public class CFBamRamRelationColTable
 		subdictRelNextIdx.put( pkey, Buff );
 
 		if( tail != null ) {
-			ICFBamRelationCol tailEdit = schema.getFactoryRelationCol().newBuff();
+			ICFBamRelationCol tailEdit = schema.getFactoryRelationCol().newRec();
 			tailEdit.set( (ICFBamRelationCol)tail );
-				tailEdit.setOptionalNextId( Buff.getRequiredId() );
+				tailEdit.setOptionalLookupNext(Buff.getRequiredId());
 			schema.getTableRelationCol().updateRelationCol( Authorization, tailEdit );
 		}
 		if (Buff == null) {
@@ -895,11 +895,7 @@ public class CFBamRamRelationColTable
 
 		cur = schema.getTableRelationCol().readDerivedByIdIdx(Authorization, Id);
 		if( cur == null ) {
-			throw new CFLibCollisionDetectedException( getClass(),
-				S_ProcName,
-				"CFBamRelationColByIdIdxKey",
-				"CFBamRelationColByIdIdxKey",
-				"Could not locate object" );
+			throw new CFLibCollisionDetectedException( getClass(), S_ProcName, "Could not locate object" );
 		}
 
 		if( ( cur.getOptionalPrevId() == null ) )
@@ -907,70 +903,58 @@ public class CFBamRamRelationColTable
 			return( (CFBamBuffRelationCol)cur );
 		}
 
-		prev = schema.getTableRelationCol().readDerivedByIdIdx(Authorization, cur.getOptionalPrevId() );
+		prev = (CFBamBuffRelationCol)(schema.getTableRelationCol().readDerivedByIdIdx(Authorization, cur.getOptionalPrevId() ));
 		if( prev == null ) {
-			throw new CFLibCollisionDetectedException( getClass(),
-				S_ProcName,
-				"CFBamRelationColByIdIdxKey",
-				"CFBamRelationColByIdIdxKey",
-				"Could not locate object.prev" );
+			throw new CFLibCollisionDetectedException( getClass(), S_ProcName, "Could not locate object.prev" );
 		}
 
 		if( ( prev.getOptionalPrevId() != null ) )
 		{
-			grandprev = schema.getTableRelationCol().readDerivedByIdIdx(Authorization, prev.getOptionalPrevId() );
+			grandprev = (CFBamBuffRelationCol)(schema.getTableRelationCol().readDerivedByIdIdx(Authorization, prev.getOptionalPrevId() ));
 			if( grandprev == null ) {
-				throw new CFLibCollisionDetectedException( getClass(),
-					S_ProcName,
-					"CFBamRelationColByIdIdxKey",
-					"CFBamRelationColByIdIdxKey",
-					"Could not locate object.prev.prev" );
+				throw new CFLibCollisionDetectedException( getClass(), S_ProcName, "Could not locate object.prev.prev" );
 			}
 		}
 
 		if( ( cur.getOptionalNextId() != null ) )
 		{
-			next = schema.getTableRelationCol().readDerivedByIdIdx(Authorization, cur.getOptionalNextId() );
+			next = (CFBamBuffRelationCol)(schema.getTableRelationCol().readDerivedByIdIdx(Authorization, cur.getOptionalNextId() ));
 			if( next == null ) {
-				throw new CFLibCollisionDetectedException( getClass(),
-					S_ProcName,
-					"CFBamRelationColByIdIdxKey",
-					"CFBamRelationColByIdIdxKey",
-					"Could not locate object.next" );
+				throw new CFLibCollisionDetectedException( getClass(), S_ProcName, "Could not locate object.next" );
 			}
 		}
 
-		String classCode = prev.getClassCode();
+		int classCode = prev.getClassCode();
 		ICFBamRelationCol newInstance;
 			if( classCode == ICFBamRelationCol.CLASS_CODE ) {
-				newInstance = schema.getFactoryRelationCol().newBuff();
+				newInstance = schema.getFactoryRelationCol().newRec();
 			}
 			else {
 				throw new CFLibUnsupportedClassException(getClass(), S_ProcName, "-instantiate-buff-", (Integer)classCode, "Classcode not recognized: " + Integer.toString(classCode));
 			}
-		ICFBamRelationCol editPrev = newInstance;
+		CFBamBuffRelationCol editPrev = (CFBamBuffRelationCol)newInstance;
 		editPrev.set( prev );
 
 		classCode = cur.getClassCode();
 			if( classCode == ICFBamRelationCol.CLASS_CODE ) {
-				newInstance = schema.getFactoryRelationCol().newBuff();
+				newInstance = schema.getFactoryRelationCol().newRec();
 			}
 			else {
 				throw new CFLibUnsupportedClassException(getClass(), S_ProcName, "-instantiate-buff-", (Integer)classCode, "Classcode not recognized: " + Integer.toString(classCode));
 			}
-		CFBamBuffRelationCol editCur = newInstance;
+		CFBamBuffRelationCol editCur = (CFBamBuffRelationCol)newInstance;
 		editCur.set( cur );
 
 		CFBamBuffRelationCol editGrandprev = null;
 		if( grandprev != null ) {
 			classCode = grandprev.getClassCode();
 			if( classCode == ICFBamRelationCol.CLASS_CODE ) {
-				newInstance = schema.getFactoryRelationCol().newBuff();
+				newInstance = schema.getFactoryRelationCol().newRec();
 			}
 			else {
 				throw new CFLibUnsupportedClassException(getClass(), S_ProcName, "-instantiate-buff-", (Integer)classCode, "Classcode not recognized: " + Integer.toString(classCode));
 			}
-			editGrandprev = newInstance;
+			editGrandprev = (CFBamBuffRelationCol)newInstance;
 			editGrandprev.set( grandprev );
 		}
 
@@ -978,33 +962,33 @@ public class CFBamRamRelationColTable
 		if( next != null ) {
 			classCode = next.getClassCode();
 			if( classCode == ICFBamRelationCol.CLASS_CODE ) {
-				newInstance = schema.getFactoryRelationCol().newBuff();
+				newInstance = schema.getFactoryRelationCol().newRec();
 			}
 			else {
 				throw new CFLibUnsupportedClassException(getClass(), S_ProcName, "-instantiate-buff-", (Integer)classCode, "Classcode not recognized: " + Integer.toString(classCode));
 			}
-			editNext = newInstance;
+			editNext = (CFBamBuffRelationCol)newInstance;
 			editNext.set( next );
 		}
 
 		if( editGrandprev != null ) {
-			editGrandprev.setOptionalNextId( cur.getRequiredId() );
-			editCur.setOptionalPrevId( grandprev.getRequiredId() );
+			editGrandprev.setOptionalLookupNext(cur.getRequiredId());
+			editCur.setOptionalLookupPrev(grandprev.getRequiredId());
 		}
 		else {
-			editCur.setOptionalPrevId( null );
+			editCur.setOptionalLookupPrev((CFLibDbKeyHash256)null);
 		}
 
-			editPrev.setOptionalPrevId( cur.getRequiredId() );
+			editPrev.setOptionalLookupPrev(cur.getRequiredId());
 
-			editCur.setOptionalNextId( prev.getRequiredId() );
+			editCur.setOptionalLookupNext(prev.getRequiredId());
 
 		if( next != null ) {
-			editPrev.setOptionalNextId( next.getRequiredId() );
-			editNext.setOptionalPrevId( prev.getRequiredId() );
+			editPrev.setOptionalLookupNext(next.getRequiredId());
+			editNext.setOptionalLookupPrev(prev.getRequiredId());
 		}
 		else {
-			editPrev.setOptionalNextId( null );
+			editPrev.setOptionalLookupNext((CFLibDbKeyHash256)null);
 		}
 
 		if( editGrandprev != null ) {
@@ -1062,13 +1046,9 @@ public class CFBamRamRelationColTable
 		CFBamBuffRelationCol next = null;
 		CFBamBuffRelationCol grandnext = null;
 
-		cur = schema.getTableRelationCol().readDerivedByIdIdx(Authorization, Id);
+		cur = (CFBamBuffRelationCol)(schema.getTableRelationCol().readDerivedByIdIdx(Authorization, Id));
 		if( cur == null ) {
-			throw new CFLibCollisionDetectedException( getClass(),
-				S_ProcName,
-				"CFBamRelationColByIdIdxKey",
-				"CFBamRelationColByIdIdxKey",
-				"Could not locate object" );
+			throw new CFLibCollisionDetectedException( getClass(), S_ProcName, "Could not locate object" );
 		}
 
 		if( ( cur.getOptionalNextId() == null ) )
@@ -1076,70 +1056,58 @@ public class CFBamRamRelationColTable
 			return( (CFBamBuffRelationCol)cur );
 		}
 
-		next = schema.getTableRelationCol().readDerivedByIdIdx(Authorization, cur.getOptionalNextId() );
+		next = (CFBamBuffRelationCol)(schema.getTableRelationCol().readDerivedByIdIdx(Authorization, cur.getOptionalNextId() ));
 		if( next == null ) {
-			throw new CFLibCollisionDetectedException( getClass(),
-				S_ProcName,
-				"CFBamRelationColByIdIdxKey",
-				"CFBamRelationColByIdIdxKey",
-				"Could not locate object.next" );
+			throw new CFLibCollisionDetectedException( getClass(), S_ProcName, "Could not locate object.next" );
 		}
 
 		if( ( next.getOptionalNextId() != null ) )
 		{
-			grandnext = schema.getTableRelationCol().readDerivedByIdIdx(Authorization, next.getOptionalNextId() );
+			grandnext = (CFBamBuffRelationCol)(schema.getTableRelationCol().readDerivedByIdIdx(Authorization, next.getOptionalNextId() ));
 			if( grandnext == null ) {
-				throw new CFLibCollisionDetectedException( getClass(),
-					S_ProcName,
-					"CFBamRelationColByIdIdxKey",
-					"CFBamRelationColByIdIdxKey",
-					"Could not locate object.next.next" );
+				throw new CFLibCollisionDetectedException( getClass(), S_ProcName, "Could not locate object.next.next" );
 			}
 		}
 
 		if( ( cur.getOptionalPrevId() != null ) )
 		{
-			prev = schema.getTableRelationCol().readDerivedByIdIdx(Authorization, cur.getOptionalPrevId() );
+			prev = (CFBamBuffRelationCol)(schema.getTableRelationCol().readDerivedByIdIdx(Authorization, cur.getOptionalPrevId() ));
 			if( prev == null ) {
-				throw new CFLibCollisionDetectedException( getClass(),
-					S_ProcName,
-					"CFBamRelationColByIdIdxKey",
-					"CFBamRelationColByIdIdxKey",
-					"Could not locate object.prev" );
+				throw new CFLibCollisionDetectedException( getClass(), S_ProcName, "Could not locate object.prev" );
 			}
 		}
 
-		integer classCode = cur.getClassCode();
-		CFBamBuffRelationCol newInstance;
+		int classCode = cur.getClassCode();
+		ICFBamRelationCol newInstance;
 			if( classCode == ICFBamRelationCol.CLASS_CODE ) {
-				newInstance = schema.getFactoryRelationCol().newBuff();
+				newInstance = schema.getFactoryRelationCol().newRec();
 			}
 			else {
 				throw new CFLibUnsupportedClassException(getClass(), S_ProcName, "-instantiate-buff-", (Integer)classCode, "Classcode not recognized: " + Integer.toString(classCode));
 			}
-		CFBamBuffRelationCol editCur = newInstance;
+		CFBamBuffRelationCol editCur = (CFBamBuffRelationCol)newInstance;
 		editCur.set( cur );
 
 		classCode = next.getClassCode();
 			if( classCode == ICFBamRelationCol.CLASS_CODE ) {
-				newInstance = schema.getFactoryRelationCol().newBuff();
+				newInstance = schema.getFactoryRelationCol().newRec();
 			}
 			else {
 				throw new CFLibUnsupportedClassException(getClass(), S_ProcName, "-instantiate-buff-", (Integer)classCode, "Classcode not recognized: " + Integer.toString(classCode));
 			}
-		CFBamBuffRelationCol editNext = newInstance;
+		CFBamBuffRelationCol editNext = (CFBamBuffRelationCol)newInstance;
 		editNext.set( next );
 
 		CFBamBuffRelationCol editGrandnext = null;
 		if( grandnext != null ) {
 			classCode = grandnext.getClassCode();
 			if( classCode == ICFBamRelationCol.CLASS_CODE ) {
-				newInstance = schema.getFactoryRelationCol().newBuff();
+				newInstance = schema.getFactoryRelationCol().newRec();
 			}
 			else {
 				throw new CFLibUnsupportedClassException(getClass(), S_ProcName, "-instantiate-buff-", (Integer)classCode, "Classcode not recognized: " + Integer.toString(classCode));
 			}
-			editGrandnext = newInstance;
+			editGrandnext = (CFBamBuffRelationCol)newInstance;
 			editGrandnext.set( grandnext );
 		}
 
@@ -1147,33 +1115,33 @@ public class CFBamRamRelationColTable
 		if( prev != null ) {
 			classCode = prev.getClassCode();
 			if( classCode == ICFBamRelationCol.CLASS_CODE ) {
-				newInstance = schema.getFactoryRelationCol().newBuff();
+				newInstance = schema.getFactoryRelationCol().newRec();
 			}
 			else {
 				throw new CFLibUnsupportedClassException(getClass(), S_ProcName, "-instantiate-buff-", (Integer)classCode, "Classcode not recognized: " + Integer.toString(classCode));
 			}
-			editPrev = newInstance;
+			editPrev = (CFBamBuffRelationCol)newInstance;
 			editPrev.set( prev );
 		}
 
 		if( prev != null ) {
-			editPrev.setOptionalNextId( next.getRequiredId() );
-			editNext.setOptionalPrevId( prev.getRequiredId() );
+			editPrev.setOptionalLookupNext(next.getRequiredId());
+			editNext.setOptionalLookupPrev(prev.getRequiredId());
 		}
 		else {
-			editNext.setOptionalPrevId( null );
+			editNext.setOptionalLookupPrev((CFLibDbKeyHash256)null);
 		}
 
-			editCur.setOptionalPrevId( next.getRequiredId() );
+			editCur.setOptionalLookupPrev(next.getRequiredId());
 
-			editNext.setOptionalNextId( cur.getRequiredId() );
+			editNext.setOptionalLookupNext(cur.getRequiredId());
 
 		if( editGrandnext != null ) {
-			editCur.setOptionalNextId( grandnext.getRequiredId() );
-			editGrandnext.setOptionalPrevId( cur.getRequiredId() );
+			editCur.setOptionalLookupNext(grandnext.getRequiredId());
+			editGrandnext.setOptionalLookupPrev(cur.getRequiredId());
 		}
 		else {
-			editCur.setOptionalNextId( null );
+			editCur.setOptionalLookupNext((CFLibDbKeyHash256)null);
 		}
 
 		if( editPrev != null ) {
@@ -1218,7 +1186,7 @@ public class CFBamRamRelationColTable
 	public ICFBamRelationCol updateRelationCol( ICFSecAuthorization Authorization,
 		ICFBamRelationCol iBuff )
 	{
-		CFBamBuffRelationCol Buff = ensureRec(iBuff);
+		CFBamBuffRelationCol Buff = (CFBamBuffRelationCol)ensureRec(iBuff);
 		CFLibDbKeyHash256 pkey = Buff.getPKey();
 		CFBamBuffRelationCol existing = dictByPKey.get( pkey );
 		if( existing == null ) {
@@ -1491,7 +1459,7 @@ public class CFBamRamRelationColTable
 		ICFBamRelationCol iBuff )
 	{
 		final String S_ProcName = "CFBamRamRelationColTable.deleteRelationCol() ";
-		CFBamBuffRelationCol Buff = ensureRec(iBuff);
+		CFBamBuffRelationCol Buff = (CFBamBuffRelationCol)ensureRec(iBuff);
 		int classCode;
 		CFLibDbKeyHash256 pkey = (CFLibDbKeyHash256)(Buff.getPKey());
 		CFBamBuffRelationCol existing = dictByPKey.get( pkey );
@@ -1520,8 +1488,8 @@ public class CFBamRamRelationColTable
 		CFBamBuffRelationCol prev = null;
 		if( ( prevId != null ) )
 		{
-			prev = schema.getTableRelationCol().readDerivedByIdIdx( Authorization,
-				prevId );
+			prev = (CFBamBuffRelationCol)(schema.getTableRelationCol().readDerivedByIdIdx( Authorization,
+				prevId ));
 			if( prev == null ) {
 				throw new CFLibNullArgumentException( getClass(),
 					S_ProcName,
@@ -1531,14 +1499,14 @@ public class CFBamRamRelationColTable
 			CFBamBuffRelationCol editPrev;
 			classCode = prev.getClassCode();
 			if( classCode == ICFBamRelationCol.CLASS_CODE ) {
-				editPrev = schema.getFactoryRelationCol().newBuff();
+				editPrev = (CFBamBuffRelationCol)(schema.getFactoryRelationCol().newRec());
 			}
 			else {
 				throw new CFLibUnsupportedClassException(getClass(), S_ProcName, "-delete-update-prev-", (Integer)classCode, "Classcode not recognized: " + Integer.toString(classCode));
 			}
 			editPrev.set( prev );
-			editPrev.setOptionalNextId( nextId );
-			if( classCode.equals( "a836" ) ) {
+			editPrev.setOptionalLookupNext(nextId);
+			if( classCode == ICFBamRelationCol.CLASS_CODE ) {
 				schema.getTableRelationCol().updateRelationCol( Authorization, editPrev );
 			}
 			else {
@@ -1549,8 +1517,8 @@ public class CFBamRamRelationColTable
 		CFBamBuffRelationCol next = null;
 		if( ( nextId != null ) )
 		{
-			next = schema.getTableRelationCol().readDerivedByIdIdx( Authorization,
-				nextId );
+			next = (CFBamBuffRelationCol)(schema.getTableRelationCol().readDerivedByIdIdx( Authorization,
+				nextId ));
 			if( next == null ) {
 				throw new CFLibNullArgumentException( getClass(),
 					S_ProcName,
@@ -1560,13 +1528,13 @@ public class CFBamRamRelationColTable
 			CFBamBuffRelationCol editNext;
 			classCode = next.getClassCode();
 			if( classCode == ICFBamRelationCol.CLASS_CODE ) {
-				editNext = schema.getFactoryRelationCol().newBuff();
+				editNext = (CFBamBuffRelationCol)(schema.getFactoryRelationCol().newRec());
 			}
 			else {
 				throw new CFLibUnsupportedClassException(getClass(), S_ProcName, "-delete-update-next-", (Integer)classCode, "Classcode not recognized: " + Integer.toString(classCode));
 			}
 			editNext.set( next );
-			editNext.setOptionalPrevId( prevId );
+			editNext.setOptionalLookupPrev(prevId);
 			if( classCode == ICFBamRelationCol.CLASS_CODE ) {
 				schema.getTableRelationCol().updateRelationCol( Authorization, editNext );
 			}

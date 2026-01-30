@@ -81,6 +81,15 @@ public class CFBamRamPopSubDep3Table
 		schema = argSchema;
 	}
 
+	public CFBamBuffScope ensureRec(ICFBamScope rec) {
+		if (rec == null) {
+			return( null );
+		}
+		else {
+			return ((CFBamRamScopeTable)(schema.getTableScope())).ensureRec(rec);
+		}
+	}
+
 	public ICFBamPopSubDep3 createPopSubDep3( ICFSecAuthorization Authorization,
 		ICFBamPopSubDep3 iBuff )
 	{
@@ -655,7 +664,7 @@ public class CFBamRamPopSubDep3Table
 		ICFBamPopSubDep3 iBuff )
 	{
 		final String S_ProcName = "CFBamRamPopSubDep3Table.deletePopSubDep3() ";
-		CFBamBuffPopSubDep3 Buff = ensureRec(iBuff);
+		CFBamBuffPopSubDep3 Buff = (CFBamBuffPopSubDep3)ensureRec(iBuff);
 		int classCode;
 		CFLibDbKeyHash256 pkey = (CFLibDbKeyHash256)(Buff.getPKey());
 		CFBamBuffPopSubDep3 existing = dictByPKey.get( pkey );

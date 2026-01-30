@@ -115,6 +115,15 @@ public class CFBamRamTableTable
 		schema = argSchema;
 	}
 
+	public CFBamBuffScope ensureRec(ICFBamScope rec) {
+		if (rec == null) {
+			return( null );
+		}
+		else {
+			return ((CFBamRamScopeTable)(schema.getTableScope())).ensureRec(rec);
+		}
+	}
+
 	public ICFBamTable createTable( ICFSecAuthorization Authorization,
 		ICFBamTable iBuff )
 	{
@@ -1118,7 +1127,7 @@ public class CFBamRamTableTable
 		ICFBamTable iBuff )
 	{
 		final String S_ProcName = "CFBamRamTableTable.deleteTable() ";
-		CFBamBuffTable Buff = ensureRec(iBuff);
+		CFBamBuffTable Buff = (CFBamBuffTable)ensureRec(iBuff);
 		int classCode;
 		CFLibDbKeyHash256 pkey = (CFLibDbKeyHash256)(Buff.getPKey());
 		CFBamBuffTable existing = dictByPKey.get( pkey );
@@ -1261,7 +1270,10 @@ public class CFBamRamTableTable
 			throw new CFLibDependentsDetectedException( getClass(),
 				"deleteTable",
 				"Lookup",
+				"Lookup",
 				"ToTable",
+				"ToTable",
+				"Relation",
 				"Relation",
 				pkey );
 		}

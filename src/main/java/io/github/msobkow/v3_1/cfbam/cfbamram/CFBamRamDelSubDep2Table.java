@@ -81,6 +81,15 @@ public class CFBamRamDelSubDep2Table
 		schema = argSchema;
 	}
 
+	public CFBamBuffScope ensureRec(ICFBamScope rec) {
+		if (rec == null) {
+			return( null );
+		}
+		else {
+			return ((CFBamRamScopeTable)(schema.getTableScope())).ensureRec(rec);
+		}
+	}
+
 	public ICFBamDelSubDep2 createDelSubDep2( ICFSecAuthorization Authorization,
 		ICFBamDelSubDep2 iBuff )
 	{
@@ -655,7 +664,7 @@ public class CFBamRamDelSubDep2Table
 		ICFBamDelSubDep2 iBuff )
 	{
 		final String S_ProcName = "CFBamRamDelSubDep2Table.deleteDelSubDep2() ";
-		CFBamBuffDelSubDep2 Buff = ensureRec(iBuff);
+		CFBamBuffDelSubDep2 Buff = (CFBamBuffDelSubDep2)ensureRec(iBuff);
 		int classCode;
 		CFLibDbKeyHash256 pkey = (CFLibDbKeyHash256)(Buff.getPKey());
 		CFBamBuffDelSubDep2 existing = dictByPKey.get( pkey );
