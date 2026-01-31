@@ -86,7 +86,7 @@ public class CFBamRamPopSubDep2Table
 			return( null );
 		}
 		else {
-			return ((CFBamRamScopeTable)(schema.getTableScope())).ensureRec(rec);
+			return ((CFBamRamScopeTable)(schema.getTableScope())).ensureRec((ICFBamScope)rec);
 		}
 	}
 
@@ -554,7 +554,7 @@ public class CFBamRamPopSubDep2Table
 	public ICFBamPopSubDep2 updatePopSubDep2( ICFSecAuthorization Authorization,
 		ICFBamPopSubDep2 iBuff )
 	{
-		CFBamBuffPopSubDep2 Buff = (CFBamBuffPopSubDep2)schema.getTablePopDep().updatePopDep( Authorization,	Buff );
+		CFBamBuffPopSubDep2 Buff = (CFBamBuffPopSubDep2)(schema.getTablePopDep().updatePopDep( Authorization,	iBuff ));
 		CFLibDbKeyHash256 pkey = Buff.getPKey();
 		CFBamBuffPopSubDep2 existing = dictByPKey.get( pkey );
 		if( existing == null ) {

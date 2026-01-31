@@ -104,7 +104,7 @@ public class CFBamRamSchemaRefTable
 			return( null );
 		}
 		else {
-			return ((CFBamRamScopeTable)(schema.getTableScope())).ensureRec(rec);
+			return ((CFBamRamScopeTable)(schema.getTableScope())).ensureRec((ICFBamScope)rec);
 		}
 	}
 
@@ -261,9 +261,7 @@ public class CFBamRamSchemaRefTable
 				schema.getTableSchemaRef().updateSchemaRef( Authorization, tailEdit );
 			}
 			else {
-				throw new CFLibUsageException( getClass(),
-					S_ProcName,
-					"Unrecognized ClassCode " + tailClassCode );
+				throw new CFLibUnsupportedClassException(getClass(), S_ProcName, "-create-table-chain-link-tail-", (Integer)tailClassCode, "Classcode not recognized: " + Integer.toString(tailClassCode));
 			}
 		}
 		if (Buff == null) {
@@ -717,11 +715,11 @@ public class CFBamRamSchemaRefTable
 	 *
 	 *	@return	The refreshed buffer after it has been moved
 	 */
-	public ICFBamSchemaRef moveBuffUp( ICFSecAuthorization Authorization,
+	public ICFBamSchemaRef moveRecUp( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 Id,
 		int revision )
 	{
-		final String S_ProcName = "moveBuffUp";
+		final String S_ProcName = "moveRecUp";
 
 		ICFBamSchemaRef grandprev = null;
 		ICFBamSchemaRef prev = null;
@@ -870,11 +868,11 @@ public class CFBamRamSchemaRefTable
 	 *
 	 *	@return	The refreshed buffer after it has been moved
 	 */
-	public ICFBamSchemaRef moveBuffDown( ICFSecAuthorization Authorization,
+	public ICFBamSchemaRef moveRecDown( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 Id,
 		int revision )
 	{
-		final String S_ProcName = "moveBuffDown";
+		final String S_ProcName = "moveRecDown";
 
 		CFBamBuffSchemaRef prev = null;
 		CFBamBuffSchemaRef cur = null;
@@ -1021,7 +1019,7 @@ public class CFBamRamSchemaRefTable
 	public ICFBamSchemaRef updateSchemaRef( ICFSecAuthorization Authorization,
 		ICFBamSchemaRef iBuff )
 	{
-		CFBamBuffSchemaRef Buff = (CFBamBuffSchemaRef)schema.getTableScope().updateScope( Authorization,	Buff );
+		CFBamBuffSchemaRef Buff = (CFBamBuffSchemaRef)(schema.getTableScope().updateScope( Authorization,	iBuff ));
 		CFLibDbKeyHash256 pkey = Buff.getPKey();
 		CFBamBuffSchemaRef existing = dictByPKey.get( pkey );
 		if( existing == null ) {

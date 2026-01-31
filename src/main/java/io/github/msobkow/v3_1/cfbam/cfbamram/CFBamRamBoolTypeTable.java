@@ -82,7 +82,7 @@ public class CFBamRamBoolTypeTable
 			return( null );
 		}
 		else {
-			return ((CFBamRamValueTable)(schema.getTableValue())).ensureRec(rec);
+			return ((CFBamRamValueTable)(schema.getTableValue())).ensureRec((ICFBamValue)rec);
 		}
 	}
 
@@ -816,9 +816,7 @@ public class CFBamRamBoolTypeTable
 				schema.getTableTableCol().updateTableCol( Authorization, tailEdit );
 			}
 			else {
-				throw new CFLibUsageException( getClass(),
-					S_ProcName,
-					"Unrecognized ClassCode " + tailClassCode );
+				throw new CFLibUnsupportedClassException(getClass(), S_ProcName, "-create-table-chain-link-tail-", (Integer)tailClassCode, "Classcode not recognized: " + Integer.toString(tailClassCode));
 			}
 		}
 		if (Buff == null) {
@@ -1286,11 +1284,11 @@ public class CFBamRamBoolTypeTable
 	 *
 	 *	@return	The refreshed buffer after it has been moved
 	 */
-	public ICFBamBoolType moveBuffUp( ICFSecAuthorization Authorization,
+	public ICFBamBoolType moveRecUp( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 Id,
 		int revision )
 	{
-		final String S_ProcName = "moveBuffUp";
+		final String S_ProcName = "moveRecUp";
 
 		ICFBamValue grandprev = null;
 		ICFBamValue prev = null;
@@ -3959,11 +3957,11 @@ public class CFBamRamBoolTypeTable
 	 *
 	 *	@return	The refreshed buffer after it has been moved
 	 */
-	public ICFBamBoolType moveBuffDown( ICFSecAuthorization Authorization,
+	public ICFBamBoolType moveRecDown( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 Id,
 		int revision )
 	{
-		final String S_ProcName = "moveBuffDown";
+		final String S_ProcName = "moveRecDown";
 
 		CFBamBuffValue prev = null;
 		CFBamBuffValue cur = null;
@@ -6630,7 +6628,7 @@ public class CFBamRamBoolTypeTable
 	public ICFBamBoolType updateBoolType( ICFSecAuthorization Authorization,
 		ICFBamBoolType iBuff )
 	{
-		CFBamBuffBoolType Buff = (CFBamBuffBoolType)schema.getTableBoolDef().updateBoolDef( Authorization,	Buff );
+		CFBamBuffBoolType Buff = (CFBamBuffBoolType)(schema.getTableBoolDef().updateBoolDef( Authorization,	iBuff ));
 		CFLibDbKeyHash256 pkey = Buff.getPKey();
 		CFBamBuffBoolType existing = dictByPKey.get( pkey );
 		if( existing == null ) {

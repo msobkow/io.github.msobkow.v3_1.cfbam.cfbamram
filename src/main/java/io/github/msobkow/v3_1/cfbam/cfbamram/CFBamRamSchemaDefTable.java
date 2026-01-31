@@ -108,7 +108,7 @@ public class CFBamRamSchemaDefTable
 			return( null );
 		}
 		else {
-			return ((CFBamRamScopeTable)(schema.getTableScope())).ensureRec(rec);
+			return ((CFBamRamScopeTable)(schema.getTableScope())).ensureRec((ICFBamScope)rec);
 		}
 	}
 
@@ -773,7 +773,7 @@ public class CFBamRamSchemaDefTable
 	public ICFBamSchemaDef updateSchemaDef( ICFSecAuthorization Authorization,
 		ICFBamSchemaDef iBuff )
 	{
-		CFBamBuffSchemaDef Buff = (CFBamBuffSchemaDef)schema.getTableScope().updateScope( Authorization,	Buff );
+		CFBamBuffSchemaDef Buff = (CFBamBuffSchemaDef)(schema.getTableScope().updateScope( Authorization,	iBuff ));
 		CFLibDbKeyHash256 pkey = Buff.getPKey();
 		CFBamBuffSchemaDef existing = dictByPKey.get( pkey );
 		if( existing == null ) {
@@ -1011,7 +1011,7 @@ public class CFBamRamSchemaDefTable
 					{
 						CFBamBuffTableCol editBuff = (CFBamBuffTableCol)(schema.getTableTableCol().readDerivedByIdIdx( Authorization,
 							buffReferencingTableCols.getRequiredId() ));
-						editBuff.setOptionalDataId( null );
+						editBuff.setRequiredParentDataType((CFLibDbKeyHash256)null);
 						classCode = editBuff.getClassCode();
 						if( classCode == ICFBamTableCol.CLASS_CODE ) {
 							schema.getTableTableCol().updateTableCol( Authorization, editBuff );
@@ -1035,7 +1035,7 @@ public class CFBamRamSchemaDefTable
 					{
 						CFBamBuffRelation editBuff = (CFBamBuffRelation)(schema.getTableRelation().readDerivedByIdIdx( Authorization,
 							buffTableRelation.getRequiredId() ));
-						editBuff.setOptionalNarrowedId( null );
+						editBuff.setOptionalLookupNarrowed((CFLibDbKeyHash256)null);
 						classCode = editBuff.getClassCode();
 						if( classCode == ICFBamRelation.CLASS_CODE ) {
 							schema.getTableRelation().updateRelation( Authorization, editBuff );

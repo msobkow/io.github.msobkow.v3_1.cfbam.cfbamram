@@ -124,7 +124,7 @@ public class CFBamRamParamTable
 		else {
 			int classCode = rec.getClassCode();
 			if (classCode == ICFBamParam.CLASS_CODE) {
-				return( ((CFBamBuffParamDefaultFactory)(schema.getFactoryParam())).ensureRec(rec) );
+				return( ((CFBamBuffParamDefaultFactory)(schema.getFactoryParam())).ensureRec((ICFBamParam)rec) );
 			}
 			else {
 				throw new CFLibUnsupportedClassException(getClass(), "ensureRec", "rec", (Integer)classCode, "Classcode not recognized: " + Integer.toString(classCode));
@@ -801,11 +801,11 @@ public class CFBamRamParamTable
 	 *
 	 *	@return	The refreshed buffer after it has been moved
 	 */
-	public ICFBamParam moveBuffUp( ICFSecAuthorization Authorization,
+	public ICFBamParam moveRecUp( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 Id,
 		int revision )
 	{
-		final String S_ProcName = "moveBuffUp";
+		final String S_ProcName = "moveRecUp";
 
 		ICFBamParam grandprev = null;
 		ICFBamParam prev = null;
@@ -954,11 +954,11 @@ public class CFBamRamParamTable
 	 *
 	 *	@return	The refreshed buffer after it has been moved
 	 */
-	public ICFBamParam moveBuffDown( ICFSecAuthorization Authorization,
+	public ICFBamParam moveRecDown( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 Id,
 		int revision )
 	{
-		final String S_ProcName = "moveBuffDown";
+		final String S_ProcName = "moveRecDown";
 
 		CFBamBuffParam prev = null;
 		CFBamBuffParam cur = null;

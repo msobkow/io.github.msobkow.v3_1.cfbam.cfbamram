@@ -124,7 +124,7 @@ public class CFBamRamIndexColTable
 		else {
 			int classCode = rec.getClassCode();
 			if (classCode == ICFBamIndexCol.CLASS_CODE) {
-				return( ((CFBamBuffIndexColDefaultFactory)(schema.getFactoryIndexCol())).ensureRec(rec) );
+				return( ((CFBamBuffIndexColDefaultFactory)(schema.getFactoryIndexCol())).ensureRec((ICFBamIndexCol)rec) );
 			}
 			else {
 				throw new CFLibUnsupportedClassException(getClass(), "ensureRec", "rec", (Integer)classCode, "Classcode not recognized: " + Integer.toString(classCode));
@@ -799,11 +799,11 @@ public class CFBamRamIndexColTable
 	 *
 	 *	@return	The refreshed buffer after it has been moved
 	 */
-	public ICFBamIndexCol moveBuffUp( ICFSecAuthorization Authorization,
+	public ICFBamIndexCol moveRecUp( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 Id,
 		int revision )
 	{
-		final String S_ProcName = "moveBuffUp";
+		final String S_ProcName = "moveRecUp";
 
 		ICFBamIndexCol grandprev = null;
 		ICFBamIndexCol prev = null;
@@ -952,11 +952,11 @@ public class CFBamRamIndexColTable
 	 *
 	 *	@return	The refreshed buffer after it has been moved
 	 */
-	public ICFBamIndexCol moveBuffDown( ICFSecAuthorization Authorization,
+	public ICFBamIndexCol moveRecDown( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 Id,
 		int revision )
 	{
-		final String S_ProcName = "moveBuffDown";
+		final String S_ProcName = "moveRecDown";
 
 		CFBamBuffIndexCol prev = null;
 		CFBamBuffIndexCol cur = null;

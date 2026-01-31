@@ -84,79 +84,79 @@ public class CFBamRamScopeTable
 		else {
 			int classCode = rec.getClassCode();
 			if (classCode == ICFBamScope.CLASS_CODE) {
-				return( ((CFBamBuffScopeDefaultFactory)(schema.getFactoryScope())).ensureRec(rec) );
+				return( ((CFBamBuffScopeDefaultFactory)(schema.getFactoryScope())).ensureRec((ICFBamScope)rec) );
 			}
 			else if (classCode == ICFBamSchemaDef.CLASS_CODE) {
-				return( ((CFBamBuffSchemaDefDefaultFactory)(schema.getFactorySchemaDef())).ensureRec(rec) );
+				return( ((CFBamBuffSchemaDefDefaultFactory)(schema.getFactorySchemaDef())).ensureRec((ICFBamSchemaDef)rec) );
 			}
 			else if (classCode == ICFBamSchemaRef.CLASS_CODE) {
-				return( ((CFBamBuffSchemaRefDefaultFactory)(schema.getFactorySchemaRef())).ensureRec(rec) );
+				return( ((CFBamBuffSchemaRefDefaultFactory)(schema.getFactorySchemaRef())).ensureRec((ICFBamSchemaRef)rec) );
 			}
 			else if (classCode == ICFBamServerMethod.CLASS_CODE) {
-				return( ((CFBamBuffServerMethodDefaultFactory)(schema.getFactoryServerMethod())).ensureRec(rec) );
+				return( ((CFBamBuffServerMethodDefaultFactory)(schema.getFactoryServerMethod())).ensureRec((ICFBamServerMethod)rec) );
 			}
 			else if (classCode == ICFBamServerObjFunc.CLASS_CODE) {
-				return( ((CFBamBuffServerObjFuncDefaultFactory)(schema.getFactoryServerObjFunc())).ensureRec(rec) );
+				return( ((CFBamBuffServerObjFuncDefaultFactory)(schema.getFactoryServerObjFunc())).ensureRec((ICFBamServerObjFunc)rec) );
 			}
 			else if (classCode == ICFBamServerProc.CLASS_CODE) {
-				return( ((CFBamBuffServerProcDefaultFactory)(schema.getFactoryServerProc())).ensureRec(rec) );
+				return( ((CFBamBuffServerProcDefaultFactory)(schema.getFactoryServerProc())).ensureRec((ICFBamServerProc)rec) );
 			}
 			else if (classCode == ICFBamServerListFunc.CLASS_CODE) {
-				return( ((CFBamBuffServerListFuncDefaultFactory)(schema.getFactoryServerListFunc())).ensureRec(rec) );
+				return( ((CFBamBuffServerListFuncDefaultFactory)(schema.getFactoryServerListFunc())).ensureRec((ICFBamServerListFunc)rec) );
 			}
 			else if (classCode == ICFBamTable.CLASS_CODE) {
-				return( ((CFBamBuffTableDefaultFactory)(schema.getFactoryTable())).ensureRec(rec) );
+				return( ((CFBamBuffTableDefaultFactory)(schema.getFactoryTable())).ensureRec((ICFBamTable)rec) );
 			}
 			else if (classCode == ICFBamClearDep.CLASS_CODE) {
-				return( ((CFBamBuffClearDepDefaultFactory)(schema.getFactoryClearDep())).ensureRec(rec) );
+				return( ((CFBamBuffClearDepDefaultFactory)(schema.getFactoryClearDep())).ensureRec((ICFBamClearDep)rec) );
 			}
 			else if (classCode == ICFBamClearSubDep1.CLASS_CODE) {
-				return( ((CFBamBuffClearSubDep1DefaultFactory)(schema.getFactoryClearSubDep1())).ensureRec(rec) );
+				return( ((CFBamBuffClearSubDep1DefaultFactory)(schema.getFactoryClearSubDep1())).ensureRec((ICFBamClearSubDep1)rec) );
 			}
 			else if (classCode == ICFBamClearSubDep2.CLASS_CODE) {
-				return( ((CFBamBuffClearSubDep2DefaultFactory)(schema.getFactoryClearSubDep2())).ensureRec(rec) );
+				return( ((CFBamBuffClearSubDep2DefaultFactory)(schema.getFactoryClearSubDep2())).ensureRec((ICFBamClearSubDep2)rec) );
 			}
 			else if (classCode == ICFBamClearSubDep3.CLASS_CODE) {
-				return( ((CFBamBuffClearSubDep3DefaultFactory)(schema.getFactoryClearSubDep3())).ensureRec(rec) );
+				return( ((CFBamBuffClearSubDep3DefaultFactory)(schema.getFactoryClearSubDep3())).ensureRec((ICFBamClearSubDep3)rec) );
 			}
 			else if (classCode == ICFBamClearTopDep.CLASS_CODE) {
-				return( ((CFBamBuffClearTopDepDefaultFactory)(schema.getFactoryClearTopDep())).ensureRec(rec) );
+				return( ((CFBamBuffClearTopDepDefaultFactory)(schema.getFactoryClearTopDep())).ensureRec((ICFBamClearTopDep)rec) );
 			}
 			else if (classCode == ICFBamDelDep.CLASS_CODE) {
-				return( ((CFBamBuffDelDepDefaultFactory)(schema.getFactoryDelDep())).ensureRec(rec) );
+				return( ((CFBamBuffDelDepDefaultFactory)(schema.getFactoryDelDep())).ensureRec((ICFBamDelDep)rec) );
 			}
 			else if (classCode == ICFBamDelSubDep1.CLASS_CODE) {
-				return( ((CFBamBuffDelSubDep1DefaultFactory)(schema.getFactoryDelSubDep1())).ensureRec(rec) );
+				return( ((CFBamBuffDelSubDep1DefaultFactory)(schema.getFactoryDelSubDep1())).ensureRec((ICFBamDelSubDep1)rec) );
 			}
 			else if (classCode == ICFBamDelSubDep2.CLASS_CODE) {
-				return( ((CFBamBuffDelSubDep2DefaultFactory)(schema.getFactoryDelSubDep2())).ensureRec(rec) );
+				return( ((CFBamBuffDelSubDep2DefaultFactory)(schema.getFactoryDelSubDep2())).ensureRec((ICFBamDelSubDep2)rec) );
 			}
 			else if (classCode == ICFBamDelSubDep3.CLASS_CODE) {
-				return( ((CFBamBuffDelSubDep3DefaultFactory)(schema.getFactoryDelSubDep3())).ensureRec(rec) );
+				return( ((CFBamBuffDelSubDep3DefaultFactory)(schema.getFactoryDelSubDep3())).ensureRec((ICFBamDelSubDep3)rec) );
 			}
 			else if (classCode == ICFBamDelTopDep.CLASS_CODE) {
-				return( ((CFBamBuffDelTopDepDefaultFactory)(schema.getFactoryDelTopDep())).ensureRec(rec) );
+				return( ((CFBamBuffDelTopDepDefaultFactory)(schema.getFactoryDelTopDep())).ensureRec((ICFBamDelTopDep)rec) );
 			}
 			else if (classCode == ICFBamIndex.CLASS_CODE) {
-				return( ((CFBamBuffIndexDefaultFactory)(schema.getFactoryIndex())).ensureRec(rec) );
+				return( ((CFBamBuffIndexDefaultFactory)(schema.getFactoryIndex())).ensureRec((ICFBamIndex)rec) );
 			}
 			else if (classCode == ICFBamPopDep.CLASS_CODE) {
-				return( ((CFBamBuffPopDepDefaultFactory)(schema.getFactoryPopDep())).ensureRec(rec) );
+				return( ((CFBamBuffPopDepDefaultFactory)(schema.getFactoryPopDep())).ensureRec((ICFBamPopDep)rec) );
 			}
 			else if (classCode == ICFBamPopSubDep1.CLASS_CODE) {
-				return( ((CFBamBuffPopSubDep1DefaultFactory)(schema.getFactoryPopSubDep1())).ensureRec(rec) );
+				return( ((CFBamBuffPopSubDep1DefaultFactory)(schema.getFactoryPopSubDep1())).ensureRec((ICFBamPopSubDep1)rec) );
 			}
 			else if (classCode == ICFBamPopSubDep2.CLASS_CODE) {
-				return( ((CFBamBuffPopSubDep2DefaultFactory)(schema.getFactoryPopSubDep2())).ensureRec(rec) );
+				return( ((CFBamBuffPopSubDep2DefaultFactory)(schema.getFactoryPopSubDep2())).ensureRec((ICFBamPopSubDep2)rec) );
 			}
 			else if (classCode == ICFBamPopSubDep3.CLASS_CODE) {
-				return( ((CFBamBuffPopSubDep3DefaultFactory)(schema.getFactoryPopSubDep3())).ensureRec(rec) );
+				return( ((CFBamBuffPopSubDep3DefaultFactory)(schema.getFactoryPopSubDep3())).ensureRec((ICFBamPopSubDep3)rec) );
 			}
 			else if (classCode == ICFBamPopTopDep.CLASS_CODE) {
-				return( ((CFBamBuffPopTopDepDefaultFactory)(schema.getFactoryPopTopDep())).ensureRec(rec) );
+				return( ((CFBamBuffPopTopDepDefaultFactory)(schema.getFactoryPopTopDep())).ensureRec((ICFBamPopTopDep)rec) );
 			}
 			else if (classCode == ICFBamRelation.CLASS_CODE) {
-				return( ((CFBamBuffRelationDefaultFactory)(schema.getFactoryRelation())).ensureRec(rec) );
+				return( ((CFBamBuffRelationDefaultFactory)(schema.getFactoryRelation())).ensureRec((ICFBamRelation)rec) );
 			}
 			else {
 				throw new CFLibUnsupportedClassException(getClass(), "ensureRec", "rec", (Integer)classCode, "Classcode not recognized: " + Integer.toString(classCode));

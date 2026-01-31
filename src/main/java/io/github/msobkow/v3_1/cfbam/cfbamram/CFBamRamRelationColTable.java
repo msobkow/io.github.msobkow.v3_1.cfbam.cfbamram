@@ -130,7 +130,7 @@ public class CFBamRamRelationColTable
 		else {
 			int classCode = rec.getClassCode();
 			if (classCode == ICFBamRelationCol.CLASS_CODE) {
-				return( ((CFBamBuffRelationColDefaultFactory)(schema.getFactoryRelationCol())).ensureRec(rec) );
+				return( ((CFBamBuffRelationColDefaultFactory)(schema.getFactoryRelationCol())).ensureRec((ICFBamRelationCol)rec) );
 			}
 			else {
 				throw new CFLibUnsupportedClassException(getClass(), "ensureRec", "rec", (Integer)classCode, "Classcode not recognized: " + Integer.toString(classCode));
@@ -882,11 +882,11 @@ public class CFBamRamRelationColTable
 	 *
 	 *	@return	The refreshed buffer after it has been moved
 	 */
-	public ICFBamRelationCol moveBuffUp( ICFSecAuthorization Authorization,
+	public ICFBamRelationCol moveRecUp( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 Id,
 		int revision )
 	{
-		final String S_ProcName = "moveBuffUp";
+		final String S_ProcName = "moveRecUp";
 
 		ICFBamRelationCol grandprev = null;
 		ICFBamRelationCol prev = null;
@@ -1035,11 +1035,11 @@ public class CFBamRamRelationColTable
 	 *
 	 *	@return	The refreshed buffer after it has been moved
 	 */
-	public ICFBamRelationCol moveBuffDown( ICFSecAuthorization Authorization,
+	public ICFBamRelationCol moveRecDown( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 Id,
 		int revision )
 	{
-		final String S_ProcName = "moveBuffDown";
+		final String S_ProcName = "moveRecDown";
 
 		CFBamBuffRelationCol prev = null;
 		CFBamBuffRelationCol cur = null;

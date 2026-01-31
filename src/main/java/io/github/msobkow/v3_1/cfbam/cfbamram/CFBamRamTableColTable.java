@@ -88,7 +88,7 @@ public class CFBamRamTableColTable
 			return( null );
 		}
 		else {
-			return ((CFBamRamValueTable)(schema.getTableValue())).ensureRec(rec);
+			return ((CFBamRamValueTable)(schema.getTableValue())).ensureRec((ICFBamValue)rec);
 		}
 	}
 
@@ -835,9 +835,7 @@ public class CFBamRamTableColTable
 				schema.getTableTableCol().updateTableCol( Authorization, tailEdit );
 			}
 			else {
-				throw new CFLibUsageException( getClass(),
-					S_ProcName,
-					"Unrecognized ClassCode " + tailClassCode );
+				throw new CFLibUnsupportedClassException(getClass(), S_ProcName, "-create-table-chain-link-tail-", (Integer)tailClassCode, "Classcode not recognized: " + Integer.toString(tailClassCode));
 			}
 		}
 		if (Buff == null) {
@@ -1368,11 +1366,11 @@ public class CFBamRamTableColTable
 	 *
 	 *	@return	The refreshed buffer after it has been moved
 	 */
-	public ICFBamTableCol moveBuffUp( ICFSecAuthorization Authorization,
+	public ICFBamTableCol moveRecUp( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 Id,
 		int revision )
 	{
-		final String S_ProcName = "moveBuffUp";
+		final String S_ProcName = "moveRecUp";
 
 		ICFBamValue grandprev = null;
 		ICFBamValue prev = null;
@@ -4041,11 +4039,11 @@ public class CFBamRamTableColTable
 	 *
 	 *	@return	The refreshed buffer after it has been moved
 	 */
-	public ICFBamTableCol moveBuffDown( ICFSecAuthorization Authorization,
+	public ICFBamTableCol moveRecDown( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 Id,
 		int revision )
 	{
-		final String S_ProcName = "moveBuffDown";
+		final String S_ProcName = "moveRecDown";
 
 		CFBamBuffValue prev = null;
 		CFBamBuffValue cur = null;
@@ -6712,7 +6710,7 @@ public class CFBamRamTableColTable
 	public ICFBamTableCol updateTableCol( ICFSecAuthorization Authorization,
 		ICFBamTableCol iBuff )
 	{
-		CFBamBuffTableCol Buff = (CFBamBuffTableCol)schema.getTableValue().updateValue( Authorization,	Buff );
+		CFBamBuffTableCol Buff = (CFBamBuffTableCol)(schema.getTableValue().updateValue( Authorization,	iBuff ));
 		CFLibDbKeyHash256 pkey = Buff.getPKey();
 		CFBamBuffTableCol existing = dictByPKey.get( pkey );
 		if( existing == null ) {

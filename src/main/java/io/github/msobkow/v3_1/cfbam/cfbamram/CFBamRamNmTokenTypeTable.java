@@ -82,7 +82,7 @@ public class CFBamRamNmTokenTypeTable
 			return( null );
 		}
 		else {
-			return ((CFBamRamValueTable)(schema.getTableValue())).ensureRec(rec);
+			return ((CFBamRamValueTable)(schema.getTableValue())).ensureRec((ICFBamValue)rec);
 		}
 	}
 
@@ -816,9 +816,7 @@ public class CFBamRamNmTokenTypeTable
 				schema.getTableTableCol().updateTableCol( Authorization, tailEdit );
 			}
 			else {
-				throw new CFLibUsageException( getClass(),
-					S_ProcName,
-					"Unrecognized ClassCode " + tailClassCode );
+				throw new CFLibUnsupportedClassException(getClass(), S_ProcName, "-create-table-chain-link-tail-", (Integer)tailClassCode, "Classcode not recognized: " + Integer.toString(tailClassCode));
 			}
 		}
 		if (Buff == null) {
@@ -1286,11 +1284,11 @@ public class CFBamRamNmTokenTypeTable
 	 *
 	 *	@return	The refreshed buffer after it has been moved
 	 */
-	public ICFBamNmTokenType moveBuffUp( ICFSecAuthorization Authorization,
+	public ICFBamNmTokenType moveRecUp( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 Id,
 		int revision )
 	{
-		final String S_ProcName = "moveBuffUp";
+		final String S_ProcName = "moveRecUp";
 
 		ICFBamValue grandprev = null;
 		ICFBamValue prev = null;
@@ -3959,11 +3957,11 @@ public class CFBamRamNmTokenTypeTable
 	 *
 	 *	@return	The refreshed buffer after it has been moved
 	 */
-	public ICFBamNmTokenType moveBuffDown( ICFSecAuthorization Authorization,
+	public ICFBamNmTokenType moveRecDown( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 Id,
 		int revision )
 	{
-		final String S_ProcName = "moveBuffDown";
+		final String S_ProcName = "moveRecDown";
 
 		CFBamBuffValue prev = null;
 		CFBamBuffValue cur = null;
@@ -6630,7 +6628,7 @@ public class CFBamRamNmTokenTypeTable
 	public ICFBamNmTokenType updateNmTokenType( ICFSecAuthorization Authorization,
 		ICFBamNmTokenType iBuff )
 	{
-		CFBamBuffNmTokenType Buff = (CFBamBuffNmTokenType)schema.getTableNmTokenDef().updateNmTokenDef( Authorization,	Buff );
+		CFBamBuffNmTokenType Buff = (CFBamBuffNmTokenType)(schema.getTableNmTokenDef().updateNmTokenDef( Authorization,	iBuff ));
 		CFLibDbKeyHash256 pkey = Buff.getPKey();
 		CFBamBuffNmTokenType existing = dictByPKey.get( pkey );
 		if( existing == null ) {

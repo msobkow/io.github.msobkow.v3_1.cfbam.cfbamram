@@ -92,7 +92,7 @@ public class CFBamRamServerMethodTable
 			return( null );
 		}
 		else {
-			return ((CFBamRamScopeTable)(schema.getTableScope())).ensureRec(rec);
+			return ((CFBamRamScopeTable)(schema.getTableScope())).ensureRec((ICFBamScope)rec);
 		}
 	}
 
@@ -535,7 +535,7 @@ public class CFBamRamServerMethodTable
 	public ICFBamServerMethod updateServerMethod( ICFSecAuthorization Authorization,
 		ICFBamServerMethod iBuff )
 	{
-		CFBamBuffServerMethod Buff = (CFBamBuffServerMethod)schema.getTableScope().updateScope( Authorization,	Buff );
+		CFBamBuffServerMethod Buff = (CFBamBuffServerMethod)(schema.getTableScope().updateScope( Authorization,	iBuff ));
 		CFLibDbKeyHash256 pkey = Buff.getPKey();
 		CFBamBuffServerMethod existing = dictByPKey.get( pkey );
 		if( existing == null ) {

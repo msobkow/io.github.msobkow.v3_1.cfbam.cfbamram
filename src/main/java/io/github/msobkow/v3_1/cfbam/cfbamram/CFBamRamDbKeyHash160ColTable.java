@@ -82,7 +82,7 @@ public class CFBamRamDbKeyHash160ColTable
 			return( null );
 		}
 		else {
-			return ((CFBamRamValueTable)(schema.getTableValue())).ensureRec(rec);
+			return ((CFBamRamValueTable)(schema.getTableValue())).ensureRec((ICFBamValue)rec);
 		}
 	}
 
@@ -816,9 +816,7 @@ public class CFBamRamDbKeyHash160ColTable
 				schema.getTableTableCol().updateTableCol( Authorization, tailEdit );
 			}
 			else {
-				throw new CFLibUsageException( getClass(),
-					S_ProcName,
-					"Unrecognized ClassCode " + tailClassCode );
+				throw new CFLibUnsupportedClassException(getClass(), S_ProcName, "-create-table-chain-link-tail-", (Integer)tailClassCode, "Classcode not recognized: " + Integer.toString(tailClassCode));
 			}
 		}
 		if (Buff == null) {
@@ -1286,11 +1284,11 @@ public class CFBamRamDbKeyHash160ColTable
 	 *
 	 *	@return	The refreshed buffer after it has been moved
 	 */
-	public ICFBamDbKeyHash160Col moveBuffUp( ICFSecAuthorization Authorization,
+	public ICFBamDbKeyHash160Col moveRecUp( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 Id,
 		int revision )
 	{
-		final String S_ProcName = "moveBuffUp";
+		final String S_ProcName = "moveRecUp";
 
 		ICFBamValue grandprev = null;
 		ICFBamValue prev = null;
@@ -3959,11 +3957,11 @@ public class CFBamRamDbKeyHash160ColTable
 	 *
 	 *	@return	The refreshed buffer after it has been moved
 	 */
-	public ICFBamDbKeyHash160Col moveBuffDown( ICFSecAuthorization Authorization,
+	public ICFBamDbKeyHash160Col moveRecDown( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 Id,
 		int revision )
 	{
-		final String S_ProcName = "moveBuffDown";
+		final String S_ProcName = "moveRecDown";
 
 		CFBamBuffValue prev = null;
 		CFBamBuffValue cur = null;
@@ -6630,7 +6628,7 @@ public class CFBamRamDbKeyHash160ColTable
 	public ICFBamDbKeyHash160Col updateDbKeyHash160Col( ICFSecAuthorization Authorization,
 		ICFBamDbKeyHash160Col iBuff )
 	{
-		CFBamBuffDbKeyHash160Col Buff = (CFBamBuffDbKeyHash160Col)schema.getTableDbKeyHash160Def().updateDbKeyHash160Def( Authorization,	Buff );
+		CFBamBuffDbKeyHash160Col Buff = (CFBamBuffDbKeyHash160Col)(schema.getTableDbKeyHash160Def().updateDbKeyHash160Def( Authorization,	iBuff ));
 		CFLibDbKeyHash256 pkey = Buff.getPKey();
 		CFBamBuffDbKeyHash160Col existing = dictByPKey.get( pkey );
 		if( existing == null ) {

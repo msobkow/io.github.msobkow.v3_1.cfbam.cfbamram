@@ -120,7 +120,7 @@ public class CFBamRamTableTable
 			return( null );
 		}
 		else {
-			return ((CFBamRamScopeTable)(schema.getTableScope())).ensureRec(rec);
+			return ((CFBamRamScopeTable)(schema.getTableScope())).ensureRec((ICFBamScope)rec);
 		}
 	}
 
@@ -901,7 +901,7 @@ public class CFBamRamTableTable
 	public ICFBamTable updateTable( ICFSecAuthorization Authorization,
 		ICFBamTable iBuff )
 	{
-		CFBamBuffTable Buff = (CFBamBuffTable)schema.getTableScope().updateScope( Authorization,	Buff );
+		CFBamBuffTable Buff = (CFBamBuffTable)(schema.getTableScope().updateScope( Authorization,	iBuff ));
 		CFLibDbKeyHash256 pkey = Buff.getPKey();
 		CFBamBuffTable existing = dictByPKey.get( pkey );
 		if( existing == null ) {
@@ -1143,7 +1143,7 @@ public class CFBamRamTableTable
 					{
 						CFBamBuffTable editBuff = (CFBamBuffTable)(schema.getTableTable().readDerivedByIdIdx( Authorization,
 						existing.getRequiredId() ));
-						editBuff.setOptionalLookupPrimaryIndex(null);
+						editBuff.setOptionalLookupPrimaryIndex((CFLibDbKeyHash256)null);
 						classCode = editBuff.getClassCode();
 						if( classCode == ICFBamTable.CLASS_CODE ) {
 							schema.getTableTable().updateTable( Authorization, editBuff );
@@ -1153,7 +1153,10 @@ public class CFBamRamTableTable
 						}
 					}
 		CFBamBuffTable editSubobj = (CFBamBuffTable)(schema.getTableTable().readDerivedByIdIdx( Authorization,
-			existing.getRequiredId() ));editSubobj.setOptionalLookupLookupIndex(null);editSubobj.setOptionalLookupAltIndex(null);editSubobj.setOptionalLookupPrimaryIndex(null);
+			existing.getRequiredId() ));
+			editSubobj.setOptionalLookupLookupIndex((CFLibDbKeyHash256)null);
+			editSubobj.setOptionalLookupAltIndex((CFLibDbKeyHash256)null);
+			editSubobj.setOptionalLookupPrimaryIndex((CFLibDbKeyHash256)null);
 		classCode = editSubobj.getClassCode();
 		if( classCode == ICFBamTable.CLASS_CODE ) {
 			schema.getTableTable().updateTable( Authorization, editSubobj );

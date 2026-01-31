@@ -106,7 +106,7 @@ public class CFBamRamEnumTagTable
 		else {
 			int classCode = rec.getClassCode();
 			if (classCode == ICFBamEnumTag.CLASS_CODE) {
-				return( ((CFBamBuffEnumTagDefaultFactory)(schema.getFactoryEnumTag())).ensureRec(rec) );
+				return( ((CFBamBuffEnumTagDefaultFactory)(schema.getFactoryEnumTag())).ensureRec((ICFBamEnumTag)rec) );
 			}
 			else {
 				throw new CFLibUnsupportedClassException(getClass(), "ensureRec", "rec", (Integer)classCode, "Classcode not recognized: " + Integer.toString(classCode));
@@ -580,11 +580,11 @@ public class CFBamRamEnumTagTable
 	 *
 	 *	@return	The refreshed buffer after it has been moved
 	 */
-	public ICFBamEnumTag moveBuffUp( ICFSecAuthorization Authorization,
+	public ICFBamEnumTag moveRecUp( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 Id,
 		int revision )
 	{
-		final String S_ProcName = "moveBuffUp";
+		final String S_ProcName = "moveRecUp";
 
 		ICFBamEnumTag grandprev = null;
 		ICFBamEnumTag prev = null;
@@ -733,11 +733,11 @@ public class CFBamRamEnumTagTable
 	 *
 	 *	@return	The refreshed buffer after it has been moved
 	 */
-	public ICFBamEnumTag moveBuffDown( ICFSecAuthorization Authorization,
+	public ICFBamEnumTag moveRecDown( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 Id,
 		int revision )
 	{
-		final String S_ProcName = "moveBuffDown";
+		final String S_ProcName = "moveRecDown";
 
 		CFBamBuffEnumTag prev = null;
 		CFBamBuffEnumTag cur = null;

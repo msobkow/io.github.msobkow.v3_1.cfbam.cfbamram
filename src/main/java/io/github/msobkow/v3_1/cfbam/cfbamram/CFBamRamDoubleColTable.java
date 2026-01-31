@@ -82,7 +82,7 @@ public class CFBamRamDoubleColTable
 			return( null );
 		}
 		else {
-			return ((CFBamRamValueTable)(schema.getTableValue())).ensureRec(rec);
+			return ((CFBamRamValueTable)(schema.getTableValue())).ensureRec((ICFBamValue)rec);
 		}
 	}
 
@@ -816,9 +816,7 @@ public class CFBamRamDoubleColTable
 				schema.getTableTableCol().updateTableCol( Authorization, tailEdit );
 			}
 			else {
-				throw new CFLibUsageException( getClass(),
-					S_ProcName,
-					"Unrecognized ClassCode " + tailClassCode );
+				throw new CFLibUnsupportedClassException(getClass(), S_ProcName, "-create-table-chain-link-tail-", (Integer)tailClassCode, "Classcode not recognized: " + Integer.toString(tailClassCode));
 			}
 		}
 		if (Buff == null) {
@@ -1286,11 +1284,11 @@ public class CFBamRamDoubleColTable
 	 *
 	 *	@return	The refreshed buffer after it has been moved
 	 */
-	public ICFBamDoubleCol moveBuffUp( ICFSecAuthorization Authorization,
+	public ICFBamDoubleCol moveRecUp( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 Id,
 		int revision )
 	{
-		final String S_ProcName = "moveBuffUp";
+		final String S_ProcName = "moveRecUp";
 
 		ICFBamValue grandprev = null;
 		ICFBamValue prev = null;
@@ -3959,11 +3957,11 @@ public class CFBamRamDoubleColTable
 	 *
 	 *	@return	The refreshed buffer after it has been moved
 	 */
-	public ICFBamDoubleCol moveBuffDown( ICFSecAuthorization Authorization,
+	public ICFBamDoubleCol moveRecDown( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 Id,
 		int revision )
 	{
-		final String S_ProcName = "moveBuffDown";
+		final String S_ProcName = "moveRecDown";
 
 		CFBamBuffValue prev = null;
 		CFBamBuffValue cur = null;
@@ -6630,7 +6628,7 @@ public class CFBamRamDoubleColTable
 	public ICFBamDoubleCol updateDoubleCol( ICFSecAuthorization Authorization,
 		ICFBamDoubleCol iBuff )
 	{
-		CFBamBuffDoubleCol Buff = (CFBamBuffDoubleCol)schema.getTableDoubleDef().updateDoubleDef( Authorization,	Buff );
+		CFBamBuffDoubleCol Buff = (CFBamBuffDoubleCol)(schema.getTableDoubleDef().updateDoubleDef( Authorization,	iBuff ));
 		CFLibDbKeyHash256 pkey = Buff.getPKey();
 		CFBamBuffDoubleCol existing = dictByPKey.get( pkey );
 		if( existing == null ) {

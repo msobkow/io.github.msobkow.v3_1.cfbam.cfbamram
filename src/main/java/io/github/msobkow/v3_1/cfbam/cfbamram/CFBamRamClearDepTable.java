@@ -88,7 +88,7 @@ public class CFBamRamClearDepTable
 			return( null );
 		}
 		else {
-			return ((CFBamRamScopeTable)(schema.getTableScope())).ensureRec(rec);
+			return ((CFBamRamScopeTable)(schema.getTableScope())).ensureRec((ICFBamScope)rec);
 		}
 	}
 
@@ -487,7 +487,7 @@ public class CFBamRamClearDepTable
 	public ICFBamClearDep updateClearDep( ICFSecAuthorization Authorization,
 		ICFBamClearDep iBuff )
 	{
-		CFBamBuffClearDep Buff = (CFBamBuffClearDep)schema.getTableScope().updateScope( Authorization,	Buff );
+		CFBamBuffClearDep Buff = (CFBamBuffClearDep)(schema.getTableScope().updateScope( Authorization,	iBuff ));
 		CFLibDbKeyHash256 pkey = Buff.getPKey();
 		CFBamBuffClearDep existing = dictByPKey.get( pkey );
 		if( existing == null ) {

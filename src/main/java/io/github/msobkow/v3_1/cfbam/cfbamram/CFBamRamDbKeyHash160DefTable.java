@@ -76,7 +76,7 @@ public class CFBamRamDbKeyHash160DefTable
 			return( null );
 		}
 		else {
-			return ((CFBamRamValueTable)(schema.getTableValue())).ensureRec(rec);
+			return ((CFBamRamValueTable)(schema.getTableValue())).ensureRec((ICFBamValue)rec);
 		}
 	}
 
@@ -538,11 +538,11 @@ public class CFBamRamDbKeyHash160DefTable
 	 *
 	 *	@return	The refreshed buffer after it has been moved
 	 */
-	public ICFBamDbKeyHash160Def moveBuffUp( ICFSecAuthorization Authorization,
+	public ICFBamDbKeyHash160Def moveRecUp( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 Id,
 		int revision )
 	{
-		final String S_ProcName = "moveBuffUp";
+		final String S_ProcName = "moveRecUp";
 
 		ICFBamValue grandprev = null;
 		ICFBamValue prev = null;
@@ -3211,11 +3211,11 @@ public class CFBamRamDbKeyHash160DefTable
 	 *
 	 *	@return	The refreshed buffer after it has been moved
 	 */
-	public ICFBamDbKeyHash160Def moveBuffDown( ICFSecAuthorization Authorization,
+	public ICFBamDbKeyHash160Def moveRecDown( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 Id,
 		int revision )
 	{
-		final String S_ProcName = "moveBuffDown";
+		final String S_ProcName = "moveRecDown";
 
 		CFBamBuffValue prev = null;
 		CFBamBuffValue cur = null;
@@ -5882,7 +5882,7 @@ public class CFBamRamDbKeyHash160DefTable
 	public ICFBamDbKeyHash160Def updateDbKeyHash160Def( ICFSecAuthorization Authorization,
 		ICFBamDbKeyHash160Def iBuff )
 	{
-		CFBamBuffDbKeyHash160Def Buff = (CFBamBuffDbKeyHash160Def)schema.getTableAtom().updateAtom( Authorization,	Buff );
+		CFBamBuffDbKeyHash160Def Buff = (CFBamBuffDbKeyHash160Def)(schema.getTableAtom().updateAtom( Authorization,	iBuff ));
 		CFLibDbKeyHash256 pkey = Buff.getPKey();
 		CFBamBuffDbKeyHash160Def existing = dictByPKey.get( pkey );
 		if( existing == null ) {

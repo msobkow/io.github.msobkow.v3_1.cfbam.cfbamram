@@ -98,7 +98,7 @@ public class CFBamRamClearTopDepTable
 			return( null );
 		}
 		else {
-			return ((CFBamRamScopeTable)(schema.getTableScope())).ensureRec(rec);
+			return ((CFBamRamScopeTable)(schema.getTableScope())).ensureRec((ICFBamScope)rec);
 		}
 	}
 
@@ -242,9 +242,7 @@ public class CFBamRamClearTopDepTable
 				schema.getTableClearTopDep().updateClearTopDep( Authorization, tailEdit );
 			}
 			else {
-				throw new CFLibUsageException( getClass(),
-					S_ProcName,
-					"Unrecognized ClassCode " + tailClassCode );
+				throw new CFLibUnsupportedClassException(getClass(), S_ProcName, "-create-table-chain-link-tail-", (Integer)tailClassCode, "Classcode not recognized: " + Integer.toString(tailClassCode));
 			}
 		}
 		if (Buff == null) {
@@ -751,11 +749,11 @@ public class CFBamRamClearTopDepTable
 	 *
 	 *	@return	The refreshed buffer after it has been moved
 	 */
-	public ICFBamClearTopDep moveBuffUp( ICFSecAuthorization Authorization,
+	public ICFBamClearTopDep moveRecUp( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 Id,
 		int revision )
 	{
-		final String S_ProcName = "moveBuffUp";
+		final String S_ProcName = "moveRecUp";
 
 		ICFBamClearTopDep grandprev = null;
 		ICFBamClearTopDep prev = null;
@@ -904,11 +902,11 @@ public class CFBamRamClearTopDepTable
 	 *
 	 *	@return	The refreshed buffer after it has been moved
 	 */
-	public ICFBamClearTopDep moveBuffDown( ICFSecAuthorization Authorization,
+	public ICFBamClearTopDep moveRecDown( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 Id,
 		int revision )
 	{
-		final String S_ProcName = "moveBuffDown";
+		final String S_ProcName = "moveRecDown";
 
 		CFBamBuffClearTopDep prev = null;
 		CFBamBuffClearTopDep cur = null;
@@ -1055,7 +1053,7 @@ public class CFBamRamClearTopDepTable
 	public ICFBamClearTopDep updateClearTopDep( ICFSecAuthorization Authorization,
 		ICFBamClearTopDep iBuff )
 	{
-		CFBamBuffClearTopDep Buff = (CFBamBuffClearTopDep)schema.getTableClearDep().updateClearDep( Authorization,	Buff );
+		CFBamBuffClearTopDep Buff = (CFBamBuffClearTopDep)(schema.getTableClearDep().updateClearDep( Authorization,	iBuff ));
 		CFLibDbKeyHash256 pkey = Buff.getPKey();
 		CFBamBuffClearTopDep existing = dictByPKey.get( pkey );
 		if( existing == null ) {

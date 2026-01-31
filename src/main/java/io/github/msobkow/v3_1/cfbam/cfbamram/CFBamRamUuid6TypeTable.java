@@ -82,7 +82,7 @@ public class CFBamRamUuid6TypeTable
 			return( null );
 		}
 		else {
-			return ((CFBamRamValueTable)(schema.getTableValue())).ensureRec(rec);
+			return ((CFBamRamValueTable)(schema.getTableValue())).ensureRec((ICFBamValue)rec);
 		}
 	}
 
@@ -816,9 +816,7 @@ public class CFBamRamUuid6TypeTable
 				schema.getTableTableCol().updateTableCol( Authorization, tailEdit );
 			}
 			else {
-				throw new CFLibUsageException( getClass(),
-					S_ProcName,
-					"Unrecognized ClassCode " + tailClassCode );
+				throw new CFLibUnsupportedClassException(getClass(), S_ProcName, "-create-table-chain-link-tail-", (Integer)tailClassCode, "Classcode not recognized: " + Integer.toString(tailClassCode));
 			}
 		}
 		if (Buff == null) {
@@ -1291,11 +1289,11 @@ public class CFBamRamUuid6TypeTable
 	 *
 	 *	@return	The refreshed buffer after it has been moved
 	 */
-	public ICFBamUuid6Type moveBuffUp( ICFSecAuthorization Authorization,
+	public ICFBamUuid6Type moveRecUp( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 Id,
 		int revision )
 	{
-		final String S_ProcName = "moveBuffUp";
+		final String S_ProcName = "moveRecUp";
 
 		ICFBamValue grandprev = null;
 		ICFBamValue prev = null;
@@ -3964,11 +3962,11 @@ public class CFBamRamUuid6TypeTable
 	 *
 	 *	@return	The refreshed buffer after it has been moved
 	 */
-	public ICFBamUuid6Type moveBuffDown( ICFSecAuthorization Authorization,
+	public ICFBamUuid6Type moveRecDown( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 Id,
 		int revision )
 	{
-		final String S_ProcName = "moveBuffDown";
+		final String S_ProcName = "moveRecDown";
 
 		CFBamBuffValue prev = null;
 		CFBamBuffValue cur = null;
@@ -6635,7 +6633,7 @@ public class CFBamRamUuid6TypeTable
 	public ICFBamUuid6Type updateUuid6Type( ICFSecAuthorization Authorization,
 		ICFBamUuid6Type iBuff )
 	{
-		CFBamBuffUuid6Type Buff = (CFBamBuffUuid6Type)schema.getTableUuid6Def().updateUuid6Def( Authorization,	Buff );
+		CFBamBuffUuid6Type Buff = (CFBamBuffUuid6Type)(schema.getTableUuid6Def().updateUuid6Def( Authorization,	iBuff ));
 		CFLibDbKeyHash256 pkey = Buff.getPKey();
 		CFBamBuffUuid6Type existing = dictByPKey.get( pkey );
 		if( existing == null ) {

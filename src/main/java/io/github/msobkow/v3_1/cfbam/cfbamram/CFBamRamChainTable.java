@@ -106,7 +106,7 @@ public class CFBamRamChainTable
 		else {
 			int classCode = rec.getClassCode();
 			if (classCode == ICFBamChain.CLASS_CODE) {
-				return( ((CFBamBuffChainDefaultFactory)(schema.getFactoryChain())).ensureRec(rec) );
+				return( ((CFBamBuffChainDefaultFactory)(schema.getFactoryChain())).ensureRec((ICFBamChain)rec) );
 			}
 			else {
 				throw new CFLibUnsupportedClassException(getClass(), "ensureRec", "rec", (Integer)classCode, "Classcode not recognized: " + Integer.toString(classCode));

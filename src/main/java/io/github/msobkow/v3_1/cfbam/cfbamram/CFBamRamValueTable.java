@@ -118,322 +118,322 @@ public class CFBamRamValueTable
 		else {
 			int classCode = rec.getClassCode();
 			if (classCode == ICFBamValue.CLASS_CODE) {
-				return( ((CFBamBuffValueDefaultFactory)(schema.getFactoryValue())).ensureRec(rec) );
+				return( ((CFBamBuffValueDefaultFactory)(schema.getFactoryValue())).ensureRec((ICFBamValue)rec) );
 			}
 			else if (classCode == ICFBamAtom.CLASS_CODE) {
-				return( ((CFBamBuffAtomDefaultFactory)(schema.getFactoryAtom())).ensureRec(rec) );
+				return( ((CFBamBuffAtomDefaultFactory)(schema.getFactoryAtom())).ensureRec((ICFBamAtom)rec) );
 			}
 			else if (classCode == ICFBamBlobDef.CLASS_CODE) {
-				return( ((CFBamBuffBlobDefDefaultFactory)(schema.getFactoryBlobDef())).ensureRec(rec) );
+				return( ((CFBamBuffBlobDefDefaultFactory)(schema.getFactoryBlobDef())).ensureRec((ICFBamBlobDef)rec) );
 			}
 			else if (classCode == ICFBamBlobType.CLASS_CODE) {
-				return( ((CFBamBuffBlobTypeDefaultFactory)(schema.getFactoryBlobType())).ensureRec(rec) );
+				return( ((CFBamBuffBlobTypeDefaultFactory)(schema.getFactoryBlobType())).ensureRec((ICFBamBlobType)rec) );
 			}
 			else if (classCode == ICFBamBlobCol.CLASS_CODE) {
-				return( ((CFBamBuffBlobColDefaultFactory)(schema.getFactoryBlobCol())).ensureRec(rec) );
+				return( ((CFBamBuffBlobColDefaultFactory)(schema.getFactoryBlobCol())).ensureRec((ICFBamBlobCol)rec) );
 			}
 			else if (classCode == ICFBamBoolDef.CLASS_CODE) {
-				return( ((CFBamBuffBoolDefDefaultFactory)(schema.getFactoryBoolDef())).ensureRec(rec) );
+				return( ((CFBamBuffBoolDefDefaultFactory)(schema.getFactoryBoolDef())).ensureRec((ICFBamBoolDef)rec) );
 			}
 			else if (classCode == ICFBamBoolType.CLASS_CODE) {
-				return( ((CFBamBuffBoolTypeDefaultFactory)(schema.getFactoryBoolType())).ensureRec(rec) );
+				return( ((CFBamBuffBoolTypeDefaultFactory)(schema.getFactoryBoolType())).ensureRec((ICFBamBoolType)rec) );
 			}
 			else if (classCode == ICFBamBoolCol.CLASS_CODE) {
-				return( ((CFBamBuffBoolColDefaultFactory)(schema.getFactoryBoolCol())).ensureRec(rec) );
+				return( ((CFBamBuffBoolColDefaultFactory)(schema.getFactoryBoolCol())).ensureRec((ICFBamBoolCol)rec) );
 			}
 			else if (classCode == ICFBamDateDef.CLASS_CODE) {
-				return( ((CFBamBuffDateDefDefaultFactory)(schema.getFactoryDateDef())).ensureRec(rec) );
+				return( ((CFBamBuffDateDefDefaultFactory)(schema.getFactoryDateDef())).ensureRec((ICFBamDateDef)rec) );
 			}
 			else if (classCode == ICFBamDateType.CLASS_CODE) {
-				return( ((CFBamBuffDateTypeDefaultFactory)(schema.getFactoryDateType())).ensureRec(rec) );
+				return( ((CFBamBuffDateTypeDefaultFactory)(schema.getFactoryDateType())).ensureRec((ICFBamDateType)rec) );
 			}
 			else if (classCode == ICFBamDateCol.CLASS_CODE) {
-				return( ((CFBamBuffDateColDefaultFactory)(schema.getFactoryDateCol())).ensureRec(rec) );
+				return( ((CFBamBuffDateColDefaultFactory)(schema.getFactoryDateCol())).ensureRec((ICFBamDateCol)rec) );
 			}
 			else if (classCode == ICFBamDoubleDef.CLASS_CODE) {
-				return( ((CFBamBuffDoubleDefDefaultFactory)(schema.getFactoryDoubleDef())).ensureRec(rec) );
+				return( ((CFBamBuffDoubleDefDefaultFactory)(schema.getFactoryDoubleDef())).ensureRec((ICFBamDoubleDef)rec) );
 			}
 			else if (classCode == ICFBamDoubleType.CLASS_CODE) {
-				return( ((CFBamBuffDoubleTypeDefaultFactory)(schema.getFactoryDoubleType())).ensureRec(rec) );
+				return( ((CFBamBuffDoubleTypeDefaultFactory)(schema.getFactoryDoubleType())).ensureRec((ICFBamDoubleType)rec) );
 			}
 			else if (classCode == ICFBamDoubleCol.CLASS_CODE) {
-				return( ((CFBamBuffDoubleColDefaultFactory)(schema.getFactoryDoubleCol())).ensureRec(rec) );
+				return( ((CFBamBuffDoubleColDefaultFactory)(schema.getFactoryDoubleCol())).ensureRec((ICFBamDoubleCol)rec) );
 			}
 			else if (classCode == ICFBamFloatDef.CLASS_CODE) {
-				return( ((CFBamBuffFloatDefDefaultFactory)(schema.getFactoryFloatDef())).ensureRec(rec) );
+				return( ((CFBamBuffFloatDefDefaultFactory)(schema.getFactoryFloatDef())).ensureRec((ICFBamFloatDef)rec) );
 			}
 			else if (classCode == ICFBamFloatType.CLASS_CODE) {
-				return( ((CFBamBuffFloatTypeDefaultFactory)(schema.getFactoryFloatType())).ensureRec(rec) );
+				return( ((CFBamBuffFloatTypeDefaultFactory)(schema.getFactoryFloatType())).ensureRec((ICFBamFloatType)rec) );
 			}
 			else if (classCode == ICFBamFloatCol.CLASS_CODE) {
-				return( ((CFBamBuffFloatColDefaultFactory)(schema.getFactoryFloatCol())).ensureRec(rec) );
+				return( ((CFBamBuffFloatColDefaultFactory)(schema.getFactoryFloatCol())).ensureRec((ICFBamFloatCol)rec) );
 			}
 			else if (classCode == ICFBamInt16Def.CLASS_CODE) {
-				return( ((CFBamBuffInt16DefDefaultFactory)(schema.getFactoryInt16Def())).ensureRec(rec) );
+				return( ((CFBamBuffInt16DefDefaultFactory)(schema.getFactoryInt16Def())).ensureRec((ICFBamInt16Def)rec) );
 			}
 			else if (classCode == ICFBamInt16Type.CLASS_CODE) {
-				return( ((CFBamBuffInt16TypeDefaultFactory)(schema.getFactoryInt16Type())).ensureRec(rec) );
+				return( ((CFBamBuffInt16TypeDefaultFactory)(schema.getFactoryInt16Type())).ensureRec((ICFBamInt16Type)rec) );
 			}
 			else if (classCode == ICFBamId16Gen.CLASS_CODE) {
-				return( ((CFBamBuffId16GenDefaultFactory)(schema.getFactoryId16Gen())).ensureRec(rec) );
+				return( ((CFBamBuffId16GenDefaultFactory)(schema.getFactoryId16Gen())).ensureRec((ICFBamId16Gen)rec) );
 			}
 			else if (classCode == ICFBamEnumDef.CLASS_CODE) {
-				return( ((CFBamBuffEnumDefDefaultFactory)(schema.getFactoryEnumDef())).ensureRec(rec) );
+				return( ((CFBamBuffEnumDefDefaultFactory)(schema.getFactoryEnumDef())).ensureRec((ICFBamEnumDef)rec) );
 			}
 			else if (classCode == ICFBamEnumType.CLASS_CODE) {
-				return( ((CFBamBuffEnumTypeDefaultFactory)(schema.getFactoryEnumType())).ensureRec(rec) );
+				return( ((CFBamBuffEnumTypeDefaultFactory)(schema.getFactoryEnumType())).ensureRec((ICFBamEnumType)rec) );
 			}
 			else if (classCode == ICFBamInt16Col.CLASS_CODE) {
-				return( ((CFBamBuffInt16ColDefaultFactory)(schema.getFactoryInt16Col())).ensureRec(rec) );
+				return( ((CFBamBuffInt16ColDefaultFactory)(schema.getFactoryInt16Col())).ensureRec((ICFBamInt16Col)rec) );
 			}
 			else if (classCode == ICFBamInt32Def.CLASS_CODE) {
-				return( ((CFBamBuffInt32DefDefaultFactory)(schema.getFactoryInt32Def())).ensureRec(rec) );
+				return( ((CFBamBuffInt32DefDefaultFactory)(schema.getFactoryInt32Def())).ensureRec((ICFBamInt32Def)rec) );
 			}
 			else if (classCode == ICFBamInt32Type.CLASS_CODE) {
-				return( ((CFBamBuffInt32TypeDefaultFactory)(schema.getFactoryInt32Type())).ensureRec(rec) );
+				return( ((CFBamBuffInt32TypeDefaultFactory)(schema.getFactoryInt32Type())).ensureRec((ICFBamInt32Type)rec) );
 			}
 			else if (classCode == ICFBamId32Gen.CLASS_CODE) {
-				return( ((CFBamBuffId32GenDefaultFactory)(schema.getFactoryId32Gen())).ensureRec(rec) );
+				return( ((CFBamBuffId32GenDefaultFactory)(schema.getFactoryId32Gen())).ensureRec((ICFBamId32Gen)rec) );
 			}
 			else if (classCode == ICFBamInt32Col.CLASS_CODE) {
-				return( ((CFBamBuffInt32ColDefaultFactory)(schema.getFactoryInt32Col())).ensureRec(rec) );
+				return( ((CFBamBuffInt32ColDefaultFactory)(schema.getFactoryInt32Col())).ensureRec((ICFBamInt32Col)rec) );
 			}
 			else if (classCode == ICFBamInt64Def.CLASS_CODE) {
-				return( ((CFBamBuffInt64DefDefaultFactory)(schema.getFactoryInt64Def())).ensureRec(rec) );
+				return( ((CFBamBuffInt64DefDefaultFactory)(schema.getFactoryInt64Def())).ensureRec((ICFBamInt64Def)rec) );
 			}
 			else if (classCode == ICFBamInt64Type.CLASS_CODE) {
-				return( ((CFBamBuffInt64TypeDefaultFactory)(schema.getFactoryInt64Type())).ensureRec(rec) );
+				return( ((CFBamBuffInt64TypeDefaultFactory)(schema.getFactoryInt64Type())).ensureRec((ICFBamInt64Type)rec) );
 			}
 			else if (classCode == ICFBamId64Gen.CLASS_CODE) {
-				return( ((CFBamBuffId64GenDefaultFactory)(schema.getFactoryId64Gen())).ensureRec(rec) );
+				return( ((CFBamBuffId64GenDefaultFactory)(schema.getFactoryId64Gen())).ensureRec((ICFBamId64Gen)rec) );
 			}
 			else if (classCode == ICFBamInt64Col.CLASS_CODE) {
-				return( ((CFBamBuffInt64ColDefaultFactory)(schema.getFactoryInt64Col())).ensureRec(rec) );
+				return( ((CFBamBuffInt64ColDefaultFactory)(schema.getFactoryInt64Col())).ensureRec((ICFBamInt64Col)rec) );
 			}
 			else if (classCode == ICFBamNmTokenDef.CLASS_CODE) {
-				return( ((CFBamBuffNmTokenDefDefaultFactory)(schema.getFactoryNmTokenDef())).ensureRec(rec) );
+				return( ((CFBamBuffNmTokenDefDefaultFactory)(schema.getFactoryNmTokenDef())).ensureRec((ICFBamNmTokenDef)rec) );
 			}
 			else if (classCode == ICFBamNmTokenType.CLASS_CODE) {
-				return( ((CFBamBuffNmTokenTypeDefaultFactory)(schema.getFactoryNmTokenType())).ensureRec(rec) );
+				return( ((CFBamBuffNmTokenTypeDefaultFactory)(schema.getFactoryNmTokenType())).ensureRec((ICFBamNmTokenType)rec) );
 			}
 			else if (classCode == ICFBamNmTokenCol.CLASS_CODE) {
-				return( ((CFBamBuffNmTokenColDefaultFactory)(schema.getFactoryNmTokenCol())).ensureRec(rec) );
+				return( ((CFBamBuffNmTokenColDefaultFactory)(schema.getFactoryNmTokenCol())).ensureRec((ICFBamNmTokenCol)rec) );
 			}
 			else if (classCode == ICFBamNmTokensDef.CLASS_CODE) {
-				return( ((CFBamBuffNmTokensDefDefaultFactory)(schema.getFactoryNmTokensDef())).ensureRec(rec) );
+				return( ((CFBamBuffNmTokensDefDefaultFactory)(schema.getFactoryNmTokensDef())).ensureRec((ICFBamNmTokensDef)rec) );
 			}
 			else if (classCode == ICFBamNmTokensType.CLASS_CODE) {
-				return( ((CFBamBuffNmTokensTypeDefaultFactory)(schema.getFactoryNmTokensType())).ensureRec(rec) );
+				return( ((CFBamBuffNmTokensTypeDefaultFactory)(schema.getFactoryNmTokensType())).ensureRec((ICFBamNmTokensType)rec) );
 			}
 			else if (classCode == ICFBamNmTokensCol.CLASS_CODE) {
-				return( ((CFBamBuffNmTokensColDefaultFactory)(schema.getFactoryNmTokensCol())).ensureRec(rec) );
+				return( ((CFBamBuffNmTokensColDefaultFactory)(schema.getFactoryNmTokensCol())).ensureRec((ICFBamNmTokensCol)rec) );
 			}
 			else if (classCode == ICFBamNumberDef.CLASS_CODE) {
-				return( ((CFBamBuffNumberDefDefaultFactory)(schema.getFactoryNumberDef())).ensureRec(rec) );
+				return( ((CFBamBuffNumberDefDefaultFactory)(schema.getFactoryNumberDef())).ensureRec((ICFBamNumberDef)rec) );
 			}
 			else if (classCode == ICFBamNumberType.CLASS_CODE) {
-				return( ((CFBamBuffNumberTypeDefaultFactory)(schema.getFactoryNumberType())).ensureRec(rec) );
+				return( ((CFBamBuffNumberTypeDefaultFactory)(schema.getFactoryNumberType())).ensureRec((ICFBamNumberType)rec) );
 			}
 			else if (classCode == ICFBamNumberCol.CLASS_CODE) {
-				return( ((CFBamBuffNumberColDefaultFactory)(schema.getFactoryNumberCol())).ensureRec(rec) );
+				return( ((CFBamBuffNumberColDefaultFactory)(schema.getFactoryNumberCol())).ensureRec((ICFBamNumberCol)rec) );
 			}
 			else if (classCode == ICFBamDbKeyHash128Def.CLASS_CODE) {
-				return( ((CFBamBuffDbKeyHash128DefDefaultFactory)(schema.getFactoryDbKeyHash128Def())).ensureRec(rec) );
+				return( ((CFBamBuffDbKeyHash128DefDefaultFactory)(schema.getFactoryDbKeyHash128Def())).ensureRec((ICFBamDbKeyHash128Def)rec) );
 			}
 			else if (classCode == ICFBamDbKeyHash128Col.CLASS_CODE) {
-				return( ((CFBamBuffDbKeyHash128ColDefaultFactory)(schema.getFactoryDbKeyHash128Col())).ensureRec(rec) );
+				return( ((CFBamBuffDbKeyHash128ColDefaultFactory)(schema.getFactoryDbKeyHash128Col())).ensureRec((ICFBamDbKeyHash128Col)rec) );
 			}
 			else if (classCode == ICFBamDbKeyHash128Type.CLASS_CODE) {
-				return( ((CFBamBuffDbKeyHash128TypeDefaultFactory)(schema.getFactoryDbKeyHash128Type())).ensureRec(rec) );
+				return( ((CFBamBuffDbKeyHash128TypeDefaultFactory)(schema.getFactoryDbKeyHash128Type())).ensureRec((ICFBamDbKeyHash128Type)rec) );
 			}
 			else if (classCode == ICFBamDbKeyHash128Gen.CLASS_CODE) {
-				return( ((CFBamBuffDbKeyHash128GenDefaultFactory)(schema.getFactoryDbKeyHash128Gen())).ensureRec(rec) );
+				return( ((CFBamBuffDbKeyHash128GenDefaultFactory)(schema.getFactoryDbKeyHash128Gen())).ensureRec((ICFBamDbKeyHash128Gen)rec) );
 			}
 			else if (classCode == ICFBamDbKeyHash160Def.CLASS_CODE) {
-				return( ((CFBamBuffDbKeyHash160DefDefaultFactory)(schema.getFactoryDbKeyHash160Def())).ensureRec(rec) );
+				return( ((CFBamBuffDbKeyHash160DefDefaultFactory)(schema.getFactoryDbKeyHash160Def())).ensureRec((ICFBamDbKeyHash160Def)rec) );
 			}
 			else if (classCode == ICFBamDbKeyHash160Col.CLASS_CODE) {
-				return( ((CFBamBuffDbKeyHash160ColDefaultFactory)(schema.getFactoryDbKeyHash160Col())).ensureRec(rec) );
+				return( ((CFBamBuffDbKeyHash160ColDefaultFactory)(schema.getFactoryDbKeyHash160Col())).ensureRec((ICFBamDbKeyHash160Col)rec) );
 			}
 			else if (classCode == ICFBamDbKeyHash160Type.CLASS_CODE) {
-				return( ((CFBamBuffDbKeyHash160TypeDefaultFactory)(schema.getFactoryDbKeyHash160Type())).ensureRec(rec) );
+				return( ((CFBamBuffDbKeyHash160TypeDefaultFactory)(schema.getFactoryDbKeyHash160Type())).ensureRec((ICFBamDbKeyHash160Type)rec) );
 			}
 			else if (classCode == ICFBamDbKeyHash160Gen.CLASS_CODE) {
-				return( ((CFBamBuffDbKeyHash160GenDefaultFactory)(schema.getFactoryDbKeyHash160Gen())).ensureRec(rec) );
+				return( ((CFBamBuffDbKeyHash160GenDefaultFactory)(schema.getFactoryDbKeyHash160Gen())).ensureRec((ICFBamDbKeyHash160Gen)rec) );
 			}
 			else if (classCode == ICFBamDbKeyHash224Def.CLASS_CODE) {
-				return( ((CFBamBuffDbKeyHash224DefDefaultFactory)(schema.getFactoryDbKeyHash224Def())).ensureRec(rec) );
+				return( ((CFBamBuffDbKeyHash224DefDefaultFactory)(schema.getFactoryDbKeyHash224Def())).ensureRec((ICFBamDbKeyHash224Def)rec) );
 			}
 			else if (classCode == ICFBamDbKeyHash224Col.CLASS_CODE) {
-				return( ((CFBamBuffDbKeyHash224ColDefaultFactory)(schema.getFactoryDbKeyHash224Col())).ensureRec(rec) );
+				return( ((CFBamBuffDbKeyHash224ColDefaultFactory)(schema.getFactoryDbKeyHash224Col())).ensureRec((ICFBamDbKeyHash224Col)rec) );
 			}
 			else if (classCode == ICFBamDbKeyHash224Type.CLASS_CODE) {
-				return( ((CFBamBuffDbKeyHash224TypeDefaultFactory)(schema.getFactoryDbKeyHash224Type())).ensureRec(rec) );
+				return( ((CFBamBuffDbKeyHash224TypeDefaultFactory)(schema.getFactoryDbKeyHash224Type())).ensureRec((ICFBamDbKeyHash224Type)rec) );
 			}
 			else if (classCode == ICFBamDbKeyHash224Gen.CLASS_CODE) {
-				return( ((CFBamBuffDbKeyHash224GenDefaultFactory)(schema.getFactoryDbKeyHash224Gen())).ensureRec(rec) );
+				return( ((CFBamBuffDbKeyHash224GenDefaultFactory)(schema.getFactoryDbKeyHash224Gen())).ensureRec((ICFBamDbKeyHash224Gen)rec) );
 			}
 			else if (classCode == ICFBamDbKeyHash256Def.CLASS_CODE) {
-				return( ((CFBamBuffDbKeyHash256DefDefaultFactory)(schema.getFactoryDbKeyHash256Def())).ensureRec(rec) );
+				return( ((CFBamBuffDbKeyHash256DefDefaultFactory)(schema.getFactoryDbKeyHash256Def())).ensureRec((ICFBamDbKeyHash256Def)rec) );
 			}
 			else if (classCode == ICFBamDbKeyHash256Col.CLASS_CODE) {
-				return( ((CFBamBuffDbKeyHash256ColDefaultFactory)(schema.getFactoryDbKeyHash256Col())).ensureRec(rec) );
+				return( ((CFBamBuffDbKeyHash256ColDefaultFactory)(schema.getFactoryDbKeyHash256Col())).ensureRec((ICFBamDbKeyHash256Col)rec) );
 			}
 			else if (classCode == ICFBamDbKeyHash256Type.CLASS_CODE) {
-				return( ((CFBamBuffDbKeyHash256TypeDefaultFactory)(schema.getFactoryDbKeyHash256Type())).ensureRec(rec) );
+				return( ((CFBamBuffDbKeyHash256TypeDefaultFactory)(schema.getFactoryDbKeyHash256Type())).ensureRec((ICFBamDbKeyHash256Type)rec) );
 			}
 			else if (classCode == ICFBamDbKeyHash256Gen.CLASS_CODE) {
-				return( ((CFBamBuffDbKeyHash256GenDefaultFactory)(schema.getFactoryDbKeyHash256Gen())).ensureRec(rec) );
+				return( ((CFBamBuffDbKeyHash256GenDefaultFactory)(schema.getFactoryDbKeyHash256Gen())).ensureRec((ICFBamDbKeyHash256Gen)rec) );
 			}
 			else if (classCode == ICFBamDbKeyHash384Def.CLASS_CODE) {
-				return( ((CFBamBuffDbKeyHash384DefDefaultFactory)(schema.getFactoryDbKeyHash384Def())).ensureRec(rec) );
+				return( ((CFBamBuffDbKeyHash384DefDefaultFactory)(schema.getFactoryDbKeyHash384Def())).ensureRec((ICFBamDbKeyHash384Def)rec) );
 			}
 			else if (classCode == ICFBamDbKeyHash384Col.CLASS_CODE) {
-				return( ((CFBamBuffDbKeyHash384ColDefaultFactory)(schema.getFactoryDbKeyHash384Col())).ensureRec(rec) );
+				return( ((CFBamBuffDbKeyHash384ColDefaultFactory)(schema.getFactoryDbKeyHash384Col())).ensureRec((ICFBamDbKeyHash384Col)rec) );
 			}
 			else if (classCode == ICFBamDbKeyHash384Type.CLASS_CODE) {
-				return( ((CFBamBuffDbKeyHash384TypeDefaultFactory)(schema.getFactoryDbKeyHash384Type())).ensureRec(rec) );
+				return( ((CFBamBuffDbKeyHash384TypeDefaultFactory)(schema.getFactoryDbKeyHash384Type())).ensureRec((ICFBamDbKeyHash384Type)rec) );
 			}
 			else if (classCode == ICFBamDbKeyHash384Gen.CLASS_CODE) {
-				return( ((CFBamBuffDbKeyHash384GenDefaultFactory)(schema.getFactoryDbKeyHash384Gen())).ensureRec(rec) );
+				return( ((CFBamBuffDbKeyHash384GenDefaultFactory)(schema.getFactoryDbKeyHash384Gen())).ensureRec((ICFBamDbKeyHash384Gen)rec) );
 			}
 			else if (classCode == ICFBamDbKeyHash512Def.CLASS_CODE) {
-				return( ((CFBamBuffDbKeyHash512DefDefaultFactory)(schema.getFactoryDbKeyHash512Def())).ensureRec(rec) );
+				return( ((CFBamBuffDbKeyHash512DefDefaultFactory)(schema.getFactoryDbKeyHash512Def())).ensureRec((ICFBamDbKeyHash512Def)rec) );
 			}
 			else if (classCode == ICFBamDbKeyHash512Col.CLASS_CODE) {
-				return( ((CFBamBuffDbKeyHash512ColDefaultFactory)(schema.getFactoryDbKeyHash512Col())).ensureRec(rec) );
+				return( ((CFBamBuffDbKeyHash512ColDefaultFactory)(schema.getFactoryDbKeyHash512Col())).ensureRec((ICFBamDbKeyHash512Col)rec) );
 			}
 			else if (classCode == ICFBamDbKeyHash512Type.CLASS_CODE) {
-				return( ((CFBamBuffDbKeyHash512TypeDefaultFactory)(schema.getFactoryDbKeyHash512Type())).ensureRec(rec) );
+				return( ((CFBamBuffDbKeyHash512TypeDefaultFactory)(schema.getFactoryDbKeyHash512Type())).ensureRec((ICFBamDbKeyHash512Type)rec) );
 			}
 			else if (classCode == ICFBamDbKeyHash512Gen.CLASS_CODE) {
-				return( ((CFBamBuffDbKeyHash512GenDefaultFactory)(schema.getFactoryDbKeyHash512Gen())).ensureRec(rec) );
+				return( ((CFBamBuffDbKeyHash512GenDefaultFactory)(schema.getFactoryDbKeyHash512Gen())).ensureRec((ICFBamDbKeyHash512Gen)rec) );
 			}
 			else if (classCode == ICFBamStringDef.CLASS_CODE) {
-				return( ((CFBamBuffStringDefDefaultFactory)(schema.getFactoryStringDef())).ensureRec(rec) );
+				return( ((CFBamBuffStringDefDefaultFactory)(schema.getFactoryStringDef())).ensureRec((ICFBamStringDef)rec) );
 			}
 			else if (classCode == ICFBamStringType.CLASS_CODE) {
-				return( ((CFBamBuffStringTypeDefaultFactory)(schema.getFactoryStringType())).ensureRec(rec) );
+				return( ((CFBamBuffStringTypeDefaultFactory)(schema.getFactoryStringType())).ensureRec((ICFBamStringType)rec) );
 			}
 			else if (classCode == ICFBamStringCol.CLASS_CODE) {
-				return( ((CFBamBuffStringColDefaultFactory)(schema.getFactoryStringCol())).ensureRec(rec) );
+				return( ((CFBamBuffStringColDefaultFactory)(schema.getFactoryStringCol())).ensureRec((ICFBamStringCol)rec) );
 			}
 			else if (classCode == ICFBamTZDateDef.CLASS_CODE) {
-				return( ((CFBamBuffTZDateDefDefaultFactory)(schema.getFactoryTZDateDef())).ensureRec(rec) );
+				return( ((CFBamBuffTZDateDefDefaultFactory)(schema.getFactoryTZDateDef())).ensureRec((ICFBamTZDateDef)rec) );
 			}
 			else if (classCode == ICFBamTZDateType.CLASS_CODE) {
-				return( ((CFBamBuffTZDateTypeDefaultFactory)(schema.getFactoryTZDateType())).ensureRec(rec) );
+				return( ((CFBamBuffTZDateTypeDefaultFactory)(schema.getFactoryTZDateType())).ensureRec((ICFBamTZDateType)rec) );
 			}
 			else if (classCode == ICFBamTZDateCol.CLASS_CODE) {
-				return( ((CFBamBuffTZDateColDefaultFactory)(schema.getFactoryTZDateCol())).ensureRec(rec) );
+				return( ((CFBamBuffTZDateColDefaultFactory)(schema.getFactoryTZDateCol())).ensureRec((ICFBamTZDateCol)rec) );
 			}
 			else if (classCode == ICFBamTZTimeDef.CLASS_CODE) {
-				return( ((CFBamBuffTZTimeDefDefaultFactory)(schema.getFactoryTZTimeDef())).ensureRec(rec) );
+				return( ((CFBamBuffTZTimeDefDefaultFactory)(schema.getFactoryTZTimeDef())).ensureRec((ICFBamTZTimeDef)rec) );
 			}
 			else if (classCode == ICFBamTZTimeType.CLASS_CODE) {
-				return( ((CFBamBuffTZTimeTypeDefaultFactory)(schema.getFactoryTZTimeType())).ensureRec(rec) );
+				return( ((CFBamBuffTZTimeTypeDefaultFactory)(schema.getFactoryTZTimeType())).ensureRec((ICFBamTZTimeType)rec) );
 			}
 			else if (classCode == ICFBamTZTimeCol.CLASS_CODE) {
-				return( ((CFBamBuffTZTimeColDefaultFactory)(schema.getFactoryTZTimeCol())).ensureRec(rec) );
+				return( ((CFBamBuffTZTimeColDefaultFactory)(schema.getFactoryTZTimeCol())).ensureRec((ICFBamTZTimeCol)rec) );
 			}
 			else if (classCode == ICFBamTZTimestampDef.CLASS_CODE) {
-				return( ((CFBamBuffTZTimestampDefDefaultFactory)(schema.getFactoryTZTimestampDef())).ensureRec(rec) );
+				return( ((CFBamBuffTZTimestampDefDefaultFactory)(schema.getFactoryTZTimestampDef())).ensureRec((ICFBamTZTimestampDef)rec) );
 			}
 			else if (classCode == ICFBamTZTimestampType.CLASS_CODE) {
-				return( ((CFBamBuffTZTimestampTypeDefaultFactory)(schema.getFactoryTZTimestampType())).ensureRec(rec) );
+				return( ((CFBamBuffTZTimestampTypeDefaultFactory)(schema.getFactoryTZTimestampType())).ensureRec((ICFBamTZTimestampType)rec) );
 			}
 			else if (classCode == ICFBamTZTimestampCol.CLASS_CODE) {
-				return( ((CFBamBuffTZTimestampColDefaultFactory)(schema.getFactoryTZTimestampCol())).ensureRec(rec) );
+				return( ((CFBamBuffTZTimestampColDefaultFactory)(schema.getFactoryTZTimestampCol())).ensureRec((ICFBamTZTimestampCol)rec) );
 			}
 			else if (classCode == ICFBamTextDef.CLASS_CODE) {
-				return( ((CFBamBuffTextDefDefaultFactory)(schema.getFactoryTextDef())).ensureRec(rec) );
+				return( ((CFBamBuffTextDefDefaultFactory)(schema.getFactoryTextDef())).ensureRec((ICFBamTextDef)rec) );
 			}
 			else if (classCode == ICFBamTextType.CLASS_CODE) {
-				return( ((CFBamBuffTextTypeDefaultFactory)(schema.getFactoryTextType())).ensureRec(rec) );
+				return( ((CFBamBuffTextTypeDefaultFactory)(schema.getFactoryTextType())).ensureRec((ICFBamTextType)rec) );
 			}
 			else if (classCode == ICFBamTextCol.CLASS_CODE) {
-				return( ((CFBamBuffTextColDefaultFactory)(schema.getFactoryTextCol())).ensureRec(rec) );
+				return( ((CFBamBuffTextColDefaultFactory)(schema.getFactoryTextCol())).ensureRec((ICFBamTextCol)rec) );
 			}
 			else if (classCode == ICFBamTimeDef.CLASS_CODE) {
-				return( ((CFBamBuffTimeDefDefaultFactory)(schema.getFactoryTimeDef())).ensureRec(rec) );
+				return( ((CFBamBuffTimeDefDefaultFactory)(schema.getFactoryTimeDef())).ensureRec((ICFBamTimeDef)rec) );
 			}
 			else if (classCode == ICFBamTimeType.CLASS_CODE) {
-				return( ((CFBamBuffTimeTypeDefaultFactory)(schema.getFactoryTimeType())).ensureRec(rec) );
+				return( ((CFBamBuffTimeTypeDefaultFactory)(schema.getFactoryTimeType())).ensureRec((ICFBamTimeType)rec) );
 			}
 			else if (classCode == ICFBamTimeCol.CLASS_CODE) {
-				return( ((CFBamBuffTimeColDefaultFactory)(schema.getFactoryTimeCol())).ensureRec(rec) );
+				return( ((CFBamBuffTimeColDefaultFactory)(schema.getFactoryTimeCol())).ensureRec((ICFBamTimeCol)rec) );
 			}
 			else if (classCode == ICFBamTimestampDef.CLASS_CODE) {
-				return( ((CFBamBuffTimestampDefDefaultFactory)(schema.getFactoryTimestampDef())).ensureRec(rec) );
+				return( ((CFBamBuffTimestampDefDefaultFactory)(schema.getFactoryTimestampDef())).ensureRec((ICFBamTimestampDef)rec) );
 			}
 			else if (classCode == ICFBamTimestampType.CLASS_CODE) {
-				return( ((CFBamBuffTimestampTypeDefaultFactory)(schema.getFactoryTimestampType())).ensureRec(rec) );
+				return( ((CFBamBuffTimestampTypeDefaultFactory)(schema.getFactoryTimestampType())).ensureRec((ICFBamTimestampType)rec) );
 			}
 			else if (classCode == ICFBamTimestampCol.CLASS_CODE) {
-				return( ((CFBamBuffTimestampColDefaultFactory)(schema.getFactoryTimestampCol())).ensureRec(rec) );
+				return( ((CFBamBuffTimestampColDefaultFactory)(schema.getFactoryTimestampCol())).ensureRec((ICFBamTimestampCol)rec) );
 			}
 			else if (classCode == ICFBamTokenDef.CLASS_CODE) {
-				return( ((CFBamBuffTokenDefDefaultFactory)(schema.getFactoryTokenDef())).ensureRec(rec) );
+				return( ((CFBamBuffTokenDefDefaultFactory)(schema.getFactoryTokenDef())).ensureRec((ICFBamTokenDef)rec) );
 			}
 			else if (classCode == ICFBamTokenType.CLASS_CODE) {
-				return( ((CFBamBuffTokenTypeDefaultFactory)(schema.getFactoryTokenType())).ensureRec(rec) );
+				return( ((CFBamBuffTokenTypeDefaultFactory)(schema.getFactoryTokenType())).ensureRec((ICFBamTokenType)rec) );
 			}
 			else if (classCode == ICFBamTokenCol.CLASS_CODE) {
-				return( ((CFBamBuffTokenColDefaultFactory)(schema.getFactoryTokenCol())).ensureRec(rec) );
+				return( ((CFBamBuffTokenColDefaultFactory)(schema.getFactoryTokenCol())).ensureRec((ICFBamTokenCol)rec) );
 			}
 			else if (classCode == ICFBamUInt16Def.CLASS_CODE) {
-				return( ((CFBamBuffUInt16DefDefaultFactory)(schema.getFactoryUInt16Def())).ensureRec(rec) );
+				return( ((CFBamBuffUInt16DefDefaultFactory)(schema.getFactoryUInt16Def())).ensureRec((ICFBamUInt16Def)rec) );
 			}
 			else if (classCode == ICFBamUInt16Type.CLASS_CODE) {
-				return( ((CFBamBuffUInt16TypeDefaultFactory)(schema.getFactoryUInt16Type())).ensureRec(rec) );
+				return( ((CFBamBuffUInt16TypeDefaultFactory)(schema.getFactoryUInt16Type())).ensureRec((ICFBamUInt16Type)rec) );
 			}
 			else if (classCode == ICFBamUInt16Col.CLASS_CODE) {
-				return( ((CFBamBuffUInt16ColDefaultFactory)(schema.getFactoryUInt16Col())).ensureRec(rec) );
+				return( ((CFBamBuffUInt16ColDefaultFactory)(schema.getFactoryUInt16Col())).ensureRec((ICFBamUInt16Col)rec) );
 			}
 			else if (classCode == ICFBamUInt32Def.CLASS_CODE) {
-				return( ((CFBamBuffUInt32DefDefaultFactory)(schema.getFactoryUInt32Def())).ensureRec(rec) );
+				return( ((CFBamBuffUInt32DefDefaultFactory)(schema.getFactoryUInt32Def())).ensureRec((ICFBamUInt32Def)rec) );
 			}
 			else if (classCode == ICFBamUInt32Type.CLASS_CODE) {
-				return( ((CFBamBuffUInt32TypeDefaultFactory)(schema.getFactoryUInt32Type())).ensureRec(rec) );
+				return( ((CFBamBuffUInt32TypeDefaultFactory)(schema.getFactoryUInt32Type())).ensureRec((ICFBamUInt32Type)rec) );
 			}
 			else if (classCode == ICFBamUInt32Col.CLASS_CODE) {
-				return( ((CFBamBuffUInt32ColDefaultFactory)(schema.getFactoryUInt32Col())).ensureRec(rec) );
+				return( ((CFBamBuffUInt32ColDefaultFactory)(schema.getFactoryUInt32Col())).ensureRec((ICFBamUInt32Col)rec) );
 			}
 			else if (classCode == ICFBamUInt64Def.CLASS_CODE) {
-				return( ((CFBamBuffUInt64DefDefaultFactory)(schema.getFactoryUInt64Def())).ensureRec(rec) );
+				return( ((CFBamBuffUInt64DefDefaultFactory)(schema.getFactoryUInt64Def())).ensureRec((ICFBamUInt64Def)rec) );
 			}
 			else if (classCode == ICFBamUInt64Type.CLASS_CODE) {
-				return( ((CFBamBuffUInt64TypeDefaultFactory)(schema.getFactoryUInt64Type())).ensureRec(rec) );
+				return( ((CFBamBuffUInt64TypeDefaultFactory)(schema.getFactoryUInt64Type())).ensureRec((ICFBamUInt64Type)rec) );
 			}
 			else if (classCode == ICFBamUInt64Col.CLASS_CODE) {
-				return( ((CFBamBuffUInt64ColDefaultFactory)(schema.getFactoryUInt64Col())).ensureRec(rec) );
+				return( ((CFBamBuffUInt64ColDefaultFactory)(schema.getFactoryUInt64Col())).ensureRec((ICFBamUInt64Col)rec) );
 			}
 			else if (classCode == ICFBamUuidDef.CLASS_CODE) {
-				return( ((CFBamBuffUuidDefDefaultFactory)(schema.getFactoryUuidDef())).ensureRec(rec) );
+				return( ((CFBamBuffUuidDefDefaultFactory)(schema.getFactoryUuidDef())).ensureRec((ICFBamUuidDef)rec) );
 			}
 			else if (classCode == ICFBamUuidType.CLASS_CODE) {
-				return( ((CFBamBuffUuidTypeDefaultFactory)(schema.getFactoryUuidType())).ensureRec(rec) );
+				return( ((CFBamBuffUuidTypeDefaultFactory)(schema.getFactoryUuidType())).ensureRec((ICFBamUuidType)rec) );
 			}
 			else if (classCode == ICFBamUuidGen.CLASS_CODE) {
-				return( ((CFBamBuffUuidGenDefaultFactory)(schema.getFactoryUuidGen())).ensureRec(rec) );
+				return( ((CFBamBuffUuidGenDefaultFactory)(schema.getFactoryUuidGen())).ensureRec((ICFBamUuidGen)rec) );
 			}
 			else if (classCode == ICFBamUuidCol.CLASS_CODE) {
-				return( ((CFBamBuffUuidColDefaultFactory)(schema.getFactoryUuidCol())).ensureRec(rec) );
+				return( ((CFBamBuffUuidColDefaultFactory)(schema.getFactoryUuidCol())).ensureRec((ICFBamUuidCol)rec) );
 			}
 			else if (classCode == ICFBamUuid6Def.CLASS_CODE) {
-				return( ((CFBamBuffUuid6DefDefaultFactory)(schema.getFactoryUuid6Def())).ensureRec(rec) );
+				return( ((CFBamBuffUuid6DefDefaultFactory)(schema.getFactoryUuid6Def())).ensureRec((ICFBamUuid6Def)rec) );
 			}
 			else if (classCode == ICFBamUuid6Type.CLASS_CODE) {
-				return( ((CFBamBuffUuid6TypeDefaultFactory)(schema.getFactoryUuid6Type())).ensureRec(rec) );
+				return( ((CFBamBuffUuid6TypeDefaultFactory)(schema.getFactoryUuid6Type())).ensureRec((ICFBamUuid6Type)rec) );
 			}
 			else if (classCode == ICFBamUuid6Gen.CLASS_CODE) {
-				return( ((CFBamBuffUuid6GenDefaultFactory)(schema.getFactoryUuid6Gen())).ensureRec(rec) );
+				return( ((CFBamBuffUuid6GenDefaultFactory)(schema.getFactoryUuid6Gen())).ensureRec((ICFBamUuid6Gen)rec) );
 			}
 			else if (classCode == ICFBamUuid6Col.CLASS_CODE) {
-				return( ((CFBamBuffUuid6ColDefaultFactory)(schema.getFactoryUuid6Col())).ensureRec(rec) );
+				return( ((CFBamBuffUuid6ColDefaultFactory)(schema.getFactoryUuid6Col())).ensureRec((ICFBamUuid6Col)rec) );
 			}
 			else if (classCode == ICFBamTableCol.CLASS_CODE) {
-				return( ((CFBamBuffTableColDefaultFactory)(schema.getFactoryTableCol())).ensureRec(rec) );
+				return( ((CFBamBuffTableColDefaultFactory)(schema.getFactoryTableCol())).ensureRec((ICFBamTableCol)rec) );
 			}
 			else {
 				throw new CFLibUnsupportedClassException(getClass(), "ensureRec", "rec", (Integer)classCode, "Classcode not recognized: " + Integer.toString(classCode));
@@ -1533,11 +1533,11 @@ public class CFBamRamValueTable
 	 *
 	 *	@return	The refreshed buffer after it has been moved
 	 */
-	public ICFBamValue moveBuffUp( ICFSecAuthorization Authorization,
+	public ICFBamValue moveRecUp( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 Id,
 		int revision )
 	{
-		final String S_ProcName = "moveBuffUp";
+		final String S_ProcName = "moveRecUp";
 
 		ICFBamValue grandprev = null;
 		ICFBamValue prev = null;
@@ -4206,11 +4206,11 @@ public class CFBamRamValueTable
 	 *
 	 *	@return	The refreshed buffer after it has been moved
 	 */
-	public ICFBamValue moveBuffDown( ICFSecAuthorization Authorization,
+	public ICFBamValue moveRecDown( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 Id,
 		int revision )
 	{
-		final String S_ProcName = "moveBuffDown";
+		final String S_ProcName = "moveRecDown";
 
 		CFBamBuffValue prev = null;
 		CFBamBuffValue cur = null;

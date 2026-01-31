@@ -82,7 +82,7 @@ public class CFBamRamInt32TypeTable
 			return( null );
 		}
 		else {
-			return ((CFBamRamValueTable)(schema.getTableValue())).ensureRec(rec);
+			return ((CFBamRamValueTable)(schema.getTableValue())).ensureRec((ICFBamValue)rec);
 		}
 	}
 
@@ -816,9 +816,7 @@ public class CFBamRamInt32TypeTable
 				schema.getTableTableCol().updateTableCol( Authorization, tailEdit );
 			}
 			else {
-				throw new CFLibUsageException( getClass(),
-					S_ProcName,
-					"Unrecognized ClassCode " + tailClassCode );
+				throw new CFLibUnsupportedClassException(getClass(), S_ProcName, "-create-table-chain-link-tail-", (Integer)tailClassCode, "Classcode not recognized: " + Integer.toString(tailClassCode));
 			}
 		}
 		if (Buff == null) {
@@ -1291,11 +1289,11 @@ public class CFBamRamInt32TypeTable
 	 *
 	 *	@return	The refreshed buffer after it has been moved
 	 */
-	public ICFBamInt32Type moveBuffUp( ICFSecAuthorization Authorization,
+	public ICFBamInt32Type moveRecUp( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 Id,
 		int revision )
 	{
-		final String S_ProcName = "moveBuffUp";
+		final String S_ProcName = "moveRecUp";
 
 		ICFBamValue grandprev = null;
 		ICFBamValue prev = null;
@@ -3964,11 +3962,11 @@ public class CFBamRamInt32TypeTable
 	 *
 	 *	@return	The refreshed buffer after it has been moved
 	 */
-	public ICFBamInt32Type moveBuffDown( ICFSecAuthorization Authorization,
+	public ICFBamInt32Type moveRecDown( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 Id,
 		int revision )
 	{
-		final String S_ProcName = "moveBuffDown";
+		final String S_ProcName = "moveRecDown";
 
 		CFBamBuffValue prev = null;
 		CFBamBuffValue cur = null;
@@ -6635,7 +6633,7 @@ public class CFBamRamInt32TypeTable
 	public ICFBamInt32Type updateInt32Type( ICFSecAuthorization Authorization,
 		ICFBamInt32Type iBuff )
 	{
-		CFBamBuffInt32Type Buff = (CFBamBuffInt32Type)schema.getTableInt32Def().updateInt32Def( Authorization,	Buff );
+		CFBamBuffInt32Type Buff = (CFBamBuffInt32Type)(schema.getTableInt32Def().updateInt32Def( Authorization,	iBuff ));
 		CFLibDbKeyHash256 pkey = Buff.getPKey();
 		CFBamBuffInt32Type existing = dictByPKey.get( pkey );
 		if( existing == null ) {

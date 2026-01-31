@@ -92,7 +92,7 @@ public class CFBamRamIndexTable
 			return( null );
 		}
 		else {
-			return ((CFBamRamScopeTable)(schema.getTableScope())).ensureRec(rec);
+			return ((CFBamRamScopeTable)(schema.getTableScope())).ensureRec((ICFBamScope)rec);
 		}
 	}
 
@@ -520,7 +520,7 @@ public class CFBamRamIndexTable
 	public ICFBamIndex updateIndex( ICFSecAuthorization Authorization,
 		ICFBamIndex iBuff )
 	{
-		CFBamBuffIndex Buff = (CFBamBuffIndex)schema.getTableScope().updateScope( Authorization,	Buff );
+		CFBamBuffIndex Buff = (CFBamBuffIndex)(schema.getTableScope().updateScope( Authorization,	iBuff ));
 		CFLibDbKeyHash256 pkey = Buff.getPKey();
 		CFBamBuffIndex existing = dictByPKey.get( pkey );
 		if( existing == null ) {

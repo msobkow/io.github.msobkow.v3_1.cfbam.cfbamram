@@ -86,7 +86,7 @@ public class CFBamRamDelSubDep2Table
 			return( null );
 		}
 		else {
-			return ((CFBamRamScopeTable)(schema.getTableScope())).ensureRec(rec);
+			return ((CFBamRamScopeTable)(schema.getTableScope())).ensureRec((ICFBamScope)rec);
 		}
 	}
 
@@ -554,7 +554,7 @@ public class CFBamRamDelSubDep2Table
 	public ICFBamDelSubDep2 updateDelSubDep2( ICFSecAuthorization Authorization,
 		ICFBamDelSubDep2 iBuff )
 	{
-		CFBamBuffDelSubDep2 Buff = (CFBamBuffDelSubDep2)schema.getTableDelDep().updateDelDep( Authorization,	Buff );
+		CFBamBuffDelSubDep2 Buff = (CFBamBuffDelSubDep2)(schema.getTableDelDep().updateDelDep( Authorization,	iBuff ));
 		CFLibDbKeyHash256 pkey = Buff.getPKey();
 		CFBamBuffDelSubDep2 existing = dictByPKey.get( pkey );
 		if( existing == null ) {

@@ -116,7 +116,7 @@ public class CFBamRamRelationTable
 			return( null );
 		}
 		else {
-			return ((CFBamRamScopeTable)(schema.getTableScope())).ensureRec(rec);
+			return ((CFBamRamScopeTable)(schema.getTableScope())).ensureRec((ICFBamScope)rec);
 		}
 	}
 
@@ -908,7 +908,7 @@ public class CFBamRamRelationTable
 	public ICFBamRelation updateRelation( ICFSecAuthorization Authorization,
 		ICFBamRelation iBuff )
 	{
-		CFBamBuffRelation Buff = (CFBamBuffRelation)schema.getTableScope().updateScope( Authorization,	Buff );
+		CFBamBuffRelation Buff = (CFBamBuffRelation)(schema.getTableScope().updateScope( Authorization,	iBuff ));
 		CFLibDbKeyHash256 pkey = Buff.getPKey();
 		CFBamBuffRelation existing = dictByPKey.get( pkey );
 		if( existing == null ) {

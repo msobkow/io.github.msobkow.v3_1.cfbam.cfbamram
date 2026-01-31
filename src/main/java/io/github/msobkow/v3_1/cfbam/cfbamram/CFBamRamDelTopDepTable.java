@@ -98,7 +98,7 @@ public class CFBamRamDelTopDepTable
 			return( null );
 		}
 		else {
-			return ((CFBamRamScopeTable)(schema.getTableScope())).ensureRec(rec);
+			return ((CFBamRamScopeTable)(schema.getTableScope())).ensureRec((ICFBamScope)rec);
 		}
 	}
 
@@ -242,9 +242,7 @@ public class CFBamRamDelTopDepTable
 				schema.getTableDelTopDep().updateDelTopDep( Authorization, tailEdit );
 			}
 			else {
-				throw new CFLibUsageException( getClass(),
-					S_ProcName,
-					"Unrecognized ClassCode " + tailClassCode );
+				throw new CFLibUnsupportedClassException(getClass(), S_ProcName, "-create-table-chain-link-tail-", (Integer)tailClassCode, "Classcode not recognized: " + Integer.toString(tailClassCode));
 			}
 		}
 		if (Buff == null) {
@@ -751,11 +749,11 @@ public class CFBamRamDelTopDepTable
 	 *
 	 *	@return	The refreshed buffer after it has been moved
 	 */
-	public ICFBamDelTopDep moveBuffUp( ICFSecAuthorization Authorization,
+	public ICFBamDelTopDep moveRecUp( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 Id,
 		int revision )
 	{
-		final String S_ProcName = "moveBuffUp";
+		final String S_ProcName = "moveRecUp";
 
 		ICFBamDelTopDep grandprev = null;
 		ICFBamDelTopDep prev = null;
@@ -904,11 +902,11 @@ public class CFBamRamDelTopDepTable
 	 *
 	 *	@return	The refreshed buffer after it has been moved
 	 */
-	public ICFBamDelTopDep moveBuffDown( ICFSecAuthorization Authorization,
+	public ICFBamDelTopDep moveRecDown( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 Id,
 		int revision )
 	{
-		final String S_ProcName = "moveBuffDown";
+		final String S_ProcName = "moveRecDown";
 
 		CFBamBuffDelTopDep prev = null;
 		CFBamBuffDelTopDep cur = null;
@@ -1055,7 +1053,7 @@ public class CFBamRamDelTopDepTable
 	public ICFBamDelTopDep updateDelTopDep( ICFSecAuthorization Authorization,
 		ICFBamDelTopDep iBuff )
 	{
-		CFBamBuffDelTopDep Buff = (CFBamBuffDelTopDep)schema.getTableDelDep().updateDelDep( Authorization,	Buff );
+		CFBamBuffDelTopDep Buff = (CFBamBuffDelTopDep)(schema.getTableDelDep().updateDelDep( Authorization,	iBuff ));
 		CFLibDbKeyHash256 pkey = Buff.getPKey();
 		CFBamBuffDelTopDep existing = dictByPKey.get( pkey );
 		if( existing == null ) {
