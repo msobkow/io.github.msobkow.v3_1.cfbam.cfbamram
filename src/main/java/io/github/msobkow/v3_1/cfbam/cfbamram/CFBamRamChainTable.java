@@ -114,6 +114,7 @@ public class CFBamRamChainTable
 		}
 	}
 
+	@Override
 	public ICFBamChain createChain( ICFSecAuthorization Authorization,
 		ICFBamChain iBuff )
 	{
@@ -277,6 +278,7 @@ public class CFBamRamChainTable
 		}
 	}
 
+	@Override
 	public ICFBamChain readDerived( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 PKey )
 	{
@@ -291,6 +293,7 @@ public class CFBamRamChainTable
 		return( buff );
 	}
 
+	@Override
 	public ICFBamChain lockDerived( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 PKey )
 	{
@@ -305,6 +308,7 @@ public class CFBamRamChainTable
 		return( buff );
 	}
 
+	@Override
 	public ICFBamChain[] readAllDerived( ICFSecAuthorization Authorization ) {
 		final String S_ProcName = "CFBamRamChain.readAllDerived";
 		ICFBamChain[] retList = new ICFBamChain[ dictByPKey.values().size() ];
@@ -316,6 +320,7 @@ public class CFBamRamChainTable
 		return( retList );
 	}
 
+	@Override
 	public ICFBamChain[] readDerivedByChainTableIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 TableId )
 	{
@@ -343,6 +348,7 @@ public class CFBamRamChainTable
 		return( recArray );
 	}
 
+	@Override
 	public ICFBamChain[] readDerivedByDefSchemaIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 DefSchemaId )
 	{
@@ -370,6 +376,7 @@ public class CFBamRamChainTable
 		return( recArray );
 	}
 
+	@Override
 	public ICFBamChain readDerivedByUNameIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 TableId,
 		String Name )
@@ -389,6 +396,7 @@ public class CFBamRamChainTable
 		return( buff );
 	}
 
+	@Override
 	public ICFBamChain[] readDerivedByPrevRelIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 PrevRelationId )
 	{
@@ -416,6 +424,7 @@ public class CFBamRamChainTable
 		return( recArray );
 	}
 
+	@Override
 	public ICFBamChain[] readDerivedByNextRelIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 NextRelationId )
 	{
@@ -443,6 +452,7 @@ public class CFBamRamChainTable
 		return( recArray );
 	}
 
+	@Override
 	public ICFBamChain readDerivedByIdIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 Id )
 	{
@@ -457,6 +467,7 @@ public class CFBamRamChainTable
 		return( buff );
 	}
 
+	@Override
 	public ICFBamChain readRec( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 PKey )
 	{
@@ -468,6 +479,7 @@ public class CFBamRamChainTable
 		return( buff );
 	}
 
+	@Override
 	public ICFBamChain lockRec( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 PKey )
 	{
@@ -479,6 +491,7 @@ public class CFBamRamChainTable
 		return( buff );
 	}
 
+	@Override
 	public ICFBamChain[] readAllRec( ICFSecAuthorization Authorization )
 	{
 		final String S_ProcName = "CFBamRamChain.readAllRec";
@@ -494,6 +507,7 @@ public class CFBamRamChainTable
 		return( filteredList.toArray( new ICFBamChain[0] ) );
 	}
 
+	@Override
 	public ICFBamChain readRecByIdIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 Id )
 	{
@@ -508,6 +522,7 @@ public class CFBamRamChainTable
 		}
 	}
 
+	@Override
 	public ICFBamChain[] readRecByChainTableIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 TableId )
 	{
@@ -525,6 +540,7 @@ public class CFBamRamChainTable
 		return( filteredList.toArray( new ICFBamChain[0] ) );
 	}
 
+	@Override
 	public ICFBamChain[] readRecByDefSchemaIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 DefSchemaId )
 	{
@@ -542,6 +558,7 @@ public class CFBamRamChainTable
 		return( filteredList.toArray( new ICFBamChain[0] ) );
 	}
 
+	@Override
 	public ICFBamChain readRecByUNameIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 TableId,
 		String Name )
@@ -558,6 +575,7 @@ public class CFBamRamChainTable
 		}
 	}
 
+	@Override
 	public ICFBamChain[] readRecByPrevRelIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 PrevRelationId )
 	{
@@ -575,6 +593,7 @@ public class CFBamRamChainTable
 		return( filteredList.toArray( new ICFBamChain[0] ) );
 	}
 
+	@Override
 	public ICFBamChain[] readRecByNextRelIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 NextRelationId )
 	{
@@ -784,6 +803,7 @@ public class CFBamRamChainTable
 		return(Buff);
 	}
 
+	@Override
 	public void deleteChain( ICFSecAuthorization Authorization,
 		ICFBamChain iBuff )
 	{
@@ -839,6 +859,7 @@ public class CFBamRamChainTable
 		subdict.remove( pkey );
 
 	}
+	@Override
 	public void deleteChainByIdIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argKey )
 	{
@@ -865,6 +886,7 @@ public class CFBamRamChainTable
 		}
 	}
 
+	@Override
 	public void deleteChainByChainTableIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argTableId )
 	{
@@ -873,6 +895,7 @@ public class CFBamRamChainTable
 		deleteChainByChainTableIdx( Authorization, key );
 	}
 
+	@Override
 	public void deleteChainByChainTableIdx( ICFSecAuthorization Authorization,
 		ICFBamChainByChainTableIdxKey argKey )
 	{
@@ -899,6 +922,7 @@ public class CFBamRamChainTable
 		}
 	}
 
+	@Override
 	public void deleteChainByDefSchemaIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argDefSchemaId )
 	{
@@ -907,6 +931,7 @@ public class CFBamRamChainTable
 		deleteChainByDefSchemaIdx( Authorization, key );
 	}
 
+	@Override
 	public void deleteChainByDefSchemaIdx( ICFSecAuthorization Authorization,
 		ICFBamChainByDefSchemaIdxKey argKey )
 	{
@@ -935,6 +960,7 @@ public class CFBamRamChainTable
 		}
 	}
 
+	@Override
 	public void deleteChainByUNameIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argTableId,
 		String argName )
@@ -945,6 +971,7 @@ public class CFBamRamChainTable
 		deleteChainByUNameIdx( Authorization, key );
 	}
 
+	@Override
 	public void deleteChainByUNameIdx( ICFSecAuthorization Authorization,
 		ICFBamChainByUNameIdxKey argKey )
 	{
@@ -972,6 +999,7 @@ public class CFBamRamChainTable
 		}
 	}
 
+	@Override
 	public void deleteChainByPrevRelIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argPrevRelationId )
 	{
@@ -980,6 +1008,7 @@ public class CFBamRamChainTable
 		deleteChainByPrevRelIdx( Authorization, key );
 	}
 
+	@Override
 	public void deleteChainByPrevRelIdx( ICFSecAuthorization Authorization,
 		ICFBamChainByPrevRelIdxKey argKey )
 	{
@@ -1006,6 +1035,7 @@ public class CFBamRamChainTable
 		}
 	}
 
+	@Override
 	public void deleteChainByNextRelIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argNextRelationId )
 	{
@@ -1014,6 +1044,7 @@ public class CFBamRamChainTable
 		deleteChainByNextRelIdx( Authorization, key );
 	}
 
+	@Override
 	public void deleteChainByNextRelIdx( ICFSecAuthorization Authorization,
 		ICFBamChainByNextRelIdxKey argKey )
 	{

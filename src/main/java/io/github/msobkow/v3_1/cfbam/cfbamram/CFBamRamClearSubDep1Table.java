@@ -90,6 +90,7 @@ public class CFBamRamClearSubDep1Table
 		}
 	}
 
+	@Override
 	public ICFBamClearSubDep1 createClearSubDep1( ICFSecAuthorization Authorization,
 		ICFBamClearSubDep1 iBuff )
 	{
@@ -194,6 +195,7 @@ public class CFBamRamClearSubDep1Table
 		}
 	}
 
+	@Override
 	public ICFBamClearSubDep1 readDerived( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 PKey )
 	{
@@ -208,6 +210,7 @@ public class CFBamRamClearSubDep1Table
 		return( buff );
 	}
 
+	@Override
 	public ICFBamClearSubDep1 lockDerived( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 PKey )
 	{
@@ -222,6 +225,7 @@ public class CFBamRamClearSubDep1Table
 		return( buff );
 	}
 
+	@Override
 	public ICFBamClearSubDep1[] readAllDerived( ICFSecAuthorization Authorization ) {
 		final String S_ProcName = "CFBamRamClearSubDep1.readAllDerived";
 		ICFBamClearSubDep1[] retList = new ICFBamClearSubDep1[ dictByPKey.values().size() ];
@@ -233,6 +237,7 @@ public class CFBamRamClearSubDep1Table
 		return( retList );
 	}
 
+	@Override
 	public ICFBamClearSubDep1[] readDerivedByTenantIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 TenantId )
 	{
@@ -255,6 +260,7 @@ public class CFBamRamClearSubDep1Table
 		}
 	}
 
+	@Override
 	public ICFBamClearSubDep1[] readDerivedByClearDepIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 RelationId )
 	{
@@ -277,6 +283,7 @@ public class CFBamRamClearSubDep1Table
 		}
 	}
 
+	@Override
 	public ICFBamClearSubDep1[] readDerivedByDefSchemaIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 DefSchemaId )
 	{
@@ -299,6 +306,7 @@ public class CFBamRamClearSubDep1Table
 		}
 	}
 
+	@Override
 	public ICFBamClearSubDep1[] readDerivedByClearTopDepIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 ClearTopDepId )
 	{
@@ -326,6 +334,7 @@ public class CFBamRamClearSubDep1Table
 		return( recArray );
 	}
 
+	@Override
 	public ICFBamClearSubDep1 readDerivedByUNameIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 ClearTopDepId,
 		String Name )
@@ -345,6 +354,7 @@ public class CFBamRamClearSubDep1Table
 		return( buff );
 	}
 
+	@Override
 	public ICFBamClearSubDep1 readDerivedByIdIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 Id )
 	{
@@ -359,6 +369,7 @@ public class CFBamRamClearSubDep1Table
 		return( buff );
 	}
 
+	@Override
 	public ICFBamClearSubDep1 readRec( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 PKey )
 	{
@@ -370,6 +381,7 @@ public class CFBamRamClearSubDep1Table
 		return( buff );
 	}
 
+	@Override
 	public ICFBamClearSubDep1 lockRec( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 PKey )
 	{
@@ -381,6 +393,7 @@ public class CFBamRamClearSubDep1Table
 		return( buff );
 	}
 
+	@Override
 	public ICFBamClearSubDep1[] readAllRec( ICFSecAuthorization Authorization )
 	{
 		final String S_ProcName = "CFBamRamClearSubDep1.readAllRec";
@@ -396,6 +409,7 @@ public class CFBamRamClearSubDep1Table
 		return( filteredList.toArray( new ICFBamClearSubDep1[0] ) );
 	}
 
+	@Override
 	public ICFBamClearSubDep1 readRecByIdIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 Id )
 	{
@@ -410,6 +424,7 @@ public class CFBamRamClearSubDep1Table
 		}
 	}
 
+	@Override
 	public ICFBamClearSubDep1[] readRecByTenantIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 TenantId )
 	{
@@ -427,6 +442,7 @@ public class CFBamRamClearSubDep1Table
 		return( filteredList.toArray( new ICFBamClearSubDep1[0] ) );
 	}
 
+	@Override
 	public ICFBamClearSubDep1[] readRecByClearDepIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 RelationId )
 	{
@@ -444,6 +460,7 @@ public class CFBamRamClearSubDep1Table
 		return( filteredList.toArray( new ICFBamClearSubDep1[0] ) );
 	}
 
+	@Override
 	public ICFBamClearSubDep1[] readRecByDefSchemaIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 DefSchemaId )
 	{
@@ -461,6 +478,7 @@ public class CFBamRamClearSubDep1Table
 		return( filteredList.toArray( new ICFBamClearSubDep1[0] ) );
 	}
 
+	@Override
 	public ICFBamClearSubDep1[] readRecByClearTopDepIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 ClearTopDepId )
 	{
@@ -478,6 +496,7 @@ public class CFBamRamClearSubDep1Table
 		return( filteredList.toArray( new ICFBamClearSubDep1[0] ) );
 	}
 
+	@Override
 	public ICFBamClearSubDep1 readRecByUNameIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 ClearTopDepId,
 		String Name )
@@ -492,63 +511,6 @@ public class CFBamRamClearSubDep1Table
 		else {
 			return( null );
 		}
-	}
-
-	/**
-	 *	Read a page array of the specific ClearSubDep1 buffer instances identified by the duplicate key ClearDepIdx.
-	 *
-	 *	@param	Authorization	The session authorization information.
-	 *
-	 *	@param	RelationId	The ClearSubDep1 key attribute of the instance generating the id.
-	 *
-	 *	@return An array of derived buffer instances for the specified key, potentially with 0 elements in the set.
-	 *
-	 *	@throws	CFLibNotSupportedException thrown by client-side implementations.
-	 */
-	public ICFBamClearSubDep1[] pageRecByClearDepIdx( ICFSecAuthorization Authorization,
-		CFLibDbKeyHash256 RelationId,
-		CFLibDbKeyHash256 priorId )
-	{
-		final String S_ProcName = "pageRecByClearDepIdx";
-		throw new CFLibNotImplementedYetException( getClass(), S_ProcName );
-	}
-
-	/**
-	 *	Read a page array of the specific ClearSubDep1 buffer instances identified by the duplicate key DefSchemaIdx.
-	 *
-	 *	@param	Authorization	The session authorization information.
-	 *
-	 *	@param	DefSchemaId	The ClearSubDep1 key attribute of the instance generating the id.
-	 *
-	 *	@return An array of derived buffer instances for the specified key, potentially with 0 elements in the set.
-	 *
-	 *	@throws	CFLibNotSupportedException thrown by client-side implementations.
-	 */
-	public ICFBamClearSubDep1[] pageRecByDefSchemaIdx( ICFSecAuthorization Authorization,
-		CFLibDbKeyHash256 DefSchemaId,
-		CFLibDbKeyHash256 priorId )
-	{
-		final String S_ProcName = "pageRecByDefSchemaIdx";
-		throw new CFLibNotImplementedYetException( getClass(), S_ProcName );
-	}
-
-	/**
-	 *	Read a page array of the specific ClearSubDep1 buffer instances identified by the duplicate key ClearTopDepIdx.
-	 *
-	 *	@param	Authorization	The session authorization information.
-	 *
-	 *	@param	ClearTopDepId	The ClearSubDep1 key attribute of the instance generating the id.
-	 *
-	 *	@return An array of derived buffer instances for the specified key, potentially with 0 elements in the set.
-	 *
-	 *	@throws	CFLibNotSupportedException thrown by client-side implementations.
-	 */
-	public ICFBamClearSubDep1[] pageRecByClearTopDepIdx( ICFSecAuthorization Authorization,
-		CFLibDbKeyHash256 ClearTopDepId,
-		CFLibDbKeyHash256 priorId )
-	{
-		final String S_ProcName = "pageRecByClearTopDepIdx";
-		throw new CFLibNotImplementedYetException( getClass(), S_ProcName );
 	}
 
 	public ICFBamClearSubDep1 updateClearSubDep1( ICFSecAuthorization Authorization,
@@ -660,6 +622,7 @@ public class CFBamRamClearSubDep1Table
 		return(Buff);
 	}
 
+	@Override
 	public void deleteClearSubDep1( ICFSecAuthorization Authorization,
 		ICFBamClearSubDep1 iBuff )
 	{
@@ -706,6 +669,7 @@ public class CFBamRamClearSubDep1Table
 		schema.getTableClearDep().deleteClearDep( Authorization,
 			Buff );
 	}
+	@Override
 	public void deleteClearSubDep1ByClearTopDepIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argClearTopDepId )
 	{
@@ -714,6 +678,7 @@ public class CFBamRamClearSubDep1Table
 		deleteClearSubDep1ByClearTopDepIdx( Authorization, key );
 	}
 
+	@Override
 	public void deleteClearSubDep1ByClearTopDepIdx( ICFSecAuthorization Authorization,
 		ICFBamClearSubDep1ByClearTopDepIdxKey argKey )
 	{
@@ -740,6 +705,7 @@ public class CFBamRamClearSubDep1Table
 		}
 	}
 
+	@Override
 	public void deleteClearSubDep1ByUNameIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argClearTopDepId,
 		String argName )
@@ -750,6 +716,7 @@ public class CFBamRamClearSubDep1Table
 		deleteClearSubDep1ByUNameIdx( Authorization, key );
 	}
 
+	@Override
 	public void deleteClearSubDep1ByUNameIdx( ICFSecAuthorization Authorization,
 		ICFBamClearSubDep1ByUNameIdxKey argKey )
 	{
@@ -777,6 +744,7 @@ public class CFBamRamClearSubDep1Table
 		}
 	}
 
+	@Override
 	public void deleteClearSubDep1ByClearDepIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argRelationId )
 	{
@@ -785,6 +753,7 @@ public class CFBamRamClearSubDep1Table
 		deleteClearSubDep1ByClearDepIdx( Authorization, key );
 	}
 
+	@Override
 	public void deleteClearSubDep1ByClearDepIdx( ICFSecAuthorization Authorization,
 		ICFBamClearDepByClearDepIdxKey argKey )
 	{
@@ -811,6 +780,7 @@ public class CFBamRamClearSubDep1Table
 		}
 	}
 
+	@Override
 	public void deleteClearSubDep1ByDefSchemaIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argDefSchemaId )
 	{
@@ -819,6 +789,7 @@ public class CFBamRamClearSubDep1Table
 		deleteClearSubDep1ByDefSchemaIdx( Authorization, key );
 	}
 
+	@Override
 	public void deleteClearSubDep1ByDefSchemaIdx( ICFSecAuthorization Authorization,
 		ICFBamClearDepByDefSchemaIdxKey argKey )
 	{
@@ -847,6 +818,7 @@ public class CFBamRamClearSubDep1Table
 		}
 	}
 
+	@Override
 	public void deleteClearSubDep1ByIdIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argKey )
 	{
@@ -873,6 +845,7 @@ public class CFBamRamClearSubDep1Table
 		}
 	}
 
+	@Override
 	public void deleteClearSubDep1ByTenantIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argTenantId )
 	{
@@ -881,6 +854,7 @@ public class CFBamRamClearSubDep1Table
 		deleteClearSubDep1ByTenantIdx( Authorization, key );
 	}
 
+	@Override
 	public void deleteClearSubDep1ByTenantIdx( ICFSecAuthorization Authorization,
 		ICFBamScopeByTenantIdxKey argKey )
 	{

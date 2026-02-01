@@ -80,6 +80,7 @@ public class CFBamRamTZDateDefTable
 		}
 	}
 
+	@Override
 	public ICFBamTZDateDef createTZDateDef( ICFSecAuthorization Authorization,
 		ICFBamTZDateDef iBuff )
 	{
@@ -147,6 +148,7 @@ public class CFBamRamTZDateDefTable
 		}
 	}
 
+	@Override
 	public ICFBamTZDateDef readDerived( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 PKey )
 	{
@@ -161,6 +163,7 @@ public class CFBamRamTZDateDefTable
 		return( buff );
 	}
 
+	@Override
 	public ICFBamTZDateDef lockDerived( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 PKey )
 	{
@@ -175,6 +178,7 @@ public class CFBamRamTZDateDefTable
 		return( buff );
 	}
 
+	@Override
 	public ICFBamTZDateDef[] readAllDerived( ICFSecAuthorization Authorization ) {
 		final String S_ProcName = "CFBamRamTZDateDef.readAllDerived";
 		ICFBamTZDateDef[] retList = new ICFBamTZDateDef[ dictByPKey.values().size() ];
@@ -186,6 +190,7 @@ public class CFBamRamTZDateDefTable
 		return( retList );
 	}
 
+	@Override
 	public ICFBamTZDateDef readDerivedByUNameIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 ScopeId,
 		String Name )
@@ -205,6 +210,7 @@ public class CFBamRamTZDateDefTable
 		}
 	}
 
+	@Override
 	public ICFBamTZDateDef[] readDerivedByScopeIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 ScopeId )
 	{
@@ -227,6 +233,7 @@ public class CFBamRamTZDateDefTable
 		}
 	}
 
+	@Override
 	public ICFBamTZDateDef[] readDerivedByDefSchemaIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 DefSchemaId )
 	{
@@ -249,6 +256,7 @@ public class CFBamRamTZDateDefTable
 		}
 	}
 
+	@Override
 	public ICFBamTZDateDef[] readDerivedByPrevIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 PrevId )
 	{
@@ -271,6 +279,7 @@ public class CFBamRamTZDateDefTable
 		}
 	}
 
+	@Override
 	public ICFBamTZDateDef[] readDerivedByNextIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 NextId )
 	{
@@ -293,6 +302,7 @@ public class CFBamRamTZDateDefTable
 		}
 	}
 
+	@Override
 	public ICFBamTZDateDef[] readDerivedByContPrevIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 ScopeId,
 		CFLibDbKeyHash256 PrevId )
@@ -317,6 +327,7 @@ public class CFBamRamTZDateDefTable
 		}
 	}
 
+	@Override
 	public ICFBamTZDateDef[] readDerivedByContNextIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 ScopeId,
 		CFLibDbKeyHash256 NextId )
@@ -341,6 +352,7 @@ public class CFBamRamTZDateDefTable
 		}
 	}
 
+	@Override
 	public ICFBamTZDateDef readDerivedByIdIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 Id )
 	{
@@ -355,6 +367,7 @@ public class CFBamRamTZDateDefTable
 		return( buff );
 	}
 
+	@Override
 	public ICFBamTZDateDef readRec( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 PKey )
 	{
@@ -366,6 +379,7 @@ public class CFBamRamTZDateDefTable
 		return( buff );
 	}
 
+	@Override
 	public ICFBamTZDateDef lockRec( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 PKey )
 	{
@@ -377,6 +391,7 @@ public class CFBamRamTZDateDefTable
 		return( buff );
 	}
 
+	@Override
 	public ICFBamTZDateDef[] readAllRec( ICFSecAuthorization Authorization )
 	{
 		final String S_ProcName = "CFBamRamTZDateDef.readAllRec";
@@ -392,6 +407,7 @@ public class CFBamRamTZDateDefTable
 		return( filteredList.toArray( new ICFBamTZDateDef[0] ) );
 	}
 
+	@Override
 	public ICFBamTZDateDef readRecByIdIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 Id )
 	{
@@ -406,6 +422,7 @@ public class CFBamRamTZDateDefTable
 		}
 	}
 
+	@Override
 	public ICFBamTZDateDef readRecByUNameIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 ScopeId,
 		String Name )
@@ -422,6 +439,7 @@ public class CFBamRamTZDateDefTable
 		}
 	}
 
+	@Override
 	public ICFBamTZDateDef[] readRecByScopeIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 ScopeId )
 	{
@@ -439,6 +457,7 @@ public class CFBamRamTZDateDefTable
 		return( filteredList.toArray( new ICFBamTZDateDef[0] ) );
 	}
 
+	@Override
 	public ICFBamTZDateDef[] readRecByDefSchemaIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 DefSchemaId )
 	{
@@ -456,6 +475,7 @@ public class CFBamRamTZDateDefTable
 		return( filteredList.toArray( new ICFBamTZDateDef[0] ) );
 	}
 
+	@Override
 	public ICFBamTZDateDef[] readRecByPrevIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 PrevId )
 	{
@@ -473,6 +493,7 @@ public class CFBamRamTZDateDefTable
 		return( filteredList.toArray( new ICFBamTZDateDef[0] ) );
 	}
 
+	@Override
 	public ICFBamTZDateDef[] readRecByNextIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 NextId )
 	{
@@ -490,6 +511,7 @@ public class CFBamRamTZDateDefTable
 		return( filteredList.toArray( new ICFBamTZDateDef[0] ) );
 	}
 
+	@Override
 	public ICFBamTZDateDef[] readRecByContPrevIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 ScopeId,
 		CFLibDbKeyHash256 PrevId )
@@ -509,6 +531,7 @@ public class CFBamRamTZDateDefTable
 		return( filteredList.toArray( new ICFBamTZDateDef[0] ) );
 	}
 
+	@Override
 	public ICFBamTZDateDef[] readRecByContNextIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 ScopeId,
 		CFLibDbKeyHash256 NextId )
@@ -533,6 +556,7 @@ public class CFBamRamTZDateDefTable
 	 *
 	 *	@return	The refreshed buffer after it has been moved
 	 */
+	@Override
 	public ICFBamTZDateDef moveRecUp( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 Id,
 		int revision )
@@ -3206,6 +3230,7 @@ public class CFBamRamTZDateDefTable
 	 *
 	 *	@return	The refreshed buffer after it has been moved
 	 */
+	@Override
 	public ICFBamTZDateDef moveRecDown( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 Id,
 		int revision )
@@ -5923,6 +5948,7 @@ public class CFBamRamTZDateDefTable
 		return(Buff);
 	}
 
+	@Override
 	public void deleteTZDateDef( ICFSecAuthorization Authorization,
 		ICFBamTZDateDef iBuff )
 	{
@@ -7323,6 +7349,7 @@ public class CFBamRamTZDateDefTable
 		schema.getTableAtom().deleteAtom( Authorization,
 			Buff );
 	}
+	@Override
 	public void deleteTZDateDefByIdIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argKey )
 	{
@@ -7362,6 +7389,7 @@ public class CFBamRamTZDateDefTable
 		}
 	}
 
+	@Override
 	public void deleteTZDateDefByUNameIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argScopeId,
 		String argName )
@@ -7372,6 +7400,7 @@ public class CFBamRamTZDateDefTable
 		deleteTZDateDefByUNameIdx( Authorization, key );
 	}
 
+	@Override
 	public void deleteTZDateDefByUNameIdx( ICFSecAuthorization Authorization,
 		ICFBamValueByUNameIdxKey argKey )
 	{
@@ -7412,6 +7441,7 @@ public class CFBamRamTZDateDefTable
 		}
 	}
 
+	@Override
 	public void deleteTZDateDefByScopeIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argScopeId )
 	{
@@ -7420,6 +7450,7 @@ public class CFBamRamTZDateDefTable
 		deleteTZDateDefByScopeIdx( Authorization, key );
 	}
 
+	@Override
 	public void deleteTZDateDefByScopeIdx( ICFSecAuthorization Authorization,
 		ICFBamValueByScopeIdxKey argKey )
 	{
@@ -7459,6 +7490,7 @@ public class CFBamRamTZDateDefTable
 		}
 	}
 
+	@Override
 	public void deleteTZDateDefByDefSchemaIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argDefSchemaId )
 	{
@@ -7467,6 +7499,7 @@ public class CFBamRamTZDateDefTable
 		deleteTZDateDefByDefSchemaIdx( Authorization, key );
 	}
 
+	@Override
 	public void deleteTZDateDefByDefSchemaIdx( ICFSecAuthorization Authorization,
 		ICFBamValueByDefSchemaIdxKey argKey )
 	{
@@ -7508,6 +7541,7 @@ public class CFBamRamTZDateDefTable
 		}
 	}
 
+	@Override
 	public void deleteTZDateDefByPrevIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argPrevId )
 	{
@@ -7516,6 +7550,7 @@ public class CFBamRamTZDateDefTable
 		deleteTZDateDefByPrevIdx( Authorization, key );
 	}
 
+	@Override
 	public void deleteTZDateDefByPrevIdx( ICFSecAuthorization Authorization,
 		ICFBamValueByPrevIdxKey argKey )
 	{
@@ -7557,6 +7592,7 @@ public class CFBamRamTZDateDefTable
 		}
 	}
 
+	@Override
 	public void deleteTZDateDefByNextIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argNextId )
 	{
@@ -7565,6 +7601,7 @@ public class CFBamRamTZDateDefTable
 		deleteTZDateDefByNextIdx( Authorization, key );
 	}
 
+	@Override
 	public void deleteTZDateDefByNextIdx( ICFSecAuthorization Authorization,
 		ICFBamValueByNextIdxKey argKey )
 	{
@@ -7606,6 +7643,7 @@ public class CFBamRamTZDateDefTable
 		}
 	}
 
+	@Override
 	public void deleteTZDateDefByContPrevIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argScopeId,
 		CFLibDbKeyHash256 argPrevId )
@@ -7616,6 +7654,7 @@ public class CFBamRamTZDateDefTable
 		deleteTZDateDefByContPrevIdx( Authorization, key );
 	}
 
+	@Override
 	public void deleteTZDateDefByContPrevIdx( ICFSecAuthorization Authorization,
 		ICFBamValueByContPrevIdxKey argKey )
 	{
@@ -7658,6 +7697,7 @@ public class CFBamRamTZDateDefTable
 		}
 	}
 
+	@Override
 	public void deleteTZDateDefByContNextIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argScopeId,
 		CFLibDbKeyHash256 argNextId )
@@ -7668,6 +7708,7 @@ public class CFBamRamTZDateDefTable
 		deleteTZDateDefByContNextIdx( Authorization, key );
 	}
 
+	@Override
 	public void deleteTZDateDefByContNextIdx( ICFSecAuthorization Authorization,
 		ICFBamValueByContNextIdxKey argKey )
 	{

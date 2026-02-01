@@ -92,6 +92,7 @@ public class CFBamRamPopDepTable
 		}
 	}
 
+	@Override
 	public ICFBamPopDep createPopDep( ICFSecAuthorization Authorization,
 		ICFBamPopDep iBuff )
 	{
@@ -215,6 +216,7 @@ public class CFBamRamPopDepTable
 		}
 	}
 
+	@Override
 	public ICFBamPopDep readDerived( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 PKey )
 	{
@@ -229,6 +231,7 @@ public class CFBamRamPopDepTable
 		return( buff );
 	}
 
+	@Override
 	public ICFBamPopDep lockDerived( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 PKey )
 	{
@@ -243,6 +246,7 @@ public class CFBamRamPopDepTable
 		return( buff );
 	}
 
+	@Override
 	public ICFBamPopDep[] readAllDerived( ICFSecAuthorization Authorization ) {
 		final String S_ProcName = "CFBamRamPopDep.readAllDerived";
 		ICFBamPopDep[] retList = new ICFBamPopDep[ dictByPKey.values().size() ];
@@ -254,6 +258,7 @@ public class CFBamRamPopDepTable
 		return( retList );
 	}
 
+	@Override
 	public ICFBamPopDep[] readDerivedByTenantIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 TenantId )
 	{
@@ -276,6 +281,7 @@ public class CFBamRamPopDepTable
 		}
 	}
 
+	@Override
 	public ICFBamPopDep[] readDerivedByRelationIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 RelationId )
 	{
@@ -303,6 +309,7 @@ public class CFBamRamPopDepTable
 		return( recArray );
 	}
 
+	@Override
 	public ICFBamPopDep[] readDerivedByDefSchemaIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 DefSchemaId )
 	{
@@ -330,6 +337,7 @@ public class CFBamRamPopDepTable
 		return( recArray );
 	}
 
+	@Override
 	public ICFBamPopDep readDerivedByIdIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 Id )
 	{
@@ -344,6 +352,7 @@ public class CFBamRamPopDepTable
 		return( buff );
 	}
 
+	@Override
 	public ICFBamPopDep readRec( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 PKey )
 	{
@@ -355,6 +364,7 @@ public class CFBamRamPopDepTable
 		return( buff );
 	}
 
+	@Override
 	public ICFBamPopDep lockRec( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 PKey )
 	{
@@ -366,6 +376,7 @@ public class CFBamRamPopDepTable
 		return( buff );
 	}
 
+	@Override
 	public ICFBamPopDep[] readAllRec( ICFSecAuthorization Authorization )
 	{
 		final String S_ProcName = "CFBamRamPopDep.readAllRec";
@@ -381,6 +392,7 @@ public class CFBamRamPopDepTable
 		return( filteredList.toArray( new ICFBamPopDep[0] ) );
 	}
 
+	@Override
 	public ICFBamPopDep readRecByIdIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 Id )
 	{
@@ -395,6 +407,7 @@ public class CFBamRamPopDepTable
 		}
 	}
 
+	@Override
 	public ICFBamPopDep[] readRecByTenantIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 TenantId )
 	{
@@ -412,6 +425,7 @@ public class CFBamRamPopDepTable
 		return( filteredList.toArray( new ICFBamPopDep[0] ) );
 	}
 
+	@Override
 	public ICFBamPopDep[] readRecByRelationIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 RelationId )
 	{
@@ -429,6 +443,7 @@ public class CFBamRamPopDepTable
 		return( filteredList.toArray( new ICFBamPopDep[0] ) );
 	}
 
+	@Override
 	public ICFBamPopDep[] readRecByDefSchemaIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 DefSchemaId )
 	{
@@ -444,44 +459,6 @@ public class CFBamRamPopDepTable
 			}
 		}
 		return( filteredList.toArray( new ICFBamPopDep[0] ) );
-	}
-
-	/**
-	 *	Read a page array of the specific PopDep buffer instances identified by the duplicate key RelationIdx.
-	 *
-	 *	@param	Authorization	The session authorization information.
-	 *
-	 *	@param	RelationId	The PopDep key attribute of the instance generating the id.
-	 *
-	 *	@return An array of derived buffer instances for the specified key, potentially with 0 elements in the set.
-	 *
-	 *	@throws	CFLibNotSupportedException thrown by client-side implementations.
-	 */
-	public ICFBamPopDep[] pageRecByRelationIdx( ICFSecAuthorization Authorization,
-		CFLibDbKeyHash256 RelationId,
-		CFLibDbKeyHash256 priorId )
-	{
-		final String S_ProcName = "pageRecByRelationIdx";
-		throw new CFLibNotImplementedYetException( getClass(), S_ProcName );
-	}
-
-	/**
-	 *	Read a page array of the specific PopDep buffer instances identified by the duplicate key DefSchemaIdx.
-	 *
-	 *	@param	Authorization	The session authorization information.
-	 *
-	 *	@param	DefSchemaId	The PopDep key attribute of the instance generating the id.
-	 *
-	 *	@return An array of derived buffer instances for the specified key, potentially with 0 elements in the set.
-	 *
-	 *	@throws	CFLibNotSupportedException thrown by client-side implementations.
-	 */
-	public ICFBamPopDep[] pageRecByDefSchemaIdx( ICFSecAuthorization Authorization,
-		CFLibDbKeyHash256 DefSchemaId,
-		CFLibDbKeyHash256 priorId )
-	{
-		final String S_ProcName = "pageRecByDefSchemaIdx";
-		throw new CFLibNotImplementedYetException( getClass(), S_ProcName );
 	}
 
 	public ICFBamPopDep updatePopDep( ICFSecAuthorization Authorization,
@@ -591,6 +568,7 @@ public class CFBamRamPopDepTable
 		return(Buff);
 	}
 
+	@Override
 	public void deletePopDep( ICFSecAuthorization Authorization,
 		ICFBamPopDep iBuff )
 	{
@@ -686,6 +664,7 @@ public class CFBamRamPopDepTable
 		schema.getTableScope().deleteScope( Authorization,
 			Buff );
 	}
+	@Override
 	public void deletePopDepByRelationIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argRelationId )
 	{
@@ -694,6 +673,7 @@ public class CFBamRamPopDepTable
 		deletePopDepByRelationIdx( Authorization, key );
 	}
 
+	@Override
 	public void deletePopDepByRelationIdx( ICFSecAuthorization Authorization,
 		ICFBamPopDepByRelationIdxKey argKey )
 	{
@@ -739,6 +719,7 @@ public class CFBamRamPopDepTable
 		}
 	}
 
+	@Override
 	public void deletePopDepByDefSchemaIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argDefSchemaId )
 	{
@@ -747,6 +728,7 @@ public class CFBamRamPopDepTable
 		deletePopDepByDefSchemaIdx( Authorization, key );
 	}
 
+	@Override
 	public void deletePopDepByDefSchemaIdx( ICFSecAuthorization Authorization,
 		ICFBamPopDepByDefSchemaIdxKey argKey )
 	{
@@ -794,6 +776,7 @@ public class CFBamRamPopDepTable
 		}
 	}
 
+	@Override
 	public void deletePopDepByIdIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argKey )
 	{
@@ -839,6 +822,7 @@ public class CFBamRamPopDepTable
 		}
 	}
 
+	@Override
 	public void deletePopDepByTenantIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argTenantId )
 	{
@@ -847,6 +831,7 @@ public class CFBamRamPopDepTable
 		deletePopDepByTenantIdx( Authorization, key );
 	}
 
+	@Override
 	public void deletePopDepByTenantIdx( ICFSecAuthorization Authorization,
 		ICFBamScopeByTenantIdxKey argKey )
 	{

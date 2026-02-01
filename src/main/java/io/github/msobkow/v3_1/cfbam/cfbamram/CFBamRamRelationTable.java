@@ -120,6 +120,7 @@ public class CFBamRamRelationTable
 		}
 	}
 
+	@Override
 	public ICFBamRelation createRelation( ICFSecAuthorization Authorization,
 		ICFBamRelation iBuff )
 	{
@@ -349,6 +350,7 @@ public class CFBamRamRelationTable
 		}
 	}
 
+	@Override
 	public ICFBamRelation readDerived( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 PKey )
 	{
@@ -363,6 +365,7 @@ public class CFBamRamRelationTable
 		return( buff );
 	}
 
+	@Override
 	public ICFBamRelation lockDerived( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 PKey )
 	{
@@ -377,6 +380,7 @@ public class CFBamRamRelationTable
 		return( buff );
 	}
 
+	@Override
 	public ICFBamRelation[] readAllDerived( ICFSecAuthorization Authorization ) {
 		final String S_ProcName = "CFBamRamRelation.readAllDerived";
 		ICFBamRelation[] retList = new ICFBamRelation[ dictByPKey.values().size() ];
@@ -388,6 +392,7 @@ public class CFBamRamRelationTable
 		return( retList );
 	}
 
+	@Override
 	public ICFBamRelation[] readDerivedByTenantIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 TenantId )
 	{
@@ -410,6 +415,7 @@ public class CFBamRamRelationTable
 		}
 	}
 
+	@Override
 	public ICFBamRelation readDerivedByUNameIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 TableId,
 		String Name )
@@ -429,6 +435,7 @@ public class CFBamRamRelationTable
 		return( buff );
 	}
 
+	@Override
 	public ICFBamRelation[] readDerivedByRelTableIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 TableId )
 	{
@@ -456,6 +463,7 @@ public class CFBamRamRelationTable
 		return( recArray );
 	}
 
+	@Override
 	public ICFBamRelation[] readDerivedByDefSchemaIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 DefSchemaId )
 	{
@@ -483,6 +491,7 @@ public class CFBamRamRelationTable
 		return( recArray );
 	}
 
+	@Override
 	public ICFBamRelation[] readDerivedByFromKeyIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 FromIndexId )
 	{
@@ -510,6 +519,7 @@ public class CFBamRamRelationTable
 		return( recArray );
 	}
 
+	@Override
 	public ICFBamRelation[] readDerivedByToTblIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 ToTableId )
 	{
@@ -537,6 +547,7 @@ public class CFBamRamRelationTable
 		return( recArray );
 	}
 
+	@Override
 	public ICFBamRelation[] readDerivedByToKeyIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 ToIndexId )
 	{
@@ -564,6 +575,7 @@ public class CFBamRamRelationTable
 		return( recArray );
 	}
 
+	@Override
 	public ICFBamRelation[] readDerivedByNarrowedIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 NarrowedId )
 	{
@@ -591,6 +603,7 @@ public class CFBamRamRelationTable
 		return( recArray );
 	}
 
+	@Override
 	public ICFBamRelation readDerivedByIdIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 Id )
 	{
@@ -605,6 +618,7 @@ public class CFBamRamRelationTable
 		return( buff );
 	}
 
+	@Override
 	public ICFBamRelation readRec( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 PKey )
 	{
@@ -616,6 +630,7 @@ public class CFBamRamRelationTable
 		return( buff );
 	}
 
+	@Override
 	public ICFBamRelation lockRec( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 PKey )
 	{
@@ -627,6 +642,7 @@ public class CFBamRamRelationTable
 		return( buff );
 	}
 
+	@Override
 	public ICFBamRelation[] readAllRec( ICFSecAuthorization Authorization )
 	{
 		final String S_ProcName = "CFBamRamRelation.readAllRec";
@@ -642,6 +658,7 @@ public class CFBamRamRelationTable
 		return( filteredList.toArray( new ICFBamRelation[0] ) );
 	}
 
+	@Override
 	public ICFBamRelation readRecByIdIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 Id )
 	{
@@ -656,6 +673,7 @@ public class CFBamRamRelationTable
 		}
 	}
 
+	@Override
 	public ICFBamRelation[] readRecByTenantIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 TenantId )
 	{
@@ -673,6 +691,7 @@ public class CFBamRamRelationTable
 		return( filteredList.toArray( new ICFBamRelation[0] ) );
 	}
 
+	@Override
 	public ICFBamRelation readRecByUNameIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 TableId,
 		String Name )
@@ -689,6 +708,7 @@ public class CFBamRamRelationTable
 		}
 	}
 
+	@Override
 	public ICFBamRelation[] readRecByRelTableIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 TableId )
 	{
@@ -706,6 +726,7 @@ public class CFBamRamRelationTable
 		return( filteredList.toArray( new ICFBamRelation[0] ) );
 	}
 
+	@Override
 	public ICFBamRelation[] readRecByDefSchemaIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 DefSchemaId )
 	{
@@ -723,6 +744,7 @@ public class CFBamRamRelationTable
 		return( filteredList.toArray( new ICFBamRelation[0] ) );
 	}
 
+	@Override
 	public ICFBamRelation[] readRecByFromKeyIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 FromIndexId )
 	{
@@ -740,6 +762,7 @@ public class CFBamRamRelationTable
 		return( filteredList.toArray( new ICFBamRelation[0] ) );
 	}
 
+	@Override
 	public ICFBamRelation[] readRecByToTblIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 ToTableId )
 	{
@@ -757,6 +780,7 @@ public class CFBamRamRelationTable
 		return( filteredList.toArray( new ICFBamRelation[0] ) );
 	}
 
+	@Override
 	public ICFBamRelation[] readRecByToKeyIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 ToIndexId )
 	{
@@ -774,6 +798,7 @@ public class CFBamRamRelationTable
 		return( filteredList.toArray( new ICFBamRelation[0] ) );
 	}
 
+	@Override
 	public ICFBamRelation[] readRecByNarrowedIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 NarrowedId )
 	{
@@ -789,120 +814,6 @@ public class CFBamRamRelationTable
 			}
 		}
 		return( filteredList.toArray( new ICFBamRelation[0] ) );
-	}
-
-	/**
-	 *	Read a page array of the specific Relation buffer instances identified by the duplicate key RelTableIdx.
-	 *
-	 *	@param	Authorization	The session authorization information.
-	 *
-	 *	@param	TableId	The Relation key attribute of the instance generating the id.
-	 *
-	 *	@return An array of derived buffer instances for the specified key, potentially with 0 elements in the set.
-	 *
-	 *	@throws	CFLibNotSupportedException thrown by client-side implementations.
-	 */
-	public ICFBamRelation[] pageRecByRelTableIdx( ICFSecAuthorization Authorization,
-		CFLibDbKeyHash256 TableId,
-		CFLibDbKeyHash256 priorId )
-	{
-		final String S_ProcName = "pageRecByRelTableIdx";
-		throw new CFLibNotImplementedYetException( getClass(), S_ProcName );
-	}
-
-	/**
-	 *	Read a page array of the specific Relation buffer instances identified by the duplicate key DefSchemaIdx.
-	 *
-	 *	@param	Authorization	The session authorization information.
-	 *
-	 *	@param	DefSchemaId	The Relation key attribute of the instance generating the id.
-	 *
-	 *	@return An array of derived buffer instances for the specified key, potentially with 0 elements in the set.
-	 *
-	 *	@throws	CFLibNotSupportedException thrown by client-side implementations.
-	 */
-	public ICFBamRelation[] pageRecByDefSchemaIdx( ICFSecAuthorization Authorization,
-		CFLibDbKeyHash256 DefSchemaId,
-		CFLibDbKeyHash256 priorId )
-	{
-		final String S_ProcName = "pageRecByDefSchemaIdx";
-		throw new CFLibNotImplementedYetException( getClass(), S_ProcName );
-	}
-
-	/**
-	 *	Read a page array of the specific Relation buffer instances identified by the duplicate key FromKeyIdx.
-	 *
-	 *	@param	Authorization	The session authorization information.
-	 *
-	 *	@param	FromIndexId	The Relation key attribute of the instance generating the id.
-	 *
-	 *	@return An array of derived buffer instances for the specified key, potentially with 0 elements in the set.
-	 *
-	 *	@throws	CFLibNotSupportedException thrown by client-side implementations.
-	 */
-	public ICFBamRelation[] pageRecByFromKeyIdx( ICFSecAuthorization Authorization,
-		CFLibDbKeyHash256 FromIndexId,
-		CFLibDbKeyHash256 priorId )
-	{
-		final String S_ProcName = "pageRecByFromKeyIdx";
-		throw new CFLibNotImplementedYetException( getClass(), S_ProcName );
-	}
-
-	/**
-	 *	Read a page array of the specific Relation buffer instances identified by the duplicate key ToTblIdx.
-	 *
-	 *	@param	Authorization	The session authorization information.
-	 *
-	 *	@param	ToTableId	The Relation key attribute of the instance generating the id.
-	 *
-	 *	@return An array of derived buffer instances for the specified key, potentially with 0 elements in the set.
-	 *
-	 *	@throws	CFLibNotSupportedException thrown by client-side implementations.
-	 */
-	public ICFBamRelation[] pageRecByToTblIdx( ICFSecAuthorization Authorization,
-		CFLibDbKeyHash256 ToTableId,
-		CFLibDbKeyHash256 priorId )
-	{
-		final String S_ProcName = "pageRecByToTblIdx";
-		throw new CFLibNotImplementedYetException( getClass(), S_ProcName );
-	}
-
-	/**
-	 *	Read a page array of the specific Relation buffer instances identified by the duplicate key ToKeyIdx.
-	 *
-	 *	@param	Authorization	The session authorization information.
-	 *
-	 *	@param	ToIndexId	The Relation key attribute of the instance generating the id.
-	 *
-	 *	@return An array of derived buffer instances for the specified key, potentially with 0 elements in the set.
-	 *
-	 *	@throws	CFLibNotSupportedException thrown by client-side implementations.
-	 */
-	public ICFBamRelation[] pageRecByToKeyIdx( ICFSecAuthorization Authorization,
-		CFLibDbKeyHash256 ToIndexId,
-		CFLibDbKeyHash256 priorId )
-	{
-		final String S_ProcName = "pageRecByToKeyIdx";
-		throw new CFLibNotImplementedYetException( getClass(), S_ProcName );
-	}
-
-	/**
-	 *	Read a page array of the specific Relation buffer instances identified by the duplicate key NarrowedIdx.
-	 *
-	 *	@param	Authorization	The session authorization information.
-	 *
-	 *	@param	NarrowedId	The Relation key attribute of the instance generating the id.
-	 *
-	 *	@return An array of derived buffer instances for the specified key, potentially with 0 elements in the set.
-	 *
-	 *	@throws	CFLibNotSupportedException thrown by client-side implementations.
-	 */
-	public ICFBamRelation[] pageRecByNarrowedIdx( ICFSecAuthorization Authorization,
-		CFLibDbKeyHash256 NarrowedId,
-		CFLibDbKeyHash256 priorId )
-	{
-		final String S_ProcName = "pageRecByNarrowedIdx";
-		throw new CFLibNotImplementedYetException( getClass(), S_ProcName );
 	}
 
 	public ICFBamRelation updateRelation( ICFSecAuthorization Authorization,
@@ -1169,6 +1080,7 @@ public class CFBamRamRelationTable
 		return(Buff);
 	}
 
+	@Override
 	public void deleteRelation( ICFSecAuthorization Authorization,
 		ICFBamRelation iBuff )
 	{
@@ -1312,6 +1224,7 @@ public class CFBamRamRelationTable
 		schema.getTableScope().deleteScope( Authorization,
 			Buff );
 	}
+	@Override
 	public void deleteRelationByUNameIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argTableId,
 		String argName )
@@ -1322,6 +1235,7 @@ public class CFBamRamRelationTable
 		deleteRelationByUNameIdx( Authorization, key );
 	}
 
+	@Override
 	public void deleteRelationByUNameIdx( ICFSecAuthorization Authorization,
 		ICFBamRelationByUNameIdxKey argKey )
 	{
@@ -1349,6 +1263,7 @@ public class CFBamRamRelationTable
 		}
 	}
 
+	@Override
 	public void deleteRelationByRelTableIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argTableId )
 	{
@@ -1357,6 +1272,7 @@ public class CFBamRamRelationTable
 		deleteRelationByRelTableIdx( Authorization, key );
 	}
 
+	@Override
 	public void deleteRelationByRelTableIdx( ICFSecAuthorization Authorization,
 		ICFBamRelationByRelTableIdxKey argKey )
 	{
@@ -1383,6 +1299,7 @@ public class CFBamRamRelationTable
 		}
 	}
 
+	@Override
 	public void deleteRelationByDefSchemaIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argDefSchemaId )
 	{
@@ -1391,6 +1308,7 @@ public class CFBamRamRelationTable
 		deleteRelationByDefSchemaIdx( Authorization, key );
 	}
 
+	@Override
 	public void deleteRelationByDefSchemaIdx( ICFSecAuthorization Authorization,
 		ICFBamRelationByDefSchemaIdxKey argKey )
 	{
@@ -1419,6 +1337,7 @@ public class CFBamRamRelationTable
 		}
 	}
 
+	@Override
 	public void deleteRelationByFromKeyIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argFromIndexId )
 	{
@@ -1427,6 +1346,7 @@ public class CFBamRamRelationTable
 		deleteRelationByFromKeyIdx( Authorization, key );
 	}
 
+	@Override
 	public void deleteRelationByFromKeyIdx( ICFSecAuthorization Authorization,
 		ICFBamRelationByFromKeyIdxKey argKey )
 	{
@@ -1453,6 +1373,7 @@ public class CFBamRamRelationTable
 		}
 	}
 
+	@Override
 	public void deleteRelationByToTblIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argToTableId )
 	{
@@ -1461,6 +1382,7 @@ public class CFBamRamRelationTable
 		deleteRelationByToTblIdx( Authorization, key );
 	}
 
+	@Override
 	public void deleteRelationByToTblIdx( ICFSecAuthorization Authorization,
 		ICFBamRelationByToTblIdxKey argKey )
 	{
@@ -1487,6 +1409,7 @@ public class CFBamRamRelationTable
 		}
 	}
 
+	@Override
 	public void deleteRelationByToKeyIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argToIndexId )
 	{
@@ -1495,6 +1418,7 @@ public class CFBamRamRelationTable
 		deleteRelationByToKeyIdx( Authorization, key );
 	}
 
+	@Override
 	public void deleteRelationByToKeyIdx( ICFSecAuthorization Authorization,
 		ICFBamRelationByToKeyIdxKey argKey )
 	{
@@ -1521,6 +1445,7 @@ public class CFBamRamRelationTable
 		}
 	}
 
+	@Override
 	public void deleteRelationByNarrowedIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argNarrowedId )
 	{
@@ -1529,6 +1454,7 @@ public class CFBamRamRelationTable
 		deleteRelationByNarrowedIdx( Authorization, key );
 	}
 
+	@Override
 	public void deleteRelationByNarrowedIdx( ICFSecAuthorization Authorization,
 		ICFBamRelationByNarrowedIdxKey argKey )
 	{
@@ -1557,6 +1483,7 @@ public class CFBamRamRelationTable
 		}
 	}
 
+	@Override
 	public void deleteRelationByIdIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argKey )
 	{
@@ -1583,6 +1510,7 @@ public class CFBamRamRelationTable
 		}
 	}
 
+	@Override
 	public void deleteRelationByTenantIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argTenantId )
 	{
@@ -1591,6 +1519,7 @@ public class CFBamRamRelationTable
 		deleteRelationByTenantIdx( Authorization, key );
 	}
 
+	@Override
 	public void deleteRelationByTenantIdx( ICFSecAuthorization Authorization,
 		ICFBamScopeByTenantIdxKey argKey )
 	{

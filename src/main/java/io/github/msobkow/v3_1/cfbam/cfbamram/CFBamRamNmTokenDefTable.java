@@ -80,6 +80,7 @@ public class CFBamRamNmTokenDefTable
 		}
 	}
 
+	@Override
 	public ICFBamNmTokenDef createNmTokenDef( ICFSecAuthorization Authorization,
 		ICFBamNmTokenDef iBuff )
 	{
@@ -147,6 +148,7 @@ public class CFBamRamNmTokenDefTable
 		}
 	}
 
+	@Override
 	public ICFBamNmTokenDef readDerived( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 PKey )
 	{
@@ -161,6 +163,7 @@ public class CFBamRamNmTokenDefTable
 		return( buff );
 	}
 
+	@Override
 	public ICFBamNmTokenDef lockDerived( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 PKey )
 	{
@@ -175,6 +178,7 @@ public class CFBamRamNmTokenDefTable
 		return( buff );
 	}
 
+	@Override
 	public ICFBamNmTokenDef[] readAllDerived( ICFSecAuthorization Authorization ) {
 		final String S_ProcName = "CFBamRamNmTokenDef.readAllDerived";
 		ICFBamNmTokenDef[] retList = new ICFBamNmTokenDef[ dictByPKey.values().size() ];
@@ -186,6 +190,7 @@ public class CFBamRamNmTokenDefTable
 		return( retList );
 	}
 
+	@Override
 	public ICFBamNmTokenDef readDerivedByUNameIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 ScopeId,
 		String Name )
@@ -205,6 +210,7 @@ public class CFBamRamNmTokenDefTable
 		}
 	}
 
+	@Override
 	public ICFBamNmTokenDef[] readDerivedByScopeIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 ScopeId )
 	{
@@ -227,6 +233,7 @@ public class CFBamRamNmTokenDefTable
 		}
 	}
 
+	@Override
 	public ICFBamNmTokenDef[] readDerivedByDefSchemaIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 DefSchemaId )
 	{
@@ -249,6 +256,7 @@ public class CFBamRamNmTokenDefTable
 		}
 	}
 
+	@Override
 	public ICFBamNmTokenDef[] readDerivedByPrevIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 PrevId )
 	{
@@ -271,6 +279,7 @@ public class CFBamRamNmTokenDefTable
 		}
 	}
 
+	@Override
 	public ICFBamNmTokenDef[] readDerivedByNextIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 NextId )
 	{
@@ -293,6 +302,7 @@ public class CFBamRamNmTokenDefTable
 		}
 	}
 
+	@Override
 	public ICFBamNmTokenDef[] readDerivedByContPrevIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 ScopeId,
 		CFLibDbKeyHash256 PrevId )
@@ -317,6 +327,7 @@ public class CFBamRamNmTokenDefTable
 		}
 	}
 
+	@Override
 	public ICFBamNmTokenDef[] readDerivedByContNextIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 ScopeId,
 		CFLibDbKeyHash256 NextId )
@@ -341,6 +352,7 @@ public class CFBamRamNmTokenDefTable
 		}
 	}
 
+	@Override
 	public ICFBamNmTokenDef readDerivedByIdIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 Id )
 	{
@@ -355,6 +367,7 @@ public class CFBamRamNmTokenDefTable
 		return( buff );
 	}
 
+	@Override
 	public ICFBamNmTokenDef readRec( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 PKey )
 	{
@@ -366,6 +379,7 @@ public class CFBamRamNmTokenDefTable
 		return( buff );
 	}
 
+	@Override
 	public ICFBamNmTokenDef lockRec( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 PKey )
 	{
@@ -377,6 +391,7 @@ public class CFBamRamNmTokenDefTable
 		return( buff );
 	}
 
+	@Override
 	public ICFBamNmTokenDef[] readAllRec( ICFSecAuthorization Authorization )
 	{
 		final String S_ProcName = "CFBamRamNmTokenDef.readAllRec";
@@ -392,6 +407,7 @@ public class CFBamRamNmTokenDefTable
 		return( filteredList.toArray( new ICFBamNmTokenDef[0] ) );
 	}
 
+	@Override
 	public ICFBamNmTokenDef readRecByIdIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 Id )
 	{
@@ -406,6 +422,7 @@ public class CFBamRamNmTokenDefTable
 		}
 	}
 
+	@Override
 	public ICFBamNmTokenDef readRecByUNameIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 ScopeId,
 		String Name )
@@ -422,6 +439,7 @@ public class CFBamRamNmTokenDefTable
 		}
 	}
 
+	@Override
 	public ICFBamNmTokenDef[] readRecByScopeIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 ScopeId )
 	{
@@ -439,6 +457,7 @@ public class CFBamRamNmTokenDefTable
 		return( filteredList.toArray( new ICFBamNmTokenDef[0] ) );
 	}
 
+	@Override
 	public ICFBamNmTokenDef[] readRecByDefSchemaIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 DefSchemaId )
 	{
@@ -456,6 +475,7 @@ public class CFBamRamNmTokenDefTable
 		return( filteredList.toArray( new ICFBamNmTokenDef[0] ) );
 	}
 
+	@Override
 	public ICFBamNmTokenDef[] readRecByPrevIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 PrevId )
 	{
@@ -473,6 +493,7 @@ public class CFBamRamNmTokenDefTable
 		return( filteredList.toArray( new ICFBamNmTokenDef[0] ) );
 	}
 
+	@Override
 	public ICFBamNmTokenDef[] readRecByNextIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 NextId )
 	{
@@ -490,6 +511,7 @@ public class CFBamRamNmTokenDefTable
 		return( filteredList.toArray( new ICFBamNmTokenDef[0] ) );
 	}
 
+	@Override
 	public ICFBamNmTokenDef[] readRecByContPrevIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 ScopeId,
 		CFLibDbKeyHash256 PrevId )
@@ -509,6 +531,7 @@ public class CFBamRamNmTokenDefTable
 		return( filteredList.toArray( new ICFBamNmTokenDef[0] ) );
 	}
 
+	@Override
 	public ICFBamNmTokenDef[] readRecByContNextIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 ScopeId,
 		CFLibDbKeyHash256 NextId )
@@ -533,6 +556,7 @@ public class CFBamRamNmTokenDefTable
 	 *
 	 *	@return	The refreshed buffer after it has been moved
 	 */
+	@Override
 	public ICFBamNmTokenDef moveRecUp( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 Id,
 		int revision )
@@ -3206,6 +3230,7 @@ public class CFBamRamNmTokenDefTable
 	 *
 	 *	@return	The refreshed buffer after it has been moved
 	 */
+	@Override
 	public ICFBamNmTokenDef moveRecDown( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 Id,
 		int revision )
@@ -5923,6 +5948,7 @@ public class CFBamRamNmTokenDefTable
 		return(Buff);
 	}
 
+	@Override
 	public void deleteNmTokenDef( ICFSecAuthorization Authorization,
 		ICFBamNmTokenDef iBuff )
 	{
@@ -7323,6 +7349,7 @@ public class CFBamRamNmTokenDefTable
 		schema.getTableAtom().deleteAtom( Authorization,
 			Buff );
 	}
+	@Override
 	public void deleteNmTokenDefByIdIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argKey )
 	{
@@ -7362,6 +7389,7 @@ public class CFBamRamNmTokenDefTable
 		}
 	}
 
+	@Override
 	public void deleteNmTokenDefByUNameIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argScopeId,
 		String argName )
@@ -7372,6 +7400,7 @@ public class CFBamRamNmTokenDefTable
 		deleteNmTokenDefByUNameIdx( Authorization, key );
 	}
 
+	@Override
 	public void deleteNmTokenDefByUNameIdx( ICFSecAuthorization Authorization,
 		ICFBamValueByUNameIdxKey argKey )
 	{
@@ -7412,6 +7441,7 @@ public class CFBamRamNmTokenDefTable
 		}
 	}
 
+	@Override
 	public void deleteNmTokenDefByScopeIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argScopeId )
 	{
@@ -7420,6 +7450,7 @@ public class CFBamRamNmTokenDefTable
 		deleteNmTokenDefByScopeIdx( Authorization, key );
 	}
 
+	@Override
 	public void deleteNmTokenDefByScopeIdx( ICFSecAuthorization Authorization,
 		ICFBamValueByScopeIdxKey argKey )
 	{
@@ -7459,6 +7490,7 @@ public class CFBamRamNmTokenDefTable
 		}
 	}
 
+	@Override
 	public void deleteNmTokenDefByDefSchemaIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argDefSchemaId )
 	{
@@ -7467,6 +7499,7 @@ public class CFBamRamNmTokenDefTable
 		deleteNmTokenDefByDefSchemaIdx( Authorization, key );
 	}
 
+	@Override
 	public void deleteNmTokenDefByDefSchemaIdx( ICFSecAuthorization Authorization,
 		ICFBamValueByDefSchemaIdxKey argKey )
 	{
@@ -7508,6 +7541,7 @@ public class CFBamRamNmTokenDefTable
 		}
 	}
 
+	@Override
 	public void deleteNmTokenDefByPrevIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argPrevId )
 	{
@@ -7516,6 +7550,7 @@ public class CFBamRamNmTokenDefTable
 		deleteNmTokenDefByPrevIdx( Authorization, key );
 	}
 
+	@Override
 	public void deleteNmTokenDefByPrevIdx( ICFSecAuthorization Authorization,
 		ICFBamValueByPrevIdxKey argKey )
 	{
@@ -7557,6 +7592,7 @@ public class CFBamRamNmTokenDefTable
 		}
 	}
 
+	@Override
 	public void deleteNmTokenDefByNextIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argNextId )
 	{
@@ -7565,6 +7601,7 @@ public class CFBamRamNmTokenDefTable
 		deleteNmTokenDefByNextIdx( Authorization, key );
 	}
 
+	@Override
 	public void deleteNmTokenDefByNextIdx( ICFSecAuthorization Authorization,
 		ICFBamValueByNextIdxKey argKey )
 	{
@@ -7606,6 +7643,7 @@ public class CFBamRamNmTokenDefTable
 		}
 	}
 
+	@Override
 	public void deleteNmTokenDefByContPrevIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argScopeId,
 		CFLibDbKeyHash256 argPrevId )
@@ -7616,6 +7654,7 @@ public class CFBamRamNmTokenDefTable
 		deleteNmTokenDefByContPrevIdx( Authorization, key );
 	}
 
+	@Override
 	public void deleteNmTokenDefByContPrevIdx( ICFSecAuthorization Authorization,
 		ICFBamValueByContPrevIdxKey argKey )
 	{
@@ -7658,6 +7697,7 @@ public class CFBamRamNmTokenDefTable
 		}
 	}
 
+	@Override
 	public void deleteNmTokenDefByContNextIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argScopeId,
 		CFLibDbKeyHash256 argNextId )
@@ -7668,6 +7708,7 @@ public class CFBamRamNmTokenDefTable
 		deleteNmTokenDefByContNextIdx( Authorization, key );
 	}
 
+	@Override
 	public void deleteNmTokenDefByContNextIdx( ICFSecAuthorization Authorization,
 		ICFBamValueByContNextIdxKey argKey )
 	{

@@ -86,6 +86,7 @@ public class CFBamRamBlobTypeTable
 		}
 	}
 
+	@Override
 	public ICFBamBlobType createBlobType( ICFSecAuthorization Authorization,
 		ICFBamBlobType iBuff )
 	{
@@ -835,6 +836,7 @@ public class CFBamRamBlobTypeTable
 		}
 	}
 
+	@Override
 	public ICFBamBlobType readDerived( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 PKey )
 	{
@@ -849,6 +851,7 @@ public class CFBamRamBlobTypeTable
 		return( buff );
 	}
 
+	@Override
 	public ICFBamBlobType lockDerived( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 PKey )
 	{
@@ -863,6 +866,7 @@ public class CFBamRamBlobTypeTable
 		return( buff );
 	}
 
+	@Override
 	public ICFBamBlobType[] readAllDerived( ICFSecAuthorization Authorization ) {
 		final String S_ProcName = "CFBamRamBlobType.readAllDerived";
 		ICFBamBlobType[] retList = new ICFBamBlobType[ dictByPKey.values().size() ];
@@ -874,6 +878,7 @@ public class CFBamRamBlobTypeTable
 		return( retList );
 	}
 
+	@Override
 	public ICFBamBlobType readDerivedByUNameIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 ScopeId,
 		String Name )
@@ -893,6 +898,7 @@ public class CFBamRamBlobTypeTable
 		}
 	}
 
+	@Override
 	public ICFBamBlobType[] readDerivedByScopeIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 ScopeId )
 	{
@@ -915,6 +921,7 @@ public class CFBamRamBlobTypeTable
 		}
 	}
 
+	@Override
 	public ICFBamBlobType[] readDerivedByDefSchemaIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 DefSchemaId )
 	{
@@ -937,6 +944,7 @@ public class CFBamRamBlobTypeTable
 		}
 	}
 
+	@Override
 	public ICFBamBlobType[] readDerivedByPrevIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 PrevId )
 	{
@@ -959,6 +967,7 @@ public class CFBamRamBlobTypeTable
 		}
 	}
 
+	@Override
 	public ICFBamBlobType[] readDerivedByNextIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 NextId )
 	{
@@ -981,6 +990,7 @@ public class CFBamRamBlobTypeTable
 		}
 	}
 
+	@Override
 	public ICFBamBlobType[] readDerivedByContPrevIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 ScopeId,
 		CFLibDbKeyHash256 PrevId )
@@ -1005,6 +1015,7 @@ public class CFBamRamBlobTypeTable
 		}
 	}
 
+	@Override
 	public ICFBamBlobType[] readDerivedByContNextIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 ScopeId,
 		CFLibDbKeyHash256 NextId )
@@ -1029,6 +1040,7 @@ public class CFBamRamBlobTypeTable
 		}
 	}
 
+	@Override
 	public ICFBamBlobType[] readDerivedBySchemaIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 SchemaDefId )
 	{
@@ -1056,6 +1068,7 @@ public class CFBamRamBlobTypeTable
 		return( recArray );
 	}
 
+	@Override
 	public ICFBamBlobType readDerivedByIdIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 Id )
 	{
@@ -1070,6 +1083,7 @@ public class CFBamRamBlobTypeTable
 		return( buff );
 	}
 
+	@Override
 	public ICFBamBlobType readRec( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 PKey )
 	{
@@ -1081,6 +1095,7 @@ public class CFBamRamBlobTypeTable
 		return( buff );
 	}
 
+	@Override
 	public ICFBamBlobType lockRec( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 PKey )
 	{
@@ -1092,6 +1107,7 @@ public class CFBamRamBlobTypeTable
 		return( buff );
 	}
 
+	@Override
 	public ICFBamBlobType[] readAllRec( ICFSecAuthorization Authorization )
 	{
 		final String S_ProcName = "CFBamRamBlobType.readAllRec";
@@ -1107,6 +1123,7 @@ public class CFBamRamBlobTypeTable
 		return( filteredList.toArray( new ICFBamBlobType[0] ) );
 	}
 
+	@Override
 	public ICFBamBlobType readRecByIdIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 Id )
 	{
@@ -1121,6 +1138,7 @@ public class CFBamRamBlobTypeTable
 		}
 	}
 
+	@Override
 	public ICFBamBlobType readRecByUNameIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 ScopeId,
 		String Name )
@@ -1137,6 +1155,7 @@ public class CFBamRamBlobTypeTable
 		}
 	}
 
+	@Override
 	public ICFBamBlobType[] readRecByScopeIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 ScopeId )
 	{
@@ -1154,6 +1173,7 @@ public class CFBamRamBlobTypeTable
 		return( filteredList.toArray( new ICFBamBlobType[0] ) );
 	}
 
+	@Override
 	public ICFBamBlobType[] readRecByDefSchemaIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 DefSchemaId )
 	{
@@ -1171,6 +1191,7 @@ public class CFBamRamBlobTypeTable
 		return( filteredList.toArray( new ICFBamBlobType[0] ) );
 	}
 
+	@Override
 	public ICFBamBlobType[] readRecByPrevIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 PrevId )
 	{
@@ -1188,6 +1209,7 @@ public class CFBamRamBlobTypeTable
 		return( filteredList.toArray( new ICFBamBlobType[0] ) );
 	}
 
+	@Override
 	public ICFBamBlobType[] readRecByNextIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 NextId )
 	{
@@ -1205,6 +1227,7 @@ public class CFBamRamBlobTypeTable
 		return( filteredList.toArray( new ICFBamBlobType[0] ) );
 	}
 
+	@Override
 	public ICFBamBlobType[] readRecByContPrevIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 ScopeId,
 		CFLibDbKeyHash256 PrevId )
@@ -1224,6 +1247,7 @@ public class CFBamRamBlobTypeTable
 		return( filteredList.toArray( new ICFBamBlobType[0] ) );
 	}
 
+	@Override
 	public ICFBamBlobType[] readRecByContNextIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 ScopeId,
 		CFLibDbKeyHash256 NextId )
@@ -1243,6 +1267,7 @@ public class CFBamRamBlobTypeTable
 		return( filteredList.toArray( new ICFBamBlobType[0] ) );
 	}
 
+	@Override
 	public ICFBamBlobType[] readRecBySchemaIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 SchemaDefId )
 	{
@@ -1261,29 +1286,11 @@ public class CFBamRamBlobTypeTable
 	}
 
 	/**
-	 *	Read a page array of the specific BlobType buffer instances identified by the duplicate key SchemaIdx.
-	 *
-	 *	@param	Authorization	The session authorization information.
-	 *
-	 *	@param	SchemaDefId	The BlobType key attribute of the instance generating the id.
-	 *
-	 *	@return An array of derived buffer instances for the specified key, potentially with 0 elements in the set.
-	 *
-	 *	@throws	CFLibNotSupportedException thrown by client-side implementations.
-	 */
-	public ICFBamBlobType[] pageRecBySchemaIdx( ICFSecAuthorization Authorization,
-		CFLibDbKeyHash256 SchemaDefId,
-		CFLibDbKeyHash256 priorId )
-	{
-		final String S_ProcName = "pageRecBySchemaIdx";
-		throw new CFLibNotImplementedYetException( getClass(), S_ProcName );
-	}
-
-	/**
 	 *	Move the specified buffer up in the chain (i.e. to the previous position.)
 	 *
 	 *	@return	The refreshed buffer after it has been moved
 	 */
+	@Override
 	public ICFBamBlobType moveRecUp( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 Id,
 		int revision )
@@ -3957,6 +3964,7 @@ public class CFBamRamBlobTypeTable
 	 *
 	 *	@return	The refreshed buffer after it has been moved
 	 */
+	@Override
 	public ICFBamBlobType moveRecDown( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 Id,
 		int revision )
@@ -6713,6 +6721,7 @@ public class CFBamRamBlobTypeTable
 		return(Buff);
 	}
 
+	@Override
 	public void deleteBlobType( ICFSecAuthorization Authorization,
 		ICFBamBlobType iBuff )
 	{
@@ -8091,6 +8100,7 @@ public class CFBamRamBlobTypeTable
 		schema.getTableBlobDef().deleteBlobDef( Authorization,
 			Buff );
 	}
+	@Override
 	public void deleteBlobTypeBySchemaIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argSchemaDefId )
 	{
@@ -8099,6 +8109,7 @@ public class CFBamRamBlobTypeTable
 		deleteBlobTypeBySchemaIdx( Authorization, key );
 	}
 
+	@Override
 	public void deleteBlobTypeBySchemaIdx( ICFSecAuthorization Authorization,
 		ICFBamBlobTypeBySchemaIdxKey argKey )
 	{
@@ -8125,6 +8136,7 @@ public class CFBamRamBlobTypeTable
 		}
 	}
 
+	@Override
 	public void deleteBlobTypeByIdIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argKey )
 	{
@@ -8151,6 +8163,7 @@ public class CFBamRamBlobTypeTable
 		}
 	}
 
+	@Override
 	public void deleteBlobTypeByUNameIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argScopeId,
 		String argName )
@@ -8161,6 +8174,7 @@ public class CFBamRamBlobTypeTable
 		deleteBlobTypeByUNameIdx( Authorization, key );
 	}
 
+	@Override
 	public void deleteBlobTypeByUNameIdx( ICFSecAuthorization Authorization,
 		ICFBamValueByUNameIdxKey argKey )
 	{
@@ -8188,6 +8202,7 @@ public class CFBamRamBlobTypeTable
 		}
 	}
 
+	@Override
 	public void deleteBlobTypeByScopeIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argScopeId )
 	{
@@ -8196,6 +8211,7 @@ public class CFBamRamBlobTypeTable
 		deleteBlobTypeByScopeIdx( Authorization, key );
 	}
 
+	@Override
 	public void deleteBlobTypeByScopeIdx( ICFSecAuthorization Authorization,
 		ICFBamValueByScopeIdxKey argKey )
 	{
@@ -8222,6 +8238,7 @@ public class CFBamRamBlobTypeTable
 		}
 	}
 
+	@Override
 	public void deleteBlobTypeByDefSchemaIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argDefSchemaId )
 	{
@@ -8230,6 +8247,7 @@ public class CFBamRamBlobTypeTable
 		deleteBlobTypeByDefSchemaIdx( Authorization, key );
 	}
 
+	@Override
 	public void deleteBlobTypeByDefSchemaIdx( ICFSecAuthorization Authorization,
 		ICFBamValueByDefSchemaIdxKey argKey )
 	{
@@ -8258,6 +8276,7 @@ public class CFBamRamBlobTypeTable
 		}
 	}
 
+	@Override
 	public void deleteBlobTypeByPrevIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argPrevId )
 	{
@@ -8266,6 +8285,7 @@ public class CFBamRamBlobTypeTable
 		deleteBlobTypeByPrevIdx( Authorization, key );
 	}
 
+	@Override
 	public void deleteBlobTypeByPrevIdx( ICFSecAuthorization Authorization,
 		ICFBamValueByPrevIdxKey argKey )
 	{
@@ -8294,6 +8314,7 @@ public class CFBamRamBlobTypeTable
 		}
 	}
 
+	@Override
 	public void deleteBlobTypeByNextIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argNextId )
 	{
@@ -8302,6 +8323,7 @@ public class CFBamRamBlobTypeTable
 		deleteBlobTypeByNextIdx( Authorization, key );
 	}
 
+	@Override
 	public void deleteBlobTypeByNextIdx( ICFSecAuthorization Authorization,
 		ICFBamValueByNextIdxKey argKey )
 	{
@@ -8330,6 +8352,7 @@ public class CFBamRamBlobTypeTable
 		}
 	}
 
+	@Override
 	public void deleteBlobTypeByContPrevIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argScopeId,
 		CFLibDbKeyHash256 argPrevId )
@@ -8340,6 +8363,7 @@ public class CFBamRamBlobTypeTable
 		deleteBlobTypeByContPrevIdx( Authorization, key );
 	}
 
+	@Override
 	public void deleteBlobTypeByContPrevIdx( ICFSecAuthorization Authorization,
 		ICFBamValueByContPrevIdxKey argKey )
 	{
@@ -8369,6 +8393,7 @@ public class CFBamRamBlobTypeTable
 		}
 	}
 
+	@Override
 	public void deleteBlobTypeByContNextIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argScopeId,
 		CFLibDbKeyHash256 argNextId )
@@ -8379,6 +8404,7 @@ public class CFBamRamBlobTypeTable
 		deleteBlobTypeByContNextIdx( Authorization, key );
 	}
 
+	@Override
 	public void deleteBlobTypeByContNextIdx( ICFSecAuthorization Authorization,
 		ICFBamValueByContNextIdxKey argKey )
 	{

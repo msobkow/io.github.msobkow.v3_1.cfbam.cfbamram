@@ -164,6 +164,7 @@ public class CFBamRamScopeTable
 		}
 	}
 
+	@Override
 	public ICFBamScope createScope( ICFSecAuthorization Authorization,
 		ICFBamScope iBuff )
 	{
@@ -354,6 +355,7 @@ public class CFBamRamScopeTable
 		}
 	}
 
+	@Override
 	public ICFBamScope readDerived( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 PKey )
 	{
@@ -368,6 +370,7 @@ public class CFBamRamScopeTable
 		return( buff );
 	}
 
+	@Override
 	public ICFBamScope lockDerived( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 PKey )
 	{
@@ -382,6 +385,7 @@ public class CFBamRamScopeTable
 		return( buff );
 	}
 
+	@Override
 	public ICFBamScope[] readAllDerived( ICFSecAuthorization Authorization ) {
 		final String S_ProcName = "CFBamRamScope.readAllDerived";
 		ICFBamScope[] retList = new ICFBamScope[ dictByPKey.values().size() ];
@@ -393,6 +397,7 @@ public class CFBamRamScopeTable
 		return( retList );
 	}
 
+	@Override
 	public ICFBamScope[] readDerivedByTenantIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 TenantId )
 	{
@@ -420,6 +425,7 @@ public class CFBamRamScopeTable
 		return( recArray );
 	}
 
+	@Override
 	public ICFBamScope readDerivedByIdIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 Id )
 	{
@@ -434,6 +440,7 @@ public class CFBamRamScopeTable
 		return( buff );
 	}
 
+	@Override
 	public ICFBamScope readRec( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 PKey )
 	{
@@ -445,6 +452,7 @@ public class CFBamRamScopeTable
 		return( buff );
 	}
 
+	@Override
 	public ICFBamScope lockRec( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 PKey )
 	{
@@ -456,6 +464,7 @@ public class CFBamRamScopeTable
 		return( buff );
 	}
 
+	@Override
 	public ICFBamScope[] readAllRec( ICFSecAuthorization Authorization )
 	{
 		final String S_ProcName = "CFBamRamScope.readAllRec";
@@ -471,6 +480,7 @@ public class CFBamRamScopeTable
 		return( filteredList.toArray( new ICFBamScope[0] ) );
 	}
 
+	@Override
 	public ICFBamScope readRecByIdIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 Id )
 	{
@@ -485,6 +495,7 @@ public class CFBamRamScopeTable
 		}
 	}
 
+	@Override
 	public ICFBamScope[] readRecByTenantIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 TenantId )
 	{
@@ -576,6 +587,7 @@ public class CFBamRamScopeTable
 		return(Buff);
 	}
 
+	@Override
 	public void deleteScope( ICFSecAuthorization Authorization,
 		ICFBamScope iBuff )
 	{
@@ -733,6 +745,7 @@ public class CFBamRamScopeTable
 		subdict.remove( pkey );
 
 	}
+	@Override
 	public void deleteScopeByIdIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argKey )
 	{
@@ -838,6 +851,7 @@ public class CFBamRamScopeTable
 		}
 	}
 
+	@Override
 	public void deleteScopeByTenantIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argTenantId )
 	{
@@ -846,6 +860,7 @@ public class CFBamRamScopeTable
 		deleteScopeByTenantIdx( Authorization, key );
 	}
 
+	@Override
 	public void deleteScopeByTenantIdx( ICFSecAuthorization Authorization,
 		ICFBamScopeByTenantIdxKey argKey )
 	{

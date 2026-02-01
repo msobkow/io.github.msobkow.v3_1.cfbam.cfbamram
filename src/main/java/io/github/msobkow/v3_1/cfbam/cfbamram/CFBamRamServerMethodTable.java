@@ -96,6 +96,7 @@ public class CFBamRamServerMethodTable
 		}
 	}
 
+	@Override
 	public ICFBamServerMethod createServerMethod( ICFSecAuthorization Authorization,
 		ICFBamServerMethod iBuff )
 	{
@@ -228,6 +229,7 @@ public class CFBamRamServerMethodTable
 		}
 	}
 
+	@Override
 	public ICFBamServerMethod readDerived( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 PKey )
 	{
@@ -242,6 +244,7 @@ public class CFBamRamServerMethodTable
 		return( buff );
 	}
 
+	@Override
 	public ICFBamServerMethod lockDerived( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 PKey )
 	{
@@ -256,6 +259,7 @@ public class CFBamRamServerMethodTable
 		return( buff );
 	}
 
+	@Override
 	public ICFBamServerMethod[] readAllDerived( ICFSecAuthorization Authorization ) {
 		final String S_ProcName = "CFBamRamServerMethod.readAllDerived";
 		ICFBamServerMethod[] retList = new ICFBamServerMethod[ dictByPKey.values().size() ];
@@ -267,6 +271,7 @@ public class CFBamRamServerMethodTable
 		return( retList );
 	}
 
+	@Override
 	public ICFBamServerMethod[] readDerivedByTenantIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 TenantId )
 	{
@@ -289,6 +294,7 @@ public class CFBamRamServerMethodTable
 		}
 	}
 
+	@Override
 	public ICFBamServerMethod readDerivedByUNameIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 TableId,
 		String Name )
@@ -308,6 +314,7 @@ public class CFBamRamServerMethodTable
 		return( buff );
 	}
 
+	@Override
 	public ICFBamServerMethod[] readDerivedByMethTableIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 TableId )
 	{
@@ -335,6 +342,7 @@ public class CFBamRamServerMethodTable
 		return( recArray );
 	}
 
+	@Override
 	public ICFBamServerMethod[] readDerivedByDefSchemaIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 DefSchemaId )
 	{
@@ -362,6 +370,7 @@ public class CFBamRamServerMethodTable
 		return( recArray );
 	}
 
+	@Override
 	public ICFBamServerMethod readDerivedByIdIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 Id )
 	{
@@ -376,6 +385,7 @@ public class CFBamRamServerMethodTable
 		return( buff );
 	}
 
+	@Override
 	public ICFBamServerMethod readRec( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 PKey )
 	{
@@ -387,6 +397,7 @@ public class CFBamRamServerMethodTable
 		return( buff );
 	}
 
+	@Override
 	public ICFBamServerMethod lockRec( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 PKey )
 	{
@@ -398,6 +409,7 @@ public class CFBamRamServerMethodTable
 		return( buff );
 	}
 
+	@Override
 	public ICFBamServerMethod[] readAllRec( ICFSecAuthorization Authorization )
 	{
 		final String S_ProcName = "CFBamRamServerMethod.readAllRec";
@@ -413,6 +425,7 @@ public class CFBamRamServerMethodTable
 		return( filteredList.toArray( new ICFBamServerMethod[0] ) );
 	}
 
+	@Override
 	public ICFBamServerMethod readRecByIdIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 Id )
 	{
@@ -427,6 +440,7 @@ public class CFBamRamServerMethodTable
 		}
 	}
 
+	@Override
 	public ICFBamServerMethod[] readRecByTenantIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 TenantId )
 	{
@@ -444,6 +458,7 @@ public class CFBamRamServerMethodTable
 		return( filteredList.toArray( new ICFBamServerMethod[0] ) );
 	}
 
+	@Override
 	public ICFBamServerMethod readRecByUNameIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 TableId,
 		String Name )
@@ -460,6 +475,7 @@ public class CFBamRamServerMethodTable
 		}
 	}
 
+	@Override
 	public ICFBamServerMethod[] readRecByMethTableIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 TableId )
 	{
@@ -477,6 +493,7 @@ public class CFBamRamServerMethodTable
 		return( filteredList.toArray( new ICFBamServerMethod[0] ) );
 	}
 
+	@Override
 	public ICFBamServerMethod[] readRecByDefSchemaIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 DefSchemaId )
 	{
@@ -492,44 +509,6 @@ public class CFBamRamServerMethodTable
 			}
 		}
 		return( filteredList.toArray( new ICFBamServerMethod[0] ) );
-	}
-
-	/**
-	 *	Read a page array of the specific ServerMethod buffer instances identified by the duplicate key MethTableIdx.
-	 *
-	 *	@param	Authorization	The session authorization information.
-	 *
-	 *	@param	TableId	The ServerMethod key attribute of the instance generating the id.
-	 *
-	 *	@return An array of derived buffer instances for the specified key, potentially with 0 elements in the set.
-	 *
-	 *	@throws	CFLibNotSupportedException thrown by client-side implementations.
-	 */
-	public ICFBamServerMethod[] pageRecByMethTableIdx( ICFSecAuthorization Authorization,
-		CFLibDbKeyHash256 TableId,
-		CFLibDbKeyHash256 priorId )
-	{
-		final String S_ProcName = "pageRecByMethTableIdx";
-		throw new CFLibNotImplementedYetException( getClass(), S_ProcName );
-	}
-
-	/**
-	 *	Read a page array of the specific ServerMethod buffer instances identified by the duplicate key DefSchemaIdx.
-	 *
-	 *	@param	Authorization	The session authorization information.
-	 *
-	 *	@param	DefSchemaId	The ServerMethod key attribute of the instance generating the id.
-	 *
-	 *	@return An array of derived buffer instances for the specified key, potentially with 0 elements in the set.
-	 *
-	 *	@throws	CFLibNotSupportedException thrown by client-side implementations.
-	 */
-	public ICFBamServerMethod[] pageRecByDefSchemaIdx( ICFSecAuthorization Authorization,
-		CFLibDbKeyHash256 DefSchemaId,
-		CFLibDbKeyHash256 priorId )
-	{
-		final String S_ProcName = "pageRecByDefSchemaIdx";
-		throw new CFLibNotImplementedYetException( getClass(), S_ProcName );
 	}
 
 	public ICFBamServerMethod updateServerMethod( ICFSecAuthorization Authorization,
@@ -660,6 +639,7 @@ public class CFBamRamServerMethodTable
 		return(Buff);
 	}
 
+	@Override
 	public void deleteServerMethod( ICFSecAuthorization Authorization,
 		ICFBamServerMethod iBuff )
 	{
@@ -754,6 +734,7 @@ public class CFBamRamServerMethodTable
 		schema.getTableScope().deleteScope( Authorization,
 			Buff );
 	}
+	@Override
 	public void deleteServerMethodByUNameIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argTableId,
 		String argName )
@@ -764,6 +745,7 @@ public class CFBamRamServerMethodTable
 		deleteServerMethodByUNameIdx( Authorization, key );
 	}
 
+	@Override
 	public void deleteServerMethodByUNameIdx( ICFSecAuthorization Authorization,
 		ICFBamServerMethodByUNameIdxKey argKey )
 	{
@@ -807,6 +789,7 @@ public class CFBamRamServerMethodTable
 		}
 	}
 
+	@Override
 	public void deleteServerMethodByMethTableIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argTableId )
 	{
@@ -815,6 +798,7 @@ public class CFBamRamServerMethodTable
 		deleteServerMethodByMethTableIdx( Authorization, key );
 	}
 
+	@Override
 	public void deleteServerMethodByMethTableIdx( ICFSecAuthorization Authorization,
 		ICFBamServerMethodByMethTableIdxKey argKey )
 	{
@@ -857,6 +841,7 @@ public class CFBamRamServerMethodTable
 		}
 	}
 
+	@Override
 	public void deleteServerMethodByDefSchemaIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argDefSchemaId )
 	{
@@ -865,6 +850,7 @@ public class CFBamRamServerMethodTable
 		deleteServerMethodByDefSchemaIdx( Authorization, key );
 	}
 
+	@Override
 	public void deleteServerMethodByDefSchemaIdx( ICFSecAuthorization Authorization,
 		ICFBamServerMethodByDefSchemaIdxKey argKey )
 	{
@@ -909,6 +895,7 @@ public class CFBamRamServerMethodTable
 		}
 	}
 
+	@Override
 	public void deleteServerMethodByIdIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argKey )
 	{
@@ -951,6 +938,7 @@ public class CFBamRamServerMethodTable
 		}
 	}
 
+	@Override
 	public void deleteServerMethodByTenantIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argTenantId )
 	{
@@ -959,6 +947,7 @@ public class CFBamRamServerMethodTable
 		deleteServerMethodByTenantIdx( Authorization, key );
 	}
 
+	@Override
 	public void deleteServerMethodByTenantIdx( ICFSecAuthorization Authorization,
 		ICFBamScopeByTenantIdxKey argKey )
 	{

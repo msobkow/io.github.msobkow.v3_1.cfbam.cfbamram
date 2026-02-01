@@ -124,6 +124,7 @@ public class CFBamRamTableTable
 		}
 	}
 
+	@Override
 	public ICFBamTable createTable( ICFSecAuthorization Authorization,
 		ICFBamTable iBuff )
 	{
@@ -307,6 +308,7 @@ public class CFBamRamTableTable
 		}
 	}
 
+	@Override
 	public ICFBamTable readDerived( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 PKey )
 	{
@@ -321,6 +323,7 @@ public class CFBamRamTableTable
 		return( buff );
 	}
 
+	@Override
 	public ICFBamTable lockDerived( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 PKey )
 	{
@@ -335,6 +338,7 @@ public class CFBamRamTableTable
 		return( buff );
 	}
 
+	@Override
 	public ICFBamTable[] readAllDerived( ICFSecAuthorization Authorization ) {
 		final String S_ProcName = "CFBamRamTable.readAllDerived";
 		ICFBamTable[] retList = new ICFBamTable[ dictByPKey.values().size() ];
@@ -346,6 +350,7 @@ public class CFBamRamTableTable
 		return( retList );
 	}
 
+	@Override
 	public ICFBamTable[] readDerivedByTenantIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 TenantId )
 	{
@@ -368,6 +373,7 @@ public class CFBamRamTableTable
 		}
 	}
 
+	@Override
 	public ICFBamTable[] readDerivedBySchemaDefIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 SchemaDefId )
 	{
@@ -395,6 +401,7 @@ public class CFBamRamTableTable
 		return( recArray );
 	}
 
+	@Override
 	public ICFBamTable[] readDerivedByDefSchemaIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 DefSchemaId )
 	{
@@ -422,6 +429,7 @@ public class CFBamRamTableTable
 		return( recArray );
 	}
 
+	@Override
 	public ICFBamTable readDerivedByUNameIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 SchemaDefId,
 		String Name )
@@ -441,6 +449,7 @@ public class CFBamRamTableTable
 		return( buff );
 	}
 
+	@Override
 	public ICFBamTable readDerivedBySchemaCdIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 SchemaDefId,
 		String TableClassCode )
@@ -460,6 +469,7 @@ public class CFBamRamTableTable
 		return( buff );
 	}
 
+	@Override
 	public ICFBamTable[] readDerivedByPrimaryIndexIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 PrimaryIndexId )
 	{
@@ -487,6 +497,7 @@ public class CFBamRamTableTable
 		return( recArray );
 	}
 
+	@Override
 	public ICFBamTable[] readDerivedByLookupIndexIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 LookupIndexId )
 	{
@@ -514,6 +525,7 @@ public class CFBamRamTableTable
 		return( recArray );
 	}
 
+	@Override
 	public ICFBamTable[] readDerivedByAltIndexIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 AltIndexId )
 	{
@@ -541,6 +553,7 @@ public class CFBamRamTableTable
 		return( recArray );
 	}
 
+	@Override
 	public ICFBamTable[] readDerivedByQualTableIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 QualifyingTableId )
 	{
@@ -568,6 +581,7 @@ public class CFBamRamTableTable
 		return( recArray );
 	}
 
+	@Override
 	public ICFBamTable readDerivedByIdIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 Id )
 	{
@@ -582,6 +596,7 @@ public class CFBamRamTableTable
 		return( buff );
 	}
 
+	@Override
 	public ICFBamTable readRec( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 PKey )
 	{
@@ -593,6 +608,7 @@ public class CFBamRamTableTable
 		return( buff );
 	}
 
+	@Override
 	public ICFBamTable lockRec( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 PKey )
 	{
@@ -604,6 +620,7 @@ public class CFBamRamTableTable
 		return( buff );
 	}
 
+	@Override
 	public ICFBamTable[] readAllRec( ICFSecAuthorization Authorization )
 	{
 		final String S_ProcName = "CFBamRamTable.readAllRec";
@@ -619,6 +636,7 @@ public class CFBamRamTableTable
 		return( filteredList.toArray( new ICFBamTable[0] ) );
 	}
 
+	@Override
 	public ICFBamTable readRecByIdIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 Id )
 	{
@@ -633,6 +651,7 @@ public class CFBamRamTableTable
 		}
 	}
 
+	@Override
 	public ICFBamTable[] readRecByTenantIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 TenantId )
 	{
@@ -650,6 +669,7 @@ public class CFBamRamTableTable
 		return( filteredList.toArray( new ICFBamTable[0] ) );
 	}
 
+	@Override
 	public ICFBamTable[] readRecBySchemaDefIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 SchemaDefId )
 	{
@@ -667,6 +687,7 @@ public class CFBamRamTableTable
 		return( filteredList.toArray( new ICFBamTable[0] ) );
 	}
 
+	@Override
 	public ICFBamTable[] readRecByDefSchemaIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 DefSchemaId )
 	{
@@ -684,6 +705,7 @@ public class CFBamRamTableTable
 		return( filteredList.toArray( new ICFBamTable[0] ) );
 	}
 
+	@Override
 	public ICFBamTable readRecByUNameIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 SchemaDefId,
 		String Name )
@@ -700,6 +722,7 @@ public class CFBamRamTableTable
 		}
 	}
 
+	@Override
 	public ICFBamTable readRecBySchemaCdIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 SchemaDefId,
 		String TableClassCode )
@@ -716,6 +739,7 @@ public class CFBamRamTableTable
 		}
 	}
 
+	@Override
 	public ICFBamTable[] readRecByPrimaryIndexIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 PrimaryIndexId )
 	{
@@ -733,6 +757,7 @@ public class CFBamRamTableTable
 		return( filteredList.toArray( new ICFBamTable[0] ) );
 	}
 
+	@Override
 	public ICFBamTable[] readRecByLookupIndexIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 LookupIndexId )
 	{
@@ -750,6 +775,7 @@ public class CFBamRamTableTable
 		return( filteredList.toArray( new ICFBamTable[0] ) );
 	}
 
+	@Override
 	public ICFBamTable[] readRecByAltIndexIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 AltIndexId )
 	{
@@ -767,6 +793,7 @@ public class CFBamRamTableTable
 		return( filteredList.toArray( new ICFBamTable[0] ) );
 	}
 
+	@Override
 	public ICFBamTable[] readRecByQualTableIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 QualifyingTableId )
 	{
@@ -782,120 +809,6 @@ public class CFBamRamTableTable
 			}
 		}
 		return( filteredList.toArray( new ICFBamTable[0] ) );
-	}
-
-	/**
-	 *	Read a page array of the specific Table buffer instances identified by the duplicate key SchemaDefIdx.
-	 *
-	 *	@param	Authorization	The session authorization information.
-	 *
-	 *	@param	SchemaDefId	The Table key attribute of the instance generating the id.
-	 *
-	 *	@return An array of derived buffer instances for the specified key, potentially with 0 elements in the set.
-	 *
-	 *	@throws	CFLibNotSupportedException thrown by client-side implementations.
-	 */
-	public ICFBamTable[] pageRecBySchemaDefIdx( ICFSecAuthorization Authorization,
-		CFLibDbKeyHash256 SchemaDefId,
-		CFLibDbKeyHash256 priorId )
-	{
-		final String S_ProcName = "pageRecBySchemaDefIdx";
-		throw new CFLibNotImplementedYetException( getClass(), S_ProcName );
-	}
-
-	/**
-	 *	Read a page array of the specific Table buffer instances identified by the duplicate key DefSchemaIdx.
-	 *
-	 *	@param	Authorization	The session authorization information.
-	 *
-	 *	@param	DefSchemaId	The Table key attribute of the instance generating the id.
-	 *
-	 *	@return An array of derived buffer instances for the specified key, potentially with 0 elements in the set.
-	 *
-	 *	@throws	CFLibNotSupportedException thrown by client-side implementations.
-	 */
-	public ICFBamTable[] pageRecByDefSchemaIdx( ICFSecAuthorization Authorization,
-		CFLibDbKeyHash256 DefSchemaId,
-		CFLibDbKeyHash256 priorId )
-	{
-		final String S_ProcName = "pageRecByDefSchemaIdx";
-		throw new CFLibNotImplementedYetException( getClass(), S_ProcName );
-	}
-
-	/**
-	 *	Read a page array of the specific Table buffer instances identified by the duplicate key PrimaryIndexIdx.
-	 *
-	 *	@param	Authorization	The session authorization information.
-	 *
-	 *	@param	PrimaryIndexId	The Table key attribute of the instance generating the id.
-	 *
-	 *	@return An array of derived buffer instances for the specified key, potentially with 0 elements in the set.
-	 *
-	 *	@throws	CFLibNotSupportedException thrown by client-side implementations.
-	 */
-	public ICFBamTable[] pageRecByPrimaryIndexIdx( ICFSecAuthorization Authorization,
-		CFLibDbKeyHash256 PrimaryIndexId,
-		CFLibDbKeyHash256 priorId )
-	{
-		final String S_ProcName = "pageRecByPrimaryIndexIdx";
-		throw new CFLibNotImplementedYetException( getClass(), S_ProcName );
-	}
-
-	/**
-	 *	Read a page array of the specific Table buffer instances identified by the duplicate key LookupIndexIdx.
-	 *
-	 *	@param	Authorization	The session authorization information.
-	 *
-	 *	@param	LookupIndexId	The Table key attribute of the instance generating the id.
-	 *
-	 *	@return An array of derived buffer instances for the specified key, potentially with 0 elements in the set.
-	 *
-	 *	@throws	CFLibNotSupportedException thrown by client-side implementations.
-	 */
-	public ICFBamTable[] pageRecByLookupIndexIdx( ICFSecAuthorization Authorization,
-		CFLibDbKeyHash256 LookupIndexId,
-		CFLibDbKeyHash256 priorId )
-	{
-		final String S_ProcName = "pageRecByLookupIndexIdx";
-		throw new CFLibNotImplementedYetException( getClass(), S_ProcName );
-	}
-
-	/**
-	 *	Read a page array of the specific Table buffer instances identified by the duplicate key AltIndexIdx.
-	 *
-	 *	@param	Authorization	The session authorization information.
-	 *
-	 *	@param	AltIndexId	The Table key attribute of the instance generating the id.
-	 *
-	 *	@return An array of derived buffer instances for the specified key, potentially with 0 elements in the set.
-	 *
-	 *	@throws	CFLibNotSupportedException thrown by client-side implementations.
-	 */
-	public ICFBamTable[] pageRecByAltIndexIdx( ICFSecAuthorization Authorization,
-		CFLibDbKeyHash256 AltIndexId,
-		CFLibDbKeyHash256 priorId )
-	{
-		final String S_ProcName = "pageRecByAltIndexIdx";
-		throw new CFLibNotImplementedYetException( getClass(), S_ProcName );
-	}
-
-	/**
-	 *	Read a page array of the specific Table buffer instances identified by the duplicate key QualTableIdx.
-	 *
-	 *	@param	Authorization	The session authorization information.
-	 *
-	 *	@param	QualifyingTableId	The Table key attribute of the instance generating the id.
-	 *
-	 *	@return An array of derived buffer instances for the specified key, potentially with 0 elements in the set.
-	 *
-	 *	@throws	CFLibNotSupportedException thrown by client-side implementations.
-	 */
-	public ICFBamTable[] pageRecByQualTableIdx( ICFSecAuthorization Authorization,
-		CFLibDbKeyHash256 QualifyingTableId,
-		CFLibDbKeyHash256 priorId )
-	{
-		final String S_ProcName = "pageRecByQualTableIdx";
-		throw new CFLibNotImplementedYetException( getClass(), S_ProcName );
 	}
 
 	public ICFBamTable updateTable( ICFSecAuthorization Authorization,
@@ -1123,6 +1036,7 @@ public class CFBamRamTableTable
 		return(Buff);
 	}
 
+	@Override
 	public void deleteTable( ICFSecAuthorization Authorization,
 		ICFBamTable iBuff )
 	{
@@ -1311,6 +1225,7 @@ public class CFBamRamTableTable
 		schema.getTableScope().deleteScope( Authorization,
 			Buff );
 	}
+	@Override
 	public void deleteTableBySchemaDefIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argSchemaDefId )
 	{
@@ -1319,6 +1234,7 @@ public class CFBamRamTableTable
 		deleteTableBySchemaDefIdx( Authorization, key );
 	}
 
+	@Override
 	public void deleteTableBySchemaDefIdx( ICFSecAuthorization Authorization,
 		ICFBamTableBySchemaDefIdxKey argKey )
 	{
@@ -1345,6 +1261,7 @@ public class CFBamRamTableTable
 		}
 	}
 
+	@Override
 	public void deleteTableByDefSchemaIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argDefSchemaId )
 	{
@@ -1353,6 +1270,7 @@ public class CFBamRamTableTable
 		deleteTableByDefSchemaIdx( Authorization, key );
 	}
 
+	@Override
 	public void deleteTableByDefSchemaIdx( ICFSecAuthorization Authorization,
 		ICFBamTableByDefSchemaIdxKey argKey )
 	{
@@ -1381,6 +1299,7 @@ public class CFBamRamTableTable
 		}
 	}
 
+	@Override
 	public void deleteTableByUNameIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argSchemaDefId,
 		String argName )
@@ -1391,6 +1310,7 @@ public class CFBamRamTableTable
 		deleteTableByUNameIdx( Authorization, key );
 	}
 
+	@Override
 	public void deleteTableByUNameIdx( ICFSecAuthorization Authorization,
 		ICFBamTableByUNameIdxKey argKey )
 	{
@@ -1418,6 +1338,7 @@ public class CFBamRamTableTable
 		}
 	}
 
+	@Override
 	public void deleteTableBySchemaCdIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argSchemaDefId,
 		String argTableClassCode )
@@ -1428,6 +1349,7 @@ public class CFBamRamTableTable
 		deleteTableBySchemaCdIdx( Authorization, key );
 	}
 
+	@Override
 	public void deleteTableBySchemaCdIdx( ICFSecAuthorization Authorization,
 		ICFBamTableBySchemaCdIdxKey argKey )
 	{
@@ -1455,6 +1377,7 @@ public class CFBamRamTableTable
 		}
 	}
 
+	@Override
 	public void deleteTableByPrimaryIndexIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argPrimaryIndexId )
 	{
@@ -1463,6 +1386,7 @@ public class CFBamRamTableTable
 		deleteTableByPrimaryIndexIdx( Authorization, key );
 	}
 
+	@Override
 	public void deleteTableByPrimaryIndexIdx( ICFSecAuthorization Authorization,
 		ICFBamTableByPrimaryIndexIdxKey argKey )
 	{
@@ -1491,6 +1415,7 @@ public class CFBamRamTableTable
 		}
 	}
 
+	@Override
 	public void deleteTableByLookupIndexIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argLookupIndexId )
 	{
@@ -1499,6 +1424,7 @@ public class CFBamRamTableTable
 		deleteTableByLookupIndexIdx( Authorization, key );
 	}
 
+	@Override
 	public void deleteTableByLookupIndexIdx( ICFSecAuthorization Authorization,
 		ICFBamTableByLookupIndexIdxKey argKey )
 	{
@@ -1527,6 +1453,7 @@ public class CFBamRamTableTable
 		}
 	}
 
+	@Override
 	public void deleteTableByAltIndexIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argAltIndexId )
 	{
@@ -1535,6 +1462,7 @@ public class CFBamRamTableTable
 		deleteTableByAltIndexIdx( Authorization, key );
 	}
 
+	@Override
 	public void deleteTableByAltIndexIdx( ICFSecAuthorization Authorization,
 		ICFBamTableByAltIndexIdxKey argKey )
 	{
@@ -1563,6 +1491,7 @@ public class CFBamRamTableTable
 		}
 	}
 
+	@Override
 	public void deleteTableByQualTableIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argQualifyingTableId )
 	{
@@ -1571,6 +1500,7 @@ public class CFBamRamTableTable
 		deleteTableByQualTableIdx( Authorization, key );
 	}
 
+	@Override
 	public void deleteTableByQualTableIdx( ICFSecAuthorization Authorization,
 		ICFBamTableByQualTableIdxKey argKey )
 	{
@@ -1599,6 +1529,7 @@ public class CFBamRamTableTable
 		}
 	}
 
+	@Override
 	public void deleteTableByIdIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argKey )
 	{
@@ -1625,6 +1556,7 @@ public class CFBamRamTableTable
 		}
 	}
 
+	@Override
 	public void deleteTableByTenantIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argTenantId )
 	{
@@ -1633,6 +1565,7 @@ public class CFBamRamTableTable
 		deleteTableByTenantIdx( Authorization, key );
 	}
 
+	@Override
 	public void deleteTableByTenantIdx( ICFSecAuthorization Authorization,
 		ICFBamScopeByTenantIdxKey argKey )
 	{

@@ -86,6 +86,7 @@ public class CFBamRamEnumTypeTable
 		}
 	}
 
+	@Override
 	public ICFBamEnumType createEnumType( ICFSecAuthorization Authorization,
 		ICFBamEnumType iBuff )
 	{
@@ -835,6 +836,7 @@ public class CFBamRamEnumTypeTable
 		}
 	}
 
+	@Override
 	public ICFBamEnumType readDerived( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 PKey )
 	{
@@ -849,6 +851,7 @@ public class CFBamRamEnumTypeTable
 		return( buff );
 	}
 
+	@Override
 	public ICFBamEnumType lockDerived( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 PKey )
 	{
@@ -863,6 +866,7 @@ public class CFBamRamEnumTypeTable
 		return( buff );
 	}
 
+	@Override
 	public ICFBamEnumType[] readAllDerived( ICFSecAuthorization Authorization ) {
 		final String S_ProcName = "CFBamRamEnumType.readAllDerived";
 		ICFBamEnumType[] retList = new ICFBamEnumType[ dictByPKey.values().size() ];
@@ -874,6 +878,7 @@ public class CFBamRamEnumTypeTable
 		return( retList );
 	}
 
+	@Override
 	public ICFBamEnumType readDerivedByUNameIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 ScopeId,
 		String Name )
@@ -893,6 +898,7 @@ public class CFBamRamEnumTypeTable
 		}
 	}
 
+	@Override
 	public ICFBamEnumType[] readDerivedByScopeIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 ScopeId )
 	{
@@ -915,6 +921,7 @@ public class CFBamRamEnumTypeTable
 		}
 	}
 
+	@Override
 	public ICFBamEnumType[] readDerivedByDefSchemaIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 DefSchemaId )
 	{
@@ -937,6 +944,7 @@ public class CFBamRamEnumTypeTable
 		}
 	}
 
+	@Override
 	public ICFBamEnumType[] readDerivedByPrevIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 PrevId )
 	{
@@ -959,6 +967,7 @@ public class CFBamRamEnumTypeTable
 		}
 	}
 
+	@Override
 	public ICFBamEnumType[] readDerivedByNextIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 NextId )
 	{
@@ -981,6 +990,7 @@ public class CFBamRamEnumTypeTable
 		}
 	}
 
+	@Override
 	public ICFBamEnumType[] readDerivedByContPrevIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 ScopeId,
 		CFLibDbKeyHash256 PrevId )
@@ -1005,6 +1015,7 @@ public class CFBamRamEnumTypeTable
 		}
 	}
 
+	@Override
 	public ICFBamEnumType[] readDerivedByContNextIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 ScopeId,
 		CFLibDbKeyHash256 NextId )
@@ -1029,6 +1040,7 @@ public class CFBamRamEnumTypeTable
 		}
 	}
 
+	@Override
 	public ICFBamEnumType[] readDerivedBySchemaIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 SchemaDefId )
 	{
@@ -1056,6 +1068,7 @@ public class CFBamRamEnumTypeTable
 		return( recArray );
 	}
 
+	@Override
 	public ICFBamEnumType readDerivedByIdIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 Id )
 	{
@@ -1070,6 +1083,7 @@ public class CFBamRamEnumTypeTable
 		return( buff );
 	}
 
+	@Override
 	public ICFBamEnumType readRec( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 PKey )
 	{
@@ -1081,6 +1095,7 @@ public class CFBamRamEnumTypeTable
 		return( buff );
 	}
 
+	@Override
 	public ICFBamEnumType lockRec( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 PKey )
 	{
@@ -1092,6 +1107,7 @@ public class CFBamRamEnumTypeTable
 		return( buff );
 	}
 
+	@Override
 	public ICFBamEnumType[] readAllRec( ICFSecAuthorization Authorization )
 	{
 		final String S_ProcName = "CFBamRamEnumType.readAllRec";
@@ -1107,6 +1123,7 @@ public class CFBamRamEnumTypeTable
 		return( filteredList.toArray( new ICFBamEnumType[0] ) );
 	}
 
+	@Override
 	public ICFBamEnumType readRecByIdIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 Id )
 	{
@@ -1121,6 +1138,7 @@ public class CFBamRamEnumTypeTable
 		}
 	}
 
+	@Override
 	public ICFBamEnumType readRecByUNameIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 ScopeId,
 		String Name )
@@ -1137,6 +1155,7 @@ public class CFBamRamEnumTypeTable
 		}
 	}
 
+	@Override
 	public ICFBamEnumType[] readRecByScopeIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 ScopeId )
 	{
@@ -1154,6 +1173,7 @@ public class CFBamRamEnumTypeTable
 		return( filteredList.toArray( new ICFBamEnumType[0] ) );
 	}
 
+	@Override
 	public ICFBamEnumType[] readRecByDefSchemaIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 DefSchemaId )
 	{
@@ -1171,6 +1191,7 @@ public class CFBamRamEnumTypeTable
 		return( filteredList.toArray( new ICFBamEnumType[0] ) );
 	}
 
+	@Override
 	public ICFBamEnumType[] readRecByPrevIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 PrevId )
 	{
@@ -1188,6 +1209,7 @@ public class CFBamRamEnumTypeTable
 		return( filteredList.toArray( new ICFBamEnumType[0] ) );
 	}
 
+	@Override
 	public ICFBamEnumType[] readRecByNextIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 NextId )
 	{
@@ -1205,6 +1227,7 @@ public class CFBamRamEnumTypeTable
 		return( filteredList.toArray( new ICFBamEnumType[0] ) );
 	}
 
+	@Override
 	public ICFBamEnumType[] readRecByContPrevIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 ScopeId,
 		CFLibDbKeyHash256 PrevId )
@@ -1224,6 +1247,7 @@ public class CFBamRamEnumTypeTable
 		return( filteredList.toArray( new ICFBamEnumType[0] ) );
 	}
 
+	@Override
 	public ICFBamEnumType[] readRecByContNextIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 ScopeId,
 		CFLibDbKeyHash256 NextId )
@@ -1243,6 +1267,7 @@ public class CFBamRamEnumTypeTable
 		return( filteredList.toArray( new ICFBamEnumType[0] ) );
 	}
 
+	@Override
 	public ICFBamEnumType[] readRecBySchemaIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 SchemaDefId )
 	{
@@ -1261,29 +1286,11 @@ public class CFBamRamEnumTypeTable
 	}
 
 	/**
-	 *	Read a page array of the specific EnumType buffer instances identified by the duplicate key SchemaIdx.
-	 *
-	 *	@param	Authorization	The session authorization information.
-	 *
-	 *	@param	SchemaDefId	The EnumType key attribute of the instance generating the id.
-	 *
-	 *	@return An array of derived buffer instances for the specified key, potentially with 0 elements in the set.
-	 *
-	 *	@throws	CFLibNotSupportedException thrown by client-side implementations.
-	 */
-	public ICFBamEnumType[] pageRecBySchemaIdx( ICFSecAuthorization Authorization,
-		CFLibDbKeyHash256 SchemaDefId,
-		CFLibDbKeyHash256 priorId )
-	{
-		final String S_ProcName = "pageRecBySchemaIdx";
-		throw new CFLibNotImplementedYetException( getClass(), S_ProcName );
-	}
-
-	/**
 	 *	Move the specified buffer up in the chain (i.e. to the previous position.)
 	 *
 	 *	@return	The refreshed buffer after it has been moved
 	 */
+	@Override
 	public ICFBamEnumType moveRecUp( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 Id,
 		int revision )
@@ -3957,6 +3964,7 @@ public class CFBamRamEnumTypeTable
 	 *
 	 *	@return	The refreshed buffer after it has been moved
 	 */
+	@Override
 	public ICFBamEnumType moveRecDown( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 Id,
 		int revision )
@@ -6713,6 +6721,7 @@ public class CFBamRamEnumTypeTable
 		return(Buff);
 	}
 
+	@Override
 	public void deleteEnumType( ICFSecAuthorization Authorization,
 		ICFBamEnumType iBuff )
 	{
@@ -8098,6 +8107,7 @@ public class CFBamRamEnumTypeTable
 		schema.getTableEnumDef().deleteEnumDef( Authorization,
 			Buff );
 	}
+	@Override
 	public void deleteEnumTypeBySchemaIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argSchemaDefId )
 	{
@@ -8106,6 +8116,7 @@ public class CFBamRamEnumTypeTable
 		deleteEnumTypeBySchemaIdx( Authorization, key );
 	}
 
+	@Override
 	public void deleteEnumTypeBySchemaIdx( ICFSecAuthorization Authorization,
 		ICFBamEnumTypeBySchemaIdxKey argKey )
 	{
@@ -8132,6 +8143,7 @@ public class CFBamRamEnumTypeTable
 		}
 	}
 
+	@Override
 	public void deleteEnumTypeByIdIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argKey )
 	{
@@ -8158,6 +8170,7 @@ public class CFBamRamEnumTypeTable
 		}
 	}
 
+	@Override
 	public void deleteEnumTypeByUNameIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argScopeId,
 		String argName )
@@ -8168,6 +8181,7 @@ public class CFBamRamEnumTypeTable
 		deleteEnumTypeByUNameIdx( Authorization, key );
 	}
 
+	@Override
 	public void deleteEnumTypeByUNameIdx( ICFSecAuthorization Authorization,
 		ICFBamValueByUNameIdxKey argKey )
 	{
@@ -8195,6 +8209,7 @@ public class CFBamRamEnumTypeTable
 		}
 	}
 
+	@Override
 	public void deleteEnumTypeByScopeIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argScopeId )
 	{
@@ -8203,6 +8218,7 @@ public class CFBamRamEnumTypeTable
 		deleteEnumTypeByScopeIdx( Authorization, key );
 	}
 
+	@Override
 	public void deleteEnumTypeByScopeIdx( ICFSecAuthorization Authorization,
 		ICFBamValueByScopeIdxKey argKey )
 	{
@@ -8229,6 +8245,7 @@ public class CFBamRamEnumTypeTable
 		}
 	}
 
+	@Override
 	public void deleteEnumTypeByDefSchemaIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argDefSchemaId )
 	{
@@ -8237,6 +8254,7 @@ public class CFBamRamEnumTypeTable
 		deleteEnumTypeByDefSchemaIdx( Authorization, key );
 	}
 
+	@Override
 	public void deleteEnumTypeByDefSchemaIdx( ICFSecAuthorization Authorization,
 		ICFBamValueByDefSchemaIdxKey argKey )
 	{
@@ -8265,6 +8283,7 @@ public class CFBamRamEnumTypeTable
 		}
 	}
 
+	@Override
 	public void deleteEnumTypeByPrevIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argPrevId )
 	{
@@ -8273,6 +8292,7 @@ public class CFBamRamEnumTypeTable
 		deleteEnumTypeByPrevIdx( Authorization, key );
 	}
 
+	@Override
 	public void deleteEnumTypeByPrevIdx( ICFSecAuthorization Authorization,
 		ICFBamValueByPrevIdxKey argKey )
 	{
@@ -8301,6 +8321,7 @@ public class CFBamRamEnumTypeTable
 		}
 	}
 
+	@Override
 	public void deleteEnumTypeByNextIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argNextId )
 	{
@@ -8309,6 +8330,7 @@ public class CFBamRamEnumTypeTable
 		deleteEnumTypeByNextIdx( Authorization, key );
 	}
 
+	@Override
 	public void deleteEnumTypeByNextIdx( ICFSecAuthorization Authorization,
 		ICFBamValueByNextIdxKey argKey )
 	{
@@ -8337,6 +8359,7 @@ public class CFBamRamEnumTypeTable
 		}
 	}
 
+	@Override
 	public void deleteEnumTypeByContPrevIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argScopeId,
 		CFLibDbKeyHash256 argPrevId )
@@ -8347,6 +8370,7 @@ public class CFBamRamEnumTypeTable
 		deleteEnumTypeByContPrevIdx( Authorization, key );
 	}
 
+	@Override
 	public void deleteEnumTypeByContPrevIdx( ICFSecAuthorization Authorization,
 		ICFBamValueByContPrevIdxKey argKey )
 	{
@@ -8376,6 +8400,7 @@ public class CFBamRamEnumTypeTable
 		}
 	}
 
+	@Override
 	public void deleteEnumTypeByContNextIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argScopeId,
 		CFLibDbKeyHash256 argNextId )
@@ -8386,6 +8411,7 @@ public class CFBamRamEnumTypeTable
 		deleteEnumTypeByContNextIdx( Authorization, key );
 	}
 
+	@Override
 	public void deleteEnumTypeByContNextIdx( ICFSecAuthorization Authorization,
 		ICFBamValueByContNextIdxKey argKey )
 	{

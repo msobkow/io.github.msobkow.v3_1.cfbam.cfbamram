@@ -92,6 +92,7 @@ public class CFBamRamDelDepTable
 		}
 	}
 
+	@Override
 	public ICFBamDelDep createDelDep( ICFSecAuthorization Authorization,
 		ICFBamDelDep iBuff )
 	{
@@ -215,6 +216,7 @@ public class CFBamRamDelDepTable
 		}
 	}
 
+	@Override
 	public ICFBamDelDep readDerived( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 PKey )
 	{
@@ -229,6 +231,7 @@ public class CFBamRamDelDepTable
 		return( buff );
 	}
 
+	@Override
 	public ICFBamDelDep lockDerived( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 PKey )
 	{
@@ -243,6 +246,7 @@ public class CFBamRamDelDepTable
 		return( buff );
 	}
 
+	@Override
 	public ICFBamDelDep[] readAllDerived( ICFSecAuthorization Authorization ) {
 		final String S_ProcName = "CFBamRamDelDep.readAllDerived";
 		ICFBamDelDep[] retList = new ICFBamDelDep[ dictByPKey.values().size() ];
@@ -254,6 +258,7 @@ public class CFBamRamDelDepTable
 		return( retList );
 	}
 
+	@Override
 	public ICFBamDelDep[] readDerivedByTenantIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 TenantId )
 	{
@@ -276,6 +281,7 @@ public class CFBamRamDelDepTable
 		}
 	}
 
+	@Override
 	public ICFBamDelDep[] readDerivedByDefSchemaIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 DefSchemaId )
 	{
@@ -303,6 +309,7 @@ public class CFBamRamDelDepTable
 		return( recArray );
 	}
 
+	@Override
 	public ICFBamDelDep[] readDerivedByDelDepIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 RelationId )
 	{
@@ -330,6 +337,7 @@ public class CFBamRamDelDepTable
 		return( recArray );
 	}
 
+	@Override
 	public ICFBamDelDep readDerivedByIdIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 Id )
 	{
@@ -344,6 +352,7 @@ public class CFBamRamDelDepTable
 		return( buff );
 	}
 
+	@Override
 	public ICFBamDelDep readRec( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 PKey )
 	{
@@ -355,6 +364,7 @@ public class CFBamRamDelDepTable
 		return( buff );
 	}
 
+	@Override
 	public ICFBamDelDep lockRec( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 PKey )
 	{
@@ -366,6 +376,7 @@ public class CFBamRamDelDepTable
 		return( buff );
 	}
 
+	@Override
 	public ICFBamDelDep[] readAllRec( ICFSecAuthorization Authorization )
 	{
 		final String S_ProcName = "CFBamRamDelDep.readAllRec";
@@ -381,6 +392,7 @@ public class CFBamRamDelDepTable
 		return( filteredList.toArray( new ICFBamDelDep[0] ) );
 	}
 
+	@Override
 	public ICFBamDelDep readRecByIdIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 Id )
 	{
@@ -395,6 +407,7 @@ public class CFBamRamDelDepTable
 		}
 	}
 
+	@Override
 	public ICFBamDelDep[] readRecByTenantIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 TenantId )
 	{
@@ -412,6 +425,7 @@ public class CFBamRamDelDepTable
 		return( filteredList.toArray( new ICFBamDelDep[0] ) );
 	}
 
+	@Override
 	public ICFBamDelDep[] readRecByDefSchemaIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 DefSchemaId )
 	{
@@ -429,6 +443,7 @@ public class CFBamRamDelDepTable
 		return( filteredList.toArray( new ICFBamDelDep[0] ) );
 	}
 
+	@Override
 	public ICFBamDelDep[] readRecByDelDepIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 RelationId )
 	{
@@ -444,44 +459,6 @@ public class CFBamRamDelDepTable
 			}
 		}
 		return( filteredList.toArray( new ICFBamDelDep[0] ) );
-	}
-
-	/**
-	 *	Read a page array of the specific DelDep buffer instances identified by the duplicate key DefSchemaIdx.
-	 *
-	 *	@param	Authorization	The session authorization information.
-	 *
-	 *	@param	DefSchemaId	The DelDep key attribute of the instance generating the id.
-	 *
-	 *	@return An array of derived buffer instances for the specified key, potentially with 0 elements in the set.
-	 *
-	 *	@throws	CFLibNotSupportedException thrown by client-side implementations.
-	 */
-	public ICFBamDelDep[] pageRecByDefSchemaIdx( ICFSecAuthorization Authorization,
-		CFLibDbKeyHash256 DefSchemaId,
-		CFLibDbKeyHash256 priorId )
-	{
-		final String S_ProcName = "pageRecByDefSchemaIdx";
-		throw new CFLibNotImplementedYetException( getClass(), S_ProcName );
-	}
-
-	/**
-	 *	Read a page array of the specific DelDep buffer instances identified by the duplicate key DelDepIdx.
-	 *
-	 *	@param	Authorization	The session authorization information.
-	 *
-	 *	@param	RelationId	The DelDep key attribute of the instance generating the id.
-	 *
-	 *	@return An array of derived buffer instances for the specified key, potentially with 0 elements in the set.
-	 *
-	 *	@throws	CFLibNotSupportedException thrown by client-side implementations.
-	 */
-	public ICFBamDelDep[] pageRecByDelDepIdx( ICFSecAuthorization Authorization,
-		CFLibDbKeyHash256 RelationId,
-		CFLibDbKeyHash256 priorId )
-	{
-		final String S_ProcName = "pageRecByDelDepIdx";
-		throw new CFLibNotImplementedYetException( getClass(), S_ProcName );
 	}
 
 	public ICFBamDelDep updateDelDep( ICFSecAuthorization Authorization,
@@ -591,6 +568,7 @@ public class CFBamRamDelDepTable
 		return(Buff);
 	}
 
+	@Override
 	public void deleteDelDep( ICFSecAuthorization Authorization,
 		ICFBamDelDep iBuff )
 	{
@@ -686,6 +664,7 @@ public class CFBamRamDelDepTable
 		schema.getTableScope().deleteScope( Authorization,
 			Buff );
 	}
+	@Override
 	public void deleteDelDepByDefSchemaIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argDefSchemaId )
 	{
@@ -694,6 +673,7 @@ public class CFBamRamDelDepTable
 		deleteDelDepByDefSchemaIdx( Authorization, key );
 	}
 
+	@Override
 	public void deleteDelDepByDefSchemaIdx( ICFSecAuthorization Authorization,
 		ICFBamDelDepByDefSchemaIdxKey argKey )
 	{
@@ -741,6 +721,7 @@ public class CFBamRamDelDepTable
 		}
 	}
 
+	@Override
 	public void deleteDelDepByDelDepIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argRelationId )
 	{
@@ -749,6 +730,7 @@ public class CFBamRamDelDepTable
 		deleteDelDepByDelDepIdx( Authorization, key );
 	}
 
+	@Override
 	public void deleteDelDepByDelDepIdx( ICFSecAuthorization Authorization,
 		ICFBamDelDepByDelDepIdxKey argKey )
 	{
@@ -794,6 +776,7 @@ public class CFBamRamDelDepTable
 		}
 	}
 
+	@Override
 	public void deleteDelDepByIdIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argKey )
 	{
@@ -839,6 +822,7 @@ public class CFBamRamDelDepTable
 		}
 	}
 
+	@Override
 	public void deleteDelDepByTenantIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argTenantId )
 	{
@@ -847,6 +831,7 @@ public class CFBamRamDelDepTable
 		deleteDelDepByTenantIdx( Authorization, key );
 	}
 
+	@Override
 	public void deleteDelDepByTenantIdx( ICFSecAuthorization Authorization,
 		ICFBamScopeByTenantIdxKey argKey )
 	{

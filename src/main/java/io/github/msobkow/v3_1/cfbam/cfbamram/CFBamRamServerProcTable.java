@@ -80,6 +80,7 @@ public class CFBamRamServerProcTable
 		}
 	}
 
+	@Override
 	public ICFBamServerProc createServerProc( ICFSecAuthorization Authorization,
 		ICFBamServerProc iBuff )
 	{
@@ -137,6 +138,7 @@ public class CFBamRamServerProcTable
 		}
 	}
 
+	@Override
 	public ICFBamServerProc readDerived( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 PKey )
 	{
@@ -151,6 +153,7 @@ public class CFBamRamServerProcTable
 		return( buff );
 	}
 
+	@Override
 	public ICFBamServerProc lockDerived( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 PKey )
 	{
@@ -165,6 +168,7 @@ public class CFBamRamServerProcTable
 		return( buff );
 	}
 
+	@Override
 	public ICFBamServerProc[] readAllDerived( ICFSecAuthorization Authorization ) {
 		final String S_ProcName = "CFBamRamServerProc.readAllDerived";
 		ICFBamServerProc[] retList = new ICFBamServerProc[ dictByPKey.values().size() ];
@@ -176,6 +180,7 @@ public class CFBamRamServerProcTable
 		return( retList );
 	}
 
+	@Override
 	public ICFBamServerProc[] readDerivedByTenantIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 TenantId )
 	{
@@ -198,6 +203,7 @@ public class CFBamRamServerProcTable
 		}
 	}
 
+	@Override
 	public ICFBamServerProc readDerivedByUNameIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 TableId,
 		String Name )
@@ -217,6 +223,7 @@ public class CFBamRamServerProcTable
 		}
 	}
 
+	@Override
 	public ICFBamServerProc[] readDerivedByMethTableIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 TableId )
 	{
@@ -239,6 +246,7 @@ public class CFBamRamServerProcTable
 		}
 	}
 
+	@Override
 	public ICFBamServerProc[] readDerivedByDefSchemaIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 DefSchemaId )
 	{
@@ -261,6 +269,7 @@ public class CFBamRamServerProcTable
 		}
 	}
 
+	@Override
 	public ICFBamServerProc readDerivedByIdIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 Id )
 	{
@@ -275,6 +284,7 @@ public class CFBamRamServerProcTable
 		return( buff );
 	}
 
+	@Override
 	public ICFBamServerProc readRec( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 PKey )
 	{
@@ -286,6 +296,7 @@ public class CFBamRamServerProcTable
 		return( buff );
 	}
 
+	@Override
 	public ICFBamServerProc lockRec( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 PKey )
 	{
@@ -297,6 +308,7 @@ public class CFBamRamServerProcTable
 		return( buff );
 	}
 
+	@Override
 	public ICFBamServerProc[] readAllRec( ICFSecAuthorization Authorization )
 	{
 		final String S_ProcName = "CFBamRamServerProc.readAllRec";
@@ -312,6 +324,7 @@ public class CFBamRamServerProcTable
 		return( filteredList.toArray( new ICFBamServerProc[0] ) );
 	}
 
+	@Override
 	public ICFBamServerProc readRecByIdIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 Id )
 	{
@@ -326,6 +339,7 @@ public class CFBamRamServerProcTable
 		}
 	}
 
+	@Override
 	public ICFBamServerProc[] readRecByTenantIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 TenantId )
 	{
@@ -343,6 +357,7 @@ public class CFBamRamServerProcTable
 		return( filteredList.toArray( new ICFBamServerProc[0] ) );
 	}
 
+	@Override
 	public ICFBamServerProc readRecByUNameIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 TableId,
 		String Name )
@@ -359,6 +374,7 @@ public class CFBamRamServerProcTable
 		}
 	}
 
+	@Override
 	public ICFBamServerProc[] readRecByMethTableIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 TableId )
 	{
@@ -376,6 +392,7 @@ public class CFBamRamServerProcTable
 		return( filteredList.toArray( new ICFBamServerProc[0] ) );
 	}
 
+	@Override
 	public ICFBamServerProc[] readRecByDefSchemaIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 DefSchemaId )
 	{
@@ -391,44 +408,6 @@ public class CFBamRamServerProcTable
 			}
 		}
 		return( filteredList.toArray( new ICFBamServerProc[0] ) );
-	}
-
-	/**
-	 *	Read a page array of the specific ServerProc buffer instances identified by the duplicate key MethTableIdx.
-	 *
-	 *	@param	Authorization	The session authorization information.
-	 *
-	 *	@param	TableId	The ServerProc key attribute of the instance generating the id.
-	 *
-	 *	@return An array of derived buffer instances for the specified key, potentially with 0 elements in the set.
-	 *
-	 *	@throws	CFLibNotSupportedException thrown by client-side implementations.
-	 */
-	public ICFBamServerProc[] pageRecByMethTableIdx( ICFSecAuthorization Authorization,
-		CFLibDbKeyHash256 TableId,
-		CFLibDbKeyHash256 priorId )
-	{
-		final String S_ProcName = "pageRecByMethTableIdx";
-		throw new CFLibNotImplementedYetException( getClass(), S_ProcName );
-	}
-
-	/**
-	 *	Read a page array of the specific ServerProc buffer instances identified by the duplicate key DefSchemaIdx.
-	 *
-	 *	@param	Authorization	The session authorization information.
-	 *
-	 *	@param	DefSchemaId	The ServerProc key attribute of the instance generating the id.
-	 *
-	 *	@return An array of derived buffer instances for the specified key, potentially with 0 elements in the set.
-	 *
-	 *	@throws	CFLibNotSupportedException thrown by client-side implementations.
-	 */
-	public ICFBamServerProc[] pageRecByDefSchemaIdx( ICFSecAuthorization Authorization,
-		CFLibDbKeyHash256 DefSchemaId,
-		CFLibDbKeyHash256 priorId )
-	{
-		final String S_ProcName = "pageRecByDefSchemaIdx";
-		throw new CFLibNotImplementedYetException( getClass(), S_ProcName );
 	}
 
 	public ICFBamServerProc updateServerProc( ICFSecAuthorization Authorization,
@@ -480,6 +459,7 @@ public class CFBamRamServerProcTable
 		return(Buff);
 	}
 
+	@Override
 	public void deleteServerProc( ICFSecAuthorization Authorization,
 		ICFBamServerProc iBuff )
 	{
@@ -509,6 +489,7 @@ public class CFBamRamServerProcTable
 		schema.getTableServerMethod().deleteServerMethod( Authorization,
 			Buff );
 	}
+	@Override
 	public void deleteServerProcByUNameIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argTableId,
 		String argName )
@@ -519,6 +500,7 @@ public class CFBamRamServerProcTable
 		deleteServerProcByUNameIdx( Authorization, key );
 	}
 
+	@Override
 	public void deleteServerProcByUNameIdx( ICFSecAuthorization Authorization,
 		ICFBamServerMethodByUNameIdxKey argKey )
 	{
@@ -546,6 +528,7 @@ public class CFBamRamServerProcTable
 		}
 	}
 
+	@Override
 	public void deleteServerProcByMethTableIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argTableId )
 	{
@@ -554,6 +537,7 @@ public class CFBamRamServerProcTable
 		deleteServerProcByMethTableIdx( Authorization, key );
 	}
 
+	@Override
 	public void deleteServerProcByMethTableIdx( ICFSecAuthorization Authorization,
 		ICFBamServerMethodByMethTableIdxKey argKey )
 	{
@@ -580,6 +564,7 @@ public class CFBamRamServerProcTable
 		}
 	}
 
+	@Override
 	public void deleteServerProcByDefSchemaIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argDefSchemaId )
 	{
@@ -588,6 +573,7 @@ public class CFBamRamServerProcTable
 		deleteServerProcByDefSchemaIdx( Authorization, key );
 	}
 
+	@Override
 	public void deleteServerProcByDefSchemaIdx( ICFSecAuthorization Authorization,
 		ICFBamServerMethodByDefSchemaIdxKey argKey )
 	{
@@ -616,6 +602,7 @@ public class CFBamRamServerProcTable
 		}
 	}
 
+	@Override
 	public void deleteServerProcByIdIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argKey )
 	{
@@ -642,6 +629,7 @@ public class CFBamRamServerProcTable
 		}
 	}
 
+	@Override
 	public void deleteServerProcByTenantIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argTenantId )
 	{
@@ -650,6 +638,7 @@ public class CFBamRamServerProcTable
 		deleteServerProcByTenantIdx( Authorization, key );
 	}
 
+	@Override
 	public void deleteServerProcByTenantIdx( ICFSecAuthorization Authorization,
 		ICFBamScopeByTenantIdxKey argKey )
 	{

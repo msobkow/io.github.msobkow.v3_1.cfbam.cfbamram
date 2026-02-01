@@ -80,6 +80,7 @@ public class CFBamRamUInt32DefTable
 		}
 	}
 
+	@Override
 	public ICFBamUInt32Def createUInt32Def( ICFSecAuthorization Authorization,
 		ICFBamUInt32Def iBuff )
 	{
@@ -147,6 +148,7 @@ public class CFBamRamUInt32DefTable
 		}
 	}
 
+	@Override
 	public ICFBamUInt32Def readDerived( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 PKey )
 	{
@@ -161,6 +163,7 @@ public class CFBamRamUInt32DefTable
 		return( buff );
 	}
 
+	@Override
 	public ICFBamUInt32Def lockDerived( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 PKey )
 	{
@@ -175,6 +178,7 @@ public class CFBamRamUInt32DefTable
 		return( buff );
 	}
 
+	@Override
 	public ICFBamUInt32Def[] readAllDerived( ICFSecAuthorization Authorization ) {
 		final String S_ProcName = "CFBamRamUInt32Def.readAllDerived";
 		ICFBamUInt32Def[] retList = new ICFBamUInt32Def[ dictByPKey.values().size() ];
@@ -186,6 +190,7 @@ public class CFBamRamUInt32DefTable
 		return( retList );
 	}
 
+	@Override
 	public ICFBamUInt32Def readDerivedByUNameIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 ScopeId,
 		String Name )
@@ -205,6 +210,7 @@ public class CFBamRamUInt32DefTable
 		}
 	}
 
+	@Override
 	public ICFBamUInt32Def[] readDerivedByScopeIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 ScopeId )
 	{
@@ -227,6 +233,7 @@ public class CFBamRamUInt32DefTable
 		}
 	}
 
+	@Override
 	public ICFBamUInt32Def[] readDerivedByDefSchemaIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 DefSchemaId )
 	{
@@ -249,6 +256,7 @@ public class CFBamRamUInt32DefTable
 		}
 	}
 
+	@Override
 	public ICFBamUInt32Def[] readDerivedByPrevIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 PrevId )
 	{
@@ -271,6 +279,7 @@ public class CFBamRamUInt32DefTable
 		}
 	}
 
+	@Override
 	public ICFBamUInt32Def[] readDerivedByNextIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 NextId )
 	{
@@ -293,6 +302,7 @@ public class CFBamRamUInt32DefTable
 		}
 	}
 
+	@Override
 	public ICFBamUInt32Def[] readDerivedByContPrevIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 ScopeId,
 		CFLibDbKeyHash256 PrevId )
@@ -317,6 +327,7 @@ public class CFBamRamUInt32DefTable
 		}
 	}
 
+	@Override
 	public ICFBamUInt32Def[] readDerivedByContNextIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 ScopeId,
 		CFLibDbKeyHash256 NextId )
@@ -341,6 +352,7 @@ public class CFBamRamUInt32DefTable
 		}
 	}
 
+	@Override
 	public ICFBamUInt32Def readDerivedByIdIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 Id )
 	{
@@ -355,6 +367,7 @@ public class CFBamRamUInt32DefTable
 		return( buff );
 	}
 
+	@Override
 	public ICFBamUInt32Def readRec( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 PKey )
 	{
@@ -366,6 +379,7 @@ public class CFBamRamUInt32DefTable
 		return( buff );
 	}
 
+	@Override
 	public ICFBamUInt32Def lockRec( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 PKey )
 	{
@@ -377,6 +391,7 @@ public class CFBamRamUInt32DefTable
 		return( buff );
 	}
 
+	@Override
 	public ICFBamUInt32Def[] readAllRec( ICFSecAuthorization Authorization )
 	{
 		final String S_ProcName = "CFBamRamUInt32Def.readAllRec";
@@ -392,6 +407,7 @@ public class CFBamRamUInt32DefTable
 		return( filteredList.toArray( new ICFBamUInt32Def[0] ) );
 	}
 
+	@Override
 	public ICFBamUInt32Def readRecByIdIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 Id )
 	{
@@ -406,6 +422,7 @@ public class CFBamRamUInt32DefTable
 		}
 	}
 
+	@Override
 	public ICFBamUInt32Def readRecByUNameIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 ScopeId,
 		String Name )
@@ -422,6 +439,7 @@ public class CFBamRamUInt32DefTable
 		}
 	}
 
+	@Override
 	public ICFBamUInt32Def[] readRecByScopeIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 ScopeId )
 	{
@@ -439,6 +457,7 @@ public class CFBamRamUInt32DefTable
 		return( filteredList.toArray( new ICFBamUInt32Def[0] ) );
 	}
 
+	@Override
 	public ICFBamUInt32Def[] readRecByDefSchemaIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 DefSchemaId )
 	{
@@ -456,6 +475,7 @@ public class CFBamRamUInt32DefTable
 		return( filteredList.toArray( new ICFBamUInt32Def[0] ) );
 	}
 
+	@Override
 	public ICFBamUInt32Def[] readRecByPrevIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 PrevId )
 	{
@@ -473,6 +493,7 @@ public class CFBamRamUInt32DefTable
 		return( filteredList.toArray( new ICFBamUInt32Def[0] ) );
 	}
 
+	@Override
 	public ICFBamUInt32Def[] readRecByNextIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 NextId )
 	{
@@ -490,6 +511,7 @@ public class CFBamRamUInt32DefTable
 		return( filteredList.toArray( new ICFBamUInt32Def[0] ) );
 	}
 
+	@Override
 	public ICFBamUInt32Def[] readRecByContPrevIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 ScopeId,
 		CFLibDbKeyHash256 PrevId )
@@ -509,6 +531,7 @@ public class CFBamRamUInt32DefTable
 		return( filteredList.toArray( new ICFBamUInt32Def[0] ) );
 	}
 
+	@Override
 	public ICFBamUInt32Def[] readRecByContNextIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 ScopeId,
 		CFLibDbKeyHash256 NextId )
@@ -533,6 +556,7 @@ public class CFBamRamUInt32DefTable
 	 *
 	 *	@return	The refreshed buffer after it has been moved
 	 */
+	@Override
 	public ICFBamUInt32Def moveRecUp( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 Id,
 		int revision )
@@ -3206,6 +3230,7 @@ public class CFBamRamUInt32DefTable
 	 *
 	 *	@return	The refreshed buffer after it has been moved
 	 */
+	@Override
 	public ICFBamUInt32Def moveRecDown( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 Id,
 		int revision )
@@ -5923,6 +5948,7 @@ public class CFBamRamUInt32DefTable
 		return(Buff);
 	}
 
+	@Override
 	public void deleteUInt32Def( ICFSecAuthorization Authorization,
 		ICFBamUInt32Def iBuff )
 	{
@@ -7323,6 +7349,7 @@ public class CFBamRamUInt32DefTable
 		schema.getTableAtom().deleteAtom( Authorization,
 			Buff );
 	}
+	@Override
 	public void deleteUInt32DefByIdIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argKey )
 	{
@@ -7362,6 +7389,7 @@ public class CFBamRamUInt32DefTable
 		}
 	}
 
+	@Override
 	public void deleteUInt32DefByUNameIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argScopeId,
 		String argName )
@@ -7372,6 +7400,7 @@ public class CFBamRamUInt32DefTable
 		deleteUInt32DefByUNameIdx( Authorization, key );
 	}
 
+	@Override
 	public void deleteUInt32DefByUNameIdx( ICFSecAuthorization Authorization,
 		ICFBamValueByUNameIdxKey argKey )
 	{
@@ -7412,6 +7441,7 @@ public class CFBamRamUInt32DefTable
 		}
 	}
 
+	@Override
 	public void deleteUInt32DefByScopeIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argScopeId )
 	{
@@ -7420,6 +7450,7 @@ public class CFBamRamUInt32DefTable
 		deleteUInt32DefByScopeIdx( Authorization, key );
 	}
 
+	@Override
 	public void deleteUInt32DefByScopeIdx( ICFSecAuthorization Authorization,
 		ICFBamValueByScopeIdxKey argKey )
 	{
@@ -7459,6 +7490,7 @@ public class CFBamRamUInt32DefTable
 		}
 	}
 
+	@Override
 	public void deleteUInt32DefByDefSchemaIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argDefSchemaId )
 	{
@@ -7467,6 +7499,7 @@ public class CFBamRamUInt32DefTable
 		deleteUInt32DefByDefSchemaIdx( Authorization, key );
 	}
 
+	@Override
 	public void deleteUInt32DefByDefSchemaIdx( ICFSecAuthorization Authorization,
 		ICFBamValueByDefSchemaIdxKey argKey )
 	{
@@ -7508,6 +7541,7 @@ public class CFBamRamUInt32DefTable
 		}
 	}
 
+	@Override
 	public void deleteUInt32DefByPrevIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argPrevId )
 	{
@@ -7516,6 +7550,7 @@ public class CFBamRamUInt32DefTable
 		deleteUInt32DefByPrevIdx( Authorization, key );
 	}
 
+	@Override
 	public void deleteUInt32DefByPrevIdx( ICFSecAuthorization Authorization,
 		ICFBamValueByPrevIdxKey argKey )
 	{
@@ -7557,6 +7592,7 @@ public class CFBamRamUInt32DefTable
 		}
 	}
 
+	@Override
 	public void deleteUInt32DefByNextIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argNextId )
 	{
@@ -7565,6 +7601,7 @@ public class CFBamRamUInt32DefTable
 		deleteUInt32DefByNextIdx( Authorization, key );
 	}
 
+	@Override
 	public void deleteUInt32DefByNextIdx( ICFSecAuthorization Authorization,
 		ICFBamValueByNextIdxKey argKey )
 	{
@@ -7606,6 +7643,7 @@ public class CFBamRamUInt32DefTable
 		}
 	}
 
+	@Override
 	public void deleteUInt32DefByContPrevIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argScopeId,
 		CFLibDbKeyHash256 argPrevId )
@@ -7616,6 +7654,7 @@ public class CFBamRamUInt32DefTable
 		deleteUInt32DefByContPrevIdx( Authorization, key );
 	}
 
+	@Override
 	public void deleteUInt32DefByContPrevIdx( ICFSecAuthorization Authorization,
 		ICFBamValueByContPrevIdxKey argKey )
 	{
@@ -7658,6 +7697,7 @@ public class CFBamRamUInt32DefTable
 		}
 	}
 
+	@Override
 	public void deleteUInt32DefByContNextIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argScopeId,
 		CFLibDbKeyHash256 argNextId )
@@ -7668,6 +7708,7 @@ public class CFBamRamUInt32DefTable
 		deleteUInt32DefByContNextIdx( Authorization, key );
 	}
 
+	@Override
 	public void deleteUInt32DefByContNextIdx( ICFSecAuthorization Authorization,
 		ICFBamValueByContNextIdxKey argKey )
 	{

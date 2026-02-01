@@ -80,6 +80,7 @@ public class CFBamRamUuidGenTable
 		}
 	}
 
+	@Override
 	public ICFBamUuidGen createUuidGen( ICFSecAuthorization Authorization,
 		ICFBamUuidGen iBuff )
 	{
@@ -796,6 +797,7 @@ public class CFBamRamUuidGenTable
 		}
 	}
 
+	@Override
 	public ICFBamUuidGen readDerived( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 PKey )
 	{
@@ -810,6 +812,7 @@ public class CFBamRamUuidGenTable
 		return( buff );
 	}
 
+	@Override
 	public ICFBamUuidGen lockDerived( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 PKey )
 	{
@@ -824,6 +827,7 @@ public class CFBamRamUuidGenTable
 		return( buff );
 	}
 
+	@Override
 	public ICFBamUuidGen[] readAllDerived( ICFSecAuthorization Authorization ) {
 		final String S_ProcName = "CFBamRamUuidGen.readAllDerived";
 		ICFBamUuidGen[] retList = new ICFBamUuidGen[ dictByPKey.values().size() ];
@@ -835,6 +839,7 @@ public class CFBamRamUuidGenTable
 		return( retList );
 	}
 
+	@Override
 	public ICFBamUuidGen readDerivedByUNameIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 ScopeId,
 		String Name )
@@ -854,6 +859,7 @@ public class CFBamRamUuidGenTable
 		}
 	}
 
+	@Override
 	public ICFBamUuidGen[] readDerivedByScopeIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 ScopeId )
 	{
@@ -876,6 +882,7 @@ public class CFBamRamUuidGenTable
 		}
 	}
 
+	@Override
 	public ICFBamUuidGen[] readDerivedByDefSchemaIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 DefSchemaId )
 	{
@@ -898,6 +905,7 @@ public class CFBamRamUuidGenTable
 		}
 	}
 
+	@Override
 	public ICFBamUuidGen[] readDerivedByPrevIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 PrevId )
 	{
@@ -920,6 +928,7 @@ public class CFBamRamUuidGenTable
 		}
 	}
 
+	@Override
 	public ICFBamUuidGen[] readDerivedByNextIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 NextId )
 	{
@@ -942,6 +951,7 @@ public class CFBamRamUuidGenTable
 		}
 	}
 
+	@Override
 	public ICFBamUuidGen[] readDerivedByContPrevIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 ScopeId,
 		CFLibDbKeyHash256 PrevId )
@@ -966,6 +976,7 @@ public class CFBamRamUuidGenTable
 		}
 	}
 
+	@Override
 	public ICFBamUuidGen[] readDerivedByContNextIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 ScopeId,
 		CFLibDbKeyHash256 NextId )
@@ -990,6 +1001,7 @@ public class CFBamRamUuidGenTable
 		}
 	}
 
+	@Override
 	public ICFBamUuidGen[] readDerivedBySchemaIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 SchemaDefId )
 	{
@@ -1012,6 +1024,7 @@ public class CFBamRamUuidGenTable
 		}
 	}
 
+	@Override
 	public ICFBamUuidGen readDerivedByIdIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 Id )
 	{
@@ -1026,6 +1039,7 @@ public class CFBamRamUuidGenTable
 		return( buff );
 	}
 
+	@Override
 	public ICFBamUuidGen readRec( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 PKey )
 	{
@@ -1037,6 +1051,7 @@ public class CFBamRamUuidGenTable
 		return( buff );
 	}
 
+	@Override
 	public ICFBamUuidGen lockRec( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 PKey )
 	{
@@ -1048,6 +1063,7 @@ public class CFBamRamUuidGenTable
 		return( buff );
 	}
 
+	@Override
 	public ICFBamUuidGen[] readAllRec( ICFSecAuthorization Authorization )
 	{
 		final String S_ProcName = "CFBamRamUuidGen.readAllRec";
@@ -1063,6 +1079,7 @@ public class CFBamRamUuidGenTable
 		return( filteredList.toArray( new ICFBamUuidGen[0] ) );
 	}
 
+	@Override
 	public ICFBamUuidGen readRecByIdIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 Id )
 	{
@@ -1077,6 +1094,7 @@ public class CFBamRamUuidGenTable
 		}
 	}
 
+	@Override
 	public ICFBamUuidGen readRecByUNameIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 ScopeId,
 		String Name )
@@ -1093,6 +1111,7 @@ public class CFBamRamUuidGenTable
 		}
 	}
 
+	@Override
 	public ICFBamUuidGen[] readRecByScopeIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 ScopeId )
 	{
@@ -1110,6 +1129,7 @@ public class CFBamRamUuidGenTable
 		return( filteredList.toArray( new ICFBamUuidGen[0] ) );
 	}
 
+	@Override
 	public ICFBamUuidGen[] readRecByDefSchemaIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 DefSchemaId )
 	{
@@ -1127,6 +1147,7 @@ public class CFBamRamUuidGenTable
 		return( filteredList.toArray( new ICFBamUuidGen[0] ) );
 	}
 
+	@Override
 	public ICFBamUuidGen[] readRecByPrevIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 PrevId )
 	{
@@ -1144,6 +1165,7 @@ public class CFBamRamUuidGenTable
 		return( filteredList.toArray( new ICFBamUuidGen[0] ) );
 	}
 
+	@Override
 	public ICFBamUuidGen[] readRecByNextIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 NextId )
 	{
@@ -1161,6 +1183,7 @@ public class CFBamRamUuidGenTable
 		return( filteredList.toArray( new ICFBamUuidGen[0] ) );
 	}
 
+	@Override
 	public ICFBamUuidGen[] readRecByContPrevIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 ScopeId,
 		CFLibDbKeyHash256 PrevId )
@@ -1180,6 +1203,7 @@ public class CFBamRamUuidGenTable
 		return( filteredList.toArray( new ICFBamUuidGen[0] ) );
 	}
 
+	@Override
 	public ICFBamUuidGen[] readRecByContNextIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 ScopeId,
 		CFLibDbKeyHash256 NextId )
@@ -1199,6 +1223,7 @@ public class CFBamRamUuidGenTable
 		return( filteredList.toArray( new ICFBamUuidGen[0] ) );
 	}
 
+	@Override
 	public ICFBamUuidGen[] readRecBySchemaIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 SchemaDefId )
 	{
@@ -1217,29 +1242,11 @@ public class CFBamRamUuidGenTable
 	}
 
 	/**
-	 *	Read a page array of the specific UuidGen buffer instances identified by the duplicate key SchemaIdx.
-	 *
-	 *	@param	Authorization	The session authorization information.
-	 *
-	 *	@param	SchemaDefId	The UuidGen key attribute of the instance generating the id.
-	 *
-	 *	@return An array of derived buffer instances for the specified key, potentially with 0 elements in the set.
-	 *
-	 *	@throws	CFLibNotSupportedException thrown by client-side implementations.
-	 */
-	public ICFBamUuidGen[] pageRecBySchemaIdx( ICFSecAuthorization Authorization,
-		CFLibDbKeyHash256 SchemaDefId,
-		CFLibDbKeyHash256 priorId )
-	{
-		final String S_ProcName = "pageRecBySchemaIdx";
-		throw new CFLibNotImplementedYetException( getClass(), S_ProcName );
-	}
-
-	/**
 	 *	Move the specified buffer up in the chain (i.e. to the previous position.)
 	 *
 	 *	@return	The refreshed buffer after it has been moved
 	 */
+	@Override
 	public ICFBamUuidGen moveRecUp( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 Id,
 		int revision )
@@ -3913,6 +3920,7 @@ public class CFBamRamUuidGenTable
 	 *
 	 *	@return	The refreshed buffer after it has been moved
 	 */
+	@Override
 	public ICFBamUuidGen moveRecDown( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 Id,
 		int revision )
@@ -6630,6 +6638,7 @@ public class CFBamRamUuidGenTable
 		return(Buff);
 	}
 
+	@Override
 	public void deleteUuidGen( ICFSecAuthorization Authorization,
 		ICFBamUuidGen iBuff )
 	{
@@ -8002,6 +8011,7 @@ public class CFBamRamUuidGenTable
 		schema.getTableUuidType().deleteUuidType( Authorization,
 			Buff );
 	}
+	@Override
 	public void deleteUuidGenBySchemaIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argSchemaDefId )
 	{
@@ -8010,6 +8020,7 @@ public class CFBamRamUuidGenTable
 		deleteUuidGenBySchemaIdx( Authorization, key );
 	}
 
+	@Override
 	public void deleteUuidGenBySchemaIdx( ICFSecAuthorization Authorization,
 		ICFBamUuidTypeBySchemaIdxKey argKey )
 	{
@@ -8036,6 +8047,7 @@ public class CFBamRamUuidGenTable
 		}
 	}
 
+	@Override
 	public void deleteUuidGenByIdIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argKey )
 	{
@@ -8062,6 +8074,7 @@ public class CFBamRamUuidGenTable
 		}
 	}
 
+	@Override
 	public void deleteUuidGenByUNameIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argScopeId,
 		String argName )
@@ -8072,6 +8085,7 @@ public class CFBamRamUuidGenTable
 		deleteUuidGenByUNameIdx( Authorization, key );
 	}
 
+	@Override
 	public void deleteUuidGenByUNameIdx( ICFSecAuthorization Authorization,
 		ICFBamValueByUNameIdxKey argKey )
 	{
@@ -8099,6 +8113,7 @@ public class CFBamRamUuidGenTable
 		}
 	}
 
+	@Override
 	public void deleteUuidGenByScopeIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argScopeId )
 	{
@@ -8107,6 +8122,7 @@ public class CFBamRamUuidGenTable
 		deleteUuidGenByScopeIdx( Authorization, key );
 	}
 
+	@Override
 	public void deleteUuidGenByScopeIdx( ICFSecAuthorization Authorization,
 		ICFBamValueByScopeIdxKey argKey )
 	{
@@ -8133,6 +8149,7 @@ public class CFBamRamUuidGenTable
 		}
 	}
 
+	@Override
 	public void deleteUuidGenByDefSchemaIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argDefSchemaId )
 	{
@@ -8141,6 +8158,7 @@ public class CFBamRamUuidGenTable
 		deleteUuidGenByDefSchemaIdx( Authorization, key );
 	}
 
+	@Override
 	public void deleteUuidGenByDefSchemaIdx( ICFSecAuthorization Authorization,
 		ICFBamValueByDefSchemaIdxKey argKey )
 	{
@@ -8169,6 +8187,7 @@ public class CFBamRamUuidGenTable
 		}
 	}
 
+	@Override
 	public void deleteUuidGenByPrevIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argPrevId )
 	{
@@ -8177,6 +8196,7 @@ public class CFBamRamUuidGenTable
 		deleteUuidGenByPrevIdx( Authorization, key );
 	}
 
+	@Override
 	public void deleteUuidGenByPrevIdx( ICFSecAuthorization Authorization,
 		ICFBamValueByPrevIdxKey argKey )
 	{
@@ -8205,6 +8225,7 @@ public class CFBamRamUuidGenTable
 		}
 	}
 
+	@Override
 	public void deleteUuidGenByNextIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argNextId )
 	{
@@ -8213,6 +8234,7 @@ public class CFBamRamUuidGenTable
 		deleteUuidGenByNextIdx( Authorization, key );
 	}
 
+	@Override
 	public void deleteUuidGenByNextIdx( ICFSecAuthorization Authorization,
 		ICFBamValueByNextIdxKey argKey )
 	{
@@ -8241,6 +8263,7 @@ public class CFBamRamUuidGenTable
 		}
 	}
 
+	@Override
 	public void deleteUuidGenByContPrevIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argScopeId,
 		CFLibDbKeyHash256 argPrevId )
@@ -8251,6 +8274,7 @@ public class CFBamRamUuidGenTable
 		deleteUuidGenByContPrevIdx( Authorization, key );
 	}
 
+	@Override
 	public void deleteUuidGenByContPrevIdx( ICFSecAuthorization Authorization,
 		ICFBamValueByContPrevIdxKey argKey )
 	{
@@ -8280,6 +8304,7 @@ public class CFBamRamUuidGenTable
 		}
 	}
 
+	@Override
 	public void deleteUuidGenByContNextIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argScopeId,
 		CFLibDbKeyHash256 argNextId )
@@ -8290,6 +8315,7 @@ public class CFBamRamUuidGenTable
 		deleteUuidGenByContNextIdx( Authorization, key );
 	}
 
+	@Override
 	public void deleteUuidGenByContNextIdx( ICFSecAuthorization Authorization,
 		ICFBamValueByContNextIdxKey argKey )
 	{

@@ -86,6 +86,7 @@ public class CFBamRamTimestampTypeTable
 		}
 	}
 
+	@Override
 	public ICFBamTimestampType createTimestampType( ICFSecAuthorization Authorization,
 		ICFBamTimestampType iBuff )
 	{
@@ -835,6 +836,7 @@ public class CFBamRamTimestampTypeTable
 		}
 	}
 
+	@Override
 	public ICFBamTimestampType readDerived( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 PKey )
 	{
@@ -849,6 +851,7 @@ public class CFBamRamTimestampTypeTable
 		return( buff );
 	}
 
+	@Override
 	public ICFBamTimestampType lockDerived( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 PKey )
 	{
@@ -863,6 +866,7 @@ public class CFBamRamTimestampTypeTable
 		return( buff );
 	}
 
+	@Override
 	public ICFBamTimestampType[] readAllDerived( ICFSecAuthorization Authorization ) {
 		final String S_ProcName = "CFBamRamTimestampType.readAllDerived";
 		ICFBamTimestampType[] retList = new ICFBamTimestampType[ dictByPKey.values().size() ];
@@ -874,6 +878,7 @@ public class CFBamRamTimestampTypeTable
 		return( retList );
 	}
 
+	@Override
 	public ICFBamTimestampType readDerivedByUNameIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 ScopeId,
 		String Name )
@@ -893,6 +898,7 @@ public class CFBamRamTimestampTypeTable
 		}
 	}
 
+	@Override
 	public ICFBamTimestampType[] readDerivedByScopeIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 ScopeId )
 	{
@@ -915,6 +921,7 @@ public class CFBamRamTimestampTypeTable
 		}
 	}
 
+	@Override
 	public ICFBamTimestampType[] readDerivedByDefSchemaIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 DefSchemaId )
 	{
@@ -937,6 +944,7 @@ public class CFBamRamTimestampTypeTable
 		}
 	}
 
+	@Override
 	public ICFBamTimestampType[] readDerivedByPrevIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 PrevId )
 	{
@@ -959,6 +967,7 @@ public class CFBamRamTimestampTypeTable
 		}
 	}
 
+	@Override
 	public ICFBamTimestampType[] readDerivedByNextIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 NextId )
 	{
@@ -981,6 +990,7 @@ public class CFBamRamTimestampTypeTable
 		}
 	}
 
+	@Override
 	public ICFBamTimestampType[] readDerivedByContPrevIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 ScopeId,
 		CFLibDbKeyHash256 PrevId )
@@ -1005,6 +1015,7 @@ public class CFBamRamTimestampTypeTable
 		}
 	}
 
+	@Override
 	public ICFBamTimestampType[] readDerivedByContNextIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 ScopeId,
 		CFLibDbKeyHash256 NextId )
@@ -1029,6 +1040,7 @@ public class CFBamRamTimestampTypeTable
 		}
 	}
 
+	@Override
 	public ICFBamTimestampType[] readDerivedBySchemaIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 SchemaDefId )
 	{
@@ -1056,6 +1068,7 @@ public class CFBamRamTimestampTypeTable
 		return( recArray );
 	}
 
+	@Override
 	public ICFBamTimestampType readDerivedByIdIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 Id )
 	{
@@ -1070,6 +1083,7 @@ public class CFBamRamTimestampTypeTable
 		return( buff );
 	}
 
+	@Override
 	public ICFBamTimestampType readRec( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 PKey )
 	{
@@ -1081,6 +1095,7 @@ public class CFBamRamTimestampTypeTable
 		return( buff );
 	}
 
+	@Override
 	public ICFBamTimestampType lockRec( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 PKey )
 	{
@@ -1092,6 +1107,7 @@ public class CFBamRamTimestampTypeTable
 		return( buff );
 	}
 
+	@Override
 	public ICFBamTimestampType[] readAllRec( ICFSecAuthorization Authorization )
 	{
 		final String S_ProcName = "CFBamRamTimestampType.readAllRec";
@@ -1107,6 +1123,7 @@ public class CFBamRamTimestampTypeTable
 		return( filteredList.toArray( new ICFBamTimestampType[0] ) );
 	}
 
+	@Override
 	public ICFBamTimestampType readRecByIdIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 Id )
 	{
@@ -1121,6 +1138,7 @@ public class CFBamRamTimestampTypeTable
 		}
 	}
 
+	@Override
 	public ICFBamTimestampType readRecByUNameIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 ScopeId,
 		String Name )
@@ -1137,6 +1155,7 @@ public class CFBamRamTimestampTypeTable
 		}
 	}
 
+	@Override
 	public ICFBamTimestampType[] readRecByScopeIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 ScopeId )
 	{
@@ -1154,6 +1173,7 @@ public class CFBamRamTimestampTypeTable
 		return( filteredList.toArray( new ICFBamTimestampType[0] ) );
 	}
 
+	@Override
 	public ICFBamTimestampType[] readRecByDefSchemaIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 DefSchemaId )
 	{
@@ -1171,6 +1191,7 @@ public class CFBamRamTimestampTypeTable
 		return( filteredList.toArray( new ICFBamTimestampType[0] ) );
 	}
 
+	@Override
 	public ICFBamTimestampType[] readRecByPrevIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 PrevId )
 	{
@@ -1188,6 +1209,7 @@ public class CFBamRamTimestampTypeTable
 		return( filteredList.toArray( new ICFBamTimestampType[0] ) );
 	}
 
+	@Override
 	public ICFBamTimestampType[] readRecByNextIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 NextId )
 	{
@@ -1205,6 +1227,7 @@ public class CFBamRamTimestampTypeTable
 		return( filteredList.toArray( new ICFBamTimestampType[0] ) );
 	}
 
+	@Override
 	public ICFBamTimestampType[] readRecByContPrevIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 ScopeId,
 		CFLibDbKeyHash256 PrevId )
@@ -1224,6 +1247,7 @@ public class CFBamRamTimestampTypeTable
 		return( filteredList.toArray( new ICFBamTimestampType[0] ) );
 	}
 
+	@Override
 	public ICFBamTimestampType[] readRecByContNextIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 ScopeId,
 		CFLibDbKeyHash256 NextId )
@@ -1243,6 +1267,7 @@ public class CFBamRamTimestampTypeTable
 		return( filteredList.toArray( new ICFBamTimestampType[0] ) );
 	}
 
+	@Override
 	public ICFBamTimestampType[] readRecBySchemaIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 SchemaDefId )
 	{
@@ -1261,29 +1286,11 @@ public class CFBamRamTimestampTypeTable
 	}
 
 	/**
-	 *	Read a page array of the specific TimestampType buffer instances identified by the duplicate key SchemaIdx.
-	 *
-	 *	@param	Authorization	The session authorization information.
-	 *
-	 *	@param	SchemaDefId	The TimestampType key attribute of the instance generating the id.
-	 *
-	 *	@return An array of derived buffer instances for the specified key, potentially with 0 elements in the set.
-	 *
-	 *	@throws	CFLibNotSupportedException thrown by client-side implementations.
-	 */
-	public ICFBamTimestampType[] pageRecBySchemaIdx( ICFSecAuthorization Authorization,
-		CFLibDbKeyHash256 SchemaDefId,
-		CFLibDbKeyHash256 priorId )
-	{
-		final String S_ProcName = "pageRecBySchemaIdx";
-		throw new CFLibNotImplementedYetException( getClass(), S_ProcName );
-	}
-
-	/**
 	 *	Move the specified buffer up in the chain (i.e. to the previous position.)
 	 *
 	 *	@return	The refreshed buffer after it has been moved
 	 */
+	@Override
 	public ICFBamTimestampType moveRecUp( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 Id,
 		int revision )
@@ -3957,6 +3964,7 @@ public class CFBamRamTimestampTypeTable
 	 *
 	 *	@return	The refreshed buffer after it has been moved
 	 */
+	@Override
 	public ICFBamTimestampType moveRecDown( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 Id,
 		int revision )
@@ -6713,6 +6721,7 @@ public class CFBamRamTimestampTypeTable
 		return(Buff);
 	}
 
+	@Override
 	public void deleteTimestampType( ICFSecAuthorization Authorization,
 		ICFBamTimestampType iBuff )
 	{
@@ -8091,6 +8100,7 @@ public class CFBamRamTimestampTypeTable
 		schema.getTableTimestampDef().deleteTimestampDef( Authorization,
 			Buff );
 	}
+	@Override
 	public void deleteTimestampTypeBySchemaIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argSchemaDefId )
 	{
@@ -8099,6 +8109,7 @@ public class CFBamRamTimestampTypeTable
 		deleteTimestampTypeBySchemaIdx( Authorization, key );
 	}
 
+	@Override
 	public void deleteTimestampTypeBySchemaIdx( ICFSecAuthorization Authorization,
 		ICFBamTimestampTypeBySchemaIdxKey argKey )
 	{
@@ -8125,6 +8136,7 @@ public class CFBamRamTimestampTypeTable
 		}
 	}
 
+	@Override
 	public void deleteTimestampTypeByIdIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argKey )
 	{
@@ -8151,6 +8163,7 @@ public class CFBamRamTimestampTypeTable
 		}
 	}
 
+	@Override
 	public void deleteTimestampTypeByUNameIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argScopeId,
 		String argName )
@@ -8161,6 +8174,7 @@ public class CFBamRamTimestampTypeTable
 		deleteTimestampTypeByUNameIdx( Authorization, key );
 	}
 
+	@Override
 	public void deleteTimestampTypeByUNameIdx( ICFSecAuthorization Authorization,
 		ICFBamValueByUNameIdxKey argKey )
 	{
@@ -8188,6 +8202,7 @@ public class CFBamRamTimestampTypeTable
 		}
 	}
 
+	@Override
 	public void deleteTimestampTypeByScopeIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argScopeId )
 	{
@@ -8196,6 +8211,7 @@ public class CFBamRamTimestampTypeTable
 		deleteTimestampTypeByScopeIdx( Authorization, key );
 	}
 
+	@Override
 	public void deleteTimestampTypeByScopeIdx( ICFSecAuthorization Authorization,
 		ICFBamValueByScopeIdxKey argKey )
 	{
@@ -8222,6 +8238,7 @@ public class CFBamRamTimestampTypeTable
 		}
 	}
 
+	@Override
 	public void deleteTimestampTypeByDefSchemaIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argDefSchemaId )
 	{
@@ -8230,6 +8247,7 @@ public class CFBamRamTimestampTypeTable
 		deleteTimestampTypeByDefSchemaIdx( Authorization, key );
 	}
 
+	@Override
 	public void deleteTimestampTypeByDefSchemaIdx( ICFSecAuthorization Authorization,
 		ICFBamValueByDefSchemaIdxKey argKey )
 	{
@@ -8258,6 +8276,7 @@ public class CFBamRamTimestampTypeTable
 		}
 	}
 
+	@Override
 	public void deleteTimestampTypeByPrevIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argPrevId )
 	{
@@ -8266,6 +8285,7 @@ public class CFBamRamTimestampTypeTable
 		deleteTimestampTypeByPrevIdx( Authorization, key );
 	}
 
+	@Override
 	public void deleteTimestampTypeByPrevIdx( ICFSecAuthorization Authorization,
 		ICFBamValueByPrevIdxKey argKey )
 	{
@@ -8294,6 +8314,7 @@ public class CFBamRamTimestampTypeTable
 		}
 	}
 
+	@Override
 	public void deleteTimestampTypeByNextIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argNextId )
 	{
@@ -8302,6 +8323,7 @@ public class CFBamRamTimestampTypeTable
 		deleteTimestampTypeByNextIdx( Authorization, key );
 	}
 
+	@Override
 	public void deleteTimestampTypeByNextIdx( ICFSecAuthorization Authorization,
 		ICFBamValueByNextIdxKey argKey )
 	{
@@ -8330,6 +8352,7 @@ public class CFBamRamTimestampTypeTable
 		}
 	}
 
+	@Override
 	public void deleteTimestampTypeByContPrevIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argScopeId,
 		CFLibDbKeyHash256 argPrevId )
@@ -8340,6 +8363,7 @@ public class CFBamRamTimestampTypeTable
 		deleteTimestampTypeByContPrevIdx( Authorization, key );
 	}
 
+	@Override
 	public void deleteTimestampTypeByContPrevIdx( ICFSecAuthorization Authorization,
 		ICFBamValueByContPrevIdxKey argKey )
 	{
@@ -8369,6 +8393,7 @@ public class CFBamRamTimestampTypeTable
 		}
 	}
 
+	@Override
 	public void deleteTimestampTypeByContNextIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argScopeId,
 		CFLibDbKeyHash256 argNextId )
@@ -8379,6 +8404,7 @@ public class CFBamRamTimestampTypeTable
 		deleteTimestampTypeByContNextIdx( Authorization, key );
 	}
 
+	@Override
 	public void deleteTimestampTypeByContNextIdx( ICFSecAuthorization Authorization,
 		ICFBamValueByContNextIdxKey argKey )
 	{

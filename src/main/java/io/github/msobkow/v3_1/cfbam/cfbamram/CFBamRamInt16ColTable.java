@@ -86,6 +86,7 @@ public class CFBamRamInt16ColTable
 		}
 	}
 
+	@Override
 	public ICFBamInt16Col createInt16Col( ICFSecAuthorization Authorization,
 		ICFBamInt16Col iBuff )
 	{
@@ -835,6 +836,7 @@ public class CFBamRamInt16ColTable
 		}
 	}
 
+	@Override
 	public ICFBamInt16Col readDerived( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 PKey )
 	{
@@ -849,6 +851,7 @@ public class CFBamRamInt16ColTable
 		return( buff );
 	}
 
+	@Override
 	public ICFBamInt16Col lockDerived( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 PKey )
 	{
@@ -863,6 +866,7 @@ public class CFBamRamInt16ColTable
 		return( buff );
 	}
 
+	@Override
 	public ICFBamInt16Col[] readAllDerived( ICFSecAuthorization Authorization ) {
 		final String S_ProcName = "CFBamRamInt16Col.readAllDerived";
 		ICFBamInt16Col[] retList = new ICFBamInt16Col[ dictByPKey.values().size() ];
@@ -874,6 +878,7 @@ public class CFBamRamInt16ColTable
 		return( retList );
 	}
 
+	@Override
 	public ICFBamInt16Col readDerivedByUNameIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 ScopeId,
 		String Name )
@@ -893,6 +898,7 @@ public class CFBamRamInt16ColTable
 		}
 	}
 
+	@Override
 	public ICFBamInt16Col[] readDerivedByScopeIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 ScopeId )
 	{
@@ -915,6 +921,7 @@ public class CFBamRamInt16ColTable
 		}
 	}
 
+	@Override
 	public ICFBamInt16Col[] readDerivedByDefSchemaIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 DefSchemaId )
 	{
@@ -937,6 +944,7 @@ public class CFBamRamInt16ColTable
 		}
 	}
 
+	@Override
 	public ICFBamInt16Col[] readDerivedByPrevIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 PrevId )
 	{
@@ -959,6 +967,7 @@ public class CFBamRamInt16ColTable
 		}
 	}
 
+	@Override
 	public ICFBamInt16Col[] readDerivedByNextIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 NextId )
 	{
@@ -981,6 +990,7 @@ public class CFBamRamInt16ColTable
 		}
 	}
 
+	@Override
 	public ICFBamInt16Col[] readDerivedByContPrevIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 ScopeId,
 		CFLibDbKeyHash256 PrevId )
@@ -1005,6 +1015,7 @@ public class CFBamRamInt16ColTable
 		}
 	}
 
+	@Override
 	public ICFBamInt16Col[] readDerivedByContNextIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 ScopeId,
 		CFLibDbKeyHash256 NextId )
@@ -1029,6 +1040,7 @@ public class CFBamRamInt16ColTable
 		}
 	}
 
+	@Override
 	public ICFBamInt16Col[] readDerivedByTableIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 TableId )
 	{
@@ -1056,6 +1068,7 @@ public class CFBamRamInt16ColTable
 		return( recArray );
 	}
 
+	@Override
 	public ICFBamInt16Col readDerivedByIdIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 Id )
 	{
@@ -1070,6 +1083,7 @@ public class CFBamRamInt16ColTable
 		return( buff );
 	}
 
+	@Override
 	public ICFBamInt16Col readRec( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 PKey )
 	{
@@ -1081,6 +1095,7 @@ public class CFBamRamInt16ColTable
 		return( buff );
 	}
 
+	@Override
 	public ICFBamInt16Col lockRec( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 PKey )
 	{
@@ -1092,6 +1107,7 @@ public class CFBamRamInt16ColTable
 		return( buff );
 	}
 
+	@Override
 	public ICFBamInt16Col[] readAllRec( ICFSecAuthorization Authorization )
 	{
 		final String S_ProcName = "CFBamRamInt16Col.readAllRec";
@@ -1107,6 +1123,7 @@ public class CFBamRamInt16ColTable
 		return( filteredList.toArray( new ICFBamInt16Col[0] ) );
 	}
 
+	@Override
 	public ICFBamInt16Col readRecByIdIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 Id )
 	{
@@ -1121,6 +1138,7 @@ public class CFBamRamInt16ColTable
 		}
 	}
 
+	@Override
 	public ICFBamInt16Col readRecByUNameIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 ScopeId,
 		String Name )
@@ -1137,6 +1155,7 @@ public class CFBamRamInt16ColTable
 		}
 	}
 
+	@Override
 	public ICFBamInt16Col[] readRecByScopeIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 ScopeId )
 	{
@@ -1154,6 +1173,7 @@ public class CFBamRamInt16ColTable
 		return( filteredList.toArray( new ICFBamInt16Col[0] ) );
 	}
 
+	@Override
 	public ICFBamInt16Col[] readRecByDefSchemaIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 DefSchemaId )
 	{
@@ -1171,6 +1191,7 @@ public class CFBamRamInt16ColTable
 		return( filteredList.toArray( new ICFBamInt16Col[0] ) );
 	}
 
+	@Override
 	public ICFBamInt16Col[] readRecByPrevIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 PrevId )
 	{
@@ -1188,6 +1209,7 @@ public class CFBamRamInt16ColTable
 		return( filteredList.toArray( new ICFBamInt16Col[0] ) );
 	}
 
+	@Override
 	public ICFBamInt16Col[] readRecByNextIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 NextId )
 	{
@@ -1205,6 +1227,7 @@ public class CFBamRamInt16ColTable
 		return( filteredList.toArray( new ICFBamInt16Col[0] ) );
 	}
 
+	@Override
 	public ICFBamInt16Col[] readRecByContPrevIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 ScopeId,
 		CFLibDbKeyHash256 PrevId )
@@ -1224,6 +1247,7 @@ public class CFBamRamInt16ColTable
 		return( filteredList.toArray( new ICFBamInt16Col[0] ) );
 	}
 
+	@Override
 	public ICFBamInt16Col[] readRecByContNextIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 ScopeId,
 		CFLibDbKeyHash256 NextId )
@@ -1243,6 +1267,7 @@ public class CFBamRamInt16ColTable
 		return( filteredList.toArray( new ICFBamInt16Col[0] ) );
 	}
 
+	@Override
 	public ICFBamInt16Col[] readRecByTableIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 TableId )
 	{
@@ -1261,29 +1286,11 @@ public class CFBamRamInt16ColTable
 	}
 
 	/**
-	 *	Read a page array of the specific Int16Col buffer instances identified by the duplicate key TableIdx.
-	 *
-	 *	@param	Authorization	The session authorization information.
-	 *
-	 *	@param	TableId	The Int16Col key attribute of the instance generating the id.
-	 *
-	 *	@return An array of derived buffer instances for the specified key, potentially with 0 elements in the set.
-	 *
-	 *	@throws	CFLibNotSupportedException thrown by client-side implementations.
-	 */
-	public ICFBamInt16Col[] pageRecByTableIdx( ICFSecAuthorization Authorization,
-		CFLibDbKeyHash256 TableId,
-		CFLibDbKeyHash256 priorId )
-	{
-		final String S_ProcName = "pageRecByTableIdx";
-		throw new CFLibNotImplementedYetException( getClass(), S_ProcName );
-	}
-
-	/**
 	 *	Move the specified buffer up in the chain (i.e. to the previous position.)
 	 *
 	 *	@return	The refreshed buffer after it has been moved
 	 */
+	@Override
 	public ICFBamInt16Col moveRecUp( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 Id,
 		int revision )
@@ -3957,6 +3964,7 @@ public class CFBamRamInt16ColTable
 	 *
 	 *	@return	The refreshed buffer after it has been moved
 	 */
+	@Override
 	public ICFBamInt16Col moveRecDown( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 Id,
 		int revision )
@@ -6713,6 +6721,7 @@ public class CFBamRamInt16ColTable
 		return(Buff);
 	}
 
+	@Override
 	public void deleteInt16Col( ICFSecAuthorization Authorization,
 		ICFBamInt16Col iBuff )
 	{
@@ -8091,6 +8100,7 @@ public class CFBamRamInt16ColTable
 		schema.getTableInt16Def().deleteInt16Def( Authorization,
 			Buff );
 	}
+	@Override
 	public void deleteInt16ColByTableIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argTableId )
 	{
@@ -8099,6 +8109,7 @@ public class CFBamRamInt16ColTable
 		deleteInt16ColByTableIdx( Authorization, key );
 	}
 
+	@Override
 	public void deleteInt16ColByTableIdx( ICFSecAuthorization Authorization,
 		ICFBamInt16ColByTableIdxKey argKey )
 	{
@@ -8125,6 +8136,7 @@ public class CFBamRamInt16ColTable
 		}
 	}
 
+	@Override
 	public void deleteInt16ColByIdIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argKey )
 	{
@@ -8151,6 +8163,7 @@ public class CFBamRamInt16ColTable
 		}
 	}
 
+	@Override
 	public void deleteInt16ColByUNameIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argScopeId,
 		String argName )
@@ -8161,6 +8174,7 @@ public class CFBamRamInt16ColTable
 		deleteInt16ColByUNameIdx( Authorization, key );
 	}
 
+	@Override
 	public void deleteInt16ColByUNameIdx( ICFSecAuthorization Authorization,
 		ICFBamValueByUNameIdxKey argKey )
 	{
@@ -8188,6 +8202,7 @@ public class CFBamRamInt16ColTable
 		}
 	}
 
+	@Override
 	public void deleteInt16ColByScopeIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argScopeId )
 	{
@@ -8196,6 +8211,7 @@ public class CFBamRamInt16ColTable
 		deleteInt16ColByScopeIdx( Authorization, key );
 	}
 
+	@Override
 	public void deleteInt16ColByScopeIdx( ICFSecAuthorization Authorization,
 		ICFBamValueByScopeIdxKey argKey )
 	{
@@ -8222,6 +8238,7 @@ public class CFBamRamInt16ColTable
 		}
 	}
 
+	@Override
 	public void deleteInt16ColByDefSchemaIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argDefSchemaId )
 	{
@@ -8230,6 +8247,7 @@ public class CFBamRamInt16ColTable
 		deleteInt16ColByDefSchemaIdx( Authorization, key );
 	}
 
+	@Override
 	public void deleteInt16ColByDefSchemaIdx( ICFSecAuthorization Authorization,
 		ICFBamValueByDefSchemaIdxKey argKey )
 	{
@@ -8258,6 +8276,7 @@ public class CFBamRamInt16ColTable
 		}
 	}
 
+	@Override
 	public void deleteInt16ColByPrevIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argPrevId )
 	{
@@ -8266,6 +8285,7 @@ public class CFBamRamInt16ColTable
 		deleteInt16ColByPrevIdx( Authorization, key );
 	}
 
+	@Override
 	public void deleteInt16ColByPrevIdx( ICFSecAuthorization Authorization,
 		ICFBamValueByPrevIdxKey argKey )
 	{
@@ -8294,6 +8314,7 @@ public class CFBamRamInt16ColTable
 		}
 	}
 
+	@Override
 	public void deleteInt16ColByNextIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argNextId )
 	{
@@ -8302,6 +8323,7 @@ public class CFBamRamInt16ColTable
 		deleteInt16ColByNextIdx( Authorization, key );
 	}
 
+	@Override
 	public void deleteInt16ColByNextIdx( ICFSecAuthorization Authorization,
 		ICFBamValueByNextIdxKey argKey )
 	{
@@ -8330,6 +8352,7 @@ public class CFBamRamInt16ColTable
 		}
 	}
 
+	@Override
 	public void deleteInt16ColByContPrevIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argScopeId,
 		CFLibDbKeyHash256 argPrevId )
@@ -8340,6 +8363,7 @@ public class CFBamRamInt16ColTable
 		deleteInt16ColByContPrevIdx( Authorization, key );
 	}
 
+	@Override
 	public void deleteInt16ColByContPrevIdx( ICFSecAuthorization Authorization,
 		ICFBamValueByContPrevIdxKey argKey )
 	{
@@ -8369,6 +8393,7 @@ public class CFBamRamInt16ColTable
 		}
 	}
 
+	@Override
 	public void deleteInt16ColByContNextIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argScopeId,
 		CFLibDbKeyHash256 argNextId )
@@ -8379,6 +8404,7 @@ public class CFBamRamInt16ColTable
 		deleteInt16ColByContNextIdx( Authorization, key );
 	}
 
+	@Override
 	public void deleteInt16ColByContNextIdx( ICFSecAuthorization Authorization,
 		ICFBamValueByContNextIdxKey argKey )
 	{

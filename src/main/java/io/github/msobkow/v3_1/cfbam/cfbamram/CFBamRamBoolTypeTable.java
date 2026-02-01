@@ -86,6 +86,7 @@ public class CFBamRamBoolTypeTable
 		}
 	}
 
+	@Override
 	public ICFBamBoolType createBoolType( ICFSecAuthorization Authorization,
 		ICFBamBoolType iBuff )
 	{
@@ -835,6 +836,7 @@ public class CFBamRamBoolTypeTable
 		}
 	}
 
+	@Override
 	public ICFBamBoolType readDerived( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 PKey )
 	{
@@ -849,6 +851,7 @@ public class CFBamRamBoolTypeTable
 		return( buff );
 	}
 
+	@Override
 	public ICFBamBoolType lockDerived( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 PKey )
 	{
@@ -863,6 +866,7 @@ public class CFBamRamBoolTypeTable
 		return( buff );
 	}
 
+	@Override
 	public ICFBamBoolType[] readAllDerived( ICFSecAuthorization Authorization ) {
 		final String S_ProcName = "CFBamRamBoolType.readAllDerived";
 		ICFBamBoolType[] retList = new ICFBamBoolType[ dictByPKey.values().size() ];
@@ -874,6 +878,7 @@ public class CFBamRamBoolTypeTable
 		return( retList );
 	}
 
+	@Override
 	public ICFBamBoolType readDerivedByUNameIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 ScopeId,
 		String Name )
@@ -893,6 +898,7 @@ public class CFBamRamBoolTypeTable
 		}
 	}
 
+	@Override
 	public ICFBamBoolType[] readDerivedByScopeIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 ScopeId )
 	{
@@ -915,6 +921,7 @@ public class CFBamRamBoolTypeTable
 		}
 	}
 
+	@Override
 	public ICFBamBoolType[] readDerivedByDefSchemaIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 DefSchemaId )
 	{
@@ -937,6 +944,7 @@ public class CFBamRamBoolTypeTable
 		}
 	}
 
+	@Override
 	public ICFBamBoolType[] readDerivedByPrevIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 PrevId )
 	{
@@ -959,6 +967,7 @@ public class CFBamRamBoolTypeTable
 		}
 	}
 
+	@Override
 	public ICFBamBoolType[] readDerivedByNextIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 NextId )
 	{
@@ -981,6 +990,7 @@ public class CFBamRamBoolTypeTable
 		}
 	}
 
+	@Override
 	public ICFBamBoolType[] readDerivedByContPrevIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 ScopeId,
 		CFLibDbKeyHash256 PrevId )
@@ -1005,6 +1015,7 @@ public class CFBamRamBoolTypeTable
 		}
 	}
 
+	@Override
 	public ICFBamBoolType[] readDerivedByContNextIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 ScopeId,
 		CFLibDbKeyHash256 NextId )
@@ -1029,6 +1040,7 @@ public class CFBamRamBoolTypeTable
 		}
 	}
 
+	@Override
 	public ICFBamBoolType[] readDerivedBySchemaIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 SchemaDefId )
 	{
@@ -1056,6 +1068,7 @@ public class CFBamRamBoolTypeTable
 		return( recArray );
 	}
 
+	@Override
 	public ICFBamBoolType readDerivedByIdIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 Id )
 	{
@@ -1070,6 +1083,7 @@ public class CFBamRamBoolTypeTable
 		return( buff );
 	}
 
+	@Override
 	public ICFBamBoolType readRec( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 PKey )
 	{
@@ -1081,6 +1095,7 @@ public class CFBamRamBoolTypeTable
 		return( buff );
 	}
 
+	@Override
 	public ICFBamBoolType lockRec( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 PKey )
 	{
@@ -1092,6 +1107,7 @@ public class CFBamRamBoolTypeTable
 		return( buff );
 	}
 
+	@Override
 	public ICFBamBoolType[] readAllRec( ICFSecAuthorization Authorization )
 	{
 		final String S_ProcName = "CFBamRamBoolType.readAllRec";
@@ -1107,6 +1123,7 @@ public class CFBamRamBoolTypeTable
 		return( filteredList.toArray( new ICFBamBoolType[0] ) );
 	}
 
+	@Override
 	public ICFBamBoolType readRecByIdIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 Id )
 	{
@@ -1121,6 +1138,7 @@ public class CFBamRamBoolTypeTable
 		}
 	}
 
+	@Override
 	public ICFBamBoolType readRecByUNameIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 ScopeId,
 		String Name )
@@ -1137,6 +1155,7 @@ public class CFBamRamBoolTypeTable
 		}
 	}
 
+	@Override
 	public ICFBamBoolType[] readRecByScopeIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 ScopeId )
 	{
@@ -1154,6 +1173,7 @@ public class CFBamRamBoolTypeTable
 		return( filteredList.toArray( new ICFBamBoolType[0] ) );
 	}
 
+	@Override
 	public ICFBamBoolType[] readRecByDefSchemaIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 DefSchemaId )
 	{
@@ -1171,6 +1191,7 @@ public class CFBamRamBoolTypeTable
 		return( filteredList.toArray( new ICFBamBoolType[0] ) );
 	}
 
+	@Override
 	public ICFBamBoolType[] readRecByPrevIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 PrevId )
 	{
@@ -1188,6 +1209,7 @@ public class CFBamRamBoolTypeTable
 		return( filteredList.toArray( new ICFBamBoolType[0] ) );
 	}
 
+	@Override
 	public ICFBamBoolType[] readRecByNextIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 NextId )
 	{
@@ -1205,6 +1227,7 @@ public class CFBamRamBoolTypeTable
 		return( filteredList.toArray( new ICFBamBoolType[0] ) );
 	}
 
+	@Override
 	public ICFBamBoolType[] readRecByContPrevIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 ScopeId,
 		CFLibDbKeyHash256 PrevId )
@@ -1224,6 +1247,7 @@ public class CFBamRamBoolTypeTable
 		return( filteredList.toArray( new ICFBamBoolType[0] ) );
 	}
 
+	@Override
 	public ICFBamBoolType[] readRecByContNextIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 ScopeId,
 		CFLibDbKeyHash256 NextId )
@@ -1243,6 +1267,7 @@ public class CFBamRamBoolTypeTable
 		return( filteredList.toArray( new ICFBamBoolType[0] ) );
 	}
 
+	@Override
 	public ICFBamBoolType[] readRecBySchemaIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 SchemaDefId )
 	{
@@ -1261,29 +1286,11 @@ public class CFBamRamBoolTypeTable
 	}
 
 	/**
-	 *	Read a page array of the specific BoolType buffer instances identified by the duplicate key SchemaIdx.
-	 *
-	 *	@param	Authorization	The session authorization information.
-	 *
-	 *	@param	SchemaDefId	The BoolType key attribute of the instance generating the id.
-	 *
-	 *	@return An array of derived buffer instances for the specified key, potentially with 0 elements in the set.
-	 *
-	 *	@throws	CFLibNotSupportedException thrown by client-side implementations.
-	 */
-	public ICFBamBoolType[] pageRecBySchemaIdx( ICFSecAuthorization Authorization,
-		CFLibDbKeyHash256 SchemaDefId,
-		CFLibDbKeyHash256 priorId )
-	{
-		final String S_ProcName = "pageRecBySchemaIdx";
-		throw new CFLibNotImplementedYetException( getClass(), S_ProcName );
-	}
-
-	/**
 	 *	Move the specified buffer up in the chain (i.e. to the previous position.)
 	 *
 	 *	@return	The refreshed buffer after it has been moved
 	 */
+	@Override
 	public ICFBamBoolType moveRecUp( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 Id,
 		int revision )
@@ -3957,6 +3964,7 @@ public class CFBamRamBoolTypeTable
 	 *
 	 *	@return	The refreshed buffer after it has been moved
 	 */
+	@Override
 	public ICFBamBoolType moveRecDown( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 Id,
 		int revision )
@@ -6713,6 +6721,7 @@ public class CFBamRamBoolTypeTable
 		return(Buff);
 	}
 
+	@Override
 	public void deleteBoolType( ICFSecAuthorization Authorization,
 		ICFBamBoolType iBuff )
 	{
@@ -8091,6 +8100,7 @@ public class CFBamRamBoolTypeTable
 		schema.getTableBoolDef().deleteBoolDef( Authorization,
 			Buff );
 	}
+	@Override
 	public void deleteBoolTypeBySchemaIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argSchemaDefId )
 	{
@@ -8099,6 +8109,7 @@ public class CFBamRamBoolTypeTable
 		deleteBoolTypeBySchemaIdx( Authorization, key );
 	}
 
+	@Override
 	public void deleteBoolTypeBySchemaIdx( ICFSecAuthorization Authorization,
 		ICFBamBoolTypeBySchemaIdxKey argKey )
 	{
@@ -8125,6 +8136,7 @@ public class CFBamRamBoolTypeTable
 		}
 	}
 
+	@Override
 	public void deleteBoolTypeByIdIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argKey )
 	{
@@ -8151,6 +8163,7 @@ public class CFBamRamBoolTypeTable
 		}
 	}
 
+	@Override
 	public void deleteBoolTypeByUNameIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argScopeId,
 		String argName )
@@ -8161,6 +8174,7 @@ public class CFBamRamBoolTypeTable
 		deleteBoolTypeByUNameIdx( Authorization, key );
 	}
 
+	@Override
 	public void deleteBoolTypeByUNameIdx( ICFSecAuthorization Authorization,
 		ICFBamValueByUNameIdxKey argKey )
 	{
@@ -8188,6 +8202,7 @@ public class CFBamRamBoolTypeTable
 		}
 	}
 
+	@Override
 	public void deleteBoolTypeByScopeIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argScopeId )
 	{
@@ -8196,6 +8211,7 @@ public class CFBamRamBoolTypeTable
 		deleteBoolTypeByScopeIdx( Authorization, key );
 	}
 
+	@Override
 	public void deleteBoolTypeByScopeIdx( ICFSecAuthorization Authorization,
 		ICFBamValueByScopeIdxKey argKey )
 	{
@@ -8222,6 +8238,7 @@ public class CFBamRamBoolTypeTable
 		}
 	}
 
+	@Override
 	public void deleteBoolTypeByDefSchemaIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argDefSchemaId )
 	{
@@ -8230,6 +8247,7 @@ public class CFBamRamBoolTypeTable
 		deleteBoolTypeByDefSchemaIdx( Authorization, key );
 	}
 
+	@Override
 	public void deleteBoolTypeByDefSchemaIdx( ICFSecAuthorization Authorization,
 		ICFBamValueByDefSchemaIdxKey argKey )
 	{
@@ -8258,6 +8276,7 @@ public class CFBamRamBoolTypeTable
 		}
 	}
 
+	@Override
 	public void deleteBoolTypeByPrevIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argPrevId )
 	{
@@ -8266,6 +8285,7 @@ public class CFBamRamBoolTypeTable
 		deleteBoolTypeByPrevIdx( Authorization, key );
 	}
 
+	@Override
 	public void deleteBoolTypeByPrevIdx( ICFSecAuthorization Authorization,
 		ICFBamValueByPrevIdxKey argKey )
 	{
@@ -8294,6 +8314,7 @@ public class CFBamRamBoolTypeTable
 		}
 	}
 
+	@Override
 	public void deleteBoolTypeByNextIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argNextId )
 	{
@@ -8302,6 +8323,7 @@ public class CFBamRamBoolTypeTable
 		deleteBoolTypeByNextIdx( Authorization, key );
 	}
 
+	@Override
 	public void deleteBoolTypeByNextIdx( ICFSecAuthorization Authorization,
 		ICFBamValueByNextIdxKey argKey )
 	{
@@ -8330,6 +8352,7 @@ public class CFBamRamBoolTypeTable
 		}
 	}
 
+	@Override
 	public void deleteBoolTypeByContPrevIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argScopeId,
 		CFLibDbKeyHash256 argPrevId )
@@ -8340,6 +8363,7 @@ public class CFBamRamBoolTypeTable
 		deleteBoolTypeByContPrevIdx( Authorization, key );
 	}
 
+	@Override
 	public void deleteBoolTypeByContPrevIdx( ICFSecAuthorization Authorization,
 		ICFBamValueByContPrevIdxKey argKey )
 	{
@@ -8369,6 +8393,7 @@ public class CFBamRamBoolTypeTable
 		}
 	}
 
+	@Override
 	public void deleteBoolTypeByContNextIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argScopeId,
 		CFLibDbKeyHash256 argNextId )
@@ -8379,6 +8404,7 @@ public class CFBamRamBoolTypeTable
 		deleteBoolTypeByContNextIdx( Authorization, key );
 	}
 
+	@Override
 	public void deleteBoolTypeByContNextIdx( ICFSecAuthorization Authorization,
 		ICFBamValueByContNextIdxKey argKey )
 	{

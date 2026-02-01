@@ -86,6 +86,7 @@ public class CFBamRamFloatColTable
 		}
 	}
 
+	@Override
 	public ICFBamFloatCol createFloatCol( ICFSecAuthorization Authorization,
 		ICFBamFloatCol iBuff )
 	{
@@ -835,6 +836,7 @@ public class CFBamRamFloatColTable
 		}
 	}
 
+	@Override
 	public ICFBamFloatCol readDerived( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 PKey )
 	{
@@ -849,6 +851,7 @@ public class CFBamRamFloatColTable
 		return( buff );
 	}
 
+	@Override
 	public ICFBamFloatCol lockDerived( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 PKey )
 	{
@@ -863,6 +866,7 @@ public class CFBamRamFloatColTable
 		return( buff );
 	}
 
+	@Override
 	public ICFBamFloatCol[] readAllDerived( ICFSecAuthorization Authorization ) {
 		final String S_ProcName = "CFBamRamFloatCol.readAllDerived";
 		ICFBamFloatCol[] retList = new ICFBamFloatCol[ dictByPKey.values().size() ];
@@ -874,6 +878,7 @@ public class CFBamRamFloatColTable
 		return( retList );
 	}
 
+	@Override
 	public ICFBamFloatCol readDerivedByUNameIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 ScopeId,
 		String Name )
@@ -893,6 +898,7 @@ public class CFBamRamFloatColTable
 		}
 	}
 
+	@Override
 	public ICFBamFloatCol[] readDerivedByScopeIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 ScopeId )
 	{
@@ -915,6 +921,7 @@ public class CFBamRamFloatColTable
 		}
 	}
 
+	@Override
 	public ICFBamFloatCol[] readDerivedByDefSchemaIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 DefSchemaId )
 	{
@@ -937,6 +944,7 @@ public class CFBamRamFloatColTable
 		}
 	}
 
+	@Override
 	public ICFBamFloatCol[] readDerivedByPrevIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 PrevId )
 	{
@@ -959,6 +967,7 @@ public class CFBamRamFloatColTable
 		}
 	}
 
+	@Override
 	public ICFBamFloatCol[] readDerivedByNextIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 NextId )
 	{
@@ -981,6 +990,7 @@ public class CFBamRamFloatColTable
 		}
 	}
 
+	@Override
 	public ICFBamFloatCol[] readDerivedByContPrevIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 ScopeId,
 		CFLibDbKeyHash256 PrevId )
@@ -1005,6 +1015,7 @@ public class CFBamRamFloatColTable
 		}
 	}
 
+	@Override
 	public ICFBamFloatCol[] readDerivedByContNextIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 ScopeId,
 		CFLibDbKeyHash256 NextId )
@@ -1029,6 +1040,7 @@ public class CFBamRamFloatColTable
 		}
 	}
 
+	@Override
 	public ICFBamFloatCol[] readDerivedByTableIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 TableId )
 	{
@@ -1056,6 +1068,7 @@ public class CFBamRamFloatColTable
 		return( recArray );
 	}
 
+	@Override
 	public ICFBamFloatCol readDerivedByIdIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 Id )
 	{
@@ -1070,6 +1083,7 @@ public class CFBamRamFloatColTable
 		return( buff );
 	}
 
+	@Override
 	public ICFBamFloatCol readRec( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 PKey )
 	{
@@ -1081,6 +1095,7 @@ public class CFBamRamFloatColTable
 		return( buff );
 	}
 
+	@Override
 	public ICFBamFloatCol lockRec( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 PKey )
 	{
@@ -1092,6 +1107,7 @@ public class CFBamRamFloatColTable
 		return( buff );
 	}
 
+	@Override
 	public ICFBamFloatCol[] readAllRec( ICFSecAuthorization Authorization )
 	{
 		final String S_ProcName = "CFBamRamFloatCol.readAllRec";
@@ -1107,6 +1123,7 @@ public class CFBamRamFloatColTable
 		return( filteredList.toArray( new ICFBamFloatCol[0] ) );
 	}
 
+	@Override
 	public ICFBamFloatCol readRecByIdIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 Id )
 	{
@@ -1121,6 +1138,7 @@ public class CFBamRamFloatColTable
 		}
 	}
 
+	@Override
 	public ICFBamFloatCol readRecByUNameIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 ScopeId,
 		String Name )
@@ -1137,6 +1155,7 @@ public class CFBamRamFloatColTable
 		}
 	}
 
+	@Override
 	public ICFBamFloatCol[] readRecByScopeIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 ScopeId )
 	{
@@ -1154,6 +1173,7 @@ public class CFBamRamFloatColTable
 		return( filteredList.toArray( new ICFBamFloatCol[0] ) );
 	}
 
+	@Override
 	public ICFBamFloatCol[] readRecByDefSchemaIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 DefSchemaId )
 	{
@@ -1171,6 +1191,7 @@ public class CFBamRamFloatColTable
 		return( filteredList.toArray( new ICFBamFloatCol[0] ) );
 	}
 
+	@Override
 	public ICFBamFloatCol[] readRecByPrevIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 PrevId )
 	{
@@ -1188,6 +1209,7 @@ public class CFBamRamFloatColTable
 		return( filteredList.toArray( new ICFBamFloatCol[0] ) );
 	}
 
+	@Override
 	public ICFBamFloatCol[] readRecByNextIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 NextId )
 	{
@@ -1205,6 +1227,7 @@ public class CFBamRamFloatColTable
 		return( filteredList.toArray( new ICFBamFloatCol[0] ) );
 	}
 
+	@Override
 	public ICFBamFloatCol[] readRecByContPrevIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 ScopeId,
 		CFLibDbKeyHash256 PrevId )
@@ -1224,6 +1247,7 @@ public class CFBamRamFloatColTable
 		return( filteredList.toArray( new ICFBamFloatCol[0] ) );
 	}
 
+	@Override
 	public ICFBamFloatCol[] readRecByContNextIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 ScopeId,
 		CFLibDbKeyHash256 NextId )
@@ -1243,6 +1267,7 @@ public class CFBamRamFloatColTable
 		return( filteredList.toArray( new ICFBamFloatCol[0] ) );
 	}
 
+	@Override
 	public ICFBamFloatCol[] readRecByTableIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 TableId )
 	{
@@ -1261,29 +1286,11 @@ public class CFBamRamFloatColTable
 	}
 
 	/**
-	 *	Read a page array of the specific FloatCol buffer instances identified by the duplicate key TableIdx.
-	 *
-	 *	@param	Authorization	The session authorization information.
-	 *
-	 *	@param	TableId	The FloatCol key attribute of the instance generating the id.
-	 *
-	 *	@return An array of derived buffer instances for the specified key, potentially with 0 elements in the set.
-	 *
-	 *	@throws	CFLibNotSupportedException thrown by client-side implementations.
-	 */
-	public ICFBamFloatCol[] pageRecByTableIdx( ICFSecAuthorization Authorization,
-		CFLibDbKeyHash256 TableId,
-		CFLibDbKeyHash256 priorId )
-	{
-		final String S_ProcName = "pageRecByTableIdx";
-		throw new CFLibNotImplementedYetException( getClass(), S_ProcName );
-	}
-
-	/**
 	 *	Move the specified buffer up in the chain (i.e. to the previous position.)
 	 *
 	 *	@return	The refreshed buffer after it has been moved
 	 */
+	@Override
 	public ICFBamFloatCol moveRecUp( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 Id,
 		int revision )
@@ -3957,6 +3964,7 @@ public class CFBamRamFloatColTable
 	 *
 	 *	@return	The refreshed buffer after it has been moved
 	 */
+	@Override
 	public ICFBamFloatCol moveRecDown( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 Id,
 		int revision )
@@ -6713,6 +6721,7 @@ public class CFBamRamFloatColTable
 		return(Buff);
 	}
 
+	@Override
 	public void deleteFloatCol( ICFSecAuthorization Authorization,
 		ICFBamFloatCol iBuff )
 	{
@@ -8091,6 +8100,7 @@ public class CFBamRamFloatColTable
 		schema.getTableFloatDef().deleteFloatDef( Authorization,
 			Buff );
 	}
+	@Override
 	public void deleteFloatColByTableIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argTableId )
 	{
@@ -8099,6 +8109,7 @@ public class CFBamRamFloatColTable
 		deleteFloatColByTableIdx( Authorization, key );
 	}
 
+	@Override
 	public void deleteFloatColByTableIdx( ICFSecAuthorization Authorization,
 		ICFBamFloatColByTableIdxKey argKey )
 	{
@@ -8125,6 +8136,7 @@ public class CFBamRamFloatColTable
 		}
 	}
 
+	@Override
 	public void deleteFloatColByIdIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argKey )
 	{
@@ -8151,6 +8163,7 @@ public class CFBamRamFloatColTable
 		}
 	}
 
+	@Override
 	public void deleteFloatColByUNameIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argScopeId,
 		String argName )
@@ -8161,6 +8174,7 @@ public class CFBamRamFloatColTable
 		deleteFloatColByUNameIdx( Authorization, key );
 	}
 
+	@Override
 	public void deleteFloatColByUNameIdx( ICFSecAuthorization Authorization,
 		ICFBamValueByUNameIdxKey argKey )
 	{
@@ -8188,6 +8202,7 @@ public class CFBamRamFloatColTable
 		}
 	}
 
+	@Override
 	public void deleteFloatColByScopeIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argScopeId )
 	{
@@ -8196,6 +8211,7 @@ public class CFBamRamFloatColTable
 		deleteFloatColByScopeIdx( Authorization, key );
 	}
 
+	@Override
 	public void deleteFloatColByScopeIdx( ICFSecAuthorization Authorization,
 		ICFBamValueByScopeIdxKey argKey )
 	{
@@ -8222,6 +8238,7 @@ public class CFBamRamFloatColTable
 		}
 	}
 
+	@Override
 	public void deleteFloatColByDefSchemaIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argDefSchemaId )
 	{
@@ -8230,6 +8247,7 @@ public class CFBamRamFloatColTable
 		deleteFloatColByDefSchemaIdx( Authorization, key );
 	}
 
+	@Override
 	public void deleteFloatColByDefSchemaIdx( ICFSecAuthorization Authorization,
 		ICFBamValueByDefSchemaIdxKey argKey )
 	{
@@ -8258,6 +8276,7 @@ public class CFBamRamFloatColTable
 		}
 	}
 
+	@Override
 	public void deleteFloatColByPrevIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argPrevId )
 	{
@@ -8266,6 +8285,7 @@ public class CFBamRamFloatColTable
 		deleteFloatColByPrevIdx( Authorization, key );
 	}
 
+	@Override
 	public void deleteFloatColByPrevIdx( ICFSecAuthorization Authorization,
 		ICFBamValueByPrevIdxKey argKey )
 	{
@@ -8294,6 +8314,7 @@ public class CFBamRamFloatColTable
 		}
 	}
 
+	@Override
 	public void deleteFloatColByNextIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argNextId )
 	{
@@ -8302,6 +8323,7 @@ public class CFBamRamFloatColTable
 		deleteFloatColByNextIdx( Authorization, key );
 	}
 
+	@Override
 	public void deleteFloatColByNextIdx( ICFSecAuthorization Authorization,
 		ICFBamValueByNextIdxKey argKey )
 	{
@@ -8330,6 +8352,7 @@ public class CFBamRamFloatColTable
 		}
 	}
 
+	@Override
 	public void deleteFloatColByContPrevIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argScopeId,
 		CFLibDbKeyHash256 argPrevId )
@@ -8340,6 +8363,7 @@ public class CFBamRamFloatColTable
 		deleteFloatColByContPrevIdx( Authorization, key );
 	}
 
+	@Override
 	public void deleteFloatColByContPrevIdx( ICFSecAuthorization Authorization,
 		ICFBamValueByContPrevIdxKey argKey )
 	{
@@ -8369,6 +8393,7 @@ public class CFBamRamFloatColTable
 		}
 	}
 
+	@Override
 	public void deleteFloatColByContNextIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argScopeId,
 		CFLibDbKeyHash256 argNextId )
@@ -8379,6 +8404,7 @@ public class CFBamRamFloatColTable
 		deleteFloatColByContNextIdx( Authorization, key );
 	}
 
+	@Override
 	public void deleteFloatColByContNextIdx( ICFSecAuthorization Authorization,
 		ICFBamValueByContNextIdxKey argKey )
 	{

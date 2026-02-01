@@ -112,6 +112,7 @@ public class CFBamRamSchemaDefTable
 		}
 	}
 
+	@Override
 	public ICFBamSchemaDef createSchemaDef( ICFSecAuthorization Authorization,
 		ICFBamSchemaDef iBuff )
 	{
@@ -291,6 +292,7 @@ public class CFBamRamSchemaDefTable
 		}
 	}
 
+	@Override
 	public ICFBamSchemaDef readDerived( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 PKey )
 	{
@@ -305,6 +307,7 @@ public class CFBamRamSchemaDefTable
 		return( buff );
 	}
 
+	@Override
 	public ICFBamSchemaDef lockDerived( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 PKey )
 	{
@@ -319,6 +322,7 @@ public class CFBamRamSchemaDefTable
 		return( buff );
 	}
 
+	@Override
 	public ICFBamSchemaDef[] readAllDerived( ICFSecAuthorization Authorization ) {
 		final String S_ProcName = "CFBamRamSchemaDef.readAllDerived";
 		ICFBamSchemaDef[] retList = new ICFBamSchemaDef[ dictByPKey.values().size() ];
@@ -330,6 +334,7 @@ public class CFBamRamSchemaDefTable
 		return( retList );
 	}
 
+	@Override
 	public ICFBamSchemaDef[] readDerivedByTenantIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 TenantId )
 	{
@@ -352,6 +357,7 @@ public class CFBamRamSchemaDefTable
 		}
 	}
 
+	@Override
 	public ICFBamSchemaDef[] readDerivedByCTenantIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 CTenantId )
 	{
@@ -379,6 +385,7 @@ public class CFBamRamSchemaDefTable
 		return( recArray );
 	}
 
+	@Override
 	public ICFBamSchemaDef[] readDerivedByMinorVersionIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 MinorVersionId )
 	{
@@ -406,6 +413,7 @@ public class CFBamRamSchemaDefTable
 		return( recArray );
 	}
 
+	@Override
 	public ICFBamSchemaDef readDerivedByUNameIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 MinorVersionId,
 		String Name )
@@ -425,6 +433,7 @@ public class CFBamRamSchemaDefTable
 		return( buff );
 	}
 
+	@Override
 	public ICFBamSchemaDef[] readDerivedByAuthEMailIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 CTenantId,
 		String AuthorEMail )
@@ -454,6 +463,7 @@ public class CFBamRamSchemaDefTable
 		return( recArray );
 	}
 
+	@Override
 	public ICFBamSchemaDef[] readDerivedByProjectURLIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 CTenantId,
 		String ProjectURL )
@@ -483,6 +493,7 @@ public class CFBamRamSchemaDefTable
 		return( recArray );
 	}
 
+	@Override
 	public ICFBamSchemaDef readDerivedByPubURIIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 CTenantId,
 		String PublishURI )
@@ -502,6 +513,7 @@ public class CFBamRamSchemaDefTable
 		return( buff );
 	}
 
+	@Override
 	public ICFBamSchemaDef readDerivedByIdIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 Id )
 	{
@@ -516,6 +528,7 @@ public class CFBamRamSchemaDefTable
 		return( buff );
 	}
 
+	@Override
 	public ICFBamSchemaDef readRec( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 PKey )
 	{
@@ -527,6 +540,7 @@ public class CFBamRamSchemaDefTable
 		return( buff );
 	}
 
+	@Override
 	public ICFBamSchemaDef lockRec( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 PKey )
 	{
@@ -538,6 +552,7 @@ public class CFBamRamSchemaDefTable
 		return( buff );
 	}
 
+	@Override
 	public ICFBamSchemaDef[] readAllRec( ICFSecAuthorization Authorization )
 	{
 		final String S_ProcName = "CFBamRamSchemaDef.readAllRec";
@@ -553,6 +568,7 @@ public class CFBamRamSchemaDefTable
 		return( filteredList.toArray( new ICFBamSchemaDef[0] ) );
 	}
 
+	@Override
 	public ICFBamSchemaDef readRecByIdIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 Id )
 	{
@@ -567,6 +583,7 @@ public class CFBamRamSchemaDefTable
 		}
 	}
 
+	@Override
 	public ICFBamSchemaDef[] readRecByTenantIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 TenantId )
 	{
@@ -584,6 +601,7 @@ public class CFBamRamSchemaDefTable
 		return( filteredList.toArray( new ICFBamSchemaDef[0] ) );
 	}
 
+	@Override
 	public ICFBamSchemaDef[] readRecByCTenantIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 CTenantId )
 	{
@@ -601,6 +619,7 @@ public class CFBamRamSchemaDefTable
 		return( filteredList.toArray( new ICFBamSchemaDef[0] ) );
 	}
 
+	@Override
 	public ICFBamSchemaDef[] readRecByMinorVersionIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 MinorVersionId )
 	{
@@ -618,6 +637,7 @@ public class CFBamRamSchemaDefTable
 		return( filteredList.toArray( new ICFBamSchemaDef[0] ) );
 	}
 
+	@Override
 	public ICFBamSchemaDef readRecByUNameIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 MinorVersionId,
 		String Name )
@@ -634,6 +654,7 @@ public class CFBamRamSchemaDefTable
 		}
 	}
 
+	@Override
 	public ICFBamSchemaDef[] readRecByAuthEMailIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 CTenantId,
 		String AuthorEMail )
@@ -653,6 +674,7 @@ public class CFBamRamSchemaDefTable
 		return( filteredList.toArray( new ICFBamSchemaDef[0] ) );
 	}
 
+	@Override
 	public ICFBamSchemaDef[] readRecByProjectURLIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 CTenantId,
 		String ProjectURL )
@@ -672,6 +694,7 @@ public class CFBamRamSchemaDefTable
 		return( filteredList.toArray( new ICFBamSchemaDef[0] ) );
 	}
 
+	@Override
 	public ICFBamSchemaDef readRecByPubURIIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 CTenantId,
 		String PublishURI )
@@ -686,88 +709,6 @@ public class CFBamRamSchemaDefTable
 		else {
 			return( null );
 		}
-	}
-
-	/**
-	 *	Read a page array of the specific SchemaDef buffer instances identified by the duplicate key CTenantIdx.
-	 *
-	 *	@param	Authorization	The session authorization information.
-	 *
-	 *	@param	CTenantId	The SchemaDef key attribute of the instance generating the id.
-	 *
-	 *	@return An array of derived buffer instances for the specified key, potentially with 0 elements in the set.
-	 *
-	 *	@throws	CFLibNotSupportedException thrown by client-side implementations.
-	 */
-	public ICFBamSchemaDef[] pageRecByCTenantIdx( ICFSecAuthorization Authorization,
-		CFLibDbKeyHash256 CTenantId,
-		CFLibDbKeyHash256 priorId )
-	{
-		final String S_ProcName = "pageRecByCTenantIdx";
-		throw new CFLibNotImplementedYetException( getClass(), S_ProcName );
-	}
-
-	/**
-	 *	Read a page array of the specific SchemaDef buffer instances identified by the duplicate key MinorVersionIdx.
-	 *
-	 *	@param	Authorization	The session authorization information.
-	 *
-	 *	@param	MinorVersionId	The SchemaDef key attribute of the instance generating the id.
-	 *
-	 *	@return An array of derived buffer instances for the specified key, potentially with 0 elements in the set.
-	 *
-	 *	@throws	CFLibNotSupportedException thrown by client-side implementations.
-	 */
-	public ICFBamSchemaDef[] pageRecByMinorVersionIdx( ICFSecAuthorization Authorization,
-		CFLibDbKeyHash256 MinorVersionId,
-		CFLibDbKeyHash256 priorId )
-	{
-		final String S_ProcName = "pageRecByMinorVersionIdx";
-		throw new CFLibNotImplementedYetException( getClass(), S_ProcName );
-	}
-
-	/**
-	 *	Read a page array of the specific SchemaDef buffer instances identified by the duplicate key AuthEMailIdx.
-	 *
-	 *	@param	Authorization	The session authorization information.
-	 *
-	 *	@param	CTenantId	The SchemaDef key attribute of the instance generating the id.
-	 *
-	 *	@param	AuthorEMail	The SchemaDef key attribute of the instance generating the id.
-	 *
-	 *	@return An array of derived buffer instances for the specified key, potentially with 0 elements in the set.
-	 *
-	 *	@throws	CFLibNotSupportedException thrown by client-side implementations.
-	 */
-	public ICFBamSchemaDef[] pageRecByAuthEMailIdx( ICFSecAuthorization Authorization,
-		CFLibDbKeyHash256 CTenantId,
-		String AuthorEMail,
-		CFLibDbKeyHash256 priorId )
-	{
-		final String S_ProcName = "pageRecByAuthEMailIdx";
-		throw new CFLibNotImplementedYetException( getClass(), S_ProcName );
-	}
-
-	/**
-	 *	Read a page array of the specific SchemaDef buffer instances identified by the duplicate key ProjectURLIdx.
-	 *
-	 *	@param	Authorization	The session authorization information.
-	 *
-	 *	@param	CTenantId	The SchemaDef key attribute of the instance generating the id.
-	 *
-	 *	@param	ProjectURL	The SchemaDef key attribute of the instance generating the id.
-	 *
-	 *	@return An array of derived buffer instances for the specified key, potentially with 0 elements in the set.
-	 *
-	 *	@throws	CFLibNotSupportedException thrown by client-side implementations.
-	 */
-	public ICFBamSchemaDef[] pageRecByProjectURLIdx( ICFSecAuthorization Authorization,
-		CFLibDbKeyHash256 CTenantId,
-		String ProjectURL,
-		CFLibDbKeyHash256 priorId )
-	{
-		final String S_ProcName = "pageRecByProjectURLIdx";
-		throw new CFLibNotImplementedYetException( getClass(), S_ProcName );
 	}
 
 	public ICFBamSchemaDef updateSchemaDef( ICFSecAuthorization Authorization,
@@ -981,6 +922,7 @@ public class CFBamRamSchemaDefTable
 		return(Buff);
 	}
 
+	@Override
 	public void deleteSchemaDef( ICFSecAuthorization Authorization,
 		ICFBamSchemaDef iBuff )
 	{
@@ -1258,6 +1200,7 @@ public class CFBamRamSchemaDefTable
 		schema.getTableScope().deleteScope( Authorization,
 			Buff );
 	}
+	@Override
 	public void deleteSchemaDefByCTenantIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argCTenantId )
 	{
@@ -1266,6 +1209,7 @@ public class CFBamRamSchemaDefTable
 		deleteSchemaDefByCTenantIdx( Authorization, key );
 	}
 
+	@Override
 	public void deleteSchemaDefByCTenantIdx( ICFSecAuthorization Authorization,
 		ICFBamSchemaDefByCTenantIdxKey argKey )
 	{
@@ -1292,6 +1236,7 @@ public class CFBamRamSchemaDefTable
 		}
 	}
 
+	@Override
 	public void deleteSchemaDefByMinorVersionIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argMinorVersionId )
 	{
@@ -1300,6 +1245,7 @@ public class CFBamRamSchemaDefTable
 		deleteSchemaDefByMinorVersionIdx( Authorization, key );
 	}
 
+	@Override
 	public void deleteSchemaDefByMinorVersionIdx( ICFSecAuthorization Authorization,
 		ICFBamSchemaDefByMinorVersionIdxKey argKey )
 	{
@@ -1326,6 +1272,7 @@ public class CFBamRamSchemaDefTable
 		}
 	}
 
+	@Override
 	public void deleteSchemaDefByUNameIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argMinorVersionId,
 		String argName )
@@ -1336,6 +1283,7 @@ public class CFBamRamSchemaDefTable
 		deleteSchemaDefByUNameIdx( Authorization, key );
 	}
 
+	@Override
 	public void deleteSchemaDefByUNameIdx( ICFSecAuthorization Authorization,
 		ICFBamSchemaDefByUNameIdxKey argKey )
 	{
@@ -1363,6 +1311,7 @@ public class CFBamRamSchemaDefTable
 		}
 	}
 
+	@Override
 	public void deleteSchemaDefByAuthEMailIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argCTenantId,
 		String argAuthorEMail )
@@ -1373,6 +1322,7 @@ public class CFBamRamSchemaDefTable
 		deleteSchemaDefByAuthEMailIdx( Authorization, key );
 	}
 
+	@Override
 	public void deleteSchemaDefByAuthEMailIdx( ICFSecAuthorization Authorization,
 		ICFBamSchemaDefByAuthEMailIdxKey argKey )
 	{
@@ -1400,6 +1350,7 @@ public class CFBamRamSchemaDefTable
 		}
 	}
 
+	@Override
 	public void deleteSchemaDefByProjectURLIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argCTenantId,
 		String argProjectURL )
@@ -1410,6 +1361,7 @@ public class CFBamRamSchemaDefTable
 		deleteSchemaDefByProjectURLIdx( Authorization, key );
 	}
 
+	@Override
 	public void deleteSchemaDefByProjectURLIdx( ICFSecAuthorization Authorization,
 		ICFBamSchemaDefByProjectURLIdxKey argKey )
 	{
@@ -1437,6 +1389,7 @@ public class CFBamRamSchemaDefTable
 		}
 	}
 
+	@Override
 	public void deleteSchemaDefByPubURIIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argCTenantId,
 		String argPublishURI )
@@ -1447,6 +1400,7 @@ public class CFBamRamSchemaDefTable
 		deleteSchemaDefByPubURIIdx( Authorization, key );
 	}
 
+	@Override
 	public void deleteSchemaDefByPubURIIdx( ICFSecAuthorization Authorization,
 		ICFBamSchemaDefByPubURIIdxKey argKey )
 	{
@@ -1474,6 +1428,7 @@ public class CFBamRamSchemaDefTable
 		}
 	}
 
+	@Override
 	public void deleteSchemaDefByIdIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argKey )
 	{
@@ -1500,6 +1455,7 @@ public class CFBamRamSchemaDefTable
 		}
 	}
 
+	@Override
 	public void deleteSchemaDefByTenantIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argTenantId )
 	{
@@ -1508,6 +1464,7 @@ public class CFBamRamSchemaDefTable
 		deleteSchemaDefByTenantIdx( Authorization, key );
 	}
 
+	@Override
 	public void deleteSchemaDefByTenantIdx( ICFSecAuthorization Authorization,
 		ICFBamScopeByTenantIdxKey argKey )
 	{

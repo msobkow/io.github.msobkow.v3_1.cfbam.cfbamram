@@ -86,6 +86,7 @@ public class CFBamRamServerObjFuncTable
 		}
 	}
 
+	@Override
 	public ICFBamServerObjFunc createServerObjFunc( ICFSecAuthorization Authorization,
 		ICFBamServerObjFunc iBuff )
 	{
@@ -156,6 +157,7 @@ public class CFBamRamServerObjFuncTable
 		}
 	}
 
+	@Override
 	public ICFBamServerObjFunc readDerived( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 PKey )
 	{
@@ -170,6 +172,7 @@ public class CFBamRamServerObjFuncTable
 		return( buff );
 	}
 
+	@Override
 	public ICFBamServerObjFunc lockDerived( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 PKey )
 	{
@@ -184,6 +187,7 @@ public class CFBamRamServerObjFuncTable
 		return( buff );
 	}
 
+	@Override
 	public ICFBamServerObjFunc[] readAllDerived( ICFSecAuthorization Authorization ) {
 		final String S_ProcName = "CFBamRamServerObjFunc.readAllDerived";
 		ICFBamServerObjFunc[] retList = new ICFBamServerObjFunc[ dictByPKey.values().size() ];
@@ -195,6 +199,7 @@ public class CFBamRamServerObjFuncTable
 		return( retList );
 	}
 
+	@Override
 	public ICFBamServerObjFunc[] readDerivedByTenantIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 TenantId )
 	{
@@ -217,6 +222,7 @@ public class CFBamRamServerObjFuncTable
 		}
 	}
 
+	@Override
 	public ICFBamServerObjFunc readDerivedByUNameIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 TableId,
 		String Name )
@@ -236,6 +242,7 @@ public class CFBamRamServerObjFuncTable
 		}
 	}
 
+	@Override
 	public ICFBamServerObjFunc[] readDerivedByMethTableIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 TableId )
 	{
@@ -258,6 +265,7 @@ public class CFBamRamServerObjFuncTable
 		}
 	}
 
+	@Override
 	public ICFBamServerObjFunc[] readDerivedByDefSchemaIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 DefSchemaId )
 	{
@@ -280,6 +288,7 @@ public class CFBamRamServerObjFuncTable
 		}
 	}
 
+	@Override
 	public ICFBamServerObjFunc[] readDerivedByRetTblIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 RetTableId )
 	{
@@ -307,6 +316,7 @@ public class CFBamRamServerObjFuncTable
 		return( recArray );
 	}
 
+	@Override
 	public ICFBamServerObjFunc readDerivedByIdIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 Id )
 	{
@@ -321,6 +331,7 @@ public class CFBamRamServerObjFuncTable
 		return( buff );
 	}
 
+	@Override
 	public ICFBamServerObjFunc readRec( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 PKey )
 	{
@@ -332,6 +343,7 @@ public class CFBamRamServerObjFuncTable
 		return( buff );
 	}
 
+	@Override
 	public ICFBamServerObjFunc lockRec( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 PKey )
 	{
@@ -343,6 +355,7 @@ public class CFBamRamServerObjFuncTable
 		return( buff );
 	}
 
+	@Override
 	public ICFBamServerObjFunc[] readAllRec( ICFSecAuthorization Authorization )
 	{
 		final String S_ProcName = "CFBamRamServerObjFunc.readAllRec";
@@ -358,6 +371,7 @@ public class CFBamRamServerObjFuncTable
 		return( filteredList.toArray( new ICFBamServerObjFunc[0] ) );
 	}
 
+	@Override
 	public ICFBamServerObjFunc readRecByIdIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 Id )
 	{
@@ -372,6 +386,7 @@ public class CFBamRamServerObjFuncTable
 		}
 	}
 
+	@Override
 	public ICFBamServerObjFunc[] readRecByTenantIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 TenantId )
 	{
@@ -389,6 +404,7 @@ public class CFBamRamServerObjFuncTable
 		return( filteredList.toArray( new ICFBamServerObjFunc[0] ) );
 	}
 
+	@Override
 	public ICFBamServerObjFunc readRecByUNameIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 TableId,
 		String Name )
@@ -405,6 +421,7 @@ public class CFBamRamServerObjFuncTable
 		}
 	}
 
+	@Override
 	public ICFBamServerObjFunc[] readRecByMethTableIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 TableId )
 	{
@@ -422,6 +439,7 @@ public class CFBamRamServerObjFuncTable
 		return( filteredList.toArray( new ICFBamServerObjFunc[0] ) );
 	}
 
+	@Override
 	public ICFBamServerObjFunc[] readRecByDefSchemaIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 DefSchemaId )
 	{
@@ -439,6 +457,7 @@ public class CFBamRamServerObjFuncTable
 		return( filteredList.toArray( new ICFBamServerObjFunc[0] ) );
 	}
 
+	@Override
 	public ICFBamServerObjFunc[] readRecByRetTblIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 RetTableId )
 	{
@@ -454,63 +473,6 @@ public class CFBamRamServerObjFuncTable
 			}
 		}
 		return( filteredList.toArray( new ICFBamServerObjFunc[0] ) );
-	}
-
-	/**
-	 *	Read a page array of the specific ServerObjFunc buffer instances identified by the duplicate key MethTableIdx.
-	 *
-	 *	@param	Authorization	The session authorization information.
-	 *
-	 *	@param	TableId	The ServerObjFunc key attribute of the instance generating the id.
-	 *
-	 *	@return An array of derived buffer instances for the specified key, potentially with 0 elements in the set.
-	 *
-	 *	@throws	CFLibNotSupportedException thrown by client-side implementations.
-	 */
-	public ICFBamServerObjFunc[] pageRecByMethTableIdx( ICFSecAuthorization Authorization,
-		CFLibDbKeyHash256 TableId,
-		CFLibDbKeyHash256 priorId )
-	{
-		final String S_ProcName = "pageRecByMethTableIdx";
-		throw new CFLibNotImplementedYetException( getClass(), S_ProcName );
-	}
-
-	/**
-	 *	Read a page array of the specific ServerObjFunc buffer instances identified by the duplicate key DefSchemaIdx.
-	 *
-	 *	@param	Authorization	The session authorization information.
-	 *
-	 *	@param	DefSchemaId	The ServerObjFunc key attribute of the instance generating the id.
-	 *
-	 *	@return An array of derived buffer instances for the specified key, potentially with 0 elements in the set.
-	 *
-	 *	@throws	CFLibNotSupportedException thrown by client-side implementations.
-	 */
-	public ICFBamServerObjFunc[] pageRecByDefSchemaIdx( ICFSecAuthorization Authorization,
-		CFLibDbKeyHash256 DefSchemaId,
-		CFLibDbKeyHash256 priorId )
-	{
-		final String S_ProcName = "pageRecByDefSchemaIdx";
-		throw new CFLibNotImplementedYetException( getClass(), S_ProcName );
-	}
-
-	/**
-	 *	Read a page array of the specific ServerObjFunc buffer instances identified by the duplicate key RetTblIdx.
-	 *
-	 *	@param	Authorization	The session authorization information.
-	 *
-	 *	@param	RetTableId	The ServerObjFunc key attribute of the instance generating the id.
-	 *
-	 *	@return An array of derived buffer instances for the specified key, potentially with 0 elements in the set.
-	 *
-	 *	@throws	CFLibNotSupportedException thrown by client-side implementations.
-	 */
-	public ICFBamServerObjFunc[] pageRecByRetTblIdx( ICFSecAuthorization Authorization,
-		CFLibDbKeyHash256 RetTableId,
-		CFLibDbKeyHash256 priorId )
-	{
-		final String S_ProcName = "pageRecByRetTblIdx";
-		throw new CFLibNotImplementedYetException( getClass(), S_ProcName );
 	}
 
 	public ICFBamServerObjFunc updateServerObjFunc( ICFSecAuthorization Authorization,
@@ -581,6 +543,7 @@ public class CFBamRamServerObjFuncTable
 		return(Buff);
 	}
 
+	@Override
 	public void deleteServerObjFunc( ICFSecAuthorization Authorization,
 		ICFBamServerObjFunc iBuff )
 	{
@@ -621,6 +584,7 @@ public class CFBamRamServerObjFuncTable
 		schema.getTableServerMethod().deleteServerMethod( Authorization,
 			Buff );
 	}
+	@Override
 	public void deleteServerObjFuncByRetTblIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argRetTableId )
 	{
@@ -629,6 +593,7 @@ public class CFBamRamServerObjFuncTable
 		deleteServerObjFuncByRetTblIdx( Authorization, key );
 	}
 
+	@Override
 	public void deleteServerObjFuncByRetTblIdx( ICFSecAuthorization Authorization,
 		ICFBamServerObjFuncByRetTblIdxKey argKey )
 	{
@@ -657,6 +622,7 @@ public class CFBamRamServerObjFuncTable
 		}
 	}
 
+	@Override
 	public void deleteServerObjFuncByUNameIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argTableId,
 		String argName )
@@ -667,6 +633,7 @@ public class CFBamRamServerObjFuncTable
 		deleteServerObjFuncByUNameIdx( Authorization, key );
 	}
 
+	@Override
 	public void deleteServerObjFuncByUNameIdx( ICFSecAuthorization Authorization,
 		ICFBamServerMethodByUNameIdxKey argKey )
 	{
@@ -694,6 +661,7 @@ public class CFBamRamServerObjFuncTable
 		}
 	}
 
+	@Override
 	public void deleteServerObjFuncByMethTableIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argTableId )
 	{
@@ -702,6 +670,7 @@ public class CFBamRamServerObjFuncTable
 		deleteServerObjFuncByMethTableIdx( Authorization, key );
 	}
 
+	@Override
 	public void deleteServerObjFuncByMethTableIdx( ICFSecAuthorization Authorization,
 		ICFBamServerMethodByMethTableIdxKey argKey )
 	{
@@ -728,6 +697,7 @@ public class CFBamRamServerObjFuncTable
 		}
 	}
 
+	@Override
 	public void deleteServerObjFuncByDefSchemaIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argDefSchemaId )
 	{
@@ -736,6 +706,7 @@ public class CFBamRamServerObjFuncTable
 		deleteServerObjFuncByDefSchemaIdx( Authorization, key );
 	}
 
+	@Override
 	public void deleteServerObjFuncByDefSchemaIdx( ICFSecAuthorization Authorization,
 		ICFBamServerMethodByDefSchemaIdxKey argKey )
 	{
@@ -764,6 +735,7 @@ public class CFBamRamServerObjFuncTable
 		}
 	}
 
+	@Override
 	public void deleteServerObjFuncByIdIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argKey )
 	{
@@ -790,6 +762,7 @@ public class CFBamRamServerObjFuncTable
 		}
 	}
 
+	@Override
 	public void deleteServerObjFuncByTenantIdx( ICFSecAuthorization Authorization,
 		CFLibDbKeyHash256 argTenantId )
 	{
@@ -798,6 +771,7 @@ public class CFBamRamServerObjFuncTable
 		deleteServerObjFuncByTenantIdx( Authorization, key );
 	}
 
+	@Override
 	public void deleteServerObjFuncByTenantIdx( ICFSecAuthorization Authorization,
 		ICFBamScopeByTenantIdxKey argKey )
 	{
