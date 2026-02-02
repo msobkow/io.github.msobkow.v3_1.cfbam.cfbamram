@@ -220,6 +220,9 @@ public class CFBamRamIndexTable
 	{
 		final String S_ProcName = "CFBamRamIndex.readDerived";
 		ICFBamIndex buff;
+		if( PKey == null ) {
+			return( null );
+		}
 		if( dictByPKey.containsKey( PKey ) ) {
 			buff = dictByPKey.get( PKey );
 		}

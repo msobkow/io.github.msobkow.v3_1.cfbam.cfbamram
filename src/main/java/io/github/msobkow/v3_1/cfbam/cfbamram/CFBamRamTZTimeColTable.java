@@ -842,6 +842,9 @@ public class CFBamRamTZTimeColTable
 	{
 		final String S_ProcName = "CFBamRamTZTimeCol.readDerived";
 		ICFBamTZTimeCol buff;
+		if( PKey == null ) {
+			return( null );
+		}
 		if( dictByPKey.containsKey( PKey ) ) {
 			buff = dictByPKey.get( PKey );
 		}

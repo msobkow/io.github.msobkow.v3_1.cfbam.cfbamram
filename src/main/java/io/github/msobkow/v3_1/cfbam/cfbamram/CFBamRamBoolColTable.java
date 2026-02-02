@@ -842,6 +842,9 @@ public class CFBamRamBoolColTable
 	{
 		final String S_ProcName = "CFBamRamBoolCol.readDerived";
 		ICFBamBoolCol buff;
+		if( PKey == null ) {
+			return( null );
+		}
 		if( dictByPKey.containsKey( PKey ) ) {
 			buff = dictByPKey.get( PKey );
 		}

@@ -842,6 +842,9 @@ public class CFBamRamNumberColTable
 	{
 		final String S_ProcName = "CFBamRamNumberCol.readDerived";
 		ICFBamNumberCol buff;
+		if( PKey == null ) {
+			return( null );
+		}
 		if( dictByPKey.containsKey( PKey ) ) {
 			buff = dictByPKey.get( PKey );
 		}

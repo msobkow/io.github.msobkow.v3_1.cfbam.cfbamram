@@ -346,6 +346,9 @@ public class CFBamRamIndexColTable
 	{
 		final String S_ProcName = "CFBamRamIndexCol.readDerived";
 		ICFBamIndexCol buff;
+		if( PKey == null ) {
+			return( null );
+		}
 		if( dictByPKey.containsKey( PKey ) ) {
 			buff = dictByPKey.get( PKey );
 		}

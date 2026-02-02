@@ -842,6 +842,9 @@ public class CFBamRamTokenTypeTable
 	{
 		final String S_ProcName = "CFBamRamTokenType.readDerived";
 		ICFBamTokenType buff;
+		if( PKey == null ) {
+			return( null );
+		}
 		if( dictByPKey.containsKey( PKey ) ) {
 			buff = dictByPKey.get( PKey );
 		}

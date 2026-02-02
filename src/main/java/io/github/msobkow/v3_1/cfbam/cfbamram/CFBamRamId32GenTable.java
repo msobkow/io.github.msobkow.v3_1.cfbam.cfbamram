@@ -803,6 +803,9 @@ public class CFBamRamId32GenTable
 	{
 		final String S_ProcName = "CFBamRamId32Gen.readDerived";
 		ICFBamId32Gen buff;
+		if( PKey == null ) {
+			return( null );
+		}
 		if( dictByPKey.containsKey( PKey ) ) {
 			buff = dictByPKey.get( PKey );
 		}

@@ -842,6 +842,9 @@ public class CFBamRamUInt32ColTable
 	{
 		final String S_ProcName = "CFBamRamUInt32Col.readDerived";
 		ICFBamUInt32Col buff;
+		if( PKey == null ) {
+			return( null );
+		}
 		if( dictByPKey.containsKey( PKey ) ) {
 			buff = dictByPKey.get( PKey );
 		}

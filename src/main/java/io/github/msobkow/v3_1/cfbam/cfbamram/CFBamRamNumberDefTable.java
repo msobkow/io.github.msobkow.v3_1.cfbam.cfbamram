@@ -154,6 +154,9 @@ public class CFBamRamNumberDefTable
 	{
 		final String S_ProcName = "CFBamRamNumberDef.readDerived";
 		ICFBamNumberDef buff;
+		if( PKey == null ) {
+			return( null );
+		}
 		if( dictByPKey.containsKey( PKey ) ) {
 			buff = dictByPKey.get( PKey );
 		}

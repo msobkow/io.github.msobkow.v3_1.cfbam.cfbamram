@@ -361,6 +361,9 @@ public class CFBamRamScopeTable
 	{
 		final String S_ProcName = "CFBamRamScope.readDerived";
 		ICFBamScope buff;
+		if( PKey == null ) {
+			return( null );
+		}
 		if( dictByPKey.containsKey( PKey ) ) {
 			buff = dictByPKey.get( PKey );
 		}

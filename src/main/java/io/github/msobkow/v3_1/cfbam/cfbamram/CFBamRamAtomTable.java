@@ -659,6 +659,9 @@ public class CFBamRamAtomTable
 	{
 		final String S_ProcName = "CFBamRamAtom.readDerived";
 		ICFBamAtom buff;
+		if( PKey == null ) {
+			return( null );
+		}
 		if( dictByPKey.containsKey( PKey ) ) {
 			buff = dictByPKey.get( PKey );
 		}

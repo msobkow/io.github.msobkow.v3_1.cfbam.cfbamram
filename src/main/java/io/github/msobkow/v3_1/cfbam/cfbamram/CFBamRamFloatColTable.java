@@ -842,6 +842,9 @@ public class CFBamRamFloatColTable
 	{
 		final String S_ProcName = "CFBamRamFloatCol.readDerived";
 		ICFBamFloatCol buff;
+		if( PKey == null ) {
+			return( null );
+		}
 		if( dictByPKey.containsKey( PKey ) ) {
 			buff = dictByPKey.get( PKey );
 		}

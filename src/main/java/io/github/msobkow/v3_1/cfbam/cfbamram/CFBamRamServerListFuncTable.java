@@ -163,6 +163,9 @@ public class CFBamRamServerListFuncTable
 	{
 		final String S_ProcName = "CFBamRamServerListFunc.readDerived";
 		ICFBamServerListFunc buff;
+		if( PKey == null ) {
+			return( null );
+		}
 		if( dictByPKey.containsKey( PKey ) ) {
 			buff = dictByPKey.get( PKey );
 		}

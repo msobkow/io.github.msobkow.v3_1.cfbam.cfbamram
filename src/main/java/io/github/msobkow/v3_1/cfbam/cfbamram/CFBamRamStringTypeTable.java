@@ -842,6 +842,9 @@ public class CFBamRamStringTypeTable
 	{
 		final String S_ProcName = "CFBamRamStringType.readDerived";
 		ICFBamStringType buff;
+		if( PKey == null ) {
+			return( null );
+		}
 		if( dictByPKey.containsKey( PKey ) ) {
 			buff = dictByPKey.get( PKey );
 		}

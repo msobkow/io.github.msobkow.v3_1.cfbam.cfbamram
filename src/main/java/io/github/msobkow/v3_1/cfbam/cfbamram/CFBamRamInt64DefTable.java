@@ -159,6 +159,9 @@ public class CFBamRamInt64DefTable
 	{
 		final String S_ProcName = "CFBamRamInt64Def.readDerived";
 		ICFBamInt64Def buff;
+		if( PKey == null ) {
+			return( null );
+		}
 		if( dictByPKey.containsKey( PKey ) ) {
 			buff = dictByPKey.get( PKey );
 		}

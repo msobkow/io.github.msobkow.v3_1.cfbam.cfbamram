@@ -842,6 +842,9 @@ public class CFBamRamDoubleTypeTable
 	{
 		final String S_ProcName = "CFBamRamDoubleType.readDerived";
 		ICFBamDoubleType buff;
+		if( PKey == null ) {
+			return( null );
+		}
 		if( dictByPKey.containsKey( PKey ) ) {
 			buff = dictByPKey.get( PKey );
 		}

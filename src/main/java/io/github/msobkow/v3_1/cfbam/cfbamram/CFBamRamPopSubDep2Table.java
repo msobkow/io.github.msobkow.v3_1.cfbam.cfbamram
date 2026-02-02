@@ -201,6 +201,9 @@ public class CFBamRamPopSubDep2Table
 	{
 		final String S_ProcName = "CFBamRamPopSubDep2.readDerived";
 		ICFBamPopSubDep2 buff;
+		if( PKey == null ) {
+			return( null );
+		}
 		if( dictByPKey.containsKey( PKey ) ) {
 			buff = dictByPKey.get( PKey );
 		}

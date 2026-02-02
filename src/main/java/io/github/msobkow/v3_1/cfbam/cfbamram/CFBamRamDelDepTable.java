@@ -222,6 +222,9 @@ public class CFBamRamDelDepTable
 	{
 		final String S_ProcName = "CFBamRamDelDep.readDerived";
 		ICFBamDelDep buff;
+		if( PKey == null ) {
+			return( null );
+		}
 		if( dictByPKey.containsKey( PKey ) ) {
 			buff = dictByPKey.get( PKey );
 		}

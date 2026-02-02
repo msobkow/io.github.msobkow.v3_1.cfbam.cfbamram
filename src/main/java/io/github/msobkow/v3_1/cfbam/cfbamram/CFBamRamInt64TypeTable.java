@@ -847,6 +847,9 @@ public class CFBamRamInt64TypeTable
 	{
 		final String S_ProcName = "CFBamRamInt64Type.readDerived";
 		ICFBamInt64Type buff;
+		if( PKey == null ) {
+			return( null );
+		}
 		if( dictByPKey.containsKey( PKey ) ) {
 			buff = dictByPKey.get( PKey );
 		}

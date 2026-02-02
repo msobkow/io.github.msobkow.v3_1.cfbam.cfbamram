@@ -803,6 +803,9 @@ public class CFBamRamDbKeyHash128GenTable
 	{
 		final String S_ProcName = "CFBamRamDbKeyHash128Gen.readDerived";
 		ICFBamDbKeyHash128Gen buff;
+		if( PKey == null ) {
+			return( null );
+		}
 		if( dictByPKey.containsKey( PKey ) ) {
 			buff = dictByPKey.get( PKey );
 		}

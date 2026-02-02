@@ -235,6 +235,9 @@ public class CFBamRamServerMethodTable
 	{
 		final String S_ProcName = "CFBamRamServerMethod.readDerived";
 		ICFBamServerMethod buff;
+		if( PKey == null ) {
+			return( null );
+		}
 		if( dictByPKey.containsKey( PKey ) ) {
 			buff = dictByPKey.get( PKey );
 		}

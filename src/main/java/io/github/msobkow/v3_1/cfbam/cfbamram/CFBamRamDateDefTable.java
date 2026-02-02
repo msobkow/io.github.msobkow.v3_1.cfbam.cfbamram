@@ -154,6 +154,9 @@ public class CFBamRamDateDefTable
 	{
 		final String S_ProcName = "CFBamRamDateDef.readDerived";
 		ICFBamDateDef buff;
+		if( PKey == null ) {
+			return( null );
+		}
 		if( dictByPKey.containsKey( PKey ) ) {
 			buff = dictByPKey.get( PKey );
 		}

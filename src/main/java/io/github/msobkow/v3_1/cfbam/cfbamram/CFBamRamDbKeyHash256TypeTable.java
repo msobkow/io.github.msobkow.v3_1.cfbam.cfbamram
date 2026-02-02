@@ -847,6 +847,9 @@ public class CFBamRamDbKeyHash256TypeTable
 	{
 		final String S_ProcName = "CFBamRamDbKeyHash256Type.readDerived";
 		ICFBamDbKeyHash256Type buff;
+		if( PKey == null ) {
+			return( null );
+		}
 		if( dictByPKey.containsKey( PKey ) ) {
 			buff = dictByPKey.get( PKey );
 		}

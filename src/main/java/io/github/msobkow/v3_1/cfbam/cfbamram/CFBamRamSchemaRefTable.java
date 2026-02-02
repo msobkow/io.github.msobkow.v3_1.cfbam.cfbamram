@@ -287,6 +287,9 @@ public class CFBamRamSchemaRefTable
 	{
 		final String S_ProcName = "CFBamRamSchemaRef.readDerived";
 		ICFBamSchemaRef buff;
+		if( PKey == null ) {
+			return( null );
+		}
 		if( dictByPKey.containsKey( PKey ) ) {
 			buff = dictByPKey.get( PKey );
 		}

@@ -842,6 +842,9 @@ public class CFBamRamTZTimestampColTable
 	{
 		final String S_ProcName = "CFBamRamTZTimestampCol.readDerived";
 		ICFBamTZTimestampCol buff;
+		if( PKey == null ) {
+			return( null );
+		}
 		if( dictByPKey.containsKey( PKey ) ) {
 			buff = dictByPKey.get( PKey );
 		}

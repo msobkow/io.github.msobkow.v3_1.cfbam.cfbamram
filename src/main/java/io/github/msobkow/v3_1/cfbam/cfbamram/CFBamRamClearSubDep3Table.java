@@ -201,6 +201,9 @@ public class CFBamRamClearSubDep3Table
 	{
 		final String S_ProcName = "CFBamRamClearSubDep3.readDerived";
 		ICFBamClearSubDep3 buff;
+		if( PKey == null ) {
+			return( null );
+		}
 		if( dictByPKey.containsKey( PKey ) ) {
 			buff = dictByPKey.get( PKey );
 		}

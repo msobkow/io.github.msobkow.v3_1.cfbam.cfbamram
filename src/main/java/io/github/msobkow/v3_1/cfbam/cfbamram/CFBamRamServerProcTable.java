@@ -144,6 +144,9 @@ public class CFBamRamServerProcTable
 	{
 		final String S_ProcName = "CFBamRamServerProc.readDerived";
 		ICFBamServerProc buff;
+		if( PKey == null ) {
+			return( null );
+		}
 		if( dictByPKey.containsKey( PKey ) ) {
 			buff = dictByPKey.get( PKey );
 		}

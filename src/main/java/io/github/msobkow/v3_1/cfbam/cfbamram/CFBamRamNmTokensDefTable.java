@@ -154,6 +154,9 @@ public class CFBamRamNmTokensDefTable
 	{
 		final String S_ProcName = "CFBamRamNmTokensDef.readDerived";
 		ICFBamNmTokensDef buff;
+		if( PKey == null ) {
+			return( null );
+		}
 		if( dictByPKey.containsKey( PKey ) ) {
 			buff = dictByPKey.get( PKey );
 		}

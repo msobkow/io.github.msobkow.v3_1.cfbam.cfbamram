@@ -267,6 +267,9 @@ public class CFBamRamEnumTagTable
 	{
 		final String S_ProcName = "CFBamRamEnumTag.readDerived";
 		ICFBamEnumTag buff;
+		if( PKey == null ) {
+			return( null );
+		}
 		if( dictByPKey.containsKey( PKey ) ) {
 			buff = dictByPKey.get( PKey );
 		}

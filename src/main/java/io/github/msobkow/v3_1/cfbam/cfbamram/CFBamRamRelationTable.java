@@ -356,6 +356,9 @@ public class CFBamRamRelationTable
 	{
 		final String S_ProcName = "CFBamRamRelation.readDerived";
 		ICFBamRelation buff;
+		if( PKey == null ) {
+			return( null );
+		}
 		if( dictByPKey.containsKey( PKey ) ) {
 			buff = dictByPKey.get( PKey );
 		}

@@ -154,6 +154,9 @@ public class CFBamRamTZTimeDefTable
 	{
 		final String S_ProcName = "CFBamRamTZTimeDef.readDerived";
 		ICFBamTZTimeDef buff;
+		if( PKey == null ) {
+			return( null );
+		}
 		if( dictByPKey.containsKey( PKey ) ) {
 			buff = dictByPKey.get( PKey );
 		}

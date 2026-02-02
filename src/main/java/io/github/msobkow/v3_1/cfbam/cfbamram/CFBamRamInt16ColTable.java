@@ -842,6 +842,9 @@ public class CFBamRamInt16ColTable
 	{
 		final String S_ProcName = "CFBamRamInt16Col.readDerived";
 		ICFBamInt16Col buff;
+		if( PKey == null ) {
+			return( null );
+		}
 		if( dictByPKey.containsKey( PKey ) ) {
 			buff = dictByPKey.get( PKey );
 		}

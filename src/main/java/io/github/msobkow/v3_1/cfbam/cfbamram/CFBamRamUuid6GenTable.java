@@ -803,6 +803,9 @@ public class CFBamRamUuid6GenTable
 	{
 		final String S_ProcName = "CFBamRamUuid6Gen.readDerived";
 		ICFBamUuid6Gen buff;
+		if( PKey == null ) {
+			return( null );
+		}
 		if( dictByPKey.containsKey( PKey ) ) {
 			buff = dictByPKey.get( PKey );
 		}

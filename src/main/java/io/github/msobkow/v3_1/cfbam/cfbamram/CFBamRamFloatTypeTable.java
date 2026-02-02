@@ -842,6 +842,9 @@ public class CFBamRamFloatTypeTable
 	{
 		final String S_ProcName = "CFBamRamFloatType.readDerived";
 		ICFBamFloatType buff;
+		if( PKey == null ) {
+			return( null );
+		}
 		if( dictByPKey.containsKey( PKey ) ) {
 			buff = dictByPKey.get( PKey );
 		}

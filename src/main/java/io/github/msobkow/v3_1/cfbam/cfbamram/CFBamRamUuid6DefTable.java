@@ -159,6 +159,9 @@ public class CFBamRamUuid6DefTable
 	{
 		final String S_ProcName = "CFBamRamUuid6Def.readDerived";
 		ICFBamUuid6Def buff;
+		if( PKey == null ) {
+			return( null );
+		}
 		if( dictByPKey.containsKey( PKey ) ) {
 			buff = dictByPKey.get( PKey );
 		}

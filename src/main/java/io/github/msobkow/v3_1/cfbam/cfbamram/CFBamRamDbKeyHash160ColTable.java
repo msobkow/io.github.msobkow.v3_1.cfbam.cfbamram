@@ -842,6 +842,9 @@ public class CFBamRamDbKeyHash160ColTable
 	{
 		final String S_ProcName = "CFBamRamDbKeyHash160Col.readDerived";
 		ICFBamDbKeyHash160Col buff;
+		if( PKey == null ) {
+			return( null );
+		}
 		if( dictByPKey.containsKey( PKey ) ) {
 			buff = dictByPKey.get( PKey );
 		}

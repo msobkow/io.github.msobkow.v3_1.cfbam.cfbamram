@@ -314,6 +314,9 @@ public class CFBamRamTableTable
 	{
 		final String S_ProcName = "CFBamRamTable.readDerived";
 		ICFBamTable buff;
+		if( PKey == null ) {
+			return( null );
+		}
 		if( dictByPKey.containsKey( PKey ) ) {
 			buff = dictByPKey.get( PKey );
 		}

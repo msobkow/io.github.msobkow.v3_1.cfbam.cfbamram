@@ -154,6 +154,9 @@ public class CFBamRamUInt32DefTable
 	{
 		final String S_ProcName = "CFBamRamUInt32Def.readDerived";
 		ICFBamUInt32Def buff;
+		if( PKey == null ) {
+			return( null );
+		}
 		if( dictByPKey.containsKey( PKey ) ) {
 			buff = dictByPKey.get( PKey );
 		}

@@ -842,6 +842,9 @@ public class CFBamRamTimeTypeTable
 	{
 		final String S_ProcName = "CFBamRamTimeType.readDerived";
 		ICFBamTimeType buff;
+		if( PKey == null ) {
+			return( null );
+		}
 		if( dictByPKey.containsKey( PKey ) ) {
 			buff = dictByPKey.get( PKey );
 		}

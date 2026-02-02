@@ -842,6 +842,9 @@ public class CFBamRamDateTypeTable
 	{
 		final String S_ProcName = "CFBamRamDateType.readDerived";
 		ICFBamDateType buff;
+		if( PKey == null ) {
+			return( null );
+		}
 		if( dictByPKey.containsKey( PKey ) ) {
 			buff = dictByPKey.get( PKey );
 		}

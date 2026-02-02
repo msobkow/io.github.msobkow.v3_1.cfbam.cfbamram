@@ -842,6 +842,9 @@ public class CFBamRamTokenColTable
 	{
 		final String S_ProcName = "CFBamRamTokenCol.readDerived";
 		ICFBamTokenCol buff;
+		if( PKey == null ) {
+			return( null );
+		}
 		if( dictByPKey.containsKey( PKey ) ) {
 			buff = dictByPKey.get( PKey );
 		}

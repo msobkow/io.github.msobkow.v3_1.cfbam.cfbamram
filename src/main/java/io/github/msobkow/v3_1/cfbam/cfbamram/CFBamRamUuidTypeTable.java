@@ -847,6 +847,9 @@ public class CFBamRamUuidTypeTable
 	{
 		final String S_ProcName = "CFBamRamUuidType.readDerived";
 		ICFBamUuidType buff;
+		if( PKey == null ) {
+			return( null );
+		}
 		if( dictByPKey.containsKey( PKey ) ) {
 			buff = dictByPKey.get( PKey );
 		}

@@ -1124,6 +1124,9 @@ public class CFBamRamValueTable
 	{
 		final String S_ProcName = "CFBamRamValue.readDerived";
 		ICFBamValue buff;
+		if( PKey == null ) {
+			return( null );
+		}
 		if( dictByPKey.containsKey( PKey ) ) {
 			buff = dictByPKey.get( PKey );
 		}

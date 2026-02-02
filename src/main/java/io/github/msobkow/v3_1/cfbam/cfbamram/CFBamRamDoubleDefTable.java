@@ -154,6 +154,9 @@ public class CFBamRamDoubleDefTable
 	{
 		final String S_ProcName = "CFBamRamDoubleDef.readDerived";
 		ICFBamDoubleDef buff;
+		if( PKey == null ) {
+			return( null );
+		}
 		if( dictByPKey.containsKey( PKey ) ) {
 			buff = dictByPKey.get( PKey );
 		}
