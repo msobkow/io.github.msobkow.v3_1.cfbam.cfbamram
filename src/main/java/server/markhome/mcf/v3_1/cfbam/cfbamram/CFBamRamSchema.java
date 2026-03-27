@@ -159,6 +159,7 @@ public class CFBamRamSchema
 		tableRelationCol = new CFBamRamRelationColTable( this );
 		tableSchemaDef = new CFBamRamSchemaDefTable( this );
 		tableSchemaRef = new CFBamRamSchemaRefTable( this );
+		tableSchemaTweak = new CFBamRamSchemaTweakTable( this );
 		tableScope = new CFBamRamScopeTable( this );
 		tableServerListFunc = new CFBamRamServerListFuncTable( this );
 		tableServerMethod = new CFBamRamServerMethodTable( this );
@@ -178,6 +179,7 @@ public class CFBamRamSchema
 		tableTZTimestampType = new CFBamRamTZTimestampTypeTable( this );
 		tableTable = new CFBamRamTableTable( this );
 		tableTableCol = new CFBamRamTableColTable( this );
+		tableTableTweak = new CFBamRamTableTweakTable( this );
 		tableTextCol = new CFBamRamTextColTable( this );
 		tableTextDef = new CFBamRamTextDefTable( this );
 		tableTextType = new CFBamRamTextTypeTable( this );
@@ -190,6 +192,7 @@ public class CFBamRamSchema
 		tableTokenCol = new CFBamRamTokenColTable( this );
 		tableTokenDef = new CFBamRamTokenDefTable( this );
 		tableTokenType = new CFBamRamTokenTypeTable( this );
+		tableTweak = new CFBamRamTweakTable( this );
 		tableUInt16Col = new CFBamRamUInt16ColTable( this );
 		tableUInt16Def = new CFBamRamUInt16DefTable( this );
 		tableUInt16Type = new CFBamRamUInt16TypeTable( this );
@@ -241,6 +244,12 @@ public class CFBamRamSchema
 
 	@Override
 	public CFLibDbKeyHash256 nextRelationColIdGen() {
+		CFLibDbKeyHash256 retval = new CFLibDbKeyHash256(0);
+		return( retval );
+	}
+
+	@Override
+	public CFLibDbKeyHash256 nextTweakIdGen() {
 		CFLibDbKeyHash256 retval = new CFLibDbKeyHash256(0);
 		return( retval );
 	}
@@ -317,6 +326,15 @@ public class CFBamRamSchema
 		}
 		if (tableTable == null || !(tableTable instanceof CFBamRamTableTable)) {
 			tableTable = new CFBamRamTableTable(this);
+		}
+		if (tableTweak == null || !(tableTweak instanceof CFBamRamTweakTable)) {
+			tableTweak = new CFBamRamTweakTable(this);
+		}
+		if (tableTableTweak == null || !(tableTableTweak instanceof CFBamRamTableTweakTable)) {
+			tableTableTweak = new CFBamRamTableTweakTable(this);
+		}
+		if (tableSchemaTweak == null || !(tableSchemaTweak instanceof CFBamRamSchemaTweakTable)) {
+			tableSchemaTweak = new CFBamRamSchemaTweakTable(this);
 		}
 		if (tableValue == null || !(tableValue instanceof CFBamRamValueTable)) {
 			tableValue = new CFBamRamValueTable(this);
